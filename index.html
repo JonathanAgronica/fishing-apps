@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Baffle Jacks">
-<meta name="app-version" content="202610092206">
+<meta name="app-version" content="202610100820">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -160,6 +160,53 @@ nav.tabs a[data-tab=log].on{box-shadow:inset 0 3px 0 #b48cff}
 label.cfile{display:inline-block;cursor:pointer;background:#20454a;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:.86rem}
 .cempty{color:var(--mut);font-size:.9rem;padding:10px;text-align:center;background:var(--panel2);border-radius:10px}
 
+nav.tabs a[data-tab=map].on{box-shadow:inset 0 3px 0 #7bd88f}
+nav.tabs a .ts{display:none}
+@media(max-width:560px){nav.tabs a .tl{display:none}nav.tabs a .ts{display:inline}}
+.mcard{padding:10px}
+.mbar{gap:6px;margin-bottom:8px}
+.mseg{display:flex;gap:3px}
+.mseg button{padding:5px 8px;font-size:.8rem;border-radius:8px}
+.mseg button.on{background:var(--tide);color:#04202c;border-color:var(--tide);font-weight:600}
+#mAdd.on{background:#ffb020;color:#1b1205;border-color:#ffb020;font-weight:600}
+#mWrap{position:relative}
+#mMap{height:62vh;min-height:320px;border-radius:12px;overflow:hidden;background:#0a1a1d;border:1px solid var(--line)}
+#mMap .mload{padding:30px;text-align:center;color:var(--mut)}
+#mHint{position:absolute;left:8px;right:8px;bottom:8px;z-index:500;background:#081416e6;border:1px solid var(--line);border-radius:10px;padding:6px 9px;font-size:.82rem;display:none;pointer-events:none}
+.mbar2{gap:6px;margin-top:8px}
+.mbar2 input[type=range]{flex:1 1 140px;padding:0}
+#mLegend{margin-top:4px;font-size:.78rem}
+#mLegend i{display:inline-block;width:14px;height:6px;border-radius:3px;margin:0 3px 0 8px;vertical-align:middle}
+.leaflet-container{font:inherit;background:#0a1a1d}
+.leaflet-popup-content-wrapper{background:#13292d;color:var(--ink);border:1px solid var(--line);border-radius:12px}
+.leaflet-popup-tip{background:#13292d}
+.leaflet-popup-content{margin:10px 12px;font-size:.86rem;line-height:1.35;min-width:220px}
+.leaflet-container a.leaflet-popup-close-button{color:var(--mut)}
+.leaflet-control-attribution{font-size:.62rem!important;background:#081416cc!important;color:var(--mut)!important}
+.leaflet-control-attribution a{color:#9fd6ff!important}
+.leaflet-bar a{background:#13292d!important;color:var(--ink)!important;border-color:var(--line)!important}
+.mpop h3{margin:0 0 4px;font-size:1rem}
+.mpop table{border-collapse:collapse;margin:4px 0;width:100%}
+.mpop td{padding:2px 4px 2px 0;vertical-align:top}
+.mpop .b{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.mpop button{padding:5px 8px;font-size:.8rem;border-radius:8px}
+.mpop input[type=text]{width:100%;margin:3px 0;padding:6px 8px}
+.mpop .sw{display:flex;gap:5px;margin:4px 0}
+.mpop .sw span{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent}
+.mpop .sw span.on{border-color:#fff}
+.mpin{width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 1px 4px #000a}
+.mpin-wrap{background:none;border:none}
+.mgauge{width:14px;height:14px;background:#e5484d;border:2px solid #fff;border-radius:3px;box-shadow:0 1px 3px #000a}
+.mkm{color:#fff;font-size:10px;font-weight:700;text-shadow:0 0 3px #000,0 0 2px #000;white-space:nowrap}
+.mme{width:14px;height:14px;border-radius:50%;background:#3b8fff;border:3px solid #fff;box-shadow:0 0 0 2px #3b8fff88}
+.mitem{display:flex;gap:8px;align-items:center;background:var(--panel2);border-radius:10px;padding:7px 9px;margin-bottom:5px}
+.mitem .dot{width:14px;height:14px;border-radius:50%;flex:none;border:2px solid #fff}
+.mitem .ci{flex:1;min-width:0}
+.mbi{display:flex;gap:6px;align-items:center;margin-bottom:5px;font-size:.86rem}
+.mbi span{flex:1 1 45%;min-width:0}
+.mbi input{flex:1 1 45%;min-width:0;padding:5px 8px}
+.tag.mine{background:#4a3a6b;color:#e3d4ff}
+
 .tab[hidden]{display:none}
 .src{margin-top:8px;font-size:.84rem;background:#12303d;border:1px solid #245a72;color:#cfeeff;border-radius:10px;padding:7px 10px}
 .src:empty{display:none}
@@ -170,7 +217,7 @@ input:disabled{opacity:.4}
 <header>
   <h1>🐟 <span>Mac's Baffle Jacks</span></h1>
   <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
-  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 Bite times</a><a href="#baffle" data-tab="baffle">🌊 Baffle tides</a><a href="#gauges" data-tab="gauges">📡 Gauges</a><a href="#log" data-tab="log">📝 Catch log</a></nav>
+  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 <span class="tl">Bite times</span><span class="ts">Bites</span></a><a href="#baffle" data-tab="baffle">🌊 <span class="tl">Baffle tides</span><span class="ts">Tides</span></a><a href="#map" data-tab="map">🗺 <span class="tl">Map</span><span class="ts">Map</span></a><a href="#gauges" data-tab="gauges">📡 <span class="tl">Gauges</span><span class="ts">Gauges</span></a><a href="#log" data-tab="log">📝 <span class="tl">Catch log</span><span class="ts">Log</span></a></nav>
 </header>
 <main>
 <div class="tab" id="tab-bite">
@@ -350,6 +397,37 @@ input:disabled{opacity:.4}
   <div class="notice">⚠️ Not for navigation. Predictions are estimates. Always use the official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ tide tables</a> and local knowledge; Baffle Creek’s bar and shallows change.</div>
 
 </div>
+<div class="tab" id="tab-map" hidden>
+<section class="card mcard">
+  <div class="row mbar">
+    <div class="mseg" id="mLayers"><button data-l="sat">🛰 Satellite</button><button data-l="osm">🗺 Street</button><button data-l="none">▫ None</button></div>
+    <span style="flex:1"></span>
+    <button class="sm" id="mMe">📍 Me</button><button class="sm" id="mAdd">➕ Add spot</button>
+  </div>
+  <div id="mWrap"><div id="mMap" role="application" aria-label="Baffle Creek map"><div class="mload"><span class="spin"></span> Loading map…</div></div><div id="mHint"></div></div>
+  <div class="row mbar2">
+    <label class="mut">Colour creek <select id="mColour"><option value="off">off</option><option value="bite">by bite score</option><option value="tide">by tide stage</option></select></label>
+    <input type="range" id="mTime" min="0" max="95" step="1" aria-label="Time of day">
+    <span id="mTimeLbl" class="mut"></span>
+  </div>
+  <div id="mLegend" class="mut"></div>
+  <p class="mut" style="margin:6px 0 0"><b>Long-press</b> the map near the creek (or tap <b>➕ Add spot</b>, then tap) to drop your own named spot — it snaps to the creek centreline for tide timing but keeps the exact point you tapped. Drag your pins to move them. Tap any spot for its next high/low/run-in start and bite score. Your spots appear in Bite times, Baffle tides and the Catch log too.</p>
+</section>
+<section class="card">
+  <h2>⭐ My spots <span class="mut" id="mCount"></span></h2>
+  <div id="mList"></div>
+  <div class="row" style="margin-top:8px">
+    <button class="sm" id="mExport">⬇ Backup spots (JSON)</button>
+    <label class="sm cfile">⬆ Restore spots<input type="file" id="mImport" accept=".json,application/json" hidden></label>
+    <span class="mut" id="mIoMsg"></span>
+  </div>
+  <p class="mut" style="margin:8px 0 0">🔒 Your spots, names, notes and exact positions are stored <b>only on this phone</b> (also included in the Catch log CSV export for backup). Community sharing never sends spot names or coordinates — only the ~2 km creek stretch.</p>
+</section>
+<section class="card">
+  <details id="mBuiltDet"><summary><b>Rename built-in landmarks</b> <span class="mut">(personal display name — tide calibration unchanged)</span></summary><div id="mBuiltins" style="margin-top:8px"></div></details>
+</section>
+
+</div>
 <div class="tab" id="tab-gauges" hidden>
 <section class="card">
   <h2>📡 Latest gauge readings</h2>
@@ -431,7 +509,7 @@ input:disabled{opacity:.4}
   <label class="cshare"><input type="checkbox" id="cShareOn"> <b>Share my catches anonymously (only creek stretch, never GPS)</b></label>
   <div class="mut" id="cShareInfo" style="margin-top:6px"></div>
   <details style="margin-top:6px"><summary class="mut">Privacy — what is shared?</summary><div class="mut" id="cPrivacy" style="margin-top:6px">
-    Your log (incl. exact GPS, spot names, notes and bait details) is stored <b>only on this phone</b>. If you turn sharing on, each saved session is sent with only:
+    Your log (incl. exact GPS, spot names, notes and bait details) and your own map spots &amp; renamed landmarks are stored <b>only on this phone</b>. If you turn sharing on, each saved session is sent with only:
     the ~2 km creek stretch (e.g. “km 4–6, Winfield–Flat Rock”) or, off Baffle Creek, a broad area (e.g. “Burnett River / Bundaberg”); times rounded to 15-minute slots;
     species, counts, kept/released, longest length; bait <i>type</i>; the app’s predicted score / tide / light / solunar / moon / wind values; and a random anonymous id (no name, account, device id or GPS).
     Submissions go through a public no-account relay (ntfy.sh) to the app’s maintainer box, which validates them and publishes the combined table as
@@ -465,12 +543,12 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610092206</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610100820</span></footer>
 <script>
 /* Mac's Baffle Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
 FT.onTab=[];
-FT.showTab=function(t){if(!['bite','baffle','gauges','log'].includes(t))t='bite';
+FT.showTab=function(t){if(!['bite','baffle','map','gauges','log'].includes(t))t='bite';
   document.querySelectorAll('.tab').forEach(s=>s.hidden=s.id!=='tab-'+t);
   document.querySelectorAll('nav.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.tab===t));
   if(location.hash!=='#'+t)history.replaceState(null,'','#'+t);
@@ -809,6 +887,61 @@ BT.runInStarts=function(km,h0,h1,opts){opts=opts||{};const hoff=opts.hoff||0;
   return out;};
 })();
 </script>
+<script id="ft-spots">/* ===== Spots registry: built-in Baffle landmarks (+ personal aliases) and the user's own custom spots =====
+   Custom spots/aliases live ONLY in this phone's localStorage (mbj_spots, mbj_alias). BT.LANDMARKS is updated
+   in place (sorted by km) so every tab that lists landmarks also lists custom spots. Built-ins keep stable ids
+   b0…bN (index in the shipped list) and their original name in .base; aliases only change .name. */
+(function(){'use strict';
+const FT=window.FT,B=window.BT,D=window.BAFFLE_DATA;
+const KS='mbj_spots',KA='mbj_alias';
+const LM=B.LANDMARKS;
+LM.forEach((l,i)=>{l.id='b'+i;l.base=l.name;l.builtin=true;l.line=/Hills Rd gauge/.test(l.name)?'E':'B';});
+const BUILTIN=LM.slice();
+const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v;}catch(e){return d;}};
+let custom=load(KS,[]);if(!Array.isArray(custom))custom=[];let alias=load(KA,{});if(!alias||typeof alias!=='object')alias={};
+const COLORS=['#ffb020','#ff5d8f','#7bd88f','#5cc8ff','#b48cff','#ff7a45','#ffffff'];
+/* line-aware centreline geometry */
+const RAD=Math.PI/180;const hav=(a,b)=>{const la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*6371.0088*Math.asin(Math.sqrt(x));};
+const EU=D.euleilah,EUC=[0];for(let i=1;i<EU.length;i++)EUC.push(EUC[i-1]+hav(EU[i-1],EU[i]));
+const EJ=D.euleilahJunctionKm;
+function pointAt(km,line){if(line!=='E'||km<EJ)return B.pointAtKm(Math.max(0,Math.min(B.MAXKM,km)));const s=km-EJ;
+  for(let i=1;i<EU.length;i++)if(EUC[i]>=s){const f=(s-EUC[i-1])/(EUC[i]-EUC[i-1]);return[EU[i-1][0]+f*(EU[i][0]-EU[i-1][0]),EU[i-1][1]+f*(EU[i][1]-EU[i-1][1])];}return EU[EU.length-1];}
+const EUMAX=EJ+EUC[EUC.length-1];
+function snapPt(lat,lng){const s=B.snap(lat,lng);const line=s.line==='Euleilah Creek'?'E':'B';return{km:+Math.min(B.MAXKM,Math.max(0,s.km)).toFixed(2),line,offKm:s.offKm,slat:s.lat,slng:s.lon};}
+function apply(){BUILTIN.forEach(l=>{const a=alias[l.id];l.name=a||l.base;l.alias=!!a;});
+  const C=custom.map(c=>Object.assign(c,{custom:true}));
+  const all=BUILTIN.concat(C).sort((a,b)=>a.km-b.km||(a.builtin?-1:1));LM.length=0;LM.push(...all);}
+function save(){try{localStorage.setItem(KS,JSON.stringify(custom.map(({custom:_c,...c})=>c)));localStorage.setItem(KA,JSON.stringify(alias));}catch(e){}apply();
+  S.onChange.forEach(f=>{try{f()}catch(e){console.error('spots hook',e)}});}
+const rid=()=>{const a=new Uint8Array(5);crypto.getRandomValues(a);return 'c'+Array.from(a,b=>b.toString(16).padStart(2,'0')).join('');};
+const clean=s=>String(s==null?'':s).replace(/[\u0000-\u001f]/g,' ').trim();
+const S={onChange:[],COLORS,pointAt,snap:snapPt,EUMAX,
+  all:()=>LM.slice(),builtins:()=>BUILTIN.slice(),customs:()=>custom.slice(),
+  get:id=>LM.find(l=>l.id===id)||null,
+  /* lat/lng used for display & light/sun maths: custom = where the user tapped, built-in = centreline point */
+  latLng:l=>l.custom?[l.lat,l.lng]:pointAt(l.km,l.line),
+  add(o){const sn=snapPt(o.lat,o.lng);if(sn.offKm>(o.maxOff||1.2))throw new Error(`That point is ${sn.offKm.toFixed(1)} km from the creek centreline — tap closer to the creek.`);
+    const c={id:rid(),name:clean(o.name).slice(0,60)||('My spot km '+sn.km.toFixed(1)),lat:+(+o.lat).toFixed(6),lng:+(+o.lng).toFixed(6),km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),
+      color:COLORS.includes(o.color)?o.color:COLORS[0],note:clean(o.note).slice(0,200),created:Date.now()};
+    custom.push(c);save();return S.get(c.id);},
+  update(id,p){const c=custom.find(x=>x.id===id);if(!c)return null;
+    if(p.name!=null)c.name=clean(p.name).slice(0,60)||c.name;if(p.note!=null)c.note=clean(p.note).slice(0,200);if(p.color&&COLORS.includes(p.color))c.color=p.color;
+    if(p.lat!=null&&p.lng!=null){const sn=snapPt(p.lat,p.lng);if(sn.offKm>1.2)throw new Error(`${sn.offKm.toFixed(1)} km from the creek — not moved.`);c.lat=+(+p.lat).toFixed(6);c.lng=+(+p.lng).toFixed(6);c.km=sn.km;c.line=sn.line;c.offKm=+sn.offKm.toFixed(3);}
+    save();return S.get(id);},
+  remove(id){const n=custom.length;custom=custom.filter(x=>x.id!==id);if(custom.length!==n)save();},
+  setAlias(id,name){if(!/^b\d+$/.test(id))return;name=clean(name).slice(0,60);const b=BUILTIN.find(l=>l.id===id);if(!b)return;
+    if(!name||name===b.base)delete alias[id];else alias[id]=name;save();},
+  nearest(km,line,maxKm){let best=null;for(const l of LM){if(line&&l.line!==line&&Math.min(km,l.km)>=EJ)continue;const d=Math.abs(l.km-km);if(d<=(maxKm==null?0.5:maxKm)&&(!best||d<best.d||(d===best.d&&l.custom)))best={l,d};}return best?best.l:null;},
+  exportData:()=>({v:1,kind:'mbj-spots',spots:custom.map(({custom:_c,...c})=>c),alias:{...alias}}),
+  importData(o,merge=true){if(!o||!Array.isArray(o.spots))throw new Error('not a spots backup');let n=0;
+    for(const x of o.spots){if(typeof x.lat!=='number'||typeof x.lng!=='number')continue;if(merge&&custom.some(c=>c.id===x.id))continue;
+      try{const sn=snapPt(x.lat,x.lng);if(sn.offKm>1.2)continue;custom.push({id:/^c[0-9a-f]{10}$/.test(x.id)?x.id:rid(),name:clean(x.name).slice(0,60)||'Spot',lat:x.lat,lng:x.lng,km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),color:COLORS.includes(x.color)?x.color:COLORS[0],note:clean(x.note).slice(0,200),created:x.created||Date.now()});n++;}catch(e){}}
+    if(o.alias&&typeof o.alias==='object')for(const [k,v] of Object.entries(o.alias))if(/^b\d+$/.test(k)&&BUILTIN.some(b=>b.id===k)&&typeof v==='string'&&clean(v))alias[k]=clean(v).slice(0,60);
+    save();return n;}};
+apply();
+FT.spots=S;
+})();
+</script>
 <script>
 (function(){
 'use strict';
@@ -818,8 +951,9 @@ const todayStr=B.dayStr(B.nowH());
 $('bt-date').value=todayStr;$('bt-km').value=st.km;
 $('bt-hoff').value=localStorage.getItem('bt_hoff')||0;$('bt-badj').value=localStorage.getItem('bt_badj')||0;
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-B.LANDMARKS.forEach((l,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${l.name} — ${l.km.toFixed(1)} km`;$('bt-lm').appendChild(o);});
-const o0=document.createElement('option');o0.value='';o0.textContent='— pick a landmark —';$('bt-lm').prepend(o0);
+function rebuildLm(cur){const sel=$('bt-lm');sel.innerHTML='<option value="">— pick a spot —</option>'+B.LANDMARKS.map((l,i)=>`<option value="${i}">${l.custom?'★ ':''}${esc(l.name)} — ${l.km.toFixed(1)} km</option>`).join('');
+  if(cur&&st.landmark!=='GPS fix'){const i=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01);if(i>=0){st.landmark=B.LANDMARKS[i].name;sel.value=i;}else sel.value='';}}
+rebuildLm(false);
 function opts(){return{hoff:+$('bt-hoff').value||0,badj:+$('bt-badj').value||0,corr:corrections()};}
 function dayH(){const [y,m,d]=$('bt-date').value.split('-').map(Number);return B.dateToH(y,m,d,0,0);}
 function fmtU(u){return '±'+Math.round(u/5)*5+' min';}
@@ -877,7 +1011,7 @@ function render(){
   const t0=dayH(),t1=t0+24,o=opts();
   const P=B.predictAt(km,t0-6,t1+6,o);const cal=P.cal;const pt=B.pointAtKm(Math.min(km,B.MAXKM));
   $('bt-kmLbl').textContent=km.toFixed(2)+' km from mouth';
-  $('bt-locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${km.toFixed(2)} km up Baffle Creek from the mouth · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
+  $('bt-locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${km.toFixed(2)} km up Baffle Creek from the mouth · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?((n=>n?` · nearest spot <b>${esc(n.name)}</b> (${Math.round(Math.abs(n.km-km)*1000)} m along)`:'')(window.FT.spots&&window.FT.spots.nearest(km,null,1.0))):'')+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
   let warn='';
   if(st.gps&&st.gps.offKm>1.5)warn+='<div class="notice err">Your GPS position is '+st.gps.offKm.toFixed(1)+' km from the creek centreline — snapped to the nearest point; check this is right.</div>';
   if(cal.beyond)warn+='<div class="notice">Above Essendean Bridge (the last calibration point). Tidal limit unknown — values held at Essendean’s, timing likely later and range smaller or nil. Great place to benchmark.</div>';
@@ -898,7 +1032,7 @@ function render(){
   $('bt-week').innerHTML='<tr><th>Day</th><th>Highs</th><th>Lows</th></tr>'+Object.keys(byDay).map(k=>{const es=byDay[k];const d=es[0].t;return `<tr><td>${B.fmtDay(d)}</td><td class="hw">${es.filter(e=>e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+(e.weak?' weak':'')+'</span>').join('<br>')}</td><td class="lw">${es.filter(e=>!e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+'</span>').join('<br>')}</td></tr>`;}).join('')+`<tr><td colspan="3" class="mut">Timing uncertainty here: highs ${fmtU(cal.hwU)}, lows ${fmtU(cal.lwU)}. Heights m AHD.</td></tr>`;
   // stretch
   $('bt-stretch').innerHTML='<tr><th>Place</th><th>km</th><th>Highs</th><th>Lows</th><th>Run-in starts</th><th>±</th></tr>'+B.LANDMARKS.map((l,i)=>{const p=B.predictAt(l.km,t0,t1,o);const c=p.cal;
-    const tags=(l.cal?'<span class="tag cal">cal</span>':'')+(c.est?'<span class="tag warn">est</span>':'');
+    const tags=(l.custom?'<span class="tag mine">my spot</span>':'')+(l.alias?'<span class="tag">renamed</span>':'')+(l.cal?'<span class="tag cal">cal</span>':'')+(c.est?'<span class="tag warn">est</span>':'');
     return `<tr class="click${Math.abs(l.km-km)<0.01?' sel':''}" data-i="${i}"><td>${esc(l.name)}${tags}${l.note?'<br><span class="mut">'+esc(l.note)+'</span>':''}</td><td>${l.km.toFixed(1)}</td><td class="hw">${p.inWin.filter(e=>e.hi).map(e=>B.fmtT(e.t)+(e.weak?'*':'')).join('<br>')}</td><td class="lw">${p.inWin.filter(e=>!e.hi).map(e=>B.fmtT(e.t)).join('<br>')}</td><td style="color:#7ff0c8">${B.runInStarts(l.km,t0,t1,o).filter(r=>r.t>=t0&&r.t<t1).map(r=>B.fmtT(r.t)+' <span class="mut">±'+Math.round(r.u)+'′'+(r.kind==='rise'?' rise':'')+'</span>').join('<br>')||'<span class="mut">—</span>'}</td><td class="mut">H ${Math.round(c.hwU)}′<br>L ${Math.round(c.lwU)}′</td></tr>`;}).join('')+'<tr><td colspan="6" class="mut">Run-in starts = low turn (or, upper creek, when the water starts rising — marked ‘rise’) ± timing; the first ~2 h after it is the strongest tide window for jacks in Bite times. * weak/no visible high expected (tide doesn’t clear the upper-creek pool level). Lows above ~30 km are a pool level, not a true low.</td></tr>';
   $('bt-stretch').querySelectorAll('tr[data-i]').forEach(tr=>tr.onclick=()=>{const l=B.LANDMARKS[+tr.dataset.i];selectKm(l.km,l.name);});
 }
@@ -927,6 +1061,7 @@ $('bt-date').onchange=()=>{render();renderBench();FT.setDate($('bt-date').value,
 ['bt-hoff','bt-badj'].forEach(id=>document.getElementById(id).onchange=()=>{render();renderBench();FT.biteRefreshIfBaffle&&FT.biteRefreshIfBaffle();});
 const FT=window.FT;
 FT.baffleOpts=opts;FT.baffleSelect=(km,name)=>selectKm(km,name);
+if(FT.spots)FT.spots.onChange.push(()=>{rebuildLm(true);render();});
 FT.baffleSetDate=v=>{if($('bt-date').value!==v){$('bt-date').value=v;render();renderBench();}};
 $('bt-toBite').onclick=()=>{const p=st.gps?[st.gps.lat,st.gps.lon]:B.pointAtKm(st.km);
   FT.setDate($('bt-date').value,'baffle');
@@ -969,9 +1104,12 @@ function baffleTide(dateStr,km){const [y,m,d]=dateStr.split('-').map(Number);con
   return{fn,ext,cal:P.cal,weak:P.ext.filter(e=>e.weak).length,runIn:BT.runInStarts(km,h0,h1,o).map(r=>({t:E0+r.t*3.6e6,u:r.u,kind:r.kind}))};}
 function snapLoc(l){if(l.baffleKm!==undefined)return l;let s=null;try{s=BT.snap(l.lat,l.lng);}catch(e){}
   l.baffleKm=(s&&s.offKm<=0.6&&s.km<=BT.MAXKM)?+Math.min(BT.MAXKM,s.km).toFixed(2):null;return l;}
-BT.LANDMARKS.forEach((l,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${l.name} (${l.km.toFixed(1)} km)`;$('mj-bafSel').appendChild(o);});
-$('mj-bafSel').onchange=()=>{const v=$('mj-bafSel').value;if(v==='')return;const l=BT.LANDMARKS[+v];const p=BT.pointAtKm(l.km);
+function rebuildBaf(){const sel=$('mj-bafSel');sel.innerHTML='<option value="">— pick a Baffle Creek spot —</option>'+BT.LANDMARKS.map((l,i)=>`<option value="${i}">${l.custom?'★ ':''}${esc(l.name)} (${l.km.toFixed(1)} km)</option>`).join('');
+  const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(x=>Math.abs(x.km-loc.baffleKm)<0.01):-1;sel.value=i>=0?i:'';}
+rebuildBaf();
+$('mj-bafSel').onchange=()=>{const v=$('mj-bafSel').value;if(v==='')return;const l=BT.LANDMARKS[+v];const p=FT.spots?FT.spots.latLng(l):BT.pointAtKm(l.km);
   setLoc({name:l.name+' — Baffle Ck',lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:l.km});};
+if(FT.spots)FT.spots.onChange.push(()=>{rebuildBaf();const v=$('mj-bafSel').value;if(v!==''&&loc.baffleKm!=null){const nm=BT.LANDMARKS[+v].name+' — Baffle Ck';if(loc.name!==nm){loc.name=nm;localStorage.setItem('mj_loc',JSON.stringify(loc));setLocInfo();}}});
 const todayIn=tz=>MJ.ymd(Date.now(),tz);
 $('mj-date').value=todayIn(loc.tz||DEF.tz);
 $('mj-tideOff').value=localStorage.getItem('mj_tideoff')||0;
@@ -1421,7 +1559,7 @@ function spotFromLatLng(lat,lng,acc,kind,name){let s=null;try{s=BT.snap(lat,lng)
 function shareBand(sp){if(!sp)return null;if(sp.km!=null)return bandOf(sp.km,sp.line);const r=regionOf(sp.lat,sp.lng);return{bk:-1,rg:r.code,label:'Off-creek: '+r.name};}
 function nearLandmark(km){let b=null;for(const l of BT.LANDMARKS){const d=Math.abs(l.km-km);if(!b||d<b.d)b={n:l.name,d};}return b&&b.d<1.5?b.n:null;}
 function spotDesc(sp){if(!sp)return '—';const nm=sp.name?esc(sp.name)+' · ':'';
-  if(sp.km!=null){const lm=nearLandmark(sp.km);return `${nm}km ${sp.km.toFixed(1)} ${sp.line==='E'?'Euleilah Ck':'Baffle Ck'}${lm?' (near '+esc(lm)+')':''}`;}
+  if(sp.km!=null){let lm=nearLandmark(sp.km);if(lm&&lm===sp.name)lm=null;return `${nm}km ${sp.km.toFixed(1)} ${sp.line==='E'?'Euleilah Ck':'Baffle Ck'}${lm?' (near '+esc(lm)+')':''}`;}
   return `${nm}off-creek — ${esc(regionOf(sp.lat,sp.lng).name)}${sp.kind==='gps'||sp.kind==='bite'?' ('+sp.lat.toFixed(3)+', '+sp.lng.toFixed(3)+')':''}`;}
 /* ---- storage ---- */
 let LOG=LS.get(K.log,[]);if(!Array.isArray(LOG))LOG=[];
@@ -1445,8 +1583,12 @@ function fillSelects(){
   $('cSp').innerHTML=SCH.species.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
   $('cFate').innerHTML=SCH.fates.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
   $('cBaitCat').innerHTML=SCH.bait.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
-  $('cSpotSel').innerHTML='<option value="">— pick a spot —</option><optgroup label="Baffle Creek landmarks">'+BT.LANDMARKS.map((l,i)=>`<option value="L${i}">${esc(l.name)} (${l.km.toFixed(1)} km)</option>`).join('')+'</optgroup>'+
+  fillSpotSel();}
+function fillSpotSel(){const L=BT.LANDMARKS,mine=L.map((l,i)=>[l,i]).filter(x=>x[0].custom),bi=L.map((l,i)=>[l,i]).filter(x=>!x[0].custom);
+  const opt=([l,i])=>`<option value="L${i}">${l.custom?'★ ':''}${esc(l.name)} (${l.km.toFixed(1)} km)</option>`;
+  $('cSpotSel').innerHTML='<option value="">— pick a spot —</option>'+(mine.length?'<optgroup label="My spots">'+mine.map(opt).join('')+'</optgroup>':'')+'<optgroup label="Baffle Creek landmarks">'+bi.map(opt).join('')+'</optgroup>'+
     '<optgroup label="Off Baffle Creek (broad area)">'+SCH.regions.filter(g=>g[2]!=null).map(g=>`<option value="R${g[0]}">${esc(g[1])}</option>`).join('')+'</optgroup><option value="cur" hidden>current</option>';}
+function landmarkSpot(l){const ll=FT.spots?FT.spots.latLng(l):BT.pointAtKm(l.km);const sp=spotFromLatLng(ll[0],ll[1],null,'landmark',l.name);sp.km=l.km;sp.line=l.line||(/Hills Rd/.test(l.base||l.name)&&l.km>16.4?'E':'B');sp.spotId=l.id;return sp;}
 /* ---- form ---- */
 let F=null; // session being edited
 function openForm(s,mode){F=JSON.parse(JSON.stringify(s));F._mode=mode;$('cFormCard').hidden=false;
@@ -1458,7 +1600,7 @@ function openForm(s,mode){F=JSON.parse(JSON.stringify(s));F._mode=mode;$('cFormC
   $('cSave').textContent=mode==='active'?'💾 Save (keep session running)':'💾 Save session';
   spotUI();catchUI();$('cFormCard').scrollIntoView({behavior:'smooth',block:'start'});}
 function closeForm(){F=null;$('cFormCard').hidden=true;}
-function spotUI(){const sp=F&&F.spot;$('cSpotSel').value=sp?(sp.kind==='landmark'?'L'+sp.li:sp.kind==='region'?'R'+sp.rg:'cur'):'';
+function spotUI(){const sp=F&&F.spot;$('cSpotSel').value=sp?(sp.kind==='landmark'?((i=>i>=0?'L'+i:'cur')(BT.LANDMARKS.findIndex(l=>sp.spotId?l.id===sp.spotId:Math.abs(l.km-sp.km)<0.01))):sp.kind==='region'?'R'+sp.rg:'cur'):'';
   const b=shareBand(sp);
   $('cSpotInfo').innerHTML=sp?`📍 <b>${spotDesc(sp)}</b>${sp.acc!=null?' ±'+sp.acc+' m':''}<br>🔒 Shared as: <b>${esc(b.label)}</b>${sp.km==null&&sp.offKm!=null?` <span class="mut">(${sp.offKm.toFixed(1)} km from the Baffle channel — not snapped)</span>`:''}`:'Pick a spot: 📡 GPS (snaps to the creek), a landmark, the Bite-times spot, or a broad off-creek area.';}
 function catchUI(){const L=(F.catches||[]).slice().sort((a,b)=>a.t-b.t);
@@ -1643,7 +1785,7 @@ function renderCom(){if(!COM)return;const rows=COM.rows.filter(r=>isTest()||!/^T
   $('cComNote').innerHTML=`Anonymous sessions shared by app users (creek stretch only), validated & merged hourly into <a href="https://github.com/JonathanAgronica/fishing-apps/blob/main/data/catches.csv" target="_blank" rel="noopener">data/catches.csv</a>. Rates use 15-minute slots of time actually fished, so “no bites” sessions count. Faded bars = under 1 h of effort — treat as anecdotes.${tests?` (${tests} TEST rows hidden)`:''}`;
   shareInfo();renderList();}
 /* ---- CSV export / import (personal, full detail incl. GPS — stays on the phone) ---- */
-const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json'];
+const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json','spot_id','color'];
 function slotAt(s,t){const sl=s.ctx&&s.ctx.slots;if(!sl||!sl.length)return null;let i=Math.floor((t-sl[0].t)/Q);i=Math.max(0,Math.min(sl.length-1,i));return sl[i];}
 function exportCSV(){const out=[COLS.join(',')];
   for(const s of LOG.filter(s=>s.end!=null).sort((a,b)=>a.start-b.start)){const sp=s.spot||{},b=shareBand(s.spot),c=s.ctx,sl=c?c.slots:[];
@@ -1654,11 +1796,18 @@ function exportCSV(){const out=[COLS.join(',')];
     out.push(rec({...base,...ctxCols(sl[0]),record:'session',note:s.note,no_bites:s.noBites?1:0,pred_score_avg:sl.length?Math.round(sl.reduce((a,x)=>a+x.score,0)/sl.length):'',pred_score_max:sl.length?Math.max(...sl.map(x=>x.score)):'',
       shared:s.share&&s.share.st||'',ctx_json:c?JSON.stringify(c):''}));
     for(const x of (s.catches||[]).slice().sort((a,b)=>a.t-b.t))out.push(rec({...base,...ctxCols(slotAt(s,x.t)),record:'catch',event_id:x.id,time_aest:isoA(x.t),species:SPN[x.sp]||x.sp,count:x.n,length_cm:x.len,fate:x.fate,note:x.note}));}
+  if(FT.spots){const X=FT.spots.exportData();const rec=o=>COLS.map(k=>csvCell(o[k])).join(',');
+    for(const c of X.spots)out.push(rec({record:'spot',spot_id:c.id,spot_kind:'custom',spot_name:c.name,lat:c.lat,lng:c.lng,creek_km:c.km,creek_line:c.line==='E'?'Euleilah':'Baffle',note:c.note,color:c.color,start_aest:isoA(c.created||Date.now())}));
+    for(const [k,v] of Object.entries(X.alias))out.push(rec({record:'alias',spot_id:k,spot_name:v}));}
   const blob=new Blob([out.join('\n')+'\n'],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-jacks-catch-log-'+toLocalInput(Date.now()).slice(0,10)+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
   $('cIoMsg').textContent=`Exported ${LOG.filter(s=>s.end!=null).length} sessions.`;window.__MBJ_LAST_EXPORT=out.join('\n');}
 function importCSV(txt){const A=parseCSV(txt);const H=A.shift()||[];if(!H.includes('record')||!H.includes('session_id'))throw new Error('not a Baffle Jacks catch-log CSV');
   const g=(a,k)=>{const i=H.indexOf(k);return i<0?'':a[i]||'';};const spCode=n=>{const f=SCH.species.find(([c,l])=>l===n||c===n);return f?f[0]:'OT';};
-  const S=new Map();let added=0,skipped=0;
+  const S=new Map();let added=0,skipped=0,spots=0;
+  if(FT.spots){const X={spots:[],alias:{}};for(const a of A){const r=g(a,'record');
+      if(r==='spot'){const lat=+g(a,'lat'),lng=+g(a,'lng');if(!isNaN(lat)&&!isNaN(lng))X.spots.push({id:g(a,'spot_id'),name:g(a,'spot_name'),lat,lng,note:g(a,'note'),color:g(a,'color'),created:fromLocalInput(g(a,'start_aest'))});}
+      else if(r==='alias')X.alias[g(a,'spot_id')]=g(a,'spot_name');}
+    if(X.spots.length||Object.keys(X.alias).length)spots=FT.spots.importData(X);}
   for(const a of A){const id=g(a,'session_id').replace(/[^\w-]/g,'').slice(0,24);if(!id)continue;
     if(g(a,'record')==='session'){const lat=+g(a,'lat'),lng=+g(a,'lng');if(isNaN(lat)||isNaN(lng)){skipped++;continue;}
       let sp=spotFromLatLng(lat,lng,g(a,'gps_acc_m')?+g(a,'gps_acc_m'):null,g(a,'spot_kind')||'gps',g(a,'spot_name').slice(0,80));
@@ -1668,7 +1817,7 @@ function importCSV(txt){const A=parseCSV(txt);const H=A.shift()||[];if(!H.includ
   for(const a of A){if(g(a,'record')!=='catch')continue;const s=S.get(g(a,'session_id'));if(!s)continue;const t=fromLocalInput(g(a,'time_aest'));if(t==null)continue;
     const len=+g(a,'length_cm');s.catches.push({id:g(a,'event_id').slice(0,16)||rid(6),t,sp:spCode(g(a,'species')),n:Math.max(1,Math.min(20,+g(a,'count')||1)),len:len>=1&&len<=150?len:null,fate:FATEN[g(a,'fate')]?g(a,'fate'):'released',note:g(a,'note').slice(0,200)});}
   for(const s of S.values()){if(byId(s.id)||validate(s)){skipped++;continue;}if(!s.ctx)s.ctx=computeCtx(s);LOG.push(s);added++;}
-  save();return{added,skipped};}
+  save();return{added,skipped,spots};}
 /* ---- wiring ---- */
 function renderAll(){renderActive();renderList();renderMine();shareInfo();if(COM)renderCom();}
 function init(){fillSelects();
@@ -1680,7 +1829,7 @@ function init(){fillSelects();
   $('cPastBtn').onclick=()=>{const now=Math.floor(Date.now()/Q)*Q;openForm(newSession(now-3*3600e3,now),'new');};
   $('cGps').onclick=()=>gps();$('cBiteSpot').onclick=biteSpot;
   $('cSpotSel').onchange=()=>{const v=$('cSpotSel').value;if(!v||v==='cur')return;
-    if(v[0]==='L'){const i=+v.slice(1),l=BT.LANDMARKS[i],p=BT.pointAtKm(l.km);const sp=spotFromLatLng(p[0],p[1],null,'landmark',l.name);sp.km=l.km;sp.line=/Euleilah|Hills Rd/.test(l.name)&&l.km>16.4?'E':'B';sp.li=i;setSpot(sp);}
+    if(v[0]==='L'){const l=BT.LANDMARKS[+v.slice(1)];nameTyped=false;setSpot(landmarkSpot(l));}
     else{const g=SCH.regions.find(x=>x[0]===v.slice(1));const sp={kind:'region',rg:g[0],lat:g[2],lng:g[3],acc:null,name:'',km:null,line:null,offKm:null};setSpot(sp);}};
   $('cSpotName').oninput=()=>{nameTyped=!!$('cSpotName').value.trim();};
   $('cNoBites').onchange=()=>{if(F){F.noBites=$('cNoBites').checked;catchUI();}};
@@ -1691,8 +1840,12 @@ function init(){fillSelects();
     if(s.end==null){const err=validate(s);if(err){$('cFormMsg').textContent='⚠ '+err;return;}const o=byId(s.id);if(o)LOG[LOG.indexOf(o)]=s;else LOG.push(s);save();closeForm();renderAll();return;}
     if(await commit(s)){closeForm();renderAll();flush();}};
   $('cExport').onclick=exportCSV;
-  $('cImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=importCSV(await f.text());$('cIoMsg').textContent=`Imported ${r.added} session(s)${r.skipped?`, skipped ${r.skipped} (duplicates/invalid)`:''}.`;renderAll();}catch(err){$('cIoMsg').textContent='Import failed: '+err.message;}e.target.value='';};
+  $('cImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=importCSV(await f.text());$('cIoMsg').textContent=`Imported ${r.added} session(s)${r.spots?`, ${r.spots} spot(s)`:''}${r.skipped?`, skipped ${r.skipped} (duplicates/invalid)`:''}.`;renderAll();}catch(err){$('cIoMsg').textContent='Import failed: '+err.message;}e.target.value='';};
   addEventListener('online',flush);
+  if(FT.spots)FT.spots.onChange.push(()=>{fillSpotSel();if(F)spotUI();renderList();});
+  FT.catchLogAt=l=>{const sp=landmarkSpot(l);curSpot=sp;LS.set('mbj_lastspot',sp);FT.showTab('log');const a=activeS();
+    if(a){openForm(a,'active');$('cCt').value=toLocalInput(Date.now());return;}
+    const now=Date.now();openForm(newSession(now-Q,now),'new');$('cFormTitle').textContent='Quick catch (15-min session) — '+l.name;};
   renderAll();
   setInterval(()=>{if(document.body.dataset.tab==='log')renderActive();},60e3);
   FT.onTab.push(t=>{if(t==='log'){renderAll();loadCom();flush();}});
@@ -1701,6 +1854,182 @@ function init(){fillSelects();
   document.body.dataset.logReady='1';
   FT.catchLog={importCSV,exportCSV,flush,loadCom,get log(){return LOG;},reload(){LOG=LS.get(K.log,[]);renderAll();}};}
 try{init();}catch(e){console.error('catch log init',e);}
+})();
+</script>
+<script>/* ===================== Map tab ===================== */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);const FT=window.FT,B=window.BT,D=window.BAFFLE_DATA,S=FT.spots;
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KP='mbj_map';const pref=Object.assign({layer:'sat',colour:'off'},(()=>{try{return JSON.parse(localStorage.getItem(KP))||{}}catch(e){return{}}})());
+const savePref=()=>{try{localStorage.setItem(KP,JSON.stringify(pref));}catch(e){}};
+const E0=Date.UTC(2025,11,31,14),Q=15*60e3,TZ='Australia/Brisbane';
+const hToMs=h=>E0+h*3600e3,msToH=ms=>(ms-E0)/3600e3;
+const fT=ms=>new Intl.DateTimeFormat('en-AU',{timeZone:TZ,hour:'numeric',minute:'2-digit',hour12:true}).format(new Date(ms)).replace(' am','am').replace(' pm','pm');
+const dayKey=ms=>new Intl.DateTimeFormat('en-CA',{timeZone:TZ}).format(new Date(ms));
+const fWhen=h=>{const ms=hToMs(h);const today=dayKey(Date.now())===dayKey(ms),tom=dayKey(Date.now()+864e5)===dayKey(ms);
+  return (today?'':tom?'tomorrow ':new Intl.DateTimeFormat('en-AU',{timeZone:TZ,weekday:'short'}).format(new Date(ms))+' ')+fT(ms);};
+function scoreColor(s){const l=(x,a,b,c,d)=>c+(d-c)*(x-a)/(b-a);const h=s<50?l(s,0,50,210,45):l(s,50,100,45,135);return `hsl(${h},75%,${s<20?40:52}%)`;}
+let LF=null,map=null,base={},creekG,tickG,lmG,myG,colG,meM=null,meC=null,watch=null,addMode=false,ready=false,loading=null;
+const markers=new Map();
+const GAUGES=[{name:'Essendean Bridge gauge 039267',km:35.25,line:'B'},{name:'Hills Rd gauge 539135 (Euleilah Ck)',km:25.24,line:'E'},{name:'Winfield (MSQ tide place)',km:3.4,line:'B'}];
+function hint(html,ms){const h=$('mHint');if(!html){h.style.display='none';return;}h.innerHTML=html;h.style.display='block';clearTimeout(hint.t);if(ms)hint.t=setTimeout(()=>h.style.display='none',ms);}
+/* ---- lazy-load vendored Leaflet (precached by the service worker → works offline) ---- */
+function loadLeaflet(){if(loading)return loading;
+  loading=new Promise((res,rej)=>{if(!document.querySelector('link[data-leaflet]')){const l=document.createElement('link');l.rel='stylesheet';l.href='vendor/leaflet/leaflet.css';l.dataset.leaflet='1';document.head.appendChild(l);}
+    const s=document.createElement('script');s.src='vendor/leaflet/leaflet.js';s.onload=()=>{LF=window.L.noConflict();res();};s.onerror=()=>{loading=null;rej(new Error('map library failed to load'));};document.head.appendChild(s);});
+  return loading;}
+async function init(){if(ready)return;try{await loadLeaflet();}catch(e){$('mMap').innerHTML='<div class="mload">⚠ '+esc(e.message)+' — connect once so it can be cached for offline use.</div>';return;}
+  if(ready)return;$('mMap').innerHTML='';
+  map=LF.map('mMap',{zoomControl:true,tapHold:true,preferCanvas:false,maxZoom:19,minZoom:9});
+  base.sat=LF.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,maxNativeZoom:18,crossOrigin:true,
+    attribution:'Imagery © <a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a> — Esri, Maxar, Earthstar Geographics, GIS User Community'});
+  base.osm=LF.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:true,
+    attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'});
+  map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
+  creekG=LF.layerGroup().addTo(map);colG=LF.layerGroup().addTo(map);tickG=LF.layerGroup().addTo(map);const labG=LF.layerGroup().addTo(map);lmG=LF.layerGroup().addTo(map);myG=LF.layerGroup().addTo(map);
+  // creek centreline (always drawn — works offline without tiles)
+  const main=D.main.slice(0),eu=D.euleilah.slice(0);
+  for(const ln of [main,eu]){LF.polyline(ln,{color:'#03141a',weight:7,opacity:.75,interactive:false}).addTo(creekG);LF.polyline(ln,{color:'#5cc8ff',weight:3.5,opacity:.95,interactive:false}).addTo(creekG);}
+  // km ticks: every 1 km (dot), labels every 2 km
+  for(let k=0;k<=B.MAXKM;k++){const p=S.pointAt(k,'B');LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
+    if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}
+  for(let k=Math.ceil(D.euleilahJunctionKm);k<=Math.floor(S.EUMAX);k++){const p=S.pointAt(k,'E');LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
+    if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}
+  const fit=[];for(let k=0;k<=B.MAXKM;k+=0.5)fit.push(S.pointAt(k,'B'));map.fitBounds(LF.latLngBounds(fit.concat(eu)).pad(0.03));
+  setLayer(pref.layer);drawSpots();
+  map.on('contextmenu',e=>addAt(e.latlng));
+  map.on('click',e=>{if(addMode){addAt(e.latlng);setAdd(false);}});
+  const zt=()=>{const z=map.getZoom();for(const [g,min] of [[tickG,12],[labG,13]]){if(z<min)map.removeLayer(g);else if(!map.hasLayer(g))g.addTo(map);}};map.on('zoomend',zt);zt();
+  ready=true;document.body.dataset.mapReady='1';
+  $('mColour').value=pref.colour;colourSetup();}
+function setLayer(l){pref.layer=l;savePref();for(const k in base)if(map.hasLayer(base[k]))map.removeLayer(base[k]);if(base[l])base[l].addTo(map);
+  document.querySelectorAll('#mLayers button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));}
+/* ---- spots on the map ---- */
+function pinIcon(c){return LF.divIcon({className:'mpin-wrap',html:`<div class="mpin" style="background:${c}"></div>`,iconSize:[22,22],iconAnchor:[11,24],popupAnchor:[0,-22]});}
+function drawSpots(){if(!map)return;lmG.clearLayers();myG.clearLayers();markers.clear();
+  for(const g of GAUGES){const m=LF.marker(S.pointAt(g.km,g.line),{icon:LF.divIcon({className:'mpin-wrap',html:'<div class="mgauge"></div>',iconSize:[14,14],iconAnchor:[7,7]}),title:g.name,zIndexOffset:-100}).addTo(lmG);
+    m.bindTooltip(esc(g.name),{direction:'top',offset:[0,-6]});m.on('click',()=>openSpot(S.nearest(g.km,g.line,0.05)||{name:g.name,km:g.km,line:g.line,builtin:true,gauge:true},m));}
+  for(const l of S.all()){if(l.custom){const m=LF.marker([l.lat,l.lng],{icon:pinIcon(l.color),draggable:true,title:l.name,autoPan:true,zIndexOffset:500}).addTo(myG);
+      m.bindTooltip(esc(l.name),{direction:'top',offset:[0,-22]});
+      m.on('click',()=>openSpot(S.get(l.id),m));
+      m.on('dragend',()=>{const p=m.getLatLng();try{const u=S.update(l.id,{lat:p.lat,lng:p.lng});hint(`📍 <b>${esc(u.name)}</b> moved → km ${u.km.toFixed(2)} ${u.line==='E'?'Euleilah Ck':'Baffle Ck'}`,4000);}catch(e){m.setLatLng([l.lat,l.lng]);hint('⚠ '+esc(e.message),4000);}});
+      markers.set(l.id,m);}
+    else{const m=LF.circleMarker(S.latLng(l),{radius:7,color:'#fff',weight:2,fillColor:l.alias?'#ffd38a':'#0b3b3a',fillOpacity:.95}).addTo(lmG);
+      m.bindTooltip(esc(l.name),{direction:'top',offset:[0,-6]});m.on('click',()=>openSpot(S.get(l.id),m));markers.set(l.id,m);}}}
+/* ---- popup: next high / low / run-in start + bite score ---- */
+function spotInfo(l){const o=FT.baffleOpts?FT.baffleOpts():{};const nh=msToH(Date.now());
+  const P=B.predictAt(l.km,nh-3,nh+30,o);const ext=P.ext.filter(e=>!e.weak);
+  const hi=ext.find(e=>e.hi&&e.t>nh),lo=ext.find(e=>!e.hi&&e.t>nh);
+  const R=B.runInStarts(l.km,nh-3,nh+30,o);const cur=R.filter(r=>r.t<=nh&&nh-r.t<=2).pop(),nxt=R.find(r=>r.t>nh);
+  let sc=null;try{const ll=S.latLng(l);const c=FT.biteCtx({lat:ll[0],lng:ll[1],km:l.km},Date.now(),Date.now()+Q);sc=c&&c.slots[0];}catch(e){}
+  const v=P.curve(nh),v2=P.curve(nh+0.25);
+  return{P,hi,lo,cur,nxt,sc,now:v,trend:v==null||v2==null?null:v2>v+0.005?'rising':v2<v-0.005?'falling':'slack',cal:P.cal};}
+function popHtml(l){const I=spotInfo(l);const u=x=>` <span class="mut">±${Math.round(x)}′</span>`;
+  const tag=l.custom?'<span class="tag mine">my spot</span>':l.alias?`<span class="tag">renamed · ${esc(l.base)}</span>`:'';
+  return `<div class="mpop" data-km="${l.km}"><h3>${esc(l.name)} ${tag}</h3>
+   <div class="mut">km ${l.km.toFixed(2)} ${l.line==='E'?'Euleilah Ck':'Baffle Ck'}${l.custom&&l.offKm>0.05?` · pin ${Math.round(l.offKm*1000)} m off centreline`:''}${l.note?'<br>📝 '+esc(l.note):''}</div>
+   <table>
+    <tr><td>🔺 Next high</td><td class="mhi"><b>${I.hi?fWhen(I.hi.t):'—'}</b>${I.hi?u(I.hi.u)+` <span class="mut">${I.hi.h.toFixed(2)} m</span>`:''}</td></tr>
+    <tr><td>🔻 Next low</td><td class="mlo"><b>${I.lo?fWhen(I.lo.t):'—'}</b>${I.lo?u(I.lo.u)+` <span class="mut">${I.lo.h.toFixed(2)} m${I.cal.trunc?' pool':''}</span>`:''}</td></tr>
+    <tr><td>🎣 Run-in start</td><td class="mri">${I.cur?`<b>now</b> (started ${fWhen(I.cur.t)}${u(I.cur.u)})${I.nxt?'<br>next ':''}`:''}${I.nxt?`<b>${fWhen(I.nxt.t)}</b>${u(I.nxt.u)}${I.nxt.kind==='rise'?' <span class="mut">water starts rising</span>':''}`:(I.cur?'':'— <span class="mut">(neap: tide not reaching)</span>')}</td></tr>
+    <tr><td>🐟 Bite score now</td><td class="msc">${I.sc?`<b style="color:${scoreColor(I.sc.score)}">${I.sc.score}</b> <span class="mut">${esc(I.sc.tl||'')}</span>`:'—'}</td></tr>
+    <tr><td>🌊 Now</td><td>${I.now!=null?I.now.toFixed(2)+' m AHD, '+I.trend:'—'}</td></tr>
+   </table>
+   <div class="b"><button class="pri" data-a="bite">🎣 Bite times here</button><button data-a="tides">🌊 Tides here</button><button data-a="log">📝 Log catch here</button>
+   ${l.custom?'<button data-a="edit">✏️ Edit</button>':l.id?'<button data-a="alias">✏️ Rename</button>':''}</div><div class="medit"></div></div>`;}
+let openM=null;
+function openSpot(l,m){if(!l)return;openM=m;m.unbindPopup();m.bindPopup(popHtml(l),{maxWidth:300,autoPanPadding:[20,60]}).openPopup();wirePopup(l,m);}
+function wirePopup(l,m){const el=m.getPopup().getElement();if(!el)return;
+  el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>action(b.dataset.a,l,m,el));}
+function goBite(l){const ll=S.latLng(l);FT.biteSetLoc({name:l.name+' — Baffle Ck',lat:ll[0],lng:ll[1],tz:TZ,baffleKm:l.km});FT.showTab('bite');}
+function action(a,l,m,el){
+  if(a==='bite'){map.closePopup();goBite(l);}
+  else if(a==='tides'){map.closePopup();FT.baffleSelect(l.km,l.name);FT.showTab('baffle');}
+  else if(a==='log'){map.closePopup();FT.catchLogAt&&FT.catchLogAt(l);}
+  else if(a==='edit')editForm(l,m,el);
+  else if(a==='alias'){const box=el.querySelector('.medit');box.innerHTML=`<input type="text" class="mnm" maxlength="60" value="${esc(l.name)}" placeholder="${esc(l.base)}"><div class="b"><button class="pri" data-x="ok">Save name</button>${l.alias?'<button data-x="reset">Reset to “'+esc(l.base)+'”</button>':''}</div>`;
+    box.querySelector('[data-x=ok]').onclick=()=>{S.setAlias(l.id,box.querySelector('.mnm').value);reopen(l.id);};
+    const r=box.querySelector('[data-x=reset]');if(r)r.onclick=()=>{S.setAlias(l.id,'');reopen(l.id);};box.querySelector('.mnm').focus();}}
+function reopen(id){const l=S.get(id);const m=markers.get(id);if(l&&m)openSpot(l,m);}
+function swatches(cur){return `<div class="sw">${S.COLORS.map(c=>`<span data-c="${c}" style="background:${c}" class="${c===cur?'on':''}"></span>`).join('')}</div>`;}
+function wireSw(box,st){box.querySelectorAll('.sw span').forEach(s=>s.onclick=()=>{st.color=s.dataset.c;box.querySelectorAll('.sw span').forEach(x=>x.classList.toggle('on',x===s));});}
+function editForm(l,m,el){const box=el.querySelector('.medit');const st={color:l.color};
+  box.innerHTML=`<input type="text" class="mnm" maxlength="60" value="${esc(l.name)}" placeholder="Spot name"><input type="text" class="mnt" maxlength="200" value="${esc(l.note||'')}" placeholder="Note (optional)">${swatches(l.color)}
+   <div class="b"><button class="pri" data-x="ok">Save</button><button data-x="del">🗑 Delete</button></div><div class="mut">Drag the pin to move it.</div>`;wireSw(box,st);
+  box.querySelector('[data-x=ok]').onclick=()=>{S.update(l.id,{name:box.querySelector('.mnm').value,note:box.querySelector('.mnt').value,color:st.color});reopen(l.id);};
+  box.querySelector('[data-x=del]').onclick=()=>{if(!confirm(`Delete “${l.name}”?`))return;map.closePopup();S.remove(l.id);hint('🗑 Spot deleted',2500);};
+  box.querySelector('.mnm').focus();}
+/* ---- add a spot ---- */
+function addAt(ll){let sn;try{sn=S.snap(ll.lat,ll.lng);}catch(e){return;}
+  const pop=LF.popup({maxWidth:300}).setLatLng(ll);
+  if(sn.offKm>1.2){pop.setContent(`<div class="mpop">That point is ${sn.offKm.toFixed(1)} km from the creek centreline — custom spots must be within 1.2 km of Baffle/Euleilah Creek.</div>`).openOn(map);return;}
+  const near=S.nearest(sn.km,sn.line,0.3);const st={color:S.COLORS[0]};
+  pop.setContent(`<div class="mpop"><h3>➕ New spot</h3><div class="mut">Snaps to <b>km ${sn.km.toFixed(2)} ${sn.line==='E'?'Euleilah Ck':'Baffle Ck'}</b> for tides (${Math.round(sn.offKm*1000)} m from centreline)${near?' · near '+esc(near.name):''}</div>
+    <input type="text" class="mnm" maxlength="60" placeholder="Name e.g. Snag bend"><input type="text" class="mnt" maxlength="200" placeholder="Note (optional)">${swatches(st.color)}
+    <div class="b"><button class="pri" data-x="ok">💾 Save spot</button><button data-x="no">Cancel</button></div></div>`).openOn(map);
+  const el=pop.getElement();wireSw(el,st);const nm=el.querySelector('.mnm');setTimeout(()=>nm.focus(),50);
+  const ok=()=>{try{const l=S.add({lat:ll.lat,lng:ll.lng,name:nm.value,note:el.querySelector('.mnt').value,color:st.color});map.closePopup();setTimeout(()=>reopen(l.id),50);}catch(e){hint('⚠ '+esc(e.message),4000);}};
+  el.querySelector('[data-x=ok]').onclick=ok;nm.onkeydown=e=>{if(e.key==='Enter')ok();};el.querySelector('[data-x=no]').onclick=()=>map.closePopup();}
+function setAdd(on){addMode=on;$('mAdd').classList.toggle('on',on);if(on)hint('Tap the map near the creek to drop a spot…');else hint('');if(map)map.getContainer().style.cursor=on?'crosshair':'';}
+/* ---- my position ---- */
+function me(){if(!navigator.geolocation){hint('No GPS on this device.',3000);return;}
+  if(watch!=null){navigator.geolocation.clearWatch(watch);watch=null;}
+  hint('<span class="spin"></span> Finding you…');let first=true;
+  watch=navigator.geolocation.watchPosition(p=>{const ll=[p.coords.latitude,p.coords.longitude],acc=p.coords.accuracy;
+    if(!meM){meM=LF.marker(ll,{icon:LF.divIcon({className:'mpin-wrap',html:'<div class="mme"></div>',iconSize:[20,20],iconAnchor:[10,10]}),zIndexOffset:1000,interactive:false}).addTo(map);meC=LF.circle(ll,{radius:acc,color:'#3b8fff',weight:1,fillOpacity:.1,interactive:false}).addTo(map);}
+    else{meM.setLatLng(ll);meC.setLatLng(ll).setRadius(acc);}
+    const sn=S.snap(ll[0],ll[1]);const n=sn.offKm<=1.2?S.nearest(sn.km,sn.line,1.0):null;
+    hint(`📍 You: ±${Math.round(acc)} m · ${sn.offKm<=1.2?`km ${sn.km.toFixed(2)} ${sn.line==='E'?'Euleilah Ck':'Baffle Ck'} (${Math.round(sn.offKm*1000)} m off)${n?` · nearest spot <b>${esc(n.name)}</b>`:''}`:sn.offKm.toFixed(1)+' km from the creek'}`);
+    if(first){first=false;map.setView(ll,Math.max(map.getZoom(),14));}},
+    e=>hint('GPS failed: '+esc(e.message),4000),{enableHighAccuracy:true,timeout:20000,maximumAge:30000});}
+function stopMe(){if(watch!=null){navigator.geolocation.clearWatch(watch);watch=null;}}
+/* ---- colour the creek by bite score / tide stage at a chosen time ---- */
+const cache={};
+function dayStartMs(){const k=dayKey(Date.now());const [y,m,d]=k.split('-').map(Number);return Date.UTC(y,m-1,d)-10*3600e3;}
+function segs(){const out=[];for(let k=0;k<B.MAXKM;k+=1)out.push({km:k+0.5,line:'B',a:k,b:k+1});
+  for(let k=Math.floor(D.euleilahJunctionKm);k<S.EUMAX;k+=1){const a=Math.max(k,D.euleilahJunctionKm),b=Math.min(k+1,S.EUMAX);if(b-a>0.05)out.push({km:(a+b)/2,line:'E',a,b});}return out;}
+function segLine(s){const pts=[];for(let x=s.a;x<=s.b+1e-9;x+=0.1)pts.push(S.pointAt(Math.min(x,s.b),s.line));pts.push(S.pointAt(s.b,s.line));return pts;}
+function stageAt(s,t){const key='t'+dayKey(t)+s.line+s.km+JSON.stringify(FT.baffleOpts?FT.baffleOpts():{});const d0=dayStartMs();
+  let c=cache[key];if(!c){const o=FT.baffleOpts?FT.baffleOpts():{};const h0=msToH(d0);c=cache[key]={P:B.predictAt(s.km,h0-14,h0+38,o),R:B.runInStarts(s.km,h0-14,h0+38,o)};}
+  const h=msToH(t);if(c.R.some(r=>h>=r.t&&h<=r.t+2))return 'runin';const v=c.P.curve(h),v2=c.P.curve(h+0.25);if(v==null||v2==null)return 'none';
+  if(c.P.cal.trunc&&v<=Math.min(...c.P.ext.filter(e=>!e.hi).map(e=>e.h))+0.03)return 'pool';return v2>v+0.004?'rising':v2<v-0.004?'falling':'slack';}
+function scoreAt(s,t){const d0=dayStartMs();const key='b'+dayKey(t)+s.line+s.km;let c=cache[key];
+  if(!c){const ll=S.pointAt(s.km,s.line);try{c=cache[key]=FT.biteCtx({lat:ll[0],lng:ll[1],km:s.km},d0,d0+864e5);}catch(e){c=cache[key]={slots:[]};}}
+  const sl=c.slots[Math.floor((t-d0)/Q)];return sl?sl.score:null;}
+const TC={runin:'#2fd3a0',rising:'#5cc8ff',falling:'#f0a03a',slack:'#9db5b1',pool:'#6b6b6b',none:'#444'};
+function colourSetup(){const v=pref.colour;const d0=dayStartMs();const r=$('mTime');
+  if(r.dataset.day!==String(d0)){r.dataset.day=d0;r.value=Math.max(0,Math.min(95,Math.floor((Date.now()-d0)/Q)));}
+  $('mTime').style.display=$('mTimeLbl').style.display=v==='off'?'none':'';colour();}
+function colour(){if(!map)return;colG.clearLayers();const v=pref.colour;const d0=dayStartMs();const t=d0+(+$('mTime').value)*Q;
+  $('mTimeLbl').textContent=v==='off'?'':'today '+fT(t)+(Math.abs(t-Date.now())<Q?' (now)':'');
+  if(v==='off'){$('mLegend').innerHTML='';creekG.eachLayer(l=>l.setStyle&&l.setStyle({opacity:l.options.color==='#5cc8ff'?.95:.75}));return;}
+  creekG.eachLayer(l=>{if(l.options.color==='#5cc8ff')l.setStyle({opacity:.25});});
+  for(const s of segs()){let c;if(v==='tide')c=TC[stageAt(s,t)];else{const sc=scoreAt(s,t);c=sc==null?'#444':scoreColor(sc);}
+    LF.polyline(segLine(s),{color:c,weight:6,opacity:.95,interactive:false}).addTo(colG);}
+  $('mLegend').innerHTML=v==='tide'?Object.entries({runin:'run-in start (0–2 h)',rising:'rising',falling:'falling',slack:'slack',pool:'pool level'}).map(([k,l])=>`<i style="background:${TC[k]}"></i>${l}`).join(''):
+    `<i style="background:${scoreColor(10)}"></i>0–20<i style="background:${scoreColor(40)}"></i>40<i style="background:${scoreColor(60)}"></i>60<i style="background:${scoreColor(80)}"></i>80<i style="background:${scoreColor(95)}"></i>95+ <span>bite score (Baffle model, 1 km segments)</span>`;}
+/* ---- lists ---- */
+function renderLists(){const C=S.customs();$('mCount').textContent=C.length?`· ${C.length}`:'';
+  $('mList').innerHTML=C.length?C.slice().sort((a,b)=>a.km-b.km).map(c=>`<div class="mitem"><span class="dot" style="background:${c.color}"></span><div class="ci"><b>${esc(c.name)}</b> <span class="mut">km ${c.km.toFixed(1)} ${c.line==='E'?'Euleilah':'Baffle'}${c.note?' · '+esc(c.note):''}</span></div><button class="sm" data-go="${c.id}">🗺</button><button class="sm" data-del="${c.id}">🗑</button></div>`).join('')
+    :'<div class="cempty">No spots yet — long-press the map near the creek.</div>';
+  $('mList').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{const l=S.get(b.dataset.go);if(!map)return;map.setView([l.lat,l.lng],Math.max(map.getZoom(),15));setTimeout(()=>reopen(l.id),300);document.getElementById('mWrap').scrollIntoView({block:'start',behavior:'smooth'});});
+  $('mList').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const l=S.get(b.dataset.del);if(confirm(`Delete “${l.name}”?`))S.remove(l.id);});
+  $('mBuiltins').innerHTML=S.builtins().map(l=>`<div class="mbi"><span>${esc(l.base)} <span class="mut">${l.km.toFixed(1)} km</span></span><input type="text" data-al="${l.id}" maxlength="60" placeholder="my name for it" value="${l.alias?esc(l.name):''}"></div>`).join('');
+  $('mBuiltins').querySelectorAll('[data-al]').forEach(i=>i.onchange=()=>S.setAlias(i.dataset.al,i.value));}
+/* ---- wiring ---- */
+document.querySelectorAll('#mLayers button').forEach(b=>b.onclick=()=>{if(map)setLayer(b.dataset.l);else{pref.layer=b.dataset.l;savePref();}});
+document.querySelectorAll('#mLayers button').forEach(b=>b.classList.toggle('on',b.dataset.l===pref.layer));
+$('mAdd').onclick=()=>setAdd(!addMode);$('mMe').onclick=()=>{if(map)me();};
+$('mColour').value=pref.colour;$('mColour').onchange=()=>{pref.colour=$('mColour').value;savePref();colourSetup();};
+$('mTime').oninput=()=>colour();
+$('mExport').onclick=()=>{const blob=new Blob([JSON.stringify(S.exportData(),null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-jacks-spots.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);$('mIoMsg').textContent='Saved '+S.customs().length+' spot(s).';};
+$('mImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const n=S.importData(JSON.parse(await f.text()));$('mIoMsg').textContent=`Restored ${n} spot(s).`;}catch(err){$('mIoMsg').textContent='Restore failed: '+err.message;}e.target.value='';};
+S.onChange.push(()=>{renderLists();drawSpots();for(const k in cache)delete cache[k];if(pref.colour!=='off')colour();});
+renderLists();
+FT.onTab.push(t=>{if(t==='map'){init().then(()=>{if(map){map.invalidateSize();colourSetup();}});}else{stopMe();setAdd(false);}});
+if(document.body.dataset.tab==='map')init();
+FT.mapDebug={get map(){return map},get LF(){return LF},addAt,openSpot:id=>reopen(id),spotInfo};
 })();
 </script>
 <script>

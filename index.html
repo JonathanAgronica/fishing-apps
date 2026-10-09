@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Baffle Jacks">
-<meta name="app-version" content="202610100820">
+<meta name="app-version" content="202610100949">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -208,6 +208,14 @@ nav.tabs a .ts{display:none}
 .tag.mine{background:#4a3a6b;color:#e3d4ff}
 
 .tab[hidden]{display:none}
+.sysbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1000px;margin:0 auto 8px;font-size:.85rem}
+.sysbar label{flex:1 1 130px;display:flex;align-items:center;gap:4px}
+.sysbar select{flex:1;min-width:0;max-width:100%;padding:6px 8px;border-radius:10px;background:#0d1f22;color:var(--ink);border:1px solid #2b5157;font-size:.9rem}
+.sysbar button{white-space:nowrap}
+.sysconf{display:inline-block;min-width:1.6em;text-align:center;font-weight:700;border-radius:7px;padding:2px 6px;font-size:.8rem;color:#081214}
+.sysconf.cA{background:#57d18a} .sysconf.cB{background:#ffd38a} .sysconf.cC{background:#ff9b8a}
+.sysmsg{flex-basis:100%;color:var(--mut);font-size:.82rem} .sysmsg:empty{display:none}
+.sysmsg button{margin-left:4px}
 .src{margin-top:8px;font-size:.84rem;background:#12303d;border:1px solid #245a72;color:#cfeeff;border-radius:10px;padding:7px 10px}
 .src:empty{display:none}
 input:disabled{opacity:.4}
@@ -543,7 +551,7 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610100820</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610100949</span></footer>
 <script>
 /* Mac's Baffle Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -558,6 +566,33 @@ addEventListener('hashchange',()=>FT.showTab(location.hash.slice(1)));
 return FT;})();
 </script>
 
+<script id="ft-boot">/* ===== River-system choice (runs before any tab script) =====
+   FT.SYS = chosen system id ('baffle' = the original hand-calibrated Baffle Creek model, default).
+   Choice: ?sys=<id> (one-off link) > localStorage ft_sys > 'baffle'. Switching reloads the page so every tab
+   starts clean on the new system. Per-system settings use FT.k(key): Baffle keeps its original keys. */
+(function(){const FT=window.FT;
+FT.SYSIDX=[{"id":"hilliard-creek","name":"Hilliard Creek","area":"Agnes Water / 1770","conf":"C","port":"Gladstone (Auckland Point)","km":3.3,"g":0,"mouth":[-24.06506,151.63471],"bbox":[-24.0768,151.6182,-24.0648,151.6347]},{"id":"worthington-creek","name":"Worthington Creek","area":"Agnes Water / 1770","conf":"C","port":"Gladstone (Auckland Point)","km":4.8,"g":0,"mouth":[-24.10778,151.67808],"bbox":[-24.1399,151.6777,-24.1078,151.6948]},{"id":"round-hill-creek","name":"Round Hill Creek","area":"Agnes Water / 1770","conf":"C","port":"Gladstone (Auckland Point)","km":14.2,"g":0,"mouth":[-24.1693,151.87986],"bbox":[-24.2409,151.8281,-24.1693,151.8816]},{"id":"eurimbula-creek","name":"Eurimbula Creek","area":"Agnes Water / 1770","conf":"C","port":"Gladstone (Auckland Point)","km":6.9,"g":0,"mouth":[-24.17336,151.84469],"bbox":[-24.1766,151.8016,-24.1643,151.8447]},{"id":"baffle","name":"Baffle Creek","area":"Baffle – Kolan coast","conf":"A","port":"Bundaberg (Burnett Heads)","km":37.5,"g":0,"mouth":[-24.5155,152.05779],"bbox":[-24.6056,151.8296,-24.4708,152.0607]},{"id":"littabella-creek","name":"Littabella Creek","area":"Baffle – Kolan coast","conf":"C","port":"Bundaberg (Burnett Heads)","km":9.0,"g":0,"mouth":[-24.59444,152.11796],"bbox":[-24.6494,152.0762,-24.5932,152.118]},{"id":"kolan-river","name":"Kolan River","area":"Baffle – Kolan coast","conf":"B","port":"Bundaberg (Burnett Heads)","km":18.1,"g":0,"mouth":[-24.65114,152.18563],"bbox":[-24.7405,152.1436,-24.6511,152.2046]},{"id":"burnett-river","name":"Burnett River","area":"Bundaberg – Elliott","conf":"A","port":"Bundaberg (Burnett Heads)","km":24.9,"g":1,"mouth":[-24.75544,152.40073],"bbox":[-24.8883,152.2857,-24.7554,152.4007]},{"id":"palmer-creek","name":"Palmer Creek","area":"Bundaberg – Elliott","conf":"B","port":"Bundaberg (Burnett Heads)","km":1.5,"g":0,"mouth":[-24.8705,152.48344],"bbox":[-24.8785,152.4806,-24.8705,152.4837]},{"id":"elliott-river","name":"Elliott River","area":"Bundaberg – Elliott","conf":"C","port":"Bundaberg (Burnett Heads)","km":10.2,"g":0,"mouth":[-24.92933,152.48688],"bbox":[-24.9702,152.4389,-24.9282,152.4869]},{"id":"coonarr-creek","name":"Coonarr Creek","area":"Bundaberg – Elliott","conf":"B","port":"Bundaberg (Burnett Heads)","km":3.9,"g":0,"mouth":[-24.96938,152.48878],"bbox":[-24.9845,152.4814,-24.9678,152.4888]},{"id":"wathumba-creek","name":"Wathumba Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":9.4,"g":0,"mouth":[-24.9813,153.22901],"bbox":[-24.9857,153.2276,-24.9507,153.2572]},{"id":"theodolite-creek","name":"Theodolite Creek","area":"Hervey Bay – Burrum","conf":"C","port":"Bundaberg (Burnett Heads)","km":9.0,"g":0,"mouth":[-25.07199,152.54752],"bbox":[-25.0984,152.501,-25.0692,152.5475]},{"id":"awinya-creek","name":"Awinya Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":3.0,"g":0,"mouth":[-25.07553,153.16774],"bbox":[-25.0755,153.1677,-25.0694,153.1782]},{"id":"bowarrady-creek","name":"Bowarrady Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":1.2,"g":0,"mouth":[-25.11352,153.1283],"bbox":[-25.1135,153.1283,-25.108,153.1361]},{"id":"woralie-creek","name":"Woralie Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":2.1,"g":0,"mouth":[-25.13562,153.09925],"bbox":[-25.1356,153.0993,-25.1257,153.1142]},{"id":"burrum-river","name":"Burrum River","area":"Hervey Bay – Burrum","conf":"A","port":"Urangan","km":30.9,"g":2,"mouth":[-25.17825,152.61505],"bbox":[-25.3332,152.4965,-25.1456,152.615]},{"id":"coongul-creek","name":"Coongul Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":7.2,"g":0,"mouth":[-25.18328,153.02522],"bbox":[-25.1833,153.0252,-25.1557,153.0823]},{"id":"puthoo-creek","name":"Puthoo Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":3.6,"g":0,"mouth":[-25.22269,153.03268],"bbox":[-25.2227,153.0327,-25.2096,153.0466]},{"id":"yidney-creek","name":"Yidney Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":1.8,"g":0,"mouth":[-25.22359,153.03891],"bbox":[-25.2274,153.0389,-25.2236,153.0505]},{"id":"marsh-creek","name":"Marsh Creek","area":"Hervey Bay – Burrum","conf":"B","port":"Urangan","km":3.0,"g":0,"mouth":[-25.22953,152.64945],"bbox":[-25.2374,152.6348,-25.2295,152.6495]},{"id":"beelbi-creek","name":"Beelbi Creek","area":"Hervey Bay – Burrum","conf":"B","port":"Urangan","km":6.0,"g":0,"mouth":[-25.24357,152.6619],"bbox":[-25.2725,152.6555,-25.2427,152.6623]},{"id":"tenimby-creek","name":"Tenimby Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Urangan","km":2.7,"g":0,"mouth":[-25.24429,153.05042],"bbox":[-25.2523,153.0504,-25.2443,153.0618]},{"id":"eli-creek","name":"Eli Creek","area":"Hervey Bay – Burrum","conf":"C","port":"Urangan","km":6.0,"g":0,"mouth":[-25.26337,152.80514],"bbox":[-25.2927,152.8051,-25.2622,152.8245]},{"id":"o-regan-creek","name":"O'Regan Creek","area":"Hervey Bay – Burrum","conf":"B","port":"Urangan","km":4.6,"g":0,"mouth":[-25.26754,152.726],"bbox":[-25.2737,152.7063,-25.2671,152.726]},{"id":"bogimbah-creek","name":"Bogimbah Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Kingfisher Bay jetty","km":2.7,"g":0,"mouth":[-25.29649,153.04429],"bbox":[-25.3039,153.0443,-25.2965,153.0576]},{"id":"pulgul-creek","name":"Pulgul Creek","area":"Hervey Bay – Burrum","conf":"B","port":"Urangan","km":1.2,"g":0,"mouth":[-25.30782,152.90043],"bbox":[-25.3129,152.8936,-25.3078,152.9008]},{"id":"urang-creek","name":"Urang Creek","area":"K'gari (Fraser Is.)","conf":"B","port":"Kingfisher Bay jetty","km":1.5,"g":0,"mouth":[-25.31903,153.0504],"bbox":[-25.3267,153.0504,-25.3182,153.0592]},{"id":"poyungan-creek","name":"Poyungan Creek","area":"K'gari (Fraser Is.)","conf":"B","port":"Kingfisher Bay jetty","km":1.5,"g":0,"mouth":[-25.34459,153.05115],"bbox":[-25.3475,153.0512,-25.3432,153.0574]},{"id":"boon-boon-creek","name":"Boon Boon Creek","area":"K'gari (Fraser Is.)","conf":"B","port":"Kingfisher Bay jetty","km":0.9,"g":0,"mouth":[-25.35899,153.04729],"bbox":[-25.3621,153.0473,-25.359,153.0518]},{"id":"dundonga-creek","name":"Dundonga Creek","area":"K'gari (Fraser Is.)","conf":"B","port":"Kingfisher Bay jetty","km":0.9,"g":0,"mouth":[-25.3845,153.03422],"bbox":[-25.3876,153.0342,-25.3845,153.04]},{"id":"yeenyargoor-creek","name":"Yeenyargoor Creek","area":"K'gari (Fraser Is.)","conf":"B","port":"Kingfisher Bay jetty","km":2.5,"g":0,"mouth":[-25.40694,153.01276],"bbox":[-25.4155,153.0128,-25.4069,153.0322]},{"id":"bennett-creek","name":"Bennett Creek","area":"K'gari (Fraser Is.)","conf":"B","port":"Kingfisher Bay jetty","km":1.2,"g":0,"mouth":[-25.42168,153.00452],"bbox":[-25.4227,153.0045,-25.4202,153.0115]},{"id":"duck-creek","name":"Duck Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":2.2,"g":0,"mouth":[-25.43247,152.99682],"bbox":[-25.4396,152.9968,-25.4325,153.0044]},{"id":"mary-river","name":"Mary River","area":"Great Sandy Strait","conf":"A","port":"Kingfisher Bay jetty","km":58.6,"g":2,"mouth":[-25.43292,152.92805],"bbox":[-25.5879,152.6216,-25.3722,152.9281]},{"id":"wanggoolba-creek","name":"Wanggoolba Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":2.4,"g":0,"mouth":[-25.44622,152.99287],"bbox":[-25.4482,152.9929,-25.4426,153.0001]},{"id":"panama-creek","name":"Panama Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":1.7,"g":0,"mouth":[-25.45811,152.98557],"bbox":[-25.4645,152.9856,-25.458,152.9947]},{"id":"sandfly-creek","name":"Sandfly Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":2.2,"g":0,"mouth":[-25.46181,152.9456],"bbox":[-25.4618,152.9333,-25.454,152.9456]},{"id":"rocky-creek","name":"Rocky Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":3.9,"g":0,"mouth":[-25.46832,152.98426],"bbox":[-25.4726,152.9843,-25.4673,153.0014]},{"id":"german-creek","name":"German Creek","area":"Great Sandy Strait","conf":"C","port":"Kingfisher Bay jetty","km":6.5,"g":0,"mouth":[-25.4711,152.92606],"bbox":[-25.4923,152.8891,-25.4701,152.9261]},{"id":"alligator-creek","name":"Alligator Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":1.1,"g":0,"mouth":[-25.48001,152.99381],"bbox":[-25.48,152.9938,-25.4755,152.9981]},{"id":"butcher-creek","name":"Butcher Creek","area":"Great Sandy Strait","conf":"C","port":"Kingfisher Bay jetty","km":12.9,"g":0,"mouth":[-25.54683,152.89208],"bbox":[-25.5468,152.8026,-25.5121,152.8921]},{"id":"dimond-creek","name":"Dimond Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":4.2,"g":0,"mouth":[-25.55187,152.86436],"bbox":[-25.5519,152.8577,-25.528,152.8644]},{"id":"kalah-creek","name":"Kalah Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":4.2,"g":0,"mouth":[-25.55373,152.86211],"bbox":[-25.5748,152.8459,-25.5537,152.8621]},{"id":"wobber-creek","name":"Wobber Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":4.7,"g":0,"mouth":[-25.59092,152.87619],"bbox":[-25.5999,152.85,-25.5852,152.8762]},{"id":"maaroom-creek","name":"Maaroom Creek","area":"Great Sandy Strait","conf":"B","port":"Kingfisher Bay jetty","km":3.9,"g":0,"mouth":[-25.61304,152.87558],"bbox":[-25.6285,152.8658,-25.613,152.8756]},{"id":"thangawang-creek","name":"Thangawang Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":2.1,"g":0,"mouth":[-25.64811,152.90085],"bbox":[-25.6523,152.8856,-25.6474,152.9008]},{"id":"figtree-creek","name":"Figtree Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":1.2,"g":0,"mouth":[-25.66245,152.98001],"bbox":[-25.6624,152.98,-25.6599,152.9857]},{"id":"little-tinana-creek","name":"Little Tinana Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":3.6,"g":0,"mouth":[-25.67368,152.88366],"bbox":[-25.6741,152.8658,-25.6681,152.8837]},{"id":"big-tuan-creek","name":"Big Tuan Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":4.5,"g":0,"mouth":[-25.68415,152.87944],"bbox":[-25.7042,152.857,-25.6841,152.8794]},{"id":"taleerba-creek","name":"Taleerba Creek","area":"K'gari (Fraser Is.)","conf":"C","port":"Tin Can Bay (Snapper Creek)","km":1.3,"g":0,"mouth":[-25.70844,153.07848],"bbox":[-25.7188,153.0764,-25.7084,153.0785]},{"id":"poona-creek","name":"Poona Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":5.1,"g":0,"mouth":[-25.72784,152.90819],"bbox":[-25.736,152.8821,-25.7191,152.9082]},{"id":"geewan-creek","name":"Geewan Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":3.4,"g":0,"mouth":[-25.72885,152.99567],"bbox":[-25.7289,152.9957,-25.7153,153.0168]},{"id":"buttha-creek","name":"Buttha Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":5.1,"g":0,"mouth":[-25.73777,152.91074],"bbox":[-25.7645,152.9039,-25.7378,152.9129]},{"id":"mosquito-creek","name":"Mosquito Creek","area":"Great Sandy Strait","conf":"C","port":"Tin Can Bay (Snapper Creek)","km":4.2,"g":0,"mouth":[-25.81433,152.91759],"bbox":[-25.8205,152.8985,-25.8117,152.9176]},{"id":"kauri-creek","name":"Kauri Creek","area":"Great Sandy Strait","conf":"C","port":"Tin Can Bay (Snapper Creek)","km":4.2,"g":0,"mouth":[-25.81893,152.92075],"bbox":[-25.8493,152.9207,-25.8189,152.9319]},{"id":"dinnies-creek","name":"Dinnies Creek","area":"Great Sandy Strait","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":2.5,"g":0,"mouth":[-25.84594,153.02258],"bbox":[-25.8459,153.0111,-25.8338,153.0226]},{"id":"teebar-creek","name":"Teebar Creek","area":"Tin Can Inlet","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":5.7,"g":0,"mouth":[-25.87825,153.00269],"bbox":[-25.8783,152.9753,-25.8596,153.0027]},{"id":"carlo-creek","name":"Carlo Creek","area":"Tin Can Inlet","conf":"C","port":"Tin Can Bay (Snapper Creek)","km":7.8,"g":0,"mouth":[-25.9038,153.05246],"bbox":[-25.9339,153.0516,-25.9038,153.0862]},{"id":"snapper-creek","name":"Snapper Creek","area":"Tin Can Inlet","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":2.1,"g":0,"mouth":[-25.91973,152.984],"bbox":[-25.9309,152.984,-25.9197,152.9875]},{"id":"teewah-creek","name":"Teewah Creek","area":"Tin Can Inlet","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":4.9,"g":0,"mouth":[-25.93085,153.01665],"bbox":[-25.9507,152.9896,-25.9308,153.0166]},{"id":"cameron-creek","name":"Cameron Creek","area":"Tin Can Inlet","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":4.4,"g":0,"mouth":[-25.93235,153.03622],"bbox":[-25.9509,153.0362,-25.9275,153.0735]},{"id":"cooloola-creek","name":"Cooloola Creek","area":"Tin Can Inlet","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":3.0,"g":0,"mouth":[-25.96055,153.03272],"bbox":[-25.9733,153.0327,-25.9606,153.0414]},{"id":"carland-creek","name":"Carland Creek","area":"Tin Can Inlet","conf":"B","port":"Tin Can Bay (Snapper Creek)","km":1.2,"g":0,"mouth":[-25.98797,153.01737],"bbox":[-25.9973,153.0161,-25.988,153.0178]},{"id":"noosa-river","name":"Noosa River","area":"Noosa","conf":"B","port":"Noosa Head","km":39.6,"g":2,"mouth":[-26.37915,153.07761],"bbox":[-26.4683,152.9859,-26.165,153.0817]},{"id":"maroochy-river","name":"Maroochy River","area":"Sunshine Coast","conf":"A","port":"Mooloolaba","km":26.4,"g":5,"mouth":[-26.64966,153.10341],"bbox":[-26.6594,152.9719,-26.555,153.1034]},{"id":"mooloolah-river","name":"Mooloolah River","area":"Sunshine Coast","conf":"A","port":"Mooloolaba","km":22.1,"g":2,"mouth":[-26.68121,153.13446],"bbox":[-26.7645,153.0574,-26.6801,153.1352]},{"id":"halls-creek","name":"Halls Creek","area":"Pumicestone Passage","conf":"C","port":"Mooloolaba","km":6.6,"g":0,"mouth":[-26.87659,153.10971],"bbox":[-26.8847,153.079,-26.8614,153.1102]},{"id":"hussey-creek","name":"Hussey Creek","area":"Pumicestone Passage","conf":"C","port":"Mooloolaba","km":4.5,"g":0,"mouth":[-26.92477,153.06815],"bbox":[-26.9298,153.0434,-26.9183,153.0682]},{"id":"pumicestone-passage","name":"Pumicestone Passage","area":"Pumicestone Passage","conf":"A","port":"Scarborough","km":25.0,"g":1,"mouth":[-27.08463,153.15607],"bbox":[-27.0846,153.0296,-26.8753,153.1561]},{"id":"caboolture-river","name":"Caboolture River","area":"Deception Bay","conf":"A","port":"Scarborough","km":22.1,"g":3,"mouth":[-27.15235,153.03649],"bbox":[-27.1523,152.9466,-27.0865,153.0366]},{"id":"burpengary-creek","name":"Burpengary Creek","area":"Deception Bay","conf":"C","port":"Scarborough","km":6.9,"g":0,"mouth":[-27.16089,153.0318],"bbox":[-27.1663,153.0104,-27.1478,153.033]},{"id":"saltwater-creek","name":"Saltwater Creek","area":"Redcliffe – Pine","conf":"A","port":"Scarborough","km":9.4,"g":1,"mouth":[-27.24969,153.06664],"bbox":[-27.2497,153.0369,-27.2164,153.0666]},{"id":"freshwater-creek","name":"Freshwater Creek","area":"Redcliffe – Pine","conf":"C","port":"Shorncliffe","km":7.1,"g":0,"mouth":[-27.26309,153.05998],"bbox":[-27.2631,153.0263,-27.2504,153.06]},{"id":"pine-river","name":"Pine River","area":"Redcliffe – Pine","conf":"A","port":"Shorncliffe","km":7.0,"g":3,"mouth":[-27.279,153.0635],"bbox":[-27.3297,152.9657,-27.2675,153.0635]},{"id":"cabbage-tree-creek","name":"Cabbage Tree Creek","area":"Brisbane – Moreton Bay","conf":"A","port":"Shorncliffe","km":6.6,"g":1,"mouth":[-27.33101,153.08372],"bbox":[-27.3686,153.0492,-27.3222,153.0931]},{"id":"nudgee-creek","name":"Nudgee Creek","area":"Brisbane – Moreton Bay","conf":"B","port":"Shorncliffe","km":5.3,"g":0,"mouth":[-27.34203,153.0948],"bbox":[-27.3637,153.0879,-27.342,153.1052]},{"id":"boggy-creek","name":"Boggy Creek","area":"Brisbane – Moreton Bay","conf":"B","port":"Brisbane Bar","km":5.0,"g":0,"mouth":[-27.39568,153.13975],"bbox":[-27.4165,153.1107,-27.3957,153.1397]},{"id":"brisbane-river","name":"Brisbane River","area":"Brisbane – Moreton Bay","conf":"A","port":"Brisbane Bar","km":87.1,"g":22,"mouth":[-27.3993,153.15303],"bbox":[-27.6149,152.7373,-27.3993,153.153]},{"id":"lota-creek","name":"Lota Creek","area":"Brisbane – Moreton Bay","conf":"B","port":"Brisbane Bar","km":2.7,"g":0,"mouth":[-27.4715,153.19614],"bbox":[-27.4762,153.1812,-27.4715,153.1963]},{"id":"tingalpa-creek","name":"Tingalpa Creek","area":"Brisbane – Moreton Bay","conf":"B","port":"Brisbane Bar","km":6.0,"g":0,"mouth":[-27.47216,153.19717],"bbox":[-27.5038,153.1841,-27.4722,153.1974]},{"id":"hilliards-creek","name":"Hilliards Creek","area":"Brisbane – Moreton Bay","conf":"B","port":"Brisbane Bar","km":1.8,"g":0,"mouth":[-27.49179,153.25151],"bbox":[-27.4962,153.2473,-27.4901,153.2518]},{"id":"eprapah-creek","name":"Eprapah Creek","area":"Brisbane – Moreton Bay","conf":"B","port":"Brisbane Bar","km":2.7,"g":0,"mouth":[-27.56468,153.29071],"bbox":[-27.5785,153.289,-27.5647,153.2947]},{"id":"moogurrapum-creek","name":"Moogurrapum Creek","area":"Brisbane – Moreton Bay","conf":"B","port":"Brisbane Bar","km":2.0,"g":0,"mouth":[-27.59467,153.30271],"bbox":[-27.6007,153.2931,-27.5931,153.3027]}];
+const by={};FT.SYSIDX.forEach(s=>by[s.id]=s);FT.sysById=id=>by[id]||null;
+let id=null;try{const q=new URLSearchParams(location.search).get('sys');if(q&&by[q]){id=q;localStorage.setItem('ft_sys',q);}}catch(e){}
+if(!id){try{id=localStorage.getItem('ft_sys');}catch(e){}}
+if(!id||!by[id])id='baffle';
+FT.SYS=id;FT.SYSINFO=by[id];FT.SYSNAME=by[id].name;
+FT.SYSSHORT=by[id].name.replace(/ Creek$/,' Ck').replace(/ River$/,' R').replace(/ Passage$/,' Psg');
+FT.k=k=>id==='baffle'?k:k+'@'+id;
+FT.switchSystem=function(nid,keepHash){if(!by[nid])return;try{localStorage.setItem('ft_sys',nid);}catch(e){}
+  const u=new URL(location.href);u.searchParams.delete('sys');try{history.replaceState(null,'',u.pathname+u.search+(keepHash===false?'':location.hash));}catch(e){}location.reload();};
+const SC='mbj-systems-v1';
+FT.fetchSys=async function(name){const url=new URL('data/systems/'+name+'.json',location.href).href;
+  try{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw new Error('HTTP '+r.status);const c=r.clone();
+    if(window.caches)caches.open(SC).then(ca=>ca.put(url,c)).catch(()=>{});return await r.json();}
+  catch(e){if(window.caches){const ca=await caches.open(SC);const m=await ca.match(url);if(m)return m.json();}throw e;}};
+FT.sysOffline=async function(){if(!window.caches)return{n:0,of:FT.SYSIDX.length};const ca=await caches.open(SC);const ks=await ca.keys();
+  const have=new Set(ks.map(k=>k.url.replace(/.*\/data\/systems\//,'').replace(/\.json$/,'')));return{n:FT.SYSIDX.filter(s=>s.id!=='baffle'&&have.has(s.id)).length,of:FT.SYSIDX.length-1,have};};
+FT.downloadAllSystems=async function(prog){const L=FT.SYSIDX.filter(s=>s.id!=='baffle');let i=0,bad=0;
+  for(const s of L){try{await FT.fetchSys(s.id);}catch(e){bad++;}i++;prog&&prog(i,L.length);}
+  try{await FT.fetchSys('index');}catch(e){bad++;}return{ok:L.length-bad,bad};};
+})();
+</script>
 <script id="mj-core">
 /* ===================== Core computation (no DOM) ===================== */
 (function(root){
@@ -858,7 +893,7 @@ const LANDMARKS=[
  {name:'Essendean Bridge (gauge 039267)',km:35.25,cal:true},
  {name:'Christensens',km:39.03,note:'above calibration'}];
 
-root.BT={nowH,hToDate,dateToH,dayStr,fmtT,fmtDT,fmtDay,bundH,bundExtremes,officialHiLo,NODES,calAt,predictAt,snap,pointAtKm,LANDMARKS,MAXKM,applyCorr};
+root.BT={fuAll,nowH,hToDate,dateToH,dayStr,fmtT,fmtDT,fmtDay,bundH,bundExtremes,officialHiLo,NODES,calAt,predictAt,snap,pointAtKm,LANDMARKS,MAXKM,applyCorr};
 })(typeof window!=='undefined'?window:globalThis);
 </script>
 <script id="bt-runin">/* Run-in start times along Baffle Creek (shared by Bite times + Baffle tides tabs).
@@ -887,41 +922,189 @@ BT.runInStarts=function(km,h0,h1,opts){opts=opts||{};const hoff=opts.hoff||0;
   return out;};
 })();
 </script>
-<script id="ft-spots">/* ===== Spots registry: built-in Baffle landmarks (+ personal aliases) and the user's own custom spots =====
+<script id="ft-engine">/* ===== Multi-system tide engine =====
+   FT.makeSystemBT(S) turns a data/systems/<id>.json file into an object with the same API as the Baffle model (window.BT),
+   so every tab works unchanged on any tidal creek/river. Baffle Creek itself keeps its own hand-calibrated BT (no regression).
+   Model: base-port harmonics (MSQ official predictions, fitted offline) → each high/low shifted by a lag and mapped in height
+   (linear in the base-port height) at calibration nodes along the channel (MSQ secondary places, MSQ/BoM gauges, generic
+   extrapolation to the estimated tidal limit), interpolated by chainage. Heights ≈ m AHD (local MSL). */
+(function(){'use strict';
+const FT=window.FT,B0=window.BT,RAD=Math.PI/180;
+function makeSystemBT(S){
+  const H=S.port.harm;const fuAll=B0.fuAll;
+  let fc={k:null,v:null};
+  function portH(h){const k=Math.floor(h/24);if(fc.k!==k)fc={k,v:fuAll(k*24+12)};const F=fc.v;let z=H.z0;
+    for(let i=0;i<H.names.length;i++){const fu=F[H.names[i]];z+=fu[0]*H.amp[i]*Math.cos((H.speeds[i]*h+fu[1]-H.pha[i])*RAD);}return z;}
+  function portExtremes(t0,t1){const st=0.1,out=[];let a=portH(t0-st),b=portH(t0);
+    for(let t=t0+st;t<=t1+1e-9;t+=st){const c=portH(t);if((b>a&&b>=c)||(b<a&&b<=c)){const den=a-2*b+c,off=den?0.5*(a-c)/den:0;out.push({t:t-st+off*st,h:b-0.25*(a-c)*off,hi:b>a});}a=b;b=c;}
+    const f=[];for(const x of out){const l=f[f.length-1];if(l&&l.hi===x.hi){if((x.hi&&x.h>l.h)||(!x.hi&&x.h<l.h))f[f.length-1]=x;}else if(l&&Math.abs(l.h-x.h)<0.05){f.pop();}else f.push(x);}return f;}
+  const mk=n=>Object.assign({},n,{hwLvl:Hh=>n.hw[0]+n.hw[1]*Hh,lwLvl:L=>{const v=n.lw[0]+n.lw[1]*L;return n.trunc?Math.max(n.floor,v):v;}});
+  const NBY={};for(const id in S.nodes)NBY[id]=S.nodes[id].map(mk);
+  const NODES=NBY.M;
+  const LMAX={};S.lines.forEach(l=>LMAX[l.id]=l.junctionKm+l.limitKm);
+  const MAXKM=S.maxKm;
+  function calAt(km,opts){opts=opts||{};const line=NBY[opts.line]?opts.line:'M';const N=NBY[line];km=Math.max(0,Math.min(LMAX[line]||MAXKM,km));
+    let i=0;while(i<N.length-2&&km>N[i+1].km)i++;
+    const a=N[i],b=N[Math.min(i+1,N.length-1)];const beyond=km>b.km+1e-6;const span=Math.max(1e-6,b.km-a.km);const f=beyond?1:Math.max(0,Math.min(1,(km-a.km)/span));
+    const gap=Math.min(Math.abs(km-a.km),Math.abs(km-b.km));const L=(x,y)=>x+(y-x)*f;const badj=opts.badj||0;
+    const gen=f>0.5?!!b.generic:!!a.generic;
+    return{km,line,beyond,nodeA:a,nodeB:b,f,hwLag:L(a.hwLag,b.hwLag),lwLag:L(a.lwLag,b.lwLag),
+      hwU:L(a.hwU,b.hwU)+(beyond?(km-b.km)*10:gap*(span>10?3:1)),lwU:L(a.lwU,b.lwU)+(beyond?(km-b.km)*15:gap*(span>10?4:1)),
+      hwLvl:x=>L(a.hwLvl(x),b.hwLvl(x)),lwLvl:x=>L(a.lwLvl(x)+(a.trunc?badj:0),b.lwLvl(x)+(b.trunc?badj:0)),
+      est:(span>10&&gap>3)||beyond||!!b.generic&&f>0.15||gen,generic:!!b.generic&&f>0.15,trunc:f>0.5&&!!b.trunc};}
+  const applyCorr=(cal,corr)=>B0.applyCorr(cal,corr&&corr.filter(c=>!c.line||c.line===cal.line));
+  function predictAt(km,t0,t1,opts){opts=opts||{};let cal=applyCorr(calAt(km,opts),opts.corr);const hoff=opts.hoff||0;
+    const base=portExtremes(t0-14,t1+14);
+    let ext=base.map(e=>{const Hh=e.h+hoff;return e.hi?{t:e.t+cal.hwLag/60,h:cal.hwLvl(Hh),hi:true,u:cal.hwU,src:e}:{t:e.t+cal.lwLag/60,h:cal.lwLvl(Hh),hi:false,u:cal.lwU,src:e};});
+    ext.sort((a,b)=>a.t-b.t);
+    if(cal.nodeB.trunc||cal.nodeA.trunc){for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi){const nb=[ext[i-1],ext[i+1]].filter(x=>x&&!x.hi);const fl=nb.length?Math.max(...nb.map(x=>x.h)):-9;e.rise=e.h-fl;if(e.h<fl+0.05)e.weak=true;}}}
+    const clean=[];for(const e of ext){const l=clean[clean.length-1];if(l&&l.hi===e.hi){if((e.hi&&e.h>l.h)||(!e.hi&&e.h<l.h))clean[clean.length-1]=e;}else clean.push(e);}
+    const curve=t=>{let i=0;while(i<clean.length-2&&clean[i+1].t<t)i++;const a=clean[i],b=clean[i+1];if(!a||!b||t<a.t||t>b.t)return null;const f=(t-a.t)/(b.t-a.t);return a.h+(b.h-a.h)*(1-Math.cos(Math.PI*f))/2;};
+    return{cal,ext:clean,curve,inWin:clean.filter(e=>e.t>=t0&&e.t<t1)};}
+  function runInStarts(km,h0,h1,opts){const P=predictAt(km,h0,h1,opts);const tr=P.cal.trunc;
+    return P.ext.filter((e,i)=>!e.hi&&e.t>=h0-6&&e.t<=h1+6&&!(tr&&P.ext[i+1]&&P.ext[i+1].weak)).map(e=>({t:e.t,u:e.u,kind:tr?'rise':'low'}));}
+  /* geometry */
+  const havKm=(a,b)=>{const la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*6371.0088*Math.asin(Math.sqrt(x));};
+  const LINES=S.lines.map(l=>{const c=[0];for(let i=1;i<l.coords.length;i++)c.push(c[i-1]+havKm(l.coords[i-1],l.coords[i]));return Object.assign({},l,{cc:c,len:c[c.length-1],j:l.junctionKm||0});});
+  const LBYID={};LINES.forEach(l=>LBYID[l.id]=l);
+  function projLine(L,lat,lon){const line=L.coords,cc=L.cc;const kx=111.32*Math.cos(lat*RAD),ky=110.54;let best={d:1e9};
+    for(let i=0;i<line.length-1;i++){const ax=(line[i][1]-lon)*kx,ay=(line[i][0]-lat)*ky,bx=(line[i+1][1]-lon)*kx,by=(line[i+1][0]-lat)*ky;const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy;let t=L2?-(ax*dx+ay*dy)/L2:0;t=Math.max(0,Math.min(1,t));const d=Math.hypot(ax+t*dx,ay+t*dy);
+      if(d<best.d)best={d,s:cc[i]+t*(cc[i+1]-cc[i]),lat:line[i][0]+t*(line[i+1][0]-line[i][0]),lon:line[i][1]+t*(line[i+1][1]-line[i][1])};}return best;}
+  function snap(lat,lon){let best=null;for(const L of LINES){const p=projLine(L,lat,lon);if(!best||p.d<best.p.d-(L.id==='M'?0:0.03))best={L,p};}
+    const L=best.L,p=best.p;return{km:L.j+p.s,offKm:p.d,line:L.name,lineId:L.id,lat:p.lat,lon:p.lon,alongKm:p.s};}
+  function pointOnLine(km,id){const L=LBYID[id]||LBYID.M;const s=Math.max(0,Math.min(L.len,km-L.j));const c=L.coords,cc=L.cc;
+    for(let i=1;i<cc.length;i++)if(cc[i]>=s){const f=(s-cc[i-1])/((cc[i]-cc[i-1])||1);return[c[i-1][0]+f*(c[i][0]-c[i-1][0]),c[i-1][1]+f*(c[i][1]-c[i-1][1])];}return c[c.length-1];}
+  const pointAtKm=km=>pointOnLine(km,'M');
+  function lineName(id){const L=LBYID[id];return L?L.name:S.name;}
+  /* two chainages are on the same reach (for 'nearest spot') */
+  function sameReach(km1,l1,km2,l2){if(l1===l2)return true;const a=LBYID[l1],b=LBYID[l2];
+    const onMainBelow=(km,L)=>L&&km<=L.j+1e-6;return (a&&a.id!=='M'&&l2==='M'&&onMainBelow(km2,a))||(b&&b.id!=='M'&&l1==='M'&&onMainBelow(km1,b));}
+  const LANDMARKS=S.landmarks.map(l=>Object.assign({},l));
+  const lineMax=id=>LMAX[id]||MAXKM;
+  const calN=NODES.filter(n=>n.kind==='bom'||n.kind==='msq'||n.kind==='gaugefit');
+  const REFKM=calN.length?calN[calN.length-1].km:LMAX.M;const REFNAME=calN.length?calN[calN.length-1].name:'tidal limit';
+  const dl=LANDMARKS.filter(l=>l.line==='M'&&l.km>0.2&&(l.ramp||l.cal));const DEFKM=dl.length?dl[0].km:Math.min(1,LMAX.M);
+  return Object.assign({},B0,{generic:true,SYS:S,bundH:portH,bundExtremes:portExtremes,portH,portExtremes,officialHiLo:()=>[],NODES,calAt,predictAt,runInStarts,
+    snap,pointAtKm,pointOnLine,lineName,sameReach,LINES,LANDMARKS,MAXKM,applyCorr,RISE:null,NBY,lineMax,REFKM,REFNAME,DEFKM});}
+FT.makeSystemBT=makeSystemBT;
+})();
+</script>
+<script type="text/ft-deferred" id="ft-sysui">/* ===== River-system UI: picker, GPS "nearest system", offline download, and wording for non-Baffle systems =====
+   Runs after BT is ready and before the tab scripts. */
+(function(){'use strict';
+const FT=window.FT,B=window.BT,$=id=>document.getElementById(id),GEN=!!B.generic,I=FT.SYSINFO;
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CONF={A:['A','calibrated with tide gauge(s)'],B:['B','partly calibrated (MSQ tide place / gauge near the mouth)'],C:['C','uncalibrated — generic model, wide ± (benchmark me)']};
+FT.CONF=CONF;
+/* ---- header picker ---- */
+const hp=document.querySelector('header p');
+const bar=document.createElement('div');bar.className='sysbar';
+const areas=[];FT.SYSIDX.forEach(s=>{if(!areas.includes(s.area))areas.push(s.area);});
+bar.innerHTML=`<label>📍 <select id="sysSel" aria-label="River system">${areas.map(a=>`<optgroup label="${esc(a)}">${FT.SYSIDX.filter(s=>s.area===a).map(s=>`<option value="${s.id}"${s.id===FT.SYS?' selected':''}>${esc(s.name)}${s.id==='baffle'?' ★':''} · ${s.conf}</option>`).join('')}</optgroup>`).join('')}</select></label>
+ <span class="sysconf c${I.conf}" title="${esc(CONF[I.conf][1])}">${I.conf}</span><button class="sm" id="sysGps" title="Find the nearest river system to your GPS position">📡 Nearest</button><button class="sm" id="sysOff" title="Save every river system on this phone for offline use">⬇ Offline</button>
+ <div id="sysMsg" class="sysmsg"></div>`;
+hp.after(bar);
+$('sysSel').onchange=()=>{const v=$('sysSel').value;if(v!==FT.SYS){$('sysMsg').innerHTML='<span class="spin"></span> Loading '+esc(FT.sysById(v).name)+'…';FT.switchSystem(v);}};
+function msg(h,ms){$('sysMsg').innerHTML=h;clearTimeout(msg.t);if(ms)msg.t=setTimeout(()=>$('sysMsg').innerHTML='',ms);}
+/* nearest system: distance to the simplified channel lines in data/systems/index.json */
+let IDX=null;async function index(){if(!IDX)IDX=await FT.fetchSys('index');return IDX;}
+function distToLine(lat,lon,ln){const kx=111.32*Math.cos(lat*Math.PI/180),ky=110.54;let d=1e9;
+  for(let i=0;i<ln.length-1;i++){const ax=(ln[i][1]-lon)*kx,ay=(ln[i][0]-lat)*ky,bx=(ln[i+1][1]-lon)*kx,by=(ln[i+1][0]-lat)*ky;const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy;let t=L2?-(ax*dx+ay*dy)/L2:0;t=Math.max(0,Math.min(1,t));d=Math.min(d,Math.hypot(ax+t*dx,ay+t*dy));}
+  if(ln.length===1)d=Math.hypot((ln[0][1]-lon)*kx,(ln[0][0]-lat)*ky);return d;}
+FT.nearestSystems=async function(lat,lon){const X=await index();return X.systems.map(s=>({s,d:Math.min(...s.ov.map(l=>distToLine(lat,lon,l)))})).sort((a,b)=>a.d-b.d);};
+function offer(lat,lon,N,why){const b=N[0];
+  if(!b||b.d>3){msg(`${why||'You'} are ${b?b.d.toFixed(1)+' km from the nearest mapped tidal channel ('+esc(b.s.name)+')':'not near a mapped system'} — staying on ${esc(FT.SYSNAME)}.`,8000);return;}
+  if(b.s.id===FT.SYS){msg(`✅ You're on <b>${esc(FT.SYSNAME)}</b> (${Math.round(b.d*1000)} m from the channel).`,6000);return;}
+  msg(`📍 ${why||'You'}’re ${Math.round(b.d*1000)} m from <b>${esc(b.s.name)}</b> (${b.s.conf}). <button class="sm pri" id="sysGo">Switch</button>${N[1]&&N[1].d<2&&N[1].s.id!==FT.SYS?` <button class="sm" id="sysGo2">${esc(N[1].s.name)}</button>`:''}`);
+  $('sysGo').onclick=()=>FT.switchSystem(b.s.id);if($('sysGo2'))$('sysGo2').onclick=()=>FT.switchSystem(N[1].s.id);}
+$('sysGps').onclick=()=>{if(!navigator.geolocation){msg('No GPS on this device.',4000);return;}msg('<span class="spin"></span> Getting GPS…');
+  navigator.geolocation.getCurrentPosition(async p=>{try{offer(p.coords.latitude,p.coords.longitude,await FT.nearestSystems(p.coords.latitude,p.coords.longitude));}catch(e){msg('Couldn’t load the systems index ('+esc(e.message)+') — connect once.',6000);}},
+    e=>msg('GPS failed: '+esc(e.message),5000),{enableHighAccuracy:true,timeout:20000,maximumAge:60000});};
+/* used by the Tides/Map GPS buttons when a fix is far from this system's channels */
+FT.suggestSystem=async function(lat,lon){try{const N=await FT.nearestSystems(lat,lon);if(N[0]&&N[0].s.id!==FT.SYS&&N[0].d<2){offer(lat,lon,N,'Your GPS fix');window.scrollTo(0,0);}}catch(e){}};
+$('sysOff').onclick=async()=>{const st=await FT.sysOffline();
+  if(!confirm(`Save all ${st.of} river systems (~0.9 MB) on this phone for offline use?\n(${st.n} already saved. Systems you open are saved automatically. Map tiles are separate.)`))return;
+  $('sysOff').disabled=true;const r=await FT.downloadAllSystems((i,n)=>msg(`<span class="spin"></span> Saving ${i}/${n}…`));$('sysOff').disabled=false;
+  msg(r.bad?`⚠ Saved ${r.ok}; ${r.bad} failed (offline?). Try again later.`:`✅ All ${r.ok} systems saved for offline use.`,8000);};
+FT.sysOffline().then(st=>{if(st.n>=st.of)$('sysOff').textContent='✅ Offline';}).catch(()=>{});
+/* default bite-times spot for this system */
+FT.defaultSpot=function(){if(!GEN){const km=15.9,p=B.pointAtKm(km);return{name:'Wartburg (Boat Ramp Rd) — Baffle Ck',lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:km,sys:'baffle'};}
+  const l=B.LANDMARKS.find(x=>x.line==='M'&&Math.abs(x.km-B.DEFKM)<0.01)||{name:'km '+B.DEFKM.toFixed(1),km:B.DEFKM,line:'M'};const p=B.pointOnLine(l.km,'M');
+  return{name:l.name+' — '+FT.SYSSHORT,lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:+l.km.toFixed(2),baffleLine:'M',sys:FT.SYS};};
+if(!GEN)return;
+/* ---------------- wording & cards for non-Baffle systems ---------------- */
+const S=B.SYS,port=S.port.name;
+document.title=`Mac's Baffle Jacks — ${FT.SYSNAME} tides & mangrove jack bite times`;
+hp.textContent=`Mangrove jack bite times · ${FT.SYSNAME} tides (mouth → ${B.lineMax('M').toFixed(0)} km) · ${S.area}`;
+const tl=document.querySelector('nav.tabs a[data-tab=baffle] .tl');if(tl)tl.textContent=FT.SYSSHORT+' tides';
+const bs=$('mj-bafSel');if(bs&&bs.parentNode&&bs.parentNode.firstChild&&bs.parentNode.firstChild.nodeType===3)bs.parentNode.firstChild.textContent=FT.SYSNAME+' spot ';
+/* Tides tab */
+const tab=$('tab-baffle');
+const n0=tab.querySelector('.notice');if(n0)n0.innerHTML=`⚠️ <b>Not for navigation.</b> Estimates only, from a model of ${esc(FT.SYSNAME)} built from MSQ tide data, BoM gauges and map data — confidence <b>${I.conf}</b> (${esc(CONF[I.conf][1])}). Use official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ Queensland Tide Tables</a> for anything that matters, and watch the water.`;
+const h2=tab.querySelector('section.card h2');if(h2)h2.textContent='📍 Spot on '+FT.SYSNAME;
+if(B.LINES.length>1){const ls=document.createElement('select');ls.id='bt-line';ls.setAttribute('aria-label','Channel');$('bt-lm').after(ls);}
+const kl=$('bt-kmLbl');if(kl&&kl.nextElementSibling)kl.nextElementSibling.id='bt-kmMaxLbl';
+const ho=$('bt-hoff');if(ho&&ho.parentNode)ho.parentNode.title=`Adds to all predicted heights (storm surge / wind setup at ${port})`;
+const ba=$('bt-badj');if(ba&&ba.parentNode){ba.parentNode.title='Raise/lower the drained-out low-water level in the upper reach (freshwater flow). Default 0.';ba.parentNode.firstChild.textContent='Upper-reach base adj (m) ';}
+const lg=$('bt-chart')&&$('bt-chart').nextElementSibling;if(lg)lg.innerHTML=`<span><b style="color:var(--acc)">━</b> Selected spot</span><span><b style="color:var(--tide)">━</b> Mouth (≈ ${esc(S.nodes.M[0].name.replace(/^Mouth \((≈ )?/,'').replace(/\)$/,''))})</span><span><b style="color:#ff7b6b">┅</b> ${esc(B.REFNAME)} (${B.REFKM.toFixed(1)} km)</span><span>Heights m AHD (≈ mean sea level). Shaded band = timing uncertainty.</span>`;
+const st=tab.querySelector('#bt-stretch');if(st){const p=st.closest('section').querySelector('p');if(p)p.innerHTML+=' Landmarks: OSM boat ramps &amp; road bridges, junctions, gauges.';}
+/* gauges card */
+const lv=$('bt-live');if(lv){const card=lv.closest('section');const G=(S.gauges||[]).filter(g=>!g.coastal),C=(S.gauges||[]).filter(g=>g.coastal);
+  const a=g=>`<a href="https://www.bom.gov.au/fwo/${g.tab}/${g.tab}.${g.id}.tbl.shtml" target="_blank" rel="noopener">${esc(g.name)} ${g.id}</a> (<a href="https://www.bom.gov.au/fwo/${g.tab}/${g.tab}.${g.id}.plt.shtml" target="_blank" rel="noopener">plot</a>)`;
+  card.innerHTML=`<h2>📡 Live gauges</h2><p class="mut">${G.length?'Tidal water-level gauges on this system (BoM, opens their page): '+G.map(g=>a(g)+(g.km!=null?` <span class="mut">km ${g.km.toFixed(1)}${g.line!=='M'?' '+esc(g.lineName):''}</span>`:'')).join(' · '):'No BoM tide-affected gauge on this system.'}${C.length?'<br>Coastal tide gauges nearby: '+C.map(a).join(' · '):''}<br>See the 📡 Gauges tab for gauge-vs-model comparisons.</p>`;}
+/* how-predictions card */
+const nt=$('bt-nodesTbl');if(nt){const card=nt.closest('section');const lim=S.lines.map(l=>`<li><b>${esc(l.name)}</b>${l.id==='M'?'':' (joins at km '+l.junctionKm.toFixed(1)+')'}: modelled to km ${(l.junctionKm+l.limitKm).toFixed(1)} — ${esc(l.limitSrc)}</li>`).join('');
+  card.innerHTML=`<h2>🧪 How predictions are made — ${esc(FT.SYSNAME)}</h2>
+  <p><span class="sysconf c${I.conf}">${I.conf}</span> <b>${esc(S.confidence.why)}</b></p>
+  <details open><summary>1 · Base tide: ${esc(port)} harmonic model</summary><p>41 tidal constituents with nodal corrections, least-squares fitted offline to the MSQ official 2026 10-minute predictions for ${esc(port)} (data.qld.gov.au). Runs offline for any date. Same method as the Baffle Creek model (Bundaberg), which validates to ≈5 min against official MSQ times.</p></details>
+  <details><summary>2 · Along-channel transfer (calibration nodes)</summary><div id="bt-nodesTbl"></div>
+   <p>Each ${esc(port)} high/low is shifted in time and mapped in height using the values at your spot, interpolated linearly by channel distance between nodes; the curve between turns is the standard cosine interpolation. Node types: <b>gauge</b> = BoM water-level gauge (7–14 days of readings matched to the base port) or an MSQ tide gauge's official predictions; <b>MSQ</b> = MSQ secondary place (published time/height offsets); <b>generic</b> = extrapolated with the median lag growth of all calibrated QLD places/gauges (≈2 min/km highs, ≈2.7 min/km lows) and wide ±. Tributaries share the main-channel model up to their junction. Heights are m AHD (≈ local mean sea level).</p></details>
+  <details><summary>3 · Tidal limits</summary><ul>${lim}</ul><p class="mut">Estimated from OSM weirs/barrages, a 90 m elevation model (river bed rising above ~4 m), and gauge evidence. Above a natural limit the creek drains out at low tide: lows are a “pool level” and run-in starts are when the water starts rising.</p></details>
+  <details><summary>4 · Limitations — please benchmark</summary><ul><li>Upstream BoM gauge fits use only the last 1–2 weeks of readings; flood/fresh flows delay and flatten tides and raise levels.</li><li>MSQ ** places are “non-linear transfer” estimates, and some gauge datums are unknown (heights then interpolated).</li><li>Generic reaches can be out by an hour or more. Log a few high/low turns in the Benchmark log — tick <b>apply</b> to correct this system (stored per system on this phone).</li><li>Wind, pressure and swell shift real levels by 0.1–0.3 m.</li></ul></details>
+  <p class="mut">Sources: ${S.sources.map(esc).join(' · ')}. Model built ${esc(S.built)}.</p>`;}
+const nl=tab.querySelectorAll(':scope > .notice');const last=nl[nl.length-1];if(last&&/bar and shallows/.test(last.innerHTML))last.innerHTML=last.innerHTML.replace('Baffle Creek’s bar',esc(FT.SYSNAME)+'’s bar');
+})();
+</script>
+<script type="text/ft-deferred" id="ft-spots">/* ===== Spots registry: built-in Baffle landmarks (+ personal aliases) and the user's own custom spots =====
    Custom spots/aliases live ONLY in this phone's localStorage (mbj_spots, mbj_alias). BT.LANDMARKS is updated
    in place (sorted by km) so every tab that lists landmarks also lists custom spots. Built-ins keep stable ids
    b0…bN (index in the shipped list) and their original name in .base; aliases only change .name. */
 (function(){'use strict';
 const FT=window.FT,B=window.BT,D=window.BAFFLE_DATA;
 const KS='mbj_spots',KA='mbj_alias';
+/* Multi-system: B.generic = a non-Baffle river system. Custom spots carry .sys (missing = 'baffle'); only this system's
+   spots are shown, the rest are kept untouched in storage. Built-in ids: Baffle b0…bN (unchanged), others '<sys>~bN'. */
+const GEN=!!B.generic,SYS=FT.SYS||'baffle';const AL=GEN?new RegExp('^'+SYS.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'~b\\d+$'):/^b\d+$/;
 const LM=B.LANDMARKS;
-LM.forEach((l,i)=>{l.id='b'+i;l.base=l.name;l.builtin=true;l.line=/Hills Rd gauge/.test(l.name)?'E':'B';});
+LM.forEach((l,i)=>{l.id=(GEN?SYS+'~b':'b')+i;l.base=l.name;l.builtin=true;if(!GEN)l.line=/Hills Rd gauge/.test(l.name)?'E':'B';});
 const BUILTIN=LM.slice();
 const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v;}catch(e){return d;}};
-let custom=load(KS,[]);if(!Array.isArray(custom))custom=[];let alias=load(KA,{});if(!alias||typeof alias!=='object')alias={};
+let allCustom=load(KS,[]);if(!Array.isArray(allCustom))allCustom=[];
+const mine=c=>(c.sys||'baffle')===SYS;let custom=allCustom.filter(mine);let alias=load(KA,{});if(!alias||typeof alias!=='object')alias={};
 const COLORS=['#ffb020','#ff5d8f','#7bd88f','#5cc8ff','#b48cff','#ff7a45','#ffffff'];
 /* line-aware centreline geometry */
 const RAD=Math.PI/180;const hav=(a,b)=>{const la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*6371.0088*Math.asin(Math.sqrt(x));};
 const EU=D.euleilah,EUC=[0];for(let i=1;i<EU.length;i++)EUC.push(EUC[i-1]+hav(EU[i-1],EU[i]));
 const EJ=D.euleilahJunctionKm;
-function pointAt(km,line){if(line!=='E'||km<EJ)return B.pointAtKm(Math.max(0,Math.min(B.MAXKM,km)));const s=km-EJ;
+function pointAt(km,line){if(GEN)return B.pointOnLine(km,line||'M');if(line!=='E'||km<EJ)return B.pointAtKm(Math.max(0,Math.min(B.MAXKM,km)));const s=km-EJ;
   for(let i=1;i<EU.length;i++)if(EUC[i]>=s){const f=(s-EUC[i-1])/(EUC[i]-EUC[i-1]);return[EU[i-1][0]+f*(EU[i][0]-EU[i-1][0]),EU[i-1][1]+f*(EU[i][1]-EU[i-1][1])];}return EU[EU.length-1];}
 const EUMAX=EJ+EUC[EUC.length-1];
-function snapPt(lat,lng){const s=B.snap(lat,lng);const line=s.line==='Euleilah Creek'?'E':'B';return{km:+Math.min(B.MAXKM,Math.max(0,s.km)).toFixed(2),line,offKm:s.offKm,slat:s.lat,slng:s.lon};}
+function snapPt(lat,lng){if(GEN){const s=B.snap(lat,lng);return{km:+Math.max(0,Math.min(B.lineMax(s.lineId),s.km)).toFixed(2),line:s.lineId,offKm:s.offKm,slat:s.lat,slng:s.lon};}const s=B.snap(lat,lng);const line=s.line==='Euleilah Creek'?'E':'B';return{km:+Math.min(B.MAXKM,Math.max(0,s.km)).toFixed(2),line,offKm:s.offKm,slat:s.lat,slng:s.lon};}
 function apply(){BUILTIN.forEach(l=>{const a=alias[l.id];l.name=a||l.base;l.alias=!!a;});
   const C=custom.map(c=>Object.assign(c,{custom:true}));
   const all=BUILTIN.concat(C).sort((a,b)=>a.km-b.km||(a.builtin?-1:1));LM.length=0;LM.push(...all);}
-function save(){try{localStorage.setItem(KS,JSON.stringify(custom.map(({custom:_c,...c})=>c)));localStorage.setItem(KA,JSON.stringify(alias));}catch(e){}apply();
+function save(){try{allCustom=load(KS,[]);if(!Array.isArray(allCustom))allCustom=[];allCustom=allCustom.filter(c=>!mine(c)).concat(custom.map(({custom:_c,...c})=>GEN?Object.assign(c,{sys:SYS}):c));localStorage.setItem(KS,JSON.stringify(allCustom));localStorage.setItem(KA,JSON.stringify(alias));}catch(e){}apply();
   S.onChange.forEach(f=>{try{f()}catch(e){console.error('spots hook',e)}});}
 const rid=()=>{const a=new Uint8Array(5);crypto.getRandomValues(a);return 'c'+Array.from(a,b=>b.toString(16).padStart(2,'0')).join('');};
 const clean=s=>String(s==null?'':s).replace(/[\u0000-\u001f]/g,' ').trim();
-const S={onChange:[],COLORS,pointAt,snap:snapPt,EUMAX,
+const lineLabel=(id,short)=>{if(!GEN)return id==='E'?(short?'Euleilah':'Euleilah Ck'):(short?'Baffle':'Baffle Ck');const n=B.lineName(id);return short?n.replace(/ (Creek|River|Passage)$/,''):n.replace(/ Creek$/,' Ck').replace(/ River$/,' R');};
+const S={onChange:[],COLORS,pointAt,snap:snapPt,EUMAX,lineLabel,GEN,SYS,
   all:()=>LM.slice(),builtins:()=>BUILTIN.slice(),customs:()=>custom.slice(),
   get:id=>LM.find(l=>l.id===id)||null,
   /* lat/lng used for display & light/sun maths: custom = where the user tapped, built-in = centreline point */
   latLng:l=>l.custom?[l.lat,l.lng]:pointAt(l.km,l.line),
   add(o){const sn=snapPt(o.lat,o.lng);if(sn.offKm>(o.maxOff||1.2))throw new Error(`That point is ${sn.offKm.toFixed(1)} km from the creek centreline — tap closer to the creek.`);
-    const c={id:rid(),name:clean(o.name).slice(0,60)||('My spot km '+sn.km.toFixed(1)),lat:+(+o.lat).toFixed(6),lng:+(+o.lng).toFixed(6),km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),
+    const c={id:rid(),name:clean(o.name).slice(0,60)||('My spot km '+sn.km.toFixed(1)),lat:+(+o.lat).toFixed(6),lng:+(+o.lng).toFixed(6),km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),...(GEN?{sys:SYS}:{}),
       color:COLORS.includes(o.color)?o.color:COLORS[0],note:clean(o.note).slice(0,200),created:Date.now()};
     custom.push(c);save();return S.get(c.id);},
   update(id,p){const c=custom.find(x=>x.id===id);if(!c)return null;
@@ -929,53 +1112,57 @@ const S={onChange:[],COLORS,pointAt,snap:snapPt,EUMAX,
     if(p.lat!=null&&p.lng!=null){const sn=snapPt(p.lat,p.lng);if(sn.offKm>1.2)throw new Error(`${sn.offKm.toFixed(1)} km from the creek — not moved.`);c.lat=+(+p.lat).toFixed(6);c.lng=+(+p.lng).toFixed(6);c.km=sn.km;c.line=sn.line;c.offKm=+sn.offKm.toFixed(3);}
     save();return S.get(id);},
   remove(id){const n=custom.length;custom=custom.filter(x=>x.id!==id);if(custom.length!==n)save();},
-  setAlias(id,name){if(!/^b\d+$/.test(id))return;name=clean(name).slice(0,60);const b=BUILTIN.find(l=>l.id===id);if(!b)return;
+  setAlias(id,name){if(!AL.test(id))return;name=clean(name).slice(0,60);const b=BUILTIN.find(l=>l.id===id);if(!b)return;
     if(!name||name===b.base)delete alias[id];else alias[id]=name;save();},
-  nearest(km,line,maxKm){let best=null;for(const l of LM){if(line&&l.line!==line&&Math.min(km,l.km)>=EJ)continue;const d=Math.abs(l.km-km);if(d<=(maxKm==null?0.5:maxKm)&&(!best||d<best.d||(d===best.d&&l.custom)))best={l,d};}return best?best.l:null;},
-  exportData:()=>({v:1,kind:'mbj-spots',spots:custom.map(({custom:_c,...c})=>c),alias:{...alias}}),
+  nearest(km,line,maxKm){let best=null;for(const l of LM){if(GEN){if(line&&l.line&&!B.sameReach(km,line,l.km,l.line))continue;}else if(line&&l.line!==line&&Math.min(km,l.km)>=EJ)continue;const d=Math.abs(l.km-km);if(d<=(maxKm==null?0.5:maxKm)&&(!best||d<best.d||(d===best.d&&l.custom)))best={l,d};}return best?best.l:null;},
+  exportData:()=>({v:1,kind:'mbj-spots',spots:(()=>{const a=load(KS,[]);return Array.isArray(a)?a:[];})(),alias:{...alias}}),
   importData(o,merge=true){if(!o||!Array.isArray(o.spots))throw new Error('not a spots backup');let n=0;
     for(const x of o.spots){if(typeof x.lat!=='number'||typeof x.lng!=='number')continue;if(merge&&custom.some(c=>c.id===x.id))continue;
-      try{const sn=snapPt(x.lat,x.lng);if(sn.offKm>1.2)continue;custom.push({id:/^c[0-9a-f]{10}$/.test(x.id)?x.id:rid(),name:clean(x.name).slice(0,60)||'Spot',lat:x.lat,lng:x.lng,km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),color:COLORS.includes(x.color)?x.color:COLORS[0],note:clean(x.note).slice(0,200),created:x.created||Date.now()});n++;}catch(e){}}
-    if(o.alias&&typeof o.alias==='object')for(const [k,v] of Object.entries(o.alias))if(/^b\d+$/.test(k)&&BUILTIN.some(b=>b.id===k)&&typeof v==='string'&&clean(v))alias[k]=clean(v).slice(0,60);
+      if((x.sys||'baffle')!==SYS){/* another system's spot: keep it as-is for when that system is open */
+        const a=load(KS,[]);if(Array.isArray(a)&&!a.some(c=>c.id===x.id)&&/^c[0-9a-f]{10}$/.test(x.id||'')){a.push(x);try{localStorage.setItem(KS,JSON.stringify(a));}catch(e){}n++;}continue;}
+      try{const sn=snapPt(x.lat,x.lng);if(sn.offKm>1.2)continue;custom.push({id:/^c[0-9a-f]{10}$/.test(x.id)?x.id:rid(),name:clean(x.name).slice(0,60)||'Spot',lat:x.lat,lng:x.lng,km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),...(GEN?{sys:SYS}:{}),color:COLORS.includes(x.color)?x.color:COLORS[0],note:clean(x.note).slice(0,200),created:x.created||Date.now()});n++;}catch(e){}}
+    if(o.alias&&typeof o.alias==='object')for(const [k,v] of Object.entries(o.alias))if(AL.test(k)&&BUILTIN.some(b=>b.id===k)&&typeof v==='string'&&clean(v))alias[k]=clean(v).slice(0,60);
     save();return n;}};
 apply();
 FT.spots=S;
 })();
 </script>
-<script>
+<script type="text/ft-deferred">
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);const B=window.BT;
-const st={km:+(localStorage.getItem('bt_km')||35.25),gps:null,landmark:null};
+const GEN=!!B.generic,FK=k=>window.FT.k(k);
+const st={km:+(localStorage.getItem(FK('bt_km'))||(GEN?B.DEFKM:35.25)),line:GEN?(localStorage.getItem(FK('bt_line'))||'M'):null,gps:null,landmark:null};
+if(GEN&&!B.LINES.some(l=>l.id===st.line))st.line='M';
 const todayStr=B.dayStr(B.nowH());
 $('bt-date').value=todayStr;$('bt-km').value=st.km;
-$('bt-hoff').value=localStorage.getItem('bt_hoff')||0;$('bt-badj').value=localStorage.getItem('bt_badj')||0;
+$('bt-hoff').value=localStorage.getItem(FK('bt_hoff'))||0;$('bt-badj').value=localStorage.getItem(FK('bt_badj'))||0;
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function rebuildLm(cur){const sel=$('bt-lm');sel.innerHTML='<option value="">— pick a spot —</option>'+B.LANDMARKS.map((l,i)=>`<option value="${i}">${l.custom?'★ ':''}${esc(l.name)} — ${l.km.toFixed(1)} km</option>`).join('');
-  if(cur&&st.landmark!=='GPS fix'){const i=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01);if(i>=0){st.landmark=B.LANDMARKS[i].name;sel.value=i;}else sel.value='';}}
+  if(cur&&st.landmark!=='GPS fix'){const i=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01&&(!GEN||(l.line||'M')===st.line));if(i>=0){st.landmark=B.LANDMARKS[i].name;sel.value=i;}else sel.value='';}}
 rebuildLm(false);
-function opts(){return{hoff:+$('bt-hoff').value||0,badj:+$('bt-badj').value||0,corr:corrections()};}
+function opts(){const o={hoff:+$('bt-hoff').value||0,badj:+$('bt-badj').value||0,corr:corrections()};if(GEN)o.line=st.line;return o;}
 function dayH(){const [y,m,d]=$('bt-date').value.split('-').map(Number);return B.dateToH(y,m,d,0,0);}
 function fmtU(u){return '±'+Math.round(u/5)*5+' min';}
 function lvl(h){return (h>=0?'+':'')+h.toFixed(2)+' m';}
 /* ---- benchmarks ---- */
-let bench=JSON.parse(localStorage.getItem('bt_bench')||'[]');
-function saveBench(){localStorage.setItem('bt_bench',JSON.stringify(bench));}
-function corrections(){return bench.filter(b=>b.applied&&b.diff!=null).map(b=>({km:b.km,kind:b.type==='HW'?'HW':b.type==='LW'?'LW':'L',d:b.type==='LVL_AHD'?-b.diff:-b.diff}));}
+let bench=JSON.parse(localStorage.getItem(FK('bt_bench'))||'[]');
+function saveBench(){localStorage.setItem(FK('bt_bench'),JSON.stringify(bench));}
+function corrections(){return bench.filter(b=>b.applied&&b.diff!=null).map(b=>({...(GEN?{line:b.line||'M'}:{}),km:b.km,kind:b.type==='HW'?'HW':b.type==='LW'?'LW':'L',d:b.type==='LVL_AHD'?-b.diff:-b.diff}));}
 // note: diff = predicted - observed (min or m); correction adds observed-predicted
-function evalBench(b,useCorr){const o={hoff:+$('bt-hoff').value||0,badj:+$('bt-badj').value||0,corr:useCorr?corrections().filter(c=>!(c.km===b.km&&b.applied)):null};
+function evalBench(b,useCorr){const o={hoff:+$('bt-hoff').value||0,badj:+$('bt-badj').value||0,corr:useCorr?corrections().filter(c=>!(c.km===b.km&&b.applied)):null};if(GEN)o.line=b.line||'M';
   const p=B.predictAt(b.km,b.t-12,b.t+12,o);
   if(b.type==='HW'||b.type==='LW'){const want=b.type==='HW';const c=p.ext.filter(e=>e.hi===want).sort((x,y)=>Math.abs(x.t-b.t)-Math.abs(y.t-b.t))[0];if(!c)return{};return{predT:c.t,diff:(c.t-b.t)*60,u:c.u};}
   const v=p.curve(b.t);if(v==null)return{};return{predV:v,diff:b.type==='LVL_AHD'&&b.value!=null?v-b.value:null};}
 function renderBench(){
   bench.forEach(b=>{const r=evalBench(b,false);b.predT=r.predT;b.predV=r.predV;b.diff=r.diff;b.u=r.u;});saveBench();
-  if(!bench.length){$('bt-bTable').innerHTML='<tr><td class="mut">No observations yet. On your next trip, log high/low turns and gauge-board readings — especially at Essendean Bridge, Wartburg, Rocky Point and the mouth.</td></tr>';$('bt-bSummary').textContent='';return;}
+  if(!bench.length){$('bt-bTable').innerHTML='<tr><td class="mut">'+(GEN?`No observations yet for ${esc(FT.SYSNAME)}. Log a few high/low turns (or gauge-board readings) at a ramp or bridge and tick <b>apply</b> — that calibrates this system (${FT.SYSINFO.conf==='C'?'currently an uncalibrated generic model':'refines the offsets'}).`:'No observations yet. On your next trip, log high/low turns and gauge-board readings — especially at Essendean Bridge, Wartburg, Rocky Point and the mouth.')+'</td></tr>';$('bt-bSummary').textContent='';return;}
   $('bt-bTable').innerHTML='<tr><th>When (AEST)</th><th>Where</th><th>What</th><th>Observed</th><th>Predicted</th><th>Pred − obs</th><th>apply</th><th></th></tr>'+bench.map((b,i)=>{
     const obs=b.type==='HW'||b.type==='LW'?B.fmtT(b.t):(b.value!=null?b.value.toFixed(2)+' m':'—');
     const pred=b.predT!=null?B.fmtT(b.predT)+' <span class="mut">'+fmtU(b.u||0)+'</span>':(b.predV!=null?b.predV.toFixed(2)+' m AHD':'—');
     const d=b.diff==null?'—':(b.type==='HW'||b.type==='LW'?`<span class="${b.diff>0?'pos':'neg'}">${b.diff>0?'+':''}${Math.round(b.diff)} min</span>`:`<span class="${b.diff>0?'pos':'neg'}">${b.diff>0?'+':''}${b.diff.toFixed(2)} m</span>`);
     const canApply=b.diff!=null;
-    return `<tr><td>${B.fmtDT(b.t)}</td><td>${esc(b.place)}<br><span class="mut">${b.km.toFixed(2)} km</span></td><td>${esc({HW:'High turn',LW:'Low turn',LVL_AHD:'Gauge (AHD)',LVL_LOCAL:'Marker (local)'}[b.type])}${b.note?'<br><span class="mut">'+esc(b.note)+'</span>':''}</td><td>${obs}</td><td>${pred}</td><td>${d}</td><td>${canApply?`<input type="checkbox" data-a="${i}" ${b.applied?'checked':''}>`:''}</td><td><button class="sm" data-d="${i}">✕</button></td></tr>`;}).join('');
+    return `<tr><td>${B.fmtDT(b.t)}</td><td>${esc(b.place)}<br><span class="mut">${b.km.toFixed(2)} km${GEN&&b.line&&b.line!=='M'?' '+esc(B.lineName(b.line)):''}</span></td><td>${esc({HW:'High turn',LW:'Low turn',LVL_AHD:'Gauge (AHD)',LVL_LOCAL:'Marker (local)'}[b.type])}${b.note?'<br><span class="mut">'+esc(b.note)+'</span>':''}</td><td>${obs}</td><td>${pred}</td><td>${d}</td><td>${canApply?`<input type="checkbox" data-a="${i}" ${b.applied?'checked':''}>`:''}</td><td><button class="sm" data-d="${i}">✕</button></td></tr>`;}).join('');
   $('bt-bTable').querySelectorAll('[data-d]').forEach(x=>x.onclick=()=>{bench.splice(+x.dataset.d,1);saveBench();renderBench();render();});
   $('bt-bTable').querySelectorAll('[data-a]').forEach(x=>x.onchange=()=>{bench[+x.dataset.a].applied=x.checked;saveBench();renderBench();render();});
   const hw=bench.filter(b=>b.type==='HW'&&b.diff!=null).map(b=>b.diff),lw=bench.filter(b=>b.type==='LW'&&b.diff!=null).map(b=>b.diff);
@@ -986,35 +1173,37 @@ function nowLocalInput(){const d=B.hToDate(B.nowH());return d.toISOString().slic
 $('bt-bTime').value=nowLocalInput();$('bt-bNow').onclick=()=>{$('bt-bTime').value=nowLocalInput();};
 $('bt-bAdd').onclick=()=>{
   const v=$('bt-bTime').value;if(!v){alert('Set a time');return;}const [dd,tt]=v.split('T');const [y,m,d]=dd.split('-').map(Number);const [hh,mi]=tt.split(':').map(Number);
-  const add=(km,place,lat,lon)=>{const type=$('bt-bType').value;const val=$('bt-bVal').value===''?null:+$('bt-bVal').value;
+  const add=(km,place,lat,lon,line)=>{const type=$('bt-bType').value;const val=$('bt-bVal').value===''?null:+$('bt-bVal').value;
     if((type==='LVL_AHD'||type==='LVL_LOCAL')&&val==null){alert('Enter the reading (m)');return;}
-    bench.push({id:Date.now(),logged:B.fmtDT(B.nowH()),t:B.dateToH(y,m,d,hh,mi),km:+km.toFixed(3),place,lat,lon,type,value:val,note:$('bt-bNote').value,applied:false});
+    bench.push({id:Date.now(),logged:B.fmtDT(B.nowH()),t:B.dateToH(y,m,d,hh,mi),km:+km.toFixed(3),place,lat,lon,type,value:val,note:$('bt-bNote').value,applied:false,...(GEN?{line:line||'M'}:{})});
     saveBench();renderBench();$('bt-bNote').value='';$('bt-bVal').value='';};
-  if($('bt-bLoc').value==='gps'){if(!navigator.geolocation){alert('No GPS');return;}navigator.geolocation.getCurrentPosition(p=>{const s=B.snap(p.coords.latitude,p.coords.longitude);add(s.km,`GPS (${s.line}, ${Math.round(s.offKm*1000)} m off line)`,p.coords.latitude,p.coords.longitude);},e=>alert('GPS failed: '+e.message),{enableHighAccuracy:true,timeout:20000});}
-  else{const pt=B.pointAtKm(st.km);add(st.km,st.landmark||('km '+st.km.toFixed(2)),pt[0],pt[1]);}
+  if($('bt-bLoc').value==='gps'){if(!navigator.geolocation){alert('No GPS');return;}navigator.geolocation.getCurrentPosition(p=>{const s=B.snap(p.coords.latitude,p.coords.longitude);add(s.km,`GPS (${s.line}, ${Math.round(s.offKm*1000)} m off line)`,p.coords.latitude,p.coords.longitude,s.lineId);},e=>alert('GPS failed: '+e.message),{enableHighAccuracy:true,timeout:20000});}
+  else{const pt=GEN?B.pointOnLine(st.km,st.line):B.pointAtKm(st.km);add(st.km,st.landmark||('km '+st.km.toFixed(2)),pt[0],pt[1],st.line);}
 };
-const CSVH=['id','logged_aest','obs_time_aest','km','place','lat','lon','type','value_m','note','pred_time_aest','pred_value_m_ahd','pred_minus_obs','applied'];
+const CSVH=['id','logged_aest','obs_time_aest','km','place','lat','lon','type','value_m','note','pred_time_aest','pred_value_m_ahd','pred_minus_obs','applied'].concat(GEN?['line','system']:[]);
 const q=s=>{s=String(s==null?'':s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
-$('bt-bExp').onclick=()=>{const rows=[CSVH.join(',')].concat(bench.map(b=>[b.id,b.logged,B.fmtDT(b.t),b.km,b.place,b.lat??'',b.lon??'',b.type,b.value??'',b.note,b.predT!=null?B.fmtDT(b.predT):'',b.predV!=null?b.predV.toFixed(3):'',b.diff!=null?(b.type==='HW'||b.type==='LW'?Math.round(b.diff):b.diff.toFixed(3)):'',b.applied?1:0].map(q).join(',')));
-  const blob=new Blob([rows.join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-benchmarks-'+B.dayStr(B.nowH())+'.csv';a.click();};
+$('bt-bExp').onclick=()=>{const rows=[CSVH.join(',')].concat(bench.map(b=>[b.id,b.logged,B.fmtDT(b.t),b.km,b.place,b.lat??'',b.lon??'',b.type,b.value??'',b.note,b.predT!=null?B.fmtDT(b.predT):'',b.predV!=null?b.predV.toFixed(3):'',b.diff!=null?(b.type==='HW'||b.type==='LW'?Math.round(b.diff):b.diff.toFixed(3)):'',b.applied?1:0].concat(GEN?[b.line||'M',FT.SYS]:[]).map(q).join(',')));
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(GEN?FT.SYS:'baffle')+'-benchmarks-'+B.dayStr(B.nowH())+'.csv';a.click();};
 function parseCSV(txt){const out=[];let row=[],f='',inq=false;for(let i=0;i<txt.length;i++){const c=txt[i];if(inq){if(c==='"'){if(txt[i+1]==='"'){f+='"';i++;}else inq=false;}else f+=c;}else if(c==='"')inq=true;else if(c===','){row.push(f);f='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&txt[i+1]==='\n')i++;row.push(f);out.push(row);row=[];f='';}else f+=c;}if(f!==''||row.length){row.push(f);out.push(row);}return out;}
 $('bt-bImp').onchange=async e=>{const file=e.target.files[0];if(!file)return;const rows=parseCSV(await file.text());const h=rows.shift().map(s=>s.trim());const ix=k=>h.indexOf(k);let n=0;
   for(const r of rows){if(r.length<5)continue;const ot=r[ix('obs_time_aest')];const m=/(\d{4})-(\d\d)-(\d\d)[ T](\d\d):(\d\d)/.exec(ot||'');if(!m)continue;
     const id=+r[ix('id')]||Date.now()+n;if(bench.some(b=>b.id===id))continue;
-    bench.push({id,logged:r[ix('logged_aest')],t:B.dateToH(+m[1],+m[2],+m[3],+m[4],+m[5]),km:+r[ix('km')],place:r[ix('place')],lat:r[ix('lat')]?+r[ix('lat')]:null,lon:r[ix('lon')]?+r[ix('lon')]:null,type:r[ix('type')],value:r[ix('value_m')]===''?null:+r[ix('value_m')],note:r[ix('note')],applied:r[ix('applied')]==='1'});n++;}
+    bench.push({id,logged:r[ix('logged_aest')],t:B.dateToH(+m[1],+m[2],+m[3],+m[4],+m[5]),km:+r[ix('km')],place:r[ix('place')],lat:r[ix('lat')]?+r[ix('lat')]:null,lon:r[ix('lon')]?+r[ix('lon')]:null,type:r[ix('type')],value:r[ix('value_m')]===''?null:+r[ix('value_m')],note:r[ix('note')],applied:r[ix('applied')]==='1',...(GEN?{line:ix('line')>=0&&B.LINES.some(l=>l.id===r[ix('line')])?r[ix('line')]:'M'}:{})});n++;}
   saveBench();renderBench();render();alert('Imported '+n+' observations');e.target.value='';};
 $('bt-bClear').onclick=()=>{if(confirm('Delete all logged observations on this device?')){bench=[];saveBench();renderBench();render();}};
 
 /* ---- main render ---- */
 function render(){
-  const km=st.km;localStorage.setItem('bt_km',km);localStorage.setItem('bt_hoff',$('bt-hoff').value);localStorage.setItem('bt_badj',$('bt-badj').value);
+  const km=st.km;localStorage.setItem(FK('bt_km'),km);localStorage.setItem(FK('bt_hoff'),$('bt-hoff').value);localStorage.setItem(FK('bt_badj'),$('bt-badj').value);if(GEN)localStorage.setItem(FK('bt_line'),st.line);
   const t0=dayH(),t1=t0+24,o=opts();
-  const P=B.predictAt(km,t0-6,t1+6,o);const cal=P.cal;const pt=B.pointAtKm(Math.min(km,B.MAXKM));
+  const P=B.predictAt(km,t0-6,t1+6,o);const cal=P.cal;const pt=GEN?B.pointOnLine(km,st.line):B.pointAtKm(Math.min(km,B.MAXKM));
   $('bt-kmLbl').textContent=km.toFixed(2)+' km from mouth';
-  $('bt-locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${km.toFixed(2)} km up Baffle Creek from the mouth · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?((n=>n?` · nearest spot <b>${esc(n.name)}</b> (${Math.round(Math.abs(n.km-km)*1000)} m along)`:'')(window.FT.spots&&window.FT.spots.nearest(km,null,1.0))):'')+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
+  $('bt-locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${GEN?(st.line==='M'?km.toFixed(2)+' km up '+esc(FT.SYSNAME)+' from the mouth':km.toFixed(2)+' km from the '+esc(FT.SYSNAME)+' mouth, on '+esc(B.lineName(st.line))+' (joins at km '+B.LINES.find(l=>l.id===st.line).j.toFixed(1)+')'):km.toFixed(2)+' km up Baffle Creek from the mouth'} · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?((n=>n?` · nearest spot <b>${esc(n.name)}</b> (${Math.round(Math.abs(n.km-km)*1000)} m along)`:'')(window.FT.spots&&window.FT.spots.nearest(km,GEN?st.line:null,1.0))):'')+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
   let warn='';
   if(st.gps&&st.gps.offKm>1.5)warn+='<div class="notice err">Your GPS position is '+st.gps.offKm.toFixed(1)+' km from the creek centreline — snapped to the nearest point; check this is right.</div>';
-  if(cal.beyond)warn+='<div class="notice">Above Essendean Bridge (the last calibration point). Tidal limit unknown — values held at Essendean’s, timing likely later and range smaller or nil. Great place to benchmark.</div>';
+  if(GEN&&cal.beyond)warn+='<div class="notice">Above '+esc(cal.nodeB.name)+' (the last model node). Values held there — real timing likely later and range smaller or nil. Great place to benchmark.</div>';
+  else if(GEN&&cal.generic)warn+='<div class="notice">⚠ <b>Uncalibrated — benchmark me.</b> No tide gauge or MSQ tide place covers this reach; lag and height are a generic estimate (median QLD lag growth), so allow ±'+Math.round(cal.hwU)+' min on highs and ±'+Math.round(cal.lwU)+' min on lows. Log a high or low turn here to calibrate it.</div>';
+  else if(cal.beyond)warn+='<div class="notice">Above Essendean Bridge (the last calibration point). Tidal limit unknown — values held at Essendean’s, timing likely later and range smaller or nil. Great place to benchmark.</div>';
   else if(cal.est)warn+='<div class="notice info">Between calibration points '+esc(cal.nodeA.name)+' and '+esc(cal.nodeB.name)+' ('+(cal.nodeB.km-cal.nodeA.km).toFixed(0)+' km apart) — interpolated, uncertainty larger. A benchmark here would help a lot.</div>';
   if(cal.corr&&(cal.corr.hw||cal.corr.lw||cal.corr.lv))warn+=`<div class="notice info">Your applied benchmarks shift this spot: HW ${Math.round(cal.corr.hw)} min, LW ${Math.round(cal.corr.lw)} min, level ${cal.corr.lv.toFixed(2)} m.</div>`;
   $('bt-locWarn').innerHTML=warn;
@@ -1025,21 +1214,21 @@ function render(){
   const nh=B.nowH();let nowTxt='';if(nh>=t0&&nh<t1){const v=P.curve(nh),v2=P.curve(nh+0.25);if(v!=null)nowTxt=`<div class="stat"><small>Now (${B.fmtT(nh)})</small><b>${lvl(v)} AHD</b><small>${v2>v+0.005?'rising ↑':v2<v-0.005?'falling ↓':'near slack'}</small></div>`;}
   const mouth=B.predictAt(0,t0,t1,o).inWin;
   const off=B.officialHiLo(t0,t1);
-  $('bt-stats').innerHTML=nowTxt+cards.join('')+`<div class="stat"><small>Mouth (model)</small><b style="font-size:.85rem">${mouth.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)).join(' · ')}</b><small>${off.length?'Official MSQ Bundaberg: '+off.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)+' '+e.h.toFixed(2)).join(' · ')+' m LAT':'Official MSQ times embedded for 2026 only'}</small></div>`;
+  $('bt-stats').innerHTML=nowTxt+cards.join('')+`<div class="stat"><small>Mouth (model)</small><b style="font-size:.85rem">${mouth.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)).join(' · ')}</b><small>${GEN?'Base port '+esc(B.SYS.port.name)+' (MSQ harmonics)'+(cal.trunc?' · lows here: pool level':''):off.length?'Official MSQ Bundaberg: '+off.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)+' '+e.h.toFixed(2)).join(' · ')+' m LAT':'Official MSQ times embedded for 2026 only'}</small></div>`;
   drawChart(P,t0,t1,o);
   // week
   const W=B.predictAt(km,t0,t0+24*7,o).inWin;const byDay={};W.forEach(e=>{const k=B.dayStr(e.t);(byDay[k]=byDay[k]||[]).push(e);});
   $('bt-week').innerHTML='<tr><th>Day</th><th>Highs</th><th>Lows</th></tr>'+Object.keys(byDay).map(k=>{const es=byDay[k];const d=es[0].t;return `<tr><td>${B.fmtDay(d)}</td><td class="hw">${es.filter(e=>e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+(e.weak?' weak':'')+'</span>').join('<br>')}</td><td class="lw">${es.filter(e=>!e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+'</span>').join('<br>')}</td></tr>`;}).join('')+`<tr><td colspan="3" class="mut">Timing uncertainty here: highs ${fmtU(cal.hwU)}, lows ${fmtU(cal.lwU)}. Heights m AHD.</td></tr>`;
   // stretch
-  $('bt-stretch').innerHTML='<tr><th>Place</th><th>km</th><th>Highs</th><th>Lows</th><th>Run-in starts</th><th>±</th></tr>'+B.LANDMARKS.map((l,i)=>{const p=B.predictAt(l.km,t0,t1,o);const c=p.cal;
+  $('bt-stretch').innerHTML='<tr><th>Place</th><th>km</th><th>Highs</th><th>Lows</th><th>Run-in starts</th><th>±</th></tr>'+B.LANDMARKS.map((l,i)=>{const lo=GEN?Object.assign({},o,{line:l.line||'M'}):o;const p=B.predictAt(l.km,t0,t1,lo);const c=p.cal;
     const tags=(l.custom?'<span class="tag mine">my spot</span>':'')+(l.alias?'<span class="tag">renamed</span>':'')+(l.cal?'<span class="tag cal">cal</span>':'')+(c.est?'<span class="tag warn">est</span>':'');
-    return `<tr class="click${Math.abs(l.km-km)<0.01?' sel':''}" data-i="${i}"><td>${esc(l.name)}${tags}${l.note?'<br><span class="mut">'+esc(l.note)+'</span>':''}</td><td>${l.km.toFixed(1)}</td><td class="hw">${p.inWin.filter(e=>e.hi).map(e=>B.fmtT(e.t)+(e.weak?'*':'')).join('<br>')}</td><td class="lw">${p.inWin.filter(e=>!e.hi).map(e=>B.fmtT(e.t)).join('<br>')}</td><td style="color:#7ff0c8">${B.runInStarts(l.km,t0,t1,o).filter(r=>r.t>=t0&&r.t<t1).map(r=>B.fmtT(r.t)+' <span class="mut">±'+Math.round(r.u)+'′'+(r.kind==='rise'?' rise':'')+'</span>').join('<br>')||'<span class="mut">—</span>'}</td><td class="mut">H ${Math.round(c.hwU)}′<br>L ${Math.round(c.lwU)}′</td></tr>`;}).join('')+'<tr><td colspan="6" class="mut">Run-in starts = low turn (or, upper creek, when the water starts rising — marked ‘rise’) ± timing; the first ~2 h after it is the strongest tide window for jacks in Bite times. * weak/no visible high expected (tide doesn’t clear the upper-creek pool level). Lows above ~30 km are a pool level, not a true low.</td></tr>';
-  $('bt-stretch').querySelectorAll('tr[data-i]').forEach(tr=>tr.onclick=()=>{const l=B.LANDMARKS[+tr.dataset.i];selectKm(l.km,l.name);});
+    return `<tr class="click${Math.abs(l.km-km)<0.01&&(!GEN||(l.line||'M')===st.line)?' sel':''}" data-i="${i}"><td>${esc(l.name)}${tags}${l.note?'<br><span class="mut">'+esc(l.note)+'</span>':''}</td><td>${l.km.toFixed(1)}</td><td class="hw">${p.inWin.filter(e=>e.hi).map(e=>B.fmtT(e.t)+(e.weak?'*':'')).join('<br>')}</td><td class="lw">${p.inWin.filter(e=>!e.hi).map(e=>B.fmtT(e.t)).join('<br>')}</td><td style="color:#7ff0c8">${B.runInStarts(l.km,t0,t1,lo).filter(r=>r.t>=t0&&r.t<t1).map(r=>B.fmtT(r.t)+' <span class="mut">±'+Math.round(r.u)+'′'+(r.kind==='rise'?' rise':'')+'</span>').join('<br>')||'<span class="mut">—</span>'}</td><td class="mut">H ${Math.round(c.hwU)}′<br>L ${Math.round(c.lwU)}′</td></tr>`;}).join('')+'<tr><td colspan="6" class="mut">Run-in starts = low turn (or, upper creek, when the water starts rising — marked ‘rise’) ± timing; the first ~2 h after it is the strongest tide window for jacks in Bite times. * weak/no visible high expected (tide doesn’t clear the upper-creek pool level). Lows above ~30 km are a pool level, not a true low.</td></tr>';
+  $('bt-stretch').querySelectorAll('tr[data-i]').forEach(tr=>tr.onclick=()=>{const l=B.LANDMARKS[+tr.dataset.i];selectKm(l.km,l.name,l.line);});
 }
 function drawChart(P,t0,t1,o){
   const svg=$('bt-chart'),W=960,H=320,L=44,R=14,T=14,Bm=40,pw=W-L-R,ph=H-T-Bm;
   const ts=[];for(let t=t0;t<=t1+1e-9;t+=0.1)ts.push(t);
-  const M=B.predictAt(0,t0-6,t1+6,o),E=B.predictAt(35.25,t0-6,t1+6,o);
+  const M=B.predictAt(0,t0-6,t1+6,o),E=GEN?B.predictAt(B.REFKM,t0-6,t1+6,Object.assign({},o,{line:'M'})):B.predictAt(35.25,t0-6,t1+6,o);
   const series=[[M.curve,'#5cc8ff',1.5,''],[E.curve,'#ff7b6b',1.5,'6 4'],[P.curve,'#f0a03a',3,'']];
   let mn=1e9,mx=-1e9;for(const [f] of series)for(const t of ts){const v=f(t);if(v!=null){mn=Math.min(mn,v);mx=Math.max(mx,v);}}
   mn=Math.floor(mn*4)/4;mx=Math.ceil(mx*4)/4;
@@ -1054,24 +1243,28 @@ function drawChart(P,t0,t1,o){
   const nh=B.nowH();if(nh>=t0&&nh<t1)s+=`<line x1="${x(nh)}" x2="${x(nh)}" y1="${T}" y2="${T+ph}" stroke="#57d18a" stroke-width="1.5"/><text x="${x(nh)+3}" y="${T+12}" fill="#57d18a" font-size="11">now</text>`;
   s+=`<text x="${L}" y="${H-6}" fill="#9db5b1" font-size="11">m AHD</text>`;
   svg.innerHTML=s;}
-function selectKm(km,name){st.km=Math.max(0,Math.min(B.MAXKM,km));st.landmark=name||null;st.gps=null;$('bt-km').value=st.km;const i=B.LANDMARKS.findIndex(l=>l.name===name);$('bt-lm').value=i>=0?i:'';render();}
+function syncLine(){if(!GEN)return;const L=B.LINES.find(l=>l.id===st.line)||B.LINES[0];st.line=L.id;$('bt-km').min=L.id==='M'?0:+L.j.toFixed(2);$('bt-km').max=+B.lineMax(L.id).toFixed(2);$('bt-km').step=0.05;
+  const s=document.getElementById('bt-line');if(s){if(!s.options.length)s.innerHTML=B.LINES.map(l=>`<option value="${l.id}">${esc(l.name)}${l.id==='M'?' (main)':' — joins km '+l.j.toFixed(1)}</option>`).join('');s.value=L.id;}
+  const ml=document.getElementById('bt-kmMaxLbl');if(ml)ml.textContent=B.lineMax(L.id).toFixed(1)+' km';}
+function selectKm(km,name,line){if(GEN){st.line=line||st.line||'M';syncLine();}st.km=Math.max(GEN&&st.line!=='M'?B.LINES.find(l=>l.id===st.line).j:0,Math.min(GEN?B.lineMax(st.line):B.MAXKM,km));st.landmark=name||null;st.gps=null;$('bt-km').value=st.km;const i=B.LANDMARKS.findIndex(l=>l.name===name&&(!GEN||(l.line||'M')===st.line));$('bt-lm').value=i>=0?i:'';render();}
 $('bt-km').oninput=()=>{st.km=+$('bt-km').value;st.landmark=null;st.gps=null;$('bt-lm').value='';render();};
-$('bt-lm').onchange=()=>{if($('bt-lm').value==='')return;const l=B.LANDMARKS[+$('bt-lm').value];selectKm(l.km,l.name);};
+$('bt-lm').onchange=()=>{if($('bt-lm').value==='')return;const l=B.LANDMARKS[+$('bt-lm').value];selectKm(l.km,l.name,l.line);};
+if(GEN&&document.getElementById('bt-line'))document.getElementById('bt-line').onchange=e=>{const L=B.LINES.find(l=>l.id===e.target.value);if(!L)return;st.line=L.id;syncLine();st.km=L.id==='M'?Math.min(st.km,B.lineMax('M')):Math.max(L.j,Math.min(B.lineMax(L.id),st.km<=L.j?L.j+Math.min(1,(B.lineMax(L.id)-L.j)/2):st.km));st.landmark=null;st.gps=null;$('bt-km').value=st.km;$('bt-lm').value='';render();};
 $('bt-date').onchange=()=>{render();renderBench();FT.setDate($('bt-date').value,'baffle');};
 ['bt-hoff','bt-badj'].forEach(id=>document.getElementById(id).onchange=()=>{render();renderBench();FT.biteRefreshIfBaffle&&FT.biteRefreshIfBaffle();});
 const FT=window.FT;
-FT.baffleOpts=opts;FT.baffleSelect=(km,name)=>selectKm(km,name);
+FT.baffleOpts=opts;FT.baffleSelect=(km,name,line)=>selectKm(km,name,line);
 if(FT.spots)FT.spots.onChange.push(()=>{rebuildLm(true);render();});
 FT.baffleSetDate=v=>{if($('bt-date').value!==v){$('bt-date').value=v;render();renderBench();}};
-$('bt-toBite').onclick=()=>{const p=st.gps?[st.gps.lat,st.gps.lon]:B.pointAtKm(st.km);
+$('bt-toBite').onclick=()=>{const p=st.gps?[st.gps.lat,st.gps.lon]:(GEN?B.pointOnLine(st.km,st.line):B.pointAtKm(st.km));
   FT.setDate($('bt-date').value,'baffle');
-  FT.biteSetLoc({name:(st.landmark&&st.landmark!=='GPS fix'?st.landmark:(st.gps?'GPS spot':'km '+st.km.toFixed(1)))+' — Baffle Ck',lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:+st.km.toFixed(2)});
+  FT.biteSetLoc(Object.assign({name:(st.landmark&&st.landmark!=='GPS fix'?st.landmark:(st.gps?'GPS spot':'km '+st.km.toFixed(1)))+' — '+(GEN?FT.SYSSHORT:'Baffle Ck'),lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:+st.km.toFixed(2)},GEN?{baffleLine:st.line,sys:FT.SYS}:{}));
   FT.showTab('bite');};
 $('bt-gps').onclick=()=>{if(!navigator.geolocation){alert('Geolocation not supported');return;}$('bt-gps').disabled=true;
-  navigator.geolocation.getCurrentPosition(p=>{$('bt-gps').disabled=false;const s=B.snap(p.coords.latitude,p.coords.longitude);st.km=Math.min(B.MAXKM,s.km);st.landmark='GPS fix';st.gps={lat:p.coords.latitude,lon:p.coords.longitude,offKm:s.offKm,line:s.line};$('bt-km').value=st.km;$('bt-lm').value='';render();},
+  navigator.geolocation.getCurrentPosition(p=>{$('bt-gps').disabled=false;const s=B.snap(p.coords.latitude,p.coords.longitude);if(GEN){st.line=s.lineId;syncLine();}st.km=Math.min(GEN?B.lineMax(s.lineId):B.MAXKM,s.km);if(s.offKm>1.5&&window.FT.suggestSystem)window.FT.suggestSystem(p.coords.latitude,p.coords.longitude);st.landmark='GPS fix';st.gps={lat:p.coords.latitude,lon:p.coords.longitude,offKm:s.offKm,line:s.line};$('bt-km').value=st.km;$('bt-lm').value='';render();},
   e=>{$('bt-gps').disabled=false;alert('GPS failed: '+e.message);},{enableHighAccuracy:true,timeout:20000,maximumAge:60000});};
 /* ---- live Bundaberg (DES storm tide CSV, CORS-enabled) ---- */
-$('bt-live').onclick=async()=>{const out=$('bt-liveOut');out.textContent='Loading…';
+if($('bt-live'))$('bt-live').onclick=async()=>{const out=$('bt-liveOut');out.textContent='Loading…';
   try{const r=await fetch('https://apps.des.qld.gov.au/data-sets/storm-tides/stdtide-7dayopdata.csv');const txt=await r.text();
     const rows=txt.split('\n').filter(l=>l.startsWith('bundaberg,')).map(l=>l.split(',')).map(p=>({t:B.dateToH(...p[2].match(/\d+/g).map(Number)),o:+p[3],p:+p[4],res:+p[5]})).filter(r=>r.o>-1&&r.o<7);
     if(!rows.length)throw new Error('no Bundaberg rows');const last=rows[rows.length-1];const recent=rows.filter(r=>r.t>last.t-6);const mres=recent.reduce((a,b)=>a+b.res,0)/recent.length;
@@ -1080,36 +1273,43 @@ $('bt-live').onclick=async()=>{const out=$('bt-liveOut');out.textContent='Loadin
     $('applyRes').onclick=()=>{$('bt-hoff').value=mres.toFixed(2);render();renderBench();};
   }catch(e){out.innerHTML='<span class="pos">Couldn’t load live data ('+esc(e.message)+'). Offline? Predictions still work.</span>';}};
 /* nodes table */
-$('bt-nodesTbl').innerHTML='<table><tr><th>km</th><th>Node</th><th>HW lag</th><th>LW lag</th><th>Source</th></tr>'+B.NODES.map(n=>`<tr><td>${n.km}</td><td>${esc(n.name)}</td><td>+${Math.floor(n.hwLag/60)}:${String(n.hwLag%60).padStart(2,'0')} ±${n.hwU}′</td><td>+${Math.floor(n.lwLag/60)}:${String(n.lwLag%60).padStart(2,'0')} ±${n.lwU}′</td><td class="mut">${esc(n.src)}</td></tr>`).join('')+'</table><p class="mut">Lags are after the Bundaberg (Burnett Heads) high/low.</p>';
-const i0=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01);if(i0>=0){st.landmark=B.LANDMARKS[i0].name;$('bt-lm').value=i0;}
+if(GEN){const fm=m=>(m<0?'−':'+')+Math.floor(Math.abs(m)/60)+':'+String(Math.round(Math.abs(m)%60)).padStart(2,'0');const K={bom:'gauge',gaugefit:'gauge',port:'base port',msq:'MSQ',mouth:'mouth',junction:'junction',generic:'generic',limit:'limit'};
+  $('bt-nodesTbl').innerHTML='<div class="tw"><table><tr><th>Channel</th><th>km</th><th>Node</th><th>HW lag</th><th>LW lag</th><th>Type</th></tr>'+B.LINES.map(L=>B.NBY[L.id].filter(n=>L.id==='M'||n.km>L.j-1e-6).map(n=>`<tr><td class="mut">${esc(L.id==='M'?'main':L.name)}</td><td>${n.km.toFixed(1)}</td><td>${esc(n.name)}</td><td>${fm(n.hwLag)} ±${Math.round(n.hwU)}′</td><td>${fm(n.lwLag)} ±${Math.round(n.lwU)}′${n.trunc?' <span class="mut">pool</span>':''}</td><td class="mut">${esc(K[n.kind]||n.kind||'')}</td></tr>`).join('')).join('')+'</table></div><p class="mut">Lags are after the '+esc(B.SYS.port.name)+' high/low.</p>';}
+else $('bt-nodesTbl').innerHTML='<table><tr><th>km</th><th>Node</th><th>HW lag</th><th>LW lag</th><th>Source</th></tr>'+B.NODES.map(n=>`<tr><td>${n.km}</td><td>${esc(n.name)}</td><td>+${Math.floor(n.hwLag/60)}:${String(n.hwLag%60).padStart(2,'0')} ±${n.hwU}′</td><td>+${Math.floor(n.lwLag/60)}:${String(n.lwLag%60).padStart(2,'0')} ±${n.lwU}′</td><td class="mut">${esc(n.src)}</td></tr>`).join('')+'</table><p class="mut">Lags are after the Bundaberg (Burnett Heads) high/low.</p>';
+syncLine();if(GEN)$('bt-km').value=st.km;
+const i0=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01&&(!GEN||(l.line||'M')===st.line));if(i0>=0){st.landmark=B.LANDMARKS[i0].name;$('bt-lm').value=i0;}
 render();renderBench();document.body.dataset.btReady='1';
 })();
 </script>
-<script>
+<script type="text/ft-deferred">
 /* ===================== App / UI ===================== */
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
 const DEF={name:'Burnett Heads (Burnett River mouth), QLD',lat:-24.76,lng:152.40,tz:'Australia/Brisbane'};
-let loc=JSON.parse(localStorage.getItem('mj_loc')||'null')||{...DEF};
+let loc=JSON.parse(localStorage.getItem(window.FT.k('mj_loc'))||'null')||(window.BT.generic?window.FT.defaultSpot():{...DEF});
+if(loc.baffleKm!=null&&(loc.sys||'baffle')!==window.FT.SYS)loc=window.FT.defaultSpot();
 if(loc.baffleKm===undefined)loc.baffleKm=null;
 let state={};
 const FT=window.FT;
 const E0=Date.UTC(2025,11,31,14); /* Baffle model hour 0 = 2026-01-01 00:00 AEST */
-function bafName(km){const L=BT.LANDMARKS.filter(l=>Math.abs(l.km-km)<0.3).sort((a,b)=>Math.abs(a.km-km)-Math.abs(b.km-km))[0];return L?L.name:null;}
-function baffleTide(dateStr,km){const [y,m,d]=dateStr.split('-').map(Number);const h0=BT.dateToH(y,m,d-1,0,0),h1=BT.dateToH(y,m,d+8,0,0);
-  const o=FT.baffleOpts?FT.baffleOpts():{};const P=BT.predictAt(km,h0,h1,o);
+const GENB=!!BT.generic,SFX=' — '+(GENB?FT.SYSSHORT:'Baffle Ck');
+function bafName(km,line){const L=BT.LANDMARKS.filter(l=>Math.abs(l.km-km)<0.3&&(!GENB||(l.line||'M')===(line||'M'))).sort((a,b)=>Math.abs(a.km-km)-Math.abs(b.km-km))[0];return L?L.name:null;}
+function baffleTide(dateStr,km,line){const [y,m,d]=dateStr.split('-').map(Number);const h0=BT.dateToH(y,m,d-1,0,0),h1=BT.dateToH(y,m,d+8,0,0);
+  const o=Object.assign({},FT.baffleOpts?FT.baffleOpts():{},GENB?{line:line||'M'}:{});const P=BT.predictAt(km,h0,h1,o);
   const fn=t=>{const v=P.curve((t-E0)/3.6e6);return v==null?null:v;};
   const ext=P.ext.filter(e=>!e.weak).map(e=>({t:E0+e.t*3.6e6,h:e.h,high:!!e.hi}));
   return{fn,ext,cal:P.cal,weak:P.ext.filter(e=>e.weak).length,runIn:BT.runInStarts(km,h0,h1,o).map(r=>({t:E0+r.t*3.6e6,u:r.u,kind:r.kind}))};}
 function snapLoc(l){if(l.baffleKm!==undefined)return l;let s=null;try{s=BT.snap(l.lat,l.lng);}catch(e){}
+  if(GENB){if(s&&s.offKm<=0.6){l.baffleKm=+Math.min(BT.lineMax(s.lineId),s.km).toFixed(2);l.baffleLine=s.lineId;l.sys=FT.SYS;}else l.baffleKm=null;return l;}
   l.baffleKm=(s&&s.offKm<=0.6&&s.km<=BT.MAXKM)?+Math.min(BT.MAXKM,s.km).toFixed(2):null;return l;}
-function rebuildBaf(){const sel=$('mj-bafSel');sel.innerHTML='<option value="">— pick a Baffle Creek spot —</option>'+BT.LANDMARKS.map((l,i)=>`<option value="${i}">${l.custom?'★ ':''}${esc(l.name)} (${l.km.toFixed(1)} km)</option>`).join('');
-  const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(x=>Math.abs(x.km-loc.baffleKm)<0.01):-1;sel.value=i>=0?i:'';}
+const bafIdx=()=>loc.baffleKm!=null?BT.LANDMARKS.findIndex(x=>Math.abs(x.km-loc.baffleKm)<0.01&&(!GENB||(x.line||'M')===(loc.baffleLine||'M'))):-1;
+function rebuildBaf(){const sel=$('mj-bafSel');sel.innerHTML='<option value="">— pick a '+esc(GENB?FT.SYSNAME:'Baffle Creek')+' spot —</option>'+BT.LANDMARKS.map((l,i)=>`<option value="${i}">${l.custom?'★ ':''}${esc(l.name)} (${l.km.toFixed(1)} km)</option>`).join('');
+  const i=bafIdx();sel.value=i>=0?i:'';}
 rebuildBaf();
 $('mj-bafSel').onchange=()=>{const v=$('mj-bafSel').value;if(v==='')return;const l=BT.LANDMARKS[+v];const p=FT.spots?FT.spots.latLng(l):BT.pointAtKm(l.km);
-  setLoc({name:l.name+' — Baffle Ck',lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:l.km});};
-if(FT.spots)FT.spots.onChange.push(()=>{rebuildBaf();const v=$('mj-bafSel').value;if(v!==''&&loc.baffleKm!=null){const nm=BT.LANDMARKS[+v].name+' — Baffle Ck';if(loc.name!==nm){loc.name=nm;localStorage.setItem('mj_loc',JSON.stringify(loc));setLocInfo();}}});
+  setLoc(Object.assign({name:l.name+SFX,lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:l.km},GENB?{baffleLine:l.line||'M',sys:FT.SYS}:{}));};
+if(FT.spots)FT.spots.onChange.push(()=>{rebuildBaf();const v=$('mj-bafSel').value;if(v!==''&&loc.baffleKm!=null){const nm=BT.LANDMARKS[+v].name+SFX;if(loc.name!==nm){loc.name=nm;localStorage.setItem(window.FT.k('mj_loc'),JSON.stringify(loc));setLocInfo();}}});
 const todayIn=tz=>MJ.ymd(Date.now(),tz);
 $('mj-date').value=todayIn(loc.tz||DEF.tz);
 $('mj-tideOff').value=localStorage.getItem('mj_tideoff')||0;
@@ -1142,7 +1342,7 @@ async function run(){
   const [mr,fr]=await Promise.allSettled([getJSON(mUrl,'m'),getJSON(fUrl,'f')]);
   const marine=mr.status==='fulfilled'?mr.value:null, fc=fr.status==='fulfilled'?fr.value:null;
   const tz=(fc&&fc.timezone)||(marine&&marine.timezone)||loc.tz||Intl.DateTimeFormat().resolvedOptions().timeZone;
-  if(tz!==loc.tz){loc.tz=tz;localStorage.setItem('mj_loc',JSON.stringify(loc));}
+  if(tz!==loc.tz){loc.tz=tz;localStorage.setItem(window.FT.k('mj_loc'),JSON.stringify(loc));}
   let tideFn=null,ext=null,sstFn=null,wxFn=null,cell='',runIn=null;
   if(marine&&marine.hourly){const tt=marine.hourly.time.map(s=>MJ.parseLocalIso(s,tz));
     const sl=marine.hourly.sea_level_height_msl;
@@ -1152,7 +1352,7 @@ async function run(){
     const sst=marine.hourly.sea_surface_temperature;if(sst.some(v=>v!=null))sstFn=MJ.makeSeries(tt,sst);
     cell=`tide model cell ${marine.latitude.toFixed(3)}, ${marine.longitude.toFixed(3)}`;
     if(marine._cached)notice('📦 Marine API unreachable — using cached tide data from a previous load.');
-  }else if(BZ!=null)notice('🌡️ Sea-temperature data unavailable ('+esc(mr.reason&&mr.reason.message||'network error')+') — using a seasonal estimate. Tide still comes from the Baffle model (works offline).');
+  }else if(BZ!=null)notice('🌡️ Sea-temperature data unavailable ('+esc(mr.reason&&mr.reason.message||'network error')+') — using a seasonal estimate. Tide still comes from the '+(GENB?esc(FT.SYSNAME)+' tide model':'Baffle model')+' (works offline).');
   else notice('🌊 Couldn\'t load tide/sea-temperature data ('+esc(mr.reason&&mr.reason.message||'network error')+'). Falling back to <b>sun/moon/weather scoring</b> with a seasonal water-temperature estimate.',true);
   if(fc&&fc.hourly){const h=fc.hourly,tt=h.time.map(s=>MJ.parseLocalIso(s,tz));const S=k=>MJ.makeSeries(tt,h[k]);
     const P=S('pressure_msl'),Wd=S('wind_speed_10m'),C=S('cloud_cover'),R=S('precipitation'),RH=S('relative_humidity_2m'),T=S('temperature_2m');
@@ -1162,13 +1362,16 @@ async function run(){
     if(fc._cached)notice('📦 Forecast API unreachable — using cached weather from a previous load.');
   }else notice('☁️ Couldn\'t load weather forecast ('+esc(fr.reason&&fr.reason.message||'network error')+'). Weather factor set to neutral.',true);
   let srcHtml;
-  if(BZ!=null){const r=baffleTide(dateStr,BZ);tideFn=r.fn;ext=r.ext;runIn=r.runIn;const c=r.cal,nm=bafName(BZ);
+  if(BZ!=null&&GENB){const BL=loc.baffleLine||'M';const r=baffleTide(dateStr,BZ,BL);tideFn=r.fn;ext=r.ext;runIn=r.runIn;const c=r.cal,nm=bafName(BZ,BL),I=FT.SYSINFO;
+    srcHtml=`🌊 <b>Tide source: ${esc(FT.SYSNAME)} along-channel model</b> @ km ${BZ.toFixed(1)}${BL!=='M'?' '+esc(BT.lineName(BL)):''}${nm?' ('+esc(nm)+')':''} — ${esc(BT.SYS.port.name)} harmonics → ${c.generic?'<b>uncalibrated generic</b> lag &amp; height — benchmark me':'calibrated lag &amp; height'} (m AHD); confidence <b>${I.conf}</b>; timing ±${Math.round(c.hwU)} min highs, ±${Math.round(c.lwU)} min lows${c.trunc?'; lows here are a <b>pool level</b> (water starts rising = run-in)':''}${r.weak?`; ${r.weak} weak/no-show high(s) this week ignored`:''}. 🌡️ Sea temperature is Open-Meteo’s nearest offshore cell — SST differs by region (warmer up north, cooler in Moreton Bay in winter), and the bite model’s temperature thresholds were tuned for the Bundaberg coast. <button class="sm" id="openBaffle">🌊 Open in ${esc(FT.SYSSHORT)} tides</button>`;
+    cell='';}
+  else if(BZ!=null){const r=baffleTide(dateStr,BZ);tideFn=r.fn;ext=r.ext;runIn=r.runIn;const c=r.cal,nm=bafName(BZ);
     srcHtml=`🌊 <b>Tide source: Baffle Creek along-creek model</b> @ ${BZ.toFixed(1)} km${nm?' ('+esc(nm)+')':''} — Bundaberg harmonics → Winfield/Hills Rd/Essendean-calibrated lag &amp; height (m AHD); timing ±${Math.round(c.hwU)} min highs, ±${Math.round(c.lwU)} min lows${c.trunc?'; lows here are a <b>pool level</b> (truncated)':''}${r.weak?`; ${r.weak} weak/no-show high(s) this week ignored`:''}. Manual tide offset not used. <button class="sm" id="openBaffle">🌊 Open in Baffle tides</button>`;
     cell='';}
   else srcHtml=tideFn?`🌊 <b>Tide source: Open-Meteo marine model</b> (offshore grid cell)${off?` + manual offset ${off>0?'+':''}${off} min`:' — use the tide offset for up-river spots'}.`:'🌊 <b>Tide source: none</b> — scoring on light, solunar, moon, temp &amp; weather.';
   if(BZ==null&&ext)runIn=ext.filter(x=>!x.high).map(x=>({t:x.t,u:30,kind:'low'}));
   $('mj-tideSrc').innerHTML=srcHtml;
-  if($('openBaffle'))$('openBaffle').onclick=()=>{FT.baffleSelect(BZ,bafName(BZ));FT.setDate($('mj-date').value,'bite');FT.showTab('baffle');};
+  if($('openBaffle'))$('openBaffle').onclick=()=>{FT.baffleSelect(BZ,bafName(BZ,loc.baffleLine),loc.baffleLine);FT.setDate($('mj-date').value,'bite');FT.showTab('baffle');};
   setLocInfo(cell);
   // week
   let weekRange=null;if(ext&&ext.length>1){let mx=0;for(let i=1;i<ext.length;i++)mx=Math.max(mx,Math.abs(ext[i].h-ext[i-1].h));weekRange={max:mx};}
@@ -1276,7 +1479,7 @@ function renderWeek(){
 }
 
 /* location controls */
-function setLoc(l){loc=snapLoc(l);{const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(x=>Math.abs(x.km-loc.baffleKm)<0.01):-1;$('mj-bafSel').value=i>=0?i:'';}localStorage.setItem('mj_loc',JSON.stringify(loc));setLocInfo();$('mj-results').innerHTML='';run();}
+function setLoc(l){loc=snapLoc(l);{const i=bafIdx();$('mj-bafSel').value=i>=0?i:'';}localStorage.setItem(window.FT.k('mj_loc'),JSON.stringify(loc));setLocInfo();$('mj-results').innerHTML='';run();}
 $('mj-searchBtn').onclick=async()=>{const q=$('mj-q').value.trim();if(!q)return;$('mj-results').innerHTML='<li><span class="spin"></span> Searching…</li>';
   try{const u=n=>`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=8&language=en&format=json`+(n?'&countryCode=AU':'');
     let j=await (await fetch(u(true))).json();if(!j.results||!j.results.length)j=await (await fetch(u(false))).json();
@@ -1296,7 +1499,7 @@ FT.biteRefreshIfBaffle=()=>{if(loc.baffleKm!=null)run();};
    FT.biteCtx(spot,t0,t1): predicted context for every 15-min slot of a fishing session at a spot.
    Re-uses the open Bite-times forecast (incl. weather & SST) when it is for the same spot & dates,
    otherwise recomputes offline: Baffle along-creek model for creek spots, no-tide scoring off-creek. */
-FT.biteLoc=()=>({name:loc.name,lat:loc.lat,lng:loc.lng,km:loc.baffleKm});
+FT.biteLoc=()=>({name:loc.name,lat:loc.lat,lng:loc.lng,km:loc.baffleKm,line:loc.baffleLine,sys:loc.sys});
 FT.biteCtx=function(spot,t0,t1){
   const tz='Australia/Brisbane',Q=15*60e3;
   t0=Math.floor(t0/Q)*Q;t1=Math.max(t0+Q,Math.ceil(t1/Q)*Q);
@@ -1304,12 +1507,13 @@ FT.biteCtx=function(spot,t0,t1){
   const dist=(a,b)=>{const R=6371,r=Math.PI/180,dx=(b.lng-a.lng)*r*Math.cos((a.lat+b.lat)/2*r),dy=(b.lat-a.lat)*r;return R*Math.hypot(dx,dy);};
   let days=null,runIn=[],src,tideSrc;
   const sd=state&&state.days;
-  const same=sd&&sd.length&&(spot.km!=null?(loc.baffleKm!=null&&Math.abs(spot.km-loc.baffleKm)<1):(loc.baffleKm==null&&dist(spot,loc)<3));
+  const sameLine=!window.BT||!BT.generic||((spot.line||'M')===(loc.baffleLine||'M'));
+  const same=sd&&sd.length&&(spot.km!=null?(loc.baffleKm!=null&&sameLine&&Math.abs(spot.km-loc.baffleKm)<1):(loc.baffleKm==null&&dist(spot,loc)<3));
   if(same&&dates.every(ds=>sd.some(d=>d.dateStr===ds))){
     days=dates.map(ds=>sd.find(d=>d.dateStr===ds));runIn=sd.flatMap(d=>d.runIns||[]);src='bite';
     tideSrc=loc.baffleKm!=null?'baffle':(state.hasTide?'marine':'none');}
   else if(spot.km!=null&&window.BT){
-    const r=baffleTide(dates[0],spot.km);let mx=0;for(let i=1;i<r.ext.length;i++)mx=Math.max(mx,Math.abs(r.ext[i].h-r.ext[i-1].h));
+    const r=baffleTide(dates[0],spot.km,spot.line);let mx=0;for(let i=1;i<r.ext.length;i++)mx=Math.max(mx,Math.abs(r.ext[i].h-r.ext[i-1].h));
     const wr=r.ext.length>1?{max:mx}:null;
     days=dates.map(ds=>MJ.computeDay({dateStr:ds,tz,lat:spot.lat,lng:spot.lng,tideFn:r.fn,ext:r.ext,runIn:r.runIn,weekRange:wr}));
     runIn=r.runIn;src='model';tideSrc='baffle';}
@@ -1325,12 +1529,12 @@ FT.biteCtx=function(spot,t0,t1){
   const il=MJ.moonIllum((t0+t1)/2);
   return{src,tideSrc,wx,moon:{phase:Math.round(il.phase*1000)/1000,illum:Math.round((il.fraction!=null?il.fraction:0)*100)/100},slots};};
 $('mj-tideOff').onchange=run;
-{const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(l=>Math.abs(l.km-loc.baffleKm)<0.01):-1;if(i>=0)$('mj-bafSel').value=i;}
+{const i=bafIdx();if(i>=0)$('mj-bafSel').value=i;}
 setLocInfo();
 run().catch(e=>{notice('Unexpected error: '+esc(e.message),true);console.error(e);});
 })();
 </script>
-<script>/* ===================== Gauges tab ===================== */
+<script type="text/ft-deferred">if(!window.BT.generic){/* ===================== Gauges tab ===================== */
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);const FT=window.FT;
@@ -1516,8 +1720,64 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 FT.gaugesReload=()=>load(true);
 window.__FT_GAUGES=()=>({D,view});
 })();
+}</script>
+<script type="text/ft-deferred">/* ===================== Gauges tab — any river system (non-Baffle) =====================
+   Shows the BoM tide/river gauges on this system (data/sysgauges/*.json, refreshed by the box routine every ~3 h)
+   against this app's tide model at the gauge's chainage. The model is shifted by the median offset (gauges use their own datum);
+   timing differences of highs/lows are what matter for calibration. */
+(function(){'use strict';
+const FT=window.FT,B=window.BT,$=id=>document.getElementById(id);if(!B.generic)return;
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const E0=Date.UTC(2025,11,31,14),TZ='Australia/Brisbane';
+const fT=ms=>new Intl.DateTimeFormat('en-AU',{timeZone:TZ,weekday:'short',hour:'numeric',minute:'2-digit',hour12:true}).format(new Date(ms)).replace(' am','am').replace(' pm','pm');
+const G=(B.SYS.gauges||[]).slice().sort((a,b)=>(a.coastal-b.coastal)||((a.km||0)-(b.km||0)));
+const root=$('tab-gauges');
+root.innerHTML=`<section class="card"><h2>📡 Gauges — ${esc(FT.SYSNAME)}</h2><div id="sgHead" class="mut"></div></section><div id="sgList"></div>
+<section class="card"><h2>ℹ️ About</h2><p class="mut">Readings: Bureau of Meteorology gauge tables, fetched about every 3 hours by the site’s update routine and kept for 72 h. Blue dashed = this app’s tide model at the gauge (shifted by the median difference, because each gauge has its own datum). Compare <b>timing</b> of highs/lows: if the gauge is consistently earlier/later, log a benchmark in the Tides tab at that spot to refine this system’s offsets. River gauges far upstream also show floods and pool levels the tide model doesn’t know about.</p></section>`;
+if(!G.length){$('sgHead').innerHTML=`No BoM tide/river gauges are listed on ${esc(FT.SYSNAME)} — its tide model is ${FT.SYSINFO.conf==='C'?'<b>uncalibrated</b> (generic estimate)':'based on MSQ tide places'}. Benchmarks you log in the Tides tab are the way to calibrate it.`;return;}
+function smooth(P,k){return P.map((p,i)=>{let s=0,n=0;for(let j=Math.max(0,i-k);j<=Math.min(P.length-1,i+k);j++){s+=P[j][1];n++;}return[p[0],s/n];});}
+function events(P){const S=smooth(P,2),out=[];const W=150*60e3;
+  for(let i=0;i<S.length;i++){const t=S[i][0];let mx=-1e9,mn=1e9,lo=t-W,hi=t+W;if(lo<S[0][0]||hi>S[S.length-1][0])continue;
+    for(let j=i;j>=0&&S[j][0]>=lo;j--){mx=Math.max(mx,S[j][1]);mn=Math.min(mn,S[j][1]);}for(let j=i;j<S.length&&S[j][0]<=hi;j++){mx=Math.max(mx,S[j][1]);mn=Math.min(mn,S[j][1]);}
+    const v=S[i][1];const l=out[out.length-1];
+    if(v===mx&&v>mn+0.08){if(!(l&&l.hi&&t-l.t<3*3600e3))out.push({t,h:v,hi:true});}
+    else if(v===mn&&v<mx-0.08){if(!(l&&!l.hi&&t-l.t<3*3600e3))out.push({t,h:v,hi:false});}}
+  return out;}
+function chart(P,M,off){const W=420,H=170,L=34,R=6,T=10,Bm=22,pw=W-L-R,ph=H-T-Bm;const t0=P[0][0],t1=P[P.length-1][0];
+  const ys=P.map(p=>p[1]).concat(M.map(m=>m[1]+off));const y0=Math.min(...ys),y1=Math.max(...ys)+0.01;
+  const X=t=>L+(t-t0)/(t1-t0)*pw,Y=v=>T+ph-(v-y0)/(y1-y0)*ph;let o=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;background:#0b1a1c;border-radius:8px">`;
+  for(let i=0;i<=4;i++){const v=y0+(y1-y0)*i/4;o+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#25464b"/><text x="${L-3}" y="${Y(v)+4}" fill="#9db5b1" font-size="10" text-anchor="end">${v.toFixed(1)}</text>`;}
+  const d0=new Date(t0+10*3600e3);d0.setUTCHours(0,0,0,0);for(let t=d0.getTime()-10*3600e3+864e5;t<t1;t+=864e5){o+=`<line x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${T+ph}" stroke="#35585e" stroke-dasharray="2 3"/><text x="${X(t)+2}" y="${H-6}" fill="#9db5b1" font-size="10">${new Intl.DateTimeFormat('en-AU',{timeZone:TZ,weekday:'short',day:'numeric'}).format(new Date(t+3600e3))}</text>`;}
+  const tn=Date.now();if(tn>t0&&tn<t1+6*3600e3)o+=`<line x1="${X(Math.min(tn,t1))}" x2="${X(Math.min(tn,t1))}" y1="${T}" y2="${T+ph}" stroke="#ffd38a"/>`;
+  o+=`<polyline fill="none" stroke="#5cc8ff" stroke-width="1.6" stroke-dasharray="5 3" points="${M.filter(m=>m[0]>=t0&&m[0]<=t1).map(m=>X(m[0]).toFixed(1)+','+Y(m[1]+off).toFixed(1)).join(' ')}"/>`;
+  o+=`<polyline fill="none" stroke="#ff8a7a" stroke-width="1.8" points="${P.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ')}"/>`;
+  return o+'</svg>';}
+async function getJSON(u){const r=await fetch(u+'?t='+Math.floor(Date.now()/6e5),{cache:'no-cache'});if(!r.ok)throw new Error('HTTP '+r.status);return{j:await r.json(),cached:!!r.headers.get('x-ft-cache')};}
+let done=false;
+async function render(){if(done)return;done=true;
+  let idx=null;try{idx=(await getJSON('data/sysgauges/index.json')).j;}catch(e){}
+  $('sgHead').innerHTML=`${G.filter(g=>!g.coastal).length} gauge(s) on the channel${G.some(g=>g.coastal)?' + '+G.filter(g=>g.coastal).length+' coastal/port station(s) near the mouth':''}. Model confidence: <b>${FT.SYSINFO.conf}</b> — ${esc(FT.CONF[FT.SYSINFO.conf][1])}.${idx&&idx.fetched?` Last fetched ${fT(idx.fetched*60e3)}.`:''}`;
+  $('sgList').innerHTML=G.map(g=>`<section class="card" id="sg-${g.id}"><h2 style="font-size:1rem">${esc(g.name)} <span class="mut" style="font-weight:400">· ${g.id}</span></h2>
+    <div class="mut">${g.coastal?'Coastal / port station near the mouth (not used as a model node)':`km ${g.km.toFixed(1)} ${esc(g.lineName||'')}`}${g.fit&&g.fit.HW?` · fitted lag HW ${Math.round(g.fit.HW.lag)} min${g.fit.LW&&g.fit.LW.n>=3?', LW '+Math.round(g.fit.LW.lag)+' min':''} after ${esc(B.SYS.port.name)}`:''} · <a href="https://www.bom.gov.au/fwo/${g.tab}/${g.tab}.${g.id}.tbl.shtml" target="_blank" rel="noopener">BoM table ↗</a></div>
+    <div class="sgBody"><span class="spin"></span> loading…</div></section>`).join('');
+  for(const g of G){const el=document.querySelector('#sg-'+g.id+' .sgBody');
+    try{const {j,cached}=await getJSON('data/sysgauges/'+g.id+'.json');const P=j.pts.map(p=>[p[0]*60e3,p[1]]);if(P.length<6){el.innerHTML='<span class="mut">No recent readings.</span>';continue;}
+      const t0=P[0][0],t1=P[P.length-1][0],h0=(t0-E0)/3.6e6,h1=(t1-E0)/3.6e6+6;
+      const pr=B.predictAt(g.coastal?0:g.km,h0,h1,{line:g.coastal?'M':(g.line||'M')});
+      const M=[];for(let h=h0;h<=h1;h+=0.1){const v=pr.curve(h);if(v!=null)M.push([E0+h*3.6e6,v]);}
+      const dif=P.map(p=>{const v=pr.curve((p[0]-E0)/3.6e6);return v==null?null:p[1]-v;}).filter(x=>x!=null).sort((a,b)=>a-b);const off=dif.length?dif[dif.length>>1]:0;
+      const ev=events(P),mx=pr.ext.map(e=>({t:E0+e.t*3.6e6,hi:e.hi}));const dh=[],dl=[];
+      for(const e of ev){let b=null;for(const m of mx){if(m.hi!==e.hi)continue;const d=(e.t-m.t)/60e3;if(Math.abs(d)<240&&(!b||Math.abs(d)<Math.abs(b)))b=d;}if(b!=null)(e.hi?dh:dl).push(b);}
+      const avg=a=>a.reduce((s,x)=>s+x,0)/a.length,fmt=a=>a.length?`${avg(a)>=0?'+':''}${Math.round(avg(a))} min (n=${a.length})`:'—';
+      const last=P[P.length-1],age=(Date.now()-last[0])/60e3;
+      el.innerHTML=`<div class="row" style="justify-content:space-between;margin:4px 0"><b style="font-size:1.1rem">${last[1].toFixed(2)} m</b><span class="mut">${fT(last[0])}${age>240?` <span style="color:#ff9b8a">(${Math.round(age/60)} h old)</span>`:''}${cached?' · offline copy':''}</span></div>`+chart(P,M,off)+
+        `<div class="mut" style="margin-top:4px"><span style="color:#ff8a7a">━ gauge</span> · <span style="color:#5cc8ff">┅ model</span> (${off>=0?'+':''}${off.toFixed(2)} m datum shift) · gauge vs model timing: highs ${fmt(dh)}, lows ${fmt(dl)}${g.coastal?'':' — + = gauge later than model'}</div>`;}
+    catch(e){el.innerHTML=`<span class="mut">Gauge data not available yet (${esc(e.message)}). It appears after the next routine update.</span>`;}}}
+FT.onTab.push(t=>{if(t==='gauges')render();});
+if(document.body.dataset.tab==='gauges')render();
+})();
 </script>
-<script>/* ===================== Catch log tab ===================== */
+<script type="text/ft-deferred">/* ===================== Catch log tab ===================== */
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);const FT=window.FT;
@@ -1535,7 +1795,8 @@ const PH=['New','Wax cres','1st qtr','Wax gib','Full','Wan gib','Last qtr','Wan 
 const phIdx=p=>Math.floor(((p+1/16)%1)*8);
 const LIGHTN={night:'Night',dawn:'Dawn',dusk:'Dusk',lowsun:'Low sun',day:'Day'};
 const TIDEN={runin:'Run-in start (0–2 h)',rising:'Rising',falling:'Falling',slack:'Slack',pool:'Pool level',none:'No tide'};
-const TSRCN={baffle:'Baffle model',marine:'Open-Meteo marine',none:'none'};
+const GEN=!!(window.BT&&BT.generic),SYS=FT.SYS||'baffle';const sysOf=sp=>(sp&&sp.sys)||'baffle';
+const TSRCN={baffle:GEN?'river tide model':'Baffle model',marine:'Open-Meteo marine',none:'none'};
 /* ---- time helpers (always AEST) ---- */
 const pad=n=>String(n).padStart(2,'0');
 function toLocalInput(ms){const d=new Date(ms+AEST);return `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;}
@@ -1546,7 +1807,8 @@ const fD=ms=>new Intl.DateTimeFormat('en-AU',{timeZone:TZ,weekday:'short',day:'n
 const dur=m=>m<60?Math.round(m)+' min':(m/60).toFixed(1)+' h';
 function scoreColor(s){const l=(x,a,b,c,d)=>c+(d-c)*(x-a)/(b-a);const h=s<50?l(s,0,50,210,45):l(s,50,100,45,135);return `hsl(${h},75%,${s<20?40:52}%)`;}
 /* ---- spots & privacy bands ---- */
-function bandOf(km,line){if(km==null)return null;const bk=Math.max(0,Math.min(38,Math.floor(km/2)*2));const E=line==='E'&&SCH.bandsE[bk];
+function bandOf(km,line,sp){if(km==null)return null;
+  if(sp&&sysOf(sp)!=='baffle'){const bk=Math.max(0,Math.floor(km/2)*2);const ln=line||'M';return{bk,ln,sy:sysOf(sp),label:`km ${bk}–${bk+2}, ${sp.lineName||(sysOf(sp)===SYS?BT.lineName(ln):sysOf(sp))}`};}const bk=Math.max(0,Math.min(38,Math.floor(km/2)*2));const E=line==='E'&&SCH.bandsE[bk];
   return{bk,ln:E?'E':'B',label:`km ${bk}–${bk+2}, ${E?SCH.bandsE[bk]:SCH.bands[bk]}`};}
 function distKm(a,b,c,d){const r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return 6371*Math.hypot(x,y);}
 function regionOf(lat,lng){let best=null;for(const g of SCH.regions){if(g[2]==null)continue;const d=distKm(lat,lng,g[2],g[3]);if(d<=30&&(!best||d<best.d))best={code:g[0],name:g[1],d};}
@@ -1554,12 +1816,17 @@ function regionOf(lat,lng){let best=null;for(const g of SCH.regions){if(g[2]==nu
 const regionName=c=>(SCH.regions.find(g=>g[0]===c)||['other','Elsewhere'])[1];
 function spotFromLatLng(lat,lng,acc,kind,name){let s=null;try{s=BT.snap(lat,lng);}catch(e){}
   const sp={kind,lat:+lat.toFixed(6),lng:+lng.toFixed(6),acc:acc!=null?Math.round(acc):null,name:name||'',km:null,line:null,offKm:s?+s.offKm.toFixed(2):null};
+  if(GEN){sp.sys=SYS;if(s&&s.offKm<=0.6){sp.km=+s.km.toFixed(2);sp.line=s.lineId;sp.lineName=s.line;}return sp;}
   if(s&&s.offKm<=0.6&&s.km<=BT.MAXKM){sp.km=+s.km.toFixed(2);sp.line=s.line==='Euleilah Creek'?'E':'B';}
   return sp;}
-function shareBand(sp){if(!sp)return null;if(sp.km!=null)return bandOf(sp.km,sp.line);const r=regionOf(sp.lat,sp.lng);return{bk:-1,rg:r.code,label:'Off-creek: '+r.name};}
-function nearLandmark(km){let b=null;for(const l of BT.LANDMARKS){const d=Math.abs(l.km-km);if(!b||d<b.d)b={n:l.name,d};}return b&&b.d<1.5?b.n:null;}
+function shareBand(sp){if(!sp)return null;if(sp.km!=null)return bandOf(sp.km,sp.line,sp);
+  if(sysOf(sp)!=='baffle'){const S=FT.sysById&&FT.sysById(sysOf(sp));return{bk:-1,rg:'other',sy:sysOf(sp),label:'Off-creek: near '+(S?S.name:sysOf(sp))};}const r=regionOf(sp.lat,sp.lng);return{bk:-1,rg:r.code,label:'Off-creek: '+r.name};}
+function nearLandmark(km,line){let b=null;for(const l of BT.LANDMARKS){if(GEN&&line&&l.line&&!BT.sameReach(km,line,l.km,l.line))continue;const d=Math.abs(l.km-km);if(!b||d<b.d)b={n:l.name,d};}return b&&b.d<1.5?b.n:null;}
 function spotDesc(sp){if(!sp)return '—';const nm=sp.name?esc(sp.name)+' · ':'';
-  if(sp.km!=null){let lm=nearLandmark(sp.km);if(lm&&lm===sp.name)lm=null;return `${nm}km ${sp.km.toFixed(1)} ${sp.line==='E'?'Euleilah Ck':'Baffle Ck'}${lm?' (near '+esc(lm)+')':''}`;}
+  const here=sysOf(sp)===SYS;
+  if(sp.km!=null){let lm=here?nearLandmark(sp.km,sp.line):null;if(lm&&lm===sp.name)lm=null;
+    const ln=sysOf(sp)==='baffle'?(sp.line==='E'?'Euleilah Ck':'Baffle Ck'):esc(sp.lineName||sp.line);return `${nm}km ${sp.km.toFixed(1)} ${ln}${lm?' (near '+esc(lm)+')':''}`;}
+  if(sysOf(sp)!=='baffle')return `${nm}off-channel near ${esc((FT.sysById&&FT.sysById(sysOf(sp))||{name:sysOf(sp)}).name)}${sp.kind==='gps'||sp.kind==='bite'?' ('+sp.lat.toFixed(3)+', '+sp.lng.toFixed(3)+')':''}`;
   return `${nm}off-creek — ${esc(regionOf(sp.lat,sp.lng).name)}${sp.kind==='gps'||sp.kind==='bite'?' ('+sp.lat.toFixed(3)+', '+sp.lng.toFixed(3)+')':''}`;}
 /* ---- storage ---- */
 let LOG=LS.get(K.log,[]);if(!Array.isArray(LOG))LOG=[];
@@ -1569,12 +1836,12 @@ const save=()=>LS.set(K.log,LOG);
 const activeS=()=>LOG.find(s=>s.end==null);
 const byId=id=>LOG.find(s=>s.id===id);
 /* ---- prediction context ---- */
-function computeCtx(s){if(!FT.biteCtx||!s.spot)return null;try{const t1=s.end!=null?s.end:Date.now();return FT.biteCtx(s.spot,s.start,Math.max(t1,s.start+Q));}catch(e){console.error('ctx',e);return null;}}
+function computeCtx(s){if(!FT.biteCtx||!s.spot)return null;if(sysOf(s.spot)!==SYS)return s.ctx||null; /* other river system: keep the context computed there */try{const t1=s.end!=null?s.end:Date.now();return FT.biteCtx(s.spot,s.start,Math.max(t1,s.start+Q));}catch(e){console.error('ctx',e);return null;}}
 function lightOf(alt,t){if(alt==null)return null;if(alt<-12)return 'night';if(alt<6)return new Date(t+AEST).getUTCHours()<12?'dawn':'dusk';if(alt<20)return 'lowsun';return 'day';}
 function tideOf(sl,src){if(src==='none'||!sl.tl)return 'none';if(sl.ri!=null&&sl.ri>=0&&sl.ri<120)return 'runin';if(/pool/i.test(sl.tl))return 'pool';if(sl.rising)return 'rising';if(/slack/i.test(sl.tl))return 'slack';return 'falling';}
 /* session -> analysis rows (one per 15-min slot) — same shape as community rows */
 function rowsOf(s,anon){const c=s.ctx;if(!c||!c.slots||!c.slots.length)return [];const b=shareBand(s.spot);const mp=phIdx(c.moon.phase);
-  const rows=c.slots.map(sl=>({anon,sid:s.id,t:sl.t,bk:b.bk,ln:b.ln||'',rg:b.rg||'',band:b.label,score:sl.score,tide:tideOf(sl,c.tideSrc),ri:sl.ri,light:lightOf(sl.alt,sl.t),sol:sl.sol,mp,ts:c.tideSrc,wind:sl.wind,dp3:sl.dp3,bites:0,fish:0,mj:0,kept:0,ml:null,sp:[],bait:s.bait&&s.bait.cat||''}));
+  const rows=c.slots.map(sl=>({anon,sid:s.id,t:sl.t,bk:b.bk,ln:b.ln||'',rg:b.rg||'',sy:b.sy||'baffle',band:b.label,score:sl.score,tide:tideOf(sl,c.tideSrc),ri:sl.ri,light:lightOf(sl.alt,sl.t),sol:sl.sol,mp,ts:c.tideSrc,wind:sl.wind,dp3:sl.dp3,bites:0,fish:0,mj:0,kept:0,ml:null,sp:[],bait:s.bait&&s.bait.cat||''}));
   for(const x of s.catches||[]){let i=Math.floor((x.t-rows[0].t)/Q);i=Math.max(0,Math.min(rows.length-1,i));const r=rows[i];const n=Math.max(1,Math.min(20,x.n|0||1));
     r.bites+=n;if(x.fate!=='bite'){r.fish+=n;if(x.sp==='MJ')r.mj+=n;if(x.fate==='kept')r.kept+=n;if(x.len)r.ml=Math.max(r.ml||0,x.len);}if(!r.sp.includes(x.sp))r.sp.push(x.sp);}
   return rows;}
@@ -1586,9 +1853,9 @@ function fillSelects(){
   fillSpotSel();}
 function fillSpotSel(){const L=BT.LANDMARKS,mine=L.map((l,i)=>[l,i]).filter(x=>x[0].custom),bi=L.map((l,i)=>[l,i]).filter(x=>!x[0].custom);
   const opt=([l,i])=>`<option value="L${i}">${l.custom?'★ ':''}${esc(l.name)} (${l.km.toFixed(1)} km)</option>`;
-  $('cSpotSel').innerHTML='<option value="">— pick a spot —</option>'+(mine.length?'<optgroup label="My spots">'+mine.map(opt).join('')+'</optgroup>':'')+'<optgroup label="Baffle Creek landmarks">'+bi.map(opt).join('')+'</optgroup>'+
-    '<optgroup label="Off Baffle Creek (broad area)">'+SCH.regions.filter(g=>g[2]!=null).map(g=>`<option value="R${g[0]}">${esc(g[1])}</option>`).join('')+'</optgroup><option value="cur" hidden>current</option>';}
-function landmarkSpot(l){const ll=FT.spots?FT.spots.latLng(l):BT.pointAtKm(l.km);const sp=spotFromLatLng(ll[0],ll[1],null,'landmark',l.name);sp.km=l.km;sp.line=l.line||(/Hills Rd/.test(l.base||l.name)&&l.km>16.4?'E':'B');sp.spotId=l.id;return sp;}
+  $('cSpotSel').innerHTML='<option value="">— pick a spot —</option>'+(mine.length?'<optgroup label="My spots">'+mine.map(opt).join('')+'</optgroup>':'')+'<optgroup label="'+esc(GEN?FT.SYSNAME:'Baffle Creek')+' landmarks">'+bi.map(opt).join('')+'</optgroup>'+
+    (GEN?'':'<optgroup label="Off Baffle Creek (broad area)">'+SCH.regions.filter(g=>g[2]!=null).map(g=>`<option value="R${g[0]}">${esc(g[1])}</option>`).join('')+'</optgroup>')+'<option value="cur" hidden>current</option>';}
+function landmarkSpot(l){const ll=FT.spots?FT.spots.latLng(l):BT.pointAtKm(l.km);const sp=spotFromLatLng(ll[0],ll[1],null,'landmark',l.name);sp.km=l.km;sp.line=l.line||(GEN?'M':(/Hills Rd/.test(l.base||l.name)&&l.km>16.4?'E':'B'));if(GEN)sp.lineName=BT.lineName(sp.line);sp.spotId=l.id;return sp;}
 /* ---- form ---- */
 let F=null; // session being edited
 function openForm(s,mode){F=JSON.parse(JSON.stringify(s));F._mode=mode;$('cFormCard').hidden=false;
@@ -1602,7 +1869,7 @@ function openForm(s,mode){F=JSON.parse(JSON.stringify(s));F._mode=mode;$('cFormC
 function closeForm(){F=null;$('cFormCard').hidden=true;}
 function spotUI(){const sp=F&&F.spot;$('cSpotSel').value=sp?(sp.kind==='landmark'?((i=>i>=0?'L'+i:'cur')(BT.LANDMARKS.findIndex(l=>sp.spotId?l.id===sp.spotId:Math.abs(l.km-sp.km)<0.01))):sp.kind==='region'?'R'+sp.rg:'cur'):'';
   const b=shareBand(sp);
-  $('cSpotInfo').innerHTML=sp?`📍 <b>${spotDesc(sp)}</b>${sp.acc!=null?' ±'+sp.acc+' m':''}<br>🔒 Shared as: <b>${esc(b.label)}</b>${sp.km==null&&sp.offKm!=null?` <span class="mut">(${sp.offKm.toFixed(1)} km from the Baffle channel — not snapped)</span>`:''}`:'Pick a spot: 📡 GPS (snaps to the creek), a landmark, the Bite-times spot, or a broad off-creek area.';}
+  $('cSpotInfo').innerHTML=sp?`📍 <b>${spotDesc(sp)}</b>${sp.acc!=null?' ±'+sp.acc+' m':''}<br>🔒 Shared as: <b>${esc(b.label)}</b>${sp.km==null&&sp.offKm!=null?` <span class="mut">(${sp.offKm.toFixed(1)} km from the ${GEN?esc(FT.SYSNAME):'Baffle'} channel — not snapped)</span>`:''}`:'Pick a spot: 📡 GPS (snaps to the creek), a landmark, the Bite-times spot, or a broad off-creek area.';}
 function catchUI(){const L=(F.catches||[]).slice().sort((a,b)=>a.t-b.t);
   $('cCatchList').innerHTML=L.length?L.map(x=>`<div class="citem"><div class="ci">🐟 <b>${x.n>1?x.n+'× ':''}${esc(SPN[x.sp]||x.sp)}</b>${x.len?' '+x.len+' cm':''} · ${esc(FATEN[x.fate]||x.fate)} <span class="mut">${fT(x.t)}${x.note?' · '+esc(x.note):''}</span></div><button class="sm" data-del="${x.id}">✕</button></div>`).join('')
     :`<div class="cempty">${$('cNoBites').checked?'No bites — that’s useful data too.':'No bites/catches added yet.'}</div>`;
@@ -1644,7 +1911,8 @@ function gps(then,orElse){const m=F?$('cFormMsg'):null;
   navigator.geolocation.getCurrentPosition(p=>{if(m)m.textContent='';setSpot(spotFromLatLng(p.coords.latitude,p.coords.longitude,p.coords.accuracy,'gps'));then&&then();},
     e=>{if(m)m.textContent='GPS failed: '+e.message;if(orElse)orElse();else if(!m)alert('GPS failed: '+e.message);},{enableHighAccuracy:true,timeout:15000,maximumAge:60000});}
 function biteSpot(){const L=FT.biteLoc&&FT.biteLoc();if(!L)return;
-  if(L.km!=null){const p=BT.pointAtKm(L.km);const sp=spotFromLatLng(p[0],p[1],null,'bite',L.name.replace(/ — Baffle Ck$/,''));if(sp.km==null){sp.km=L.km;sp.line='B';}setSpot(sp);}
+  if(L.km!=null&&GEN){const p=BT.pointOnLine(L.km,L.line||'M');const sp=spotFromLatLng(p[0],p[1],null,'bite',L.name.replace(' — '+FT.SYSSHORT,''));sp.km=+L.km.toFixed(2);sp.line=L.line||'M';sp.lineName=BT.lineName(sp.line);setSpot(sp);}
+  else if(L.km!=null){const p=BT.pointAtKm(L.km);const sp=spotFromLatLng(p[0],p[1],null,'bite',L.name.replace(/ — Baffle Ck$/,''));if(sp.km==null){sp.km=L.km;sp.line='B';}setSpot(sp);}
   else setSpot(spotFromLatLng(L.lat,L.lng,null,'bite',L.name));}
 function renderActive(){const s=activeS();
   $('cStartRow').style.display=s?'none':'';
@@ -1682,7 +1950,7 @@ async function anonId(){const h=await sha('mbj-anon:'+SH.k);return (isTest()?'TE
 const sidOf=async tok=>(await sha('mbj-sid:'+tok)).slice(0,12);
 async function message(s){const rows=rowsOf(s,'');if(!rows.length)return null;const b=shareBand(s.spot);const T=SCH.tide,LI=SCH.light,SO=SCH.sol;
   const sid=await sidOf(s.tok);
-  const m={v:1,app:'mbj',anon:await anonId(),sid,bk:b.bk,ln:b.ln||'B',rg:b.rg||'',ts:s.ctx.tideSrc,mp:rows[0].mp,bt:s.bait&&s.bait.cat||'',s0:Math.round(rows[0].t/1000),
+  const m={v:1,app:'mbj',anon:await anonId(),sid,bk:b.bk,ln:b.ln||'B',rg:b.rg||'',...(b.sy?{sy:b.sy}:{}),ts:s.ctx.tideSrc,mp:rows[0].mp,bt:s.bait&&s.bait.cat||'',s0:Math.round(rows[0].t/1000),
     sl:rows.map(r=>[r.score,T.indexOf(r.tide),r.ri,LI.indexOf(r.light),SO.indexOf(r.sol),r.wind,r.dp3,r.bites,r.fish,r.mj,r.kept,r.ml,r.sp.join(';')])};
   if(isTest())m.test=1;return{m,sid};}
 async function shareSession(s){if(!s.ctx)return;const r=await message(s);if(!r)return;s.share={st:'queued',sid:r.sid,at:Date.now(),tries:(s.share&&s.share.tries||0)};if(isTest())s.test=1;
@@ -1707,7 +1975,7 @@ function bucketOf(v,r){switch(v){
   case 'light':return SCH.light.indexOf(r.light);
   case 'moon':return r.mp;
   case 'sol':return SCH.sol.indexOf(r.sol);
-  case 'stretch':return r.bk>=0?r.bk/2+(r.ln==='E'?100:0):'R'+r.rg;}}
+  case 'stretch':if(r.sy&&r.sy!=="baffle"){return 'K'+r.sy+'|'+r.band;}return r.bk>=0?r.bk/2+(r.ln==='E'?100:0):'R'+r.rg;}}
 function bucketLabels(v,rows){switch(v){
   case 'score':return [[0,'0–19'],[1,'20–39'],[2,'40–59'],[3,'60–79'],[4,'80–100']];
   case 'runin':return [[0,'−1–0 h'],[1,'0–1 h'],[2,'1–2 h'],[3,'2–4 h'],[4,'4–6 h'],[5,'6 h+'],[6,'no tide']];
@@ -1715,7 +1983,7 @@ function bucketLabels(v,rows){switch(v){
   case 'moon':return PH.map((p,i)=>[i,p]);
   case 'sol':return [[0,'Major'],[1,'Minor'],[2,'None']];
   case 'stretch':{const ks=[...new Set(rows.map(r=>bucketOf('stretch',r)))];ks.sort((a,b)=>(typeof a==='string')-(typeof b==='string')||(typeof a==='string'?a.localeCompare(b):a-b));
-    return ks.map(k=>[k,typeof k==='string'?regionName(k.slice(1)).replace(/ \(.*\)/,'')+' (off)':(k>=100?'Eu ':'')+'km '+(k%100)*2+'–'+((k%100)*2+2)]);}}}
+    return ks.map(k=>[k,typeof k==='string'?(k[0]==='K'?(k.split('|')[0].slice(1)===SYS?'':((FT.sysById&&FT.sysById(k.split('|')[0].slice(1))||{}).name||'')+': ')+k.split('|').slice(1).join('|').replace(/^Off-creek: /,'off '):regionName(k.slice(1)).replace(/ \(.*\)/,'')+' (off)'):(k>=100?'Eu ':'')+'km '+(k%100)*2+'–'+((k%100)*2+2)]);}}}
 function aggregate(rows,v){const m=new Map();for(const r of rows){const k=bucketOf(v,r);if(k==null||k===-1)continue;let a=m.get(k);if(!a)m.set(k,a={h:0,bites:0,fish:0,mj:0,ss:new Set(),an:new Set(),sc:0});
   a.h+=0.25;a.bites+=r.bites;a.fish+=r.fish;a.mj+=r.mj;a.ss.add(r.anon+'|'+r.sid);a.an.add(r.anon);a.sc+=r.score;}return m;}
 function barChart(rows,v,opts){const labs=bucketLabels(v,rows),A=aggregate(rows,v);const W=420,H=230,L=34,R=6,T=24,B=50,pw=W-L-R,ph=H-T-B;
@@ -1768,7 +2036,7 @@ async function loadCom(force){if(!force&&COM&&Date.now()-comAt<5*60e3){renderCom
     const A=parseCSV(txt);const H=A.shift()||[];const ix=k=>H.indexOf(k);const num=(x)=>x===''||x==null?null:+x;
     COM={cache:!!r.headers.get('x-ft-cache'),rows:A.filter(a=>a.length>=H.length-1).map(a=>{const g=k=>a[ix(k)];const t=Date.parse(g('slot_start'));
       return{anon:g('anon'),sid:g('session'),t,bk:g('band_km')===''?-1:+g('band_km'),ln:g('line')||'',rg:g('region')||'',band:g('band'),score:+g('score'),tide:g('tide'),ri:num(g('min_from_runin')),light:g('light'),sol:g('solunar'),
-        mp:Math.max(0,PH.findIndex(p=>p===g('moon_phase'))),ts:g('tide_source'),wind:num(g('wind_kmh')),dp3:num(g('dp3_hpa')),bites:+g('bites')||0,fish:+g('fish')||0,mj:+g('mj')||0,kept:+g('kept')||0,ml:num(g('max_len_cm')),sp:(g('species')||'').split(';').filter(Boolean),bait:g('bait')};}).filter(r=>!isNaN(r.t))};
+        mp:Math.max(0,PH.findIndex(p=>p===g('moon_phase'))),ts:g('tide_source'),wind:num(g('wind_kmh')),dp3:num(g('dp3_hpa')),bites:+g('bites')||0,fish:+g('fish')||0,mj:+g('mj')||0,kept:+g('kept')||0,ml:num(g('max_len_cm')),sp:(g('species')||'').split(';').filter(Boolean),bait:g('bait'),sy:g('system')||'baffle'};}).filter(r=>!isNaN(r.t))};
     comAt=Date.now();}
   catch(e){if(!COM){$('cComHead').innerHTML=`<div class="notice err">Couldn’t load community data (${esc(e.message)}). Connect once to cache it.</div>`;return;}}
   // mark my shared sessions that made it into the table; resend if lost
@@ -1777,19 +2045,20 @@ async function loadCom(force){if(!force&&COM&&Date.now()-comAt<5*60e3){renderCom
     else if(sh.st==='published'||(sh.st==='sent'&&Date.now()-sh.at>6*3600e3&&(sh.tries||0)<3&&Date.now()-s.end<10*864e5)){if(SH.on){await shareSession(s);ch=true;}}}
   if(ch){save();flush();}
   renderCom();}
-function renderCom(){if(!COM)return;const rows=COM.rows.filter(r=>isTest()||!/^TEST/.test(r.anon));
-  const tests=COM.rows.length-rows.length;
+function renderCom(){if(!COM)return;const all=LS.get('mbj_comall',0);const rows0=COM.rows.filter(r=>isTest()||!/^TEST/.test(r.anon));const rows=all?rows0:rows0.filter(r=>(r.sy||'baffle')===SYS);
+  const tests=COM.rows.length-rows0.length;
   $('cComSum').textContent=rows.length?`· ${new Set(rows.map(r=>r.anon)).size} angler(s)`:'';
-  $('cComHead').innerHTML=COM.cache?'<div class="notice">📦 Offline copy of the community table.</div>':'';
+  $('cComHead').innerHTML=(COM.cache?'<div class="notice">📦 Offline copy of the community table.</div>':'')+`<div class="row" style="margin:4px 0"><span class="mut">Show:</span> <button class="sm${all?'':' pri'}" id="cComThis">${esc(FT.SYSSHORT||'Baffle Ck')} only</button><button class="sm${all?' pri':''}" id="cComAll">all river systems (${new Set(rows0.map(r=>r.sy||'baffle')).size})</button></div>`;
+  $('cComThis').onclick=()=>{LS.set('mbj_comall',0);renderCom();};$('cComAll').onclick=()=>{LS.set('mbj_comall',1);renderCom();};
   renderCharts(rows,'com',$('cComViews'),$('cComCharts'),true);
   $('cComNote').innerHTML=`Anonymous sessions shared by app users (creek stretch only), validated & merged hourly into <a href="https://github.com/JonathanAgronica/fishing-apps/blob/main/data/catches.csv" target="_blank" rel="noopener">data/catches.csv</a>. Rates use 15-minute slots of time actually fished, so “no bites” sessions count. Faded bars = under 1 h of effort — treat as anecdotes.${tests?` (${tests} TEST rows hidden)`:''}`;
   shareInfo();renderList();}
 /* ---- CSV export / import (personal, full detail incl. GPS — stays on the phone) ---- */
-const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json','spot_id','color'];
+const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json','spot_id','color','system'];
 function slotAt(s,t){const sl=s.ctx&&s.ctx.slots;if(!sl||!sl.length)return null;let i=Math.floor((t-sl[0].t)/Q);i=Math.max(0,Math.min(sl.length-1,i));return sl[i];}
 function exportCSV(){const out=[COLS.join(',')];
   for(const s of LOG.filter(s=>s.end!=null).sort((a,b)=>a.start-b.start)){const sp=s.spot||{},b=shareBand(s.spot),c=s.ctx,sl=c?c.slots:[];
-    const base={session_id:s.id,start_aest:isoA(s.start),end_aest:isoA(s.end),spot_kind:sp.kind,spot_name:sp.name,lat:sp.lat,lng:sp.lng,gps_acc_m:sp.acc,creek_km:sp.km,creek_line:sp.line==='E'?'Euleilah':sp.km!=null?'Baffle':'',share_band:b?b.label:'',bait_type:s.bait&&s.bait.cat,bait:s.bait&&s.bait.txt,
+    const base={session_id:s.id,start_aest:isoA(s.start),end_aest:isoA(s.end),spot_kind:sp.kind,spot_name:sp.name,lat:sp.lat,lng:sp.lng,gps_acc_m:sp.acc,creek_km:sp.km,creek_line:sysOf(sp)!=='baffle'?(sp.km!=null?(sp.lineName||sp.line):''):sp.line==='E'?'Euleilah':sp.km!=null?'Baffle':'',share_band:b?b.label:'',system:sysOf(sp),bait_type:s.bait&&s.bait.cat,bait:s.bait&&s.bait.txt,
       moon_phase:c?PH[phIdx(c.moon.phase)]:'',moon_illum:c?c.moon.illum:'',tide_source:c?c.tideSrc:''};
     const ctxCols=x=>x?{pred_score:x.score,tide_stage:tideOf(x,c.tideSrc),min_from_runin:x.ri,light:lightOf(x.alt,x.t),solunar:x.sol,wind_kmh:x.wind,pressure_hpa:x.p,pressure_3h_hpa:x.dp3,cloud_pct:x.cloud,sst_c:x.sst}:{};
     const rec=o=>COLS.map(k=>csvCell(o[k])).join(',');
@@ -1797,7 +2066,7 @@ function exportCSV(){const out=[COLS.join(',')];
       shared:s.share&&s.share.st||'',ctx_json:c?JSON.stringify(c):''}));
     for(const x of (s.catches||[]).slice().sort((a,b)=>a.t-b.t))out.push(rec({...base,...ctxCols(slotAt(s,x.t)),record:'catch',event_id:x.id,time_aest:isoA(x.t),species:SPN[x.sp]||x.sp,count:x.n,length_cm:x.len,fate:x.fate,note:x.note}));}
   if(FT.spots){const X=FT.spots.exportData();const rec=o=>COLS.map(k=>csvCell(o[k])).join(',');
-    for(const c of X.spots)out.push(rec({record:'spot',spot_id:c.id,spot_kind:'custom',spot_name:c.name,lat:c.lat,lng:c.lng,creek_km:c.km,creek_line:c.line==='E'?'Euleilah':'Baffle',note:c.note,color:c.color,start_aest:isoA(c.created||Date.now())}));
+    for(const c of X.spots)out.push(rec({record:'spot',spot_id:c.id,spot_kind:'custom',spot_name:c.name,lat:c.lat,lng:c.lng,creek_km:c.km,creek_line:(c.sys||'baffle')!=='baffle'?c.line:c.line==='E'?'Euleilah':'Baffle',note:c.note,color:c.color,system:c.sys||'baffle',start_aest:isoA(c.created||Date.now())}));
     for(const [k,v] of Object.entries(X.alias))out.push(rec({record:'alias',spot_id:k,spot_name:v}));}
   const blob=new Blob([out.join('\n')+'\n'],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-jacks-catch-log-'+toLocalInput(Date.now()).slice(0,10)+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
   $('cIoMsg').textContent=`Exported ${LOG.filter(s=>s.end!=null).length} sessions.`;window.__MBJ_LAST_EXPORT=out.join('\n');}
@@ -1805,13 +2074,16 @@ function importCSV(txt){const A=parseCSV(txt);const H=A.shift()||[];if(!H.includ
   const g=(a,k)=>{const i=H.indexOf(k);return i<0?'':a[i]||'';};const spCode=n=>{const f=SCH.species.find(([c,l])=>l===n||c===n);return f?f[0]:'OT';};
   const S=new Map();let added=0,skipped=0,spots=0;
   if(FT.spots){const X={spots:[],alias:{}};for(const a of A){const r=g(a,'record');
-      if(r==='spot'){const lat=+g(a,'lat'),lng=+g(a,'lng');if(!isNaN(lat)&&!isNaN(lng))X.spots.push({id:g(a,'spot_id'),name:g(a,'spot_name'),lat,lng,note:g(a,'note'),color:g(a,'color'),created:fromLocalInput(g(a,'start_aest'))});}
+      if(r==='spot'){const lat=+g(a,'lat'),lng=+g(a,'lng');if(!isNaN(lat)&&!isNaN(lng))X.spots.push(Object.assign({id:g(a,'spot_id'),name:g(a,'spot_name'),lat,lng,note:g(a,'note'),color:g(a,'color'),created:fromLocalInput(g(a,'start_aest'))},(g(a,'system')||'baffle')!=='baffle'?{sys:g(a,'system'),km:+g(a,'creek_km')||0,line:g(a,'creek_line')||'M'}:{}));}
       else if(r==='alias')X.alias[g(a,'spot_id')]=g(a,'spot_name');}
     if(X.spots.length||Object.keys(X.alias).length)spots=FT.spots.importData(X);}
   for(const a of A){const id=g(a,'session_id').replace(/[^\w-]/g,'').slice(0,24);if(!id)continue;
     if(g(a,'record')==='session'){const lat=+g(a,'lat'),lng=+g(a,'lng');if(isNaN(lat)||isNaN(lng)){skipped++;continue;}
       let sp=spotFromLatLng(lat,lng,g(a,'gps_acc_m')?+g(a,'gps_acc_m'):null,g(a,'spot_kind')||'gps',g(a,'spot_name').slice(0,80));
-      if(g(a,'creek_km')!==''&&sp.km==null){sp.km=+g(a,'creek_km');sp.line=g(a,'creek_line')==='Euleilah'?'E':'B';}
+      const sy=g(a,'system')||'baffle';
+      if(sy!==SYS){sp={kind:g(a,'spot_kind')||'gps',lat,lng,acc:g(a,'gps_acc_m')?+g(a,'gps_acc_m'):null,name:g(a,'spot_name').slice(0,80),km:g(a,'creek_km')!==''?+g(a,'creek_km'):null,line:null,offKm:null};
+        if(sy!=='baffle'){sp.sys=sy;sp.lineName=g(a,'creek_line');sp.line=null;}else if(sp.km!=null)sp.line=g(a,'creek_line')==='Euleilah'?'E':'B';}
+      else if(g(a,'creek_km')!==''&&sp.km==null){sp.km=+g(a,'creek_km');sp.line=GEN?'M':(g(a,'creek_line')==='Euleilah'?'E':'B');}
       let ctx=null;try{ctx=g(a,'ctx_json')?JSON.parse(g(a,'ctx_json')):null;if(ctx&&!Array.isArray(ctx.slots))ctx=null;}catch(e){}
       S.set(id,{id,tok:rid(12),v:1,start:fromLocalInput(g(a,'start_aest')),end:fromLocalInput(g(a,'end_aest')),spot:sp,bait:{cat:SCH.bait.some(b=>b[0]===g(a,'bait_type'))?g(a,'bait_type'):'',txt:g(a,'bait').slice(0,120)},note:g(a,'note').slice(0,500),noBites:g(a,'no_bites')==='1',catches:[],ctx,share:{st:'local'}});}}
   for(const a of A){if(g(a,'record')!=='catch')continue;const s=S.get(g(a,'session_id'));if(!s)continue;const t=fromLocalInput(g(a,'time_aest'));if(t==null)continue;
@@ -1856,7 +2128,7 @@ function init(){fillSelects();
 try{init();}catch(e){console.error('catch log init',e);}
 })();
 </script>
-<script>/* ===================== Map tab ===================== */
+<script type="text/ft-deferred">/* ===================== Map tab ===================== */
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);const FT=window.FT,B=window.BT,D=window.BAFFLE_DATA,S=FT.spots;
@@ -1870,9 +2142,11 @@ const dayKey=ms=>new Intl.DateTimeFormat('en-CA',{timeZone:TZ}).format(new Date(
 const fWhen=h=>{const ms=hToMs(h);const today=dayKey(Date.now())===dayKey(ms),tom=dayKey(Date.now()+864e5)===dayKey(ms);
   return (today?'':tom?'tomorrow ':new Intl.DateTimeFormat('en-AU',{timeZone:TZ,weekday:'short'}).format(new Date(ms))+' ')+fT(ms);};
 function scoreColor(s){const l=(x,a,b,c,d)=>c+(d-c)*(x-a)/(b-a);const h=s<50?l(s,0,50,210,45):l(s,50,100,45,135);return `hsl(${h},75%,${s<20?40:52}%)`;}
-let LF=null,map=null,base={},creekG,tickG,lmG,myG,colG,meM=null,meC=null,watch=null,addMode=false,ready=false,loading=null;
+let LF=null,map=null,base={},sysG,creekG,tickG,lmG,myG,colG,meM=null,meC=null,watch=null,addMode=false,ready=false,loading=null;
 const markers=new Map();
-const GAUGES=[{name:'Essendean Bridge gauge 039267',km:35.25,line:'B'},{name:'Hills Rd gauge 539135 (Euleilah Ck)',km:25.24,line:'E'},{name:'Winfield (MSQ tide place)',km:3.4,line:'B'}];
+const GEN=!!B.generic;
+const GAUGES=GEN?(B.SYS.gauges||[]).filter(g=>!g.coastal&&g.km!=null).map(g=>({name:g.name+' (gauge '+g.id+')',km:g.km,line:g.line})):[{name:'Essendean Bridge gauge 039267',km:35.25,line:'B'},{name:'Hills Rd gauge 539135 (Euleilah Ck)',km:25.24,line:'E'},{name:'Winfield (MSQ tide place)',km:3.4,line:'B'}];
+const LL=GEN?B.LINES.map(L=>({id:L.id,a:L.id==='M'?0:L.j,b:L.j+L.len,coords:L.coords})):null; /* generic channel list */
 function hint(html,ms){const h=$('mHint');if(!html){h.style.display='none';return;}h.innerHTML=html;h.style.display='block';clearTimeout(hint.t);if(ms)hint.t=setTimeout(()=>h.style.display='none',ms);}
 /* ---- lazy-load vendored Leaflet (precached by the service worker → works offline) ---- */
 function loadLeaflet(){if(loading)return loading;
@@ -1889,14 +2163,20 @@ async function init(){if(ready)return;try{await loadLeaflet();}catch(e){$('mMap'
   map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
   creekG=LF.layerGroup().addTo(map);colG=LF.layerGroup().addTo(map);tickG=LF.layerGroup().addTo(map);const labG=LF.layerGroup().addTo(map);lmG=LF.layerGroup().addTo(map);myG=LF.layerGroup().addTo(map);
   // creek centreline (always drawn — works offline without tiles)
-  const main=D.main.slice(0),eu=D.euleilah.slice(0);
-  for(const ln of [main,eu]){LF.polyline(ln,{color:'#03141a',weight:7,opacity:.75,interactive:false}).addTo(creekG);LF.polyline(ln,{color:'#5cc8ff',weight:3.5,opacity:.95,interactive:false}).addTo(creekG);}
+  sysG=LF.layerGroup().addTo(map);
+  const main=GEN?[]:D.main.slice(0),eu=GEN?[]:D.euleilah.slice(0);
+  for(const ln of (GEN?LL.map(L=>L.coords):[main,eu])){LF.polyline(ln,{color:'#03141a',weight:7,opacity:.75,interactive:false}).addTo(creekG);LF.polyline(ln,{color:'#5cc8ff',weight:3.5,opacity:.95,interactive:false}).addTo(creekG);}
   // km ticks: every 1 km (dot), labels every 2 km
+  if(GEN){for(const L of LL)for(let k=Math.ceil(L.a);k<=Math.floor(L.b);k++){if(L.id!=='M'&&k<=L.a+0.2)continue;const p=S.pointAt(k,L.id);LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
+    if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}
+    map.fitBounds(LF.latLngBounds(LL.flatMap(L=>L.coords)).pad(0.05));}
+  else{
   for(let k=0;k<=B.MAXKM;k++){const p=S.pointAt(k,'B');LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
     if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}
   for(let k=Math.ceil(D.euleilahJunctionKm);k<=Math.floor(S.EUMAX);k++){const p=S.pointAt(k,'E');LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
     if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}
-  const fit=[];for(let k=0;k<=B.MAXKM;k+=0.5)fit.push(S.pointAt(k,'B'));map.fitBounds(LF.latLngBounds(fit.concat(eu)).pad(0.03));
+  const fit=[];for(let k=0;k<=B.MAXKM;k+=0.5)fit.push(S.pointAt(k,'B'));map.fitBounds(LF.latLngBounds(fit.concat(eu)).pad(0.03));}
+  drawSystems();
   setLayer(pref.layer);drawSpots();
   map.on('contextmenu',e=>addAt(e.latlng));
   map.on('click',e=>{if(addMode){addAt(e.latlng);setAdd(false);}});
@@ -1913,22 +2193,22 @@ function drawSpots(){if(!map)return;lmG.clearLayers();myG.clearLayers();markers.
   for(const l of S.all()){if(l.custom){const m=LF.marker([l.lat,l.lng],{icon:pinIcon(l.color),draggable:true,title:l.name,autoPan:true,zIndexOffset:500}).addTo(myG);
       m.bindTooltip(esc(l.name),{direction:'top',offset:[0,-22]});
       m.on('click',()=>openSpot(S.get(l.id),m));
-      m.on('dragend',()=>{const p=m.getLatLng();try{const u=S.update(l.id,{lat:p.lat,lng:p.lng});hint(`📍 <b>${esc(u.name)}</b> moved → km ${u.km.toFixed(2)} ${u.line==='E'?'Euleilah Ck':'Baffle Ck'}`,4000);}catch(e){m.setLatLng([l.lat,l.lng]);hint('⚠ '+esc(e.message),4000);}});
+      m.on('dragend',()=>{const p=m.getLatLng();try{const u=S.update(l.id,{lat:p.lat,lng:p.lng});hint(`📍 <b>${esc(u.name)}</b> moved → km ${u.km.toFixed(2)} ${S.lineLabel(u.line)}`,4000);}catch(e){m.setLatLng([l.lat,l.lng]);hint('⚠ '+esc(e.message),4000);}});
       markers.set(l.id,m);}
     else{const m=LF.circleMarker(S.latLng(l),{radius:7,color:'#fff',weight:2,fillColor:l.alias?'#ffd38a':'#0b3b3a',fillOpacity:.95}).addTo(lmG);
       m.bindTooltip(esc(l.name),{direction:'top',offset:[0,-6]});m.on('click',()=>openSpot(S.get(l.id),m));markers.set(l.id,m);}}}
 /* ---- popup: next high / low / run-in start + bite score ---- */
-function spotInfo(l){const o=FT.baffleOpts?FT.baffleOpts():{};const nh=msToH(Date.now());
+function spotInfo(l){const o=Object.assign({},FT.baffleOpts?FT.baffleOpts():{},GEN?{line:l.line||'M'}:{});const nh=msToH(Date.now());
   const P=B.predictAt(l.km,nh-3,nh+30,o);const ext=P.ext.filter(e=>!e.weak);
   const hi=ext.find(e=>e.hi&&e.t>nh),lo=ext.find(e=>!e.hi&&e.t>nh);
   const R=B.runInStarts(l.km,nh-3,nh+30,o);const cur=R.filter(r=>r.t<=nh&&nh-r.t<=2).pop(),nxt=R.find(r=>r.t>nh);
-  let sc=null;try{const ll=S.latLng(l);const c=FT.biteCtx({lat:ll[0],lng:ll[1],km:l.km},Date.now(),Date.now()+Q);sc=c&&c.slots[0];}catch(e){}
+  let sc=null;try{const ll=S.latLng(l);const c=FT.biteCtx({lat:ll[0],lng:ll[1],km:l.km,line:l.line,sys:FT.SYS},Date.now(),Date.now()+Q);sc=c&&c.slots[0];}catch(e){}
   const v=P.curve(nh),v2=P.curve(nh+0.25);
   return{P,hi,lo,cur,nxt,sc,now:v,trend:v==null||v2==null?null:v2>v+0.005?'rising':v2<v-0.005?'falling':'slack',cal:P.cal};}
 function popHtml(l){const I=spotInfo(l);const u=x=>` <span class="mut">±${Math.round(x)}′</span>`;
   const tag=l.custom?'<span class="tag mine">my spot</span>':l.alias?`<span class="tag">renamed · ${esc(l.base)}</span>`:'';
   return `<div class="mpop" data-km="${l.km}"><h3>${esc(l.name)} ${tag}</h3>
-   <div class="mut">km ${l.km.toFixed(2)} ${l.line==='E'?'Euleilah Ck':'Baffle Ck'}${l.custom&&l.offKm>0.05?` · pin ${Math.round(l.offKm*1000)} m off centreline`:''}${l.note?'<br>📝 '+esc(l.note):''}</div>
+   <div class="mut">km ${l.km.toFixed(2)} ${S.lineLabel(l.line)}${l.custom&&l.offKm>0.05?` · pin ${Math.round(l.offKm*1000)} m off centreline`:''}${l.note?'<br>📝 '+esc(l.note):''}</div>
    <table>
     <tr><td>🔺 Next high</td><td class="mhi"><b>${I.hi?fWhen(I.hi.t):'—'}</b>${I.hi?u(I.hi.u)+` <span class="mut">${I.hi.h.toFixed(2)} m</span>`:''}</td></tr>
     <tr><td>🔻 Next low</td><td class="mlo"><b>${I.lo?fWhen(I.lo.t):'—'}</b>${I.lo?u(I.lo.u)+` <span class="mut">${I.lo.h.toFixed(2)} m${I.cal.trunc?' pool':''}</span>`:''}</td></tr>
@@ -1942,10 +2222,10 @@ let openM=null;
 function openSpot(l,m){if(!l)return;openM=m;m.unbindPopup();m.bindPopup(popHtml(l),{maxWidth:300,autoPanPadding:[20,60]}).openPopup();wirePopup(l,m);}
 function wirePopup(l,m){const el=m.getPopup().getElement();if(!el)return;
   el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>action(b.dataset.a,l,m,el));}
-function goBite(l){const ll=S.latLng(l);FT.biteSetLoc({name:l.name+' — Baffle Ck',lat:ll[0],lng:ll[1],tz:TZ,baffleKm:l.km});FT.showTab('bite');}
+function goBite(l){const ll=S.latLng(l);FT.biteSetLoc(Object.assign({name:l.name+' — '+(FT.SYSSHORT||'Baffle Ck'),lat:ll[0],lng:ll[1],tz:TZ,baffleKm:l.km},GEN?{baffleLine:l.line,sys:FT.SYS}:{}));FT.showTab('bite');}
 function action(a,l,m,el){
   if(a==='bite'){map.closePopup();goBite(l);}
-  else if(a==='tides'){map.closePopup();FT.baffleSelect(l.km,l.name);FT.showTab('baffle');}
+  else if(a==='tides'){map.closePopup();FT.baffleSelect(l.km,l.name,l.line);FT.showTab('baffle');}
   else if(a==='log'){map.closePopup();FT.catchLogAt&&FT.catchLogAt(l);}
   else if(a==='edit')editForm(l,m,el);
   else if(a==='alias'){const box=el.querySelector('.medit');box.innerHTML=`<input type="text" class="mnm" maxlength="60" value="${esc(l.name)}" placeholder="${esc(l.base)}"><div class="b"><button class="pri" data-x="ok">Save name</button>${l.alias?'<button data-x="reset">Reset to “'+esc(l.base)+'”</button>':''}</div>`;
@@ -1963,9 +2243,10 @@ function editForm(l,m,el){const box=el.querySelector('.medit');const st={color:l
 /* ---- add a spot ---- */
 function addAt(ll){let sn;try{sn=S.snap(ll.lat,ll.lng);}catch(e){return;}
   const pop=LF.popup({maxWidth:300}).setLatLng(ll);
-  if(sn.offKm>1.2){pop.setContent(`<div class="mpop">That point is ${sn.offKm.toFixed(1)} km from the creek centreline — custom spots must be within 1.2 km of Baffle/Euleilah Creek.</div>`).openOn(map);return;}
+  if(sn.offKm>1.2){pop.setContent(`<div class="mpop">That point is ${sn.offKm.toFixed(1)} km from the creek centreline — custom spots must be within 1.2 km of ${GEN?esc(FT.SYSNAME)+'’s mapped channels':'Baffle/Euleilah Creek'}. <span id="mOther"></span></div>`).openOn(map);
+    if(FT.nearestSystems)FT.nearestSystems(ll.lat,ll.lng).then(N=>{const b=N[0],e=document.getElementById('mOther');if(e&&b&&b.s.id!==FT.SYS&&b.d<1.2){e.innerHTML=`It’s on <b>${esc(b.s.name)}</b> — <button class="sm pri">Switch to it</button>`;e.querySelector('button').onclick=()=>FT.switchSystem(b.s.id);}}).catch(()=>{});return;}
   const near=S.nearest(sn.km,sn.line,0.3);const st={color:S.COLORS[0]};
-  pop.setContent(`<div class="mpop"><h3>➕ New spot</h3><div class="mut">Snaps to <b>km ${sn.km.toFixed(2)} ${sn.line==='E'?'Euleilah Ck':'Baffle Ck'}</b> for tides (${Math.round(sn.offKm*1000)} m from centreline)${near?' · near '+esc(near.name):''}</div>
+  pop.setContent(`<div class="mpop"><h3>➕ New spot</h3><div class="mut">Snaps to <b>km ${sn.km.toFixed(2)} ${S.lineLabel(sn.line)}</b> for tides (${Math.round(sn.offKm*1000)} m from centreline)${near?' · near '+esc(near.name):''}</div>
     <input type="text" class="mnm" maxlength="60" placeholder="Name e.g. Snag bend"><input type="text" class="mnt" maxlength="200" placeholder="Note (optional)">${swatches(st.color)}
     <div class="b"><button class="pri" data-x="ok">💾 Save spot</button><button data-x="no">Cancel</button></div></div>`).openOn(map);
   const el=pop.getElement();wireSw(el,st);const nm=el.querySelector('.mnm');setTimeout(()=>nm.focus(),50);
@@ -1980,22 +2261,23 @@ function me(){if(!navigator.geolocation){hint('No GPS on this device.',3000);ret
     if(!meM){meM=LF.marker(ll,{icon:LF.divIcon({className:'mpin-wrap',html:'<div class="mme"></div>',iconSize:[20,20],iconAnchor:[10,10]}),zIndexOffset:1000,interactive:false}).addTo(map);meC=LF.circle(ll,{radius:acc,color:'#3b8fff',weight:1,fillOpacity:.1,interactive:false}).addTo(map);}
     else{meM.setLatLng(ll);meC.setLatLng(ll).setRadius(acc);}
     const sn=S.snap(ll[0],ll[1]);const n=sn.offKm<=1.2?S.nearest(sn.km,sn.line,1.0):null;
-    hint(`📍 You: ±${Math.round(acc)} m · ${sn.offKm<=1.2?`km ${sn.km.toFixed(2)} ${sn.line==='E'?'Euleilah Ck':'Baffle Ck'} (${Math.round(sn.offKm*1000)} m off)${n?` · nearest spot <b>${esc(n.name)}</b>`:''}`:sn.offKm.toFixed(1)+' km from the creek'}`);
-    if(first){first=false;map.setView(ll,Math.max(map.getZoom(),14));}},
+    hint(`📍 You: ±${Math.round(acc)} m · ${sn.offKm<=1.2?`km ${sn.km.toFixed(2)} ${S.lineLabel(sn.line)} (${Math.round(sn.offKm*1000)} m off)${n?` · nearest spot <b>${esc(n.name)}</b>`:''}`:sn.offKm.toFixed(1)+' km from the creek'}`);
+    if(first){first=false;map.setView(ll,Math.max(map.getZoom(),14));if(sn.offKm>1.2&&FT.suggestSystem)FT.suggestSystem(ll[0],ll[1]);}},
     e=>hint('GPS failed: '+esc(e.message),4000),{enableHighAccuracy:true,timeout:20000,maximumAge:30000});}
 function stopMe(){if(watch!=null){navigator.geolocation.clearWatch(watch);watch=null;}}
 /* ---- colour the creek by bite score / tide stage at a chosen time ---- */
 const cache={};
 function dayStartMs(){const k=dayKey(Date.now());const [y,m,d]=k.split('-').map(Number);return Date.UTC(y,m-1,d)-10*3600e3;}
-function segs(){const out=[];for(let k=0;k<B.MAXKM;k+=1)out.push({km:k+0.5,line:'B',a:k,b:k+1});
+function segs(){if(GEN){const tot=LL.reduce((a,L)=>a+L.b-L.a,0),st=tot>70?2:1,out=[];for(const L of LL)for(let a=L.a;a<L.b-0.05;a+=st){const b=Math.min(a+st,L.b);out.push({km:(a+b)/2,line:L.id,a,b});}return out;}
+  const out=[];for(let k=0;k<B.MAXKM;k+=1)out.push({km:k+0.5,line:'B',a:k,b:k+1});
   for(let k=Math.floor(D.euleilahJunctionKm);k<S.EUMAX;k+=1){const a=Math.max(k,D.euleilahJunctionKm),b=Math.min(k+1,S.EUMAX);if(b-a>0.05)out.push({km:(a+b)/2,line:'E',a,b});}return out;}
 function segLine(s){const pts=[];for(let x=s.a;x<=s.b+1e-9;x+=0.1)pts.push(S.pointAt(Math.min(x,s.b),s.line));pts.push(S.pointAt(s.b,s.line));return pts;}
 function stageAt(s,t){const key='t'+dayKey(t)+s.line+s.km+JSON.stringify(FT.baffleOpts?FT.baffleOpts():{});const d0=dayStartMs();
-  let c=cache[key];if(!c){const o=FT.baffleOpts?FT.baffleOpts():{};const h0=msToH(d0);c=cache[key]={P:B.predictAt(s.km,h0-14,h0+38,o),R:B.runInStarts(s.km,h0-14,h0+38,o)};}
+  let c=cache[key];if(!c){const o=Object.assign({},FT.baffleOpts?FT.baffleOpts():{},GEN?{line:s.line}:{});const h0=msToH(d0);c=cache[key]={P:B.predictAt(s.km,h0-14,h0+38,o),R:B.runInStarts(s.km,h0-14,h0+38,o)};}
   const h=msToH(t);if(c.R.some(r=>h>=r.t&&h<=r.t+2))return 'runin';const v=c.P.curve(h),v2=c.P.curve(h+0.25);if(v==null||v2==null)return 'none';
   if(c.P.cal.trunc&&v<=Math.min(...c.P.ext.filter(e=>!e.hi).map(e=>e.h))+0.03)return 'pool';return v2>v+0.004?'rising':v2<v-0.004?'falling':'slack';}
 function scoreAt(s,t){const d0=dayStartMs();const key='b'+dayKey(t)+s.line+s.km;let c=cache[key];
-  if(!c){const ll=S.pointAt(s.km,s.line);try{c=cache[key]=FT.biteCtx({lat:ll[0],lng:ll[1],km:s.km},d0,d0+864e5);}catch(e){c=cache[key]={slots:[]};}}
+  if(!c){const ll=S.pointAt(s.km,s.line);try{c=cache[key]=FT.biteCtx({lat:ll[0],lng:ll[1],km:s.km,line:s.line,sys:FT.SYS},d0,d0+864e5);}catch(e){c=cache[key]={slots:[]};}}
   const sl=c.slots[Math.floor((t-d0)/Q)];return sl?sl.score:null;}
 const TC={runin:'#2fd3a0',rising:'#5cc8ff',falling:'#f0a03a',slack:'#9db5b1',pool:'#6b6b6b',none:'#444'};
 function colourSetup(){const v=pref.colour;const d0=dayStartMs();const r=$('mTime');
@@ -2008,15 +2290,23 @@ function colour(){if(!map)return;colG.clearLayers();const v=pref.colour;const d0
   for(const s of segs()){let c;if(v==='tide')c=TC[stageAt(s,t)];else{const sc=scoreAt(s,t);c=sc==null?'#444':scoreColor(sc);}
     LF.polyline(segLine(s),{color:c,weight:6,opacity:.95,interactive:false}).addTo(colG);}
   $('mLegend').innerHTML=v==='tide'?Object.entries({runin:'run-in start (0–2 h)',rising:'rising',falling:'falling',slack:'slack',pool:'pool level'}).map(([k,l])=>`<i style="background:${TC[k]}"></i>${l}`).join(''):
-    `<i style="background:${scoreColor(10)}"></i>0–20<i style="background:${scoreColor(40)}"></i>40<i style="background:${scoreColor(60)}"></i>60<i style="background:${scoreColor(80)}"></i>80<i style="background:${scoreColor(95)}"></i>95+ <span>bite score (Baffle model, 1 km segments)</span>`;}
+    `<i style="background:${scoreColor(10)}"></i>0–20<i style="background:${scoreColor(40)}"></i>40<i style="background:${scoreColor(60)}"></i>60<i style="background:${scoreColor(80)}"></i>80<i style="background:${scoreColor(95)}"></i>95+ <span>bite score (${GEN?esc(FT.SYSSHORT)+' tide model, '+(segs().length&&segs()[0].b-segs()[0].a>1.5?2:1):'Baffle model, 1'} km segments)</span>`;}
 /* ---- lists ---- */
 function renderLists(){const C=S.customs();$('mCount').textContent=C.length?`· ${C.length}`:'';
-  $('mList').innerHTML=C.length?C.slice().sort((a,b)=>a.km-b.km).map(c=>`<div class="mitem"><span class="dot" style="background:${c.color}"></span><div class="ci"><b>${esc(c.name)}</b> <span class="mut">km ${c.km.toFixed(1)} ${c.line==='E'?'Euleilah':'Baffle'}${c.note?' · '+esc(c.note):''}</span></div><button class="sm" data-go="${c.id}">🗺</button><button class="sm" data-del="${c.id}">🗑</button></div>`).join('')
+  $('mList').innerHTML=C.length?C.slice().sort((a,b)=>a.km-b.km).map(c=>`<div class="mitem"><span class="dot" style="background:${c.color}"></span><div class="ci"><b>${esc(c.name)}</b> <span class="mut">km ${c.km.toFixed(1)} ${S.lineLabel(c.line,true)}${c.note?' · '+esc(c.note):''}</span></div><button class="sm" data-go="${c.id}">🗺</button><button class="sm" data-del="${c.id}">🗑</button></div>`).join('')
     :'<div class="cempty">No spots yet — long-press the map near the creek.</div>';
   $('mList').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{const l=S.get(b.dataset.go);if(!map)return;map.setView([l.lat,l.lng],Math.max(map.getZoom(),15));setTimeout(()=>reopen(l.id),300);document.getElementById('mWrap').scrollIntoView({block:'start',behavior:'smooth'});});
   $('mList').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const l=S.get(b.dataset.del);if(confirm(`Delete “${l.name}”?`))S.remove(l.id);});
   $('mBuiltins').innerHTML=S.builtins().map(l=>`<div class="mbi"><span>${esc(l.base)} <span class="mut">${l.km.toFixed(1)} km</span></span><input type="text" data-al="${l.id}" maxlength="60" placeholder="my name for it" value="${l.alias?esc(l.name):''}"></div>`).join('');
   $('mBuiltins').querySelectorAll('[data-al]').forEach(i=>i.onchange=()=>S.setAlias(i.dataset.al,i.value));}
+/* ---- all river systems (thin lines; tap to switch) ---- */
+async function drawSystems(){if(!FT.fetchSys||!sysG)return;let X;try{X=await FT.fetchSys('index');}catch(e){return;}
+  const CC={A:'#57d18a',B:'#ffd38a',C:'#ff9b8a'};
+  for(const s of X.systems){if(s.id===FT.SYS)continue;
+    for(const ln of s.ov){const pl=LF.polyline(ln,{color:CC[s.conf]||'#ccc',weight:2.5,opacity:.55,dashArray:s.conf==='C'?'4 4':null}).addTo(sysG);
+      pl.bindTooltip(esc(s.name)+' · '+s.conf,{sticky:true});
+      pl.on('click',e=>{LF.popup({maxWidth:260}).setLatLng(e.latlng).setContent(`<div class="mpop"><h3>${esc(s.name)}</h3><div class="mut">${esc(s.area)} · confidence <b>${s.conf}</b> · ${s.km} km tidal · base ${esc(s.port)}${s.g?' · '+s.g+' gauge'+(s.g>1?'s':''):''}</div><div class="b"><button class="pri" data-sw="${s.id}">Switch to ${esc(s.name)}</button></div></div>`).openOn(map);
+        setTimeout(()=>{const b=document.querySelector('[data-sw="'+s.id+'"]');if(b)b.onclick=()=>FT.switchSystem(s.id);},30);});}}}
 /* ---- wiring ---- */
 document.querySelectorAll('#mLayers button').forEach(b=>b.onclick=()=>{if(map)setLayer(b.dataset.l);else{pref.layer=b.dataset.l;savePref();}});
 document.querySelectorAll('#mLayers button').forEach(b=>b.classList.toggle('on',b.dataset.l===pref.layer));
@@ -2032,8 +2322,19 @@ if(document.body.dataset.tab==='map')init();
 FT.mapDebug={get map(){return map},get LF(){return LF},addAt,openSpot:id=>reopen(id),spotInfo};
 })();
 </script>
-<script>
+<script type="text/ft-deferred">
 FT.showTab((location.hash||'').slice(1)||(function(){try{return localStorage.getItem('ft_tab')}catch(e){return null}})()||'bite');
+document.body.dataset.sysReady=FT.SYS;
+</script>
+<script id="ft-loader">(function(){const FT=window.FT;
+function run(){for(const s of [...document.querySelectorAll('script[type="text/ft-deferred"]')]){const n=document.createElement('script');n.text=s.textContent;if(s.id){const i=s.id;s.removeAttribute('id');n.id=i;}s.replaceWith(n);}}
+if(FT.SYS==='baffle'){run();return;}
+const b=document.createElement('div');b.className='notice';b.id='sysLoading';b.innerHTML='<span class="spin"></span> Loading '+FT.SYSNAME+'…';document.querySelector('main').prepend(b);
+FT.fetchSys(FT.SYS).then(J=>{window.BT=FT.makeSystemBT(J);b.remove();run();}).catch(e=>{console.error(e);
+  b.className='notice err';b.innerHTML='⚠ Couldn’t load '+FT.SYSNAME+' ('+String(e.message||e).replace(/[<>&]/g,'')+'). Offline and not saved on this phone? <button class="sm pri" id="sysBack">Back to Baffle Creek</button>';
+  document.getElementById('sysBack').onclick=()=>FT.switchSystem('baffle');
+  const t=(location.hash||'').slice(1);document.querySelectorAll('.tab').forEach(x=>x.hidden=x.id!=='tab-'+(t||'bite'));});
+})();
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW',e)));}
 </script>
 </body>

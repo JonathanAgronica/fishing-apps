@@ -19,10 +19,20 @@ SCH = json.load(open(os.path.join(HERE, 'catch_schema.json')))
 OUT = os.path.join(REPO, 'data', 'catches.csv')
 AEST = dt.timezone(dt.timedelta(hours=10))
 COLS = ['session','anon','slot_start','band_km','line','band','region','score','tide','min_from_runin','light','solunar','moon_phase',
-        'tide_source','wind_kmh','dp3_hpa','bites','fish','mj','kept','max_len_cm','species','bait','received']
+        'tide_source','wind_kmh','dp3_hpa','bites','fish','mj','kept','max_len_cm','species','bait','received','system']
 PH = ['New','Wax cres','1st qtr','Wax gib','Full','Wan gib','Last qtr','Wan cres']
 SPECIES = [c for c,_ in SCH['species']]; BAIT = [c for c,_ in SCH['bait']]
 REGIONS = {r[0]: r[1] for r in SCH['regions']}
+SYSDIR = os.path.join(REPO, 'data', 'systems'); _SYS = {}
+def system_info(sy):
+    """Multi-system: {'name', lines:{id:(name, maxKm)}} for a non-Baffle river system, or None if unknown."""
+    if not isinstance(sy, str) or not re.fullmatch(r'[a-z0-9-]{2,40}', sy) or sy == 'baffle': return None
+    if sy not in _SYS:
+        try:
+            J = json.load(open(os.path.join(SYSDIR, sy + '.json'), encoding='utf-8'))
+            _SYS[sy] = {'name': J['name'], 'lines': {l['id']: (l['name'], l['junctionKm'] + l['limitKm']) for l in J['lines']}}
+        except Exception: _SYS[sy] = None
+    return _SYS[sy]
 MAX_SESS_PER_ANON_DAY = 12; MAX_NEW_PER_RUN = 600; MAX_SLOTS = 64
 
 def band_label(bk, ln):
@@ -49,12 +59,21 @@ def validate(m, now):
     test = anon.startswith('TEST-') or m.get('test') == 1
     if test and not anon.startswith('TEST-'): anon = 'TEST-' + anon[:5]
     bk = m.get('bk')
-    if not isinstance(bk, int) or not (bk == -1 or (0 <= bk <= 38 and bk % 2 == 0)): raise ValueError('bad band')
-    ln = m.get('ln') if m.get('ln') in ('B', 'E') else 'B'
-    if bk >= 0 and ln == 'E' and str(bk) not in SCH['bandsE']: ln = 'B'
+    SI = system_info(m.get('sy')) if m.get('sy') not in (None, '', 'baffle') else None
+    if m.get('sy') not in (None, '', 'baffle') and SI is None: raise ValueError('unknown system')
+    sysid = m.get('sy') if SI else 'baffle'
+    if SI:   # band = 2 km of one channel of that system (never GPS)
+        ln = m.get('ln') if m.get('ln') in SI['lines'] else 'M'
+        if not isinstance(bk, int) or not (bk == -1 or (0 <= bk <= SI['lines'][ln][1] + 2 and bk % 2 == 0)): raise ValueError('bad band')
+        blabel = f"km {bk}–{bk+2}, {SI['lines'][ln][0]}" if bk >= 0 else 'Off-creek: near ' + SI['name']
+    else:
+        if not isinstance(bk, int) or not (bk == -1 or (0 <= bk <= 38 and bk % 2 == 0)): raise ValueError('bad band')
+        ln = m.get('ln') if m.get('ln') in ('B', 'E') else 'B'
+        if bk >= 0 and ln == 'E' and str(bk) not in SCH['bandsE']: ln = 'B'
+        blabel = None
     rg = ''
     if bk < 0:
-        rg = m.get('rg') if m.get('rg') in REGIONS else 'other'
+        rg = m.get('rg') if (m.get('rg') in REGIONS and not SI) else 'other'
     ts = m.get('ts') if m.get('ts') in SCH['tsrc'] else 'none'
     mp = m.get('mp'); mp = mp if isinstance(mp, int) and 0 <= mp <= 7 else None
     if mp is None: raise ValueError('bad moon')
@@ -83,11 +102,11 @@ def validate(m, now):
         sp = ';'.join(dict.fromkeys(c for c in sp.split(';') if c in SPECIES)) if bites else ''
         if ts == 'none': tide, ri = 'none', None
         rows.append({'session': sid, 'anon': anon, 'slot_start': iso(s0 + 900 * i), 'band_km': '' if bk < 0 else bk,
-                     'line': '' if bk < 0 else ln, 'band': band_label(bk, ln) or 'Off-creek: ' + REGIONS[rg], 'region': rg,
+                     'line': '' if bk < 0 else ln, 'band': blabel or band_label(bk, ln) or 'Off-creek: ' + REGIONS[rg], 'region': rg,
                      'score': score, 'tide': tide, 'min_from_runin': '' if ri is None else ri, 'light': light, 'solunar': sol,
                      'moon_phase': PH[mp], 'tide_source': ts, 'wind_kmh': '' if wind is None else wind, 'dp3_hpa': '' if dp3 is None else dp3,
                      'bites': bites, 'fish': fish, 'mj': mj, 'kept': kept, 'max_len_cm': '' if ml is None else ml, 'species': sp, 'bait': bait,
-                     'received': dt.datetime.now(AEST).strftime('%Y-%m-%d')})
+                     'received': dt.datetime.now(AEST).strftime('%Y-%m-%d'), 'system': sysid})
     if sum(r['bites'] for r in rows) > 60: raise ValueError('implausible bite count')
     return {'sid': sid, 'anon': anon, 'test': test, 'day': iso(s0)[:10]}, rows
 

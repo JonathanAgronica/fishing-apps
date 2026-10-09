@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Fish Times">
-<meta name="app-version" content="202610091526">
+<meta name="app-version" content="202610091535">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -120,6 +120,20 @@ nav.tabs{display:flex;gap:4px;max-width:1000px;margin:0 auto}
 nav.tabs a{flex:1;text-align:center;padding:10px 6px;border-radius:12px 12px 0 0;color:var(--mut);text-decoration:none;font-weight:600;background:#0d1f2288}
 nav.tabs a.on{background:var(--bg);color:var(--ink);box-shadow:inset 0 3px 0 var(--acc)}
 nav.tabs a[data-tab=baffle].on{box-shadow:inset 0 3px 0 var(--tide)}
+nav.tabs a[data-tab=gauges].on{box-shadow:inset 0 3px 0 #e5484d}
+@media(max-width:420px){nav.tabs a{font-size:.86rem;padding:9px 3px}}
+.gbar button.on{background:var(--acc);color:#1b1205;border-color:var(--acc)}
+.gleg{margin-top:8px;gap:6px}
+.gleg button{font-size:.74rem;padding:3px 8px;border-radius:14px;display:inline-flex;align-items:center;gap:5px}
+.gleg button i{display:inline-block;width:14px;height:4px;border-radius:2px}
+.gleg button.off{opacity:.38;text-decoration:line-through}
+#gWrap{position:relative;margin-top:6px}
+#gChart{width:100%;display:block;touch-action:pan-y;user-select:none;-webkit-user-select:none;background:#0f2427;border-radius:10px}
+#gTip{position:absolute;pointer-events:none;background:#081416ee;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:.76rem;display:none;white-space:nowrap;z-index:2}
+.gst{background:var(--panel2);border-radius:10px;padding:8px 10px}
+.gst b{display:block;font-size:1.05rem}.gst small{color:var(--mut)}
+.drift-ok{color:var(--good)}.drift-warn{color:#ffd38a}.drift-bad{color:var(--bad)}
+
 .tab[hidden]{display:none}
 .src{margin-top:8px;font-size:.84rem;background:#12303d;border:1px solid #245a72;color:#cfeeff;border-radius:10px;padding:7px 10px}
 .src:empty{display:none}
@@ -130,7 +144,7 @@ input:disabled{opacity:.4}
 <header>
   <h1>🐟 <span>Fish Times</span></h1>
   <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
-  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 Bite times</a><a href="#baffle" data-tab="baffle">🌊 Baffle tides</a></nav>
+  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 Bite times</a><a href="#baffle" data-tab="baffle">🌊 Baffle tides</a><a href="#gauges" data-tab="gauges">📡 Gauges</a></nav>
 </header>
 <main>
 <div class="tab" id="tab-bite">
@@ -309,16 +323,45 @@ input:disabled{opacity:.4}
   <div class="notice">⚠️ Not for navigation. Predictions are estimates. Always use the official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ tide tables</a> and local knowledge; Baffle Creek’s bar and shallows change.</div>
 
 </div>
+<div class="tab" id="tab-gauges" hidden>
+<section class="card">
+  <h2>📡 Latest gauge readings</h2>
+  <div class="grid" id="gLatest"><span class="spin"></span> Loading gauge data…</div>
+  <div class="row" style="margin-top:8px;justify-content:space-between"><span class="mut" id="gUpd"></span><button class="sm" id="gRefresh">⟳ Refresh</button></div>
+  <div id="gFresh"></div>
+</section>
+<section class="card">
+  <h2>📈 Tide propagation up Baffle Creek</h2>
+  <div class="row gbar">
+    <button class="sm" data-r="2">2d</button><button class="sm on" data-r="7">7d</button><button class="sm" data-r="30">30d</button><button class="sm" data-r="all">All</button>
+    <span style="flex:1"></span><button class="sm" id="gZo" aria-label="Zoom out">−</button><button class="sm" id="gZi" aria-label="Zoom in">＋</button>
+  </div>
+  <div class="row gleg" id="gLegend"></div>
+  <div id="gWrap"><svg id="gChart" role="img" aria-label="Gauge levels and lag chart"></svg><div id="gTip"></div></div>
+  <p class="mut" style="margin:6px 0 0">Drag sideways to pan · pinch / mouse-wheel or −/＋ to zoom · tap for values. Times AEST. Levels m AHD (Bundaberg LAT −1.693 m). Lower panel: lag of each upstream peak/low after the matching Bundaberg observed high/low; error bars = ± half the time the 5 cm-step gauge sat on that value.</p>
+</section>
+<section class="card">
+  <h2>⏱ Running lag stats — calibration drift</h2>
+  <div class="tw"><table id="gStats"></table></div>
+  <p class="mut" id="gStatsNote"></p>
+</section>
+<section class="card">
+  <details><summary>Recent peaks &amp; lows (per tide)</summary><div class="tw"><table id="gEvents"></table></div></details>
+  <p class="mut" style="margin:8px 0 0">Sources: BoM river-height tables IDQ65392 (039267 Essendean Bridge, 539135 Euleilah Ck @ Hills Rd, 539132 Mimdale; 5 cm event-reported, m AHD) and Qld DES storm-tide 7-day feed (Bundaberg 051011A, CC BY 4.0). Archived hourly-ish into the app repo (<a href="https://github.com/JonathanAgronica/fishing-apps/tree/main/data" target="_blank" rel="noopener">data/*.csv</a>) so the record keeps growing beyond BoM's 7-day window.</p>
+</section>
+
+</div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Fish Times build 202610091526</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Fish Times build 202610091535</span></footer>
 <script>
 /* Fish Times shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
-FT.showTab=function(t){if(t!=='bite'&&t!=='baffle')t='bite';
+FT.onTab=[];
+FT.showTab=function(t){if(t!=='bite'&&t!=='baffle'&&t!=='gauges')t='bite';
   document.querySelectorAll('.tab').forEach(s=>s.hidden=s.id!=='tab-'+t);
   document.querySelectorAll('nav.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.tab===t));
   if(location.hash!=='#'+t)history.replaceState(null,'','#'+t);
-  try{localStorage.setItem('ft_tab',t);}catch(e){}document.body.dataset.tab=t;window.scrollTo(0,0);};
+  try{localStorage.setItem('ft_tab',t);}catch(e){}document.body.dataset.tab=t;window.scrollTo(0,0);FT.onTab.forEach(f=>{try{f(t)}catch(e){console.error(e)}});};
 FT.setDate=function(v,from){if(!v)return;if(from!=='bite'&&FT.biteSetDate)FT.biteSetDate(v);if(from!=='baffle'&&FT.baffleSetDate)FT.baffleSetDate(v);};
 addEventListener('hashchange',()=>FT.showTab(location.hash.slice(1)));
 return FT;})();
@@ -944,6 +987,193 @@ FT.biteRefreshIfBaffle=()=>{if(loc.baffleKm!=null)run();};$('mj-tideOff').onchan
 {const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(l=>Math.abs(l.km-loc.baffleKm)<0.01):-1;if(i>=0)$('mj-bafSel').value=i;}
 setLocInfo();
 run().catch(e=>{notice('Unexpected error: '+esc(e.message),true);console.error(e);});
+})();
+</script>
+<script>/* ===================== Gauges tab ===================== */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);const FT=window.FT;
+const E0=Date.UTC(2025,11,31,14);           // minute 0 = 2026-01-01 00:00 AEST
+const toMs=m=>E0+m*60000, nowM=()=>(Date.now()-E0)/60000;
+const fT=(m,o)=>new Intl.DateTimeFormat('en-AU',Object.assign({timeZone:'Australia/Brisbane',hour:'numeric',minute:'2-digit',hour12:true},o||{})).format(new Date(toMs(m))).replace(' am','am').replace(' pm','pm');
+const fDT=m=>fT(m,{weekday:'short',day:'numeric',month:'short'});
+const hm=min=>{if(min==null||isNaN(min))return '—';const s=min<0?'−':'';min=Math.abs(min);return s+Math.floor(min/60)+':'+String(Math.round(min%60)).padStart(2,'0');};
+const ago=m=>{const d=Math.max(0,nowM()-m);return d<1?'just now':d<90?Math.round(d)+' min ago':d<48*60?(d/60).toFixed(1)+' h ago':(d/1440).toFixed(1)+' days ago';};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let D=null,lastFetch=0,fetchedFrom='',view=null,shown=false;
+const KM={win:3.4,hills:25.24,ess:35.25};
+const SER=[ // id, label, colour, kind, default on
+ {id:'bundaberg',lab:'Bundaberg obs',col:'#3b8fd9',k:'line',on:true},
+ {id:'bundaberg_pred',lab:'Bundaberg MSQ pred',col:'#8fb8de',k:'line',dash:'3 3',on:false},
+ {id:'win',lab:'Winfield pred (MSQ offsets)',col:'#17becf',k:'model',dash:'7 4',on:true},
+ {id:'hillsrd',lab:'Hills Rd 539135',col:'#2ca02c',k:'step',on:true},
+ {id:'hills_m',lab:'Hills Rd model',col:'#98df8a',k:'model',dash:'2 3',on:false},
+ {id:'essendean',lab:'Essendean 039267',col:'#e5484d',k:'step',on:true,dots:true},
+ {id:'ess_m',lab:'Essendean model',col:'#ff9896',k:'model',dash:'2 3',on:false},
+ {id:'lags',lab:'Lag panel',col:'#c9a227',k:'panel',on:true},
+ {id:'mimdale',lab:'Mimdale 539132',col:'#b48cff',k:'panel',on:true}];
+const on=JSON.parse(localStorage.getItem('ft_gauge_on')||'null')||{};SER.forEach(s=>{if(on[s.id]===undefined)on[s.id]=s.on;});
+const LAGS=[{k:'essendean',kind:'HW',lab:'Essendean HW',col:'#e5484d'},{k:'essendean',kind:'LW',lab:'Essendean low-plateau',col:'#ff9896'},{k:'hillsrd',kind:'HW',lab:'Hills Rd HW',col:'#2ca02c'},{k:'hillsrd',kind:'LW',lab:'Hills Rd LW',col:'#98df8a'}];
+
+function legend(){$('gLegend').innerHTML=SER.map(s=>`<button data-s="${s.id}" class="${on[s.id]?'':'off'}"><i style="background:${s.col}"></i>${esc(s.lab)}</button>`).join('');
+  $('gLegend').querySelectorAll('button').forEach(b=>b.onclick=()=>{on[b.dataset.s]=!on[b.dataset.s];localStorage.setItem('ft_gauge_on',JSON.stringify(on));legend();draw();});}
+
+async function load(force){
+  if(!force&&D&&Date.now()-lastFetch<4*60e3)return;
+  try{const r=await fetch('data/gauges.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);
+    D=await r.json();fetchedFrom=r.headers.get('x-ft-cache')?'cache':'network';}
+  catch(e){if(!D){$('gLatest').innerHTML='<div class="notice err">Couldn\'t load gauge data ('+esc(e.message)+'). Connect once to cache it for offline use.</div>';return;}}
+  lastFetch=Date.now();
+  if(!view)setRange(7,true);
+  render();}
+function lastVal(arr,m){let lo=0,hi=arr.length-1,r=null;while(lo<=hi){const mid=(lo+hi)>>1;if(arr[mid][0]<=m){r=arr[mid];lo=mid+1;}else hi=mid-1;}return r;}
+function render(){if(!D)return;latest();stats();events();draw();upd();document.body.dataset.gaugesReady='1';}
+function upd(){if(!D)return;const g=D.generated;const gm=(Date.parse(g)-E0)/60000;
+  $('gUpd').innerHTML=`Data file updated <b>${ago(gm)}</b> (${fT(gm,{weekday:'short',day:'numeric',month:'short'})})${fetchedFrom==='cache'?' · <b>offline copy</b>':''} · app re-checks every 10 min`;
+  document.querySelectorAll('[data-ago]').forEach(el=>el.textContent=ago(+el.dataset.ago));}
+function latest(){const S=D.series;const card=(k,lab,unit,extra)=>{const a=S[k];if(!a||!a.length)return '';const L=a[a.length-1];const p=lastVal(a,L[0]-60);const d=p?L[1]-p[1]:0;
+    const ar=Math.abs(d)<0.005?'→':d>0?'↑':'↓';
+    return `<div class="gst"><small>${lab}</small><b>${L[1].toFixed(2)} ${unit} ${ar}</b><small>${fT(L[0],{weekday:'short'})} · <span data-ago="${L[0]}">${ago(L[0])}</span>${extra?'<br>'+extra:''}</small></div>`;};
+  const B=S.bundaberg;const bL=B&&B.length?B[B.length-1]:null;
+  $('gLatest').innerHTML=card('essendean','Essendean Bridge (35.3 km)','m AHD')+card('hillsrd','Hills Rd, Euleilah Ck','m AHD')+card('bundaberg','Bundaberg (Burnett Hds)','m AHD',bL?`= ${(bL[1]+1.693).toFixed(2)} m LAT`:'')+card('mimdale','Mimdale (fresh-flow)','m');
+  // fresh-flow indicator
+  const M=S.mimdale||[];let html='';
+  if(M.length){const L=M[M.length-1];const d24=lastVal(M,L[0]-1440),w=M.filter(x=>x[0]>=L[0]-7*1440);const mn=Math.min(...w.map(x=>x[1]));
+    const rise24=d24?L[1]-d24[1]:0,above=L[1]-mn;
+    const lvl=above>0.5||rise24>0.3?'bad':above>0.1||rise24>0.08?'warn':'ok';
+    html=`<div class="notice ${lvl==='ok'?'info':lvl==='bad'?'err':''}">💧 <b>Fresh-flow indicator (Mimdale, upstream of the tide):</b> ${L[1].toFixed(2)} m, ${rise24>=0?'+':''}${rise24.toFixed(2)} m in 24 h, ${above.toFixed(2)} m above its 7-day low. `+
+      (lvl==='ok'?'Steady base flow — tide-driven readings at Essendean/Hills Rd are representative.':lvl==='warn'?'Rising — some fresh coming down: upper-creek lows will sit higher and peaks look smaller; consider the Baffle tab\'s “Upper-creek base adj”.':'<b>Fresh / flood flow</b> — upper-creek levels are flow-dominated; tide lags & the model are unreliable above ~25 km.')+'</div>';}
+  $('gFresh').innerHTML=html;}
+function stats(){const S=D.stats;const row=(lab,k)=>{const s=S[k];if(!s)return '';const a=s.all,w=s.last7d;const drift=a.n?a.mean-s.model:null;
+    const cls=drift==null?'':Math.abs(drift)<15?'drift-ok':Math.abs(drift)<40?'drift-warn':'drift-bad';
+    return `<tr><td>${lab}</td><td>${a.n||0}</td><td>${a.n?'+'+hm(a.mean):'—'}${a.sd!=null?' <span class="mut">±'+Math.round(a.sd)+'′</span>':''}</td><td>${w&&w.n?'+'+hm(w.mean)+' <span class="mut">(n '+w.n+')</span>':'—'}</td><td>+${hm(s.model)}</td><td class="${cls}">${drift==null?'—':(drift>=0?'+':'−')+Math.abs(Math.round(drift))+'′'}</td><td class="mut">±${a.u_med!=null?Math.round(a.u_med):'—'}′</td></tr>`;};
+  $('gStats').innerHTML='<tr><th>Lag after Bundaberg</th><th>n tides</th><th>Mean (all) ± sd</th><th>Last 7 d</th><th>App model</th><th>Drift</th><th>Gauge step ±</th></tr>'+
+    row('Essendean HW','essendean_HW')+row('Essendean low plateau (mid)','essendean_LW')+row('Hills Rd HW','hillsrd_HW')+row('Hills Rd LW','hillsrd_LW');
+  const ev=D.events;const first=Math.min(...['essendean','hillsrd'].flatMap(k=>ev[k].map(e=>e.bt)));
+  $('gStatsNote').innerHTML=`Since ${isFinite(first)?fDT(first):'—'}. Drift = running mean − lag the app's tide model uses (green &lt;15′, amber &lt;40′, red ≥40′). A steady drift means the model needs re-calibrating; a jump during a fresh (see Mimdale) is expected.`;}
+function events(){const rows=[];for(const L of LAGS)for(const e of D.events[L.k])if(e.k===L.kind)rows.push({...e,lab:L.lab});
+  rows.sort((a,b)=>b.t-a.t);
+  $('gEvents').innerHTML='<tr><th>Gauge event</th><th>Time (plateau)</th><th>Level</th><th>Bundaberg</th><th>Lag</th></tr>'+rows.slice(0,40).map(e=>`<tr><td>${e.lab}</td><td>${fDT(e.t)}<br><span class="mut">${fT(e.s)}–${fT(e.e)}</span></td><td>${e.v.toFixed(2)}</td><td class="mut">${fT(e.bt,{weekday:'short'})}<br>${(e.bh-1.693).toFixed(2)} AHD</td><td>+${hm(e.lag)} <span class="mut">±${Math.round(e.u)}′</span></td></tr>`).join('');}
+
+/* ---------- chart ---------- */
+function dataSpan(){const S=D.series;let a=Infinity,b=-Infinity;for(const k of ['bundaberg','essendean','hillsrd'])if(S[k]&&S[k].length){a=Math.min(a,S[k][0][0]);b=Math.max(b,S[k][S[k].length-1][0]);}return[a,b];}
+function setRange(r,silent){const [a,b]=dataSpan();const end=Math.max(b,Math.min(nowM(),b+720))+180;
+  view=r==='all'?[a-120,end]:[end-r*1440,end];
+  document.querySelectorAll('.gbar [data-r]').forEach(x=>x.classList.toggle('on',String(x.dataset.r)===String(r)));if(!silent)draw();}
+function clampView(){const [a,b]=dataSpan();let w=view[1]-view[0];w=Math.max(180,Math.min(w,(b-a)+3*1440));
+  let v0=view[0];v0=Math.max(a-1440,Math.min(v0,b+1440-w));view=[v0,v0+w];}
+const modelCache={};
+function model(km,v0,v1){if(!window.BT)return[];const h0=Math.floor(v0/60/6)*6-12,h1=Math.ceil(v1/60/6)*6+12,key=km+':'+h0+':'+h1;
+  if(modelCache[key])return modelCache[key];
+  const span=h1-h0;if(span>24*120)return[];
+  const P=BT.predictAt(km,h0,h1,{});const st=Math.max(1/6,span/1200),out=[];
+  for(let h=h0;h<=h1;h+=st){const v=P.curve(h);if(v!=null)out.push([h*60,v]);}
+  for(const k in modelCache)delete modelCache[k];return modelCache[key]=out;}
+function thin(a,v0,v1,maxN){let i0=0;while(i0<a.length&&a[i0][0]<v0)i0++;i0=Math.max(0,i0-1);let i1=i0;while(i1<a.length&&a[i1][0]<=v1)i1++;i1=Math.min(a.length,i1+1);
+  const s=a.slice(i0,i1);if(s.length<=maxN)return s;const bw=(v1-v0)/(maxN/2),out=[];let cur=null;
+  for(const p of s){const b=Math.floor((p[0]-v0)/bw);if(!cur||cur.b!==b){if(cur){const x=cur.mn[0]<cur.mx[0]?[cur.mn,cur.mx]:[cur.mx,cur.mn];out.push(...x);}cur={b,mn:p,mx:p};}else{if(p[1]<cur.mn[1])cur.mn=p;if(p[1]>cur.mx[1])cur.mx=p;}}
+  if(cur)out.push(cur.mn[0]<cur.mx[0]?cur.mn:cur.mx,cur.mn[0]<cur.mx[0]?cur.mx:cur.mn);return out;}
+let G=null;
+function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,Math.round(svg.parentNode.clientWidth||360));if(!svg.parentNode.clientWidth)return;
+  clampView();const [v0,v1]=view;
+  const showLag=on.lags,showMim=on.mimdale;const fs=11;
+  const L=36,R=8,pw=W-L-R;const H1=Math.round(Math.min(330,Math.max(220,W*0.62)));
+  let y=8;const P1={y0:y,h:H1};y+=H1+22;
+  const P2=showLag?{y0:y,h:120}:null;if(P2)y+=120+22;
+  const P3=showMim?{y0:y,h:56}:null;if(P3)y+=56+22;
+  const Ht=y+18;svg.setAttribute('viewBox',`0 0 ${W} ${Ht}`);svg.style.height=Ht+'px';
+  const X=m=>L+(m-v0)/(v1-v0)*pw;const S=D.series;const maxN=Math.round(pw*1.5);
+  // y range panel 1
+  const vis={};for(const s of SER){if(!on[s.id])continue;
+    if(s.k==='line'||s.k==='step')vis[s.id]=thin(S[s.id]||[],v0,v1,maxN);
+    else if(s.k==='model')vis[s.id]=thin(model(s.id==='win'?KM.win:s.id==='hills_m'?KM.hills:KM.ess,v0,v1),v0,v1,maxN);}
+  let lo=Infinity,hi=-Infinity;for(const k in vis)for(const p of vis[k])if(p[0]>=v0&&p[0]<=v1){lo=Math.min(lo,p[1]);hi=Math.max(hi,p[1]);}
+  if(!isFinite(lo)){lo=-1.5;hi=1.5;}const pad=(hi-lo)*0.06+0.05;lo-=pad;hi+=pad;
+  const Y1=v=>P1.y0+P1.h-(v-lo)/(hi-lo)*P1.h;
+  let o='';
+  // night shading + day grid
+  const dayStart=Math.floor(v0/1440)*1440;
+  for(let d=dayStart;d<v1;d+=1440){const n0=X(Math.max(v0,d+18.5*60)),n1=X(Math.min(v1,d+1440+5.3*60));
+    if(n1>n0)o+=`<rect x="${n0}" y="${P1.y0}" width="${n1-n0}" height="${y-P1.y0-22}" fill="#000" opacity=".18"/>`;}
+  const span=v1-v0;const tstep=span<=1.5*1440?180:span<=4*1440?720:span<=10*1440?1440:span<=40*1440?7*1440:30*1440;
+  for(let t=Math.ceil(v0/tstep)*tstep;t<=v1;t+=tstep){const x=X(t);o+=`<line x1="${x}" x2="${x}" y1="${P1.y0}" y2="${y-22}" stroke="#25464b" stroke-width="1"/>`;
+    const lab=tstep<1440?fT(t):fT(t,{hour:undefined,minute:undefined,hour12:undefined,weekday:'short',day:'numeric',month:tstep>=7*1440?'short':undefined});
+    o+=`<text x="${x+3}" y="${Ht-5}" font-size="${fs}" fill="#9db5b1">${esc(lab)}</text>`;}
+  const nx=X(nowM());if(nx>L&&nx<W-R)o+=`<line x1="${nx}" x2="${nx}" y1="${P1.y0}" y2="${y-22}" stroke="#f0a03a" stroke-dasharray="4 3" stroke-width="1.2"/><text x="${nx-3}" y="${P1.y0+11}" text-anchor="end" font-size="${fs}" fill="#f0a03a">now</text>`;
+  // y grid panel1
+  const yst=hi-lo>3?1:hi-lo>1.2?0.5:0.2;for(let v=Math.ceil(lo/yst)*yst;v<=hi;v+=yst){const yy=Y1(v);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="#25464b" stroke-dasharray="2 4"/><text x="${L-4}" y="${yy+4}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${v.toFixed(1)}</text>`;}
+  o+=`<text x="${L+4}" y="${P1.y0+12}" font-size="${fs}" fill="#9db5b1">m AHD</text>`;
+  o+=`<clipPath id="gc1"><rect x="${L}" y="${P1.y0}" width="${pw}" height="${P1.h}"/></clipPath><g clip-path="url(#gc1)">`;
+  for(const s of SER){const a=vis[s.id];if(!a||!a.length)continue;let d='';
+    if(s.k==='step'){a.forEach((p,i)=>{const xx=X(p[0]).toFixed(1),yy=Y1(p[1]).toFixed(1);d+=i?`H${xx}V${yy}`:`M${xx},${yy}`;});const last=a[a.length-1];d+=`H${Math.min(X(last[0]+30),W-R).toFixed(1)}`;}
+    else{let pen=false,prev=null;for(const p of a){const brk=prev&&p[0]-prev[0]>(s.k==='model'?120:45);d+=(!pen||brk?'M':'L')+X(p[0]).toFixed(1)+','+Y1(p[1]).toFixed(1);pen=true;prev=p;}}
+    o+=`<path d="${d}" fill="none" stroke="${s.col}" stroke-width="${s.k==='step'?2:1.5}" ${s.dash?`stroke-dasharray="${s.dash}"`:''}/>`;
+    if(s.dots&&a.length<400)o+=a.map(p=>`<circle cx="${X(p[0]).toFixed(1)}" cy="${Y1(p[1]).toFixed(1)}" r="2" fill="${s.col}"/>`).join('');}
+  // HW markers for Essendean events
+  if(on.essendean)for(const e of D.events.essendean)if(e.k==='HW'&&e.t>v0&&e.t<v1){const xx=X(e.t),yy=Y1(e.v);o+=`<path d="M${xx},${yy-6}l-4,-8h8z" fill="#e5484d"/>`;}
+  o+='</g>';
+  // panel 2: lags
+  let Y2=null;
+  if(P2){const pts=[];for(const Lg of LAGS)for(const e of D.events[Lg.k])if(e.k===Lg.kind&&e.bt>=v0-600&&e.bt<=v1)pts.push({...e,col:Lg.col});
+    let a=Infinity,b=-Infinity;for(const p of pts){a=Math.min(a,p.lag-p.u);b=Math.max(b,p.lag+p.u);}a=Math.min(a,60);b=Math.max(b,480);a=Math.max(0,Math.floor(a/60)*60);b=Math.ceil(b/60)*60;
+    Y2=v=>P2.y0+P2.h-(v-a)/(b-a)*P2.h;
+    o+=`<rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}" fill="none" stroke="#25464b"/>`;
+    const st2=(b-a)>480?120:60;for(let v=a;v<=b;v+=st2){const yy=Y2(v);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="#25464b" stroke-dasharray="2 4"/><text x="${L-4}" y="${yy+4}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${v/60}h</text>`;}
+    for(const [v,c,t] of [[65,'#17becf','Winfield HW'],[116,'#17becf','Winfield LW']]){const yy=Y2(v);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="${c}" stroke-dasharray="${t.endsWith('HW')?'6 3':'2 3'}" opacity=".8"/>`;}
+    o+=`<text x="${L+4}" y="${P2.y0+12}" font-size="${fs}" fill="#9db5b1">lag after Bundaberg (Winfield +1:05 / +1:56 dashed)</text>`;
+    o+=`<clipPath id="gc2"><rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}"/></clipPath><g clip-path="url(#gc2)">`;
+    for(const p of pts){const xx=X(p.bt).toFixed(1);o+=`<line x1="${xx}" x2="${xx}" y1="${Y2(p.lag-p.u)}" y2="${Y2(p.lag+p.u)}" stroke="${p.col}" stroke-width="1.2" opacity=".7"/><circle cx="${xx}" cy="${Y2(p.lag)}" r="3.2" fill="${p.col}"/>`;}
+    o+='</g>';
+    o+=LAGS.map((Lg,i)=>`<circle cx="${L+8+i*Math.min(110,pw/4)}" cy="${P2.y0+P2.h-8}" r="3" fill="${Lg.col}"/><text x="${L+14+i*Math.min(110,pw/4)}" y="${P2.y0+P2.h-4}" font-size="${fs-1}" fill="#cfe">${Lg.lab.replace(' low-plateau',' LW')}</text>`).join('');}
+  // panel 3: Mimdale
+  let Y3=null;
+  if(P3){const a=thin(S.mimdale||[],v0,v1,maxN);let mn=Infinity,mx=-Infinity;for(const p of a){mn=Math.min(mn,p[1]);mx=Math.max(mx,p[1]);}
+    if(!isFinite(mn)){mn=0;mx=1;}if(mx-mn<0.2){const c=(mx+mn)/2;mn=c-0.1;mx=c+0.1;}
+    Y3=v=>P3.y0+P3.h-(v-mn)/(mx-mn)*P3.h;o+=`<rect x="${L}" y="${P3.y0}" width="${pw}" height="${P3.h}" fill="none" stroke="#25464b"/>`;
+    o+=`<text x="${L-4}" y="${P3.y0+10}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${mx.toFixed(2)}</text><text x="${L-4}" y="${P3.y0+P3.h}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${mn.toFixed(2)}</text>`;
+    let d='';a.forEach((p,i)=>{d+=(i?'L':'M')+X(p[0]).toFixed(1)+','+Y3(p[1]).toFixed(1);});
+    o+=`<clipPath id="gc3"><rect x="${L}" y="${P3.y0}" width="${pw}" height="${P3.h}"/></clipPath><path clip-path="url(#gc3)" d="${d}" fill="none" stroke="#b48cff" stroke-width="1.8"/><text x="${L+4}" y="${P3.y0+12}" font-size="${fs}" fill="#9db5b1">Mimdale 539132 (m) — fresh-flow indicator</text>`;}
+  o+=`<g id="gCur"></g>`;
+  svg.innerHTML=o;G={X,v0,v1,L,pw,W,Ht,vis,Y1,P1};}
+
+/* ---------- interaction ---------- */
+const ptrs=new Map();let drag=null;
+function tip(clientX){if(!G)return;const svg=$('gChart'),rc=svg.getBoundingClientRect();const sx=(clientX-rc.left)*(G.W/rc.width);if(sx<G.L||sx>G.L+G.pw){$('gTip').style.display='none';$('gCur').innerHTML='';return;}
+  const m=G.v0+(sx-G.L)/G.pw*(G.v1-G.v0);const S=D.series;let rows=[];
+  for(const s of SER){if(!on[s.id]||s.k==='panel')continue;let v=null;
+    if(s.k==='step'){const p=lastVal(S[s.id]||[],m);v=p&&m-p[0]<720?p[1]:null;}
+    else{const a=s.k==='model'?(G.vis[s.id]||[]):S[s.id]||[];let i=0;while(i<a.length&&a[i][0]<m)i++;if(i>0&&i<a.length&&a[i][0]-a[i-1][0]<180){const f=(m-a[i-1][0])/(a[i][0]-a[i-1][0]);v=a[i-1][1]+f*(a[i][1]-a[i-1][1]);}}
+    if(v!=null)rows.push(`<span style="color:${s.col}">●</span> ${esc(s.lab)}: <b>${v.toFixed(2)}</b>`);}
+  if(on.mimdale){const p=lastVal(S.mimdale||[],m);if(p)rows.push(`<span style="color:#b48cff">●</span> Mimdale: <b>${p[1].toFixed(2)}</b>`);}
+  const tp=$('gTip');tp.innerHTML=`<b>${fDT(m)}</b><br>`+rows.join('<br>');tp.style.display='block';
+  const wx=svg.parentNode.clientWidth;const px=(sx/G.W)*rc.width;tp.style.left=Math.max(0,Math.min(px+10,wx-tp.offsetWidth-2))+'px';tp.style.top='30px';
+  $('gCur').innerHTML=`<line x1="${sx}" x2="${sx}" y1="${G.P1.y0}" y2="${G.Ht-18}" stroke="#fff" stroke-width="1" opacity=".6"/>`;}
+function zoom(f,cx){if(!view)return;const c=cx!=null?cx:(view[0]+view[1])/2;view=[c-(c-view[0])*f,c+(view[1]-c)*f];document.querySelectorAll('.gbar [data-r]').forEach(x=>x.classList.remove('on'));draw();}
+function svgX(e){const rc=$('gChart').getBoundingClientRect();return (e.clientX-rc.left)*(G.W/rc.width);}
+function mAt(e){return G.v0+(svgX(e)-G.L)/G.pw*(G.v1-G.v0);}
+function bind(){const svg=$('gChart');
+  svg.addEventListener('pointerdown',e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});svg.setPointerCapture(e.pointerId);
+    if(ptrs.size===1)drag={x0:e.clientX,v:view.slice(),moved:false};
+    else if(ptrs.size===2){const [a,b]=[...ptrs.values()];drag={pinch:Math.abs(a.x-b.x)||1,v:view.slice(),cm:mAt({clientX:(a.x+b.x)/2}),moved:true};}});
+  svg.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId)){if(e.pointerType==='mouse')tip(e.clientX);return;}ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(!drag||!G)return;
+    if(drag.pinch&&ptrs.size===2){const [a,b]=[...ptrs.values()];const f=drag.pinch/(Math.abs(a.x-b.x)||1);const c=drag.cm;view=[c-(c-drag.v[0])*f,c+(drag.v[1]-c)*f];draw();return;}
+    const dx=e.clientX-drag.x0;if(Math.abs(dx)>6)drag.moved=true;if(!drag.moved)return;
+    const rc=svg.getBoundingClientRect();const dm=-dx/(rc.width*G.pw/G.W)*(drag.v[1]-drag.v[0]);view=[drag.v[0]+dm,drag.v[1]+dm];
+    document.querySelectorAll('.gbar [data-r]').forEach(x=>x.classList.remove('on'));draw();});
+  const up=e=>{const wasTap=drag&&!drag.moved&&ptrs.size===1;ptrs.delete(e.pointerId);if(wasTap)tip(e.clientX);if(!ptrs.size)drag=null;};
+  svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);if(!ptrs.size)drag=null;});
+  svg.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'){$('gTip').style.display='none';const c=$('gCur');if(c)c.innerHTML='';}});
+  svg.addEventListener('wheel',e=>{if(!G)return;e.preventDefault();zoom(e.deltaY>0?1.2:1/1.2,mAt(e));},{passive:false});
+  document.querySelectorAll('.gbar [data-r]').forEach(b=>b.onclick=()=>setRange(b.dataset.r==='all'?'all':+b.dataset.r));
+  $('gZi').onclick=()=>zoom(1/1.5);$('gZo').onclick=()=>zoom(1.5);$('gRefresh').onclick=()=>load(true);
+  let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(shown)draw();},150);});}
+legend();bind();
+FT.onTab=FT.onTab||[];FT.onTab.push(t=>{shown=t==='gauges';if(shown){if(!D)load(true);else{load(false);draw();}}});
+setInterval(()=>{if(document.visibilityState==='visible'&&shown)load(true);},10*60e3);
+setInterval(()=>{if(shown)upd();},30e3);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&shown)load(false);});
+FT.gaugesReload=()=>load(true);
+window.__FT_GAUGES=()=>({D,view});
 })();
 </script>
 <script>

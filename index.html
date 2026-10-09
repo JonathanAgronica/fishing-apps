@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Fish Times">
-<meta name="app-version" content="202610091535">
+<meta name="app-version" content="202610091536">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -352,7 +352,7 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Fish Times build 202610091535</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Fish Times build 202610091536</span></footer>
 <script>
 /* Fish Times shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1079,7 +1079,7 @@ function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,M
   const showLag=on.lags,showMim=on.mimdale;const fs=11;
   const L=36,R=8,pw=W-L-R;const H1=Math.round(Math.min(330,Math.max(220,W*0.62)));
   let y=8;const P1={y0:y,h:H1};y+=H1+22;
-  const P2=showLag?{y0:y,h:120}:null;if(P2)y+=120+22;
+  const P2=showLag?{y0:y,h:120}:null;if(P2)y+=120+22+26;
   const P3=showMim?{y0:y,h:56}:null;if(P3)y+=56+22;
   const Ht=y+18;svg.setAttribute('viewBox',`0 0 ${W} ${Ht}`);svg.style.height=Ht+'px';
   const X=m=>L+(m-v0)/(v1-v0)*pw;const S=D.series;const maxN=Math.round(pw*1.5);
@@ -1124,7 +1124,7 @@ function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,M
     o+=`<clipPath id="gc2"><rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}"/></clipPath><g clip-path="url(#gc2)">`;
     for(const p of pts){const xx=X(p.bt).toFixed(1);o+=`<line x1="${xx}" x2="${xx}" y1="${Y2(p.lag-p.u)}" y2="${Y2(p.lag+p.u)}" stroke="${p.col}" stroke-width="1.2" opacity=".7"/><circle cx="${xx}" cy="${Y2(p.lag)}" r="3.2" fill="${p.col}"/>`;}
     o+='</g>';
-    o+=LAGS.map((Lg,i)=>`<circle cx="${L+8+i*Math.min(110,pw/4)}" cy="${P2.y0+P2.h-8}" r="3" fill="${Lg.col}"/><text x="${L+14+i*Math.min(110,pw/4)}" y="${P2.y0+P2.h-4}" font-size="${fs-1}" fill="#cfe">${Lg.lab.replace(' low-plateau',' LW')}</text>`).join('');}
+    const cw=pw/(pw>560?4:2);o+=LAGS.map((Lg,i)=>{const cx=L+8+(pw>560?i:i%2)*cw,cy=P2.y0+P2.h+12+(pw>560?0:(i>>1)*13);return `<circle cx="${cx}" cy="${cy-4}" r="3.5" fill="${Lg.col}"/><text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${Lg.lab.replace(' low-plateau',' low plateau')} (±err)</text>`;}).join('');}
   // panel 3: Mimdale
   let Y3=null;
   if(P3){const a=thin(S.mimdale||[],v0,v1,maxN);let mn=Infinity,mx=-Infinity;for(const p of a){mn=Math.min(mn,p[1]);mx=Math.max(mx,p[1]);}

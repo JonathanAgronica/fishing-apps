@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b3b3a">
-<title>Fish Times — mangrove jack bite times &amp; Baffle Creek tides</title>
+<title>Mac's Baffle Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Fish Times">
-<meta name="app-version" content="202610091536">
+<meta name="apple-mobile-web-app-title" content="Baffle Jacks">
+<meta name="app-version" content="202610091718">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -142,7 +142,7 @@ input:disabled{opacity:.4}
 </head>
 <body>
 <header>
-  <h1>🐟 <span>Fish Times</span></h1>
+  <h1>🐟 <span>Mac's Baffle Jacks</span></h1>
   <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
   <nav class="tabs"><a href="#bite" data-tab="bite">🎣 Bite times</a><a href="#baffle" data-tab="baffle">🌊 Baffle tides</a><a href="#gauges" data-tab="gauges">📡 Gauges</a></nav>
 </header>
@@ -352,9 +352,9 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Fish Times build 202610091536</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610091718</span></footer>
 <script>
-/* Fish Times shell: tabs, shared date, cross-tab hooks */
+/* Mac's Baffle Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
 FT.onTab=[];
 FT.showTab=function(t){if(t!=='bite'&&t!=='baffle'&&t!=='gauges')t='bite';
@@ -1124,7 +1124,7 @@ function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,M
     o+=`<clipPath id="gc2"><rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}"/></clipPath><g clip-path="url(#gc2)">`;
     for(const p of pts){const xx=X(p.bt).toFixed(1);o+=`<line x1="${xx}" x2="${xx}" y1="${Y2(p.lag-p.u)}" y2="${Y2(p.lag+p.u)}" stroke="${p.col}" stroke-width="1.2" opacity=".7"/><circle cx="${xx}" cy="${Y2(p.lag)}" r="3.2" fill="${p.col}"/>`;}
     o+='</g>';
-    const cw=pw/(pw>560?4:2);o+=LAGS.map((Lg,i)=>{const cx=L+8+(pw>560?i:i%2)*cw,cy=P2.y0+P2.h+12+(pw>560?0:(i>>1)*13);return `<circle cx="${cx}" cy="${cy-4}" r="3.5" fill="${Lg.col}"/><text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${Lg.lab.replace(' low-plateau',' low plateau')} (±err)</text>`;}).join('');}
+    const cw=pw/(pw>560?4:2);o+=LAGS.map((Lg,i)=>{const cx=L+8+(pw>560?i:i%2)*cw,cy=P2.y0+P2.h+12+(pw>560?0:(i>>1)*13);return `<circle cx="${cx}" cy="${cy-4}" r="3.5" fill="${Lg.col}"/><text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${Lg.lab.replace(' low-plateau',' low plateau')}</text>`;}).join('');}
   // panel 3: Mimdale
   let Y3=null;
   if(P3){const a=thin(S.mimdale||[],v0,v1,maxN);let mn=Infinity,mx=-Infinity;for(const p of a){mn=Math.min(mn,p[1]);mx=Math.max(mx,p[1]);}

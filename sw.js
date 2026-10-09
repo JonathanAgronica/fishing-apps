@@ -1,5 +1,5 @@
-/* Mac's Baffle Jacks service worker 202610091738 */
-const CACHE='fishtimes-202610091738';
+/* Mac's Baffle Jacks service worker 202610092152 */
+const CACHE='fishtimes-202610092152';
 const OURS=/^(fishtimes|landing|mangrove-jack|baffle-tides)-/;  /* only touch this site's caches (origin is shared with other Pages repos) */
 const ASSETS=["./", "./index.html", "./manifest.webmanifest", "./icons/icon-180.png", "./icons/icon-192.png", "./icons/icon-512.png", "./mangrove-jack/", "./mangrove-jack/index.html", "./baffle-tides/", "./baffle-tides/index.html", "./data/gauges.json"];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()));});

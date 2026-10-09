@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Baffle Jacks">
-<meta name="app-version" content="202610091738">
+<meta name="app-version" content="202610092152">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -353,7 +353,7 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610091738</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610092152</span></footer>
 <script>
 /* Mac's Baffle Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -460,7 +460,7 @@ function runInScore(t,runIn){let best=null;if(!runIn)return null;
     if(!best||s>best.v)best={v:s,r,x};}
   return best;}
 function tideFactor(t,ext,runIn,rangeN){let prev=null,next=null;for(const x of ext){if(x.t<=t)prev=x;else{next=x;break;}}
-  if(!prev||!next)return null;if(prev.high===next.high)return{v:0.5,label:prev.high?'Slack high':'No tide reaching here (pool level)',prev,next,rising:false};
+  if(!prev||!next)return null;if(prev.high===next.high)return{v:0.5,label:prev.high?'Slack high':'No tide reaching here (pool level)',prev,next,rising:false,ri:0,riRef:null};
   const f=(t-prev.t)/(next.t-prev.t),hAfter=(t-prev.t)/3600e3,hBefore=(next.t-t)/3600e3;
   let v,label,rising=!prev.high;
   if(prev.high===next.high){v=0.5;label=prev.high?'Slack high':'No tide reaching here (pool level)';rising=false;}

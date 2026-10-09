@@ -4,37 +4,951 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b3b3a">
+<title>Fish Times — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Fishing">
-<title>Fishing apps — Bundaberg & Baffle Creek</title>
+<meta name="apple-mobile-web-app-title" content="Fish Times">
+<meta name="app-version" content="202610091526">
 <style>
-:root{--bg:#0d1f22;--panel:#13292d;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--tide:#5cc8ff;--line:#25464b}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{background:linear-gradient(135deg,#0b3b3a,#1b2b40 60%,#3b1f16);padding:max(22px,env(safe-area-inset-top)) 18px 18px}
-h1{margin:0;font-size:1.4rem}header p{margin:6px 0 0;color:var(--mut);font-size:.9rem}
-main{max-width:640px;margin:0 auto;padding:14px}
-a.app{display:flex;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;color:var(--ink);text-decoration:none}
-a.app:hover{filter:brightness(1.1)}a.app img{width:64px;height:64px;border-radius:14px;flex:none}
-a.app b{font-size:1.1rem;display:block}a.app span{color:var(--mut);font-size:.88rem}
-.tip{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--mut);font-size:.88rem}
-.tip b{color:var(--ink)}footer{color:var(--mut);font-size:.75rem;text-align:center;padding:16px}
+
+:root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h2{margin:0 0 10px;font-size:1.05rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input,button,select{font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+input[type=text]{flex:1 1 180px;min-width:0}
+button{cursor:pointer;background:#20454a}
+button.pri{background:var(--acc);color:#1b1205;border-color:var(--acc);font-weight:600}
+button:hover{filter:brightness(1.12)}
+.mut{color:var(--mut);font-size:.86rem}
+#mj-results{list-style:none;margin:8px 0 0;padding:0}
+#mj-results li{padding:8px 10px;border-radius:8px;cursor:pointer;background:var(--panel2);margin-bottom:4px}
+#mj-results li:hover{background:#21434a}
+.notice{background:#3d2a12;border:1px solid #7a5420;color:#ffd9a8;border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:.9rem}
+.notice.err{background:#3d1616;border-color:#7a2a2a;color:#ffc4c4}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.stat{background:var(--panel2);border-radius:10px;padding:8px 10px}
+.stat b{display:block;font-size:1.02rem}
+.stat small{color:var(--mut)}
+.win{display:flex;gap:12px;align-items:flex-start;background:var(--panel2);border-radius:12px;padding:10px 12px;margin-bottom:8px;border-left:5px solid var(--acc)}
+.win .sc{font-size:1.5rem;font-weight:700;min-width:52px;text-align:center}
+.win .t{font-weight:600;font-size:1.05rem}
+.win ul{margin:4px 0 0;padding-left:18px;color:var(--mut);font-size:.88rem}
+#mj-chartWrap{position:relative}
+#mj-chart{width:100%;height:auto;display:block;touch-action:pan-y}
+#mj-tip{position:absolute;pointer-events:none;background:#081416ee;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:.8rem;display:none;white-space:nowrap}
+.hours{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:10px}
+.hr{border-radius:6px;text-align:center;padding:4px 0;font-size:.72rem;color:#071012;font-weight:600}
+.hr span{display:block;font-weight:400;font-size:.65rem;opacity:.8}
+.days{display:grid;grid-template-columns:repeat(7,minmax(118px,1fr));gap:8px;overflow-x:auto;padding-bottom:4px}
+.day{background:var(--panel2);border-radius:12px;padding:10px;cursor:pointer;border:2px solid transparent;min-width:118px}
+.day.sel{border-color:var(--acc)}
+.day .dn{font-weight:600}
+.day .stars{color:var(--acc);font-size:1.05rem;letter-spacing:1px}
+.day .ds{font-size:.78rem;color:var(--mut)}
+.bar{height:6px;border-radius:3px;background:#0a1719;margin:6px 0;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#3a7,#fc3,#f63)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.78rem;color:var(--mut);margin-top:6px}
+.legend i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle}
+details{background:var(--panel2);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+details summary{cursor:pointer;font-weight:600}
+details p,details li{color:var(--mut);font-size:.9rem}
+.rules{border-left:4px solid var(--good)}
+a{color:#7fd6ff}
+footer{color:var(--mut);font-size:.8rem;text-align:center;padding:10px 12px 30px}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--mut);border-top-color:transparent;border-radius:50%;animation:s 1s linear infinite;vertical-align:-2px}
+@keyframes s{to{transform:rotate(360deg)}}
+@media(max-width:560px){.hours{grid-template-columns:repeat(8,1fr)}.win .sc{font-size:1.25rem;min-width:42px}}
+
+/* ---- Baffle tides ---- */
+
+:root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--tide:#5cc8ff;--good:#57d18a;--bad:#ff7b6b;--line:#25464b}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h2{margin:0 0 10px;font-size:1.05rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input,button,select,textarea{font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+select{max-width:100%}
+button{cursor:pointer;background:#20454a}
+button.pri{background:var(--acc);color:#1b1205;border-color:var(--acc);font-weight:600}
+button.sm{padding:4px 8px;font-size:.8rem}
+button:hover{filter:brightness(1.12)}
+input[type=range]{width:100%;padding:0}
+.mut{color:var(--mut);font-size:.86rem}
+.notice{background:#3d2a12;border:1px solid #7a5420;color:#ffd9a8;border-radius:10px;padding:9px 12px;margin:8px 0;font-size:.9rem}
+.notice.info{background:#12303d;border-color:#245a72;color:#cfeeff}
+.notice.err{background:#3d1616;border-color:#7a2a2a;color:#ffc4c4}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.stat{background:var(--panel2);border-radius:10px;padding:8px 10px}
+.stat b{display:block;font-size:1.05rem}
+.stat small{color:var(--mut)}
+.hw{color:var(--tide)} .lw{color:#c9b6ff}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600;position:sticky;top:0;background:var(--panel)}
+tr.sel td{background:#20393e}
+tr.click{cursor:pointer}
+.tw{overflow-x:auto;max-height:520px}
+.tag{display:inline-block;font-size:.7rem;padding:1px 6px;border-radius:8px;background:#2a4a50;color:var(--mut);margin-left:4px}
+.tag.warn{background:#4a3a1a;color:#ffd38a}
+.tag.cal{background:#1d4a33;color:#9ff0c0}
+#bt-chart{width:100%;height:auto;display:block}
+details{background:var(--panel2);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+details summary{cursor:pointer;font-weight:600}
+details p,details li{color:var(--mut);font-size:.9rem}
+.pos{color:var(--bad)} .neg{color:var(--good)}
+a{color:#7fd6ff}
+footer{color:var(--mut);font-size:.8rem;text-align:center;padding:10px 12px 30px}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:.8rem;color:var(--mut)}
+@media(max-width:560px){th,td{padding:5px 3px;font-size:.8rem}}
+
+/* ---- combined shell ---- */
+body{padding-bottom:env(safe-area-inset-bottom)}
+header{background:linear-gradient(135deg,#0b3b3a,#1b2b40 60%,#3b1f16);padding:max(14px,env(safe-area-inset-top)) 16px 0}
+header h1{margin:0;font-size:1.3rem} header h1 span{color:var(--acc)}
+header p{margin:2px 0 8px;color:var(--mut);font-size:.82rem}
+nav.tabs{display:flex;gap:4px;max-width:1000px;margin:0 auto}
+nav.tabs a{flex:1;text-align:center;padding:10px 6px;border-radius:12px 12px 0 0;color:var(--mut);text-decoration:none;font-weight:600;background:#0d1f2288}
+nav.tabs a.on{background:var(--bg);color:var(--ink);box-shadow:inset 0 3px 0 var(--acc)}
+nav.tabs a[data-tab=baffle].on{box-shadow:inset 0 3px 0 var(--tide)}
+.tab[hidden]{display:none}
+.src{margin-top:8px;font-size:.84rem;background:#12303d;border:1px solid #245a72;color:#cfeeff;border-radius:10px;padding:7px 10px}
+.src:empty{display:none}
+input:disabled{opacity:.4}
 </style>
 </head>
 <body>
-<header><h1>🎣 Fishing apps</h1><p>Burnett Heads · Bundaberg · Baffle Creek — works offline once opened</p></header>
+<header>
+  <h1>🐟 <span>Fish Times</span></h1>
+  <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
+  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 Bite times</a><a href="#baffle" data-tab="baffle">🌊 Baffle tides</a></nav>
+</header>
 <main>
-  <a class="app" href="mangrove-jack/"><img src="mangrove-jack/icon-192.png" alt=""><div><b>Mangrove Jack Bite Times</b><span>Hourly bite score from light, tide, solunar, moon, water temp &amp; weather, with a 7-day outlook.</span></div></a>
-  <a class="app" href="baffle-tides/"><img src="baffle-tides/icon-192.png" alt=""><div><b>Baffle Creek Tides</b><span>Tide times along Baffle Creek from the mouth to Essendean Bridge, plus a benchmark log for your own observations.</span></div></a>
-  <div class="tip"><b>Add to home screen:</b> open an app (not this page) so its icon goes straight to it.<br>
-  iPhone (Safari): Share ⬆ → <i>Add to Home Screen</i>. Android (Chrome): ⋮ menu → <i>Add to Home screen / Install app</i>.<br>
-  Open each app once while online. After that it opens without signal; live tide, weather and gauge data still need a connection.</div>
+<div class="tab" id="tab-bite">
+
+  <section class="card">
+    <h2>📍 Location &amp; date</h2>
+    <div class="row">
+      <input type="text" id="mj-q" placeholder="Search place (e.g. Elliott Heads, Wartburg)" autocomplete="off">
+      <button id="mj-searchBtn">Search</button>
+      <button id="mj-geoBtn">📡 Use my location</button>
+      <button id="mj-defBtn" title="Burnett Heads">🏠 Default</button>
+    </div>
+    <ul id="mj-results"></ul>
+    <div class="row" style="margin-top:8px"><label class="mut" style="flex:1 1 220px">Baffle Creek spot <select id="mj-bafSel" style="width:100%"><option value="">— pick a Baffle Creek landmark —</option></select></label></div>
+    <div class="row" style="margin-top:8px">
+      <label class="mut">Date <input type="date" id="mj-date"></label>
+      <label class="mut" title="Shift model tide times to suit your spot, e.g. up-river creeks run later than the river mouth">Tide offset (min) <input type="number" id="mj-tideOff" value="0" step="5" style="width:80px"></label>
+      <button class="pri" id="mj-goBtn">Calculate</button>
+    </div>
+    <p class="mut" id="mj-locInfo" style="margin:8px 0 0"></p>
+    <div id="mj-tideSrc" class="src"></div>
+  </section>
+
+  <div id="mj-notices"></div>
+
+  <section class="card" id="mj-summaryCard">
+    <h2 id="mj-dayTitle">Selected day</h2>
+    <div class="grid" id="mj-stats"></div>
+  </section>
+
+  <section class="card">
+    <h2>🎯 Best bite windows</h2>
+    <div id="mj-windows"><span class="spin"></span> Loading…</div>
+  </section>
+
+  <section class="card">
+    <h2>📈 Hourly bite score &amp; tide</h2>
+    <div id="mj-chartWrap"><svg id="mj-chart" viewBox="0 0 960 330" role="img" aria-label="Bite score and tide chart"></svg><div id="mj-tip"></div></div>
+    <div class="legend">
+      <span><i style="background:var(--acc)"></i>Bite score (0–100)</span>
+      <span><i style="background:var(--tide)"></i>Tide height (m, model)</span>
+      <span><i style="background:#06101a"></i>Night</span>
+      <span><i style="background:#1c2f4a"></i>Twilight</span>
+      <span><i style="background:#c9a227"></i>Solunar major</span>
+      <span><i style="background:#7c6d3a"></i>Solunar minor</span>
+    </div>
+    <div class="hours" id="mj-hours"></div>
+  </section>
+
+  <section class="card">
+    <h2>📅 7-day outlook</h2>
+    <div class="days" id="mj-days"></div>
+    <p class="mut" style="margin:6px 0 0">Daily rating = average of the day's four best hours. Tap a day to view it.</p>
+  </section>
+
+  <section class="card">
+    <h2>🧠 How the score works</h2>
+    <details open><summary>Low light (≈34% weight)</summary><p>Jacks are ambush predators that hunt hardest at dawn, dusk and through the night. Civil/nautical twilight scores highest, night is strong, bright midday is weakest — though heavy cloud cover lifts daytime scores.</p></details>
+    <details><summary>Tide (≈30%)</summary><p>Run-in tide builds steadily toward the top; the <b>top of the tide</b> (water up in the mangroves and snags) and the <b>first of the run-out</b> score highest, as does the <b>last of the run-out</b> when bait is flushed out of drains. Dead-low slack and the middle of the run-out score lower. Bigger-range (spring) tides get a small bonus. Tide times come from the Open-Meteo marine model (an offshore grid cell) — use the tide offset to match your creek.</p></details>
+    <details><summary>Solunar (≈20%)</summary><p>Major periods: ~2 hours centred on the moon overhead (upper transit) and underfoot (lower transit). Minor periods: ~1 hour centred on moonrise and moonset. Scores taper toward the edges.</p></details>
+    <details><summary>Moon phase (≈6%)</summary><p>New and full moons (bigger tides, stronger feeding cues) get a boost; quarter moons are neutral.</p></details>
+    <details><summary>Weather (≈10%)</summary><p>Falling barometer and the build-up to storms boost the score; warm humid conditions help; a rapidly rising barometer, strong wind (&gt;25 km/h) and heavy rain are light penalties.</p></details>
+    <details><summary>Water temperature (multiplier)</summary><p>Sea-surface temperature scales the whole score: strong above ~24°C, fair 22–24°C, sluggish below ~20°C. If SST is unavailable a seasonal estimate is used (peak Oct–Apr in QLD). Note: estuary water is often warmer than the offshore SST shown.</p></details>
+  </section>
+
+  <section class="card rules">
+    <h2>📏 Queensland rules reminder</h2>
+    <p style="margin:0">Mangrove jack in Queensland tidal waters: <b>minimum size 35&nbsp;cm</b>, <b>possession limit 5</b> (per Fisheries Queensland, page last updated 25 Sep 2026). Rules change — always check the current limits before you keep a fish:
+    <a href="https://www.qld.gov.au/recreation/activities/boating-fishing/rec-fishing/rules/limits-tidal" target="_blank" rel="noopener">Size and possession limits in tidal waters (qld.gov.au)</a>. Also check closed waters, green zones and seasonal closures for other species (e.g. the Oct/Nov coral reef fin fish closures) via the <a href="https://www.qld.gov.au/recreation/activities/boating-fishing/rec-fishing/rules" target="_blank" rel="noopener">Fisheries Queensland rules</a> or the free Qld Fishing 2.0 app.</p>
+  </section>
+
+  <section class="notice">⚠️ <b>Disclaimer:</b> bite scores are an estimate built from general angling knowledge and model data (tides here are modelled, not official tide tables, and may be offset from your exact spot). They are not a guarantee of fish. For navigation and safety, use official Bureau of Meteorology / MSQ tide tables and forecasts.</section>
+
+</div>
+<div class="tab" id="tab-baffle" hidden>
+
+  <div class="notice">⚠️ <b>Not for navigation.</b> Estimates only, from a model built on limited calibration data (one week of upstream gauge records). Use official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ Queensland Tide Tables</a> for anything that matters, and watch the water.</div>
+
+  <section class="card">
+    <h2>📍 Spot on the creek</h2>
+    <div class="row">
+      <select id="bt-lm" aria-label="Landmark"></select>
+      <button id="bt-gps">📡 Use GPS</button>
+      <button id="bt-toBite" class="pri">🎣 Bite times here</button>
+    </div>
+    <div style="margin-top:10px">
+      <input type="range" id="bt-km" min="0" max="40" step="0.1" value="35.25" aria-label="Distance from mouth (km)">
+      <div class="row mut" style="justify-content:space-between"><span>Mouth 0 km</span><span id="bt-kmLbl"></span><span>40 km</span></div>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <label class="f">Date <input type="date" id="bt-date"></label>
+      <label class="f" title="Adds to all predicted heights, e.g. from live Bundaberg residual (storm surge / wind setup)">Height offset (m) <input type="number" id="bt-hoff" value="0" step="0.05" style="width:90px"></label>
+      <label class="f" title="Raise/lower the Essendean low-water base level (freshwater flow). Dry-weather default 0.">Upper-creek base adj (m) <input type="number" id="bt-badj" value="0" step="0.05" style="width:90px"></label>
+    </div>
+    <p class="mut" id="bt-locInfo" style="margin:8px 0 0"></p>
+    <div id="bt-locWarn"></div>
+  </section>
+
+  <section class="card">
+    <h2 id="bt-dayTitle">Today</h2>
+    <div class="grid" id="bt-stats"></div>
+    <svg id="bt-chart" viewBox="0 0 960 320" role="img" aria-label="Tide curve"></svg>
+    <div class="mut" style="display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem">
+      <span><b style="color:var(--acc)">━</b> Selected spot</span><span><b style="color:var(--tide)">━</b> Mouth (≈ Bundaberg, open coast)</span><span><b style="color:#ff7b6b">┅</b> Essendean Bridge</span><span>Heights m AHD (≈ mean sea level). Shaded band = timing uncertainty.</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>📅 7-day highs & lows at this spot</h2>
+    <div class="tw"><table id="bt-week"></table></div>
+  </section>
+
+  <section class="card">
+    <h2>🗺️ Whole stretch — selected day</h2>
+    <p class="mut" style="margin-top:0">Tap a row to select it. <span class="tag cal">cal</span> = calibration point, <span class="tag warn">est</span> = interpolated across a long uncalibrated gap.</p>
+    <div class="tw"><table id="bt-stretch"></table></div>
+  </section>
+
+  <section class="card">
+    <h2>📝 Benchmark log</h2>
+    <p class="mut" style="margin-top:0">Record what you actually see. The app compares it with the prediction for the same spot. Tick <b>apply</b> to fold your offsets into predictions near that spot (fades out over ±6 km).</p>
+    <div class="row">
+      <label class="f">Where <select id="bt-bLoc"><option value="cur">Current spot (slider)</option><option value="gps">GPS now</option></select></label>
+      <label class="f">When (AEST) <input type="datetime-local" id="bt-bTime"></label>
+      <label class="f">What <select id="bt-bType">
+        <option value="HW">High-tide turn (stopped rising)</option>
+        <option value="LW">Low-tide turn (started rising)</option>
+        <option value="LVL_AHD">Gauge-board reading (m AHD, e.g. Essendean flood board)</option>
+        <option value="LVL_LOCAL">Marker reading (local / arbitrary datum)</option>
+      </select></label>
+      <label class="f">Value (m) <input type="number" id="bt-bVal" step="0.01" style="width:90px"></label>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <input type="text" id="bt-bNote" placeholder="Note (e.g. 'measured at bridge pylon, slack water')" style="flex:1 1 240px">
+      <button class="pri" id="bt-bAdd">＋ Log observation</button>
+      <button id="bt-bNow" class="sm">time = now</button>
+    </div>
+    <div class="tw" style="margin-top:10px"><table id="bt-bTable"></table></div>
+    <div class="row" style="margin-top:8px">
+      <button id="bt-bExp">⬇ Export CSV</button>
+      <label class="f" style="flex-direction:row;align-items:center;gap:6px"><span>⬆ Import CSV</span><input type="file" id="bt-bImp" accept=".csv,text/csv"></label>
+      <button id="bt-bClear" class="sm">Clear all</button>
+    </div>
+    <p class="mut" id="bt-bSummary"></p>
+  </section>
+
+  <section class="card">
+    <h2>📡 Live gauges</h2>
+    <div class="row"><button id="bt-live">Load live Bundaberg gauge (≈2 MB)</button></div>
+    <div id="bt-liveOut" class="mut" style="margin-top:8px"></div>
+    <p class="mut">Upstream BoM gauges can't be read by a web page (no CORS) — open them directly:
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.039267.tbl.shtml" target="_blank" rel="noopener">Essendean Bridge 039267 (table)</a> ·
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.039267.plt.shtml" target="_blank" rel="noopener">plot</a> ·
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.539135.tbl.shtml" target="_blank" rel="noopener">Euleilah Ck @ Hills Rd 539135</a> ·
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.539132.tbl.shtml" target="_blank" rel="noopener">Mimdale 539132 (fresh flow)</a> ·
+      <a href="https://www.qld.gov.au/environment/coasts-waterways/beach/storm/storm-sites/burnett-heads" target="_blank" rel="noopener">Burnett Heads storm-tide site</a></p>
+  </section>
+
+  <section class="card">
+    <h2>🧪 How predictions are made</h2>
+    <details open><summary>1 · Base tide: Bundaberg (Burnett Heads) harmonic model</summary>
+      <p>41 tidal constituents (M2, S2, N2, K2, K1, O1, P1, Q1, M4, MS4, MN4, M6 …, with nodal corrections) fitted by least squares to the MSQ Bundaberg port gauge 051011A observed 10-minute record 2021–2025 (≈260k readings). Runs offline for any date.
+      Validation: vs official MSQ 2026 high/low predictions (1411 tides) HW timing RMS 4.5 min, LW 4.9 min, height RMS 0.02 m; vs held-out observed gauge data 2–9 Oct 2026, height RMS 0.06 m, HW timing RMS 12 min. Official MSQ 2026 Bundaberg times are also embedded and shown for comparison.</p></details>
+    <details><summary>2 · Along-creek transfer (calibration nodes)</summary><div id="bt-nodesTbl"></div>
+      <p>Each Bundaberg high/low is shifted in time and mapped in height using the values at your spot, interpolated linearly by distance between nodes; the curve between turns uses the standard cosine interpolation. Heights are m AHD (Bundaberg LAT→AHD −1.693 m per TMR; Winfield AHD ≈ LAT −1.53 assumes local MSL≈AHD, unverified).</p></details>
+    <details><summary>3 · What the Essendean gauge shows</summary>
+      <p>BoM 039267 (gauge zero = 0.00 m AHD, event-reported in 5 cm steps). 2–9 Oct 2026: 10 tidal peaks, on average 5 h 39 min (sd 44 min, range 4:44–6:51) after the observed Bundaberg high, i.e. ≈ 4 h 34 min after the MSQ-predicted Winfield high. Peak level ≈ −0.52 + 0.42 × Bundaberg HW (m LAT), r = 0.93. Lows are truncated at 0.37–0.57 m AHD (bed/fresh water pool), so the creek there drains for ~7 h and floods in 1–2 h. Bundaberg highs ≤ 2.13 m LAT produced no visible peak; ≥ 2.35 m did — Essendean only “sees” the bigger tide of each day in this period.</p></details>
+    <details><summary>4 · Limitations</summary>
+      <ul><li>Upstream calibration is one week (2–9 Oct 2026), low steady fresh flow (Mimdale 0.78 m all week). Floods or heavy rain will delay/flatten tides and raise levels upstream — expect big errors after rain.</li>
+      <li>No calibration between Winfield (3.4 km) and the Hills Rd gauge, which is on Euleilah Creek (≈25 km channel distance) and used as a proxy for the 16–35 km reach.</li>
+      <li>Mouth timing is assumed equal to Bundaberg/Bargara (open coast, MSQ planes); the Winfield offsets are MSQ “non-linear transfer” values (**), not a long gauge record.</li>
+      <li>Above Essendean the tidal limit is unknown — values are held at Essendean’s and flagged.</li>
+      <li>Wind, pressure and swell can shift real levels by 0.1–0.3 m (use the live residual).</li></ul></details>
+  </section>
+
+  <div class="notice">⚠️ Not for navigation. Predictions are estimates. Always use the official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ tide tables</a> and local knowledge; Baffle Creek’s bar and shallows change.</div>
+
+</div>
 </main>
-<footer>Estimates only, not for navigation. Build 202610091510</footer>
-<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Fish Times build 202610091526</span></footer>
+<script>
+/* Fish Times shell: tabs, shared date, cross-tab hooks */
+window.FT=(function(){const FT={};
+FT.showTab=function(t){if(t!=='bite'&&t!=='baffle')t='bite';
+  document.querySelectorAll('.tab').forEach(s=>s.hidden=s.id!=='tab-'+t);
+  document.querySelectorAll('nav.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.tab===t));
+  if(location.hash!=='#'+t)history.replaceState(null,'','#'+t);
+  try{localStorage.setItem('ft_tab',t);}catch(e){}document.body.dataset.tab=t;window.scrollTo(0,0);};
+FT.setDate=function(v,from){if(!v)return;if(from!=='bite'&&FT.biteSetDate)FT.biteSetDate(v);if(from!=='baffle'&&FT.baffleSetDate)FT.baffleSetDate(v);};
+addEventListener('hashchange',()=>FT.showTab(location.hash.slice(1)));
+return FT;})();
+</script>
+
+<script id="mj-core">
+/* ===================== Core computation (no DOM) ===================== */
+(function(root){
+'use strict';
+const PI=Math.PI, sin=Math.sin, cos=Math.cos, tan=Math.tan, asin=Math.asin, atan=Math.atan2, acos=Math.acos, rad=PI/180;
+const dayMs=864e5, J1970=2440588, J2000=2451545, e=rad*23.4397;
+const toDays=ms=>ms/dayMs-0.5+J1970-J2000;
+const ra_=(l,b)=>atan(sin(l)*cos(e)-tan(b)*sin(e),cos(l));
+const dec_=(l,b)=>asin(sin(b)*cos(e)+cos(b)*sin(e)*sin(l));
+const alt_=(H,phi,dec)=>asin(sin(phi)*sin(dec)+cos(phi)*cos(dec)*cos(H));
+const sidereal=(d,lw)=>rad*(280.16+360.9856235*d)-lw;
+function refraction(h){if(h<0)h=0;return 0.0002967/tan(h+0.00312536/(h+0.08901179));}
+function sunCoords(d){const M=rad*(357.5291+0.98560028*d);const C=rad*(1.9148*sin(M)+0.02*sin(2*M)+0.0003*sin(3*M));const L=M+C+rad*102.9372+PI;return{dec:dec_(L,0),ra:ra_(L,0)};}
+function moonCoords(d){const L=rad*(218.316+13.176396*d),M=rad*(134.963+13.064993*d),F=rad*(93.272+13.229350*d);const l=L+rad*6.289*sin(M),b=rad*5.128*sin(F),dt=385001-20905*cos(M);return{ra:ra_(l,b),dec:dec_(l,b),dist:dt};}
+function sunAlt(ms,lat,lng){const d=toDays(ms),c=sunCoords(d);return alt_(sidereal(d,rad*-lng)-c.ra,rad*lat,c.dec)/rad;}
+function moonPos(ms,lat,lng){const d=toDays(ms),c=moonCoords(d);const H=sidereal(d,rad*-lng)-c.ra;let h=alt_(H,rad*lat,c.dec);h+=refraction(h);return{alt:h/rad,H:Math.atan2(sin(H),cos(H))};}
+function moonIllum(ms){const d=toDays(ms),s=sunCoords(d),m=moonCoords(d),sd=149598000;const phi=acos(sin(s.dec)*sin(m.dec)+cos(s.dec)*cos(m.dec)*cos(s.ra-m.ra));const inc=atan(sd*sin(phi),m.dist-sd*cos(phi));const ang=atan(cos(s.dec)*sin(s.ra-m.ra),sin(s.dec)*cos(m.dec)-cos(s.dec)*sin(m.dec)*cos(s.ra-m.ra));return{fraction:(1+cos(inc))/2,phase:0.5+0.5*inc*(ang<0?-1:1)/PI};}
+
+/* --- timezone helpers (Intl based, DST-safe) --- */
+const dtfCache={};
+function tzParts(ms,tz){let f=dtfCache[tz];if(!f)f=dtfCache[tz]=new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});const p={};for(const x of f.formatToParts(new Date(ms)))p[x.type]=x.value;return{y:+p.year,mo:+p.month,d:+p.day,h:+p.hour%24,mi:+p.minute,s:+p.second};}
+function tzOffsetMs(ms,tz){const p=tzParts(ms,tz);return Date.UTC(p.y,p.mo-1,p.d,p.h,p.mi,p.s)-Math.floor(ms/1000)*1000;}
+/* UTC ms for local wall time y-m-d h:mi in tz */
+function localToUtc(y,mo,d,h,mi,tz){const guess=Date.UTC(y,mo-1,d,h,mi||0);let o=tzOffsetMs(guess,tz);let t=guess-o;const o2=tzOffsetMs(t,tz);if(o2!==o)t=guess-o2;return t;}
+function parseLocalIso(s,tz){const m=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/.exec(s);return localToUtc(+m[1],+m[2],+m[3],+m[4],+m[5],tz);}
+function ymd(ms,tz){const p=tzParts(ms,tz);return p.y+'-'+String(p.mo).padStart(2,'0')+'-'+String(p.d).padStart(2,'0');}
+function addDays(dateStr,n){const [y,m,d]=dateStr.split('-').map(Number);const t=new Date(Date.UTC(y,m-1,d+n));return t.toISOString().slice(0,10);}
+function dayStart(dateStr,tz){const [y,m,d]=dateStr.split('-').map(Number);return localToUtc(y,m,d,0,0,tz);}
+
+/* --- sun/moon events by sampling (robust for any timezone) --- */
+function crossings(fn,t0,t1,step,level){const out=[];let pt=t0,pv=fn(t0)-level;for(let t=t0+step;t<=t1;t+=step){const v=fn(t)-level;if((pv<0)!==(v<0)){let a=pt,b=t,fa=pv;for(let i=0;i<20;i++){const m=(a+b)/2,fm=fn(m)-level;if((fa<0)===(fm<0)){a=m;fa=fm}else b=m;}out.push({t:(a+b)/2,rising:v>pv});}pt=t;pv=v;}return out;}
+function sunMoonEvents(t0,t1,lat,lng){
+  const step=10*60e3;
+  const sa=t=>sunAlt(t,lat,lng);
+  const ev={sun:{},moon:{}};
+  ev.sunRiseSet=crossings(sa,t0,t1,step,-0.833);
+  ev.civil=crossings(sa,t0,t1,step,-6);
+  ev.nautical=crossings(sa,t0,t1,step,-12);
+  const ma=t=>moonPos(t,lat,lng).alt;
+  ev.moonRiseSet=crossings(ma,t0,t1,step,0.133);
+  // transits: hour angle crosses 0 (overhead) or ±pi (underfoot)
+  ev.transits=[];
+  const hs=t=>Math.sin(moonPos(t,lat,lng).H);
+  for(const c of crossings(hs,t0,t1,step,0)){const H=moonPos(c.t,lat,lng).H;ev.transits.push({t:c.t,over:Math.abs(H)<PI/2,alt:moonPos(c.t,lat,lng).alt});}
+  return ev;
+}
+
+/* --- interpolation of hourly series --- */
+function makeSeries(times,vals){ // times ms sorted, vals may contain null
+  return function(t){const n=times.length;if(!n||t<times[0]-3600e3||t>times[n-1]+3600e3)return null;
+    let i=Math.floor((t-times[0])/3600e3);i=Math.max(0,Math.min(n-2,i));
+    while(i>0&&times[i]>t)i--;while(i<n-2&&times[i+1]<t)i++;
+    const p0=vals[Math.max(0,i-1)],p1=vals[i],p2=vals[i+1],p3=vals[Math.min(n-1,i+2)];
+    if(p1==null&&p2==null)return null;if(p1==null)return p2;if(p2==null)return p1;
+    const u=Math.max(0,Math.min(1,(t-times[i])/(times[i+1]-times[i])));
+    if(p0==null||p3==null)return p1+(p2-p1)*u;
+    return 0.5*((2*p1)+(-p0+p2)*u+(2*p0-5*p1+4*p2-p3)*u*u+(-p0+3*p1-3*p2+p3)*u*u*u);};
+}
+function tideExtremes(tideFn,t0,t1){const step=6*60e3,out=[];let a=tideFn(t0),b=tideFn(t0+step);for(let t=t0+2*step;t<=t1;t+=step){const c=tideFn(t);if(a==null||b==null||c==null){a=b;b=c;continue;}
+  if((b>a&&b>=c)||(b<a&&b<=c)){const den=a-2*b+c;const off=den!==0?0.5*(a-c)/den:0;const tm=t-step+off*step;out.push({t:tm,h:tideFn(tm),high:b>a});}a=b;b=c;}
+  // drop tiny wiggles
+  const f=[];for(const x of out){const l=f[f.length-1];if(l&&l.high===x.high){if((x.high&&x.h>l.h)||(!x.high&&x.h<l.h))f[f.length-1]=x;}else if(l&&Math.abs(l.h-x.h)<0.08){f.pop();}else f.push(x);}return f;}
+
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lerp=(x,x0,x1,y0,y1)=>y0+(y1-y0)*clamp((x-x0)/(x1-x0));
+
+/* --- factor functions (0..1) --- */
+function lightFactor(alt,cloud){let v,label;
+  if(alt<-12){v=0.78;label='Night';}
+  else if(alt<-6){v=0.95;label='Nautical twilight';}
+  else if(alt<0){v=1.0;label=alt<-3?'Twilight':'Sunrise/sunset low light';}
+  else if(alt<8){v=lerp(alt,0,8,0.95,0.62);label='Low sun';}
+  else if(alt<20){v=lerp(alt,8,20,0.62,0.35);label='Morning/afternoon sun';}
+  else {v=lerp(alt,20,50,0.35,0.22);label='Bright daylight';}
+  if(alt>0&&cloud!=null){v=Math.min(1,v+(1-v)*0.35*cloud/100);if(cloud>75)label+=' (overcast)';}
+  return{v,label};}
+function tideFactor(t,ext){let prev=null,next=null;for(const x of ext){if(x.t<=t)prev=x;else{next=x;break;}}
+  if(!prev||!next)return null;if(prev.high===next.high)return{v:0.5,label:prev.high?'Slack high':'No tide reaching here (pool level)',prev,next,rising:false};const f=(t-prev.t)/(next.t-prev.t),hAfter=(t-prev.t)/3600e3,hBefore=(next.t-t)/3600e3;
+  let v,label;
+  if(!prev.high){ // rising
+    if(hAfter<0.75){v=0.45;label='Low slack / turn';}
+    else if(hBefore<1.25){v=0.98;label='Top of the run-in';}
+    else{v=lerp(f,0.1,0.8,0.6,0.88);label='Run-in tide';}
+  }else{ // falling
+    if(hAfter<1.5){v=lerp(hAfter,0,1.5,0.95,0.85);label=hAfter<0.5?'High tide turn':'First of the run-out';}
+    else if(hBefore<1.75){v=lerp(hBefore,1.75,0.4,0.72,0.9);if(hBefore<0.4)v=0.8;label='Last of the run-out';}
+    else{v=lerp(f,0.3,0.6,0.7,0.42);label='Mid run-out';}
+  }
+  return{v,label,prev,next,rising:!prev.high};}
+function solunarFactor(t,ev){let best={v:0,label:''};
+  for(const x of ev.transits){const dh=Math.abs(t-x.t)/3600e3;const v=dh<=1?1:dh<1.6?lerp(dh,1,1.6,1,0):0;if(v>best.v)best={v,label:'Major solunar (moon '+(x.over?'overhead':'underfoot')+')',ev:x,major:true};}
+  for(const x of ev.moonRiseSet){const dh=Math.abs(t-x.t)/3600e3;const v=dh<=0.5?0.7:dh<0.9?lerp(dh,0.5,0.9,0.7,0):0;if(v>best.v)best={v,label:'Minor solunar ('+(x.rising?'moonrise':'moonset')+')',ev:x,major:false};}
+  return best;}
+function moonPhaseFactor(phase){const d=Math.min(phase,Math.abs(phase-0.5),1-phase);return clamp(1-d/0.25);} // 1 at new/full, 0 at quarters
+function phaseName(p){const n=['New moon','Waxing crescent','First quarter','Waxing gibbous','Full moon','Waning gibbous','Last quarter','Waning crescent'];return n[Math.floor(((p+1/16)%1)*8)];}
+function phaseEmoji(p,lat){const e=['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];let i=Math.floor(((p+1/16)%1)*8);if(lat<0&&i%4)i=8-i;return e[i];}
+function tempFactor(sst,month,lat){
+  if(sst!=null){return{v:sst>=26?1:sst>=24?lerp(sst,24,26,0.9,1):sst>=22?lerp(sst,22,24,0.72,0.9):sst>=20?lerp(sst,20,22,0.5,0.72):lerp(sst,16,20,0.2,0.5),label:'SST '+sst.toFixed(1)+'°C',est:false};}
+  let m=month; if(lat>0)m=((m+5)%12)+1; // flip seasons for N hemisphere
+  const tbl={1:1,2:1,3:0.95,4:0.85,5:0.65,6:0.45,7:0.4,8:0.45,9:0.6,10:0.82,11:0.95,12:1};
+  return{v:tbl[m],label:'Seasonal estimate (no SST)',est:true};}
+function weatherFactor(w){ // w: {p, dp3, wind, rain, cloud, rh, temp, code}
+  if(!w)return{v:0.5,notes:[]};let v=0.5;const notes=[];
+  if(w.dp3!=null){if(w.dp3<=-0.6){v+=clamp((-w.dp3-0.6)/2.4)*0.25+0.05;notes.push('Falling barometer ('+w.dp3.toFixed(1)+' hPa/3h)');}
+    else if(w.dp3>=1.2){v-=clamp((w.dp3-1.2)/2)*0.15;notes.push('Rising barometer');}}
+  if(w.code!=null&&w.code>=95){v+=0.15;notes.push('Thunderstorm activity');}
+  else if(w.stormAhead){v+=0.1;notes.push('Storms building (next 6h)');}
+  if(w.temp!=null&&w.rh!=null&&w.temp>=24&&w.rh>=65){v+=0.08;notes.push('Warm & humid');}
+  if(w.wind!=null){if(w.wind>35){v-=0.22;notes.push('Strong wind '+Math.round(w.wind)+' km/h');}else if(w.wind>25){v-=0.12;notes.push('Fresh wind '+Math.round(w.wind)+' km/h');}else if(w.wind<12)v+=0.03;}
+  if(w.rain!=null){if(w.rain>8){v-=0.15;notes.push('Heavy rain');}else if(w.rain>3){v-=0.06;notes.push('Steady rain');}}
+  return{v:clamp(v),notes};}
+
+/* --- main day computation --- */
+const W={light:0.34,tide:0.30,sol:0.20,moon:0.06,wx:0.10};
+function computeDay(opts){
+  const{dateStr,tz,lat,lng,tideFn,ext,wxFn,sstFn,stepMin=15,weekRange}=opts;
+  const t0=dayStart(dateStr,tz),t1=dayStart(addDays(dateStr,1),tz);
+  const ev=sunMoonEvents(t0-4*3600e3,t1+4*3600e3,lat,lng);
+  const illum=moonIllum((t0+t1)/2);const mpf=moonPhaseFactor(illum.phase);
+  const month=+dateStr.slice(5,7);
+  // tide range for the day
+  let range=null;const dayExt=ext?ext.filter(x=>x.t>=t0-6*3600e3&&x.t<=t1+6*3600e3):[];
+  if(dayExt.length>=2){let r=0;for(let i=1;i<dayExt.length;i++)r=Math.max(r,Math.abs(dayExt[i].h-dayExt[i-1].h));range=r;}
+  const rangeBonus=(range!=null&&weekRange)?clamp((range/weekRange.max-0.6)/0.4)*0.05:0;
+  const pts=[];
+  for(let t=t0;t<t1;t+=stepMin*60e3){
+    const wx=wxFn?wxFn(t):null;
+    const L=lightFactor(sunAlt(t,lat,lng),wx?wx.cloud:null);
+    const T=ext&&ext.length?tideFactor(t,ext):null;
+    const S=solunarFactor(t,ev);
+    const sst=sstFn?sstFn(t):null;const TF=tempFactor(sst,month,lat);
+    const WX=weatherFactor(wx);
+    let raw,wsum;
+    if(T){raw=W.light*L.v+W.tide*(T.v+rangeBonus)+W.sol*S.v+W.moon*mpf+W.wx*WX.v;wsum=1;}
+    else{raw=(W.light*L.v+W.sol*S.v+W.moon*mpf+W.wx*WX.v)/(1-W.tide);wsum=1;}
+    const mult=0.45+0.55*TF.v;
+    // map: raw ~0.35..0.95 => 0..100
+    let score=clamp((raw*mult-0.25)/0.68)*100;
+    pts.push({t,score:Math.round(score),L,T,S,TF,WX,wx,sst,tide:tideFn?tideFn(t):null,alt:sunAlt(t,lat,lng)});
+  }
+  const hourly=[];for(let i=0;i<pts.length;i+=60/stepMin){const sl=pts.slice(i,i+60/stepMin);hourly.push({t:sl[0].t,score:Math.round(sl.reduce((a,b)=>a+b.score,0)/sl.length)});}
+  const top4=[...hourly].sort((a,b)=>b.score-a.score).slice(0,4);
+  const rating=Math.round(top4.reduce((a,b)=>a+b.score,0)/top4.length);
+  return{dateStr,t0,t1,ev,illum,mpf,pts,hourly,rating,range,dayExt:ext?ext.filter(x=>x.t>=t0&&x.t<t1):[],windows:findWindows(pts,stepMin)};
+}
+function findWindows(pts,stepMin){
+  const max=Math.max(...pts.map(p=>p.score));const thr=Math.max(45,max-14);
+  let wins=[],cur=null;
+  pts.forEach((p,i)=>{if(p.score>=thr){if(!cur)cur={s:i,e:i,peak:i};cur.e=i;if(p.score>pts[cur.peak].score)cur.peak=i;}else if(cur){wins.push(cur);cur=null;}});
+  if(cur)wins.push(cur);
+  // merge windows separated by short dips (<=1 h)
+  wins=wins.reduce((a,w)=>{const l=a[a.length-1];if(l&&w.s-l.e<=Math.round(60/stepMin)){l.e=w.e;if(pts[w.peak].score>pts[l.peak].score)l.peak=w.peak;}else a.push(w);return a;},[]);
+  // split overly long windows around the peak (cap at 3h)
+  const maxLen=Math.round(180/stepMin);
+  wins=wins.map(w=>{if(w.e-w.s+1<=maxLen)return w;let s=w.peak,e=w.peak;while(e-s+1<maxLen){const ls=s>w.s?pts[s-1].score:-1,re=e<w.e?pts[e+1].score:-1;if(ls<0&&re<0)break;if(ls>=re)s--;else e++;}return{s,e,peak:w.peak};});
+  // min length 45 min: pad
+  wins.forEach(w=>{while((w.e-w.s+1)*stepMin<60){if(w.s>0)w.s--;if((w.e-w.s+1)*stepMin<60&&w.e<pts.length-1)w.e++;if(w.s===0&&w.e===pts.length-1)break;}});
+  wins.sort((a,b)=>pts[b.peak].score-pts[a.peak].score);
+  const keep=wins.filter((w,i)=>i<2||pts[w.peak].score>=Math.max(50,max-12)).slice(0,4);
+  return keep.map(w=>({start:pts[w.s].t,end:pts[w.e].t+stepMin*60e3,peak:pts[w.peak],score:pts[w.peak].score})).sort((a,b)=>a.start-b.start);
+}
+root.MJ={sunAlt,moonPos,moonIllum,tzParts,tzOffsetMs,localToUtc,parseLocalIso,ymd,addDays,dayStart,sunMoonEvents,makeSeries,tideExtremes,lightFactor,tideFactor,solunarFactor,moonPhaseFactor,phaseName,phaseEmoji,tempFactor,weatherFactor,computeDay,findWindows,clamp};
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script id="bt-data">window.BAFFLE_DATA={"harm":{"names":["SA","SSA","MM","MSF","MF","2Q1","Q1","RHO1","O1","M1","P1","S1","K1","J1","OO1","2N2","MU2","N2","NU2","M2","LAM2","L2","T2","S2","R2","K2","2SM2","MO3","M3","MK3","SK3","MN4","M4","MS4","MK4","S4","2MN6","M6","2MS6","2SM6","M8"],"speeds":[0.0410686,0.0821373,0.5443747,1.0158958,1.0980331,12.8542862,13.3986609,13.4715145,13.9430356,14.4966939,14.9589314,15.0,15.0410686,15.5854433,16.1391017,27.8953548,27.9682084,28.4397295,28.5125831,28.9841042,29.4556253,29.5284789,29.9589333,30.0,30.0410667,30.0821373,31.0158958,42.9271398,43.4761563,44.0251729,45.0410686,57.4238337,57.9682084,58.9841042,59.0662415,60.0,86.407938,86.9523127,87.9682084,88.9841042,115.9364166],"amp":[0.083,0.0041,0.0061,0.0066,0.0063,0.0037,0.0247,0.0045,0.1158,0.0096,0.0654,0.0118,0.2211,0.0138,0.0102,0.0298,0.0248,0.189,0.0373,0.8657,0.012,0.0313,0.0156,0.2961,0.0058,0.0873,0.0054,0.0063,0.0246,0.0025,0.004,0.0041,0.0074,0.0053,0.0021,0.0015,0.0066,0.0105,0.017,0.0038,0.0009],"pha":[62.18,76.37,358.02,274.15,256.58,9.99,45.4,330.13,63.38,155.93,161.78,289.73,147.79,170.36,72.68,162.98,111.85,172.24,94.38,179.51,47.21,357.5,267.92,257.7,79.32,51.37,116.55,13.55,261.97,178.83,310.65,318.62,340.36,45.76,205.42,88.07,220.72,224.11,318.84,49.96,67.73],"z0":1.8109,"fit":"MSQ observed 10-min 2021-2025, 247148 points"},"hilo2026":[[4,66,0],[400,326,1],[786,93,0],[1133,254,1],[1499,56,0],[1893,344,1],[2283,80,0],[2631,259,1],[2990,47,0],[3383,355,1],[3775,72,0],[4123,264,1],[4480,44,0],[4871,358,1],[5264,69,0],[5611,266,1],[5967,46,0],[6357,353,1],[6749,72,0],[7096,265,1],[7453,56,0],[7841,340,1],[8232,79,0],[8580,260,1],[8936,73,0],[9324,321,1],[9712,88,0],[10065,252,1],[10420,95,0],[10804,300,1],[11191,99,0],[11550,244,1],[11907,118,0],[12286,277,1],[12672,108,0],[13043,237,1],[13404,139,0],[13771,256,1],[14156,114,0],[14550,235,1],[14921,152,0],[15266,238,1],[15648,118,0],[16075,240,1],[16452,154,0],[16770,227,1],[17149,118,0],[17589,254,1],[17967,145,0],[18281,223,1],[18651,114,0],[19081,270,1],[19463,132,0],[19785,225,1],[20146,106,0],[20563,284,1],[20947,120,0],[21277,232,1],[21632,96,0],[22039,296,1],[22425,110,0],[22759,240,1],[23113,86,0],[23513,306,1],[23902,102,0],[24238,247,1],[24589,78,0],[24986,314,1],[25376,96,0],[25714,255,1],[26065,70,0],[26460,320,1],[26850,91,0],[27190,261,1],[27540,67,0],[27932,323,1],[28324,88,0],[28666,265,1],[29015,67,0],[29405,322,1],[29799,86,0],[30144,268,1],[30492,72,0],[30880,317,1],[31274,86,0],[31624,268,1],[31972,83,0],[32355,306,1],[32751,88,0],[33108,266,1],[33456,99,0],[33835,290,1],[34231,93,0],[34598,263,1],[34949,118,0],[35320,271,1],[35718,99,0],[36100,261,1],[36458,135,0],[36819,251,1],[37217,104,0],[37618,265,1],[37994,142,0],[38339,234,1],[38731,105,0],[39141,279,1],[39531,134,0],[39870,229,1],[40247,97,0],[40656,300,1],[41050,117,0],[41394,236,1],[41757,84,0],[42157,322,1],[42551,98,0],[42898,250,1],[43257,68,0],[43649,341,1],[44041,83,0],[44389,264,1],[44748,55,0],[45135,353,1],[45525,73,0],[45875,276,1],[46233,47,0],[46617,357,1],[47005,68,0],[47356,283,1],[47715,48,0],[48096,351,1],[48482,69,0],[48836,284,1],[49195,57,0],[49573,338,1],[49956,75,0],[50313,281,1],[50672,74,0],[51047,318,1],[51429,84,0],[51789,273,1],[52149,96,0],[52519,294,1],[52899,94,0],[53266,263,1],[53627,119,0],[53993,270,1],[54370,105,0],[54747,253,1],[55114,141,0],[55471,246,1],[55846,116,0],[56239,243,1],[56620,158,0],[56962,225,1],[57334,127,0],[57757,238,1],[58166,164,0],[58475,210,1],[58843,134,0],[59307,244,1],[59709,154,0],[60011,207,1],[60366,133,0],[60817,260,1],[61207,138,0],[61531,216,1],[61881,123,0],[62302,277,1],[62689,124,0],[63023,230,1],[63376,108,0],[63780,293,1],[64166,110,0],[64503,244,1],[64859,93,0],[65253,308,1],[65639,99,0],[65979,258,1],[66335,79,0],[66725,320,1],[67111,88,0],[67455,271,1],[67811,68,0],[68197,329,1],[68584,79,0],[68930,283,1],[69285,61,0],[69668,333,1],[70055,72,0],[70407,292,1],[70761,60,0],[71141,331,1],[71528,68,0],[71884,297,1],[72239,66,0],[72614,321,1],[73001,70,0],[73363,298,1],[73719,79,0],[74088,303,1],[74475,76,0],[74845,293,1],[75203,98,0],[75567,280,1],[75953,87,0],[76334,285,1],[76695,119,0],[77052,254,1],[77439,101,0],[77835,275,1],[78208,139,0],[78555,229,1],[78942,115,0],[79357,270,1],[79759,146,0],[80095,214,1],[80473,120,0],[80894,279,1],[81305,133,0],[81648,219,1],[82005,111,0],[82411,299,1],[82815,112,0],[83162,238,1],[83519,93,0],[83910,319,1],[84305,94,0],[84655,259,1],[85014,75,0],[85396,335,1],[85786,80,0],[86139,276,1],[86500,62,0],[86877,343,1],[87263,71,0],[87618,289,1],[87980,56,0],[88353,343,1],[88737,68,0],[89095,297,1],[89458,58,0],[89827,335,1],[90208,68,0],[90570,299,1],[90934,67,0],[91299,321,1],[91676,72,0],[92042,296,1],[92408,82,0],[92770,302,1],[93143,80,0],[93515,289,1],[93883,100,0],[94239,280,1],[94609,89,0],[94987,280,1],[95359,119,0],[95710,257,1],[96076,102,0],[96463,267,1],[96841,138,0],[97185,235,1],[97549,116,0],[97947,254,1],[98339,154,0],[98672,214,1],[99034,131,0],[99450,242,1],[99871,163,0],[100186,200,1],[100541,143,0],[100997,239,1],[101437,155,0],[101739,199,1],[102077,145,0],[102536,252,1],[102937,139,0],[103267,212,1],[103607,134,0],[104026,270,1],[104417,123,0],[104756,231,1],[105106,116,0],[105505,288,1],[105892,107,0],[106235,250,1],[106590,99,0],[106979,305,1],[107365,91,0],[107712,269,1],[108070,82,0],[108451,318,1],[108837,77,0],[109188,288,1],[109547,70,0],[109924,327,1],[110309,65,0],[110665,304,1],[111026,62,0],[111398,328,1],[111780,56,0],[112142,317,1],[112505,60,0],[112873,322,1],[113253,54,0],[113622,323,1],[113985,66,0],[114348,307,1],[114727,58,0],[115102,322,1],[115470,80,0],[115827,285,1],[116204,69,0],[116587,314,1],[116957,99,0],[117310,259,1],[117685,86,0],[118079,300,1],[118455,120,0],[118802,233,1],[119175,105,0],[119584,285,1],[119977,136,0],[120321,212,1],[120689,122,0],[121110,277,1],[121532,136,0],[121875,209,1],[122231,125,0],[122642,283,1],[123060,121,0],[123412,225,1],[123761,114,0],[124154,297,1],[124557,103,0],[124912,248,1],[125268,97,0],[125647,311,1],[126041,88,0],[126399,269,1],[126759,83,0],[127131,319,1],[127518,78,0],[127879,285,1],[128242,75,0],[128609,321,1],[128991,71,0],[129356,297,1],[129721,72,0],[130082,317,1],[130460,68,0],[130830,304,1],[131197,74,0],[131554,307,1],[131928,68,0],[132301,307,1],[132673,81,0],[133025,294,1],[133395,71,0],[133772,305,1],[134147,91,0],[134495,278,1],[134860,77,0],[135242,299,1],[135622,103,0],[135966,260,1],[136326,87,0],[136713,289,1],[137099,117,0],[137438,241,1],[137794,99,0],[138187,277,1],[138580,131,0],[138915,224,1],[139267,114,0],[139668,262,1],[140071,144,0],[140401,208,1],[140750,129,0],[141165,249,1],[141586,152,0],[141909,198,1],[142253,141,0],[142688,243,1],[143131,149,0],[143446,198,1],[143782,146,0],[144224,249,1],[144641,135,0],[144977,211,1],[145314,137,0],[145726,264,1],[146127,119,0],[146473,232,1],[146820,122,0],[147211,281,1],[147604,100,0],[147957,255,1],[148311,104,0],[148691,296,1],[149080,82,0],[149437,279,1],[149797,88,0],[150169,307,1],[150555,66,0],[150917,302,1],[151280,75,0],[151647,312,1],[152029,53,0],[152398,321,1],[152764,67,0],[153126,309,1],[153504,46,0],[153878,335,1],[154249,64,0],[154606,300,1],[154980,45,0],[155360,341,1],[155735,69,0],[156089,284,1],[156459,52,0],[156845,338,1],[157225,80,0],[157575,263,1],[157941,66,0],[158335,326,1],[158719,96,0],[159067,241,1],[159429,84,0],[159832,310,1],[160224,111,0],[160571,222,1],[160927,104,0],[161340,295,1],[161745,120,0],[162092,212,1],[162446,118,0],[162857,286,1],[163275,118,0],[163628,217,1],[163979,122,0],[164373,286,1],[164785,109,0],[165148,233,1],[165499,114,0],[165878,290,1],[166280,97,0],[166647,254,1],[167004,105,0],[167370,293,1],[167763,87,0],[168134,272,1],[168495,97,0],[168855,293,1],[169240,79,0],[169614,287,1],[169980,92,0],[170333,290,1],[170712,74,0],[171090,298,1],[171460,90,0],[171809,284,1],[172181,71,0],[172563,305,1],[172937,90,0],[173282,275,1],[173648,70,0],[174034,308,1],[174413,92,0],[174755,265,1],[175115,72,0],[175505,307,1],[175889,97,0],[176228,254,1],[176583,77,0],[176975,302,1],[177364,103,0],[177702,242,1],[178052,85,0],[178447,293,1],[178842,112,0],[179176,231,1],[179524,95,0],[179922,282,1],[180323,121,0],[180656,219,1],[181000,107,0],[181402,271,1],[181811,130,0],[182143,210,1],[182483,119,0],[182894,260,1],[183311,136,0],[183642,204,1],[183979,130,0],[184398,254,1],[184822,134,0],[185156,205,1],[185492,137,0],[185910,256,1],[186330,125,0],[186675,216,1],[187016,134,0],[187415,263,1],[187823,109,0],[188180,236,1],[188529,124,0],[188910,273,1],[189308,92,0],[189674,261,1],[190030,110,0],[190398,281,1],[190789,75,0],[191161,287,1],[191524,96,0],[191885,286,1],[192270,60,0],[192646,311,1],[193016,83,0],[193372,287,1],[193751,48,0],[194131,331,1],[194506,73,0],[194859,283,1],[195232,42,0],[195617,345,1],[195998,68,0],[196348,274,1],[196715,42,0],[197104,350,1],[197490,69,0],[197838,263,1],[198200,48,0],[198595,346,1],[198984,75,0],[199332,250,1],[199689,60,0],[200087,336,1],[200480,85,0],[200829,237,1],[201182,76,0],[201585,320,1],[201982,94,0],[202331,228,1],[202682,93,0],[203085,305,1],[203488,101,0],[203838,224,1],[204191,108,0],[204588,291,1],[204994,103,0],[205353,227,1],[205708,118,0],[206092,281,1],[206495,100,0],[206867,238,1],[207225,120,0],[207590,274,1],[207989,95,0],[208372,253,1],[208733,118,0],[209085,267,1],[209475,89,0],[209865,268,1],[210230,113,0],[210573,262,1],[210954,84,0],[211348,282,1],[211719,108,0],[212056,257,1],[212429,79,0],[212826,293,1],[213202,104,0],[213538,252,1],[213901,76,0],[214300,300,1],[214681,100,0],[215016,248,1],[215372,74,0],[215773,304,1],[216159,97,0],[216493,243,1],[216844,74,0],[217244,304,1],[217635,97,0],[217969,239,1],[218317,76,0],[218715,301,1],[219110,99,0],[219445,234,1],[219791,80,0],[220188,296,1],[220587,103,0],[220921,229,1],[221265,86,0],[221664,289,1],[222066,108,0],[222401,224,1],[222743,94,0],[223143,281,1],[223548,113,0],[223885,220,1],[224224,104,0],[224626,274,1],[225036,115,0],[225375,217,1],[225713,114,0],[226116,268,1],[226529,114,0],[226875,219,1],[227212,123,0],[227611,264,1],[228025,108,0],[228382,227,1],[228723,128,0],[229111,262,1],[229520,98,0],[229890,243,1],[230243,126,0],[230612,261,1],[231013,85,0],[231393,265,1],[231755,116,0],[232111,261,1],[232503,72,0],[232890,289,1],[233260,103,0],[233610,261,1],[233991,60,0],[234382,313,1],[234760,89,0],[235107,260,1],[235480,50,0],[235874,333,1],[236257,77,0],[236604,259,1],[236970,43,0],[237364,347,1],[237752,68,0],[238100,257,1],[238460,40,0],[238855,354,1],[239247,64,0],[239595,256,1],[239951,41,0],[240345,352,1],[240739,65,0],[241088,252,1],[241442,49,0],[241836,343,1],[242231,69,0],[242580,248,1],[242934,63,0],[243327,328,1],[243721,77,0],[244073,243,1],[244426,80,0],[244817,309,1],[245212,85,0],[245568,238,1],[245923,100,0],[246308,288,1],[246704,92,0],[247070,235,1],[247427,118,0],[247800,269,1],[248195,96,0],[248579,238,1],[248941,130,0],[249296,252,1],[249687,97,0],[250090,246,1],[250459,133,0],[250794,239,1],[251177,96,0],[251594,259,1],[251968,128,0],[252292,232,1],[252665,92,0],[253083,272,1],[253463,119,0],[253786,229,1],[254150,88,0],[254565,284,1],[254949,110,0],[255275,229,1],[255630,83,0],[256043,292,1],[256429,102,0],[256759,231,1],[257109,78,0],[257517,298,1],[257906,96,0],[258239,233,1],[258585,74,0],[258990,301,1],[259381,92,0],[259715,235,1],[260061,72,0],[260461,302,1],[260855,91,0],[261191,237,1],[261537,71,0],[261934,302,1],[262330,91,0],[262667,237,1],[263012,73,0],[263407,299,1],[263805,92,0],[264145,237,1],[264489,78,0],[264882,294,1],[265281,93,0],[265625,236,1],[265967,87,0],[266357,287,1],[266760,93,0],[267110,236,1],[267450,98,0],[267838,278,1],[268243,94,0],[268601,236,1],[268941,111,0],[269322,267,1],[269730,93,0],[270100,240,1],[270444,122,0],[270816,254,1],[271223,90,0],[271608,249,1],[271965,128,0],[272323,243,1],[272724,85,0],[273120,265,1],[273493,123,0],[273837,235,1],[274226,77,0],[274626,287,1],[275010,109,0],[275350,235,1],[275726,66,0],[276128,309,1],[276516,92,0],[276859,239,1],[277224,54,0],[277624,330,1],[278015,76,0],[278361,247,1],[278720,43,0],[279117,346,1],[279509,63,0],[279856,255,1],[280214,35,0],[280605,355,1],[280997,55,0],[281346,262,1],[281703,33,0],[282092,355,1],[282483,53,0],[282834,265,1],[283191,39,0],[283577,345,1],[283966,56,0],[284320,263,1],[284677,53,0],[285060,327,1],[285448,64,0],[285806,258,1],[286162,73,0],[286541,303,1],[286928,75,0],[287293,250,1],[287649,98,0],[288022,277,1],[288408,85,0],[288783,242,1],[289142,122,0],[289505,251,1],[289891,95,0],[290284,237,1],[290654,139,0],[290998,228,1],[291380,102,0],[291800,238,1],[292187,144,0],[292503,213,1],[292879,105,0],[293322,247,1],[293713,136,0],[294019,207,1],[294382,104,0],[294823,260,1],[295212,123,0],[295530,210,1],[295882,97,0],[296309,273,1],[296697,109,0],[297023,218,1],[297373,89,0],[297787,285,1],[298175,98,0],[298506,226,1],[298856,80,0],[299262,295,1],[299649,90,0],[299984,235,1],[300333,71,0],[300734,302,1],[301122,83,0],[301458,242,1],[301809,64,0],[302204,308,1],[302593,78,0],[302933,248,1],[303284,60,0],[303675,310,1],[304065,74,0],[304409,253,1],[304758,60,0],[305145,309,1],[305536,72,0],[305884,257,1],[306234,64,0],[306615,303,1],[307009,71,0],[307363,258,1],[307711,74,0],[308087,293,1],[308483,73,0],[308844,257,1],[309193,87,0],[309563,278,1],[309960,78,0],[310331,255,1],[310680,104,0],[311043,259,1],[311443,83,0],[311826,253,1],[312180,120,0],[312535,238,1],[312936,89,0],[313336,254,1],[313705,131,0],[314050,219,1],[314447,92,0],[314858,264,1],[315250,126,0],[315586,212,1],[315966,86,0],[316377,283,1],[316774,108,0],[317115,219,1],[317477,73,0],[317883,306,1],[318279,87,0],[318624,234,1],[318980,57,0],[319379,328,1],[319772,68,0],[320119,251,1],[320476,42,0],[320866,344,1],[321257,54,0],[321607,265,1],[321966,32,0],[322350,351,1],[322739,46,0],[323091,275,1],[323451,30,0],[323831,348,1],[324217,44,0],[324573,279,1],[324934,37,0],[325309,336,1],[325694,48,0],[326054,278,1],[326415,53,0],[326786,314,1],[327167,57,0],[327534,271,1],[327896,75,0],[328260,288,1],[328640,69,0],[329014,261,1],[329377,100,0],[329735,260,1],[330113,82,0],[330497,249,1],[330864,123,0],[331214,233,1],[331590,96,0],[331990,238,1],[332368,142,0],[332703,209,1],[333078,109,0],[333504,231,1],[333913,149,0],[334217,193,1],[334586,117,0],[335045,236,1],[335459,138,0],[335760,191,1],[336107,116,0],[336558,249,1],[336955,122,0],[337279,202,1],[337622,106,0],[338046,265,1],[338436,106,0],[338768,216,1],[339117,93,0],[339524,280,1],[339910,93,0],[340247,230,1],[340599,80,0],[340996,293,1],[341382,82,0],[341722,244,1],[342075,68,0],[342467,304,1],[342853,72,0],[343196,256,1],[343550,59,0],[343937,311,1],[344323,63,0],[344670,266,1],[345025,53,0],[345407,314,1],[345793,57,0],[346144,275,1],[346500,53,0],[346876,311,1],[347263,53,0],[347621,281,1],[347977,57,0],[348347,302,1],[348734,54,0],[349098,282,1],[349456,68,0],[349820,286,1],[350206,59,0],[350580,279,1],[350939,83,0],[351296,265,1],[351683,69,0],[352066,272,1],[352428,102,0],[352778,241,1],[353166,82,0],[353564,263,1],[353932,121,0],[354275,216,1],[354666,96,0],[355080,259,1],[355470,130,0],[355809,199,1],[356193,102,0],[356610,265,1],[357022,120,0],[357364,202,1],[357724,93,0],[358131,284,1],[358538,98,0],[358886,222,1],[359237,76,0],[359634,306,1],[360032,77,0],[360382,244,1],[360737,58,0],[361125,324,1],[361516,60,0],[361869,264,1],[362228,44,0],[362608,334,1],[362995,48,0],[363350,279,1],[363713,37,0],[364087,336,1],[364470,42,0],[364830,289,1],[365194,38,0],[365564,329,1],[365943,41,0],[366307,292,1],[366674,47,0],[367038,313,1],[367414,46,0],[367784,290,1],[368152,62,0],[368511,292,1],[368884,55,0],[369260,282,1],[369630,81,0],[369983,267,1],[370352,67,0],[370736,271,1],[371111,102,0],[371455,242,1],[371821,82,0],[372215,257,1],[372595,122,0],[372931,218,1],[373295,98,0],[373702,242,1],[374092,138,0],[374420,198,1],[374782,114,0],[375209,231,1],[375626,145,0],[375937,184,1],[376294,126,0],[376752,230,1],[377184,136,0],[377495,185,1],[377831,126,0],[378278,242,1],[378681,121,0],[379015,200,1],[379352,115,0],[379769,258,1],[380160,105,0],[380501,219,1],[380848,99,0],[381246,274,1],[381634,90,0],[381978,237,1],[382330,84,0],[382720,288,1],[383105,75,0],[383452,255,1],[383808,71,0],[384192,299,1],[384575,62,0],[384927,273,1],[385286,61,0],[385663,306,1],[386045,50,0],[386402,288,1],[386763,55,0],[387135,307,1],[387516,43,0],[387878,299,1],[388242,53,0],[388607,302,1],[388987,40,0],[389356,306,1],[389723,57,0],[390082,289,1],[390460,43,0],[390836,306,1],[391205,68,0],[391560,270,1],[391935,52,0],[392320,300,1],[392693,83,0],[393041,247,1],[393415,68,0],[393810,288,1],[394187,102,0],[394530,223,1],[394905,86,0],[395314,275,1],[395700,117,0],[396043,202,1],[396415,102,0],[396834,268,1],[397243,120,0],[397589,196,1],[397952,107,0],[398361,273,1],[398777,107,0],[399132,211,1],[399481,96,0],[399874,287,1],[400281,88,0],[400637,234,1],[400990,80,0],[401371,301,1],[401769,71,0],[402127,258,1],[402485,66,0],[402859,311,1],[403249,58,0],[403611,277,1],[403973,57,0],[404340,313,1],[404725,49,0],[405090,291,1],[405455,55,0],[405818,309,1],[406197,45,0],[406566,299,1],[406935,57,0],[407294,299,1],[407666,45,0],[408042,302,1],[408415,65,0],[408767,285,1],[409135,49,0],[409515,300,1],[409892,75,0],[410239,267,1],[410602,57,0],[410988,292,1],[411370,89,0],[411712,248,1],[412069,69,0],[412462,281,1],[412849,103,0],[413186,230,1],[413538,83,0],[413939,267,1],[414332,117,0],[414663,212,1],[415012,99,0],[415423,252,1],[415824,130,0],[416150,197,1],[416498,115,0],[416922,240,1],[417336,137,0],[417659,187,1],[418004,128,0],[418443,235,1],[418874,134,0],[419197,187,1],[419535,132,0],[419970,241,1],[420384,122,0],[420726,201,1],[421063,125,0],[421469,253,1],[421869,106,0],[422220,222,1],[422564,111,0],[422953,267,1],[423346,89,0],[423701,244,1],[424052,96,0],[424431,279,1],[424820,72,0],[425179,267,1],[425536,82,0],[425908,288,1],[426293,57,0],[426657,289,1],[427019,71,0],[427385,292,1],[427767,45,0],[428134,308,1],[428502,63,0],[428863,291,1],[429240,37,0],[429614,321,1],[429986,60,0],[430342,285,1],[430715,35,0],[431095,328,1],[431472,62,0],[431824,272,1],[432193,39,0],[432579,327,1],[432960,70,0],[433309,256,1],[433674,51,0],[434068,319,1],[434453,82,0],[434799,237,1],[435161,67,0],[435564,306,1],[435953,95,0],[436299,219,1],[436657,86,0],[437069,292,1],[437466,105,0],[437813,208,1],[438171,102,0],[438582,284,1],[438990,106,0],[439343,209,1],[439700,107,0],[440096,283,1],[440505,97,0],[440869,224,1],[441222,102,0],[441600,286,1],[442005,86,0],[442374,246,1],[442729,94,0],[443097,288,1],[443493,74,0],[443865,266,1],[444225,86,0],[444585,288,1],[444974,65,0],[445350,284,1],[445715,81,0],[446069,284,1],[446449,59,0],[446829,297,1],[447199,79,0],[447548,278,1],[447921,56,0],[448305,304,1],[448680,80,0],[449025,269,1],[449391,56,0],[449778,307,1],[450159,82,0],[450501,259,1],[450860,58,0],[451251,305,1],[451637,87,0],[451976,249,1],[452329,64,0],[452724,299,1],[453115,94,0],[453450,238,1],[453798,72,0],[454197,290,1],[454592,102,0],[454926,227,1],[455270,83,0],[455672,279,1],[456074,112,0],[456405,217,1],[456746,96,0],[457154,267,1],[457560,120,0],[457889,208,1],[458228,109,0],[458644,257,1],[459054,126,0],[459384,201,1],[459723,122,0],[460144,250,1],[460559,127,0],[460894,200,1],[461235,131,0],[461650,249,1],[462065,120,0],[462414,208,1],[462757,132,0],[463152,253,1],[463561,108,0],[463922,226,1],[464271,125,0],[464647,260,1],[465048,92,0],[465417,250,1],[465771,113,0],[466136,266,1],[466530,76,0],[466903,275,1],[467265,100,0],[467624,271,1],[468010,61,0],[468387,300,1],[468755,87,0],[469110,273,1],[469490,49,0],[469870,321,1],[470245,76,0],[470597,272,1],[470970,40,0],[471355,336,1],[471735,69,0],[472085,269,1],[472452,37,0],[472841,345,1],[473226,67,0],[473575,262,1],[473936,39,0],[474330,345,1],[474719,69,0],[475067,254,1],[475424,48,0],[475821,339,1],[476214,75,0],[476561,244,1],[476915,61,0],[477316,327,1],[477711,83,0],[478059,235,1],[478412,78,0],[478815,313,1],[479211,91,0],[479562,229,1],[479917,96,0],[480315,299,1],[480715,95,0],[481072,228,1],[481431,109,0],[481817,287,1],[482217,95,0],[482589,236,1],[482949,115,0],[483316,276,1],[483716,92,0],[484101,250,1],[484462,116,0],[484814,267,1],[485208,87,0],[485600,267,1],[485965,112,0],[486308,260,1],[486694,82,0],[487090,283,1],[487459,107,0],[487798,254,1],[488175,77,0],[488571,295,1],[488947,102,0],[489284,250,1],[489650,73,0],[490049,303,1],[490429,98,0],[490766,248,1],[491124,71,0],[491523,307,1],[491909,95,0],[492245,245,1],[492597,70,0],[492996,307,1],[493386,95,0],[493722,243,1],[494069,71,0],[494468,305,1],[494862,97,0],[495197,240,1],[495541,75,0],[495941,300,1],[496337,100,0],[496672,236,1],[497014,80,0],[497415,293,1],[497814,105,0],[498149,232,1],[498490,88,0],[498891,286,1],[499293,110,0],[499628,228,1],[499968,99,0],[500371,278,1],[500775,114,0],[501113,223,1],[501452,112,0],[501855,270,1],[502261,116,0],[502606,221,1],[502946,124,0],[503344,263,1],[503754,114,0],[504110,224,1],[504452,134,0],[504840,257,1],[505250,109,0],[505622,235,1],[505973,137,0],[506340,253,1],[506746,100,0],[507130,254,1],[507491,130,0],[507843,251,1],[508241,88,0],[508629,278,1],[508998,118,0],[509345,251,1],[509731,74,0],[510122,303,1],[510498,103,0],[510845,254,1],[511221,61,0],[511613,326,1],[511995,89,0],[512343,258,1],[512711,50,0],[513103,344,1],[513491,77,0],[513839,262,1],[514200,42,0],[514592,356,1],[514983,68,0],[515332,265,1],[515689,38,0],[516082,361,1],[516475,65,0],[516823,267,1],[517179,41,0],[517572,357,1],[517965,66,0],[518313,265,1],[518669,52,0],[519061,345,1],[519453,72,0],[519804,260,1],[520159,69,0],[520550,327,1],[520941,81,0],[521295,254,1],[521653,91,0],[522040,305,1],[522430,90,0],[522793,248,1],[523154,114,0],[523530,282,1],[523920,98,0],[524300,245,1],[524668,132,0],[525026,260,1],[525415,104,0]],"main":[[-24.5155,152.05779],[-24.51619,152.05813],[-24.51862,152.05932],[-24.52041,152.06045],[-24.52261,152.06069],[-24.52283,152.06061],[-24.52383,152.06023],[-24.52448,152.05877],[-24.52422,152.05648],[-24.52371,152.05449],[-24.52341,152.05252],[-24.52373,152.05095],[-24.52488,152.04848],[-24.52619,152.04699],[-24.52726,152.04546],[-24.52756,152.04274],[-24.5273,152.04141],[-24.52653,152.03982],[-24.52541,152.03796],[-24.52482,152.03745],[-24.5243,152.03641],[-24.52317,152.03521],[-24.52196,152.03431],[-24.52102,152.03324],[-24.52045,152.03195],[-24.52007,152.03064],[-24.52008,152.02931],[-24.52007,152.02787],[-24.51955,152.0266],[-24.51824,152.0254],[-24.51608,152.02385],[-24.5146,152.02197],[-24.5139,152.02049],[-24.51327,152.01822],[-24.51308,152.01575],[-24.51358,152.01136],[-24.51388,152.00966],[-24.51438,152.00743],[-24.51527,152.00616],[-24.51581,152.00453],[-24.51583,152.00328],[-24.51566,152.00146],[-24.51581,151.99845],[-24.51514,151.99687],[-24.51487,151.99566],[-24.51446,151.99435],[-24.51419,151.9931],[-24.51421,151.9917],[-24.5146,151.98988],[-24.51517,151.9876],[-24.51581,151.98451],[-24.51602,151.98226],[-24.51567,151.98006],[-24.51444,151.97699],[-24.5136,151.97399],[-24.51311,151.97024],[-24.51334,151.96791],[-24.51383,151.96656],[-24.5145,151.96546],[-24.51554,151.96427],[-24.51625,151.96245],[-24.517,151.95958],[-24.51702,151.95793],[-24.51658,151.95606],[-24.51533,151.95261],[-24.51431,151.95043],[-24.514,151.94827],[-24.51375,151.94506],[-24.51371,151.94288],[-24.51371,151.93943],[-24.51375,151.93746],[-24.51319,151.9357],[-24.51242,151.9339],[-24.51144,151.93172],[-24.5104,151.92976],[-24.50938,151.9284],[-24.50826,151.92741],[-24.50635,151.92686],[-24.50427,151.9265],[-24.50308,151.92605],[-24.50271,151.92559],[-24.50267,151.92335],[-24.50311,151.92143],[-24.50382,151.91973],[-24.50552,151.91667],[-24.50656,151.91407],[-24.50753,151.91111],[-24.50788,151.90759],[-24.50815,151.90516],[-24.50923,151.90377],[-24.5104,151.903],[-24.51295,151.90215],[-24.51613,151.90103],[-24.51803,151.90027],[-24.52006,151.89976],[-24.52175,151.89972],[-24.52311,151.90064],[-24.52439,151.90198],[-24.52565,151.90314],[-24.52782,151.90428],[-24.53025,151.90535],[-24.53127,151.90572],[-24.53235,151.90585],[-24.53365,151.90523],[-24.53555,151.90358],[-24.53728,151.90176],[-24.53809,151.90136],[-24.53879,151.90108],[-24.53953,151.90119],[-24.54018,151.90189],[-24.54139,151.90336],[-24.54218,151.90465],[-24.54331,151.90567],[-24.54528,151.9063],[-24.54698,151.90676],[-24.54839,151.90691],[-24.55054,151.90698],[-24.55429,151.90654],[-24.55714,151.90574],[-24.55876,151.90482],[-24.5601,151.90263],[-24.56247,151.90071],[-24.5647,151.89967],[-24.56664,151.89833],[-24.56759,151.89734],[-24.56868,151.89702],[-24.56996,151.89736],[-24.57131,151.89736],[-24.57263,151.89649],[-24.57466,151.89498],[-24.57641,151.89357],[-24.57716,151.89279],[-24.57784,151.89182],[-24.57816,151.89045],[-24.57851,151.88837],[-24.5786,151.88777],[-24.57939,151.8848],[-24.58025,151.88231],[-24.58122,151.8812],[-24.58171,151.88006],[-24.5831,151.87653],[-24.58334,151.8752],[-24.58337,151.87334],[-24.58355,151.86995],[-24.58309,151.86764],[-24.58195,151.86534],[-24.58074,151.86322],[-24.58045,151.8616],[-24.58073,151.86042],[-24.58093,151.86019],[-24.58114,151.86002],[-24.58182,151.85963],[-24.58264,151.85944],[-24.5841,151.85937],[-24.58648,151.85903],[-24.58745,151.85963],[-24.58798,151.8607],[-24.5888,151.86269],[-24.58964,151.86374],[-24.59055,151.86393],[-24.59178,151.86323],[-24.59351,151.86187],[-24.59518,151.86031],[-24.59533,151.85996],[-24.59547,151.85932],[-24.59505,151.85825],[-24.59484,151.8568],[-24.59465,151.85623],[-24.59337,151.85458],[-24.59212,151.85339],[-24.5919,151.85282],[-24.59264,151.8509],[-24.59388,151.84933],[-24.59443,151.84868],[-24.59488,151.84856],[-24.59609,151.84873],[-24.59731,151.84831],[-24.59923,151.84717],[-24.60011,151.84657],[-24.60021,151.84574],[-24.60073,151.84507],[-24.60135,151.84486],[-24.60235,151.84422],[-24.60271,151.84373],[-24.60275,151.84346],[-24.60324,151.84258],[-24.60419,151.84192],[-24.60494,151.84154],[-24.60552,151.84089],[-24.60554,151.84032],[-24.60548,151.83957],[-24.60557,151.83874],[-24.60541,151.83781],[-24.60516,151.83673],[-24.60458,151.83603],[-24.60373,151.83516],[-24.60302,151.83462],[-24.60161,151.83301],[-24.59986,151.83194],[-24.59821,151.83091],[-24.59715,151.8296],[-24.59693,151.82758],[-24.59618,151.82531],[-24.59533,151.82345],[-24.59583,151.82211],[-24.59696,151.82201],[-24.59865,151.82225],[-24.60061,151.82211],[-24.60224,151.82218],[-24.60283,151.822],[-24.60309,151.82181],[-24.60319,151.82149],[-24.60318,151.82102],[-24.60295,151.81978],[-24.60277,151.81902],[-24.60183,151.81696],[-24.60008,151.81535],[-24.59858,151.81442],[-24.59615,151.81332],[-24.59446,151.81305],[-24.59249,151.81171],[-24.59074,151.81064],[-24.58534,151.80837],[-24.58243,151.80765],[-24.58025,151.80789],[-24.578,151.808],[-24.57678,151.80751],[-24.5759,151.80597],[-24.57503,151.80422],[-24.57479,151.80297],[-24.5744,151.80172],[-24.5739,151.80126],[-24.57312,151.80051],[-24.57181,151.79851],[-24.57009,151.79714],[-24.56847,151.7957],[-24.56681,151.79515],[-24.56491,151.79518],[-24.56372,151.7957],[-24.56328,151.79686],[-24.56269,151.79851],[-24.56178,151.80054],[-24.56009,151.80219],[-24.5585,151.80222],[-24.55784,151.80181],[-24.55747,151.80082],[-24.55669,151.80006],[-24.55588,151.79992],[-24.55434,151.80013],[-24.55188,151.8003],[-24.55072,151.79937],[-24.55021,151.79814],[-24.55,151.79765],[-24.54913,151.79305],[-24.54788,151.79164],[-24.54513,151.78831],[-24.54216,151.78591],[-24.54166,151.78481],[-24.54006,151.78271],[-24.53784,151.78144],[-24.53538,151.78044],[-24.53331,151.77921],[-24.53125,151.77824],[-24.52864,151.7775],[-24.52753,151.77651],[-24.52665,151.77571],[-24.52625,151.77519],[-24.52561,151.77329],[-24.52504,151.77256],[-24.52486,151.77234],[-24.52376,151.77162],[-24.5225,151.77089],[-24.52131,151.76972],[-24.52028,151.76935],[-24.51903,151.76797],[-24.51797,151.76694],[-24.51756,151.76529],[-24.51715,151.76382],[-24.51647,151.76282],[-24.51656,151.76179],[-24.51675,151.76052],[-24.5174,151.75983],[-24.51775,151.75928],[-24.51806,151.75852],[-24.51806,151.75674],[-24.51853,151.75481],[-24.51925,151.75385],[-24.51978,151.7532],[-24.51981,151.75217],[-24.51931,151.75131],[-24.51869,151.75069],[-24.51856,151.74903],[-24.5194,151.7479],[-24.52043,151.74705],[-24.52033,151.74474],[-24.5199,151.74296],[-24.5194,151.74186],[-24.51928,151.74117],[-24.51912,151.74063],[-24.51853,151.7398],[-24.51839,151.73922],[-24.51778,151.73824],[-24.51695,151.7378],[-24.51572,151.73766],[-24.51481,151.73737],[-24.51137,151.73716],[-24.50731,151.7376],[-24.50484,151.73784],[-24.50324,151.73784],[-24.50243,151.73668],[-24.50096,151.73547],[-24.49952,151.73544],[-24.49812,151.73585],[-24.49737,151.73661],[-24.49712,151.73764],[-24.49734,151.73933],[-24.49709,151.74046],[-24.49743,151.7421],[-24.49788,151.74364],[-24.49759,151.74416],[-24.49665,151.74554],[-24.49602,151.74667],[-24.49571,151.74753],[-24.49512,151.74822],[-24.49412,151.74867],[-24.49352,151.74856],[-24.4924,151.74791],[-24.49124,151.74777],[-24.49046,151.74695],[-24.48902,151.74599],[-24.48821,151.74595],[-24.48733,151.74612],[-24.48667,151.74547],[-24.48627,151.74465],[-24.48596,151.74375],[-24.48698,151.74236],[-24.48711,151.74217],[-24.48714,151.74138],[-24.48677,151.74039],[-24.48589,151.73953],[-24.48489,151.73791],[-24.48411,151.73674],[-24.48252,151.73619],[-24.48211,151.73637],[-24.47973,151.73994],[-24.47876,151.74001],[-24.47808,151.73973],[-24.47776,151.73894],[-24.47748,151.73733],[-24.47674,151.73442],[-24.47652,151.73287],[-24.47599,151.73177],[-24.47539,151.73146],[-24.47455,151.73146],[-24.47392,151.73105],[-24.4733,151.73043],[-24.47251,151.73036],[-24.47164,151.7305],[-24.47061,151.73136],[-24.46989,151.73167],[-24.46898,151.73164],[-24.46779,151.73098],[-24.46557,151.73115],[-24.46413,151.73088],[-24.46279,151.73095],[-24.46019,151.73084],[-24.45885,151.72985],[-24.45732,151.72909],[-24.45497,151.72827],[-24.45347,151.72751],[-24.45225,151.72689],[-24.45106,151.72645],[-24.44944,151.72614],[-24.44837,151.72566],[-24.44818,151.72525],[-24.44837,151.72466],[-24.44815,151.72408],[-24.4474,151.72356],[-24.44615,151.72284],[-24.44545,151.72155],[-24.4456,151.72106],[-24.44609,151.72051],[-24.44722,151.72002],[-24.44778,151.7202],[-24.44835,151.71954],[-24.44844,151.71803],[-24.44805,151.71664],[-24.4472,151.7148],[-24.44712,151.7144],[-24.44747,151.71405],[-24.44796,151.71424],[-24.44844,151.71465],[-24.44914,151.71474],[-24.44989,151.71426],[-24.45107,151.71422],[-24.45292,151.71461],[-24.45317,151.71533],[-24.45414,151.71594],[-24.4544,151.71601],[-24.45481,151.71595],[-24.45504,151.7156],[-24.45507,151.71504],[-24.4543,151.71283],[-24.45226,151.71244],[-24.45067,151.71147],[-24.44917,151.71089],[-24.44757,151.71053],[-24.44572,151.71011],[-24.44337,151.70924],[-24.44258,151.70826],[-24.44136,151.70724],[-24.44089,151.70697],[-24.44042,151.7066],[-24.44013,151.70597],[-24.43999,151.70526],[-24.43985,151.70429],[-24.43939,151.70307],[-24.43897,151.70256],[-24.43833,151.70253],[-24.43766,151.70261],[-24.43751,151.7024],[-24.43756,151.70159],[-24.43744,151.70108],[-24.43664,151.69982],[-24.43516,151.69853],[-24.43355,151.69661],[-24.43224,151.69555],[-24.43094,151.69406],[-24.43091,151.69312],[-24.43093,151.69265],[-24.43111,151.69222]],"euleilah":[[-24.50271,151.92559],[-24.5019,151.92579],[-24.50095,151.92664],[-24.49996,151.92631],[-24.49978,151.92463],[-24.50085,151.91917],[-24.50149,151.91512],[-24.50413,151.91172],[-24.50428,151.91041],[-24.5037,151.90912],[-24.50221,151.90821],[-24.5009,151.90768],[-24.49865,151.90869],[-24.49736,151.90968],[-24.49622,151.91],[-24.49532,151.90965],[-24.49498,151.90765],[-24.49544,151.90606],[-24.49736,151.90555],[-24.49802,151.90486],[-24.49818,151.90341],[-24.49765,151.9018],[-24.49714,151.90133],[-24.49643,151.90124],[-24.49554,151.90156],[-24.49219,151.9066],[-24.49146,151.90763],[-24.49066,151.90787],[-24.48907,151.90645],[-24.48764,151.90475],[-24.48725,151.90303],[-24.48653,151.90197],[-24.48555,151.90223],[-24.48495,151.90195],[-24.48308,151.90245],[-24.48225,151.90242],[-24.48048,151.89885],[-24.47982,151.8981],[-24.4782,151.89833],[-24.47729,151.89752],[-24.47726,151.89683],[-24.48007,151.89659],[-24.48099,151.89616],[-24.48109,151.89541],[-24.48019,151.89444],[-24.47773,151.89119],[-24.47701,151.88897],[-24.47684,151.88837],[-24.477,151.8874],[-24.47786,151.88587],[-24.478,151.88448],[-24.47769,151.8828],[-24.47579,151.88095],[-24.4747,151.88036],[-24.47448,151.87944],[-24.4746,151.8778],[-24.47553,151.87604],[-24.47564,151.87522],[-24.47486,151.8746],[-24.47288,151.87355],[-24.4697,151.87177],[-24.4674,151.8707],[-24.46656,151.87047],[-24.46536,151.8702],[-24.46418,151.86999],[-24.46349,151.86975],[-24.46315,151.86958],[-24.46276,151.86932],[-24.46251,151.86887],[-24.46239,151.86823],[-24.46247,151.86765],[-24.46285,151.86686],[-24.46325,151.86626],[-24.46379,151.86592],[-24.4641,151.86581],[-24.46422,151.86556],[-24.46427,151.86527],[-24.46426,151.86498],[-24.46409,151.86451],[-24.46382,151.86406],[-24.46328,151.86354],[-24.46279,151.86325],[-24.4622,151.86304],[-24.46164,151.8628],[-24.46105,151.86254],[-24.46028,151.86219],[-24.45982,151.86174],[-24.45944,151.86148],[-24.45935,151.86143],[-24.45883,151.86125],[-24.45807,151.8611],[-24.45759,151.86089],[-24.45695,151.86062],[-24.45653,151.86031],[-24.45632,151.85997],[-24.45619,151.85949],[-24.45595,151.85898],[-24.45564,151.85843],[-24.45524,151.85788],[-24.45461,151.85752],[-24.454,151.85724],[-24.45348,151.85702],[-24.45302,151.85692],[-24.45247,151.85688],[-24.45198,151.85672],[-24.45145,151.85636],[-24.45111,151.85579],[-24.4508,151.85513],[-24.4506,151.85434],[-24.45043,151.85374],[-24.45015,151.85302],[-24.44983,151.85252],[-24.44936,151.85186],[-24.44814,151.85038]],"euleilahJunctionKm":16.38};</script>
+<script id="bt-core">
+(function(root){
+'use strict';
+const D=root.BAFFLE_DATA;
+const EPOCH_UTC=Date.UTC(2025,11,31,14,0); // 2026-01-01 00:00 AEST
+const AEST_MS=Date.UTC(2026,0,1);
+const nowH=()=> (Date.now()-EPOCH_UTC)/3.6e6;
+const hToDate=h=>new Date(AEST_MS+h*3.6e6); // read with UTC getters = AEST wall time
+function dateToH(y,m,d,hh,mi){return (Date.UTC(y,m-1,d,hh||0,mi||0)-AEST_MS)/3.6e6;}
+function dayStr(h){const d=hToDate(h);return d.toISOString().slice(0,10);}
+function fmtT(h){const d=hToDate(h);let H=d.getUTCHours(),M=d.getUTCMinutes();const ap=H<12?'am':'pm';H=H%12||12;return H+':'+String(M).padStart(2,'0')+ap;}
+function fmtDT(h){const d=hToDate(Math.round(h*60)/60);return d.toISOString().slice(0,16).replace('T',' ');}
+function fmtDay(h,long){const d=hToDate(h);return d.toLocaleDateString('en-AU',Object.assign({timeZone:'UTC',weekday:'short',day:'numeric',month:'short'},long?{weekday:'long',year:'numeric',month:'long'}:{}));}
+
+/* ---------- nodal corrections + harmonic prediction (Bundaberg, m LAT) ---------- */
+const RAD=Math.PI/180;
+function nodeN(h){const d0=(EPOCH_UTC-Date.UTC(2000,0,1,12))/864e5;return (125.0445-0.0529538*(d0+h/24))*RAD;}
+function fuAll(h){const N=nodeN(h),c=Math.cos,s=Math.sin;
+  const fM2=1.0004-0.0373*c(N)+0.0002*c(2*N),uM2=-2.14*s(N);
+  const fK1=1.0060+0.1150*c(N)-0.0088*c(2*N)+0.0006*c(3*N),uK1=-8.86*s(N)+0.68*s(2*N)-0.07*s(3*N);
+  const fO1=1.0089+0.1871*c(N)-0.0147*c(2*N)+0.0014*c(3*N),uO1=10.80*s(N)-1.34*s(2*N)+0.19*s(3*N);
+  const fK2=1.0241+0.2863*c(N)+0.0083*c(2*N)-0.0015*c(3*N),uK2=-17.74*s(N)+0.68*s(2*N)-0.04*s(3*N);
+  const T={SA:[1,0],SSA:[1,0],MM:[1-0.13*c(N),0],MSF:[fM2,-uM2],MF:[1.0429+0.4135*c(N)-0.004*c(2*N),-23.74*s(N)+2.68*s(2*N)-0.38*s(3*N)],
+  '2Q1':[fO1,uO1],Q1:[fO1,uO1],RHO1:[fO1,uO1],O1:[fO1,uO1],M1:[fO1,uO1],P1:[1,0],S1:[1,0],K1:[fK1,uK1],
+  J1:[1.0129+0.1676*c(N)-0.017*c(2*N),-12.94*s(N)+1.34*s(2*N)-0.19*s(3*N)],OO1:[1.1027+0.6504*c(N)+0.0317*c(2*N)-0.0014*c(3*N),-36.68*s(N)+4.02*s(2*N)-0.57*s(3*N)],
+  '2N2':[fM2,uM2],MU2:[fM2,uM2],N2:[fM2,uM2],NU2:[fM2,uM2],M2:[fM2,uM2],LAM2:[fM2,uM2],L2:[fM2,uM2],T2:[1,0],S2:[1,0],R2:[1,0],K2:[fK2,uK2],'2SM2':[fM2,-uM2],
+  MO3:[fM2*fO1,uM2+uO1],M3:[Math.pow(fM2,1.5),1.5*uM2],MK3:[fM2*fK1,uM2+uK1],SK3:[fK1,uK1],
+  MN4:[fM2*fM2,2*uM2],M4:[fM2*fM2,2*uM2],MS4:[fM2,uM2],MK4:[fM2*fK2,uM2+uK2],S4:[1,0],
+  '2MN6':[fM2**3,3*uM2],M6:[fM2**3,3*uM2],'2MS6':[fM2*fM2,2*uM2],'2SM6':[fM2,uM2],M8:[fM2**4,4*uM2]};
+  return T;}
+let fuCache={k:null,v:null};
+function bundH(h){const H=D.harm;const k=Math.floor(h/24);if(fuCache.k!==k){fuCache={k,v:fuAll(k*24+12)};}const F=fuCache.v;let z=H.z0;
+  for(let i=0;i<H.names.length;i++){const fu=F[H.names[i]];z+=fu[0]*H.amp[i]*Math.cos((H.speeds[i]*h+fu[1]-H.pha[i])*RAD);}return z;}
+function bundExtremes(t0,t1){const st=0.1,out=[];let a=bundH(t0-st),b=bundH(t0);
+  for(let t=t0+st;t<=t1+1e-9;t+=st){const c=bundH(t);if((b>a&&b>=c)||(b<a&&b<=c)){const den=a-2*b+c,off=den?0.5*(a-c)/den:0;out.push({t:t-st+off*st,h:b-0.25*(a-c)*off,hi:b>a});}a=b;b=c;}
+  // remove tiny double-stands
+  const f=[];for(const x of out){const l=f[f.length-1];if(l&&l.hi===x.hi){if((x.hi&&x.h>l.h)||(!x.hi&&x.h<l.h))f[f.length-1]=x;}else if(l&&Math.abs(l.h-x.h)<0.05){f.pop();}else f.push(x);}return f;}
+function officialHiLo(t0,t1){const r=[];for(const [m,cm,hi] of D.hilo2026){const t=m/60;if(t>=t0&&t<t1)r.push({t,h:cm/100,hi:!!hi});}return r;}
+
+/* ---------- along-creek calibration ---------- */
+const LAT2AHD_BUND=1.693, LAT2AHD_WIN=1.53;
+const NODES=[
+ {km:0,name:'Mouth (open coast)',hwLag:0,lwLag:0,hwU:15,lwU:15,src:'Assumed = Bundaberg/Bargara (MSQ planes: Bargara +0:00, Lady Elliot −0:24)',
+  hwLvl:H=>H-LAT2AHD_BUND,lwLvl:L=>L-LAT2AHD_BUND},
+ {km:3.4,name:'Baffle Ck (Winfield) — MSQ secondary place',hwLag:65,lwLag:116,hwU:15,lwU:20,src:'MSQ 2025 Tidal Planes: HW +1:05, LW +1:56 on Bundaberg; MHWS 2.27 MHWN 1.81 MLWN 1.02 MLWS 1.01 m LAT (** non-linear transfer)',
+  hwLvl:H=>1.81+(H-2.35)*(2.27-1.81)/(2.94-2.35)-LAT2AHD_WIN,lwLvl:L=>1.02+(L-1.20)*(1.01-1.02)/(0.61-1.20)-LAT2AHD_WIN},
+ {km:25.24,name:'Euleilah Ck @ Hills Rd gauge (proxy)',hwLag:179,lwLag:277,hwU:35,lwU:45,src:'BoM 539135, 2–9 Oct 2026: 13 HW (lag 179 ± 18 min), 13 LW (277 ± 25 min); HW lvl = −0.981+0.613·H r=0.99; LW lvl = 0.225−0.220·L r=0.50. On Euleilah Ck 8.9 km above its junction (16.4 km).',
+  hwLvl:H=>-0.981+0.613*H,lwLvl:L=>0.225-0.220*L},
+ {km:35.25,name:'Essendean Bridge gauge',hwLag:339,lwLag:415,hwU:60,lwU:150,src:'BoM 039267, 2–9 Oct 2026: 10 HW (lag 339 ± 44 min, ±60 min gauge resolution); HW lvl = −0.520+0.423·H r=0.93; lows truncated: base ≈ 0.738−0.384·L (≥0.30) m AHD.',
+  hwLvl:H=>-0.520+0.423*H,lwLvl:L=>Math.max(0.30,0.738-0.384*L),trunc:true}
+];
+const MAXKM=40;
+function calAt(km,opts){opts=opts||{};km=Math.max(0,Math.min(MAXKM,km));
+  let i=0;while(i<NODES.length-2&&km>NODES[i+1].km)i++;
+  const a=NODES[i],b=NODES[i+1];const beyond=km>b.km;const f=beyond?1:(km-a.km)/(b.km-a.km);
+  const gap=Math.min(Math.abs(km-a.km),Math.abs(km-b.km));const span=b.km-a.km;
+  const L=(x,y)=>x+(y-x)*f;
+  const badj=opts.badj||0;
+  const trunc=f>0.5&&b.trunc;
+  const cal={km,beyond,nodeA:a,nodeB:b,f,
+    hwLag:L(a.hwLag,b.hwLag),lwLag:L(a.lwLag,b.lwLag),
+    hwU:L(a.hwU,b.hwU)+(beyond?(km-b.km)*10:gap*(span>10?3:1)),lwU:L(a.lwU,b.lwU)+(beyond?(km-b.km)*15:gap*(span>10?4:1)),
+    hwLvl:H=>L(a.hwLvl(H),b.hwLvl(H)),
+    lwLvl:Lw=>L(a.lwLvl(Lw)+(a.trunc?badj:0),b.lwLvl(Lw)+(b.trunc?badj:0)),
+    est:(span>10&&gap>3)||beyond, trunc};
+  return cal;}
+function applyCorr(cal,corr){if(!corr)return cal;const c=Object.assign({},cal);const k=cal.km;
+  const w=(p)=>Math.max(0,1-Math.abs(p.km-k)/6);let sw={HW:0,LW:0,L:0},sv={HW:0,LW:0,L:0};
+  for(const p of corr){const ww=w(p);if(!ww)continue;sw[p.kind]+=ww;sv[p.kind]+=ww*p.d;}
+  const hw=sw.HW?sv.HW/Math.max(1,sw.HW):0,lw=sw.LW?sv.LW/Math.max(1,sw.LW):0,lv=sw.L?sv.L/Math.max(1,sw.L):0;
+  c.hwLag+=hw;c.lwLag+=lw;const h0=c.hwLvl,l0=c.lwLvl;c.hwLvl=H=>h0(H)+lv;c.lwLvl=L=>l0(L)+lv;c.corr={hw,lw,lv};return c;}
+/* predict extremes + curve at a spot */
+function predictAt(km,t0,t1,opts){opts=opts||{};let cal=calAt(km,opts);cal=applyCorr(cal,opts.corr);
+  const hoff=opts.hoff||0;
+  const base=bundExtremes(t0-14,t1+14);
+  let ext=base.map(e=>{const H=e.h+hoff;return e.hi?{t:e.t+cal.hwLag/60,h:cal.hwLvl(H),hi:true,u:cal.hwU,src:e}:{t:e.t+cal.lwLag/60,h:cal.lwLvl(H),hi:false,u:cal.lwU,src:e};});
+  ext.sort((a,b)=>a.t-b.t);
+  // truncated reach: highs below the floor (pool level) are not visible
+  if(cal.nodeB.trunc||cal.nodeA.trunc){for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi){const nb=[ext[i-1],ext[i+1]].filter(x=>x&&!x.hi);const fl=nb.length?Math.max(...nb.map(x=>x.h)):-9;e.rise=e.h-fl;if(e.h<fl+0.05){e.weak=true;}}}}
+  // enforce alternation after shifting
+  const clean=[];for(const e of ext){const l=clean[clean.length-1];if(l&&l.hi===e.hi){if((e.hi&&e.h>l.h)||(!e.hi&&e.h<l.h))clean[clean.length-1]=e;}else clean.push(e);}
+  const curve=t=>{let i=0;while(i<clean.length-2&&clean[i+1].t<t)i++;const a=clean[i],b=clean[i+1];if(!a||!b)return null;if(t<a.t||t>b.t)return null;const f=(t-a.t)/(b.t-a.t);const v=a.h+(b.h-a.h)*(1-Math.cos(Math.PI*f))/2;return v;};
+  return {cal,ext:clean,curve,inWin:clean.filter(e=>e.t>=t0&&e.t<t1)};}
+
+/* ---------- geometry: snap a GPS fix onto the creek ---------- */
+function havKm(a,b){const R=6371.0088,la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+function cum(line){const c=[0];for(let i=1;i<line.length;i++)c.push(c[i-1]+havKm(line[i-1],line[i]));return c;}
+const MAIN=D.main, MAINC=cum(MAIN), EU=D.euleilah, EUC=cum(EU);
+function projLine(line,cc,lat,lon){const kx=111.32*Math.cos(lat*RAD),ky=110.54;let best={d:1e9};
+  for(let i=0;i<line.length-1;i++){const ax=(line[i][1]-lon)*kx,ay=(line[i][0]-lat)*ky,bx=(line[i+1][1]-lon)*kx,by=(line[i+1][0]-lat)*ky;const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy;let t=L2?-(ax*dx+ay*dy)/L2:0;t=Math.max(0,Math.min(1,t));const px=ax+t*dx,py=ay+t*dy,d=Math.hypot(px,py);
+    if(d<best.d)best={d,s:cc[i]+t*(cc[i+1]-cc[i]),lat:line[i][0]+t*(line[i+1][0]-line[i][0]),lon:line[i][1]+t*(line[i+1][1]-line[i][1])};}return best;}
+function snap(lat,lon){const m=projLine(MAIN,MAINC,lat,lon),e=projLine(EU,EUC,lat,lon);
+  if(e.d<m.d-0.05)return{km:D.euleilahJunctionKm+e.s,offKm:e.d,line:'Euleilah Creek',lat:e.lat,lon:e.lon,alongKm:e.s};
+  return{km:m.s,offKm:m.d,line:'Baffle Creek',lat:m.lat,lon:m.lon};}
+function pointAtKm(km){for(let i=1;i<MAINC.length;i++)if(MAINC[i]>=km){const f=(km-MAINC[i-1])/(MAINC[i]-MAINC[i-1]);return[MAIN[i-1][0]+f*(MAIN[i][0]-MAIN[i-1][0]),MAIN[i-1][1]+f*(MAIN[i][1]-MAIN[i-1][1])];}return MAIN[MAIN.length-1];}
+
+const LANDMARKS=[
+ {name:'Mouth / entrance',km:0},
+ {name:'Duck Creek junction',km:2.93},
+ {name:'Winfield (MSQ tide place, approx.)',km:3.4,cal:true},
+ {name:'Winfield ramp (side channel)',km:3.74,note:'OSM slipway 1.3 km off main channel'},
+ {name:'Flat Rock Rd ramp',km:5.77,note:'unnamed OSM slipway at end of Flat Rock Rd'},
+ {name:'Rocky Point boat ramp',km:6.51},
+ {name:'Caravan park ramp (Flat Rock area)',km:7.75,note:'OSM slipway by Baffle Creek Caravan & Camping Park'},
+ {name:'Bottle Creek junction',km:8.07},
+ {name:'Newton Rd',km:10.58},
+ {name:'Wartburg (Boat Ramp Rd)',km:15.9},
+ {name:'Euleilah Creek junction',km:16.38},
+ {name:'Hills Rd gauge (Euleilah Ck)',km:25.24,cal:true,note:'on Euleilah Ck, 8.9 km above junction'},
+ {name:'Sleepy Creek junction',km:27.68},
+ {name:'Manning Creek junction',km:30.92},
+ {name:'Sandy Creek junction',km:34.05},
+ {name:'Essendean Bridge (gauge 039267)',km:35.25,cal:true},
+ {name:'Christensens',km:39.03,note:'above calibration'}];
+
+root.BT={nowH,hToDate,dateToH,dayStr,fmtT,fmtDT,fmtDay,bundH,bundExtremes,officialHiLo,NODES,calAt,predictAt,snap,pointAtKm,LANDMARKS,MAXKM,applyCorr};
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);const B=window.BT;
+const st={km:+(localStorage.getItem('bt_km')||35.25),gps:null,landmark:null};
+const todayStr=B.dayStr(B.nowH());
+$('bt-date').value=todayStr;$('bt-km').value=st.km;
+$('bt-hoff').value=localStorage.getItem('bt_hoff')||0;$('bt-badj').value=localStorage.getItem('bt_badj')||0;
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+B.LANDMARKS.forEach((l,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${l.name} — ${l.km.toFixed(1)} km`;$('bt-lm').appendChild(o);});
+const o0=document.createElement('option');o0.value='';o0.textContent='— pick a landmark —';$('bt-lm').prepend(o0);
+function opts(){return{hoff:+$('bt-hoff').value||0,badj:+$('bt-badj').value||0,corr:corrections()};}
+function dayH(){const [y,m,d]=$('bt-date').value.split('-').map(Number);return B.dateToH(y,m,d,0,0);}
+function fmtU(u){return '±'+Math.round(u/5)*5+' min';}
+function lvl(h){return (h>=0?'+':'')+h.toFixed(2)+' m';}
+/* ---- benchmarks ---- */
+let bench=JSON.parse(localStorage.getItem('bt_bench')||'[]');
+function saveBench(){localStorage.setItem('bt_bench',JSON.stringify(bench));}
+function corrections(){return bench.filter(b=>b.applied&&b.diff!=null).map(b=>({km:b.km,kind:b.type==='HW'?'HW':b.type==='LW'?'LW':'L',d:b.type==='LVL_AHD'?-b.diff:-b.diff}));}
+// note: diff = predicted - observed (min or m); correction adds observed-predicted
+function evalBench(b,useCorr){const o={hoff:+$('bt-hoff').value||0,badj:+$('bt-badj').value||0,corr:useCorr?corrections().filter(c=>!(c.km===b.km&&b.applied)):null};
+  const p=B.predictAt(b.km,b.t-12,b.t+12,o);
+  if(b.type==='HW'||b.type==='LW'){const want=b.type==='HW';const c=p.ext.filter(e=>e.hi===want).sort((x,y)=>Math.abs(x.t-b.t)-Math.abs(y.t-b.t))[0];if(!c)return{};return{predT:c.t,diff:(c.t-b.t)*60,u:c.u};}
+  const v=p.curve(b.t);if(v==null)return{};return{predV:v,diff:b.type==='LVL_AHD'&&b.value!=null?v-b.value:null};}
+function renderBench(){
+  bench.forEach(b=>{const r=evalBench(b,false);b.predT=r.predT;b.predV=r.predV;b.diff=r.diff;b.u=r.u;});saveBench();
+  if(!bench.length){$('bt-bTable').innerHTML='<tr><td class="mut">No observations yet. On your next trip, log high/low turns and gauge-board readings — especially at Essendean Bridge, Wartburg, Rocky Point and the mouth.</td></tr>';$('bt-bSummary').textContent='';return;}
+  $('bt-bTable').innerHTML='<tr><th>When (AEST)</th><th>Where</th><th>What</th><th>Observed</th><th>Predicted</th><th>Pred − obs</th><th>apply</th><th></th></tr>'+bench.map((b,i)=>{
+    const obs=b.type==='HW'||b.type==='LW'?B.fmtT(b.t):(b.value!=null?b.value.toFixed(2)+' m':'—');
+    const pred=b.predT!=null?B.fmtT(b.predT)+' <span class="mut">'+fmtU(b.u||0)+'</span>':(b.predV!=null?b.predV.toFixed(2)+' m AHD':'—');
+    const d=b.diff==null?'—':(b.type==='HW'||b.type==='LW'?`<span class="${b.diff>0?'pos':'neg'}">${b.diff>0?'+':''}${Math.round(b.diff)} min</span>`:`<span class="${b.diff>0?'pos':'neg'}">${b.diff>0?'+':''}${b.diff.toFixed(2)} m</span>`);
+    const canApply=b.diff!=null;
+    return `<tr><td>${B.fmtDT(b.t)}</td><td>${esc(b.place)}<br><span class="mut">${b.km.toFixed(2)} km</span></td><td>${esc({HW:'High turn',LW:'Low turn',LVL_AHD:'Gauge (AHD)',LVL_LOCAL:'Marker (local)'}[b.type])}${b.note?'<br><span class="mut">'+esc(b.note)+'</span>':''}</td><td>${obs}</td><td>${pred}</td><td>${d}</td><td>${canApply?`<input type="checkbox" data-a="${i}" ${b.applied?'checked':''}>`:''}</td><td><button class="sm" data-d="${i}">✕</button></td></tr>`;}).join('');
+  $('bt-bTable').querySelectorAll('[data-d]').forEach(x=>x.onclick=()=>{bench.splice(+x.dataset.d,1);saveBench();renderBench();render();});
+  $('bt-bTable').querySelectorAll('[data-a]').forEach(x=>x.onchange=()=>{bench[+x.dataset.a].applied=x.checked;saveBench();renderBench();render();});
+  const hw=bench.filter(b=>b.type==='HW'&&b.diff!=null).map(b=>b.diff),lw=bench.filter(b=>b.type==='LW'&&b.diff!=null).map(b=>b.diff);
+  const rms=a=>Math.sqrt(a.reduce((s,x)=>s+x*x,0)/a.length);
+  $('bt-bSummary').textContent=(hw.length?`High turns: n=${hw.length}, mean ${Math.round(hw.reduce((a,b)=>a+b,0)/hw.length)} min, RMS ${Math.round(rms(hw))} min. `:'')+(lw.length?`Low turns: n=${lw.length}, mean ${Math.round(lw.reduce((a,b)=>a+b,0)/lw.length)} min, RMS ${Math.round(rms(lw))} min. `:'')+'Positive = prediction later/higher than observed.';
+}
+function nowLocalInput(){const d=B.hToDate(B.nowH());return d.toISOString().slice(0,16);}
+$('bt-bTime').value=nowLocalInput();$('bt-bNow').onclick=()=>{$('bt-bTime').value=nowLocalInput();};
+$('bt-bAdd').onclick=()=>{
+  const v=$('bt-bTime').value;if(!v){alert('Set a time');return;}const [dd,tt]=v.split('T');const [y,m,d]=dd.split('-').map(Number);const [hh,mi]=tt.split(':').map(Number);
+  const add=(km,place,lat,lon)=>{const type=$('bt-bType').value;const val=$('bt-bVal').value===''?null:+$('bt-bVal').value;
+    if((type==='LVL_AHD'||type==='LVL_LOCAL')&&val==null){alert('Enter the reading (m)');return;}
+    bench.push({id:Date.now(),logged:B.fmtDT(B.nowH()),t:B.dateToH(y,m,d,hh,mi),km:+km.toFixed(3),place,lat,lon,type,value:val,note:$('bt-bNote').value,applied:false});
+    saveBench();renderBench();$('bt-bNote').value='';$('bt-bVal').value='';};
+  if($('bt-bLoc').value==='gps'){if(!navigator.geolocation){alert('No GPS');return;}navigator.geolocation.getCurrentPosition(p=>{const s=B.snap(p.coords.latitude,p.coords.longitude);add(s.km,`GPS (${s.line}, ${Math.round(s.offKm*1000)} m off line)`,p.coords.latitude,p.coords.longitude);},e=>alert('GPS failed: '+e.message),{enableHighAccuracy:true,timeout:20000});}
+  else{const pt=B.pointAtKm(st.km);add(st.km,st.landmark||('km '+st.km.toFixed(2)),pt[0],pt[1]);}
+};
+const CSVH=['id','logged_aest','obs_time_aest','km','place','lat','lon','type','value_m','note','pred_time_aest','pred_value_m_ahd','pred_minus_obs','applied'];
+const q=s=>{s=String(s==null?'':s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+$('bt-bExp').onclick=()=>{const rows=[CSVH.join(',')].concat(bench.map(b=>[b.id,b.logged,B.fmtDT(b.t),b.km,b.place,b.lat??'',b.lon??'',b.type,b.value??'',b.note,b.predT!=null?B.fmtDT(b.predT):'',b.predV!=null?b.predV.toFixed(3):'',b.diff!=null?(b.type==='HW'||b.type==='LW'?Math.round(b.diff):b.diff.toFixed(3)):'',b.applied?1:0].map(q).join(',')));
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-benchmarks-'+B.dayStr(B.nowH())+'.csv';a.click();};
+function parseCSV(txt){const out=[];let row=[],f='',inq=false;for(let i=0;i<txt.length;i++){const c=txt[i];if(inq){if(c==='"'){if(txt[i+1]==='"'){f+='"';i++;}else inq=false;}else f+=c;}else if(c==='"')inq=true;else if(c===','){row.push(f);f='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&txt[i+1]==='\n')i++;row.push(f);out.push(row);row=[];f='';}else f+=c;}if(f!==''||row.length){row.push(f);out.push(row);}return out;}
+$('bt-bImp').onchange=async e=>{const file=e.target.files[0];if(!file)return;const rows=parseCSV(await file.text());const h=rows.shift().map(s=>s.trim());const ix=k=>h.indexOf(k);let n=0;
+  for(const r of rows){if(r.length<5)continue;const ot=r[ix('obs_time_aest')];const m=/(\d{4})-(\d\d)-(\d\d)[ T](\d\d):(\d\d)/.exec(ot||'');if(!m)continue;
+    const id=+r[ix('id')]||Date.now()+n;if(bench.some(b=>b.id===id))continue;
+    bench.push({id,logged:r[ix('logged_aest')],t:B.dateToH(+m[1],+m[2],+m[3],+m[4],+m[5]),km:+r[ix('km')],place:r[ix('place')],lat:r[ix('lat')]?+r[ix('lat')]:null,lon:r[ix('lon')]?+r[ix('lon')]:null,type:r[ix('type')],value:r[ix('value_m')]===''?null:+r[ix('value_m')],note:r[ix('note')],applied:r[ix('applied')]==='1'});n++;}
+  saveBench();renderBench();render();alert('Imported '+n+' observations');e.target.value='';};
+$('bt-bClear').onclick=()=>{if(confirm('Delete all logged observations on this device?')){bench=[];saveBench();renderBench();render();}};
+
+/* ---- main render ---- */
+function render(){
+  const km=st.km;localStorage.setItem('bt_km',km);localStorage.setItem('bt_hoff',$('bt-hoff').value);localStorage.setItem('bt_badj',$('bt-badj').value);
+  const t0=dayH(),t1=t0+24,o=opts();
+  const P=B.predictAt(km,t0-6,t1+6,o);const cal=P.cal;const pt=B.pointAtKm(Math.min(km,B.MAXKM));
+  $('bt-kmLbl').textContent=km.toFixed(2)+' km from mouth';
+  $('bt-locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${km.toFixed(2)} km up Baffle Creek from the mouth · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
+  let warn='';
+  if(st.gps&&st.gps.offKm>1.5)warn+='<div class="notice err">Your GPS position is '+st.gps.offKm.toFixed(1)+' km from the creek centreline — snapped to the nearest point; check this is right.</div>';
+  if(cal.beyond)warn+='<div class="notice">Above Essendean Bridge (the last calibration point). Tidal limit unknown — values held at Essendean’s, timing likely later and range smaller or nil. Great place to benchmark.</div>';
+  else if(cal.est)warn+='<div class="notice info">Between calibration points '+esc(cal.nodeA.name)+' and '+esc(cal.nodeB.name)+' ('+(cal.nodeB.km-cal.nodeA.km).toFixed(0)+' km apart) — interpolated, uncertainty larger. A benchmark here would help a lot.</div>';
+  if(cal.corr&&(cal.corr.hw||cal.corr.lw||cal.corr.lv))warn+=`<div class="notice info">Your applied benchmarks shift this spot: HW ${Math.round(cal.corr.hw)} min, LW ${Math.round(cal.corr.lw)} min, level ${cal.corr.lv.toFixed(2)} m.</div>`;
+  $('bt-locWarn').innerHTML=warn;
+  // stats
+  $('bt-dayTitle').textContent=B.fmtDay(t0+12,true)+' — '+(st.landmark||('km '+km.toFixed(1)));
+  const day=P.ext.filter(e=>e.t>=t0&&e.t<t1);P.day=day;
+  const cards=day.map(e=>`<div class="stat"><small>${e.hi?'High':'Low'}${e.weak?' (weak/none)':''}${cal.trunc&&!e.hi?' (pool level)':''}</small><b class="${e.hi?'hw':'lw'}">${B.fmtT(e.t)} <span class="mut" style="font-size:.75rem">${fmtU(e.u)}</span></b><small>${lvl(e.h)} AHD${e.hi&&e.rise!=null?' · rise '+Math.max(0,e.rise).toFixed(2)+' m':''}</small></div>`);
+  const nh=B.nowH();let nowTxt='';if(nh>=t0&&nh<t1){const v=P.curve(nh),v2=P.curve(nh+0.25);if(v!=null)nowTxt=`<div class="stat"><small>Now (${B.fmtT(nh)})</small><b>${lvl(v)} AHD</b><small>${v2>v+0.005?'rising ↑':v2<v-0.005?'falling ↓':'near slack'}</small></div>`;}
+  const mouth=B.predictAt(0,t0,t1,o).inWin;
+  const off=B.officialHiLo(t0,t1);
+  $('bt-stats').innerHTML=nowTxt+cards.join('')+`<div class="stat"><small>Mouth (model)</small><b style="font-size:.85rem">${mouth.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)).join(' · ')}</b><small>${off.length?'Official MSQ Bundaberg: '+off.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)+' '+e.h.toFixed(2)).join(' · ')+' m LAT':'Official MSQ times embedded for 2026 only'}</small></div>`;
+  drawChart(P,t0,t1,o);
+  // week
+  const W=B.predictAt(km,t0,t0+24*7,o).inWin;const byDay={};W.forEach(e=>{const k=B.dayStr(e.t);(byDay[k]=byDay[k]||[]).push(e);});
+  $('bt-week').innerHTML='<tr><th>Day</th><th>Highs</th><th>Lows</th></tr>'+Object.keys(byDay).map(k=>{const es=byDay[k];const d=es[0].t;return `<tr><td>${B.fmtDay(d)}</td><td class="hw">${es.filter(e=>e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+(e.weak?' weak':'')+'</span>').join('<br>')}</td><td class="lw">${es.filter(e=>!e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+'</span>').join('<br>')}</td></tr>`;}).join('')+`<tr><td colspan="3" class="mut">Timing uncertainty here: highs ${fmtU(cal.hwU)}, lows ${fmtU(cal.lwU)}. Heights m AHD.</td></tr>`;
+  // stretch
+  $('bt-stretch').innerHTML='<tr><th>Place</th><th>km</th><th>Highs</th><th>Lows</th><th>±</th></tr>'+B.LANDMARKS.map((l,i)=>{const p=B.predictAt(l.km,t0,t1,o);const c=p.cal;
+    const tags=(l.cal?'<span class="tag cal">cal</span>':'')+(c.est?'<span class="tag warn">est</span>':'');
+    return `<tr class="click${Math.abs(l.km-km)<0.01?' sel':''}" data-i="${i}"><td>${esc(l.name)}${tags}${l.note?'<br><span class="mut">'+esc(l.note)+'</span>':''}</td><td>${l.km.toFixed(1)}</td><td class="hw">${p.inWin.filter(e=>e.hi).map(e=>B.fmtT(e.t)+(e.weak?'*':'')).join('<br>')}</td><td class="lw">${p.inWin.filter(e=>!e.hi).map(e=>B.fmtT(e.t)).join('<br>')}</td><td class="mut">H ${Math.round(c.hwU)}′<br>L ${Math.round(c.lwU)}′</td></tr>`;}).join('')+'<tr><td colspan="5" class="mut">* weak/no visible high expected (tide doesn’t clear the upper-creek pool level). Lows above ~30 km are a pool level, not a true low.</td></tr>';
+  $('bt-stretch').querySelectorAll('tr[data-i]').forEach(tr=>tr.onclick=()=>{const l=B.LANDMARKS[+tr.dataset.i];selectKm(l.km,l.name);});
+}
+function drawChart(P,t0,t1,o){
+  const svg=$('bt-chart'),W=960,H=320,L=44,R=14,T=14,Bm=40,pw=W-L-R,ph=H-T-Bm;
+  const ts=[];for(let t=t0;t<=t1+1e-9;t+=0.1)ts.push(t);
+  const M=B.predictAt(0,t0-6,t1+6,o),E=B.predictAt(35.25,t0-6,t1+6,o);
+  const series=[[M.curve,'#5cc8ff',1.5,''],[E.curve,'#ff7b6b',1.5,'6 4'],[P.curve,'#f0a03a',3,'']];
+  let mn=1e9,mx=-1e9;for(const [f] of series)for(const t of ts){const v=f(t);if(v!=null){mn=Math.min(mn,v);mx=Math.max(mx,v);}}
+  mn=Math.floor(mn*4)/4;mx=Math.ceil(mx*4)/4;
+  const x=t=>L+(t-t0)/(t1-t0)*pw,y=v=>T+ph-(v-mn)/(mx-mn)*ph;
+  let s='';
+  for(let v=mn;v<=mx+1e-9;v+=0.25)s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#25464b" ${Math.abs(v)<1e-9?'':'stroke-dasharray="3 4"'}/><text x="${L-5}" y="${y(v)+4}" fill="#9db5b1" font-size="11" text-anchor="end">${v.toFixed(2)}</text>`;
+  for(let h=0;h<=24;h+=3)s+=`<text x="${x(t0+h)}" y="${H-Bm+16}" fill="#9db5b1" font-size="11" text-anchor="middle">${h===24?'':B.fmtT(t0+h).replace(':00','')}</text>`;
+  // uncertainty bands for selected extremes
+  for(const e of P.day){const u=e.u/60;s+=`<rect x="${Math.max(L,x(e.t-u))}" y="${T}" width="${Math.max(0,Math.min(W-R,x(e.t+u))-Math.max(L,x(e.t-u)))}" height="${ph}" fill="${e.hi?'#5cc8ff':'#c9b6ff'}" opacity=".07"/>`;}
+  for(const [f,col,w,da] of series){const pts=ts.map(t=>{const v=f(t);return v==null?null:`${x(t).toFixed(1)},${y(v).toFixed(1)}`;}).filter(Boolean);s+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${col}" stroke-width="${w}" ${da?`stroke-dasharray="${da}"`:''}/>`;}
+  for(const e of P.day){s+=`<circle cx="${x(e.t)}" cy="${y(e.h)}" r="4.5" fill="#f0a03a"/><text x="${x(e.t)}" y="${y(e.h)+(e.hi?-10:18)}" fill="#ffe2b8" font-size="12" text-anchor="middle">${e.hi?'H':'L'} ${B.fmtT(e.t)}</text>`;}
+  const nh=B.nowH();if(nh>=t0&&nh<t1)s+=`<line x1="${x(nh)}" x2="${x(nh)}" y1="${T}" y2="${T+ph}" stroke="#57d18a" stroke-width="1.5"/><text x="${x(nh)+3}" y="${T+12}" fill="#57d18a" font-size="11">now</text>`;
+  s+=`<text x="${L}" y="${H-6}" fill="#9db5b1" font-size="11">m AHD</text>`;
+  svg.innerHTML=s;}
+function selectKm(km,name){st.km=Math.max(0,Math.min(B.MAXKM,km));st.landmark=name||null;st.gps=null;$('bt-km').value=st.km;const i=B.LANDMARKS.findIndex(l=>l.name===name);$('bt-lm').value=i>=0?i:'';render();}
+$('bt-km').oninput=()=>{st.km=+$('bt-km').value;st.landmark=null;st.gps=null;$('bt-lm').value='';render();};
+$('bt-lm').onchange=()=>{if($('bt-lm').value==='')return;const l=B.LANDMARKS[+$('bt-lm').value];selectKm(l.km,l.name);};
+$('bt-date').onchange=()=>{render();renderBench();FT.setDate($('bt-date').value,'baffle');};
+['bt-hoff','bt-badj'].forEach(id=>document.getElementById(id).onchange=()=>{render();renderBench();FT.biteRefreshIfBaffle&&FT.biteRefreshIfBaffle();});
+const FT=window.FT;
+FT.baffleOpts=opts;FT.baffleSelect=(km,name)=>selectKm(km,name);
+FT.baffleSetDate=v=>{if($('bt-date').value!==v){$('bt-date').value=v;render();renderBench();}};
+$('bt-toBite').onclick=()=>{const p=st.gps?[st.gps.lat,st.gps.lon]:B.pointAtKm(st.km);
+  FT.setDate($('bt-date').value,'baffle');
+  FT.biteSetLoc({name:(st.landmark&&st.landmark!=='GPS fix'?st.landmark:(st.gps?'GPS spot':'km '+st.km.toFixed(1)))+' — Baffle Ck',lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:+st.km.toFixed(2)});
+  FT.showTab('bite');};
+$('bt-gps').onclick=()=>{if(!navigator.geolocation){alert('Geolocation not supported');return;}$('bt-gps').disabled=true;
+  navigator.geolocation.getCurrentPosition(p=>{$('bt-gps').disabled=false;const s=B.snap(p.coords.latitude,p.coords.longitude);st.km=Math.min(B.MAXKM,s.km);st.landmark='GPS fix';st.gps={lat:p.coords.latitude,lon:p.coords.longitude,offKm:s.offKm,line:s.line};$('bt-km').value=st.km;$('bt-lm').value='';render();},
+  e=>{$('bt-gps').disabled=false;alert('GPS failed: '+e.message);},{enableHighAccuracy:true,timeout:20000,maximumAge:60000});};
+/* ---- live Bundaberg (DES storm tide CSV, CORS-enabled) ---- */
+$('bt-live').onclick=async()=>{const out=$('bt-liveOut');out.textContent='Loading…';
+  try{const r=await fetch('https://apps.des.qld.gov.au/data-sets/storm-tides/stdtide-7dayopdata.csv');const txt=await r.text();
+    const rows=txt.split('\n').filter(l=>l.startsWith('bundaberg,')).map(l=>l.split(',')).map(p=>({t:B.dateToH(...p[2].match(/\d+/g).map(Number)),o:+p[3],p:+p[4],res:+p[5]})).filter(r=>r.o>-1&&r.o<7);
+    if(!rows.length)throw new Error('no Bundaberg rows');const last=rows[rows.length-1];const recent=rows.filter(r=>r.t>last.t-6);const mres=recent.reduce((a,b)=>a+b.res,0)/recent.length;
+    let se=0;rows.forEach(r=>{se+=(B.bundH(r.t)-r.o)**2;});const rms=Math.sqrt(se/rows.length);
+    out.innerHTML=`Bundaberg gauge latest <b>${B.fmtDT(last.t)}</b>: observed ${last.o.toFixed(2)} m LAT (${(last.o-1.693).toFixed(2)} m AHD), MSQ predicted ${last.p.toFixed(2)} → residual <b>${last.res>=0?'+':''}${last.res.toFixed(2)} m</b> (6-h mean ${mres>=0?'+':''}${mres.toFixed(2)} m). This app's harmonic model vs the last ${rows.length} observations: RMS ${rms.toFixed(3)} m. <button class="sm" id="applyRes">Use ${mres.toFixed(2)} m as height offset</button>`;
+    $('applyRes').onclick=()=>{$('bt-hoff').value=mres.toFixed(2);render();renderBench();};
+  }catch(e){out.innerHTML='<span class="pos">Couldn’t load live data ('+esc(e.message)+'). Offline? Predictions still work.</span>';}};
+/* nodes table */
+$('bt-nodesTbl').innerHTML='<table><tr><th>km</th><th>Node</th><th>HW lag</th><th>LW lag</th><th>Source</th></tr>'+B.NODES.map(n=>`<tr><td>${n.km}</td><td>${esc(n.name)}</td><td>+${Math.floor(n.hwLag/60)}:${String(n.hwLag%60).padStart(2,'0')} ±${n.hwU}′</td><td>+${Math.floor(n.lwLag/60)}:${String(n.lwLag%60).padStart(2,'0')} ±${n.lwU}′</td><td class="mut">${esc(n.src)}</td></tr>`).join('')+'</table><p class="mut">Lags are after the Bundaberg (Burnett Heads) high/low.</p>';
+const i0=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01);if(i0>=0){st.landmark=B.LANDMARKS[i0].name;$('bt-lm').value=i0;}
+render();renderBench();document.body.dataset.btReady='1';
+})();
+</script>
+<script>
+/* ===================== App / UI ===================== */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const DEF={name:'Burnett Heads (Burnett River mouth), QLD',lat:-24.76,lng:152.40,tz:'Australia/Brisbane'};
+let loc=JSON.parse(localStorage.getItem('mj_loc')||'null')||{...DEF};
+if(loc.baffleKm===undefined)loc.baffleKm=null;
+let state={};
+const FT=window.FT;
+const E0=Date.UTC(2025,11,31,14); /* Baffle model hour 0 = 2026-01-01 00:00 AEST */
+function bafName(km){const L=BT.LANDMARKS.filter(l=>Math.abs(l.km-km)<0.3).sort((a,b)=>Math.abs(a.km-km)-Math.abs(b.km-km))[0];return L?L.name:null;}
+function baffleTide(dateStr,km){const [y,m,d]=dateStr.split('-').map(Number);const h0=BT.dateToH(y,m,d-1,0,0),h1=BT.dateToH(y,m,d+8,0,0);
+  const P=BT.predictAt(km,h0,h1,FT.baffleOpts?FT.baffleOpts():{});
+  const fn=t=>{const v=P.curve((t-E0)/3.6e6);return v==null?null:v;};
+  const ext=P.ext.filter(e=>!e.weak).map(e=>({t:E0+e.t*3.6e6,h:e.h,high:!!e.hi}));
+  return{fn,ext,cal:P.cal,weak:P.ext.filter(e=>e.weak).length};}
+function snapLoc(l){if(l.baffleKm!==undefined)return l;let s=null;try{s=BT.snap(l.lat,l.lng);}catch(e){}
+  l.baffleKm=(s&&s.offKm<=0.6&&s.km<=BT.MAXKM)?+Math.min(BT.MAXKM,s.km).toFixed(2):null;return l;}
+BT.LANDMARKS.forEach((l,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${l.name} (${l.km.toFixed(1)} km)`;$('mj-bafSel').appendChild(o);});
+$('mj-bafSel').onchange=()=>{const v=$('mj-bafSel').value;if(v==='')return;const l=BT.LANDMARKS[+v];const p=BT.pointAtKm(l.km);
+  setLoc({name:l.name+' — Baffle Ck',lat:p[0],lng:p[1],tz:'Australia/Brisbane',baffleKm:l.km});};
+const todayIn=tz=>MJ.ymd(Date.now(),tz);
+$('mj-date').value=todayIn(loc.tz||DEF.tz);
+$('mj-tideOff').value=localStorage.getItem('mj_tideoff')||0;
+
+function fmtT(ms,tz,opts){return new Intl.DateTimeFormat('en-AU',Object.assign({timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true},opts||{})).format(new Date(ms)).replace(' am','am').replace(' pm','pm');}
+function fmtDay(dateStr,o){const [y,m,d]=dateStr.split('-').map(Number);return new Intl.DateTimeFormat('en-AU',Object.assign({timeZone:'UTC',weekday:'short',day:'numeric',month:'short'},o||{})).format(new Date(Date.UTC(y,m-1,d)));}
+function setLocInfo(extra){$('mj-locInfo').innerHTML=`<b>${esc(loc.name)}</b> · ${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)} · TZ ${esc(loc.tz||'?')}${extra?' · '+extra:''}`;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function notice(html,err){const d=document.createElement('div');d.className='notice'+(err?' err':'');d.innerHTML=html;$('mj-notices').appendChild(d);}
+function scoreColor(s){const h=s<50?lerp(s,0,50,210,45):lerp(s,50,100,45,135);const l=s<20?40:52;return `hsl(${h},75%,${l}%)`;}
+function lerp(x,x0,x1,y0,y1){return y0+(y1-y0)*Math.max(0,Math.min(1,(x-x0)/(x1-x0)));}
+
+/* fetch with localStorage cache fallback and end_date clamping */
+async function getJSON(url,key){
+  try{const r=await fetch(url);const j=await r.json();
+    if(j.error){const m=/to (\d{4}-\d\d-\d\d)/.exec(j.reason||'');if(m&&/end_date/.test(j.reason)&&!/clamped/.test(url)){return getJSON(url.replace(/end_date=[\d-]+/,'end_date='+m[1])+'&clamped=1',key);}throw new Error(j.reason||'API error');}
+    try{localStorage.setItem('mj_c_'+key,JSON.stringify({u:url,j}));}catch(e){}
+    return j;}
+  catch(e){const c=JSON.parse(localStorage.getItem('mj_c_'+key)||'null');if(c&&c.u.split('&clamped')[0]===url.split('&clamped')[0]){c.j._cached=true;return c.j;}throw e;}
+}
+
+async function run(){
+  document.body.dataset.biteReady='';$('mj-notices').innerHTML='';const BZ=(loc.baffleKm!=null&&window.BT)?loc.baffleKm:null;$('mj-tideOff').disabled=BZ!=null;$('mj-windows').innerHTML='<span class="spin"></span> Fetching tide &amp; weather…';
+  const dateStr=$('mj-date').value||todayIn(loc.tz||DEF.tz);
+  const off=+$('mj-tideOff').value||0;localStorage.setItem('mj_tideoff',off);
+  const start=MJ.addDays(dateStr,-1),end=MJ.addDays(dateStr,7);
+  const ll=`latitude=${loc.lat.toFixed(4)}&longitude=${loc.lng.toFixed(4)}`;
+  const mUrl=`https://marine-api.open-meteo.com/v1/marine?${ll}&hourly=sea_level_height_msl,sea_surface_temperature&timezone=auto&start_date=${start}&end_date=${end}&cell_selection=sea`;
+  const fUrl=`https://api.open-meteo.com/v1/forecast?${ll}&hourly=pressure_msl,wind_speed_10m,cloud_cover,precipitation,relative_humidity_2m,temperature_2m,weather_code&timezone=auto&wind_speed_unit=kmh&start_date=${start}&end_date=${end}`;
+  const [mr,fr]=await Promise.allSettled([getJSON(mUrl,'m'),getJSON(fUrl,'f')]);
+  const marine=mr.status==='fulfilled'?mr.value:null, fc=fr.status==='fulfilled'?fr.value:null;
+  const tz=(fc&&fc.timezone)||(marine&&marine.timezone)||loc.tz||Intl.DateTimeFormat().resolvedOptions().timeZone;
+  if(tz!==loc.tz){loc.tz=tz;localStorage.setItem('mj_loc',JSON.stringify(loc));}
+  let tideFn=null,ext=null,sstFn=null,wxFn=null,cell='';
+  if(marine&&marine.hourly){const tt=marine.hourly.time.map(s=>MJ.parseLocalIso(s,tz));
+    const sl=marine.hourly.sea_level_height_msl;
+    if(BZ!=null){/* tide comes from the Baffle along-creek model */}
+    else if(sl.some(v=>v!=null)){const base=MJ.makeSeries(tt,sl);tideFn=t=>base(t-off*60e3);ext=MJ.tideExtremes(tideFn,tt[0]+off*60e3,tt[tt.length-1]+off*60e3);}
+    else notice('🌊 No sea-level data for this point (probably inland). Tide factor omitted; scoring uses light, solunar, moon, temperature and weather only.');
+    const sst=marine.hourly.sea_surface_temperature;if(sst.some(v=>v!=null))sstFn=MJ.makeSeries(tt,sst);
+    cell=`tide model cell ${marine.latitude.toFixed(3)}, ${marine.longitude.toFixed(3)}`;
+    if(marine._cached)notice('📦 Marine API unreachable — using cached tide data from a previous load.');
+  }else if(BZ!=null)notice('🌡️ Sea-temperature data unavailable ('+esc(mr.reason&&mr.reason.message||'network error')+') — using a seasonal estimate. Tide still comes from the Baffle model (works offline).');
+  else notice('🌊 Couldn\'t load tide/sea-temperature data ('+esc(mr.reason&&mr.reason.message||'network error')+'). Falling back to <b>sun/moon/weather scoring</b> with a seasonal water-temperature estimate.',true);
+  if(fc&&fc.hourly){const h=fc.hourly,tt=h.time.map(s=>MJ.parseLocalIso(s,tz));const S=k=>MJ.makeSeries(tt,h[k]);
+    const P=S('pressure_msl'),Wd=S('wind_speed_10m'),C=S('cloud_cover'),R=S('precipitation'),RH=S('relative_humidity_2m'),T=S('temperature_2m');
+    const codeAt=t=>{const i=Math.round((t-tt[0])/3600e3);return i>=0&&i<tt.length?h.weather_code[i]:null;};
+    wxFn=t=>{const p=P(t);if(p==null)return null;const p3=P(t-3*3600e3);let storm=false;for(let k=1;k<=6;k++){const c=codeAt(t+k*3600e3);if(c!=null&&c>=95)storm=true;}
+      return{p,dp3:p3!=null?p-p3:null,wind:Wd(t),cloud:C(t),rain:R(t),rh:RH(t),temp:T(t),code:codeAt(t),stormAhead:storm};};
+    if(fc._cached)notice('📦 Forecast API unreachable — using cached weather from a previous load.');
+  }else notice('☁️ Couldn\'t load weather forecast ('+esc(fr.reason&&fr.reason.message||'network error')+'). Weather factor set to neutral.',true);
+  let srcHtml;
+  if(BZ!=null){const r=baffleTide(dateStr,BZ);tideFn=r.fn;ext=r.ext;const c=r.cal,nm=bafName(BZ);
+    srcHtml=`🌊 <b>Tide source: Baffle Creek along-creek model</b> @ ${BZ.toFixed(1)} km${nm?' ('+esc(nm)+')':''} — Bundaberg harmonics → Winfield/Hills Rd/Essendean-calibrated lag &amp; height (m AHD); timing ±${Math.round(c.hwU)} min highs, ±${Math.round(c.lwU)} min lows${c.trunc?'; lows here are a <b>pool level</b> (truncated)':''}${r.weak?`; ${r.weak} weak/no-show high(s) this week ignored`:''}. Manual tide offset not used. <button class="sm" id="openBaffle">🌊 Open in Baffle tides</button>`;
+    cell='';}
+  else srcHtml=tideFn?`🌊 <b>Tide source: Open-Meteo marine model</b> (offshore grid cell)${off?` + manual offset ${off>0?'+':''}${off} min`:' — use the tide offset for up-river spots'}.`:'🌊 <b>Tide source: none</b> — scoring on light, solunar, moon, temp &amp; weather.';
+  $('mj-tideSrc').innerHTML=srcHtml;
+  if($('openBaffle'))$('openBaffle').onclick=()=>{FT.baffleSelect(BZ,bafName(BZ));FT.setDate($('mj-date').value,'bite');FT.showTab('baffle');};
+  setLocInfo(cell);
+  // week
+  let weekRange=null;if(ext&&ext.length>1){let mx=0;for(let i=1;i<ext.length;i++)mx=Math.max(mx,Math.abs(ext[i].h-ext[i-1].h));weekRange={max:mx};}
+  const days=[];for(let i=0;i<7;i++){const ds=MJ.addDays(dateStr,i);days.push(MJ.computeDay({dateStr:ds,tz,lat:loc.lat,lng:loc.lng,tideFn,ext,wxFn,sstFn,weekRange}));}
+  state={tz,days,sel:0,dateStr,hasTide:!!tideFn};
+  window.__MJ_STATE=state;
+  renderDay(0);renderWeek();
+  document.body.dataset.biteReady='1';
+}
+
+function renderDay(i){
+  state.sel=i;const d=state.days[i],tz=state.tz;
+  $('mj-dayTitle').textContent=fmtDay(d.dateStr,{weekday:'long',day:'numeric',month:'long',year:'numeric'})+' — rating '+d.rating+'/100 '+stars(d.rating);
+  const ev=d.ev,inDay=x=>x.t>=d.t0&&x.t<d.t1;
+  const sr=ev.sunRiseSet.filter(inDay),cv=ev.civil.filter(inDay);
+  const rise=sr.find(x=>x.rising),set=sr.find(x=>!x.rising),dawn=cv.find(x=>x.rising),dusk=cv.find(x=>!x.rising);
+  const mr=ev.moonRiseSet.filter(inDay),tr=ev.transits.filter(inDay);
+  const f=x=>x?fmtT(x.t,tz):'—';
+  const sst=d.pts.find(p=>p.sst!=null);const wx=d.pts.map(p=>p.wx).filter(Boolean);
+  const pr=wx.length?`${Math.round(wx[0].p)}→${Math.round(wx[wx.length-1].p)} hPa`:'n/a';
+  const maxWind=wx.length?Math.round(Math.max(...wx.map(w=>w.wind||0))):null;
+  const rain=wx.length?(d.pts.filter((p,k)=>k%4===0&&p.wx).reduce((a,p)=>a+(p.wx.rain||0),0)).toFixed(1):null;
+  const tides=d.dayExt.map(x=>`${x.high?'H':'L'} ${fmtT(x.t,tz)} (${x.h.toFixed(2)}m)`).join('<br>')||'n/a';
+  const stats=[
+    ['🌅 Dawn / sunrise',`${f(dawn)} / ${f(rise)}`],['🌇 Sunset / dusk',`${f(set)} / ${f(dusk)}`],
+    [MJ.phaseEmoji(d.illum.phase,loc.lat)+' Moon',`${MJ.phaseName(d.illum.phase)}, ${Math.round(d.illum.fraction*100)}% lit`],
+    ['🌙 Moonrise / set',mr.map(x=>(x.rising?'↑':'↓')+fmtT(x.t,tz)).join(' ')||'—'],
+    ['⭐ Moon over / under',tr.map(x=>(x.over?'over ':'under ')+fmtT(x.t,tz)).join('<br>')||'—'],
+    ['🌊 Tides',tides],
+    ['🌡️ Sea temp',sst?sst.sst.toFixed(1)+'°C':'n/a ('+d.pts[0].TF.label+')'],
+    ['🧭 Pressure',pr],['💨 Max wind / rain',maxWind!=null?`${maxWind} km/h / ${rain} mm`:'n/a'],
+  ];
+  $('mj-stats').innerHTML=stats.map(s=>`<div class="stat"><small>${s[0]}</small><b>${s[1]}</b></div>`).join('');
+  // windows
+  $('mj-windows').innerHTML=d.windows.length?d.windows.map(w=>{const r=reasons(w.peak);return `<div class="win" style="border-color:${scoreColor(w.score)}"><div class="sc" style="color:${scoreColor(w.score)}">${w.score}</div><div><div class="t">${fmtT(w.start,tz)} – ${fmtT(w.end,tz)}</div><ul>${r.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div></div>`;}).join(''):'<p class="mut">No standout windows.</p>';
+  drawChart(d);
+  $('mj-hours').innerHTML=d.hourly.map(h=>`<div class="hr" style="background:${scoreColor(h.score)}" title="${fmtT(h.t,tz)}: ${h.score}">${h.score}<span>${fmtT(h.t,tz,{minute:undefined}).replace(':00','')}</span></div>`).join('');
+  document.querySelectorAll('.day').forEach((el,k)=>el.classList.toggle('sel',k===i));
+}
+function reasons(p){const tz=state.tz,r=[];
+  r.push(p.L.label);
+  if(p.T){let s=p.T.label;s+=p.T.rising?` (high ${fmtT(p.T.next.t,tz)})`:(/Last/.test(p.T.label)?` (low ${fmtT(p.T.next.t,tz)})`:` (high was ${fmtT(p.T.prev.t,tz)})`);r.push(s);}
+  if(p.S.v>0.3)r.push(p.S.label+' '+fmtT(p.S.ev.t,tz));
+  const d=state.days[state.sel];if(d.mpf>0.6)r.push(MJ.phaseName(d.illum.phase)+' boost');
+  r.push(p.TF.label+(p.TF.v>=0.9?' — ideal':p.TF.v<0.55?' — fish sluggish':''));
+  for(const n of p.WX.notes)r.push(n);
+  return r;}
+function stars(s){const n=Math.max(1,Math.min(5,Math.round(s/20)));return '★'.repeat(n)+'☆'.repeat(5-n);}
+
+function drawChart(d){
+  const svg=$('mj-chart'),tz=state.tz,W=960,H=330,L=38,R=46,T=14,B=56,pw=W-L-R,ph=H-T-B;
+  const x=t=>L+(t-d.t0)/(d.t1-d.t0)*pw,y=s=>T+ph-(s/100)*ph;
+  let o='';
+  // light bands
+  for(const p of d.pts){const c=p.alt<-12?'#06101a':p.alt<-0.8?'#1c2f4a':null;if(c)o+=`<rect x="${x(p.t).toFixed(1)}" y="${T}" width="${(pw/d.pts.length+0.6).toFixed(1)}" height="${ph}" fill="${c}"/>`;}
+  // solunar bars
+  for(const tr of d.ev.transits){const a=Math.max(d.t0,tr.t-3600e3),b=Math.min(d.t1,tr.t+3600e3);if(b>a)o+=`<rect x="${x(a)}" y="${T+ph+4}" width="${x(b)-x(a)}" height="7" rx="3" fill="#c9a227"><title>Major: moon ${tr.over?'overhead':'underfoot'} ${fmtT(tr.t,tz)}</title></rect>`;}
+  for(const m of d.ev.moonRiseSet){const a=Math.max(d.t0,m.t-1800e3),b=Math.min(d.t1,m.t+1800e3);if(b>a)o+=`<rect x="${x(a)}" y="${T+ph+4}" width="${x(b)-x(a)}" height="7" rx="3" fill="#7c6d3a"><title>Minor: ${m.rising?'moonrise':'moonset'} ${fmtT(m.t,tz)}</title></rect>`;}
+  // grid
+  for(let s=0;s<=100;s+=25)o+=`<line x1="${L}" x2="${W-R}" y1="${y(s)}" y2="${y(s)}" stroke="#2b4a50" stroke-dasharray="3 4"/><text x="${L-6}" y="${y(s)+4}" fill="#9db5b1" font-size="11" text-anchor="end">${s}</text>`;
+  for(let h=0;h<=24;h+=3){const t=d.t0+h*3600e3;o+=`<text x="${x(t)}" y="${H-26}" fill="#9db5b1" font-size="11" text-anchor="middle">${h===24?'':fmtT(t,tz,{minute:undefined})}</text>`;}
+  // windows highlight
+  for(const w of d.windows)o+=`<rect x="${x(w.start)}" y="${T}" width="${x(w.end)-x(w.start)}" height="${ph}" fill="#f0a03a" opacity=".13"/>`;
+  // score area
+  const sp=d.pts.map(p=>`${x(p.t).toFixed(1)},${y(p.score).toFixed(1)}`);
+  o+=`<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6b3d" stop-opacity=".75"/><stop offset="1" stop-color="#f0a03a" stop-opacity=".08"/></linearGradient></defs>`;
+  o+=`<path d="M${x(d.t0)},${y(0)} L${sp.join(' L')} L${x(d.pts[d.pts.length-1].t)},${y(0)} Z" fill="url(#g)"/><polyline points="${sp.join(' ')}" fill="none" stroke="#f0a03a" stroke-width="2.5"/>`;
+  // tide
+  const tp=d.pts.filter(p=>p.tide!=null);
+  if(tp.length){const all=state.days.flatMap(dd=>dd.dayExt.map(e=>e.h));let mn=Math.min(...all,...tp.map(p=>p.tide)),mx=Math.max(...all,...tp.map(p=>p.tide));const pad=(mx-mn)*0.08;mn-=pad;mx+=pad;
+    const ty=v=>T+ph-(v-mn)/(mx-mn)*ph;
+    o+=`<polyline points="${tp.map(p=>x(p.t).toFixed(1)+','+ty(p.tide).toFixed(1)).join(' ')}" fill="none" stroke="#5cc8ff" stroke-width="2" stroke-dasharray="6 3"/>`;
+    for(let v=Math.ceil(mn*2)/2;v<=mx;v+=0.5)o+=`<text x="${W-R+6}" y="${ty(v)+4}" fill="#5cc8ff" font-size="10">${v.toFixed(1)}m</text>`;
+    for(const e of d.dayExt)o+=`<circle cx="${x(e.t)}" cy="${ty(e.h)}" r="4" fill="#5cc8ff"/><text x="${x(e.t)}" y="${ty(e.h)+(e.high?-9:16)}" fill="#bfe9ff" font-size="11" text-anchor="middle">${e.high?'H':'L'} ${fmtT(e.t,tz)}</text>`;}
+  // sun/moon markers row
+  const ev=d.ev,inDay=x0=>x0.t>=d.t0&&x0.t<d.t1;
+  for(const s of ev.sunRiseSet.filter(inDay))o+=`<text x="${x(s.t)}" y="${H-8}" font-size="13" text-anchor="middle">${s.rising?'🌅':'🌇'}</text>`;
+  for(const s of ev.moonRiseSet.filter(inDay))o+=`<text x="${x(s.t)}" y="${H-8}" font-size="12" text-anchor="middle" fill="#ddd">${s.rising?'☽↑':'☽↓'}</text>`;
+  o+=`<line id="cur" x1="0" x2="0" y1="${T}" y2="${T+ph}" stroke="#fff" stroke-width="1" opacity="0"/>`;
+  // now marker
+  const now=Date.now();if(now>=d.t0&&now<d.t1)o+=`<line x1="${x(now)}" x2="${x(now)}" y1="${T}" y2="${T+ph}" stroke="#57d18a" stroke-width="1.5"/><text x="${x(now)+3}" y="${T+11}" fill="#57d18a" font-size="11">now</text>`;
+  svg.innerHTML=o;
+  const tip=$('mj-tip');
+  const move=ev2=>{const r=svg.getBoundingClientRect();const cx=(ev2.touches?ev2.touches[0].clientX:ev2.clientX)-r.left;const vx=cx/r.width*W;if(vx<L||vx>W-R){tip.style.display='none';return;}
+    const t=d.t0+(vx-L)/pw*(d.t1-d.t0);const i=Math.max(0,Math.min(d.pts.length-1,Math.round((t-d.t0)/(d.pts[1].t-d.t0))));const p=d.pts[i];
+    tip.innerHTML=`<b>${fmtT(p.t,tz)} · ${p.score}</b><br>${p.L.label}${p.T?'<br>'+p.T.label:''}${p.tide!=null?' ('+p.tide.toFixed(2)+'m)':''}${p.S.v>0.3?'<br>'+p.S.label:''}`;
+    tip.style.display='block';const left=Math.min(r.width-tip.offsetWidth-4,Math.max(0,cx+10));tip.style.left=left+'px';tip.style.top='8px';
+    const c=svg.querySelector('#cur');c.setAttribute('x1',x(p.t));c.setAttribute('x2',x(p.t));c.setAttribute('opacity','.6');};
+  svg.onmousemove=move;svg.ontouchstart=move;svg.ontouchmove=move;svg.onmouseleave=()=>{tip.style.display='none';};
+}
+function renderWeek(){
+  $('mj-days').innerHTML=state.days.map((d,i)=>{const b=[...d.windows].sort((a,b2)=>b2.score-a.score)[0];const sst=d.pts.find(p=>p.sst!=null);
+    return `<div class="day${i===state.sel?' sel':''}" data-i="${i}"><div class="dn">${fmtDay(d.dateStr)}</div><div class="stars">${stars(d.rating)}</div><div class="bar"><i style="width:${d.rating}%"></i></div><div class="ds"><b style="color:var(--ink)">${d.rating}</b>/100 · ${MJ.phaseEmoji(d.illum.phase,loc.lat)} ${Math.round(d.illum.fraction*100)}%</div>${b?`<div class="ds">Best ${fmtT(b.start,state.tz)}–${fmtT(b.end,state.tz)}</div>`:''}<div class="ds">${d.range!=null?'Range '+d.range.toFixed(1)+'m':''}${sst?' · '+sst.sst.toFixed(0)+'°C':''}</div></div>`;}).join('');
+  document.querySelectorAll('.day').forEach(el=>el.onclick=()=>renderDay(+el.dataset.i));
+}
+
+/* location controls */
+function setLoc(l){loc=snapLoc(l);{const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(x=>Math.abs(x.km-loc.baffleKm)<0.01):-1;$('mj-bafSel').value=i>=0?i:'';}localStorage.setItem('mj_loc',JSON.stringify(loc));setLocInfo();$('mj-results').innerHTML='';run();}
+$('mj-searchBtn').onclick=async()=>{const q=$('mj-q').value.trim();if(!q)return;$('mj-results').innerHTML='<li><span class="spin"></span> Searching…</li>';
+  try{const u=n=>`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=8&language=en&format=json`+(n?'&countryCode=AU':'');
+    let j=await (await fetch(u(true))).json();if(!j.results||!j.results.length)j=await (await fetch(u(false))).json();
+    const res=j.results||[];if(!res.length){$('mj-results').innerHTML='<li>No matches.</li>';return;}
+    $('mj-results').innerHTML=res.map((r,i)=>`<li data-i="${i}">${esc(r.name)}<span class="mut"> · ${esc([r.admin2,r.admin1,r.country].filter(Boolean).join(', '))} · ${r.latitude.toFixed(3)}, ${r.longitude.toFixed(3)}</span></li>`).join('');
+    $('mj-results').querySelectorAll('li').forEach(li=>li.onclick=()=>{const r=res[+li.dataset.i];setLoc({name:[r.name,r.admin1].filter(Boolean).join(', '),lat:r.latitude,lng:r.longitude,tz:r.timezone});});
+  }catch(e){$('mj-results').innerHTML='<li>Search failed (offline?).</li>';}};
+$('mj-q').onkeydown=e=>{if(e.key==='Enter')$('mj-searchBtn').click();};
+$('mj-geoBtn').onclick=()=>{if(!navigator.geolocation){notice('Geolocation not supported by this browser.',true);return;}
+  $('mj-geoBtn').disabled=true;navigator.geolocation.getCurrentPosition(p=>{$('mj-geoBtn').disabled=false;setLoc({name:'My location',lat:p.coords.latitude,lng:p.coords.longitude,tz:Intl.DateTimeFormat().resolvedOptions().timeZone});},
+  e=>{$('mj-geoBtn').disabled=false;notice('Couldn\'t get your location: '+esc(e.message),true);},{enableHighAccuracy:false,timeout:15000,maximumAge:600000});};
+$('mj-defBtn').onclick=()=>setLoc({...DEF});
+$('mj-goBtn').onclick=run;$('mj-date').onchange=()=>{FT.setDate($('mj-date').value,'bite');run();};
+FT.biteSetLoc=setLoc;FT.biteSetDate=v=>{if($('mj-date').value!==v){$('mj-date').value=v;run();}};
+FT.biteRefreshIfBaffle=()=>{if(loc.baffleKm!=null)run();};$('mj-tideOff').onchange=run;
+{const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(l=>Math.abs(l.km-loc.baffleKm)<0.01):-1;if(i>=0)$('mj-bafSel').value=i;}
+setLocInfo();
+run().catch(e=>{notice('Unexpected error: '+esc(e.message),true);console.error(e);});
+})();
+</script>
+<script>
+FT.showTab((location.hash||'').slice(1)||(function(){try{return localStorage.getItem('ft_tab')}catch(e){return null}})()||'bite');
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW',e)));}
+</script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 {
- "name": "Fishing Apps \u2014 Bundaberg",
- "short_name": "Fishing",
- "description": "Mangrove jack bite times and Baffle Creek tides",
+ "id": "./",
+ "name": "Fish Times",
+ "short_name": "Fish Times",
+ "description": "Mangrove jack bite times + Baffle Creek tides (Bundaberg region)",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
@@ -20,6 +21,16 @@
    "sizes": "512x512",
    "type": "image/png",
    "purpose": "any maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Bite times",
+   "url": "./#bite"
+  },
+  {
+   "name": "Baffle tides",
+   "url": "./#baffle"
   }
  ]
 }

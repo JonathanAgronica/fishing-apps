@@ -35,6 +35,10 @@
   {
    "name": "Gauges",
    "url": "./#gauges"
+  },
+  {
+   "name": "Catch log",
+   "url": "./#log"
   }
  ]
 }

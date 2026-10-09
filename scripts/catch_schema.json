@@ -1,0 +1,223 @@
+{
+ "topic": "mbj-catches-e7a8ebe08a57ba22e520",
+ "bands": {
+  "0": "Mouth–Duck Ck",
+  "2": "Duck Ck–Winfield",
+  "4": "Winfield–Flat Rock",
+  "6": "Rocky Point–Caravan park",
+  "8": "Bottle Ck jn",
+  "10": "Newton Rd",
+  "12": "Newton Rd–Wartburg",
+  "14": "below Wartburg",
+  "16": "Wartburg–Euleilah jn",
+  "18": "above Euleilah jn",
+  "20": "Euleilah jn–Sleepy Ck",
+  "22": "Euleilah jn–Sleepy Ck",
+  "24": "below Sleepy Ck",
+  "26": "Sleepy Ck jn",
+  "28": "Sleepy–Manning Ck",
+  "30": "Manning Ck jn",
+  "32": "below Sandy Ck",
+  "34": "Sandy Ck–Essendean",
+  "36": "above Essendean",
+  "38": "Christensens"
+ },
+ "bandsE": {
+  "16": "Euleilah Ck mouth",
+  "18": "lower Euleilah Ck",
+  "20": "lower Euleilah Ck",
+  "22": "upper Euleilah Ck",
+  "24": "Euleilah Ck, Hills Rd"
+ },
+ "regions": [
+  [
+   "baffle",
+   "Baffle Ck catchment (off main channel)",
+   -24.54,
+   151.95
+  ],
+  [
+   "coastn",
+   "Rules Beach / Deepwater coast",
+   -24.35,
+   151.95
+  ],
+  [
+   "agnes",
+   "Agnes Water / 1770",
+   -24.2,
+   151.88
+  ],
+  [
+   "kolan",
+   "Kolan River",
+   -24.66,
+   152.17
+  ],
+  [
+   "burnett",
+   "Burnett River / Bundaberg",
+   -24.78,
+   152.38
+  ],
+  [
+   "elliott",
+   "Elliott River / Heads",
+   -24.92,
+   152.46
+  ],
+  [
+   "burrum",
+   "Burrum / Woodgate",
+   -25.2,
+   152.6
+  ],
+  [
+   "gladstone",
+   "Gladstone region",
+   -23.9,
+   151.25
+  ],
+  [
+   "other",
+   "Elsewhere",
+   null,
+   null
+  ]
+ ],
+ "species": [
+  [
+   "MJ",
+   "Mangrove jack"
+  ],
+  [
+   "BR",
+   "Bream"
+  ],
+  [
+   "WH",
+   "Whiting"
+  ],
+  [
+   "FL",
+   "Flathead"
+  ],
+  [
+   "GT",
+   "Trevally"
+  ],
+  [
+   "BA",
+   "Barramundi"
+  ],
+  [
+   "GR",
+   "Grunter"
+  ],
+  [
+   "CO",
+   "Estuary cod"
+  ],
+  [
+   "MU",
+   "Mulloway"
+  ],
+  [
+   "FI",
+   "Fingermark"
+  ],
+  [
+   "TH",
+   "Threadfin salmon"
+  ],
+  [
+   "QF",
+   "Queenfish"
+  ],
+  [
+   "TA",
+   "Tarpon / oxeye herring"
+  ],
+  [
+   "OT",
+   "Other"
+  ]
+ ],
+ "fates": [
+  [
+   "released",
+   "Released"
+  ],
+  [
+   "kept",
+   "Kept"
+  ],
+  [
+   "bite",
+   "Bite / lost / missed"
+  ]
+ ],
+ "bait": [
+  [
+   "",
+   "—"
+  ],
+  [
+   "live",
+   "Live bait"
+  ],
+  [
+   "dead",
+   "Dead / cut bait"
+  ],
+  [
+   "plastic",
+   "Soft plastic"
+  ],
+  [
+   "hardbody",
+   "Hard-body lure"
+  ],
+  [
+   "topwater",
+   "Topwater / surface"
+  ],
+  [
+   "vibe",
+   "Vibe / blade"
+  ],
+  [
+   "fly",
+   "Fly"
+  ],
+  [
+   "other",
+   "Other"
+  ]
+ ],
+ "tide": [
+  "runin",
+  "rising",
+  "falling",
+  "slack",
+  "pool",
+  "none"
+ ],
+ "light": [
+  "night",
+  "dawn",
+  "dusk",
+  "lowsun",
+  "day"
+ ],
+ "sol": [
+  "major",
+  "minor",
+  "none"
+ ],
+ "tsrc": [
+  "baffle",
+  "marine",
+  "none"
+ ]
+}

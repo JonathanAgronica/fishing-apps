@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Baffle Jacks">
-<meta name="app-version" content="202610092152">
+<meta name="app-version" content="202610092206">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -121,7 +121,8 @@ nav.tabs a{flex:1;text-align:center;padding:10px 6px;border-radius:12px 12px 0 0
 nav.tabs a.on{background:var(--bg);color:var(--ink);box-shadow:inset 0 3px 0 var(--acc)}
 nav.tabs a[data-tab=baffle].on{box-shadow:inset 0 3px 0 var(--tide)}
 nav.tabs a[data-tab=gauges].on{box-shadow:inset 0 3px 0 #e5484d}
-@media(max-width:420px){nav.tabs a{font-size:.86rem;padding:9px 3px}}
+@media(max-width:520px){nav.tabs a{font-size:.8rem;padding:9px 2px;line-height:1.2}}
+@media(max-width:380px){nav.tabs a{font-size:.72rem}}
 .gbar button.on{background:var(--acc);color:#1b1205;border-color:var(--acc)}
 .gleg{margin-top:8px;gap:6px}
 .gleg button{font-size:.74rem;padding:3px 8px;border-radius:14px;display:inline-flex;align-items:center;gap:5px}
@@ -134,6 +135,31 @@ nav.tabs a[data-tab=gauges].on{box-shadow:inset 0 3px 0 #e5484d}
 .gst b{display:block;font-size:1.05rem}.gst small{color:var(--mut)}
 .drift-ok{color:var(--good)}.drift-warn{color:#ffd38a}.drift-bad{color:var(--bad)}
 
+nav.tabs a[data-tab=log].on{box-shadow:inset 0 3px 0 #b48cff}
+.ch3{font-size:.95rem;margin:12px 0 6px}
+.cadd{background:var(--panel2);border-radius:10px;padding:8px}
+#tab-log input[type=datetime-local],#tab-log input[type=number]{padding:7px 8px}
+#tab-log input[type=text]{flex:1 1 180px;min-width:0}
+.cact{background:#1d2f45;border:1px solid #3a5a86;border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.cact .big{font-size:1.15rem;font-weight:700}
+.citem{background:var(--panel2);border-radius:10px;padding:8px 10px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.citem .ci{flex:1;min-width:0}
+.citem .sc{font-weight:700;min-width:40px;text-align:center;border-radius:8px;padding:2px 4px;color:#071012}
+.ctag{display:inline-block;font-size:.72rem;border-radius:6px;padding:1px 6px;margin-left:4px;background:#2b4b52;color:#cfe}
+.ctag.sh{background:#2d3f6b}.ctag.ok{background:#1f5a3a}.ctag.q{background:#5a4a1f}
+.cseg{gap:4px;margin-bottom:6px}
+.cseg button{padding:5px 9px;font-size:.82rem;border-radius:8px}
+.cseg button.on{background:#b48cff;color:#140b24;border-color:#b48cff;font-weight:600}
+.cchart{width:100%;height:auto;display:block}
+.cnums{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px}
+.cnums div{background:var(--panel2);border-radius:10px;padding:5px 3px;text-align:center}
+.cnums b{display:block;font-size:1.02rem}
+.cnums small{color:var(--mut);font-size:.68rem;line-height:1.1;display:block}
+.cshare{display:flex;gap:8px;align-items:flex-start}
+.cshare input{width:22px;height:22px;margin-top:1px}
+label.cfile{display:inline-block;cursor:pointer;background:#20454a;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:.86rem}
+.cempty{color:var(--mut);font-size:.9rem;padding:10px;text-align:center;background:var(--panel2);border-radius:10px}
+
 .tab[hidden]{display:none}
 .src{margin-top:8px;font-size:.84rem;background:#12303d;border:1px solid #245a72;color:#cfeeff;border-radius:10px;padding:7px 10px}
 .src:empty{display:none}
@@ -144,7 +170,7 @@ input:disabled{opacity:.4}
 <header>
   <h1>🐟 <span>Mac's Baffle Jacks</span></h1>
   <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
-  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 Bite times</a><a href="#baffle" data-tab="baffle">🌊 Baffle tides</a><a href="#gauges" data-tab="gauges">📡 Gauges</a></nav>
+  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 Bite times</a><a href="#baffle" data-tab="baffle">🌊 Baffle tides</a><a href="#gauges" data-tab="gauges">📡 Gauges</a><a href="#log" data-tab="log">📝 Catch log</a></nav>
 </header>
 <main>
 <div class="tab" id="tab-bite">
@@ -352,13 +378,99 @@ input:disabled{opacity:.4}
 </section>
 
 </div>
+<div class="tab" id="tab-log" hidden>
+<section class="card" id="cActiveCard">
+  <h2>📝 Catch log <span class="mut" id="cCount"></span></h2>
+  <div id="cActive"></div>
+  <div class="row" id="cStartRow">
+    <button class="pri" id="cStart">▶ Start session now</button>
+    <button id="cQuick">🐟 Quick log a catch now</button>
+    <button id="cPastBtn">🗓 Log a past session</button>
+  </div>
+  <p class="mut" style="margin:8px 0 0">Log every session, including ones with <b>no bites</b> — catch <i>rate</i> per hour is what tests the bite-time predictions. The predicted score, tide stage (minutes from run-in start), light, solunar, moon and tide source are attached automatically (weather too if Bite times has the forecast loaded for that spot).</p>
+</section>
+
+<section class="card" id="cFormCard" hidden>
+  <h2 id="cFormTitle">Session</h2>
+  <div class="row"><b style="min-width:52px">Spot</b>
+    <button class="sm" id="cGps">📡 GPS</button><button class="sm" id="cBiteSpot">🎣 Bite-times spot</button>
+    <select id="cSpotSel" style="flex:1 1 220px"></select></div>
+  <div class="row" style="margin-top:6px"><input type="text" id="cSpotName" placeholder="Spot name (optional — stays on this phone)"></div>
+  <div class="src" id="cSpotInfo"></div>
+  <div class="row" style="margin-top:10px">
+    <label class="mut">Start <input type="datetime-local" id="cS0" step="60"></label>
+    <label class="mut" id="cEndLab">End <input type="datetime-local" id="cS1" step="60"></label>
+    <label class="mut"><input type="checkbox" id="cNoBites"> No bites this session</label>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <label class="mut">Bait / lure <select id="cBaitCat"></select></label>
+    <input type="text" id="cBait" placeholder="details e.g. 4&quot; prawn plastic (stays on phone)">
+  </div>
+  <div class="row" style="margin-top:6px"><input type="text" id="cNote" placeholder="Note (stays on this phone)"></div>
+  <h3 class="ch3">Bites &amp; catches</h3>
+  <div id="cCatchList"></div>
+  <div class="cadd">
+    <div class="row">
+      <label class="mut">Time <input type="datetime-local" id="cCt" step="60"></label>
+      <button class="sm" id="cCtNow">now</button>
+      <select id="cSp"></select>
+      <label class="mut">Count <input type="number" id="cN" min="1" max="20" value="1" style="width:64px"></label>
+      <label class="mut">Length <input type="number" id="cLen" min="1" max="150" step="0.5" placeholder="cm" style="width:76px"></label>
+      <select id="cFate"></select>
+    </div>
+    <div class="row" style="margin-top:6px"><input type="text" id="cCnote" placeholder="Catch note (optional, stays on phone)"><button id="cAddCatch">＋ Add bite/catch</button></div>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <button class="pri" id="cSave">💾 Save session</button><button id="cCancel">Cancel</button>
+    <span class="mut" id="cFormMsg"></span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>🔒 Sharing</h2>
+  <label class="cshare"><input type="checkbox" id="cShareOn"> <b>Share my catches anonymously (only creek stretch, never GPS)</b></label>
+  <div class="mut" id="cShareInfo" style="margin-top:6px"></div>
+  <details style="margin-top:6px"><summary class="mut">Privacy — what is shared?</summary><div class="mut" id="cPrivacy" style="margin-top:6px">
+    Your log (incl. exact GPS, spot names, notes and bait details) is stored <b>only on this phone</b>. If you turn sharing on, each saved session is sent with only:
+    the ~2 km creek stretch (e.g. “km 4–6, Winfield–Flat Rock”) or, off Baffle Creek, a broad area (e.g. “Burnett River / Bundaberg”); times rounded to 15-minute slots;
+    species, counts, kept/released, longest length; bait <i>type</i>; the app’s predicted score / tide / light / solunar / moon / wind values; and a random anonymous id (no name, account, device id or GPS).
+    Submissions go through a public no-account relay (ntfy.sh) to the app’s maintainer box, which validates them and publishes the combined table as
+    <a href="https://github.com/JonathanAgronica/fishing-apps/blob/main/data/catches.csv" target="_blank" rel="noopener">data/catches.csv</a> (public). Deleting a shared session here also removes it from the shared table at the next update.
+  </div></details>
+</section>
+
+<section class="card">
+  <h2>📊 My results <span class="mut" id="cMySum"></span></h2>
+  <div class="row cseg" id="cMyViews"></div>
+  <div id="cMyCharts"></div>
+</section>
+
+<section class="card">
+  <h2>🌐 Community <span class="mut" id="cComSum"></span></h2>
+  <div id="cComHead"></div>
+  <div class="row cseg" id="cComViews"></div>
+  <div id="cComCharts"></div>
+  <p class="mut" id="cComNote" style="margin:8px 0 0"></p>
+</section>
+
+<section class="card">
+  <h2>🗂 My sessions</h2>
+  <div id="cList"></div>
+  <div class="row" style="margin-top:10px">
+    <button class="sm" id="cExport">⬇ Export CSV</button>
+    <label class="sm cfile">⬆ Import CSV<input type="file" id="cImport" accept=".csv,text/csv" hidden></label>
+    <span class="mut" id="cIoMsg"></span>
+  </div>
+</section>
+
+</div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610092152</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610092206</span></footer>
 <script>
 /* Mac's Baffle Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
 FT.onTab=[];
-FT.showTab=function(t){if(t!=='bite'&&t!=='baffle'&&t!=='gauges')t='bite';
+FT.showTab=function(t){if(!['bite','baffle','gauges','log'].includes(t))t='bite';
   document.querySelectorAll('.tab').forEach(s=>s.hidden=s.id!=='tab-'+t);
   document.querySelectorAll('nav.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.tab===t));
   if(location.hash!=='#'+t)history.replaceState(null,'','#'+t);
@@ -1041,7 +1153,40 @@ $('mj-geoBtn').onclick=()=>{if(!navigator.geolocation){notice('Geolocation not s
 $('mj-defBtn').onclick=()=>setLoc({...DEF});
 $('mj-goBtn').onclick=run;$('mj-date').onchange=()=>{FT.setDate($('mj-date').value,'bite');run();};
 FT.biteSetLoc=setLoc;FT.biteSetDate=v=>{if($('mj-date').value!==v){$('mj-date').value=v;run();}};
-FT.biteRefreshIfBaffle=()=>{if(loc.baffleKm!=null)run();};$('mj-tideOff').onchange=run;
+FT.biteRefreshIfBaffle=()=>{if(loc.baffleKm!=null)run();};
+/* ---- Catch log hooks (injected into the Bite times closure) ----
+   FT.biteCtx(spot,t0,t1): predicted context for every 15-min slot of a fishing session at a spot.
+   Re-uses the open Bite-times forecast (incl. weather & SST) when it is for the same spot & dates,
+   otherwise recomputes offline: Baffle along-creek model for creek spots, no-tide scoring off-creek. */
+FT.biteLoc=()=>({name:loc.name,lat:loc.lat,lng:loc.lng,km:loc.baffleKm});
+FT.biteCtx=function(spot,t0,t1){
+  const tz='Australia/Brisbane',Q=15*60e3;
+  t0=Math.floor(t0/Q)*Q;t1=Math.max(t0+Q,Math.ceil(t1/Q)*Q);
+  const dates=[];for(let t=t0;t<t1;t+=Q){const ds=MJ.ymd(t,tz);if(!dates.includes(ds))dates.push(ds);}
+  const dist=(a,b)=>{const R=6371,r=Math.PI/180,dx=(b.lng-a.lng)*r*Math.cos((a.lat+b.lat)/2*r),dy=(b.lat-a.lat)*r;return R*Math.hypot(dx,dy);};
+  let days=null,runIn=[],src,tideSrc;
+  const sd=state&&state.days;
+  const same=sd&&sd.length&&(spot.km!=null?(loc.baffleKm!=null&&Math.abs(spot.km-loc.baffleKm)<1):(loc.baffleKm==null&&dist(spot,loc)<3));
+  if(same&&dates.every(ds=>sd.some(d=>d.dateStr===ds))){
+    days=dates.map(ds=>sd.find(d=>d.dateStr===ds));runIn=sd.flatMap(d=>d.runIns||[]);src='bite';
+    tideSrc=loc.baffleKm!=null?'baffle':(state.hasTide?'marine':'none');}
+  else if(spot.km!=null&&window.BT){
+    const r=baffleTide(dates[0],spot.km);let mx=0;for(let i=1;i<r.ext.length;i++)mx=Math.max(mx,Math.abs(r.ext[i].h-r.ext[i-1].h));
+    const wr=r.ext.length>1?{max:mx}:null;
+    days=dates.map(ds=>MJ.computeDay({dateStr:ds,tz,lat:spot.lat,lng:spot.lng,tideFn:r.fn,ext:r.ext,runIn:r.runIn,weekRange:wr}));
+    runIn=r.runIn;src='model';tideSrc='baffle';}
+  else{days=dates.map(ds=>MJ.computeDay({dateStr:ds,tz,lat:spot.lat,lng:spot.lng}));src='model';tideSrc='none';}
+  const slots=[];let wx=false;
+  for(let t=t0;t<t1;t+=Q){const d=days.find(d=>t>=d.t0&&t<d.t1);if(!d)continue;const p=d.pts[Math.round((t-d.t0)/Q)];if(!p)continue;
+    let ri=null;if(tideSrc!=='none'){let best=null;for(const r of runIn){if(r.t<=t+60*60e3&&(best==null||r.t>best.t))best=r;}if(best&&t-best.t<=13*3600e3)ri=Math.round((t-best.t)/60e3);}
+    const w=p.wx;if(w)wx=true;
+    slots.push({t,score:p.score,tl:p.T?p.T.label:null,rising:p.T?!!p.T.rising:null,ri,alt:Math.round(p.alt*10)/10,
+      sol:p.S&&p.S.v>0?(p.S.major?'major':'minor'):'none',
+      wind:w&&w.wind!=null?Math.round(w.wind):null,cloud:w&&w.cloud!=null?Math.round(w.cloud):null,p:w&&w.p!=null?Math.round(w.p):null,dp3:w&&w.dp3!=null?Math.round(w.dp3*10)/10:null,
+      sst:p.sst!=null?Math.round(p.sst*10)/10:null});}
+  const il=MJ.moonIllum((t0+t1)/2);
+  return{src,tideSrc,wx,moon:{phase:Math.round(il.phase*1000)/1000,illum:Math.round((il.fraction!=null?il.fraction:0)*100)/100},slots};};
+$('mj-tideOff').onchange=run;
 {const i=loc.baffleKm!=null?BT.LANDMARKS.findIndex(l=>Math.abs(l.km-loc.baffleKm)<0.01):-1;if(i>=0)$('mj-bafSel').value=i;}
 setLocInfo();
 run().catch(e=>{notice('Unexpected error: '+esc(e.message),true);console.error(e);});
@@ -1232,6 +1377,330 @@ setInterval(()=>{if(shown)upd();},30e3);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&shown)load(false);});
 FT.gaugesReload=()=>load(true);
 window.__FT_GAUGES=()=>({D,view});
+})();
+</script>
+<script>/* ===================== Catch log tab ===================== */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);const FT=window.FT;
+const SCH={"topic":"mbj-catches-e7a8ebe08a57ba22e520","bands":{"0":"Mouth–Duck Ck","2":"Duck Ck–Winfield","4":"Winfield–Flat Rock","6":"Rocky Point–Caravan park","8":"Bottle Ck jn","10":"Newton Rd","12":"Newton Rd–Wartburg","14":"below Wartburg","16":"Wartburg–Euleilah jn","18":"above Euleilah jn","20":"Euleilah jn–Sleepy Ck","22":"Euleilah jn–Sleepy Ck","24":"below Sleepy Ck","26":"Sleepy Ck jn","28":"Sleepy–Manning Ck","30":"Manning Ck jn","32":"below Sandy Ck","34":"Sandy Ck–Essendean","36":"above Essendean","38":"Christensens"},"bandsE":{"16":"Euleilah Ck mouth","18":"lower Euleilah Ck","20":"lower Euleilah Ck","22":"upper Euleilah Ck","24":"Euleilah Ck, Hills Rd"},"regions":[["baffle","Baffle Ck catchment (off main channel)",-24.54,151.95],["coastn","Rules Beach / Deepwater coast",-24.35,151.95],["agnes","Agnes Water / 1770",-24.2,151.88],["kolan","Kolan River",-24.66,152.17],["burnett","Burnett River / Bundaberg",-24.78,152.38],["elliott","Elliott River / Heads",-24.92,152.46],["burrum","Burrum / Woodgate",-25.2,152.6],["gladstone","Gladstone region",-23.9,151.25],["other","Elsewhere",null,null]],"species":[["MJ","Mangrove jack"],["BR","Bream"],["WH","Whiting"],["FL","Flathead"],["GT","Trevally"],["BA","Barramundi"],["GR","Grunter"],["CO","Estuary cod"],["MU","Mulloway"],["FI","Fingermark"],["TH","Threadfin salmon"],["QF","Queenfish"],["TA","Tarpon / oxeye herring"],["OT","Other"]],"fates":[["released","Released"],["kept","Kept"],["bite","Bite / lost / missed"]],"bait":[["","—"],["live","Live bait"],["dead","Dead / cut bait"],["plastic","Soft plastic"],["hardbody","Hard-body lure"],["topwater","Topwater / surface"],["vibe","Vibe / blade"],["fly","Fly"],["other","Other"]],"tide":["runin","rising","falling","slack","pool","none"],"light":["night","dawn","dusk","lowsun","day"],"sol":["major","minor","none"],"tsrc":["baffle","marine","none"]};
+const RELAY='https://ntfy.sh/'+SCH.topic;
+const TZ='Australia/Brisbane',Q=15*60e3,AEST=10*3600e3;
+const K={log:'mbj_log',act:'mbj_active',share:'mbj_share',q:'mbj_shareq',test:'mbj_test',view:'mbj_view'};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS={get:(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+const rid=n=>{const a=new Uint8Array(n);crypto.getRandomValues(a);return Array.from(a,b=>b.toString(16).padStart(2,'0')).join('');};
+async function sha(s){if(crypto.subtle){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,'0')).join('');}
+  let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0;}return h.toString(16).padStart(8,'0').repeat(8);}
+const SPN=Object.fromEntries(SCH.species),FATEN=Object.fromEntries(SCH.fates),BAITN=Object.fromEntries(SCH.bait);
+const PH=['New','Wax cres','1st qtr','Wax gib','Full','Wan gib','Last qtr','Wan cres'];
+const phIdx=p=>Math.floor(((p+1/16)%1)*8);
+const LIGHTN={night:'Night',dawn:'Dawn',dusk:'Dusk',lowsun:'Low sun',day:'Day'};
+const TIDEN={runin:'Run-in start (0–2 h)',rising:'Rising',falling:'Falling',slack:'Slack',pool:'Pool level',none:'No tide'};
+const TSRCN={baffle:'Baffle model',marine:'Open-Meteo marine',none:'none'};
+/* ---- time helpers (always AEST) ---- */
+const pad=n=>String(n).padStart(2,'0');
+function toLocalInput(ms){const d=new Date(ms+AEST);return `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;}
+function fromLocalInput(v){const m=/^(\d{4})-(\d\d)-(\d\d)[T ](\d\d):(\d\d)/.exec(v||'');return m?Date.UTC(+m[1],m[2]-1,+m[3],+m[4],+m[5])-AEST:null;}
+const isoA=ms=>toLocalInput(ms).replace('T',' ');
+const fT=ms=>new Intl.DateTimeFormat('en-AU',{timeZone:TZ,hour:'numeric',minute:'2-digit',hour12:true}).format(new Date(ms)).replace(' am','am').replace(' pm','pm');
+const fD=ms=>new Intl.DateTimeFormat('en-AU',{timeZone:TZ,weekday:'short',day:'numeric',month:'short',year:'2-digit'}).format(new Date(ms));
+const dur=m=>m<60?Math.round(m)+' min':(m/60).toFixed(1)+' h';
+function scoreColor(s){const l=(x,a,b,c,d)=>c+(d-c)*(x-a)/(b-a);const h=s<50?l(s,0,50,210,45):l(s,50,100,45,135);return `hsl(${h},75%,${s<20?40:52}%)`;}
+/* ---- spots & privacy bands ---- */
+function bandOf(km,line){if(km==null)return null;const bk=Math.max(0,Math.min(38,Math.floor(km/2)*2));const E=line==='E'&&SCH.bandsE[bk];
+  return{bk,ln:E?'E':'B',label:`km ${bk}–${bk+2}, ${E?SCH.bandsE[bk]:SCH.bands[bk]}`};}
+function distKm(a,b,c,d){const r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return 6371*Math.hypot(x,y);}
+function regionOf(lat,lng){let best=null;for(const g of SCH.regions){if(g[2]==null)continue;const d=distKm(lat,lng,g[2],g[3]);if(d<=30&&(!best||d<best.d))best={code:g[0],name:g[1],d};}
+  return best||{code:'other',name:'Elsewhere'};}
+const regionName=c=>(SCH.regions.find(g=>g[0]===c)||['other','Elsewhere'])[1];
+function spotFromLatLng(lat,lng,acc,kind,name){let s=null;try{s=BT.snap(lat,lng);}catch(e){}
+  const sp={kind,lat:+lat.toFixed(6),lng:+lng.toFixed(6),acc:acc!=null?Math.round(acc):null,name:name||'',km:null,line:null,offKm:s?+s.offKm.toFixed(2):null};
+  if(s&&s.offKm<=0.6&&s.km<=BT.MAXKM){sp.km=+s.km.toFixed(2);sp.line=s.line==='Euleilah Creek'?'E':'B';}
+  return sp;}
+function shareBand(sp){if(!sp)return null;if(sp.km!=null)return bandOf(sp.km,sp.line);const r=regionOf(sp.lat,sp.lng);return{bk:-1,rg:r.code,label:'Off-creek: '+r.name};}
+function nearLandmark(km){let b=null;for(const l of BT.LANDMARKS){const d=Math.abs(l.km-km);if(!b||d<b.d)b={n:l.name,d};}return b&&b.d<1.5?b.n:null;}
+function spotDesc(sp){if(!sp)return '—';const nm=sp.name?esc(sp.name)+' · ':'';
+  if(sp.km!=null){const lm=nearLandmark(sp.km);return `${nm}km ${sp.km.toFixed(1)} ${sp.line==='E'?'Euleilah Ck':'Baffle Ck'}${lm?' (near '+esc(lm)+')':''}`;}
+  return `${nm}off-creek — ${esc(regionOf(sp.lat,sp.lng).name)}${sp.kind==='gps'||sp.kind==='bite'?' ('+sp.lat.toFixed(3)+', '+sp.lng.toFixed(3)+')':''}`;}
+/* ---- storage ---- */
+let LOG=LS.get(K.log,[]);if(!Array.isArray(LOG))LOG=[];
+let SH=LS.get(K.share,null);if(!SH||!SH.k){SH={on:false,k:rid(16)};LS.set(K.share,SH);}
+const isTest=()=>LS.get(K.test,0)?1:0;
+const save=()=>LS.set(K.log,LOG);
+const activeS=()=>LOG.find(s=>s.end==null);
+const byId=id=>LOG.find(s=>s.id===id);
+/* ---- prediction context ---- */
+function computeCtx(s){if(!FT.biteCtx||!s.spot)return null;try{const t1=s.end!=null?s.end:Date.now();return FT.biteCtx(s.spot,s.start,Math.max(t1,s.start+Q));}catch(e){console.error('ctx',e);return null;}}
+function lightOf(alt,t){if(alt==null)return null;if(alt<-12)return 'night';if(alt<6)return new Date(t+AEST).getUTCHours()<12?'dawn':'dusk';if(alt<20)return 'lowsun';return 'day';}
+function tideOf(sl,src){if(src==='none'||!sl.tl)return 'none';if(sl.ri!=null&&sl.ri>=0&&sl.ri<120)return 'runin';if(/pool/i.test(sl.tl))return 'pool';if(sl.rising)return 'rising';if(/slack/i.test(sl.tl))return 'slack';return 'falling';}
+/* session -> analysis rows (one per 15-min slot) — same shape as community rows */
+function rowsOf(s,anon){const c=s.ctx;if(!c||!c.slots||!c.slots.length)return [];const b=shareBand(s.spot);const mp=phIdx(c.moon.phase);
+  const rows=c.slots.map(sl=>({anon,sid:s.id,t:sl.t,bk:b.bk,ln:b.ln||'',rg:b.rg||'',band:b.label,score:sl.score,tide:tideOf(sl,c.tideSrc),ri:sl.ri,light:lightOf(sl.alt,sl.t),sol:sl.sol,mp,ts:c.tideSrc,wind:sl.wind,dp3:sl.dp3,bites:0,fish:0,mj:0,kept:0,ml:null,sp:[],bait:s.bait&&s.bait.cat||''}));
+  for(const x of s.catches||[]){let i=Math.floor((x.t-rows[0].t)/Q);i=Math.max(0,Math.min(rows.length-1,i));const r=rows[i];const n=Math.max(1,Math.min(20,x.n|0||1));
+    r.bites+=n;if(x.fate!=='bite'){r.fish+=n;if(x.sp==='MJ')r.mj+=n;if(x.fate==='kept')r.kept+=n;if(x.len)r.ml=Math.max(r.ml||0,x.len);}if(!r.sp.includes(x.sp))r.sp.push(x.sp);}
+  return rows;}
+/* ---- UI: selects ---- */
+function fillSelects(){
+  $('cSp').innerHTML=SCH.species.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
+  $('cFate').innerHTML=SCH.fates.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
+  $('cBaitCat').innerHTML=SCH.bait.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
+  $('cSpotSel').innerHTML='<option value="">— pick a spot —</option><optgroup label="Baffle Creek landmarks">'+BT.LANDMARKS.map((l,i)=>`<option value="L${i}">${esc(l.name)} (${l.km.toFixed(1)} km)</option>`).join('')+'</optgroup>'+
+    '<optgroup label="Off Baffle Creek (broad area)">'+SCH.regions.filter(g=>g[2]!=null).map(g=>`<option value="R${g[0]}">${esc(g[1])}</option>`).join('')+'</optgroup><option value="cur" hidden>current</option>';}
+/* ---- form ---- */
+let F=null; // session being edited
+function openForm(s,mode){F=JSON.parse(JSON.stringify(s));F._mode=mode;$('cFormCard').hidden=false;
+  $('cFormTitle').textContent=mode==='active'?'Session in progress':mode==='edit'?'Edit session':'Log a past session';
+  $('cEndLab').style.display=mode==='active'?'none':'';
+  $('cS0').value=toLocalInput(F.start);$('cS1').value=F.end!=null?toLocalInput(F.end):toLocalInput(Date.now());
+  $('cNoBites').checked=!!F.noBites;$('cBaitCat').value=F.bait&&F.bait.cat||'';$('cBait').value=F.bait&&F.bait.txt||'';$('cNote').value=F.note||'';
+  $('cSpotName').value=F.spot&&F.spot.name||'';nameTyped=false;$('cCt').value=toLocalInput(Math.min(Date.now(),F.end||Date.now()));$('cFormMsg').textContent='';
+  $('cSave').textContent=mode==='active'?'💾 Save (keep session running)':'💾 Save session';
+  spotUI();catchUI();$('cFormCard').scrollIntoView({behavior:'smooth',block:'start'});}
+function closeForm(){F=null;$('cFormCard').hidden=true;}
+function spotUI(){const sp=F&&F.spot;$('cSpotSel').value=sp?(sp.kind==='landmark'?'L'+sp.li:sp.kind==='region'?'R'+sp.rg:'cur'):'';
+  const b=shareBand(sp);
+  $('cSpotInfo').innerHTML=sp?`📍 <b>${spotDesc(sp)}</b>${sp.acc!=null?' ±'+sp.acc+' m':''}<br>🔒 Shared as: <b>${esc(b.label)}</b>${sp.km==null&&sp.offKm!=null?` <span class="mut">(${sp.offKm.toFixed(1)} km from the Baffle channel — not snapped)</span>`:''}`:'Pick a spot: 📡 GPS (snaps to the creek), a landmark, the Bite-times spot, or a broad off-creek area.';}
+function catchUI(){const L=(F.catches||[]).slice().sort((a,b)=>a.t-b.t);
+  $('cCatchList').innerHTML=L.length?L.map(x=>`<div class="citem"><div class="ci">🐟 <b>${x.n>1?x.n+'× ':''}${esc(SPN[x.sp]||x.sp)}</b>${x.len?' '+x.len+' cm':''} · ${esc(FATEN[x.fate]||x.fate)} <span class="mut">${fT(x.t)}${x.note?' · '+esc(x.note):''}</span></div><button class="sm" data-del="${x.id}">✕</button></div>`).join('')
+    :`<div class="cempty">${$('cNoBites').checked?'No bites — that’s useful data too.':'No bites/catches added yet.'}</div>`;
+  $('cCatchList').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{F.catches=F.catches.filter(x=>x.id!==b.dataset.del);catchUI();});}
+function readForm(){F.start=fromLocalInput($('cS0').value)||F.start;if(F._mode!=='active')F.end=fromLocalInput($('cS1').value);
+  F.noBites=$('cNoBites').checked;F.bait={cat:$('cBaitCat').value,txt:$('cBait').value.trim().slice(0,120)};F.note=$('cNote').value.trim().slice(0,500);
+  if(F.spot)F.spot.name=$('cSpotName').value.trim().slice(0,80);}
+function validate(s){const now=Date.now();
+  if(!s.spot)return 'Pick a spot first.';
+  if(!s.start||isNaN(s.start))return 'Start time missing.';
+  if(s.start>now+5*60e3)return 'Start is in the future.';
+  if(s.start<now-400*864e5)return 'Start is more than a year ago.';
+  if(s.end!=null){if(isNaN(s.end))return 'End time missing.';if(s.end<=s.start)return 'End must be after start.';if(s.end-s.start>16*3600e3)return 'Sessions are limited to 16 h — split longer trips.';if(s.end>now+5*60e3)return 'End is in the future.';}
+  for(const x of s.catches||[]){if(x.t<s.start-Q||(s.end!=null&&x.t>s.end+Q))return `A catch at ${fT(x.t)} is outside the session times.`;}
+  if(s.noBites&&(s.catches||[]).some(x=>x.n>0))return 'Untick “No bites” or remove the catches.';
+  return null;}
+function addCatch(){if(!F)return;const t=fromLocalInput($('cCt').value)||Date.now();let n=Math.round(+$('cN').value||1);n=Math.max(1,Math.min(20,n));
+  let len=+$('cLen').value||null;if(len!=null){if(len<1||len>150){$('cFormMsg').textContent='Length must be 1–150 cm.';return;}len=Math.round(len*2)/2;}
+  if(t>Date.now()+5*60e3){$('cFormMsg').textContent='Catch time is in the future.';return;}
+  F.catches=F.catches||[];F.catches.push({id:rid(6),t,sp:$('cSp').value,n,len,fate:$('cFate').value,note:$('cCnote').value.trim().slice(0,200)});
+  F.noBites=false;$('cNoBites').checked=false;$('cLen').value='';$('cCnote').value='';$('cN').value=1;$('cFormMsg').textContent='';catchUI();}
+async function commit(s,{silent}={}){
+  const err=validate(s);if(err){if(!silent)$('cFormMsg').textContent='⚠ '+err;return false;}
+  if(s.end!=null&&s.start>s.end)return false;
+  s.catches=(s.catches||[]).filter(x=>x.t>=s.start-Q);
+  s.ctx=s.end!=null?computeCtx(s):null;s.saved=Date.now();
+  const old=byId(s.id);const wasShared=old&&old.share&&old.share.sid;
+  if(old)LOG[LOG.indexOf(old)]=s;else LOG.push(s);
+  if(s.end!=null&&SH.on){if(wasShared){queueDel(old);s.tok=rid(12);s.share={st:'local'};}await shareSession(s);}
+  save();return true;}
+/* ---- live session ---- */
+function newSession(start,end){return{id:rid(8),tok:rid(12),v:1,start,end,spot:curSpot?JSON.parse(JSON.stringify(curSpot)):null,bait:{cat:'',txt:''},note:'',noBites:false,catches:[],ctx:null,share:{st:'local'}};}
+let curSpot=LS.get('mbj_lastspot',null);
+let nameTyped=false;
+function setSpot(sp){if(!sp)return;curSpot=sp;LS.set('mbj_lastspot',sp);if(F){const nm=nameTyped?$('cSpotName').value.trim():'';F.spot=JSON.parse(JSON.stringify(sp));F.spot.name=nm||sp.name||'';$('cSpotName').value=F.spot.name;spotUI();}renderActive();}
+function gps(then,orElse){const m=F?$('cFormMsg'):null;
+  if(!navigator.geolocation){if(m)m.textContent='No GPS on this device.';orElse&&orElse();return;}
+  if(m)m.innerHTML='<span class="spin"></span> Getting GPS…';
+  navigator.geolocation.getCurrentPosition(p=>{if(m)m.textContent='';setSpot(spotFromLatLng(p.coords.latitude,p.coords.longitude,p.coords.accuracy,'gps'));then&&then();},
+    e=>{if(m)m.textContent='GPS failed: '+e.message;if(orElse)orElse();else if(!m)alert('GPS failed: '+e.message);},{enableHighAccuracy:true,timeout:15000,maximumAge:60000});}
+function biteSpot(){const L=FT.biteLoc&&FT.biteLoc();if(!L)return;
+  if(L.km!=null){const p=BT.pointAtKm(L.km);const sp=spotFromLatLng(p[0],p[1],null,'bite',L.name.replace(/ — Baffle Ck$/,''));if(sp.km==null){sp.km=L.km;sp.line='B';}setSpot(sp);}
+  else setSpot(spotFromLatLng(L.lat,L.lng,null,'bite',L.name));}
+function renderActive(){const s=activeS();
+  $('cStartRow').style.display=s?'none':'';
+  if(!s){$('cActive').innerHTML='';return;}
+  const m=(Date.now()-s.start)/60e3,n=(s.catches||[]).reduce((a,x)=>a+x.n,0);
+  let sc='';try{const c=FT.biteCtx&&s.spot?FT.biteCtx(s.spot,Date.now(),Date.now()+Q):null;if(c&&c.slots[0])sc=`Predicted now <b style="color:${scoreColor(c.slots[0].score)}">${c.slots[0].score}</b> · ${esc(c.slots[0].tl||'no tide')}`+(c.slots[0].ri!=null?` · ${c.slots[0].ri>=0?'+':''}${dur(Math.abs(c.slots[0].ri)).replace(' ','\u00a0')} ${c.slots[0].ri>=0?'after':'before'} run-in start`:'');}catch(e){}
+  $('cActive').innerHTML=`<div class="cact"><div class="big">🟢 Fishing since ${fT(s.start)} <span class="mut">(${dur(m)})</span></div>
+   <div class="mut">${spotDesc(s.spot)} · ${n} bite${n===1?'':'s'}/catch${n===1?'':'es'} logged</div><div class="mut">${sc}</div>
+   <div class="row" style="margin-top:8px"><button class="pri" id="cBite">🐟 Bite / catch now</button><button id="cNone">➕ No-bite note</button><button id="cEdit">✏️ Details</button><button id="cEnd">⏹ End session</button></div></div>`;
+  $('cBite').onclick=()=>{openForm(s,'active');$('cCt').value=toLocalInput(Date.now());$('cSp').focus();};
+  $('cEdit').onclick=()=>openForm(s,'active');
+  $('cNone').onclick=()=>{openForm(s,'active');$('cNote').focus();};
+  $('cEnd').onclick=async()=>{const x=byId(s.id);x.end=Math.max(Date.now(),x.start+60e3);if(x.end-x.start>16*3600e3)x.end=x.start+16*3600e3;
+    if(!(x.catches||[]).length)x.noBites=confirm('End session with NO bites?\n\nOK = record as a no-bite session (counts toward catch rates)\nCancel = keep it but unmarked')||x.noBites;
+    const ok=await commit(x,{silent:true});if(!ok){openForm(x,'edit');$('cFormMsg').textContent='⚠ '+validate(x);return;}closeForm();renderAll();};}
+/* ---- list ---- */
+function shareTag(s){const st=s.share&&s.share.st;if(!SH.on&&(!st||st==='local'))return '';
+  return st==='published'?'<span class="ctag ok">shared ✓</span>':st==='sent'?'<span class="ctag sh">sent</span>':st==='queued'?'<span class="ctag q">queued</span>':'<span class="ctag">not shared</span>';}
+function renderList(){const L=LOG.filter(s=>s.end!=null).sort((a,b)=>b.start-a.start);
+  $('cCount').textContent=L.length?`· ${L.length} session${L.length>1?'s':''}`:'';
+  if(!L.length){$('cList').innerHTML='<div class="cempty">No sessions logged yet.</div>';return;}
+  $('cList').innerHTML=L.map(s=>{const sl=s.ctx&&s.ctx.slots||[];const avg=sl.length?Math.round(sl.reduce((a,b)=>a+b.score,0)/sl.length):null,mx=sl.length?Math.max(...sl.map(x=>x.score)):null;
+    const n=(s.catches||[]).reduce((a,x)=>a+x.n,0),fish=(s.catches||[]).filter(x=>x.fate!=='bite').reduce((a,x)=>a+x.n,0);
+    const sp=[...new Set((s.catches||[]).map(x=>SPN[x.sp]||x.sp))].join(', ');
+    return `<div class="citem"><div class="sc" style="background:${avg!=null?scoreColor(avg):'#555'}" title="mean predicted score">${avg!=null?avg:'?'}</div><div class="ci">
+      <b>${fD(s.start)} ${fT(s.start)}–${fT(s.end)}</b> <span class="mut">(${dur((s.end-s.start)/60e3)})</span>${shareTag(s)}${isTest()&&s.test?'<span class="ctag q">TEST</span>':''}<br>
+      <span class="mut">${spotDesc(s.spot)}</span><br>
+      ${n?`🐟 ${n} bite${n>1?'s':''}${fish!==n?` (${fish} landed)`:''} — ${esc(sp)}`:'<span class="mut">No bites</span>'} · <span class="mut">peak ${mx!=null?mx:'—'}, ${s.ctx?TSRCN[s.ctx.tideSrc]+(s.ctx.wx?' + weather':''):'no context'}${s.bait&&s.bait.cat?' · '+esc(BAITN[s.bait.cat]):''}</span>
+      </div><div class="row" style="flex-direction:column;gap:4px"><button class="sm" data-ed="${s.id}">✏️</button><button class="sm" data-rm="${s.id}">🗑</button></div></div>`;}).join('');
+  $('cList').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>openForm(byId(b.dataset.ed),'edit'));
+  $('cList').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const s=byId(b.dataset.rm);if(!confirm('Delete this session'+(s.share&&s.share.sid?' (and remove it from the shared table)':'')+'?'))return;
+    if(s.share&&s.share.sid)queueDel(s);LOG=LOG.filter(x=>x!==s);save();renderAll();flush();});}
+/* ---- sharing ---- */
+async function anonId(){const h=await sha('mbj-anon:'+SH.k);return (isTest()?'TEST-':'')+h.slice(0,isTest()?5:10);}
+const sidOf=async tok=>(await sha('mbj-sid:'+tok)).slice(0,12);
+async function message(s){const rows=rowsOf(s,'');if(!rows.length)return null;const b=shareBand(s.spot);const T=SCH.tide,LI=SCH.light,SO=SCH.sol;
+  const sid=await sidOf(s.tok);
+  const m={v:1,app:'mbj',anon:await anonId(),sid,bk:b.bk,ln:b.ln||'B',rg:b.rg||'',ts:s.ctx.tideSrc,mp:rows[0].mp,bt:s.bait&&s.bait.cat||'',s0:Math.round(rows[0].t/1000),
+    sl:rows.map(r=>[r.score,T.indexOf(r.tide),r.ri,LI.indexOf(r.light),SO.indexOf(r.sol),r.wind,r.dp3,r.bites,r.fish,r.mj,r.kept,r.ml,r.sp.join(';')])};
+  if(isTest())m.test=1;return{m,sid};}
+async function shareSession(s){if(!s.ctx)return;const r=await message(s);if(!r)return;s.share={st:'queued',sid:r.sid,at:Date.now(),tries:(s.share&&s.share.tries||0)};if(isTest())s.test=1;
+  const q=LS.get(K.q,[]);q.push({kind:'add',id:s.id,body:JSON.stringify(r.m)});LS.set(K.q,q);}
+function queueDel(s){if(!s.share||!s.share.sid)return;const q=LS.get(K.q,[]).filter(x=>x.id!==s.id||x.kind!=='add');q.push({kind:'del',id:s.id,body:JSON.stringify({v:1,app:'mbj',op:'del',tok:s.tok})});LS.set(K.q,q);}
+let flushing=false;
+async function flush(){if(flushing)return;flushing=true;try{let q=LS.get(K.q,[]);const left=[];
+  for(const it of q){let ok=false;try{const r=await fetch(RELAY,{method:'POST',body:it.body,headers:{'Content-Type':'text/plain'}});ok=r.ok;}catch(e){}
+    if(ok){if(it.kind==='add'){const s=byId(it.id);if(s&&s.share){s.share.st='sent';s.share.at=Date.now();s.share.tries=(s.share.tries||0)+1;}}}else left.push(it);}
+  LS.set(K.q,left);save();shareInfo();renderList();}finally{flushing=false;}}
+function shareInfo(){const q=LS.get(K.q,[]);const n=LOG.filter(s=>s.share&&s.share.sid).length,p=LOG.filter(s=>s.share&&s.share.st==='published').length;
+  const unshared=LOG.filter(s=>s.end!=null&&s.ctx&&!(s.share&&s.share.sid)).length;
+  $('cShareInfo').innerHTML=SH.on?`Sharing <b>on</b>${isTest()?' <span class="ctag q">TEST mode</span>':''} · ${n} session${n===1?'':'s'} shared${p?` (${p} already in the community table)`:''}${q.length?` · ${q.length} waiting to send (offline?) <button class="sm" id="cFlush">retry</button>`:''}${unshared?` · <button class="sm" id="cShareOld">share my ${unshared} earlier session${unshared>1?'s':''}</button>`:''}. New uploads appear in Community after the next hourly update.`
+    :'Sharing <b>off</b> — your log stays on this phone only.';
+  if($('cFlush'))$('cFlush').onclick=flush;
+  if($('cShareOld'))$('cShareOld').onclick=async()=>{for(const s of LOG.filter(s=>s.end!=null&&s.ctx&&!(s.share&&s.share.sid)))await shareSession(s);save();shareInfo();renderList();flush();};}
+/* ---- analysis ---- */
+const VIEWS=[['score','Predicted score'],['runin','Tide (from run-in start)'],['light','Light'],['moon','Moon phase'],['stretch','Creek stretch'],['sol','Solunar']];
+function bucketOf(v,r){switch(v){
+  case 'score':return r.score<20?0:r.score<40?1:r.score<60?2:r.score<80?3:4;
+  case 'runin':if(r.ts==='none'||r.tide==='none')return 6;if(r.ri==null)return 5;return r.ri<0?0:r.ri<60?1:r.ri<120?2:r.ri<240?3:r.ri<360?4:5;
+  case 'light':return SCH.light.indexOf(r.light);
+  case 'moon':return r.mp;
+  case 'sol':return SCH.sol.indexOf(r.sol);
+  case 'stretch':return r.bk>=0?r.bk/2+(r.ln==='E'?100:0):'R'+r.rg;}}
+function bucketLabels(v,rows){switch(v){
+  case 'score':return [[0,'0–19'],[1,'20–39'],[2,'40–59'],[3,'60–79'],[4,'80–100']];
+  case 'runin':return [[0,'−1–0 h'],[1,'0–1 h'],[2,'1–2 h'],[3,'2–4 h'],[4,'4–6 h'],[5,'6 h+'],[6,'no tide']];
+  case 'light':return SCH.light.map((l,i)=>[i,LIGHTN[l]]);
+  case 'moon':return PH.map((p,i)=>[i,p]);
+  case 'sol':return [[0,'Major'],[1,'Minor'],[2,'None']];
+  case 'stretch':{const ks=[...new Set(rows.map(r=>bucketOf('stretch',r)))];ks.sort((a,b)=>(typeof a==='string')-(typeof b==='string')||(typeof a==='string'?a.localeCompare(b):a-b));
+    return ks.map(k=>[k,typeof k==='string'?regionName(k.slice(1)).replace(/ \(.*\)/,'')+' (off)':(k>=100?'Eu ':'')+'km '+(k%100)*2+'–'+((k%100)*2+2)]);}}}
+function aggregate(rows,v){const m=new Map();for(const r of rows){const k=bucketOf(v,r);if(k==null||k===-1)continue;let a=m.get(k);if(!a)m.set(k,a={h:0,bites:0,fish:0,mj:0,ss:new Set(),an:new Set(),sc:0});
+  a.h+=0.25;a.bites+=r.bites;a.fish+=r.fish;a.mj+=r.mj;a.ss.add(r.anon+'|'+r.sid);a.an.add(r.anon);a.sc+=r.score;}return m;}
+function barChart(rows,v,opts){const labs=bucketLabels(v,rows),A=aggregate(rows,v);const W=420,H=230,L=34,R=6,T=24,B=50,pw=W-L-R,ph=H-T-B;
+  const data=labs.map(([k,l])=>{const a=A.get(k);return{l,h:a?a.h:0,bites:a?a.bites:0,fish:a?a.fish:0,n:a?a.ss.size:0,rate:a&&a.h?a.bites/a.h:0,frate:a&&a.h?a.fish/a.h:0,msc:a&&a.h?a.sc/(a.h*4):null};});
+  const tot=rows.length/4,totB=rows.reduce((s,r)=>s+r.bites,0),mean=rows.length?rows.reduce((s,r)=>s+r.score,0)/rows.length:50;
+  let exp=null;if(v==='score'&&tot>0)exp=data.map((d,i)=>totB/tot*((d.msc!=null?d.msc:i*20+10)/Math.max(5,mean)));
+  const mx=Math.max(0.5,...data.map(d=>d.rate),...(exp||[]))*1.15;const bw=pw/data.length;const y=r=>T+ph-r/mx*ph;
+  let o=`<svg class="cchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.title)}">`;
+  for(let i=0;i<=4;i++){const r=mx*i/4;o+=`<line x1="${L}" x2="${W-R}" y1="${y(r)}" y2="${y(r)}" stroke="#25464b"/><text x="${L-4}" y="${y(r)+4}" fill="#9db5b1" font-size="11" text-anchor="end">${r.toFixed(r<2?2:1)}</text>`;}
+  o+=`<text x="${L}" y="14" fill="#9db5b1" font-size="11">bites / hour fished · dark = landed · hours under bars</text>`;
+  data.forEach((d,i)=>{const x=L+i*bw+bw*0.15,w=bw*0.7,low=d.h<1;
+    if(d.h>0){o+=`<rect x="${x}" y="${y(d.rate)}" width="${w}" height="${T+ph-y(d.rate)}" rx="3" fill="${v==='score'?scoreColor(i*20+10):'#b48cff'}" opacity="${low?0.35:0.9}"><title>${esc(d.l)}: ${d.bites} bites, ${d.fish} landed in ${d.h.toFixed(2)} h (${d.n} session${d.n===1?"":"s"})</title></rect>`;
+      o+=`<rect x="${x+w*0.25}" y="${y(d.frate)}" width="${w*0.5}" height="${T+ph-y(d.frate)}" fill="#0b1a1c" opacity=".55"/>`;
+      o+=`<text x="${x+w/2}" y="${y(d.rate)-4}" fill="#e8f1ef" font-size="11" text-anchor="middle">${d.rate.toFixed(2)}</text>`;}
+    o+=`<text x="${x+w/2}" y="${T+ph+15}" fill="#e8f1ef" font-size="${data.length>8?9:11}" text-anchor="middle">${esc(d.l)}</text><text x="${x+w/2}" y="${T+ph+29}" fill="#9db5b1" font-size="10" text-anchor="middle">${d.h?d.h.toFixed(d.h<10?2:0)+' h':'—'}${d.n?' · '+d.n+'s':''}</text>`;});
+  if(exp){o+=`<polyline fill="none" stroke="#fff" stroke-dasharray="5 4" stroke-width="1.5" points="${exp.map((e,i)=>`${L+i*bw+bw/2},${y(e)}`).join(' ')}"/>`;
+    o+=`<text x="${W-R}" y="${T+ph+44}" fill="#9db5b1" font-size="10" text-anchor="end">dashed = expected if rate ∝ predicted score</text>`;}
+  return o+'</svg>';}
+function scatter(rows){const S=new Map();for(const r of rows){const k=r.anon+'|'+r.sid;let a=S.get(k);if(!a)S.set(k,a={h:0,b:0,sc:0});a.h+=0.25;a.b+=r.bites;a.sc+=r.score;}
+  const P=[...S.values()].map(a=>({x:a.sc/(a.h*4),y:a.b/a.h,h:a.h}));if(P.length<2)return '';
+  const W=420,H=190,L=34,R=8,T=18,B=34,pw=W-L-R,ph=H-T-B;const my=Math.max(0.5,...P.map(p=>p.y))*1.1;const X=x=>L+x/100*pw,Y=v=>T+ph-v/my*ph;
+  let o=`<svg class="cchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Sessions: bites per hour vs mean predicted score"><text x="${L}" y="12" fill="#9db5b1" font-size="11">sessions: bites/h vs mean predicted score (size = hours)</text>`;
+  for(let s=0;s<=100;s+=20)o+=`<line x1="${X(s)}" x2="${X(s)}" y1="${T}" y2="${T+ph}" stroke="#25464b"/><text x="${X(s)}" y="${T+ph+14}" fill="#9db5b1" font-size="10" text-anchor="middle">${s}</text>`;
+  o+=`<text x="${L+pw/2}" y="${H-4}" fill="#9db5b1" font-size="10" text-anchor="middle">mean predicted score</text><text x="${L-4}" y="${Y(my/1.1)+4}" fill="#9db5b1" font-size="10" text-anchor="end">${(my/1.1).toFixed(1)}</text><text x="${L-4}" y="${Y(0)}" fill="#9db5b1" font-size="10" text-anchor="end">0</text>`;
+  for(const p of P)o+=`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="${Math.min(12,3+Math.sqrt(p.h)*2.5)}" fill="${scoreColor(p.x)}" fill-opacity=".65" stroke="#fff" stroke-width=".6"><title>${p.x.toFixed(0)} score · ${p.y.toFixed(2)} bites/h · ${p.h.toFixed(2)} h</title></circle>`;
+  // effort-weighted correlation
+  const sw=P.reduce((s,p)=>s+p.h,0),mx=P.reduce((s,p)=>s+p.h*p.x,0)/sw,myy=P.reduce((s,p)=>s+p.h*p.y,0)/sw;
+  const cov=P.reduce((s,p)=>s+p.h*(p.x-mx)*(p.y-myy),0),vx=P.reduce((s,p)=>s+p.h*(p.x-mx)**2,0),vy=P.reduce((s,p)=>s+p.h*(p.y-myy)**2,0);
+  const r=vx>0&&vy>0?cov/Math.sqrt(vx*vy):null;
+  return o+'</svg>'+(r!=null?`<p class="mut" style="margin:2px 0 8px">Effort-weighted correlation, session score vs bite rate: <b>r = ${r.toFixed(2)}</b> (n = ${P.length} sessions${P.length<15?' — too few to judge yet':''}).</p>`:'');}
+function nums(rows,extra){const S=new Set(rows.map(r=>r.anon+'|'+r.sid)),A=new Set(rows.map(r=>r.anon));const b=rows.reduce((s,r)=>s+r.bites,0),f=rows.reduce((s,r)=>s+r.fish,0),mj=rows.reduce((s,r)=>s+r.mj,0),h=rows.length/4;
+  const nb=[...S].filter(k=>!rows.some(r=>r.anon+'|'+r.sid===k&&r.bites>0)).length;
+  return `<div class="cnums">${extra?`<div><b>${A.size}</b><small>anglers</small></div>`:''}<div><b>${S.size}</b><small>sessions</small></div><div><b>${h.toFixed(h<10?1:0)}</b><small>hours fished</small></div><div><b>${b}</b><small>bites</small></div><div><b>${f}</b><small>landed</small></div><div><b>${mj}</b><small>jacks</small></div><div><b>${h?(b/h).toFixed(2):'—'}</b><small>bites / h</small></div><div><b>${nb}</b><small>no-bite sessions</small></div></div>`;}
+function renderCharts(rows,viewKey,elV,elC,extra){let v=LS.get(K.view,{})[viewKey]||'score';
+  elV.innerHTML=VIEWS.map(([k,l])=>`<button data-v="${k}" class="${k===v?'on':''}">${l}</button>`).join('');
+  elV.querySelectorAll('button').forEach(b=>b.onclick=()=>{const o=LS.get(K.view,{});o[viewKey]=b.dataset.v;LS.set(K.view,o);renderCharts(rows,viewKey,elV,elC,extra);});
+  if(!rows.length){elC.innerHTML=nums(rows,extra)+'<div class="cempty">No data yet.</div>';return;}
+  elC.innerHTML=nums(rows,extra)+barChart(rows,v,{title:'Catch rate by '+v})+(v==='score'?scatter(rows):'');}
+function myRows(){return LOG.filter(s=>s.end!=null).flatMap(s=>rowsOf(s,'me'));}
+function renderMine(){const rows=myRows();$('cMySum').textContent=rows.length?`· ${(rows.length/4).toFixed(1)} h logged`:'';renderCharts(rows,'my',$('cMyViews'),$('cMyCharts'),false);}
+/* ---- community ---- */
+let COM=null,comAt=0;
+function parseCSV(txt){const out=[];let row=[],f='',q=false;for(let i=0;i<txt.length;i++){const c=txt[i];
+  if(q){if(c==='"'){if(txt[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}
+  else if(c==='"')q=true;else if(c===','){row.push(f);f='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&txt[i+1]==='\n')i++;row.push(f);f='';if(row.length>1||row[0]!=='')out.push(row);row=[];}else f+=c;}
+  if(f!==''||row.length){row.push(f);out.push(row);}return out;}
+const csvCell=v=>{v=v==null?'':String(v);return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+async function loadCom(force){if(!force&&COM&&Date.now()-comAt<5*60e3){renderCom();return;}
+  try{const r=await fetch('data/catches.csv?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const txt=await r.text();
+    const A=parseCSV(txt);const H=A.shift()||[];const ix=k=>H.indexOf(k);const num=(x)=>x===''||x==null?null:+x;
+    COM={cache:!!r.headers.get('x-ft-cache'),rows:A.filter(a=>a.length>=H.length-1).map(a=>{const g=k=>a[ix(k)];const t=Date.parse(g('slot_start'));
+      return{anon:g('anon'),sid:g('session'),t,bk:g('band_km')===''?-1:+g('band_km'),ln:g('line')||'',rg:g('region')||'',band:g('band'),score:+g('score'),tide:g('tide'),ri:num(g('min_from_runin')),light:g('light'),sol:g('solunar'),
+        mp:Math.max(0,PH.findIndex(p=>p===g('moon_phase'))),ts:g('tide_source'),wind:num(g('wind_kmh')),dp3:num(g('dp3_hpa')),bites:+g('bites')||0,fish:+g('fish')||0,mj:+g('mj')||0,kept:+g('kept')||0,ml:num(g('max_len_cm')),sp:(g('species')||'').split(';').filter(Boolean),bait:g('bait')};}).filter(r=>!isNaN(r.t))};
+    comAt=Date.now();}
+  catch(e){if(!COM){$('cComHead').innerHTML=`<div class="notice err">Couldn’t load community data (${esc(e.message)}). Connect once to cache it.</div>`;return;}}
+  // mark my shared sessions that made it into the table; resend if lost
+  const sids=new Set(COM.rows.map(r=>r.sid));let ch=false;
+  for(const s of LOG){const sh=s.share;if(!sh||!sh.sid)continue;if(sids.has(sh.sid)){if(sh.st!=='published'){sh.st='published';ch=true;}}
+    else if(sh.st==='published'||(sh.st==='sent'&&Date.now()-sh.at>6*3600e3&&(sh.tries||0)<3&&Date.now()-s.end<10*864e5)){if(SH.on){await shareSession(s);ch=true;}}}
+  if(ch){save();flush();}
+  renderCom();}
+function renderCom(){if(!COM)return;const rows=COM.rows.filter(r=>isTest()||!/^TEST/.test(r.anon));
+  const tests=COM.rows.length-rows.length;
+  $('cComSum').textContent=rows.length?`· ${new Set(rows.map(r=>r.anon)).size} angler(s)`:'';
+  $('cComHead').innerHTML=COM.cache?'<div class="notice">📦 Offline copy of the community table.</div>':'';
+  renderCharts(rows,'com',$('cComViews'),$('cComCharts'),true);
+  $('cComNote').innerHTML=`Anonymous sessions shared by app users (creek stretch only), validated & merged hourly into <a href="https://github.com/JonathanAgronica/fishing-apps/blob/main/data/catches.csv" target="_blank" rel="noopener">data/catches.csv</a>. Rates use 15-minute slots of time actually fished, so “no bites” sessions count. Faded bars = under 1 h of effort — treat as anecdotes.${tests?` (${tests} TEST rows hidden)`:''}`;
+  shareInfo();renderList();}
+/* ---- CSV export / import (personal, full detail incl. GPS — stays on the phone) ---- */
+const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json'];
+function slotAt(s,t){const sl=s.ctx&&s.ctx.slots;if(!sl||!sl.length)return null;let i=Math.floor((t-sl[0].t)/Q);i=Math.max(0,Math.min(sl.length-1,i));return sl[i];}
+function exportCSV(){const out=[COLS.join(',')];
+  for(const s of LOG.filter(s=>s.end!=null).sort((a,b)=>a.start-b.start)){const sp=s.spot||{},b=shareBand(s.spot),c=s.ctx,sl=c?c.slots:[];
+    const base={session_id:s.id,start_aest:isoA(s.start),end_aest:isoA(s.end),spot_kind:sp.kind,spot_name:sp.name,lat:sp.lat,lng:sp.lng,gps_acc_m:sp.acc,creek_km:sp.km,creek_line:sp.line==='E'?'Euleilah':sp.km!=null?'Baffle':'',share_band:b?b.label:'',bait_type:s.bait&&s.bait.cat,bait:s.bait&&s.bait.txt,
+      moon_phase:c?PH[phIdx(c.moon.phase)]:'',moon_illum:c?c.moon.illum:'',tide_source:c?c.tideSrc:''};
+    const ctxCols=x=>x?{pred_score:x.score,tide_stage:tideOf(x,c.tideSrc),min_from_runin:x.ri,light:lightOf(x.alt,x.t),solunar:x.sol,wind_kmh:x.wind,pressure_hpa:x.p,pressure_3h_hpa:x.dp3,cloud_pct:x.cloud,sst_c:x.sst}:{};
+    const rec=o=>COLS.map(k=>csvCell(o[k])).join(',');
+    out.push(rec({...base,...ctxCols(sl[0]),record:'session',note:s.note,no_bites:s.noBites?1:0,pred_score_avg:sl.length?Math.round(sl.reduce((a,x)=>a+x.score,0)/sl.length):'',pred_score_max:sl.length?Math.max(...sl.map(x=>x.score)):'',
+      shared:s.share&&s.share.st||'',ctx_json:c?JSON.stringify(c):''}));
+    for(const x of (s.catches||[]).slice().sort((a,b)=>a.t-b.t))out.push(rec({...base,...ctxCols(slotAt(s,x.t)),record:'catch',event_id:x.id,time_aest:isoA(x.t),species:SPN[x.sp]||x.sp,count:x.n,length_cm:x.len,fate:x.fate,note:x.note}));}
+  const blob=new Blob([out.join('\n')+'\n'],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-jacks-catch-log-'+toLocalInput(Date.now()).slice(0,10)+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+  $('cIoMsg').textContent=`Exported ${LOG.filter(s=>s.end!=null).length} sessions.`;window.__MBJ_LAST_EXPORT=out.join('\n');}
+function importCSV(txt){const A=parseCSV(txt);const H=A.shift()||[];if(!H.includes('record')||!H.includes('session_id'))throw new Error('not a Baffle Jacks catch-log CSV');
+  const g=(a,k)=>{const i=H.indexOf(k);return i<0?'':a[i]||'';};const spCode=n=>{const f=SCH.species.find(([c,l])=>l===n||c===n);return f?f[0]:'OT';};
+  const S=new Map();let added=0,skipped=0;
+  for(const a of A){const id=g(a,'session_id').replace(/[^\w-]/g,'').slice(0,24);if(!id)continue;
+    if(g(a,'record')==='session'){const lat=+g(a,'lat'),lng=+g(a,'lng');if(isNaN(lat)||isNaN(lng)){skipped++;continue;}
+      let sp=spotFromLatLng(lat,lng,g(a,'gps_acc_m')?+g(a,'gps_acc_m'):null,g(a,'spot_kind')||'gps',g(a,'spot_name').slice(0,80));
+      if(g(a,'creek_km')!==''&&sp.km==null){sp.km=+g(a,'creek_km');sp.line=g(a,'creek_line')==='Euleilah'?'E':'B';}
+      let ctx=null;try{ctx=g(a,'ctx_json')?JSON.parse(g(a,'ctx_json')):null;if(ctx&&!Array.isArray(ctx.slots))ctx=null;}catch(e){}
+      S.set(id,{id,tok:rid(12),v:1,start:fromLocalInput(g(a,'start_aest')),end:fromLocalInput(g(a,'end_aest')),spot:sp,bait:{cat:SCH.bait.some(b=>b[0]===g(a,'bait_type'))?g(a,'bait_type'):'',txt:g(a,'bait').slice(0,120)},note:g(a,'note').slice(0,500),noBites:g(a,'no_bites')==='1',catches:[],ctx,share:{st:'local'}});}}
+  for(const a of A){if(g(a,'record')!=='catch')continue;const s=S.get(g(a,'session_id'));if(!s)continue;const t=fromLocalInput(g(a,'time_aest'));if(t==null)continue;
+    const len=+g(a,'length_cm');s.catches.push({id:g(a,'event_id').slice(0,16)||rid(6),t,sp:spCode(g(a,'species')),n:Math.max(1,Math.min(20,+g(a,'count')||1)),len:len>=1&&len<=150?len:null,fate:FATEN[g(a,'fate')]?g(a,'fate'):'released',note:g(a,'note').slice(0,200)});}
+  for(const s of S.values()){if(byId(s.id)||validate(s)){skipped++;continue;}if(!s.ctx)s.ctx=computeCtx(s);LOG.push(s);added++;}
+  save();return{added,skipped};}
+/* ---- wiring ---- */
+function renderAll(){renderActive();renderList();renderMine();shareInfo();if(COM)renderCom();}
+function init(){fillSelects();
+  $('cShareOn').checked=!!SH.on;
+  $('cShareOn').onchange=()=>{SH.on=$('cShareOn').checked;LS.set(K.share,SH);shareInfo();renderList();if(SH.on)flush();};
+  $('cStart').onclick=()=>{const go=()=>{if(activeS())return;const s=newSession(Date.now(),null);LOG.push(s);save();renderAll();if(!s.spot)openForm(s,'active');};
+    if(!curSpot||curSpot.kind==='gps'){$('cStart').disabled=true;gps(()=>{$('cStart').disabled=false;go();},()=>{$('cStart').disabled=false;go();});}else go();};
+  $('cQuick').onclick=()=>{const now=Date.now();const s=newSession(now-Q,now);openForm(s,'new');$('cFormTitle').textContent='Quick catch (15-min session)';};
+  $('cPastBtn').onclick=()=>{const now=Math.floor(Date.now()/Q)*Q;openForm(newSession(now-3*3600e3,now),'new');};
+  $('cGps').onclick=()=>gps();$('cBiteSpot').onclick=biteSpot;
+  $('cSpotSel').onchange=()=>{const v=$('cSpotSel').value;if(!v||v==='cur')return;
+    if(v[0]==='L'){const i=+v.slice(1),l=BT.LANDMARKS[i],p=BT.pointAtKm(l.km);const sp=spotFromLatLng(p[0],p[1],null,'landmark',l.name);sp.km=l.km;sp.line=/Euleilah|Hills Rd/.test(l.name)&&l.km>16.4?'E':'B';sp.li=i;setSpot(sp);}
+    else{const g=SCH.regions.find(x=>x[0]===v.slice(1));const sp={kind:'region',rg:g[0],lat:g[2],lng:g[3],acc:null,name:'',km:null,line:null,offKm:null};setSpot(sp);}};
+  $('cSpotName').oninput=()=>{nameTyped=!!$('cSpotName').value.trim();};
+  $('cNoBites').onchange=()=>{if(F){F.noBites=$('cNoBites').checked;catchUI();}};
+  $('cCtNow').onclick=()=>$('cCt').value=toLocalInput(Date.now());
+  $('cAddCatch').onclick=addCatch;
+  $('cCancel').onclick=closeForm;
+  $('cSave').onclick=async()=>{readForm();const s=F;delete s._mode;const mode=$('cFormTitle').textContent;
+    if(s.end==null){const err=validate(s);if(err){$('cFormMsg').textContent='⚠ '+err;return;}const o=byId(s.id);if(o)LOG[LOG.indexOf(o)]=s;else LOG.push(s);save();closeForm();renderAll();return;}
+    if(await commit(s)){closeForm();renderAll();flush();}};
+  $('cExport').onclick=exportCSV;
+  $('cImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=importCSV(await f.text());$('cIoMsg').textContent=`Imported ${r.added} session(s)${r.skipped?`, skipped ${r.skipped} (duplicates/invalid)`:''}.`;renderAll();}catch(err){$('cIoMsg').textContent='Import failed: '+err.message;}e.target.value='';};
+  addEventListener('online',flush);
+  renderAll();
+  setInterval(()=>{if(document.body.dataset.tab==='log')renderActive();},60e3);
+  FT.onTab.push(t=>{if(t==='log'){renderAll();loadCom();flush();}});
+  if(document.body.dataset.tab==='log'){loadCom();}
+  if(LS.get(K.q,[]).length)flush();
+  document.body.dataset.logReady='1';
+  FT.catchLog={importCSV,exportCSV,flush,loadCom,get log(){return LOG;},reload(){LOG=LS.get(K.log,[]);renderAll();}};}
+try{init();}catch(e){console.error('catch log init',e);}
 })();
 </script>
 <script>

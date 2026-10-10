@@ -19,8 +19,10 @@ SCH = json.load(open(os.path.join(HERE, 'catch_schema.json')))
 OUT = os.path.join(REPO, 'data', 'catches.csv')
 AEST = dt.timezone(dt.timedelta(hours=10))
 COLS = ['session','anon','slot_start','band_km','line','band','region','score','tide','min_from_runin','light','solunar','moon_phase',
-        'tide_source','wind_kmh','dp3_hpa','bites','fish','mj','kept','max_len_cm','species','bait','received','system']
+        'tide_source','wind_kmh','dp3_hpa','bites','fish','mj','kept','max_len_cm','species','bait','received','system',
+        'stage','spot_type']
 PH = ['New','Wax cres','1st qtr','Wax gib','Full','Wan gib','Last qtr','Wan cres']
+STAGE = SCH.get('stage', ['ri','flood','tot','ro','bot']); STYPE = SCH.get('stype', ['ri','tot','bot','ro'])
 SPECIES = [c for c,_ in SCH['species']]; BAIT = [c for c,_ in SCH['bait']]
 REGIONS = {r[0]: r[1] for r in SCH['regions']}
 SYSDIR = os.path.join(REPO, 'data', 'systems'); _SYS = {}
@@ -78,6 +80,7 @@ def validate(m, now):
     mp = m.get('mp'); mp = mp if isinstance(mp, int) and 0 <= mp <= 7 else None
     if mp is None: raise ValueError('bad moon')
     bait = m.get('bt') if m.get('bt') in BAIT else ''
+    stype = m.get('st') if m.get('st') in STYPE else ''   # spot type (run-in / TOT / BOT / run-out) -- a category, never a location
     s0 = m.get('s0')
     if not isinstance(s0, int) or s0 % 900: raise ValueError('bad start (must be a 15-min slot)')
     if s0 > now + 3600 or s0 < now - 400 * 86400: raise ValueError('start out of range')
@@ -86,7 +89,7 @@ def validate(m, now):
     if s0 + 900 * len(sl) > now + 3600: raise ValueError('ends in the future')
     rows = []
     for i, x in enumerate(sl):
-        if not isinstance(x, list) or len(x) != 13: raise ValueError('bad slot shape')
+        if not isinstance(x, list) or len(x) not in (13, 14): raise ValueError('bad slot shape')
         score = num(x[0], 0, 100, allow_none=False)
         tide = SCH['tide'][x[1]] if isinstance(x[1], int) and 0 <= x[1] < len(SCH['tide']) else 'none'
         ri = num(x[2], -60, 13 * 60)
@@ -100,13 +103,15 @@ def validate(m, now):
         ml = num(x[11], 1, 150, 1) if fish else None
         sp = x[12] if isinstance(x[12], str) else ''
         sp = ';'.join(dict.fromkeys(c for c in sp.split(';') if c in SPECIES)) if bites else ''
-        if ts == 'none': tide, ri = 'none', None
+        stage = STAGE[x[13]] if len(x) > 13 and isinstance(x[13], int) and 0 <= x[13] < len(STAGE) else ''
+        if ts == 'none': tide, ri, stage = 'none', None, ''
         rows.append({'session': sid, 'anon': anon, 'slot_start': iso(s0 + 900 * i), 'band_km': '' if bk < 0 else bk,
                      'line': '' if bk < 0 else ln, 'band': blabel or band_label(bk, ln) or 'Off-creek: ' + REGIONS[rg], 'region': rg,
                      'score': score, 'tide': tide, 'min_from_runin': '' if ri is None else ri, 'light': light, 'solunar': sol,
                      'moon_phase': PH[mp], 'tide_source': ts, 'wind_kmh': '' if wind is None else wind, 'dp3_hpa': '' if dp3 is None else dp3,
                      'bites': bites, 'fish': fish, 'mj': mj, 'kept': kept, 'max_len_cm': '' if ml is None else ml, 'species': sp, 'bait': bait,
-                     'received': dt.datetime.now(AEST).strftime('%Y-%m-%d'), 'system': sysid})
+                     'received': dt.datetime.now(AEST).strftime('%Y-%m-%d'), 'system': sysid,
+                     'stage': stage, 'spot_type': stype})
     if sum(r['bites'] for r in rows) > 60: raise ValueError('implausible bite count')
     return {'sid': sid, 'anon': anon, 'test': test, 'day': iso(s0)[:10]}, rows
 

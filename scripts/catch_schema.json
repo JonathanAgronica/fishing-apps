@@ -219,5 +219,18 @@
   "baffle",
   "marine",
   "none"
+ ],
+ "stype": [
+  "ri",
+  "tot",
+  "bot",
+  "ro"
+ ],
+ "stage": [
+  "ri",
+  "flood",
+  "tot",
+  "ro",
+  "bot"
  ]
 }

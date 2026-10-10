@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610101148"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610101148"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610101148">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610101148">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610101201"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610101201"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610101201">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610101201">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610101148">
+<meta name="app-version" content="202610101201">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -134,6 +134,9 @@ nav.tabs a[data-tab=gauges].on{box-shadow:inset 0 3px 0 #e5484d}
 .gst{background:var(--panel2);border-radius:10px;padding:8px 10px}
 .gst b{display:block;font-size:1.05rem}.gst small{color:var(--mut)}
 .drift-ok{color:var(--good)}.drift-warn{color:#ffd38a}.drift-bad{color:var(--bad)}
+.gsp{margin-top:8px;background:var(--panel2);border-radius:10px;padding:6px 10px}.gsp summary{cursor:pointer;font-size:.85rem}
+.gsp .gleg{margin-top:4px}.gsp input[type=number]{padding:3px 6px}
+.gsp-card small i{font-style:italic;color:#cfe}
 
 nav.tabs a[data-tab=log].on{box-shadow:inset 0 3px 0 #b48cff}
 .ch3{font-size:.95rem;margin:12px 0 6px}
@@ -450,6 +453,7 @@ input:disabled{opacity:.4}
     <span style="flex:1"></span><button class="sm" id="gZo" aria-label="Zoom out">−</button><button class="sm" id="gZi" aria-label="Zoom in">＋</button>
   </div>
   <div class="row gleg" id="gLegend"></div>
+  <div id="gSpots"></div>
   <div id="gWrap"><svg id="gChart" role="img" aria-label="Gauge levels and lag chart"></svg><div id="gTip"></div></div>
   <p class="mut" style="margin:6px 0 0" id="gHelp">Drag sideways to pan · pinch / mouse-wheel or −/＋ to zoom · tap for values. Times AEST. Levels m AHD (Bundaberg LAT −1.693 m). Lower panel: lag of each upstream peak/low after the matching Bundaberg observed high/low; error bars = ± half the time the 5 cm-step gauge sat on that value.</p>
 </section>
@@ -551,7 +555,7 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610101148</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610101201</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1533,6 +1537,126 @@ setLocInfo();
 run().catch(e=>{notice('Unexpected error: '+esc(e.message),true);console.error(e);});
 })();
 </script>
+<script type="text/ft-deferred" id="ft-gspots">/* ===================== Gauges tab — "Spots" overlay (every system) =====================
+   Lets the user pick their own spots (★, from mbj_spots), built-in / renamed landmarks or any km, and draws each spot's
+   PREDICTED tide (same along-creek model + applied benchmarks as the Tides tab; truncated "resting" lows and run-in starts
+   included) on the gauge chart, extending ~1.5–2 days past now for planning. Selections are remembered per system
+   (localStorage FT.k('mbj_gspots')); spots never leave this phone — everything here is computed locally. */
+(function(){
+'use strict';
+const FT=window.FT,BT=window.BT,SP=FT.spots,$=id=>document.getElementById(id);if(!BT||!SP)return;
+const GEN=!!BT.generic;
+const KEY=FT.k('mbj_gspots'),KEYB=FT.k('mbj_gspots_band'),MAXSEL=6;
+const E0=Date.UTC(2025,11,31,14),nowM=()=>(Date.now()-E0)/60000;
+const fT=(m,o)=>new Intl.DateTimeFormat('en-AU',Object.assign({timeZone:'Australia/Brisbane',hour:'numeric',minute:'2-digit',hour12:true},o||{})).format(new Date(E0+m*60000)).replace(' am','am').replace(' pm','pm');
+const fDT=m=>fT(m,{weekday:'short',day:'numeric',month:'short'});
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const hm=min=>{const s=min<0?'−':'+';min=Math.abs(min);return s+Math.floor(min/60)+':'+String(Math.round(min%60)).padStart(2,'0');};
+const PAL=['#ffd166','#06d6a0','#c77dff','#4cc9f0','#ff70a6','#e9ff70','#f4a261','#ffffff'];
+const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v;}catch(e){return d;}};
+let sel=load(KEY,[]);if(!Array.isArray(sel))sel=[];let band=!!load(KEYB,false);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(sel));localStorage.setItem(KEYB,JSON.stringify(band));}catch(e){}};
+const lineOf=l=>GEN?(l.line||'M'):(l.line||'B');
+const lineTxt=(line)=>GEN&&line&&line!=='M'?' '+SP.lineLabel(line,true):(!GEN&&line==='E'?' Euleilah':'');
+/* resolve the saved selection to spots (deleted spots drop out) + colours */
+function list(){const used=new Set(),out=[];
+  for(const s of sel){let r=null;
+    if(s.id){const l=SP.get(s.id);if(!l)continue;r={key:s.id,name:l.name,km:l.km,line:lineOf(l),custom:!!l.custom,builtin:!!l.builtin,color:l.color};}
+    else if(isFinite(s.km)){r={key:'km:'+(s.line||'')+':'+s.km,name:'km '+(+s.km).toFixed(2)+lineTxt(s.line),km:+s.km,line:s.line||(GEN?'M':'B'),adhoc:true};}
+    if(!r)continue;out.push(r);}
+  /* own colour if it is clearly different from the colours already taken, else the palette colour furthest from them */
+  const rgb=c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)),dist=(a,b)=>{const x=rgb(a),y=rgb(b),rm=(x[0]+y[0])/2;return Math.sqrt((2+rm/256)*(x[0]-y[0])**2+4*(x[1]-y[1])**2+(2+(255-rm)/256)*(x[2]-y[2])**2);};
+  const far=c=>[...used].reduce((m,u)=>Math.min(m,dist(c,u)),1e9);
+  for(const r of out)if(r.custom&&/^#[0-9a-f]{6}$/i.test(r.color||'')&&far(r.color)>150){r.col=r.color;used.add(r.color);}
+  for(const r of out)if(!r.col){let best=PAL[0],bd=-1;for(const c of PAL){const d=far(c);if(d>bd){bd=d;best=c;}}r.col=best;used.add(best);}
+  return out;}
+function opts(r){return Object.assign({},FT.baffleOpts?FT.baffleOpts():{},GEN?{line:r.line}:{});}
+const cache=new Map();
+/* predictions for one spot over model hours [h0,h1] */
+function pred(r,h0,h1){const o=opts(r);const key=r.key+'|'+r.km+'|'+h0+'|'+h1+'|'+JSON.stringify(o);let c=cache.get(key);if(c)return c;
+  if(cache.size>60)cache.clear();
+  const P=BT.predictAt(r.km,h0,h1,o);let R=[];try{R=BT.runInStarts?BT.runInStarts(r.km,h0,h1,o):[];}catch(e){}
+  const trunc=!!(P.cal&&P.cal.trunc);
+  c={P,R,trunc,cal:P.cal};cache.set(key,c);return c;}
+/* chart layer for the visible window (minutes since 2026-01-01 AEST) */
+function prepare(v0,v1){const L=list();if(!L.length)return[];
+  const h0=Math.floor(v0/60/6)*6-14,h1=Math.ceil(v1/60/6)*6+14,span=h1-h0;if(span>24*60)return L.map(r=>Object.assign(r,{pts:[],ext:[],R:[],tooWide:true}));
+  const st=Math.max(1/12,span/1400);
+  return L.map(r=>{const c=pred(r,h0,h1);const pts=[];for(let h=h0;h<=h1;h+=st){const v=c.P.curve(h);if(v!=null)pts.push([h*60,v]);}
+    const ext=c.P.ext.map(e=>({t:e.t*60,h:e.h,hi:e.hi,u:e.u,weak:!!e.weak,bt:e.src?e.src.t*60:null}));
+    const R=c.R.map(x=>({t:x.t*60,u:x.u,kind:x.kind,v:c.P.curve(x.t)}));
+    return Object.assign(r,{pts,ext,R,P:c.P,trunc:c.trunc,cal:c.cal});});}
+function uAt(ext,m){let best=null,bd=1e9;for(const e of ext){const d=Math.abs(e.t-m);if(d<bd){bd=d;best=e;}}return best?best.u:30;}
+/* SVG for the main panel (call inside the clip group) */
+function svgMain(layer,X,Y1,v0,v1){let o='';
+  for(const r of layer){if(!r.pts.length)continue;const a=r.pts.filter(p=>p[0]>=v0-240&&p[0]<=v1+240);if(!a.length)continue;
+    if(band){const up=[],dn=[];for(const p of a){const u=uAt(r.ext,p[0]);const vs=[p[1],r.P.curve((p[0]-u)/60),r.P.curve((p[0]+u)/60)].filter(v=>v!=null);up.push([p[0],Math.max(...vs)]);dn.push([p[0],Math.min(...vs)]);}
+      o+=`<path d="M${up.map(p=>X(p[0]).toFixed(1)+','+Y1(p[1]).toFixed(1)).join('L')}L${dn.reverse().map(p=>X(p[0]).toFixed(1)+','+Y1(p[1]).toFixed(1)).join('L')}Z" fill="${r.col}" opacity=".13" stroke="none"/>`;}
+    let d='',prev=null;for(const p of a){d+=(!prev||p[0]-prev[0]>240?'M':'L')+X(p[0]).toFixed(1)+','+Y1(p[1]).toFixed(1);prev=p;}
+    o+=`<path d="${d}" fill="none" stroke="${r.col}" stroke-width="1.8" stroke-dasharray="6 3" opacity=".95"/>`;
+    for(const e of r.ext){if(e.t<v0||e.t>v1)continue;const x=X(e.t),y=Y1(e.h);
+      if(e.hi)o+=e.weak?`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.5" fill="none" stroke="${r.col}" opacity=".6"/>`:`<path d="M${x.toFixed(1)},${(y-11).toFixed(1)}l-4.5,7h9z" fill="#0f2427" stroke="${r.col}" stroke-width="1.4"/>`;
+      else if(r.trunc)o+=`<rect x="${(x-5).toFixed(1)}" y="${(y+4).toFixed(1)}" width="10" height="3" fill="${r.col}" opacity=".85"/>`;
+      else o+=`<path d="M${x.toFixed(1)},${(y+11).toFixed(1)}l-4.5,-7h9z" fill="#0f2427" stroke="${r.col}" stroke-width="1.4"/>`;}
+    for(const s of r.R){if(s.t<v0||s.t>v1||s.v==null)continue;const x=X(s.t),y=Y1(s.v);o+=`<path d="M${(x-3).toFixed(1)},${(y-6).toFixed(1)}l9,6l-9,6z" fill="${r.col}" stroke="#0f2427" stroke-width=".8"/>`;}}
+  return o;}
+/* predicted HW/LW lags (minutes after the base-port PREDICTION) for the lag panel — hollow markers */
+function lagPts(layer,v0,v1){const out=[];for(const r of layer)for(const e of r.ext){if(e.bt==null||e.bt<v0-600||e.bt>v1||(e.hi&&e.weak))continue;
+  out.push({bt:e.bt,lag:Math.round(e.t-e.bt),u:e.u,col:r.col,hi:e.hi,r});}return out;}
+function lagSvg(pts,X,Y2){return pts.map(p=>{const x=X(p.bt).toFixed(1);return `<line x1="${x}" x2="${x}" y1="${Y2(p.lag-p.u)}" y2="${Y2(p.lag+p.u)}" stroke="${p.col}" stroke-width="1" stroke-dasharray="2 2" opacity=".75"/>`+
+  (p.hi?`<circle cx="${x}" cy="${Y2(p.lag)}" r="3.6" fill="#0f2427" stroke="${p.col}" stroke-width="1.6"/>`:`<rect x="${(+x-3.4).toFixed(1)}" y="${(Y2(p.lag)-3.4).toFixed(1)}" width="6.8" height="6.8" fill="#0f2427" stroke="${p.col}" stroke-width="1.6"/>`);}).join('');}
+function lagLegend(layer){const o=[];for(const r of layer){o.push({col:r.col,lab:r.name+' HW (pred)',hollow:'c'});o.push({col:r.col,lab:r.name+(r.trunc?' rest/LW (pred)':' LW (pred)'),hollow:'s'});}return o;}
+/* tap read-out */
+function tipRows(layer,m,tol){const rs=[];for(const r of layer){if(!r.P)continue;const v=r.P.curve(m/60);let ev=null,bd=tol;
+  for(const e of r.ext){const d=Math.abs(e.t-m);if(d<=bd&&!(e.hi&&e.weak)){bd=d;ev=e;}}
+  let ri=null;for(const s of r.R){const d=Math.abs(s.t-m);if(d<=bd){bd=d;ri=s;ev=null;}}
+  let t=`<span style="color:${r.col}">◇</span> ${esc(r.name)} <span class="mut">pred</span>: <b>${v!=null?v.toFixed(2):'—'}</b> <span class="mut">±${Math.round(uAt(r.ext,m))}′</span>`;
+  if(ev)t+=`<br>&nbsp;&nbsp;${ev.hi?'▲ HW':r.trunc?'▬ resting low':'▼ LW'} ${fT(ev.t)} <span class="mut">±${Math.round(ev.u)}′</span> · ${ev.h.toFixed(2)} m`;
+  if(ri)t+=`<br>&nbsp;&nbsp;▶ run-in starts ${fT(ri.t)} <span class="mut">±${Math.round(ri.u)}′</span>${ri.v!=null?' · '+ri.v.toFixed(2)+' m':''}`;
+  rs.push(t);}return rs;}
+/* "predicted now" cards for the latest-readings grid */
+function cards(){const L=list();if(!L.length)return '';const nm=nowM(),nh=nm/60;let h='';
+  for(const r of L){const c=pred(r,Math.floor(nh)-16,Math.floor(nh)+40);const v=c.P.curve(nh),v2=c.P.curve(nh+0.25);
+    const ar=v==null||v2==null?'':v2>v+0.005?'↑':v2<v-0.005?'↓':'→';const tr=v==null||v2==null?'':v2>v+0.005?'rising':v2<v-0.005?'falling':'near slack';
+    const nHW=c.P.ext.find(e=>e.hi&&!e.weak&&e.t>nh),nLW=c.P.ext.find(e=>!e.hi&&e.t>nh),nR=(c.R||[]).find(x=>x.t>nh);
+    const ev=(e,lab)=>e?`${lab} ${fT(e.t*60,{weekday:'short'})} <span class="mut">±${Math.round(e.u)}′</span> (${e.h.toFixed(2)})`:'';
+    h+=`<div class="gst gsp-card" style="border-left:3px solid ${r.col}"><small>${r.custom?'★ ':'📍 '}${esc(r.name)} · ${r.km.toFixed(1)} km${esc(lineTxt(r.line))} · <i>predicted</i></small><b>${v!=null?v.toFixed(2)+' m AHD '+ar:'—'}</b><small>predicted now${tr?' · '+tr:''}<br>${[ev(nHW,'next HW'),ev(nLW,c.trunc?'next resting low':'next LW')].filter(Boolean).join('<br>')}${nR?`<br>▶ run-in ${fT(nR.t*60,{weekday:'short'})} <span class="mut">±${Math.round(nR.u)}′</span>`:''}</small></div>`;}
+  return h;}
+/* ---------- selector UI ---------- */
+let onChange=()=>{};
+function ui(){const el=$('gSpots');if(!el)return;const L=list();const selKeys=new Set(L.map(r=>r.key));const colOf={};L.forEach(r=>colOf[r.key]=r.col);
+  const all=SP.all();const mine=all.filter(l=>l.custom),lms=all.filter(l=>l.builtin);
+  const chip=(l)=>{const on=selKeys.has(l.id);return `<button data-sp="${esc(l.id)}" class="${on?'':'off'}" title="${esc(l.name)} — ${l.km.toFixed(2)} km"><i style="background:${on?colOf[l.id]:(l.custom&&l.color)||'#5a7a7e'}"></i>${l.custom?'★ ':''}${esc(l.name)}${l.alias?' <span class="mut">(renamed)</span>':''} <span class="mut">${l.km.toFixed(1)}</span></button>`;};
+  const adhoc=L.filter(r=>r.adhoc).map(r=>`<button data-rm="${esc(r.key)}"><i style="background:${r.col}"></i>${esc(r.name)} ✕</button>`).join('');
+  const lines=GEN&&BT.LINES&&BT.LINES.length>1?`<select id="gSpLine" class="sm" style="max-width:9.5rem">${BT.LINES.map(l=>`<option value="${esc(l.id)}">${esc(SP.lineLabel(l.id,true))}</option>`).join('')}</select>`:'';
+  const open=el.querySelector('details')?el.querySelector('details').open:false;
+  el.innerHTML=`<details class="gsp"${open?' open':''}><summary>📍 <b>Spots</b> — predicted tide on the chart${L.length?` <span class="mut">(${L.length}: ${L.map(r=>`<span style="color:${r.col}">${esc(r.name)}</span>`).join(', ')})</span>`:' <span class="mut">(none selected)</span>'}</summary>
+<p class="mut" style="margin:6px 0">Pick up to ${MAXSEL}. Dashed = predicted (Tides-tab model incl. your applied benchmarks), drawn ~2 days past now. ▲/▼ predicted high/low${L.some(r=>r.trunc)?', ▬ resting (pool) low':''}, ▶ run-in start; hollow markers in the lag panel. Your spots stay on this phone.</p>
+${mine.length?`<div class="mut" style="font-size:.78rem">★ My spots</div><div class="row gleg">${mine.map(chip).join('')}</div>`:`<div class="mut" style="font-size:.78rem">No spots of your own on ${esc(GEN?FT.SYSSHORT||'this system':'Baffle Creek')} yet — add them on the Map tab (long-press).</div>`}
+${lms.length?`<div class="mut" style="font-size:.78rem;margin-top:6px">Landmarks</div><div class="row gleg">${lms.map(chip).join('')}</div>`:''}
+<div class="row gleg" style="margin-top:6px;align-items:center">${adhoc}<input id="gSpKm" type="number" inputmode="decimal" step="0.1" min="0" placeholder="km" style="width:5.5rem" aria-label="km from the mouth">${lines}<button id="gSpAdd" class="sm">＋ add km…</button>
+<label class="mut" style="font-size:.78rem;display:inline-flex;align-items:center;gap:4px;margin-left:6px"><input type="checkbox" id="gSpBand"${band?' checked':''}> ± timing band</label>${L.length?'<button id="gSpClr" class="sm">clear</button>':''}</div>
+<div class="mut" id="gSpMsg" style="font-size:.78rem"></div></details>`;
+  const msg=t=>{const m=$('gSpMsg');if(m)m.textContent=t||'';};
+  el.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{const id=b.dataset.sp;const i=sel.findIndex(s=>s.id===id);
+    if(i>=0)sel.splice(i,1);else{if(list().length>=MAXSEL){msg(`Up to ${MAXSEL} spots — untick one first.`);return;}sel.push({id});}save();ui();onChange();});
+  el.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const k=b.dataset.rm;sel=sel.filter(s=>s.id||('km:'+(s.line||'')+':'+s.km)!==k);save();ui();onChange();});
+  $('gSpAdd').onclick=()=>{const v=parseFloat($('gSpKm').value);const line=GEN?($('gSpLine')?$('gSpLine').value:'M'):'B';
+    if(!isFinite(v)){msg('Type a distance in km from the mouth first.');$('gSpKm').focus();return;}
+    const lo=GEN&&line!=='M'?(BT.LINES.find(l=>l.id===line)||{}).j||0:0,hi=GEN?BT.lineMax(line):BT.MAXKM;
+    if(v<lo||v>hi){msg(`km must be between ${lo.toFixed(1)} and ${hi.toFixed(1)}${GEN&&line!=='M'?' on '+SP.lineLabel(line):''}.`);return;}
+    if(list().length>=MAXSEL){msg(`Up to ${MAXSEL} spots — untick one first.`);return;}
+    const km=+v.toFixed(2);if(!sel.some(s=>!s.id&&s.km===km&&(s.line||'')===(GEN?line:'B')))sel.push({km,line:GEN?line:'B'});save();ui();onChange();};
+  $('gSpBand').onchange=e=>{band=e.target.checked;save();onChange();};
+  if($('gSpClr'))$('gSpClr').onclick=()=>{sel=[];save();ui();onChange();};}
+SP.onChange.push(()=>{cache.clear();ui();onChange();});
+FT.gSpots={list,prepare,svgMain,lagPts,lagSvg,lagLegend,tipRows,cards,ui,
+  active:()=>list().length>0,
+  futureEnd:()=>list().length?nowM()+48*60:null,
+  setOnChange:f=>{onChange=f||(()=>{});},
+  clearCache:()=>cache.clear()};
+})();
+</script>
 <script type="text/ft-deferred">if(!window.BT.generic){/* ===================== Gauges tab ===================== */
 (function(){
 'use strict';
@@ -1579,7 +1703,7 @@ function latest(){const S=D.series;const card=(k,lab,unit,extra)=>{const a=S[k];
     const ar=Math.abs(d)<0.005?'→':d>0?'↑':'↓';
     return `<div class="gst"><small>${lab}</small><b>${L[1].toFixed(2)} ${unit} ${ar}</b><small>${fT(L[0],{weekday:'short'})} · <span data-ago="${L[0]}">${ago(L[0])}</span>${extra?'<br>'+extra:''}</small></div>`;};
   const B=S.bundaberg;const bL=B&&B.length?B[B.length-1]:null;
-  $('gLatest').innerHTML=card('essendean','Essendean Bridge (35.3 km)','m AHD')+card('hillsrd','Hills Rd, Euleilah Ck','m AHD')+card('bundaberg','Bundaberg (Burnett Hds)','m AHD',bL?`= ${(bL[1]+1.693).toFixed(2)} m LAT`:'')+card('mimdale','Mimdale (fresh-flow)','m');
+  $('gLatest').innerHTML=card('essendean','Essendean Bridge (35.3 km)','m AHD')+card('hillsrd','Hills Rd, Euleilah Ck','m AHD')+card('bundaberg','Bundaberg (Burnett Hds)','m AHD',bL?`= ${(bL[1]+1.693).toFixed(2)} m LAT`:'')+card('mimdale','Mimdale (fresh-flow)','m')+(FT.gSpots?FT.gSpots.cards():'');
   // fresh-flow indicator
   const M=S.mimdale||[];let html='';
   if(M.length){const L=M[M.length-1];const d24=lastVal(M,L[0]-1440),w=M.filter(x=>x[0]>=L[0]-7*1440);const mn=Math.min(...w.map(x=>x[1]));
@@ -1601,10 +1725,10 @@ function events(){const rows=[];for(const L of LAGS)for(const e of D.events[L.k]
 
 /* ---------- chart ---------- */
 function dataSpan(){const S=D.series;let a=Infinity,b=-Infinity;for(const k of ['bundaberg','essendean','hillsrd'])if(S[k]&&S[k].length){a=Math.min(a,S[k][0][0]);b=Math.max(b,S[k][S[k].length-1][0]);}return[a,b];}
-function setRange(r,silent){const [a,b]=dataSpan();const end=Math.max(b,Math.min(nowM(),b+720))+180;
+function setRange(r,silent){const [a,b]=dataSpan();let end=Math.max(b,Math.min(nowM(),b+720))+180;if(FT.gSpots&&FT.gSpots.futureEnd())end=Math.max(end,nowM()+36*60);
   view=r==='all'?[a-120,end]:[end-r*1440,end];
   document.querySelectorAll('.gbar [data-r]').forEach(x=>x.classList.toggle('on',String(x.dataset.r)===String(r)));if(!silent)draw();}
-function clampView(){const [a,b]=dataSpan();let w=view[1]-view[0];w=Math.max(180,Math.min(w,(b-a)+3*1440));
+function clampView(){let [a,b]=dataSpan();const fe=FT.gSpots&&FT.gSpots.futureEnd();if(fe)b=Math.max(b,fe-1440);let w=view[1]-view[0];w=Math.max(180,Math.min(w,(b-a)+3*1440));
   let v0=view[0];v0=Math.max(a-1440,Math.min(v0,b+1440-w));view=[v0,v0+w];}
 const modelCache={};
 function model(km,v0,v1){if(!window.BT)return[];const h0=Math.floor(v0/60/6)*6-12,h1=Math.ceil(v1/60/6)*6+12,key=km+':'+h0+':'+h1;
@@ -1620,10 +1744,10 @@ function thin(a,v0,v1,maxN){let i0=0;while(i0<a.length&&a[i0][0]<v0)i0++;i0=Math
 let G=null;
 function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,Math.round(svg.parentNode.clientWidth||360));if(!svg.parentNode.clientWidth)return;
   clampView();const [v0,v1]=view;
-  const showLag=on.lags,showMim=on.mimdale;const fs=11;
+  const showLag=on.lags,showMim=on.mimdale;const fs=11;const SPL=FT.gSpots?FT.gSpots.prepare(v0,v1):[];const spLeg=SPL.length?FT.gSpots.lagLegend(SPL):[];
   const L=36,R=8,pw=W-L-R;const H1=Math.round(Math.min(330,Math.max(220,W*0.62)));
   let y=8;const P1={y0:y,h:H1};y+=H1+22;
-  const P2=showLag?{y0:y,h:120}:null;if(P2)y+=120+22+26;
+  const P2=showLag?{y0:y,h:120}:null;if(P2)y+=120+22+26+(spLeg.length?Math.ceil(spLeg.length/(pw>560?4:2))*13+4:0);
   const P3=showMim?{y0:y,h:56}:null;if(P3)y+=56+22;
   const Ht=y+18;svg.setAttribute('viewBox',`0 0 ${W} ${Ht}`);svg.style.height=Ht+'px';
   const X=m=>L+(m-v0)/(v1-v0)*pw;const S=D.series;const maxN=Math.round(pw*1.5);
@@ -1632,7 +1756,8 @@ function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,M
     if(s.k==='line'||s.k==='step')vis[s.id]=thin(S[s.id]||[],v0,v1,maxN);
     else if(s.k==='model')vis[s.id]=thin(model(s.id==='win'?KM.win:s.id==='hills_m'?KM.hills:KM.ess,v0,v1),v0,v1,maxN);}
   let lo=Infinity,hi=-Infinity;for(const k in vis)for(const p of vis[k])if(p[0]>=v0&&p[0]<=v1){lo=Math.min(lo,p[1]);hi=Math.max(hi,p[1]);}
-  if(!isFinite(lo)){lo=-1.5;hi=1.5;}const pad=(hi-lo)*0.06+0.05;lo-=pad;hi+=pad;
+  for(const r of SPL)for(const p of r.pts)if(p[0]>=v0&&p[0]<=v1){lo=Math.min(lo,p[1]);hi=Math.max(hi,p[1]);}
+  if(!isFinite(lo)){lo=-1.5;hi=1.5;}const pad=(hi-lo)*0.06+(SPL.length?0.12:0.05);lo-=pad;hi+=pad;
   const Y1=v=>P1.y0+P1.h-(v-lo)/(hi-lo)*P1.h;
   let o='';
   // night shading + day grid
@@ -1655,20 +1780,24 @@ function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,M
     if(s.dots&&a.length<400)o+=a.map(p=>`<circle cx="${X(p[0]).toFixed(1)}" cy="${Y1(p[1]).toFixed(1)}" r="2" fill="${s.col}"/>`).join('');}
   // HW markers for Essendean events
   if(on.essendean)for(const e of D.events.essendean)if(e.k==='HW'&&e.t>v0&&e.t<v1){const xx=X(e.t),yy=Y1(e.v);o+=`<path d="M${xx},${yy-6}l-4,-8h8z" fill="#e5484d"/>`;}
+  if(SPL.length)o+=FT.gSpots.svgMain(SPL,X,Y1,v0,v1);
   o+='</g>';
   // panel 2: lags
   let Y2=null;
   if(P2){const pts=[];for(const Lg of LAGS)for(const e of D.events[Lg.k])if(e.k===Lg.kind&&e.bt>=v0-600&&e.bt<=v1)pts.push({...e,col:Lg.col});
-    let a=Infinity,b=-Infinity;for(const p of pts){a=Math.min(a,p.lag-p.u);b=Math.max(b,p.lag+p.u);}a=Math.min(a,60);b=Math.max(b,480);a=Math.max(0,Math.floor(a/60)*60);b=Math.ceil(b/60)*60;
+    const spp=SPL.length?FT.gSpots.lagPts(SPL,v0,v1):[];
+    let a=Infinity,b=-Infinity;for(const p of pts.concat(spp)){a=Math.min(a,p.lag-p.u);b=Math.max(b,p.lag+p.u);}a=Math.min(a,60);b=Math.max(b,480);a=Math.max(0,Math.floor(a/60)*60);b=Math.ceil(b/60)*60;
     Y2=v=>P2.y0+P2.h-(v-a)/(b-a)*P2.h;
     o+=`<rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}" fill="none" stroke="#25464b"/>`;
     const st2=(b-a)>480?120:60;for(let v=a;v<=b;v+=st2){const yy=Y2(v);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="#25464b" stroke-dasharray="2 4"/><text x="${L-4}" y="${yy+4}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${v/60}h</text>`;}
     for(const [v,c,t] of [[65,'#17becf','Winfield HW'],[116,'#17becf','Winfield LW']]){const yy=Y2(v);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="${c}" stroke-dasharray="${t.endsWith('HW')?'6 3':'2 3'}" opacity=".8"/>`;}
-    o+=`<text x="${L+4}" y="${P2.y0+12}" font-size="${fs}" fill="#9db5b1">lag after Bundaberg (Winfield +1:05 / +1:56 dashed)</text>`;
+    o+=`<text x="${L+4}" y="${P2.y0+12}" font-size="${fs}" fill="#9db5b1">lag after Bundaberg (Winfield +1:05 / +1:56 dashed)${spp.length?'; hollow = spots':''}</text>`;
     o+=`<clipPath id="gc2"><rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}"/></clipPath><g clip-path="url(#gc2)">`;
     for(const p of pts){const xx=X(p.bt).toFixed(1);o+=`<line x1="${xx}" x2="${xx}" y1="${Y2(p.lag-p.u)}" y2="${Y2(p.lag+p.u)}" stroke="${p.col}" stroke-width="1.2" opacity=".7"/><circle cx="${xx}" cy="${Y2(p.lag)}" r="3.2" fill="${p.col}"/>`;}
+    if(spp.length)o+=FT.gSpots.lagSvg(spp,X,Y2);
     o+='</g>';
-    const cw=pw/(pw>560?4:2);o+=LAGS.map((Lg,i)=>{const cx=L+8+(pw>560?i:i%2)*cw,cy=P2.y0+P2.h+12+(pw>560?0:(i>>1)*13);return `<circle cx="${cx}" cy="${cy-4}" r="3.5" fill="${Lg.col}"/><text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${Lg.lab.replace(' low-plateau',' low plateau')}</text>`;}).join('');}
+    const cw=pw/(pw>560?4:2);if(spLeg.length){const per=pw>560?4:2,r0=pw>560?1:2;o+=spLeg.map((Lg,i)=>{const cx=L+8+(i%per)*cw,cy=P2.y0+P2.h+12+(r0+Math.floor(i/per))*13;const mk=Lg.hollow==='c'?`<circle cx="${cx}" cy="${cy-4}" r="3.3" fill="#0f2427" stroke="${Lg.col}" stroke-width="1.5"/>`:`<rect x="${cx-3.2}" y="${cy-7.2}" width="6.4" height="6.4" fill="#0f2427" stroke="${Lg.col}" stroke-width="1.5"/>`;return mk+`<text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${esc((n=>Lg.lab.length>n?Lg.lab.slice(0,n-1)+'…':Lg.lab)(Math.max(12,Math.floor((cw-16)/6.2))))}</text>`;}).join('');}
+    o+=LAGS.map((Lg,i)=>{const cx=L+8+(pw>560?i:i%2)*cw,cy=P2.y0+P2.h+12+(pw>560?0:(i>>1)*13);return `<circle cx="${cx}" cy="${cy-4}" r="3.5" fill="${Lg.col}"/><text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${Lg.lab.replace(' low-plateau',' low plateau')}</text>`;}).join('');}
   // panel 3: Mimdale
   let Y3=null;
   if(P3){const a=thin(S.mimdale||[],v0,v1,maxN);let mn=Infinity,mx=-Infinity;for(const p of a){mn=Math.min(mn,p[1]);mx=Math.max(mx,p[1]);}
@@ -1678,7 +1807,7 @@ function draw(){if(!D||!view)return;const svg=$('gChart');const W=Math.max(300,M
     let d='';a.forEach((p,i)=>{d+=(i?'L':'M')+X(p[0]).toFixed(1)+','+Y3(p[1]).toFixed(1);});
     o+=`<clipPath id="gc3"><rect x="${L}" y="${P3.y0}" width="${pw}" height="${P3.h}"/></clipPath><path clip-path="url(#gc3)" d="${d}" fill="none" stroke="#b48cff" stroke-width="1.8"/><text x="${L+4}" y="${P3.y0+12}" font-size="${fs}" fill="#9db5b1">Mimdale 539132 (m) — fresh-flow indicator</text>`;}
   o+=`<g id="gCur"></g>`;
-  svg.innerHTML=o;G={X,v0,v1,L,pw,W,Ht,vis,Y1,P1};}
+  svg.innerHTML=o;G={X,v0,v1,L,pw,W,Ht,vis,Y1,P1,SPL};}
 
 /* ---------- interaction ---------- */
 const ptrs=new Map();let drag=null;
@@ -1689,6 +1818,7 @@ function tip(clientX){if(!G)return;const svg=$('gChart'),rc=svg.getBoundingClien
     else{const a=s.k==='model'?(G.vis[s.id]||[]):S[s.id]||[];let i=0;while(i<a.length&&a[i][0]<m)i++;if(i>0&&i<a.length&&a[i][0]-a[i-1][0]<180){const f=(m-a[i-1][0])/(a[i][0]-a[i-1][0]);v=a[i-1][1]+f*(a[i][1]-a[i-1][1]);}}
     if(v!=null)rows.push(`<span style="color:${s.col}">●</span> ${esc(s.lab)}: <b>${v.toFixed(2)}</b>`);}
   if(on.mimdale){const p=lastVal(S.mimdale||[],m);if(p)rows.push(`<span style="color:#b48cff">●</span> Mimdale: <b>${p[1].toFixed(2)}</b>`);}
+  if(G.SPL&&G.SPL.length)rows.push(...FT.gSpots.tipRows(G.SPL,m,Math.max(20,(G.v1-G.v0)/G.pw*14)));
   const tp=$('gTip');tp.innerHTML=`<b>${fDT(m)}</b><br>`+rows.join('<br>');tp.style.display='block';
   const wx=svg.parentNode.clientWidth;const px=(sx/G.W)*rc.width;tp.style.left=Math.max(0,Math.min(px+10,wx-tp.offsetWidth-2))+'px';tp.style.top='30px';
   $('gCur').innerHTML=`<line x1="${sx}" x2="${sx}" y1="${G.P1.y0}" y2="${G.Ht-18}" stroke="#fff" stroke-width="1" opacity=".6"/>`;}
@@ -1712,6 +1842,7 @@ function bind(){const svg=$('gChart');
   $('gZi').onclick=()=>zoom(1/1.5);$('gZo').onclick=()=>zoom(1.5);$('gRefresh').onclick=()=>load(true);
   let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(shown)draw();},150);});}
 legend();bind();
+if(FT.gSpots){FT.gSpots.ui();FT.gSpots.setOnChange(()=>{if(!D||!view)return;const fe=FT.gSpots.futureEnd();if(fe&&view[1]<nowM()+20*60){const w=view[1]-view[0];view=[nowM()+36*60-w,nowM()+36*60];}latest();draw();});}
 FT.onTab=FT.onTab||[];FT.onTab.push(t=>{shown=t==='gauges';if(shown){if(!D)load(true);else{load(false);draw();}}});
 setInterval(()=>{if(document.visibilityState==='visible'&&shown)load(true);},10*60e3);
 setInterval(()=>{if(shown)upd();},30e3);
@@ -1853,7 +1984,7 @@ function latest(){
   for(const g of GA)h+=card(g.id,`${gname(g)} (${g.lineName&&g.line!=='M'?esc(g.lineName)+' ':''}${g.km.toFixed(1)} km)${g.role==='partial'?' · part-tidal':''}`,g.datum==='AHD'?'m AHD':'m',g.datum!=='AHD'&&OFF[g.id]?`gauge datum (${g.datum||'local'}); ≈ ${(rows(g.id).filter(r=>r[1]!=null).slice(-1)[0][1]-OFF[g.id]).toFixed(2)} m AHD`:'');
   if(REF)h+=card(REF.id,short(REF.name)+(REF.src==='des'?' (DES)':' (BoM tide)'),REF.datum==='AHD'?'m AHD':'m '+(REF.datum||''),REF.datum!=='AHD'?`≈ ${(((rows(REF.id).filter(r=>r[1]!=null).slice(-1)[0]||[0,0])[1])-REFOFF).toFixed(2)} m AHD (MSL-centred)`:'');
   if(FR)h+=card(FR.id,short(FR.name)+' (fresh-flow)','m','');
-  $('gLatest').innerHTML=h||'<span class="mut">No gauge data yet.</span>';
+  const sc=FT.gSpots?FT.gSpots.cards():'';$('gLatest').innerHTML=(h+sc)||'<span class="mut">No gauge data yet.</span>';
   let f='';const M=ser.fresh||[];
   if(FR&&M.length){const L=M[M.length-1];const d24=lastVal(M,L[0]-1440),w=M.filter(x=>x[0]>=L[0]-7*1440);const mn=Math.min(...w.map(x=>x[1]));
     const rise24=d24?L[1]-d24[1]:0,above=L[1]-mn;const lvl=above>0.5||rise24>0.3?'bad':above>0.1||rise24>0.08?'warn':'ok';
@@ -1879,10 +2010,10 @@ function legend(){$('gLegend').innerHTML=SER.map(s=>`<button data-s="${s.id}" cl
 function dataSpan(){let a=Infinity,b=-Infinity;for(const k of ['ref',...GA.map(g=>'g'+g.id)]){const s=ser[k];if(s&&s.length){a=Math.min(a,s[0][0]);b=Math.max(b,s[s.length-1][0]);}}
   if(!isFinite(a)){b=nowM();a=b-7*1440;}return[a,b];}
 async function setRange(r,silent){if(r==='all'&&!allLoaded){await loadMonths(true);build();statsTbl();events();}
-  const [a,b]=dataSpan();const end=Math.max(b,Math.min(nowM(),b+720))+180;
+  const [a,b]=dataSpan();let end=Math.max(b,Math.min(nowM(),b+720))+180;const fe=FT.gSpots&&FT.gSpots.futureEnd();if(fe)end=Math.max(end,nowM()+36*60);
   view=r==='all'?[a-120,end]:[end-r*1440,end];
   document.querySelectorAll('.gbar [data-r]').forEach(x=>x.classList.toggle('on',String(x.dataset.r)===String(r)));if(!silent)draw();}
-function clampView(){const [a,b]=dataSpan();let w=view[1]-view[0];w=Math.max(180,Math.min(w,(b-a)+8*1440));let v0=view[0];v0=Math.max(a-7*1440,Math.min(v0,b+1440-w));view=[v0,v0+w];}
+function clampView(){let [a,b]=dataSpan();const fe=FT.gSpots&&FT.gSpots.futureEnd();if(fe)b=Math.max(b,fe-1440);let w=view[1]-view[0];w=Math.max(180,Math.min(w,(b-a)+8*1440));let v0=view[0];v0=Math.max(a-7*1440,Math.min(v0,b+1440-w));view=[v0,v0+w];}
 const mc={};
 function model(s,v0,v1){const h0=Math.floor(v0/60/6)*6-12,h1=Math.ceil(v1/60/6)*6+12,key=s.id+':'+h0+':'+h1;if(mc[key])return mc[key];
   const span=h1-h0;if(span>24*120)return[];const st=Math.max(1/6,span/1200),out=[];
@@ -1896,16 +2027,17 @@ function thin(a,v0,v1,maxN){let i0=0;while(i0<a.length&&a[i0][0]<v0)i0++;i0=Math
 let G=null;
 function draw(){const svg=$('gChart');if(!view||!svg.parentNode.clientWidth)return;const W=Math.max(300,Math.round(svg.parentNode.clientWidth));
   for(const k in mc)if(Object.keys(mc).length>40)delete mc[k];
-  clampView();const [v0,v1]=view;const fs=11;const showLag=GA.length&&on.lags,showFr=FR&&on.fresh;
+  clampView();const [v0,v1]=view;const fs=11;const SPL=FT.gSpots?FT.gSpots.prepare(v0,v1):[];const showLag=(GA.length&&on.lags)||(!GA.length&&SPL.length),showFr=FR&&on.fresh;const spLeg=FT.gSpots&&SPL.length?FT.gSpots.lagLegend(SPL):[];
   const L=36,R=8,pw=W-L-R;const H1=Math.round(Math.min(330,Math.max(220,W*0.62)));
-  let y=8;const P1={y0:y,h:H1};y+=H1+22;const nL=GA.filter(g=>on['g'+g.id]).length*2;const legRows=pw>560?Math.ceil(nL/4):Math.ceil(nL/2);
+  let y=8;const P1={y0:y,h:H1};y+=H1+22;const nL=(GA.length?GA.filter(g=>on['g'+g.id]).length*2:0)+spLeg.length;const legRows=pw>560?Math.ceil(nL/4):Math.ceil(nL/2);
   const P2=showLag?{y0:y,h:120}:null;if(P2)y+=120+16+legRows*13+8;
   const P3=showFr?{y0:y,h:56}:null;if(P3)y+=56+22;
   const Ht=y+18;svg.setAttribute('viewBox',`0 0 ${W} ${Ht}`);svg.style.height=Ht+'px';
   const X=m=>L+(m-v0)/(v1-v0)*pw;const maxN=Math.round(pw*1.5);
   const vis={};for(const s of SER){if(!on[s.id])continue;if(s.k==='line'||s.k==='step')vis[s.id]=thin(ser[s.id]||[],v0,v1,maxN);else if(s.k==='model')vis[s.id]=thin(model(s,v0,v1),v0,v1,maxN);}
   let lo=Infinity,hi=-Infinity;for(const k in vis)for(const p of vis[k])if(p[0]>=v0&&p[0]<=v1){lo=Math.min(lo,p[1]);hi=Math.max(hi,p[1]);}
-  if(!isFinite(lo)){lo=-1.5;hi=1.5;}const pad=(hi-lo)*0.06+0.05;lo-=pad;hi+=pad;const Y1=v=>P1.y0+P1.h-(v-lo)/(hi-lo)*P1.h;
+  for(const r of SPL)for(const p of r.pts)if(p[0]>=v0&&p[0]<=v1){lo=Math.min(lo,p[1]);hi=Math.max(hi,p[1]);}
+  if(!isFinite(lo)){lo=-1.5;hi=1.5;}const pad=(hi-lo)*0.06+(SPL.length?0.12:0.05);lo-=pad;hi+=pad;const Y1=v=>P1.y0+P1.h-(v-lo)/(hi-lo)*P1.h;
   let o='';const dayStart=Math.floor(v0/1440)*1440;
   for(let d=dayStart;d<v1;d+=1440){const n0=X(Math.max(v0,d+18.5*60)),n1=X(Math.min(v1,d+1440+5.3*60));if(n1>n0)o+=`<rect x="${n0}" y="${P1.y0}" width="${n1-n0}" height="${y-P1.y0-22}" fill="#000" opacity=".18"/>`;}
   const span=v1-v0;const tstep=span<=1.5*1440?180:span<=4*1440?720:span<=10*1440?1440:span<=40*1440?7*1440:30*1440;
@@ -1921,27 +2053,30 @@ function draw(){const svg=$('gChart');if(!view||!svg.parentNode.clientWidth)retu
     o+=`<path d="${d}" fill="none" stroke="${s.col}" stroke-width="${s.k==='step'?2:1.5}" ${s.dash?`stroke-dasharray="${s.dash}"`:''}/>`;
     if(s.dots&&a.length<300)o+=a.map(p=>`<circle cx="${X(p[0]).toFixed(1)}" cy="${Y1(p[1]).toFixed(1)}" r="1.8" fill="${s.col}"/>`).join('');
     if(s.k==='step'&&s.g)for(const e of EV[s.g.id]||[])if(e.k==='HW'&&e.t>v0&&e.t<v1){const xx=X(e.t),yy=Y1(e.v-(OFF[s.g.id]||0));o+=`<path d="M${xx},${yy-6}l-4,-8h8z" fill="${s.col}"/>`;}}
+  if(SPL.length)o+=FT.gSpots.svgMain(SPL,X,Y1,v0,v1);
   o+='</g>';
-  if(P2){const LG=[];GA.forEach((g,i)=>{if(!on['g'+g.id])return;LG.push({g,k:'HW',col:PAL[i%PAL.length],lab:gname(g)+' HW'});LG.push({g,k:g.role==='partial'?'RISE':'LW',col:MPAL[i%MPAL.length],lab:gname(g)+(g.role==='partial'?' rise':' LW')});});
+  if(P2){const LG=[];if(GA.length&&on.lags)GA.forEach((g,i)=>{if(!on['g'+g.id])return;LG.push({g,k:'HW',col:PAL[i%PAL.length],lab:gname(g)+' HW'});LG.push({g,k:g.role==='partial'?'RISE':'LW',col:MPAL[i%MPAL.length],lab:gname(g)+(g.role==='partial'?' rise':' LW')});});
     const pts=[];for(const Lg of LG)for(const e of EV[Lg.g.id]||[])if(e.k===Lg.k&&e.bt>=v0-600&&e.bt<=v1)pts.push(Object.assign({},e,{col:Lg.col}));
-    let a=Infinity,b=-Infinity;for(const p of pts){a=Math.min(a,p.lag-p.u);b=Math.max(b,p.lag+p.u);}for(const Lg of LG){const m=ST[Lg.g.id+'_'+Lg.k];if(m){a=Math.min(a,m.model);b=Math.max(b,m.model);}}
+    const spp=SPL.length?FT.gSpots.lagPts(SPL,v0,v1):[];
+    let a=Infinity,b=-Infinity;for(const p of pts.concat(spp)){a=Math.min(a,p.lag-p.u);b=Math.max(b,p.lag+p.u);}for(const Lg of LG){const m=ST[Lg.g.id+'_'+Lg.k];if(m){a=Math.min(a,m.model);b=Math.max(b,m.model);}}
     if(!isFinite(a)){a=0;b=240;}a=Math.floor((a-20)/60)*60;b=Math.ceil((b+20)/60)*60;if(b-a<120)b=a+120;
     const Y2=v=>P2.y0+P2.h-(v-a)/(b-a)*P2.h;
     o+=`<rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}" fill="none" stroke="#25464b"/>`;
     const st2=(b-a)>480?120:60;for(let v=a;v<=b;v+=st2){const yy=Y2(v);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="#25464b" stroke-dasharray="2 4"/><text x="${L-4}" y="${yy+4}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${v<0?'−':''}${Math.abs(v)/60}h</text>`;}
     for(const Lg of LG){const m=ST[Lg.g.id+'_'+Lg.k];if(!m)continue;const yy=Y2(m.model);o+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="${Lg.col}" stroke-dasharray="${Lg.k==='HW'?'6 3':'2 3'}" opacity=".75"/>`;}
-    o+=`<text x="${L+4}" y="${P2.y0+12}" font-size="${fs}" fill="#9db5b1">lag after ${esc(PORT.name)} pred (dashed = app model)</text>`;
+    o+=`<text x="${L+4}" y="${P2.y0+12}" font-size="${fs}" fill="#9db5b1">lag after ${esc(PORT.name)} pred (${LG.length?'dashed = app model':''}${LG.length&&spp.length?'; ':''}${spp.length?'hollow = spots (pred)':''})</text>`;
     o+=`<clipPath id="gc2"><rect x="${L}" y="${P2.y0}" width="${pw}" height="${P2.h}"/></clipPath><g clip-path="url(#gc2)">`;
     for(const p of pts){const xx=X(p.bt).toFixed(1);o+=`<line x1="${xx}" x2="${xx}" y1="${Y2(p.lag-p.u)}" y2="${Y2(p.lag+p.u)}" stroke="${p.col}" stroke-width="1.2" opacity=".7"/><circle cx="${xx}" cy="${Y2(p.lag)}" r="3.2" fill="${p.col}"/>`;}
-    o+='</g>';const per=pw>560?4:2,cw=pw/per;
-    o+=LG.map((Lg,i)=>{const cx=L+8+(i%per)*cw,cy=P2.y0+P2.h+12+Math.floor(i/per)*13;return `<circle cx="${cx}" cy="${cy-4}" r="3.5" fill="${Lg.col}"/><text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${esc(Lg.lab)}</text>`;}).join('');}
+    if(spp.length)o+=FT.gSpots.lagSvg(spp,X,Y2);
+    o+='</g>';const per=pw>560?4:2,cw=pw/per;const LL=LG.concat(spLeg);
+    o+=LL.map((Lg,i)=>{const cx=L+8+(i%per)*cw,cy=P2.y0+P2.h+12+Math.floor(i/per)*13;const mk=Lg.hollow==='c'?`<circle cx="${cx}" cy="${cy-4}" r="3.3" fill="#0f2427" stroke="${Lg.col}" stroke-width="1.5"/>`:Lg.hollow==='s'?`<rect x="${cx-3.2}" y="${cy-7.2}" width="6.4" height="6.4" fill="#0f2427" stroke="${Lg.col}" stroke-width="1.5"/>`:`<circle cx="${cx}" cy="${cy-4}" r="3.5" fill="${Lg.col}"/>`;return mk+`<text x="${cx+7}" y="${cy}" font-size="${fs}" fill="#cfe">${esc((n=>Lg.lab.length>n?Lg.lab.slice(0,n-1)+'…':Lg.lab)(Math.max(12,Math.floor((cw-16)/6.2))))}</text>`;}).join('');}
   if(P3){const a=thin(ser.fresh||[],v0,v1,maxN);let mn=Infinity,mx=-Infinity;for(const p of a){mn=Math.min(mn,p[1]);mx=Math.max(mx,p[1]);}
     if(!isFinite(mn)){mn=0;mx=1;}if(mx-mn<0.2){const c=(mx+mn)/2;mn=c-0.1;mx=c+0.1;}
     const Y3=v=>P3.y0+P3.h-(v-mn)/(mx-mn)*P3.h;o+=`<rect x="${L}" y="${P3.y0}" width="${pw}" height="${P3.h}" fill="none" stroke="#25464b"/>`;
     o+=`<text x="${L-4}" y="${P3.y0+10}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${mx.toFixed(2)}</text><text x="${L-4}" y="${P3.y0+P3.h}" text-anchor="end" font-size="${fs}" fill="#9db5b1">${mn.toFixed(2)}</text>`;
     let d='';a.forEach((p,i)=>{d+=(i?'L':'M')+X(p[0]).toFixed(1)+','+Y3(p[1]).toFixed(1);});
     o+=`<clipPath id="gc3"><rect x="${L}" y="${P3.y0}" width="${pw}" height="${P3.h}"/></clipPath><path clip-path="url(#gc3)" d="${d}" fill="none" stroke="#b48cff" stroke-width="1.8"/><text x="${L+4}" y="${P3.y0+12}" font-size="${fs}" fill="#9db5b1">${esc(short(FR.name))} ${esc(FR.id)} (m) — fresh-flow indicator</text>`;}
-  o+=`<g id="gCur"></g>`;svg.innerHTML=o;G={X,v0,v1,L,pw,W,Ht,vis,Y1,P1};}
+  o+=`<g id="gCur"></g>`;svg.innerHTML=o;G={X,v0,v1,L,pw,W,Ht,vis,Y1,P1,SPL};}
 /* ---------- interaction ---------- */
 const ptrs=new Map();let drag=null;
 function tip(clientX){if(!G)return;const svg=$('gChart'),rc=svg.getBoundingClientRect();const sx=(clientX-rc.left)*(G.W/rc.width);if(sx<G.L||sx>G.L+G.pw){$('gTip').style.display='none';$('gCur').innerHTML='';return;}
@@ -1951,6 +2086,7 @@ function tip(clientX){if(!G)return;const svg=$('gChart'),rc=svg.getBoundingClien
     else{const a=s.k==='model'?(G.vis[s.id]||[]):ser[s.id]||[];let i=0;while(i<a.length&&a[i][0]<m)i++;if(i>0&&i<a.length&&a[i][0]-a[i-1][0]<180){const f=(m-a[i-1][0])/(a[i][0]-a[i-1][0]);v=a[i-1][1]+f*(a[i][1]-a[i-1][1]);}}
     if(v!=null)rs.push(`<span style="color:${s.col}">●</span> ${esc(s.lab)}: <b>${v.toFixed(2)}</b>`);}
   if(FR&&on.fresh){const p=lastVal(ser.fresh||[],m);if(p)rs.push(`<span style="color:#b48cff">●</span> ${esc(short(FR.name))}: <b>${p[1].toFixed(2)}</b>`);}
+  if(G.SPL&&G.SPL.length)rs.push(...FT.gSpots.tipRows(G.SPL,m,Math.max(20,(G.v1-G.v0)/G.pw*14)));
   const tp=$('gTip');tp.innerHTML=`<b>${fDT(m)}</b><br>`+rs.join('<br>');tp.style.display='block';
   const wx=svg.parentNode.clientWidth;const px=(sx/G.W)*rc.width;tp.style.left=Math.max(0,Math.min(px+10,wx-tp.offsetWidth-2))+'px';tp.style.top='30px';
   $('gCur').innerHTML=`<line x1="${sx}" x2="${sx}" y1="${G.P1.y0}" y2="${G.Ht-18}" stroke="#fff" stroke-width="1" opacity=".6"/>`;}
@@ -1974,6 +2110,7 @@ function bind(){const svg=$('gChart');
   $('gZi').onclick=()=>zoom(1/1.5);$('gZo').onclick=()=>zoom(1.5);$('gRefresh').onclick=()=>load(true);
   let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(shown)draw();},150);});}
 legend();bind();
+if(FT.gSpots){FT.gSpots.ui();FT.gSpots.setOnChange(()=>{if(!view)return;const fe=FT.gSpots.futureEnd();if(fe&&view[1]<nowM()+20*60){const w=view[1]-view[0];view=[nowM()+36*60-w,nowM()+36*60];}latest();draw();});}
 FT.onTab=FT.onTab||[];FT.onTab.push(t=>{shown=t==='gauges';if(shown){if(!IDX)load(true).then(legend);else{load(false);draw();}}});
 setInterval(()=>{if(document.visibilityState==='visible'&&shown)load(true);},10*60e3);
 setInterval(()=>{if(shown)upd();},30e3);

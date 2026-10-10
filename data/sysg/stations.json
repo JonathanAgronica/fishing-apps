@@ -1,0 +1,1026 @@
+{
+"v": 1,
+"built": "2026-10-10",
+"stations": [
+{
+"id": "039352",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Burnett River at Bundaberg",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"burnett-river"
+]
+},
+{
+"id": "040443",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Mary River at Maryborough (Portside)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"mary-river"
+]
+},
+{
+"id": "040812",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Moggill",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "040831",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Bremer River at Ipswich",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "040903",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Cherwell River at Pacific Haven",
+"datum": "LGH",
+"role": "partial",
+"systems": [
+"burrum-river"
+]
+},
+{
+"id": "040907",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Burrum River at Howard",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"burrum-river"
+]
+},
+{
+"id": "539032",
+"src": "bom",
+"tab": "IDQ65392",
+"name": "Gladstone Tide",
+"datum": "LGH",
+"role": "ref",
+"systems": [
+"eurimbula-creek",
+"round-hill-creek",
+"worthington-creek",
+"hilliard-creek"
+]
+},
+{
+"id": "539060",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Elliott River at Dr Mays Crossing",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"elliott-river"
+]
+},
+{
+"id": "539076",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Burnett Heads Tide",
+"datum": "LGH",
+"role": "ref",
+"systems": [
+"burnett-river",
+"theodolite-creek",
+"coonarr-creek",
+"elliott-river",
+"palmer-creek"
+]
+},
+{
+"id": "539093",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Bundaberg Port Tide",
+"datum": "LGH",
+"role": "ref",
+"systems": [
+"kolan-river",
+"littabella-creek"
+]
+},
+{
+"id": "539153",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Burnett River at Branyan (Woongarra PS)",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"burnett-river"
+]
+},
+{
+"id": "539205",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Kolan River at Bucca Weir",
+"datum": "AHD",
+"role": "fresh",
+"systems": [
+"kolan-river"
+]
+},
+{
+"id": "540036",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Urangan Tide",
+"datum": "LGH",
+"role": "ref",
+"systems": [
+"mary-river",
+"burrum-river",
+"beelbi-creek",
+"yidney-creek",
+"bogimbah-creek",
+"coongul-creek",
+"bowarrady-creek",
+"wanggoolba-creek",
+"poyungan-creek",
+"woralie-creek",
+"boon-boon-creek",
+"rocky-creek",
+"wathumba-creek",
+"awinya-creek",
+"tenimby-creek",
+"puthoo-creek",
+"marsh-creek",
+"german-creek",
+"bennett-creek",
+"eli-creek",
+"dundonga-creek",
+"pulgul-creek",
+"o-regan-creek",
+"yeenyargoor-creek",
+"sandfly-creek",
+"duck-creek",
+"panama-creek",
+"urang-creek"
+]
+},
+{
+"id": "540061",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Moggill Creek at Kenmore (Fortose St)",
+"datum": "AHD",
+"role": "partial",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540063",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Colleges Crossing",
+"datum": "LGH",
+"role": "partial",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540071",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Oxley Creek at Corinda (Corinda High School)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540087",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Eudlo Creek at Kiels Mountain",
+"datum": "LGH",
+"role": "partial",
+"systems": [
+"maroochy-river"
+]
+},
+{
+"id": "540094",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Maroochy River at Picnic Point",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"maroochy-river"
+]
+},
+{
+"id": "540095",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Maroochy River at Dunethin Rock",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"maroochy-river"
+]
+},
+{
+"id": "540122",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Cabbage Tree Creek at Zillmere (Pineapple St)",
+"datum": "AHD",
+"role": "fresh",
+"systems": [
+"cabbage-tree-creek"
+]
+},
+{
+"id": "540124",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Cabbage Tree Creek at Deagon (Burralong St)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"cabbage-tree-creek"
+]
+},
+{
+"id": "540129",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Bulimba Creek at Hemmant (Doughboy Pde)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540130",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Breakfast Creek at Bowen Hills (Mayne Railway Yards)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540132",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Norman Creek at East Brisbane (Caswell St)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540192",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Jindalee Alert",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540198",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Brisbane City",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540199",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Mt Crosby",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540201",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Moggill (Aitcheson St East)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540222",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Eudlo Creek at Eudlo",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"maroochy-river"
+]
+},
+{
+"id": "540242",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Burpengary Creek at Burpengary (Dale St)",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"burpengary-creek"
+]
+},
+{
+"id": "540250",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Bremer River at Brassall (Hancocks Bridge)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540274",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Oxley Creek Mouth at Graceville",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540286",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Breakfast Creek Mouth at Newstead",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540296",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Pullen Pullen Creek at Pinjarra Hills",
+"datum": "AHD",
+"role": "partial",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540309",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Noosa River at Lake Cooroibah",
+"datum": "LGH",
+"role": "partial",
+"systems": [
+"noosa-river"
+]
+},
+{
+"id": "540311",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Noosa Bar",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"noosa-river",
+"noosa-river"
+]
+},
+{
+"id": "540345",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Mooloolah River at Mooloolah",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"mooloolah-river"
+]
+},
+{
+"id": "540347",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Mooloolaba Tide",
+"datum": "LGH",
+"role": "ref",
+"systems": [
+"mooloolah-river",
+"maroochy-river"
+]
+},
+{
+"id": "540348",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Mooloolah River at Parrearra Weir US",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"mooloolah-river"
+]
+},
+{
+"id": "540350",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Mooloolah River at Palmview",
+"datum": "AHD",
+"role": "partial",
+"systems": [
+"mooloolah-river"
+]
+},
+{
+"id": "540357",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Caboolture River at Upper Caboolture (Hausman Lane)",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"caboolture-river"
+]
+},
+{
+"id": "540412",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "North Pine River at Youngs Crossing",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"pine-river"
+]
+},
+{
+"id": "540417",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "North Pine River at Murrumba Downs",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"pine-river"
+]
+},
+{
+"id": "540424",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Maroochy River at Stoney Wharf Road",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"maroochy-river"
+]
+},
+{
+"id": "540439",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "North Pine River at Lawnton",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"pine-river"
+]
+},
+{
+"id": "540448",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Golden Beach",
+"datum": "LGH",
+"role": "ref",
+"systems": []
+},
+{
+"id": "540468",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Cannery Creek at Northgate (Crockford Street)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"kedron-brook"
+]
+},
+{
+"id": "540469",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Pound Creek at Hendra",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"kedron-brook"
+]
+},
+{
+"id": "540478",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Kedron Brook at Gordon Park (McCord St)",
+"datum": "AHD",
+"role": "fresh",
+"systems": [
+"kedron-brook"
+]
+},
+{
+"id": "540495",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Moreton Bay at Whyte Island",
+"datum": "AHD",
+"role": "ref",
+"systems": []
+},
+{
+"id": "540506",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Petrie Creek and Bli Bli",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"maroochy-river"
+]
+},
+{
+"id": "540533",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Coochin Creek at Mawsons Rd",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"pumicestone-passage"
+]
+},
+{
+"id": "540548",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Kedron Brook at Toombul (Nudgee Rd)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"kedron-brook"
+]
+},
+{
+"id": "540558",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Caboolture River at Beachmere (Riversleigh Rd)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"caboolture-river"
+]
+},
+{
+"id": "540625",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "South Pine River at Strathpine (Gympie Rd)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"pine-river"
+]
+},
+{
+"id": "540635",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Elimbah Creek at Toorbul (Donnybrook Rd)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"pumicestone-passage"
+]
+},
+{
+"id": "540637",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Mary River at Maryborough (Churchill Street)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"mary-river"
+]
+},
+{
+"id": "540658",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Freshwater Creek at Kallangur",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"freshwater-creek"
+]
+},
+{
+"id": "540659",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Saltwater Creek at Rothwell",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"saltwater-creek"
+]
+},
+{
+"id": "540660",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Caboolture River at Caboolture (Short St)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"caboolture-river"
+]
+},
+{
+"id": "540661",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Bremer River at Karalee",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540670",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Goodna",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540682",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Jindalee (Boat Ramp Park)",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540683",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at St Lucia",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540684",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Brisbane Port Office",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540685",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Brisbane River at Hawthorne",
+"datum": "AHD",
+"role": "tidal",
+"systems": [
+"brisbane-river"
+]
+},
+{
+"id": "540686",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Mary River at Owanyilla",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"mary-river"
+]
+},
+{
+"id": "540730",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Scarborough Tide",
+"datum": "LGH",
+"role": "ref",
+"systems": []
+},
+{
+"id": "540740",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Caboolture River at Beachmere (St Smith Rd)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"caboolture-river"
+]
+},
+{
+"id": "540741",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Saltwater Creek at Deception Bay (Major St)",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"saltwater-creek"
+]
+},
+{
+"id": "540762",
+"src": "bom",
+"tab": "IDQ65389",
+"name": "Shorncliffe Tide",
+"datum": "LGH",
+"role": "ref",
+"systems": [
+"cabbage-tree-creek",
+"pine-river",
+"nudgee-creek"
+]
+},
+{
+"id": "540774",
+"src": "bom",
+"tab": "IDQ65390",
+"name": "Kin Kin Creek at Wahpunga Lane",
+"datum": "LGH",
+"role": "fresh",
+"systems": [
+"noosa-river"
+]
+},
+{
+"id": "540792",
+"src": "bom",
+"tab": "IDQ65391",
+"name": "Burrum River at Walls Camp (Pacific Haven)",
+"datum": "LGH",
+"role": "tidal",
+"systems": [
+"burrum-river"
+]
+},
+{
+"id": "bananabank",
+"src": "des",
+"tab": "DES",
+"name": "Banana Bank",
+"datum": "LAT",
+"role": "ref",
+"systems": [
+"eprapah-creek",
+"moogurrapum-creek"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "birkdale",
+"src": "des",
+"tab": "DES",
+"name": "Birkdale",
+"datum": "LAT",
+"role": "ref",
+"systems": [
+"tingalpa-creek",
+"hilliards-creek",
+"lota-creek"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "bundaberg",
+"src": "des",
+"tab": "DES",
+"name": "Bundaberg (Burnett Heads)",
+"datum": "LAT",
+"role": "tidal",
+"systems": [
+"burnett-river"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "donnybrook",
+"src": "des",
+"tab": "DES",
+"name": "Donnybrook (Pumicestone Passage)",
+"datum": "LAT",
+"role": "tidal",
+"systems": [
+"pumicestone-passage"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "hallsbay",
+"src": "des",
+"tab": "DES",
+"name": "Halls Bay (Pumicestone Passage)",
+"datum": "LAT",
+"role": "ref",
+"systems": [
+"hussey-creek",
+"halls-creek"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "maroochydore",
+"src": "des",
+"tab": "DES",
+"name": "Maroochydore (Maroochy R)",
+"datum": "LAT",
+"role": "tidal",
+"systems": [
+"maroochy-river"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "noosamunna",
+"src": "des",
+"tab": "DES",
+"name": "Munna Point (Noosa R)",
+"datum": "LAT",
+"role": "tidal",
+"systems": [
+"noosa-river"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "rabybay",
+"src": "des",
+"tab": "DES",
+"name": "Raby Bay",
+"datum": "LAT",
+"role": "ref",
+"systems": [],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "scarborough",
+"src": "des",
+"tab": "DES",
+"name": "Scarborough",
+"datum": "LAT",
+"role": "ref",
+"systems": [
+"caboolture-river",
+"burpengary-creek",
+"pumicestone-passage",
+"saltwater-creek",
+"freshwater-creek"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "tangalooma",
+"src": "des",
+"tab": "DES",
+"name": "Tangalooma",
+"datum": "LAT",
+"role": "ref",
+"systems": [],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "tincanbay",
+"src": "des",
+"tab": "DES",
+"name": "Tin Can Bay",
+"datum": "LAT",
+"role": "ref",
+"systems": [
+"kauri-creek",
+"mosquito-creek",
+"teebar-creek",
+"snapper-creek",
+"carlo-creek",
+"cooloola-creek",
+"teewah-creek",
+"carland-creek",
+"cameron-creek",
+"dinnies-creek"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "tuan",
+"src": "des",
+"tab": "DES",
+"name": "Tuan (Great Sandy Strait)",
+"datum": "LAT",
+"role": "ref",
+"systems": [
+"poona-creek",
+"big-tuan-creek",
+"kalah-creek",
+"butcher-creek",
+"buttha-creek",
+"little-tinana-creek",
+"maaroom-creek",
+"wobber-creek",
+"figtree-creek",
+"dimond-creek",
+"geewan-creek",
+"thangawang-creek",
+"taleerba-creek",
+"alligator-creek"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+},
+{
+"id": "whyteislandnx",
+"src": "des",
+"tab": "DES",
+"name": "Whyte Island (Brisbane R mouth)",
+"datum": "LAT",
+"role": "ref",
+"systems": [
+"brisbane-river",
+"kedron-brook",
+"boggy-creek"
+],
+"cols": "level m LAT, MSQ prediction m LAT"
+}
+]
+}

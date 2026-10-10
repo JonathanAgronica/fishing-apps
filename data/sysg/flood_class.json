@@ -1,0 +1,91 @@
+{
+ "source": "https://www.bom.gov.au/qld/flood/networks/section4.shtml",
+ "note": "gauge height (m, local gauge datum) at which BoM minor / moderate / major flooding commences",
+ "stations": {
+  "040907": {
+   "name": "Howard Alert",
+   "minor": 6.0,
+   "moderate": 8.0,
+   "major": 10.0
+  },
+  "539060": {
+   "name": "Dr Mays Crossing Tm",
+   "minor": 1.5,
+   "moderate": 2.0,
+   "major": 2.5
+  },
+  "539132": {
+   "name": "Mimdale Alert",
+   "minor": 10.0,
+   "moderate": 12.0,
+   "major": 14.0
+  },
+  "539153": {
+   "name": "Branyan(Woongarra Ps) Al",
+   "minor": 10.0,
+   "moderate": 12.5,
+   "major": 14.5
+  },
+  "539205": {
+   "name": "Bucca Weir Alert",
+   "minor": 17.5,
+   "moderate": 18.5,
+   "major": 19.0
+  },
+  "540122": {
+   "name": "Zillmere(Pineapple St)Al",
+   "minor": 12.0,
+   "moderate": 12.8,
+   "major": 13.5
+  },
+  "540199": {
+   "name": "Mt Crosby Alert",
+   "minor": 11.0,
+   "moderate": 13.0,
+   "major": 21.0
+  },
+  "540222": {
+   "name": "Eudlo Alert",
+   "minor": 4.3,
+   "moderate": 4.5,
+   "major": 4.8
+  },
+  "540242": {
+   "name": "Burpengary (Dale St) Al",
+   "minor": 9.0,
+   "moderate": 10.0,
+   "major": 10.9
+  },
+  "540345": {
+   "name": "Mooloolah Al",
+   "minor": 5.3,
+   "moderate": 5.8,
+   "major": 6.3
+  },
+  "540357": {
+   "name": "Upper Caboolture Alert",
+   "minor": 8.5,
+   "moderate": 10.0,
+   "major": 10.9
+  },
+  "540412": {
+   "name": "Youngs Crossing Alert",
+   "minor": 7.7,
+   "moderate": 9.5,
+   "major": 11.6
+  },
+  "540533": {
+   "name": "Mawsons Rd Al",
+   "minor": 2.8,
+   "moderate": 4.8,
+   "major": 8.2
+  }
+ },
+ "missing": [
+  "540478",
+  "540658",
+  "540686",
+  "540741",
+  "540774"
+ ]
+}

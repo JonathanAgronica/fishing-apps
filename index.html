@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610101148"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610101148"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610101148">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610101148">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610101052">
+<meta name="app-version" content="202610101148">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -114,7 +114,7 @@ label.f{display:flex;flex-direction:column;gap:3px;font-size:.8rem;color:var(--m
 /* ---- combined shell ---- */
 body{padding-bottom:env(safe-area-inset-bottom)}
 header{background:linear-gradient(135deg,#0b3b3a,#1b2b40 60%,#3b1f16);padding:max(14px,env(safe-area-inset-top)) 16px 0}
-header h1{margin:0;font-size:1.3rem} header h1 span{color:var(--acc)}
+header h1{margin:0;font-size:1.3rem;display:flex;align-items:center;gap:.45rem} header h1 img.logo{width:34px;height:34px;border-radius:8px;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.15)} header h1 span{color:var(--acc)}
 header p{margin:2px 0 8px;color:var(--mut);font-size:.82rem}
 nav.tabs{display:flex;gap:4px;max-width:1000px;margin:0 auto}
 nav.tabs a{flex:1;text-align:center;padding:10px 6px;border-radius:12px 12px 0 0;color:var(--mut);text-decoration:none;font-weight:600;background:#0d1f2288}
@@ -223,7 +223,7 @@ input:disabled{opacity:.4}
 </head>
 <body>
 <header>
-  <h1>🐟 <span>Mac's Jacks</span></h1>
+  <h1><img class="logo" src="icons/icon-64.png" srcset="icons/icon-64.png 1x, icons/icon-128.png 2x" alt="" width="34" height="34"><span>Mac's Jacks</span></h1>
   <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
   <nav class="tabs"><a href="#bite" data-tab="bite">🎣 <span class="tl">Bite times</span><span class="ts">Bites</span></a><a href="#baffle" data-tab="baffle">🌊 <span class="tl">Tides</span><span class="ts">Tides</span></a><a href="#map" data-tab="map">🗺 <span class="tl">Map</span><span class="ts">Map</span></a><a href="#gauges" data-tab="gauges">📡 <span class="tl">Gauges</span><span class="ts">Gauges</span></a><a href="#log" data-tab="log">📝 <span class="tl">Catch log</span><span class="ts">Log</span></a></nav>
 </header>
@@ -551,7 +551,7 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610101052</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610101148</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};

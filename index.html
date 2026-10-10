@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b3b3a">
-<title>Mac's Baffle Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
+<title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Baffle Jacks">
-<meta name="app-version" content="202610100949">
+<meta name="apple-mobile-web-app-title" content="Mac's Jacks">
+<meta name="app-version" content="202610101007">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -209,9 +209,9 @@ nav.tabs a .ts{display:none}
 
 .tab[hidden]{display:none}
 .sysbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1000px;margin:0 auto 8px;font-size:.85rem}
-.sysbar label{flex:1 1 130px;display:flex;align-items:center;gap:4px}
-.sysbar select{flex:1;min-width:0;max-width:100%;padding:6px 8px;border-radius:10px;background:#0d1f22;color:var(--ink);border:1px solid #2b5157;font-size:.9rem}
-.sysbar button{white-space:nowrap}
+.sysbar label{flex:1 1 110px;min-width:0;display:flex;align-items:center;gap:4px}
+.sysbar select{flex:1;min-width:0;width:100%;max-width:100%;padding:6px 8px;border-radius:10px;background:#0d1f22;color:var(--ink);border:1px solid #2b5157;font-size:.9rem}
+.sysbar button{white-space:nowrap;padding:6px 9px}
 .sysconf{display:inline-block;min-width:1.6em;text-align:center;font-weight:700;border-radius:7px;padding:2px 6px;font-size:.8rem;color:#081214}
 .sysconf.cA{background:#57d18a} .sysconf.cB{background:#ffd38a} .sysconf.cC{background:#ff9b8a}
 .sysmsg{flex-basis:100%;color:var(--mut);font-size:.82rem} .sysmsg:empty{display:none}
@@ -223,9 +223,9 @@ input:disabled{opacity:.4}
 </head>
 <body>
 <header>
-  <h1>🐟 <span>Mac's Baffle Jacks</span></h1>
+  <h1>🐟 <span>Mac's Jacks</span></h1>
   <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
-  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 <span class="tl">Bite times</span><span class="ts">Bites</span></a><a href="#baffle" data-tab="baffle">🌊 <span class="tl">Baffle tides</span><span class="ts">Tides</span></a><a href="#map" data-tab="map">🗺 <span class="tl">Map</span><span class="ts">Map</span></a><a href="#gauges" data-tab="gauges">📡 <span class="tl">Gauges</span><span class="ts">Gauges</span></a><a href="#log" data-tab="log">📝 <span class="tl">Catch log</span><span class="ts">Log</span></a></nav>
+  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 <span class="tl">Bite times</span><span class="ts">Bites</span></a><a href="#baffle" data-tab="baffle">🌊 <span class="tl">Tides</span><span class="ts">Tides</span></a><a href="#map" data-tab="map">🗺 <span class="tl">Map</span><span class="ts">Map</span></a><a href="#gauges" data-tab="gauges">📡 <span class="tl">Gauges</span><span class="ts">Gauges</span></a><a href="#log" data-tab="log">📝 <span class="tl">Catch log</span><span class="ts">Log</span></a></nav>
 </header>
 <main>
 <div class="tab" id="tab-bite">
@@ -412,14 +412,14 @@ input:disabled{opacity:.4}
     <span style="flex:1"></span>
     <button class="sm" id="mMe">📍 Me</button><button class="sm" id="mAdd">➕ Add spot</button>
   </div>
-  <div id="mWrap"><div id="mMap" role="application" aria-label="Baffle Creek map"><div class="mload"><span class="spin"></span> Loading map…</div></div><div id="mHint"></div></div>
+  <div id="mWrap"><div id="mMap" role="application" aria-label="River map"><div class="mload"><span class="spin"></span> Loading map…</div></div><div id="mHint"></div></div>
   <div class="row mbar2">
     <label class="mut">Colour creek <select id="mColour"><option value="off">off</option><option value="bite">by bite score</option><option value="tide">by tide stage</option></select></label>
     <input type="range" id="mTime" min="0" max="95" step="1" aria-label="Time of day">
     <span id="mTimeLbl" class="mut"></span>
   </div>
   <div id="mLegend" class="mut"></div>
-  <p class="mut" style="margin:6px 0 0"><b>Long-press</b> the map near the creek (or tap <b>➕ Add spot</b>, then tap) to drop your own named spot — it snaps to the creek centreline for tide timing but keeps the exact point you tapped. Drag your pins to move them. Tap any spot for its next high/low/run-in start and bite score. Your spots appear in Bite times, Baffle tides and the Catch log too.</p>
+  <p class="mut" style="margin:6px 0 0"><b>Long-press</b> the map near the creek (or tap <b>➕ Add spot</b>, then tap) to drop your own named spot — it snaps to the creek centreline for tide timing but keeps the exact point you tapped. Drag your pins to move them. Tap any spot for its next high/low/run-in start and bite score. Your spots appear in Bite times, Tides and the Catch log too.</p>
 </section>
 <section class="card">
   <h2>⭐ My spots <span class="mut" id="mCount"></span></h2>
@@ -518,7 +518,7 @@ input:disabled{opacity:.4}
   <div class="mut" id="cShareInfo" style="margin-top:6px"></div>
   <details style="margin-top:6px"><summary class="mut">Privacy — what is shared?</summary><div class="mut" id="cPrivacy" style="margin-top:6px">
     Your log (incl. exact GPS, spot names, notes and bait details) and your own map spots &amp; renamed landmarks are stored <b>only on this phone</b>. If you turn sharing on, each saved session is sent with only:
-    the ~2 km creek stretch (e.g. “km 4–6, Winfield–Flat Rock”) or, off Baffle Creek, a broad area (e.g. “Burnett River / Bundaberg”); times rounded to 15-minute slots;
+    the river system and ~2 km stretch (e.g. “km 4–6, Winfield–Flat Rock” on Baffle Creek, “km 0–2, Burnett River”) or, off the mapped channels, a broad area (e.g. “Off-creek: near Noosa River”); times rounded to 15-minute slots;
     species, counts, kept/released, longest length; bait <i>type</i>; the app’s predicted score / tide / light / solunar / moon / wind values; and a random anonymous id (no name, account, device id or GPS).
     Submissions go through a public no-account relay (ntfy.sh) to the app’s maintainer box, which validates them and publishes the combined table as
     <a href="https://github.com/JonathanAgronica/fishing-apps/blob/main/data/catches.csv" target="_blank" rel="noopener">data/catches.csv</a> (public). Deleting a shared session here also removes it from the shared table at the next update.
@@ -551,9 +551,9 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Baffle Jacks build 202610100949</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610101007</span></footer>
 <script>
-/* Mac's Baffle Jacks shell: tabs, shared date, cross-tab hooks */
+/* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
 FT.onTab=[];
 FT.showTab=function(t){if(!['bite','baffle','map','gauges','log'].includes(t))t='bite';
@@ -1034,9 +1034,8 @@ FT.defaultSpot=function(){if(!GEN){const km=15.9,p=B.pointAtKm(km);return{name:'
 if(!GEN)return;
 /* ---------------- wording & cards for non-Baffle systems ---------------- */
 const S=B.SYS,port=S.port.name;
-document.title=`Mac's Baffle Jacks — ${FT.SYSNAME} tides & mangrove jack bite times`;
+document.title=`Mac's Jacks — ${FT.SYSNAME} tides & mangrove jack bite times`;
 hp.textContent=`Mangrove jack bite times · ${FT.SYSNAME} tides (mouth → ${B.lineMax('M').toFixed(0)} km) · ${S.area}`;
-const tl=document.querySelector('nav.tabs a[data-tab=baffle] .tl');if(tl)tl.textContent=FT.SYSSHORT+' tides';
 const bs=$('mj-bafSel');if(bs&&bs.parentNode&&bs.parentNode.firstChild&&bs.parentNode.firstChild.nodeType===3)bs.parentNode.firstChild.textContent=FT.SYSNAME+' spot ';
 /* Tides tab */
 const tab=$('tab-baffle');
@@ -2068,9 +2067,9 @@ function exportCSV(){const out=[COLS.join(',')];
   if(FT.spots){const X=FT.spots.exportData();const rec=o=>COLS.map(k=>csvCell(o[k])).join(',');
     for(const c of X.spots)out.push(rec({record:'spot',spot_id:c.id,spot_kind:'custom',spot_name:c.name,lat:c.lat,lng:c.lng,creek_km:c.km,creek_line:(c.sys||'baffle')!=='baffle'?c.line:c.line==='E'?'Euleilah':'Baffle',note:c.note,color:c.color,system:c.sys||'baffle',start_aest:isoA(c.created||Date.now())}));
     for(const [k,v] of Object.entries(X.alias))out.push(rec({record:'alias',spot_id:k,spot_name:v}));}
-  const blob=new Blob([out.join('\n')+'\n'],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-jacks-catch-log-'+toLocalInput(Date.now()).slice(0,10)+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+  const blob=new Blob([out.join('\n')+'\n'],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='macs-jacks-catch-log-'+toLocalInput(Date.now()).slice(0,10)+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
   $('cIoMsg').textContent=`Exported ${LOG.filter(s=>s.end!=null).length} sessions.`;window.__MBJ_LAST_EXPORT=out.join('\n');}
-function importCSV(txt){const A=parseCSV(txt);const H=A.shift()||[];if(!H.includes('record')||!H.includes('session_id'))throw new Error('not a Baffle Jacks catch-log CSV');
+function importCSV(txt){const A=parseCSV(txt);const H=A.shift()||[];if(!H.includes('record')||!H.includes('session_id'))throw new Error('not a Mac’s Jacks catch-log CSV');
   const g=(a,k)=>{const i=H.indexOf(k);return i<0?'':a[i]||'';};const spCode=n=>{const f=SCH.species.find(([c,l])=>l===n||c===n);return f?f[0]:'OT';};
   const S=new Map();let added=0,skipped=0,spots=0;
   if(FT.spots){const X={spots:[],alias:{}};for(const a of A){const r=g(a,'record');
@@ -2313,7 +2312,7 @@ document.querySelectorAll('#mLayers button').forEach(b=>b.classList.toggle('on',
 $('mAdd').onclick=()=>setAdd(!addMode);$('mMe').onclick=()=>{if(map)me();};
 $('mColour').value=pref.colour;$('mColour').onchange=()=>{pref.colour=$('mColour').value;savePref();colourSetup();};
 $('mTime').oninput=()=>colour();
-$('mExport').onclick=()=>{const blob=new Blob([JSON.stringify(S.exportData(),null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-jacks-spots.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);$('mIoMsg').textContent='Saved '+S.customs().length+' spot(s).';};
+$('mExport').onclick=()=>{const blob=new Blob([JSON.stringify(S.exportData(),null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='macs-jacks-spots.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);$('mIoMsg').textContent='Saved '+S.customs().length+' spot(s).';};
 $('mImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const n=S.importData(JSON.parse(await f.text()));$('mIoMsg').textContent=`Restored ${n} spot(s).`;}catch(err){$('mIoMsg').textContent='Restore failed: '+err.message;}e.target.value='';};
 S.onChange.push(()=>{renderLists();drawSpots();for(const k in cache)delete cache[k];if(pref.colour!=='off')colour();});
 renderLists();

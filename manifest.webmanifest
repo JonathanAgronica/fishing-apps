@@ -1,7 +1,7 @@
 {
  "id": "./",
- "name": "Mac's Baffle Jacks",
- "short_name": "Baffle Jacks",
+ "name": "Mac's Jacks",
+ "short_name": "Mac's Jacks",
  "description": "Mangrove jack bite times + Baffle Creek tides (Bundaberg region)",
  "start_url": "./",
  "scope": "./",
@@ -29,7 +29,7 @@
    "url": "./#bite"
   },
   {
-   "name": "Baffle tides",
+   "name": "Tides",
    "url": "./#baffle"
   },
   {

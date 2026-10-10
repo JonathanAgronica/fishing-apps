@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-10T14:45+10:00",
+ "generated_aest": "2026-10-10T15:42+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": false,
    "span_days": 8.0,
    "base": 0.76,
-   "level": 0.88,
+   "level": 0.87,
    "kind": "none",
    "note": "gauge history only 8 days - cannot rule out a flood 1-3 weeks ago",
    "phase": null,

@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610111538"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610111538"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610111538">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610111538">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610111700"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610111700"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610111700">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610111700">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610111538">
+<meta name="app-version" content="202610111700">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -133,6 +133,8 @@ nav.tabs a[data-tab=baffle].on{box-shadow:inset 0 3px 0 var(--tide)}
 nav.tabs a[data-tab=gauges].on{box-shadow:inset 0 3px 0 #e5484d}
 @media(max-width:520px){nav.tabs a{font-size:.8rem;padding:9px 2px;line-height:1.2}}
 @media(max-width:380px){nav.tabs a{font-size:.72rem}}
+@media(max-width:460px){nav.tabs{gap:2px} nav.tabs a{font-size:.74rem;padding:9px 0;letter-spacing:-.2px;white-space:nowrap}}
+@media(max-width:360px){nav.tabs a{font-size:.66rem}}
 .gbar button.on{background:var(--acc);color:#1b1205;border-color:var(--acc)}
 .gleg{margin-top:8px;gap:6px}
 .gleg button{font-size:.74rem;padding:3px 8px;border-radius:14px;display:inline-flex;align-items:center;gap:5px}
@@ -241,6 +243,60 @@ nav.tabs a .ts{display:none}
 .mtype button.on{background:var(--tc);color:#111;border-color:var(--tc);font-weight:700}
 .ttag{display:inline-block;border-radius:6px;padding:0 4px;font-size:.66rem;font-weight:800;color:#111;vertical-align:middle}
 
+nav.tabs a[data-tab=cal].on{box-shadow:inset 0 3px 0 #b48cff}
+.calcard{padding:10px}
+.calctl{gap:6px 10px;font-size:.84rem;margin-bottom:6px}
+.calctl select{padding:4px 6px;border-radius:8px;background:#0d1f22;color:var(--ink);border:1px solid #2b5157;max-width:100%}
+.calscope{flex:1 1 100%;display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}.calscope select{flex:1;min-width:0;width:100%;text-overflow:ellipsis}
+.calsheet-in{overflow-x:hidden}.calsheet-in *{overflow-wrap:anywhere}
+.calnav{display:flex;align-items:center;gap:6px;margin:4px 0 6px}
+.calnav>button{min-width:40px;font-size:1.2rem;padding:3px 10px}
+.calnav .mseg button{white-space:nowrap;font-size:.76rem;padding:5px 7px}
+.calnav b{font-size:1.02rem;min-width:7.5em;text-align:center}
+.calprog{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--mut);margin:0 0 6px}
+.calbar{flex:0 0 90px;height:6px;border-radius:3px;background:#0a1a1d;overflow:hidden;border:1px solid var(--line)}
+.calbar i{display:block;height:100%;width:0;background:#b48cff;transition:width .3s}
+.calhead,.calgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.calhead span{text-align:center;font-size:.7rem;color:var(--mut);padding:2px 0}
+.calgrid{touch-action:pan-y}
+.cc{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:62px;padding:12px 1px 3px;border-radius:9px;border:1px solid #25464b;background:#10272b;color:var(--ink);font:inherit;cursor:pointer;overflow:hidden}
+.cc.blank{visibility:hidden}
+.cc.past{opacity:.28;cursor:default}
+.cc.wk{border-color:#6c8ad8;box-shadow:inset 0 0 0 1px #6c8ad855}
+.cc.dim{opacity:.38}
+.cc.today{outline:2px solid var(--acc);outline-offset:-2px}
+.cc .cn{position:absolute;left:4px;top:2px;font-size:.66rem;color:#d7e6e3;font-weight:600}
+.cc .cm{position:absolute;right:2px;top:1px;font-size:.62rem;line-height:1}
+.cc .cs{font-size:1.12rem;font-weight:800;line-height:1.05;text-shadow:0 1px 2px #0008}
+.cc .ct{font-size:.64rem;color:#eaf6f3;opacity:.92;white-space:nowrap}
+.cc .cb{position:absolute;right:2px;bottom:1px;font-size:.66rem;color:#ffe066;font-style:normal;text-shadow:0 0 3px #000}
+.cc .cf{position:absolute;left:3px;bottom:2px;width:5px;height:5px;border-radius:50%;background:#5cc8ff}
+.cc .cw{font-size:.7rem;color:var(--mut)}
+.calleg{font-size:.74rem;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.calleg i{display:inline-block;width:22px;height:9px;border-radius:3px;vertical-align:-1px}
+.calnote{font-size:.76rem;margin-top:6px}
+.cbl{display:flex;flex-direction:column;gap:5px}
+.cbr{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid #25464b;border-radius:10px;padding:6px 8px;cursor:pointer;color:var(--ink);font:inherit;text-align:left}
+.cbr .cbs{font-size:1.3rem;font-weight:800;width:40px;text-align:center}
+.cbr .cbb{flex:1;min-width:0;font-size:.84rem}
+.calsheet{position:fixed;inset:0;z-index:2000;display:flex;flex-direction:column;justify-content:flex-end}
+.calsheet[hidden]{display:none}
+.calsheet-bg{position:absolute;inset:0;background:#000a}
+.calsheet-in{position:relative;max-height:88vh;overflow:auto;background:var(--panel);border-top:2px solid #b48cff;border-radius:16px 16px 0 0;padding:10px 12px calc(14px + env(safe-area-inset-bottom));max-width:760px;width:100%;margin:0 auto;box-sizing:border-box}
+.calsheet-h{display:flex;align-items:center;gap:8px;position:sticky;top:-10px;background:var(--panel);padding:4px 0 6px;z-index:1}
+.calsheet-h b{flex:1;font-size:1rem}
+.csub{font-size:.8rem;color:var(--mut);margin:0 0 8px}
+.csub .tagf{display:inline-block;border-radius:6px;padding:0 6px;font-weight:700;font-size:.72rem;color:#04202c;background:#5cc8ff}
+.csub .tago{display:inline-block;border-radius:6px;padding:0 6px;font-weight:700;font-size:.72rem;color:#04202c;background:#9db5b1}
+.cwin{display:flex;gap:8px;border:1px solid #25464b;border-left-width:4px;border-radius:10px;padding:7px 8px;margin-bottom:7px;background:#10272b}
+.cwin .cws{font-size:1.5rem;font-weight:800;min-width:40px;text-align:center}
+.cwin .cwb{flex:1;min-width:0;font-size:.85rem}
+.cwin ul{margin:3px 0 4px 16px;padding:0;font-size:.78rem;color:#cfe0dc}
+.cwin .cwbtn{display:flex;flex-wrap:wrap;gap:4px}
+.cwin .cwbtn button{font-size:.76rem;padding:4px 7px}
+.cstg{display:inline-block;border-radius:6px;padding:0 5px;font-weight:800;font-size:.7rem;color:#111;vertical-align:1px}
+.csec{margin:10px 0 6px;font-size:.9rem}
+
 .tab[hidden]{display:none}
 .sysbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1000px;margin:0 auto 8px;font-size:.85rem}
 .sysbar label{flex:1 1 110px;min-width:0;display:flex;align-items:center;gap:4px}
@@ -259,7 +315,7 @@ input:disabled{opacity:.4}
 <header>
   <h1><img class="logo" src="icons/icon-64.png" srcset="icons/icon-64.png 1x, icons/icon-128.png 2x" alt="" width="34" height="34"><span>Mac's Jacks</span></h1>
   <p>Mangrove jack bite times · Baffle Creek tides (mouth → Essendean) · Bundaberg region</p>
-  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 <span class="tl">Bite times</span><span class="ts">Bites</span></a><a href="#baffle" data-tab="baffle">🌊 <span class="tl">Tides</span><span class="ts">Tides</span></a><a href="#map" data-tab="map">🗺 <span class="tl">Map</span><span class="ts">Map</span></a><a href="#gauges" data-tab="gauges">📡 <span class="tl">Gauges</span><span class="ts">Gauges</span></a><a href="#log" data-tab="log">📝 <span class="tl">Catch log</span><span class="ts">Log</span></a></nav>
+  <nav class="tabs"><a href="#bite" data-tab="bite">🎣 <span class="tl">Bite times</span><span class="ts">Bites</span></a><a href="#baffle" data-tab="baffle">🌊 <span class="tl">Tides</span><span class="ts">Tides</span></a><a href="#map" data-tab="map">🗺 <span class="tl">Map</span><span class="ts">Map</span></a><a href="#gauges" data-tab="gauges">📡 <span class="tl">Gauges</span><span class="ts">Gauges</span></a><a href="#cal" data-tab="cal">📅 <span class="tl">Calendar</span><span class="ts">Cal</span></a><a href="#log" data-tab="log">📝 <span class="tl">Catch log</span><span class="ts">Log</span></a></nav>
 </header>
 <main>
 <div class="tab" id="tab-bite">
@@ -517,6 +573,38 @@ input:disabled{opacity:.4}
 </section>
 
 </div>
+<div class="tab" id="tab-cal" hidden>
+<section class="card calcard">
+  <h2>📅 Bite calendar — <span id="calSys"></span></h2>
+  <div class="row calctl">
+    <label class="mut calscope">Scope <select id="calScope"></select></label>
+    <label class="mut"><input type="checkbox" id="calDD"> Dawn/dusk only</label>
+    <label class="mut">Min <select id="calMin"><option value="0">any</option><option value="50">50+</option><option value="60">60+</option><option value="70">70+</option><option value="80">80+</option><option value="90">90+</option></select></label>
+    <label class="mut"><input type="checkbox" id="calWk"> Weekends</label>
+  </div>
+  <div class="calnav">
+    <button id="calPrev" aria-label="Previous month">‹</button>
+    <b id="calMonth"></b>
+    <button id="calNext" aria-label="Next month">›</button>
+    <span style="flex:1"></span>
+    <div class="mseg" id="calViewSeg"><button data-v="grid">📅 Month</button><button data-v="list">🏆 Best days</button></div>
+  </div>
+  <div id="calProg" class="calprog" hidden><div class="calbar"><i></i></div><span></span></div>
+  <div id="calGridWrap">
+    <div class="calhead"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+    <div id="calGrid" class="calgrid"></div>
+  </div>
+  <div id="calList" hidden></div>
+  <div id="calLegend" class="calleg mut"></div>
+  <div class="row" style="margin-top:8px"><button class="sm" id="calIcsMonth">📆 Add this month’s 90+ days to my calendar (.ics)</button></div>
+  <div id="calNote" class="mut calnote"></div>
+</section>
+<div id="calSheet" class="calsheet" hidden><div class="calsheet-bg" data-close="1"></div><div class="calsheet-in" role="dialog" aria-modal="true" aria-labelledby="calSheetT">
+  <div class="calsheet-h"><b id="calSheetT"></b><button class="sm" id="calSheetX" aria-label="Close">✕</button></div>
+  <div id="calSheetB"></div>
+</div></div>
+
+</div>
 <div class="tab" id="tab-log" hidden>
 <section class="card" id="cActiveCard">
   <h2>📝 Catch log <span class="mut" id="cCount"></span></h2>
@@ -604,12 +692,12 @@ input:disabled{opacity:.4}
 
 </div>
 </main>
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610111538</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610111700</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
 FT.onTab=[];
-FT.showTab=function(t){if(!['bite','baffle','map','gauges','log'].includes(t))t='bite';
+FT.showTab=function(t){if(!['bite','baffle','map','gauges','cal','log'].includes(t))t='bite';
   document.querySelectorAll('.tab').forEach(s=>s.hidden=s.id!=='tab-'+t);
   document.querySelectorAll('nav.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.tab===t));
   if(location.hash!=='#'+t)history.replaceState(null,'','#'+t);
@@ -901,7 +989,7 @@ const W={light:0.28,tide:0.38,sol:0.14,moon:0.05,wx:0.15};
 function computeDay(opts){
   const{dateStr,tz,lat,lng,tideFn,ext,wxFn,sstFn,stepMin=15,weekRange,runIn,spotType,fresh}=opts;
   const t0=dayStart(dateStr,tz),t1=dayStart(addDays(dateStr,1),tz);
-  const ev=sunMoonEvents(t0-4*3600e3,t1+4*3600e3,lat,lng);
+  const ev=opts.ev||sunMoonEvents(t0-4*3600e3,t1+4*3600e3,lat,lng);
   const illum=moonIllum((t0+t1)/2);const mpf=moonPhaseFactor(illum.phase);
   const month=+dateStr.slice(5,7);
   // tide range for the day
@@ -1208,6 +1296,70 @@ function makeSystemBT(S){
     snap,pointAtKm,pointOnLine,lineName,sameReach,LINES,LANDMARKS,MAXKM,applyCorr,RISE:null,NBY,lineMax,REFKM,REFNAME,DEFKM});}
 FT.makeSystemBT=makeSystemBT;
 })();
+</script>
+<script id="ft-calc">/* ===== Bite calendar compute core =====
+   Shared by the Calendar tab's Web Worker (built at runtime from this page's own mj-core / bt-data / bt-core / bt-runin /
+   ft-engine script texts + this file, so the scoring is byte-for-byte the Bite tab's code) and by its main-thread fallback
+   and exact day refinement. No DOM, no storage, no network: everything it needs arrives in cfg. */
+(function(G){'use strict';
+const TZ='Australia/Brisbane',E0=Date.UTC(2025,11,31,14),HR=36e5;
+const DDLO=-12,DDHI=10; /* "dawn/dusk": sun between 12° below and 10° above the horizon */
+function makeCore(B,MJ,cfg){
+  const GEN=!!B.generic;
+  const wxFn=cfg.wx?MJ.makeWxFn(cfg.wx.tt,cfg.wx.h):null;
+  const sstFn=cfg.sst?MJ.makeSeries(cfg.sst.tt,cfg.sst.v):null;
+  const wxT1=cfg.wx&&cfg.wx.tt.length?cfg.wx.tt[cfg.wx.tt.length-1]:-Infinity,wxT0=cfg.wx&&cfg.wx.tt.length?cfg.wx.tt[0]:Infinity;
+  const fresh=cfg.fresh||null;
+  const P3=s=>s.split('-').map(Number);
+  const optsFor=pt=>Object.assign({},cfg.opts||{},GEN?{line:pt.line||'M'}:pt.line?{line:pt.line}:{});
+  /* = the Bite tab's baffleTide(dateStr,km,line), stretched over [d0−1 day, d1+8 days] */
+  function tide(pt,d0,d1){const [y,m,d]=P3(d0),[y1,m1,e1]=P3(d1||d0);const h0=B.dateToH(y,m,d-1,0,0),h1=B.dateToH(y1,m1,e1+8,0,0);
+    const o=optsFor(pt);const P=B.predictAt(pt.km,h0,h1,o);
+    const fn=t=>{const v=P.curve((t-E0)/3.6e6);return v==null?null:v;};
+    const ext=P.ext.filter(e=>!e.weak).map(e=>({t:E0+e.t*3.6e6,h:e.h,high:!!e.hi,u:e.u}));
+    const stands=P.ext.filter(e=>e.stand).map(e=>({t:E0+e.t*3.6e6,t0:E0+e.standT0*3.6e6,t1:E0+e.standT1*3.6e6}));
+    const runIn=B.runInStarts(pt.km,h0,h1,o).map(r=>({t:E0+r.t*3.6e6,u:r.u,kind:r.kind}));
+    return{fn,ext,stands,runIn,cal:P.cal,h0,h1};}
+  const wrOf=ext=>{if(!ext||ext.length<2)return null;let mx=0;for(let i=1;i<ext.length;i++)mx=Math.max(mx,Math.abs(ext[i].h-ext[i-1].h));return{max:mx};};
+  /* forecast status of a day: weather forecast covers it (≥ 12 h of it) or it is an outlook day (tide + sun/moon, neutral weather) */
+  function fcOf(ds){const t0=MJ.dayStart(ds,TZ);return wxFn&&wxT0<=t0+12*HR&&wxT1>=t0+12*HR;}
+  function day(pt,T,ds,stepMin,ev){
+    return MJ.computeDay({dateStr:ds,tz:TZ,lat:pt.lat,lng:pt.lng,tideFn:T.fn,ext:T.ext,wxFn,sstFn,fresh,weekRange:T.wr||wrOf(T.ext),runIn:T.runIn,spotType:pt.type&&MJ.STYPES&&MJ.STYPES[pt.type]?pt.type:null,stepMin,ev});}
+  /* coarse (30-min) day summary for one point: [best, minute-of-day of best, best in dawn/dusk, its minute] */
+  function coarse(pt,T,ds,ev){const t0=MJ.dayStart(ds,TZ),a=MJ.dayStart(MJ.addDays(ds,-1),TZ)-6*HR,b=MJ.dayStart(MJ.addDays(ds,8),TZ)+6*HR;
+    const sub=T.ext.filter(x=>x.t>=a&&x.t<=b);const dd=day(pt,Object.assign({},T,{wr:wrOf(sub)}),ds,30,ev);
+    let b0=-1,t0b=0,b1=-1,t1b=0;for(const p of dd.pts){if(p.score>b0){b0=p.score;t0b=p.t;}if(p.alt>=DDLO&&p.alt<=DDHI&&p.score>b1){b1=p.score;t1b=p.t;}}
+    return[b0,Math.round((t0b-t0)/6e4),b1,Math.round((t1b-t0)/6e4)];}
+  /* exact: identical inputs to the Bite tab for this spot & date (15-min steps, own sun/moon events) */
+  function refine(pt,ds){const T=tide(pt,ds,ds);const dd=day(pt,T,ds,15,null);return{dd,T};}
+  return{tide,coarse,refine,fcOf,day,GEN,B,MJ};}
+/* block scheduler: one calendar month per block, every point's tide predicted once per block; yields between points */
+function makeRunner(core,pts,post){let Q=[],busy=false,dead=false;const MJ=core.MJ;
+  const evC={};function evFor(pt,ds){const k=ds+'|'+Math.round(pt.lat*20)+'|'+Math.round(pt.lng*20);let e=evC[k];
+    if(!e){const t0=MJ.dayStart(ds,TZ),t1=MJ.dayStart(MJ.addDays(ds,1),TZ);e=evC[k]=MJ.sunMoonEvents(t0-4*HR,t1+4*HR,Math.round(pt.lat*20)/20,Math.round(pt.lng*20)/20);}return e;}
+  const tick=()=>new Promise(r=>setTimeout(r,0));
+  async function loop(){busy=true;
+    while(Q.length&&!dead){const blk=Q.shift(),ms0=Date.now();const out={};for(const d of blk.dates)out[d]={fc:core.fcOf(d),p:new Array(pts.length)};
+      for(let i=0;i<pts.length&&!dead;i++){let T=null;try{T=core.tide(pts[i],blk.dates[0],blk.dates[blk.dates.length-1]);}catch(e){T=null;}
+        for(const d of blk.dates){try{out[d].p[i]=T?core.coarse(pts[i],T,d,evFor(pts[i],d)):[-1,0,-1,0];}catch(e){out[d].p[i]=[-1,0,-1,0];}}
+        post({type:'prog',key:blk.key,i:i+1,n:pts.length,left:Q.length});await tick();}
+      for(const k in evC)delete evC[k];
+      if(!dead)post({type:'block',key:blk.key,days:out,ms:Date.now()-ms0,n:pts.length});}
+    busy=false;if(!dead)post({type:'idle'});}
+  return{add(blocks){for(const b of blocks)if(!Q.some(q=>q.key===b.key))Q.push(b);if(!busy)loop();},
+    prio(key){const i=Q.findIndex(b=>b.key===key);if(i>0)Q.unshift(Q.splice(i,1)[0]);},
+    stop(){dead=true;Q=[];}};}
+G.FTCalc={makeCore,makeRunner,TZ,DDLO,DDHI};
+/* ---- Web Worker entry (only when this text runs inside the worker built by the Calendar tab) ---- */
+if(typeof document==='undefined'&&typeof importScripts==='function'&&G.__ftCalWorker){let run=null,gen=0;
+  G.onmessage=e=>{const m=e.data||{};
+    if(m.type==='init'){if(run)run.stop();gen=m.gen;const g=gen;let B;
+      try{B=m.cfg.sys?G.FT.makeSystemBT(m.cfg.sys):G.BT;}catch(err){G.postMessage({type:'error',gen:g,msg:String(err&&err.message||err)});return;}
+      const core=makeCore(B,G.MJ,m.cfg);run=makeRunner(core,m.pts,x=>{x.gen=g;G.postMessage(x);});G.postMessage({type:'ready',gen:g});}
+    else if(m.type==='add'&&run&&m.gen===gen)run.add(m.blocks);
+    else if(m.type==='prio'&&run&&m.gen===gen)run.prio(m.key);
+    else if(m.type==='stop'&&run){run.stop();run=null;}};}
+})(typeof window!=='undefined'?window:globalThis);
 </script>
 <script type="text/ft-deferred" id="ft-sysui">/* ===== River-system UI: picker, GPS "nearest system", offline download, and wording for non-Baffle systems =====
    Runs after BT is ready and before the tab scripts. */
@@ -1739,7 +1891,7 @@ $('mj-geoBtn').onclick=()=>{if(!navigator.geolocation){notice('Geolocation not s
   e=>{$('mj-geoBtn').disabled=false;notice('Couldn\'t get your location: '+esc(e.message),true);},{enableHighAccuracy:false,timeout:15000,maximumAge:600000});};
 $('mj-defBtn').onclick=()=>setLoc({...DEF});
 $('mj-goBtn').onclick=run;$('mj-date').onchange=()=>{FT.setDate($('mj-date').value,'bite');run();};
-FT.biteSetLoc=setLoc;FT.biteSetDate=v=>{if($('mj-date').value!==v){$('mj-date').value=v;run();}};
+FT.biteSetLoc=setLoc;FT.biteGo=(l,v)=>{if(v&&$('mj-date').value!==v){$('mj-date').value=v;FT.setDate(v,'bite');}setLoc(l);};FT.biteSetDate=v=>{if($('mj-date').value!==v){$('mj-date').value=v;run();}};
 FT.biteRefreshIfBaffle=()=>{if(loc.baffleKm!=null)run();};
 /* ---- weather v2 (Bite closure): fresh-flow gauge for this system, storm/drizzle day badges ---- */
 let _fresh={k:null,at:0,v:null};
@@ -1780,6 +1932,8 @@ FT.floodInfo=async()=>{const F=await getFresh();if(!F)return '';const now=Date.n
     else h=`${ev}. Flood cycle over — back to normal conditions.`;
     if(F.peakAtStart)h+=` <i>${esc(F.note)}.</i>`;}
   return `<div class="notice ${cls}">🌊 <b>Flood cycle (${g}):</b> ${h}${C} <span class="mut">Bite score: light floods/runoff are good from the onset for ~10–14 days; after a big flood ~3–5 days of dirty water (small penalty), then prime ~day 7–14 even with the river running, tapering by ~day 21.</span></div>`;};
+/* Calendar tab: shared flood-cycle state */
+FT.getFresh=getFresh;
 
 /* ---- spot types in Bite times (injected into the Bite closure) ---- */
 const STYC=t=>FT.spots&&FT.spots.TYPES[t]?FT.spots.TYPES[t]:null;
@@ -3057,6 +3211,241 @@ renderLists();
 FT.onTab.push(t=>{if(t==='map'){init().then(()=>{if(map){map.invalidateSize();colourSetup();}});}else{stopMe();setAdd(false);}});
 if(document.body.dataset.tab==='map')init();
 FT.mapDebug={get map(){return map},get LF(){return LF},addAt,openSpot:id=>reopen(id),spotInfo};
+})();
+</script>
+<script type="text/ft-deferred">/* ===== Calendar tab (#cal): month grid of the best bite score per day for this river system =====
+   Scores come from the Bite tab's own scoring code (MJ.computeDay + the system's tide model + spot types + flood cycle +
+   Baffle single-high stands) run in a Web Worker built from this page's own script texts (main-thread fallback).
+   Month grid = fast 30-min scan (sun/moon events shared per ~5 km cell); tapping a day re-scores the best spots at 15 min
+   exactly as Bite times does. Forecast weather/SST for the next ~16 days, outlook (neutral weather, seasonal water temp)
+   beyond. Results cached in IndexedDB per system/scope keyed by build + spots + settings. Spots never leave the phone:
+   weather is fetched for a fixed point on the main channel (or a built-in landmark), never for your own spots. */
+(function(){'use strict';
+const FT=window.FT,B=window.BT,MJ=window.MJ,C=window.FTCalc;if(!FT||!B||!MJ||!C||!document.getElementById('calGrid'))return;
+const $=id=>document.getElementById(id),TZ=C.TZ,HR=36e5,DAY=864e5,GEN=!!B.generic,SYS=FT.SYS||'baffle';
+const VER=(document.querySelector('meta[name="app-version"]')||{}).content||'dev';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lerp=(x,a,b,c,d)=>c+(d-c)*Math.max(0,Math.min(1,(x-a)/(b-a)));
+const hue=s=>s<50?lerp(s,0,50,210,45):lerp(s,50,100,45,135);
+const scoreColor=s=>`hsl(${hue(s)},75%,${s<20?40:52}%)`,heat=s=>`hsla(${hue(s)},70%,${s<20?32:40}%,.92)`;
+const dtf=new Intl.DateTimeFormat('en-AU',{timeZone:TZ,hour:'numeric',minute:'2-digit',hour12:true});
+const fmtT=ms=>dtf.format(new Date(ms)).replace(/\s?([ap])\.?m\.?/i,(m,a)=>a.toLowerCase()+'m');
+const fmtS=ms=>fmtT(ms).replace(/m$/,'');
+const fmtDay=(ds,o)=>{const [y,m,d]=ds.split('-').map(Number);return new Intl.DateTimeFormat('en-AU',Object.assign({timeZone:'UTC',weekday:'short',day:'numeric',month:'short'},o||{})).format(new Date(Date.UTC(y,m-1,d)));};
+const dow=ds=>{const [y,m,d]=ds.split('-').map(Number);return (new Date(Date.UTC(y,m-1,d)).getUTCDay()+6)%7;}; /* Mon=0 */
+const SFX=' — '+(GEN?FT.SYSSHORT:'Baffle Ck');
+const KEY=FT.k('ft_cal'),KWX=FT.k('ft_cal_wx'),KSST=FT.k('ft_cal_sst');
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v;}catch(e){return d;}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+let set=Object.assign({scope:'sys',dd:false,min:0,wk:true,view:'grid'},ld(KEY,{}));
+const today=()=>MJ.ymd(Date.now(),TZ);
+const NDAYS=366;
+const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0).toString(36);};
+const STG={ri:['RI','#ffd21f','run-in'],tot:['TOT','#3ddc84','top of tide'],bot:['BOT','#a46bff','bottom of tide'],ro:['RO','#ff4fa3','run-out'],stand:['STAND','#9db5b1','tide stand']};
+let st={inited:false,month:null,pts:[],data:{},base:'',gen:0,worker:null,runner:null,cfg:null,core:null,need:0,doneDays:0,t0:0,perf:null,mode:'',busy:false,prog:null,sheet:null};
+/* ---------- points ---------- */
+const S=FT.spots;
+const lineList=()=>GEN?B.LINES.map(L=>({id:L.id,a:L.id==='M'?0:L.j,b:B.lineMax(L.id),main:L.id==='M'}))
+  :[{id:'B',a:0,b:B.MAXKM,main:true},{id:'E',a:window.BAFFLE_DATA.euleilahJunctionKm,b:S?S.EUMAX:B.MAXKM,main:false}];
+const pAt=(km,line)=>S?S.pointAt(km,line):(GEN?B.pointOnLine(km,line||'M'):B.pointAtKm(km));
+const lineShort=id=>S?S.lineLabel(id,false):(GEN?B.lineName(id):'Baffle Ck');
+const isMainLine=id=>GEN?id==='M':id!=='E';
+function lmPt(l){const p=S?S.latLng(l):pAt(l.km,l.line);return{id:l.id||null,name:l.name,km:+l.km,line:GEN?(l.line||'M'):(l.line||'B'),lat:p[0],lng:p[1],type:l.custom&&MJ.STYPES&&MJ.STYPES[l.type]?l.type:'',custom:!!l.custom,lm:true};}
+function scanPts(){const out=[];
+  for(const L of lineList()){const len=L.b-L.a;if(len<0.3)continue;const ks=[];
+    if(L.main){const step=len<=30?1.5:2;for(let km=Math.min(0.5,len/2);km<=L.b+1e-6;km+=step)ks.push(km);if(L.b-ks[ks.length-1]>0.6)ks.push(L.b);}
+    else{const n=len<1.5?1:Math.min(6,Math.floor((len-0.5)/2)+1);for(let i=0;i<n;i++)ks.push(Math.min(L.b,n===1?L.a+len/2:L.a+1+i*Math.min(2,(len-1)/Math.max(1,n-1))));}
+    for(const k of ks){const km=+k.toFixed(2),q=pAt(km,L.id);out.push({km,line:L.id,name:'km '+km.toFixed(1)+(L.main?'':' · '+lineShort(L.id)),lat:q[0],lng:q[1],type:'',custom:false,id:null});}}
+  const LM=S?S.all():B.LANDMARKS;
+  for(const l of LM){if(l.custom)continue;const ln=GEN?(l.line||'M'):(l.line||'B');let best=null;
+    for(const p of out)if(!p.lm&&p.line===ln){const d=Math.abs(p.km-l.km);if(d<=0.75&&(!best||d<best.d))best={p,d};}
+    if(best)Object.assign(best.p,lmPt(l));else out.push(lmPt(l));}
+  for(const l of LM)if(l.custom)out.push(lmPt(l));
+  return out.sort((a,b)=>(isMainLine(a.line)?0:1)-(isMainLine(b.line)?0:1)||String(a.line).localeCompare(String(b.line))||a.km-b.km);}
+function ptsFor(scope){if(scope==='sys')return scanPts();const cs=S?S.customs():[];
+  if(scope==='mine')return cs.map(lmPt);
+  const l=S?S.get(scope.slice(3)):null;return l?[lmPt(l)]:[];}
+const ptLabel=p=>`${p.custom?'★ ':''}${esc(p.name)}${p.lm||!/^km /.test(p.name)?` <small class="mut">km ${p.km.toFixed(1)}${isMainLine(p.line)?'':' '+esc(lineShort(p.line))}</small>`:''}`;
+/* ---------- weather / SST (same Open-Meteo requests as Bite times, for one fixed public point) ---------- */
+const WXH='pressure_msl,wind_speed_10m,wind_gusts_10m,cloud_cover,precipitation,precipitation_probability,relative_humidity_2m,temperature_2m,weather_code,cape,lifted_index';
+async function getJ(url,key){
+  try{const r=await fetch(url);const j=await r.json();
+    if(j.error){const m=/to (\d{4}-\d\d-\d\d)/.exec(j.reason||'');if(m&&/end_date/.test(j.reason)&&!/clamped/.test(url))return getJ(url.replace(/end_date=[\d-]+/,'end_date='+m[1])+'&clamped=1',key);throw new Error(j.reason||'API error');}
+    sv(key,{u:url.split('&start_date')[0],j,at:Date.now()});return j;}
+  catch(e){const c=ld(key,null);if(c&&c.u===url.split('&start_date')[0]){c.j._cached=c.at;return c.j;}return null;}}
+function refPoint(scope){if(scope&&scope.startsWith('lm:')){const l=S&&S.get(scope.slice(3));if(l&&!l.custom){const p=S.latLng(l);return{lat:p[0],lng:p[1],name:l.name};}}
+  const km=(GEN?B.lineMax('M'):B.MAXKM)*0.4,p=pAt(km,GEN?'M':'B');return{lat:p[0],lng:p[1],name:'km '+km.toFixed(1)+' '+(GEN?FT.SYSSHORT:'Baffle Ck')};}
+async function buildCfg(scope){const opts=Object.assign({},FT.baffleOpts?FT.baffleOpts():{});delete opts.line;
+  const ref=refPoint(scope),t=today(),ll=`latitude=${ref.lat.toFixed(4)}&longitude=${ref.lng.toFixed(4)}`,a=MJ.addDays(t,-1),b=MJ.addDays(t,15);
+  const [fc,mr,fresh]=await Promise.all([
+    getJ(`https://api.open-meteo.com/v1/forecast?${ll}&hourly=${WXH}&timezone=auto&wind_speed_unit=kmh&start_date=${a}&end_date=${b}`,KWX),
+    getJ(`https://marine-api.open-meteo.com/v1/marine?${ll}&hourly=sea_level_height_msl,sea_surface_temperature&timezone=auto&start_date=${a}&end_date=${b}&cell_selection=sea`,KSST),
+    FT.getFresh?FT.getFresh().catch(()=>null):Promise.resolve(null)]);
+  let wx=null,sst=null,wxKey=null,wxInfo={ok:false};
+  if(fc&&fc.hourly&&fc.hourly.time){const tz=fc.timezone||TZ,tt=fc.hourly.time.map(s=>MJ.parseLocalIso(s,tz));const h={};for(const k of WXH.split(','))if(Array.isArray(fc.hourly[k]))h[k]=fc.hourly[k];
+    wx={tt,h};wxKey=hash(JSON.stringify([tt[0],tt.length,h.pressure_msl,h.precipitation,h.cloud_cover]));wxInfo={ok:true,cached:fc._cached||0,to:tt[tt.length-1]};}
+  if(mr&&mr.hourly&&mr.hourly.sea_surface_temperature&&mr.hourly.sea_surface_temperature.some(v=>v!=null)){const tz=mr.timezone||TZ;sst={tt:mr.hourly.time.map(s=>MJ.parseLocalIso(s,tz)),v:mr.hourly.sea_surface_temperature};}
+  const fr=fresh?JSON.parse(JSON.stringify(fresh)):null;
+  return{opts,wx,sst,fresh:fr,sys:GEN?B.SYS:null,ref,wxKey,wxInfo,freshKey:fr?[fr.kind,fr.peakT||0,fr.onsetT||0].join(':'):'-'};}
+/* ---------- IndexedDB cache ---------- */
+const IDB={p:null,open(){if(!this.p)this.p=new Promise(res=>{try{if(!window.indexedDB)return res(null);const r=indexedDB.open('ft-cal',1);r.onupgradeneeded=()=>{try{r.result.createObjectStore('d');}catch(e){}};r.onsuccess=()=>res(r.result);r.onerror=()=>res(null);r.onblocked=()=>res(null);}catch(e){res(null);}});return this.p;},
+  async all(base){const db=await this.open();if(!db)return{};return new Promise(res=>{const out={};try{const rq=db.transaction('d','readonly').objectStore('d').openCursor(IDBKeyRange.bound(base+'#',base+'#\uffff'));
+    rq.onsuccess=()=>{const c=rq.result;if(c){out[String(c.key).slice(base.length+1)]=c.value;c.continue();}else res(out);};rq.onerror=()=>res(out);}catch(e){res(out);}});},
+  async put(base,days){const db=await this.open();if(!db)return;try{const s=db.transaction('d','readwrite').objectStore('d');for(const d in days)s.put(days[d],base+'#'+d);}catch(e){}},
+  async prune(prefix,keep,before){const db=await this.open();if(!db)return;try{const s=db.transaction('d','readwrite').objectStore('d');const rq=s.openCursor(IDBKeyRange.bound(prefix,prefix+'\uffff'));
+    rq.onsuccess=()=>{const c=rq.result;if(!c)return;const k=String(c.key);const d=k.slice(k.indexOf('#')+1);if(!k.startsWith(keep+'#')||d<before)c.delete();c.continue();};}catch(e){}}};
+/* ---------- compute orchestration ---------- */
+const monthKey=ds=>ds.slice(0,7);
+function allDays(){const t=today(),o=[];for(let i=0;i<NDAYS;i++)o.push(MJ.addDays(t,i));return o;}
+function stopWork(){if(st.worker){try{st.worker.terminate();}catch(e){}st.worker=null;}if(st.runner){st.runner.stop();st.runner=null;}}
+function workerSrc(){return ['mj-core','bt-data','bt-core','bt-runin','ft-engine','ft-calc'].map(id=>{const s=document.getElementById(id);if(!s)throw new Error('no '+id);return s.textContent;}).join('\n;\n');}
+let WURL=null;
+function onMsg(m){if(m.gen!==st.gen)return;
+  if(m.type==='prog'){st.prog=m;showProg();}
+  else if(m.type==='block'){for(const d in m.days){m.days[d].wk=m.days[d].fc?st.cfg.wxKey:null;st.data[d]=m.days[d];}st.doneDays+=Object.keys(m.days).length;
+    st.perf.blocks.push({key:m.key,ms:m.ms,days:Object.keys(m.days).length,n:m.n});IDB.put(st.base,m.days);
+    if(set.view==='list'||m.key===st.month)render();else if(m.key<=monthKey(MJ.addDays(st.month+'-01',40)))render();showProg();}
+  else if(m.type==='idle'){st.busy=false;st.perf.totalMs=Date.now()-st.t0;st.prog=null;showProg();render();document.body.dataset.calDone=String(st.gen);}
+  else if(m.type==='error'){console.warn('cal worker',m.msg);fallback();}
+  else if(m.type==='ready'){st.worker.postMessage({type:'add',gen:st.gen,blocks:st.blocks});}}
+function fallback(){stopWork();st.mode='main thread';st.runner=C.makeRunner(st.core,st.pts,x=>{x.gen=st.gen;setTimeout(()=>onMsg(x),0);});st.runner.add(st.blocks);showProg();}
+async function start(){stopWork();const g=++st.gen;st.busy=true;st.data={};st.prog=null;showProg('Preparing…');
+  st.pts=ptsFor(set.scope);document.body.dataset.calDone='';
+  if(!st.pts.length){st.busy=false;showProg();render();return;}
+  const cfg=await buildCfg(set.scope);if(g!==st.gen)return;st.cfg=cfg;
+  st.core=C.makeCore(B,MJ,cfg);
+  const pre=`${SYS}|${set.scope}|`;st.base=pre+hash(VER+JSON.stringify(st.pts.map(p=>[p.km,p.line,p.type,+p.lat.toFixed(5),+p.lng.toFixed(5)]))+JSON.stringify(cfg.opts)+cfg.freshKey);
+  const cached=await IDB.all(st.base);if(g!==st.gen)return;IDB.prune(pre,st.base,today());
+  const need={};
+  for(const d of allDays()){const c=cached[d],fcNow=st.core.fcOf(d);
+    if(c&&Array.isArray(c.p)&&c.p.length===st.pts.length&&(c.fc?(!fcNow||c.wk===cfg.wxKey):!fcNow))st.data[d]=c;else(need[monthKey(d)]=need[monthKey(d)]||[]).push(d);}
+  const keys=Object.keys(need).sort();const vis=st.month;keys.sort((a,b)=>(a===vis?-1:b===vis?1:0)||a.localeCompare(b));
+  st.blocks=keys.map(k=>({key:k,dates:need[k]}));st.need=st.blocks.reduce((a,b)=>a+b.dates.length,0);st.doneDays=0;st.t0=Date.now();
+  st.perf={pts:st.pts.length,days:st.need,cached:Object.keys(st.data).length,blocks:[],mode:'',scope:set.scope};
+  render();
+  if(!st.blocks.length){st.busy=false;st.perf.totalMs=0;showProg();document.body.dataset.calDone=String(g);return;}
+  let w=null;try{if(!window.Worker||FT.calNoWorker||/[?&]calmain=1\b/.test(location.search))throw 0;if(!WURL)WURL=URL.createObjectURL(new Blob(['self.window=self;self.FT={};self.__ftCalWorker=1;\n'+workerSrc()],{type:'text/javascript'}));w=new Worker(WURL);}catch(e){w=null;}
+  if(w){st.worker=w;st.mode='Web Worker';w.onmessage=e=>onMsg(e.data);w.onerror=e=>{console.warn('cal worker error',e.message);if(g===st.gen)fallback();};
+    w.postMessage({type:'init',gen:g,pts:st.pts,cfg:{opts:cfg.opts,wx:cfg.wx,sst:cfg.sst,fresh:cfg.fresh,sys:cfg.sys}});}
+  else fallback();
+  st.perf.mode=st.mode;showProg();}
+function showProg(txt){const el=$('calProg');if(!el)return;
+  if(txt){el.hidden=false;el.querySelector('span').textContent=txt;el.querySelector('i').style.width='3%';return;}
+  if(!st.busy){const P=st.perf;if(P&&P.totalMs&&st.need){el.hidden=false;el.querySelector('i').style.width='100%';el.querySelector('span').textContent=`✓ ${st.need} days × ${P.pts} spot${P.pts>1?'s':''} scored in ${(P.totalMs/1000).toFixed(1)} s (${st.mode}); cached on this phone`;}else el.hidden=true;return;}
+  const p=st.prog,frac=st.need?(st.doneDays+(p?p.i/p.n*((st.blocks.find(b=>b.key===p.key)||{dates:[]}).dates.length):0))/st.need:0;
+  el.hidden=false;el.querySelector('i').style.width=Math.max(3,Math.round(frac*100))+'%';
+  el.querySelector('span').textContent=p?`Scoring ${monthName(p.key)} · spot ${p.i}/${p.n} · ${Math.round(frac*100)}% of ${st.need} days (${st.mode})`:`Starting (${st.mode||'…'})…`;}
+const monthName=k=>{const [y,m]=k.split('-').map(Number);return new Intl.DateTimeFormat('en-AU',{timeZone:'UTC',month:'short',year:'numeric'}).format(new Date(Date.UTC(y,m-1,1)));};
+/* ---------- rendering ---------- */
+const moonC={};function moonOf(ds){if(!moonC[ds]){const t=MJ.dayStart(ds,TZ)+12*HR,il=MJ.moonIllum(t);moonC[ds]={e:MJ.phaseEmoji(il.phase,-25),n:MJ.phaseName(il.phase),f:il.fraction};}return moonC[ds];}
+function cellVal(ds){const r=st.data[ds];if(!r||!r.p)return null;const o=set.dd?2:0;let s=-1,i=-1,m=0;r.p.forEach((a,k)=>{if(a&&a[o]>s){s=a[o];i=k;m=a[o+1];}});return s<0?null:{s,i,t:MJ.dayStart(ds,TZ)+m*6e4,fc:r.fc};}
+function months(){const t=today(),o=[];let [y,m]=t.split('-').map(Number);for(let i=0;i<13;i++){o.push(`${y}-${String(m).padStart(2,'0')}`);m++;if(m>12){m=1;y++;}}return o;}
+function render(){if(!st.inited)return;const M=months();if(!M.includes(st.month))st.month=M[0];
+  $('calMonth').textContent=new Intl.DateTimeFormat('en-AU',{timeZone:'UTC',month:'long',year:'numeric'}).format(new Date(Date.UTC(+st.month.slice(0,4),+st.month.slice(5,7)-1,1)));
+  $('calPrev').disabled=st.month===M[0];$('calNext').disabled=st.month===M[M.length-1];
+  document.querySelectorAll('#calViewSeg button').forEach(b=>b.classList.toggle('on',b.dataset.v===set.view));
+  $('calGridWrap').hidden=set.view!=='grid';$('calList').hidden=set.view!=='list';
+  if(!st.pts.length){const msg=set.scope==='mine'?'You have no spots on this system yet — add some on the 🗺️ Map tab (long-press near the creek) and give them a type.':'No spots to score.';
+    $('calGrid').innerHTML=`<p class="mut" style="grid-column:1/-1">${msg}</p>`;$('calList').innerHTML='';renderLegend();return;}
+  if(set.view==='grid')renderGrid();else renderList();renderLegend();}
+function renderGrid(){const t=today(),first=st.month+'-01',off=dow(first),end=MJ.addDays(t,NDAYS-1);const h=[];
+  for(let i=0;i<off;i++)h.push('<span class="cc blank"></span>');
+  for(let d=first;d.slice(0,7)===st.month;d=MJ.addDays(d,1)){const dn=+d.slice(8),wk=set.wk&&dow(d)>=5;
+    if(d<t||d>end){h.push(`<span class="cc past${wk?' wk':''}"><span class="cn">${dn}</span></span>`);continue;}
+    const v=cellVal(d),mo=moonOf(d);
+    if(!v){h.push(`<button class="cc${wk?' wk':''}${d===t?' today':''}" data-d="${d}" aria-label="${fmtDay(d)}: computing"><span class="cn">${dn}</span><span class="cm">${mo.e}</span><span class="spin" style="width:10px;height:10px"></span></button>`);continue;}
+    const dim=v.s<set.min;
+    h.push(`<button class="cc${wk?' wk':''}${dim?' dim':''}${d===t?' today':''}" data-d="${d}" style="background:${heat(v.s)}" aria-label="${fmtDay(d)}: best ${v.s} at ${fmtT(v.t)}${v.fc?' (forecast)':''}"><span class="cn">${dn}</span><span class="cm">${mo.e}</span><b class="cs">${v.s}</b><span class="ct">${fmtS(v.t)}</span>${v.s>=90?'<i class="cb">★</i>':''}${v.fc?'<span class="cf" title="weather forecast"></span>':''}</button>`);}
+  $('calGrid').innerHTML=h.join('');}
+function bestDays(range){const t=today(),o=[];for(const d of allDays()){if(range==='month'&&d.slice(0,7)!==st.month)continue;const v=cellVal(d);if(v&&v.s>=set.min)o.push({d,v});}return o.sort((a,b)=>b.v.s-a.v.s||a.d.localeCompare(b.d)).slice(0,10);}
+function renderList(){const rg=set.range||'month';const L=bestDays(rg);const nd=allDays().filter(d=>(rg!=='month'||d.slice(0,7)===st.month)&&!st.data[d]).length;
+  $('calList').innerHTML=`<div class="row" style="margin-bottom:6px"><div class="mseg" id="calRange"><button data-r="month" class="${rg==='month'?'on':''}">This month</button><button data-r="season" class="${rg==='season'?'on':''}">Next 12 months</button></div>${nd?`<span class="mut" style="font-size:.78rem">${nd} days still computing…</span>`:''}</div>`+
+    (L.length?`<div class="cbl">${L.map((x,k)=>{const p=st.pts[x.v.i]||{};const wk=dow(x.d)>=5;return `<button class="cbr" data-d="${x.d}"><span class="mut" style="width:14px">${k+1}</span><span class="cbs" style="color:${scoreColor(x.v.s)}">${x.v.s}</span><span class="cbb"><b${set.wk&&wk?' style="color:#a9c1ff"':''}>${fmtDay(x.d,{weekday:'short',day:'numeric',month:'short'})}</b> ${moonOf(x.d).e} · ${fmtT(x.v.t)}${x.v.s>=90?' ⭐':''} ${x.v.fc?'<span class="mut">· forecast</span>':'<span class="mut">· outlook</span>'}<br><span class="mut">${p.name?ptLabel(p):''}</span></span></button>`;}).join('')}</div>`:'<p class="mut">No days match the filters yet.</p>');
+  $('calList').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{set.range=b.dataset.r;sv(KEY,set);render();});
+  $('calList').querySelectorAll('.cbr').forEach(b=>b.onclick=()=>openDay(b.dataset.d));}
+function renderLegend(){const P=st.cfg;const wx=P&&P.wxInfo&&P.wxInfo.ok?`weather forecast to ${fmtDay(MJ.ymd(P.wxInfo.to,TZ))}${P.wxInfo.cached?' (cached — offline)':''}`:'no weather forecast (offline?) — all days are outlook';
+  $('calLegend').innerHTML=`<span><i style="background:linear-gradient(90deg,${heat(10)},${heat(50)},${heat(75)},${heat(95)})"></i> best score 0→100</span><span>★ 90+</span><span><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#5cc8ff"></span> forecast weather (else outlook: tide, sun &amp; moon only)</span>${set.wk?'<span style="color:#a9c1ff">▢ weekend</span>':''}`;
+  const sc=set.scope==='sys'?`whole system — ${st.pts.length} points (every ~1.5–2 km + landmarks + your spots)`:set.scope==='mine'?`your ${st.pts.length} spot${st.pts.length===1?'':'s'} (each scored with its spot type)`:`one spot: ${st.pts[0]?esc(st.pts[0].name):''}`;
+  $('calNote').innerHTML=`Best bite score of each day for ${sc}${set.dd?', dawn/dusk only (sun between −12° and +10°)':''}. Same scoring as 🎣 Bite times (tide model${GEN?'':' incl. single-high tide stands'}, spot types, light, solunar, moon, flood cycle). Month view = quick 30-min scan; tap a day for the exact 15-min windows. ${wx}; beyond it scores use neutral weather and a seasonal water temperature. Weather comes from one public point (${esc(P?P.ref.name:'')}) — your spots never leave this phone.`;}
+/* ---------- day detail ---------- */
+function stageOf(T,t){for(const s of T.stands||[])if(t>=s.t0-15*6e4&&t<=s.t1)return'stand';const a=MJ.stageAt?MJ.stageAt(t,T.ext,T.runIn):{c:''};return a.c==='flood'?'ri':a.c||'';}
+const stTag=c=>{const s=STG[c];return s?`<span class="cstg" style="background:${s[1]}">${s[0]}</span>`:'';};
+function reasonsOf(p,dd){const r=[];if(p.L)r.push(p.L.label);if(p.T)r.push(p.T.label);if(p.S&&p.S.v>=0.3)r.push(p.S.label);
+  if(dd.mpf>=0.75)r.push(MJ.phaseName(dd.illum.phase)+' (strong moon)');if(p.WX&&p.WX.notes)r.push(...p.WX.notes.slice(0,2));if(p.TF&&p.TF.est)r.push('Water temp: seasonal estimate');return r;}
+function winsOf(R){const dd=R.dd;let W=dd.windows.slice();if(set.dd){W=W.filter(w=>w.peak.alt>=C.DDLO&&w.peak.alt<=C.DDHI);
+    if(!W.length){let b=null;for(const p of dd.pts)if(p.alt>=C.DDLO&&p.alt<=C.DDHI&&(!b||p.score>b.score))b=p;if(b)W=[{start:b.t-30*6e4,end:b.t+45*6e4,peak:b,score:b.score}];}}
+  return W.map(w=>({w,score:w.score,pt:R.pt,stage:stageOf(R.T,w.peak.t),reasons:reasonsOf(w.peak,dd)}));}
+const refC={};function refine(pt,ds){const k=st.base+'|'+ds+'|'+pt.km+'|'+pt.line+'|'+pt.type+'|'+pt.lat;if(!refC[k]){const R=st.core.refine(pt,ds);R.pt=pt;refC[k]=R;}return refC[k];}
+function overlap(a,b){return a.w.start<b.w.end&&b.w.start<a.w.end;}
+function dayEvents(ds,rows){return rows.map(x=>({start:x.w.start,end:x.w.end,title:`🎣 Jacks ${x.score} · ${STG[x.stage]?STG[x.stage][2]+' · ':''}${FT.SYSSHORT} ${x.pt.custom?'★ my spot':x.pt.name} (km ${x.pt.km.toFixed(1)})`,desc:`Mac's Jacks bite score ${x.score}/100, ${fmtT(x.w.start)}–${fmtT(x.w.end)}. ${x.reasons.join('; ')}.`}));}
+async function openDay(ds){const sh=$('calSheet');sh.hidden=false;document.body.style.overflow='hidden';const mo=moonOf(ds),fc=st.core?st.core.fcOf(ds):false;
+  $('calSheetT').textContent=fmtDay(ds,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  $('calSheetB').innerHTML='<p class="mut"><span class="spin"></span> Scoring this day at 15-min steps…</p>';await new Promise(r=>setTimeout(r,30));
+  if(!st.core){$('calSheetB').innerHTML='<p class="mut">Still preparing — try again in a moment.</p>';return;}
+  const r=st.data[ds],o=set.dd?2:0,idx=st.pts.map((p,i)=>i);let cand;
+  if(set.scope!=='sys')cand=idx;else if(r)cand=idx.filter(i=>r.p[i]&&r.p[i][o]>=0).sort((a,b)=>r.p[b][o]-r.p[a][o]).slice(0,8);else cand=idx.filter((i,k)=>k%Math.max(1,Math.round(idx.length/12))===0);
+  const t0=performance.now();const all=[];for(const i of cand){try{all.push(...winsOf(refine(st.pts[i],ds)));}catch(e){console.error('cal refine',e);}}
+  all.sort((a,b)=>b.score-a.score);const top=[];for(const x of all){if(top.length>=3)break;if(top.some(y=>overlap(x,y)&&y.pt.line===x.pt.line&&Math.abs(y.pt.km-x.pt.km)<4))continue;if(top.some(y=>y.pt===x.pt&&overlap(x,y)))continue;top.push(x);}
+  /* the user's own spots, ranked (spot type shapes each score) */
+  const mine=(S?S.customs():[]).map(lmPt).map(p=>{try{const W=winsOf(refine(p,ds)).sort((a,b)=>b.score-a.score);return{p,w:W[0]||null,more:W.slice(1,3)};}catch(e){return{p,w:null,more:[]};}}).sort((a,b)=>(b.w?b.w.score:-1)-(a.w?a.w.score:-1));
+  const ms=performance.now()-t0;st.sheet={ds,top,mine,ms,targets:[]};
+  const T=st.sheet.targets,btns=x=>{T.push(x.pt);const k=T.length-1;return `<div class="cwbtn"><button class="sm pri" data-act="bite" data-k="${k}">🎣 Bite times here</button><button class="sm" data-act="tides" data-k="${k}">🌊 Tides</button><button class="sm" data-act="map" data-k="${k}">🗺 Map</button></div>`;};
+  const win=x=>`<div class="cwin" style="border-left-color:${scoreColor(x.score)}"><div class="cws" style="color:${scoreColor(x.score)}">${x.score}</div><div class="cwb"><b>${fmtT(x.w.start)} – ${fmtT(x.w.end)}</b> ${stTag(x.stage)} <span class="mut">${STG[x.stage]?STG[x.stage][2]:''}</span><br>${ptLabel(x.pt)}<ul>${x.reasons.map(s=>'<li>'+esc(s)+'</li>').join('')}</ul>${btns(x)}</div></div>`;
+  const stands=[];if(!GEN)for(const x of top){const R=refine(x.pt,ds);const s0=MJ.dayStart(ds,TZ);for(const s of R.T.stands||[])if(s.t>=s0&&s.t<s0+DAY&&!stands.some(q=>q.n===x.pt.name))stands.push({n:x.pt.name,s});}
+  $('calSheetB').innerHTML=`<p class="csub">${mo.e} ${esc(mo.n)}, ${Math.round(mo.f*100)}% lit · ${fc?'<span class="tagf">FORECAST</span> weather &amp; sea temp from the forecast':'<span class="tago">OUTLOOK</span> tide, sun &amp; moon (+ flood cycle) — weather neutral, seasonal water temp'}${set.dd?' · dawn/dusk only':''}</p>`+
+    `<h3 class="csec">🎯 Top windows — ${set.scope==='sys'?'whole '+esc(FT.SYSSHORT):set.scope==='mine'?'my spots':esc(st.pts[0]?st.pts[0].name:'')}</h3>`+(top.length?top.map(win).join(''):'<p class="mut">No standout windows.</p>')+
+    (stands.length?`<p class="mut" style="font-size:.78rem">🌗 Single-high day: tide stand at ${stands.map(x=>esc(x.n)+' '+fmtT(x.s.t0)+'–'+fmtT(x.s.t1)).join(', ')} — the small high doesn’t reach there.</p>`:'')+
+    `<h3 class="csec">📌 My spots this day</h3>`+(mine.length?mine.map((x,k)=>x.w?`<div class="cwin" style="border-left-color:${scoreColor(x.w.score)}"><div class="cws" style="color:${scoreColor(x.w.score)};font-size:1.25rem">${x.w.score}</div><div class="cwb"><span class="mut">${k+1}.</span> ${ptLabel(x.p)} ${x.p.type&&S?`<span class="cstg" style="background:${S.TYPES[x.p.type].col}">${S.TYPES[x.p.type].s}</span>`:''}<br><b>${fmtT(x.w.w.start)} – ${fmtT(x.w.w.end)}</b> ${stTag(x.w.stage)} <span class="mut">${esc(x.w.reasons[1]||'')}${x.more.length?' · also '+x.more.map(m=>fmtT(m.w.start)+' ('+m.score+')').join(', '):''}</span>${btns(x.w)}</div></div>`:`<div class="cwin"><div class="cwb">${ptLabel(x.p)} — no window</div></div>`).join(''):'<p class="mut">Add your own spots on the 🗺️ Map tab — they’re ranked here for each day.</p>')+
+    `<div class="row" style="margin-top:8px"><button class="sm" id="calIcsDay">📆 Add this day’s top windows to my calendar (.ics)</button></div><p class="mut" style="font-size:.74rem">Exact 15-min scoring (same inputs as 🎣 Bite times for that spot and date) · ${Math.round(ms)} ms.</p>`;
+  $('calSheetB').querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>act(b.dataset.act,T[+b.dataset.k],ds));
+  $('calIcsDay').onclick=()=>{if(!top.length)return;dl(`macs-jacks-${SYS}-${ds}.ics`,ics(dayEvents(ds,top)));};
+  document.body.dataset.calSheet=ds;}
+function closeSheet(){$('calSheet').hidden=true;document.body.style.overflow='';delete document.body.dataset.calSheet;}
+function locOf(p){return Object.assign({name:p.name+SFX,lat:p.lat,lng:p.lng,tz:TZ,baffleKm:p.km},p.id?{spotId:p.id}:{},GEN?{baffleLine:p.line||'M',sys:SYS}:p.line?{baffleLine:p.line}:{});}
+function act(a,p,ds){if(!p)return;closeSheet();
+  if(a==='bite'){if(FT.biteGo)FT.biteGo(locOf(p),ds);else{FT.setDate(ds,'cal');FT.biteSetLoc(locOf(p));}FT.showTab('bite');}
+  else if(a==='tides'){FT.baffleSelect(p.km,p.lm?p.name:null,p.line);FT.setDate(ds,'cal');FT.showTab('baffle');}
+  else if(a==='map'){FT.showTab('map');let n=0;const go=()=>{const M=FT.mapDebug&&FT.mapDebug.map;if(!M){if(n++<40)setTimeout(go,150);return;}M.setView([p.lat,p.lng],Math.max(M.getZoom(),15));if(p.custom&&p.id&&FT.mapDebug.openSpot)setTimeout(()=>FT.mapDebug.openSpot(p.id),300);};setTimeout(go,200);}}
+/* ---------- .ics (local download only) ---------- */
+const z=ms=>new Date(ms).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+const ie=s=>String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+function fold(l){const o=[];while(l.length>72){o.push(l.slice(0,72));l=' '+l.slice(72);}o.push(l);return o.join('\r\n');}
+function ics(evs){const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Mac\'s Jacks//Bite calendar//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  for(const e of evs){const u=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(16).padStart(2,'0')).join('');
+    L.push('BEGIN:VEVENT','UID:'+u+'@macs-jacks','DTSTAMP:'+z(Date.now()),'DTSTART:'+z(e.start),'DTEND:'+z(e.end),fold('SUMMARY:'+ie(e.title)),fold('DESCRIPTION:'+ie(e.desc)),'END:VEVENT');}
+  L.push('END:VCALENDAR');return L.join('\r\n')+'\r\n';}
+function dl(name,txt){const b=new Blob([txt],{type:'text/calendar;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);FT.calLastIcs={name,txt};}
+async function icsMonth(){const days=allDays().filter(d=>d.slice(0,7)===st.month).map(d=>({d,v:cellVal(d)})).filter(x=>x.v&&x.v.s>=90);
+  if(!days.length){alert('No 90+ days computed in '+monthName(st.month)+' yet'+(set.dd?' (dawn/dusk only)':'')+'.');return;}
+  const evs=[];for(const x of days){const p=st.pts[x.v.i];try{const W=winsOf(refine(p,x.d)).sort((a,b)=>b.score-a.score);if(W[0])evs.push(...dayEvents(x.d,[W[0]]));}catch(e){}}
+  dl(`macs-jacks-${SYS}-${st.month}-90plus.ics`,ics(evs));}
+/* ---------- controls ---------- */
+function fillScope(){const cs=S?S.customs():[],lm=(S?S.builtins():B.LANDMARKS);
+  $('calScope').innerHTML=`<option value="sys">Whole system (${esc(FT.SYSSHORT)})</option><option value="mine">My spots (${cs.length})</option>`+
+    (cs.length?`<optgroup label="One of my spots">${cs.map(c=>`<option value="lm:${esc(c.id)}">★ ${esc(c.name)} (km ${(+c.km).toFixed(1)})</option>`).join('')}</optgroup>`:'')+
+    `<optgroup label="One landmark">${lm.map(l=>`<option value="lm:${esc(l.id)}">${esc(l.name)} (km ${(+l.km).toFixed(1)})</option>`).join('')}</optgroup>`;
+  if(![...$('calScope').options].some(o=>o.value===set.scope))set.scope='sys';$('calScope').value=set.scope;}
+function init(){st.inited=true;$('calSys').textContent=FT.SYSNAME;st.month=months()[0];fillScope();
+  $('calDD').checked=!!set.dd;$('calMin').value=String(set.min||0);$('calWk').checked=set.wk!==false;
+  $('calScope').onchange=()=>{set.scope=$('calScope').value;sv(KEY,set);start();};
+  $('calDD').onchange=()=>{set.dd=$('calDD').checked;sv(KEY,set);render();};
+  $('calMin').onchange=()=>{set.min=+$('calMin').value;sv(KEY,set);render();};
+  $('calWk').onchange=()=>{set.wk=$('calWk').checked;sv(KEY,set);render();};
+  document.querySelectorAll('#calViewSeg button').forEach(b=>b.onclick=()=>{set.view=b.dataset.v;sv(KEY,set);render();});
+  const nav=k=>{const M=months(),i=M.indexOf(st.month)+k;if(i<0||i>=M.length)return;st.month=M[i];render();
+    if(st.worker)st.worker.postMessage({type:'prio',gen:st.gen,key:st.month});else if(st.runner)st.runner.prio(st.month);};
+  $('calPrev').onclick=()=>nav(-1);$('calNext').onclick=()=>nav(1);
+  let tx=null,ty=null;const g=$('calGridWrap');g.addEventListener('touchstart',e=>{const t=e.touches[0];tx=t.clientX;ty=t.clientY;},{passive:true});
+  g.addEventListener('touchend',e=>{if(tx==null)return;const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;tx=null;if(Math.abs(dx)>50&&Math.abs(dx)>1.5*Math.abs(dy))nav(dx<0?1:-1);},{passive:true});
+  $('calGrid').onclick=e=>{const b=e.target.closest('button.cc[data-d]');if(b)openDay(b.dataset.d);};
+  $('calSheetX').onclick=closeSheet;$('calSheet').querySelector('.calsheet-bg').onclick=closeSheet;
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('calSheet').hidden)closeSheet();});
+  $('calIcsMonth').onclick=icsMonth;
+  FT.calNav=nav;start();}
+let dirty=false;
+if(S)S.onChange.push(()=>{if(!st.inited)return;fillScope();dirty=true;if(document.body.dataset.tab==='cal'){dirty=false;start();}});
+FT.onTab.push(t=>{if(t!=='cal')return;if(!st.inited)init();else if(dirty){dirty=false;start();}else{const o=Object.assign({},FT.baffleOpts?FT.baffleOpts():{});delete o.line;if(st.cfg&&JSON.stringify(o)!==JSON.stringify(st.cfg.opts))start();else render();}});
+FT.cal={get st(){return st},get set(){return set},openDay,start,closeSheet,cellVal,refine:(pt,ds)=>st.core.refine(pt,ds),ptsFor,bestDays,ics,winsOf};
 })();
 </script>
 <script type="text/ft-deferred">

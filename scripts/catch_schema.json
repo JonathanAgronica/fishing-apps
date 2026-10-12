@@ -27,7 +27,12 @@
   "18": "lower Euleilah Ck",
   "20": "lower Euleilah Ck",
   "22": "upper Euleilah Ck",
-  "24": "Euleilah Ck, Hills Rd"
+  "24": "Euleilah Ck, Hills Rd",
+  "26": "upper Euleilah Ck",
+  "28": "upper Euleilah Ck",
+  "30": "upper Euleilah Ck",
+  "32": "Euleilah Ck above Oyster Ck (est.)",
+  "34": "Euleilah Ck above Oyster Ck (est.)"
  },
  "regions": [
   [
@@ -232,5 +237,51 @@
   "tot",
   "ro",
   "bot"
- ]
+ ],
+ "sides": {
+  "duck": [
+   "Duck Creek",
+   5.9
+  ],
+  "bottle": [
+   "Bottle Creek",
+   14.3
+  ],
+  "mosq": [
+   "Mosquito Creek",
+   4.7
+  ],
+  "lmosq": [
+   "Little Mosquito Creek",
+   3.8
+  ],
+  "cattle": [
+   "Cattle Creek",
+   3.8
+  ],
+  "sleepy": [
+   "Sleepy Creek",
+   3.6
+  ],
+  "halfway": [
+   "Halfway Creek",
+   2.6
+  ],
+  "manning": [
+   "Manning Creek",
+   1.0
+  ],
+  "grev": [
+   "Grevillea Creek",
+   1.0
+  ],
+  "sandy": [
+   "Sandy Creek",
+   1.2
+  ],
+  "oyster": [
+   "Oyster Creek",
+   9.0
+  ]
+ }
 }

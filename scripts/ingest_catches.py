@@ -69,10 +69,15 @@ def validate(m, now):
         if not isinstance(bk, int) or not (bk == -1 or (0 <= bk <= SI['lines'][ln][1] + 2 and bk % 2 == 0)): raise ValueError('bad band')
         blabel = f"km {bk}–{bk+2}, {SI['lines'][ln][0]}" if bk >= 0 else 'Off-creek: near ' + SI['name']
     else:
-        if not isinstance(bk, int) or not (bk == -1 or (0 <= bk <= 38 and bk % 2 == 0)): raise ValueError('bad band')
-        ln = m.get('ln') if m.get('ln') in ('B', 'E') else 'B'
-        if bk >= 0 and ln == 'E' and str(bk) not in SCH['bandsE']: ln = 'B'
-        blabel = None
+        SIDES = SCH.get('sides', {})
+        if m.get('ln') in SIDES and isinstance(bk, int) and bk >= 0:   # Baffle side creek: 2 km band counted from its junction
+            if not (bk <= SIDES[m['ln']][1] + 2 and bk % 2 == 0): raise ValueError('bad band')
+            ln = m['ln']; blabel = f"{SIDES[ln][0]} km {bk}–{bk+2}"
+        else:
+            if not isinstance(bk, int) or not (bk == -1 or (0 <= bk <= 38 and bk % 2 == 0)): raise ValueError('bad band')
+            ln = m.get('ln') if m.get('ln') in ('B', 'E') else 'B'
+            if bk >= 0 and ln == 'E' and str(bk) not in SCH['bandsE']: ln = 'B'
+            blabel = None
     rg = ''
     if bk < 0:
         rg = m.get('rg') if (m.get('rg') in REGIONS and not SI) else 'other'

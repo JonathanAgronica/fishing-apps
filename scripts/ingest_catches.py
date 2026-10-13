@@ -20,7 +20,7 @@ OUT = os.path.join(REPO, 'data', 'catches.csv')
 AEST = dt.timezone(dt.timedelta(hours=10))
 COLS = ['session','anon','slot_start','band_km','line','band','region','score','tide','min_from_runin','light','solunar','moon_phase',
         'tide_source','wind_kmh','dp3_hpa','bites','fish','mj','kept','max_len_cm','species','bait','received','system',
-        'stage','spot_type']
+        'stage','spot_type','historical']
 PH = ['New','Wax cres','1st qtr','Wax gib','Full','Wan gib','Last qtr','Wan cres']
 STAGE = SCH.get('stage', ['ri','flood','tot','ro','bot']); STYPE = SCH.get('stype', ['ri','tot','bot','ro'])
 SPECIES = [c for c,_ in SCH['species']]; BAIT = [c for c,_ in SCH['bait']]
@@ -35,7 +35,8 @@ def system_info(sy):
             _SYS[sy] = {'name': J['name'], 'lines': {l['id']: (l['name'], l['junctionKm'] + l['limitKm']) for l in J['lines']}}
         except Exception: _SYS[sy] = None
     return _SYS[sy]
-MAX_SESS_PER_ANON_DAY = 12; MAX_NEW_PER_RUN = 600; MAX_SLOTS = 64
+MAX_SESS_PER_ANON_DAY = 12; MAX_NEW_PER_RUN = 3000; MIN_S0 = 631116000  # 1990-01-01 AEST
+HIST_S = 400 * 86400; MAX_SLOTS = 64
 
 def band_label(bk, ln):
     if bk < 0: return None
@@ -88,10 +89,11 @@ def validate(m, now):
     stype = m.get('st') if m.get('st') in STYPE else ''   # spot type (run-in / TOT / BOT / run-out) -- a category, never a location
     s0 = m.get('s0')
     if not isinstance(s0, int) or s0 % 900: raise ValueError('bad start (must be a 15-min slot)')
-    if s0 > now + 3600 or s0 < now - 400 * 86400: raise ValueError('start out of range')
+    if s0 > now + 3600 or s0 < MIN_S0: raise ValueError('start out of range')   # historical logs back to 1990 are fine
     sl = m.get('sl')
     if not isinstance(sl, list) or not (1 <= len(sl) <= MAX_SLOTS): raise ValueError('bad slots')
     if s0 + 900 * len(sl) > now + 3600: raise ValueError('ends in the future')
+    hist = 'y' if (m.get('hi') == 1 or s0 < now - HIST_S) else ''   # old logs are welcome, just flagged
     rows = []
     for i, x in enumerate(sl):
         if not isinstance(x, list) or len(x) not in (13, 14): raise ValueError('bad slot shape')
@@ -116,7 +118,7 @@ def validate(m, now):
                      'moon_phase': PH[mp], 'tide_source': ts, 'wind_kmh': '' if wind is None else wind, 'dp3_hpa': '' if dp3 is None else dp3,
                      'bites': bites, 'fish': fish, 'mj': mj, 'kept': kept, 'max_len_cm': '' if ml is None else ml, 'species': sp, 'bait': bait,
                      'received': dt.datetime.now(AEST).strftime('%Y-%m-%d'), 'system': sysid,
-                     'stage': stage, 'spot_type': stype})
+                     'stage': stage, 'spot_type': stype, 'historical': hist})
     if sum(r['bites'] for r in rows) > 60: raise ValueError('implausible bite count')
     return {'sid': sid, 'anon': anon, 'test': test, 'day': iso(s0)[:10]}, rows
 

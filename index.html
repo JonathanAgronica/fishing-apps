@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610122109"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610122109"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610122109">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610122109">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610132113"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610132113"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610132113">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610132113">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610122109">
+<meta name="app-version" content="202610132113">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -714,6 +714,7 @@ input:disabled{opacity:.4}
     <button class="sm" id="cExport">⬇ Export CSV</button>
     <label class="sm cfile">⬆ Import CSV<input type="file" id="cImport" accept=".csv,text/csv" hidden></label>
     <span class="mut" id="cIoMsg"></span>
+    <details class="mut" style="margin-top:6px"><summary>Import old catches (any year back to 1990)</summary>A plain CSV with a header row works, e.g.<br><code>date,time,spot,km,caught,count,size,species,hours,notes<br>2014-03-08,6pm,Flat Rock Rd ramp,,y,2,48cm,jack,3,run-in<br>12/01/2009,dawn,,22.5,n,,,,2,</code><br>Only <b>date</b> is required. Dates: YYYY-MM-DD or DD/MM/YYYY. Times can be rough (18:30, 6pm, dawn, dusk, morning, arvo, night; blank = 7am). Spot = a landmark or My-spot name, or give <b>km</b> (plus <b>line</b> for side creeks, e.g. mosq / Mosquito, with km from its junction). caught y/n; size in cm (mm/inch ok); hours defaults to 2. Tide, moon, solunar &amp; sun are computed from the model; weather is marked unknown for old dates. Re-importing the same file skips duplicates.</details>
   </div>
 </section>
 
@@ -725,7 +726,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610122109</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610132113</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -2938,11 +2939,12 @@ function catchUI(){const L=(F.catches||[]).slice().sort((a,b)=>a.t-b.t);
 function readForm(){F.start=fromLocalInput($('cS0').value)||F.start;if(F._mode!=='active')F.end=fromLocalInput($('cS1').value);
   F.noBites=$('cNoBites').checked;F.bait={cat:$('cBaitCat').value,txt:$('cBait').value.trim().slice(0,120)};F.note=$('cNote').value.trim().slice(0,500);
   if(F.spot)F.spot.name=$('cSpotName').value.trim().slice(0,80);}
+const MIN_T=Date.UTC(1990,0,1)-AEST,HIST_MS=400*864e5;const isHist=s=>s&&s.start<Date.now()-HIST_MS;
 function validate(s){const now=Date.now();
   if(!s.spot)return 'Pick a spot first.';
   if(!s.start||isNaN(s.start))return 'Start time missing.';
   if(s.start>now+5*60e3)return 'Start is in the future.';
-  if(s.start<now-400*864e5)return 'Start is more than a year ago.';
+  if(s.start<MIN_T)return 'Start is before 1990 — the tide/moon model isn’t checked that far back.';
   if(s.end!=null){if(isNaN(s.end))return 'End time missing.';if(s.end<=s.start)return 'End must be after start.';if(s.end-s.start>16*3600e3)return 'Sessions are limited to 16 h — split longer trips.';if(s.end>now+5*60e3)return 'End is in the future.';}
   for(const x of s.catches||[]){if(x.t<s.start-Q||(s.end!=null&&x.t>s.end+Q))return `A catch at ${fT(x.t)} is outside the session times.`;}
   if(s.noBites&&(s.catches||[]).some(x=>x.n>0))return 'Untick “No bites” or remove the catches.';
@@ -3001,7 +3003,7 @@ function renderList(){const L=LOG.filter(s=>s.end!=null).sort((a,b)=>b.start-a.s
     return `<div class="citem"><div class="sc" style="background:${avg!=null?scoreColor(avg):'#555'}" title="mean predicted score">${avg!=null?avg:'?'}</div><div class="ci">
       <b>${fD(s.start)} ${fT(s.start)}–${fT(s.end)}</b> <span class="mut">(${dur((s.end-s.start)/60e3)})</span>${shareTag(s)}${isTest()&&s.test?'<span class="ctag q">TEST</span>':''}<br>
       <span class="mut">${spotDesc(s.spot)}</span><br>
-      ${n?`🐟 ${n} bite${n>1?'s':''}${fish!==n?` (${fish} landed)`:''} — ${esc(sp)}`:'<span class="mut">No bites</span>'} · <span class="mut">peak ${mx!=null?mx:'—'}, ${s.ctx?TSRCN[s.ctx.tideSrc]+(s.ctx.wx?' + weather':''):'no context'}${s.bait&&s.bait.cat?' · '+esc(BAITN[s.bait.cat]):''}</span>
+      ${n?`🐟 ${n} bite${n>1?'s':''}${fish!==n?` (${fish} landed)`:''} — ${esc(sp)}`:'<span class="mut">No bites</span>'} · <span class="mut">peak ${mx!=null?mx:'—'}, ${s.ctx?TSRCN[s.ctx.tideSrc]+(s.ctx.wx?' + weather':(isHist(s)?' · weather unknown':'')):'no context'}${isHist(s)?' <span class="ctag">historical</span>':''}${s.rough?' <span class="ctag">approx. time</span>':''}${s.bait&&s.bait.cat?' · '+esc(BAITN[s.bait.cat]):''}</span>
       </div><div class="row" style="flex-direction:column;gap:4px"><button class="sm" data-ed="${s.id}">✏️</button><button class="sm" data-rm="${s.id}">🗑</button></div></div>`;}).join('');
   $('cList').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>openForm(byId(b.dataset.ed),'edit'));
   $('cList').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const s=byId(b.dataset.rm);if(!confirm('Delete this session'+(s.share&&s.share.sid?' (and remove it from the shared table)':'')+'?'))return;
@@ -3011,7 +3013,7 @@ async function anonId(){const h=await sha('mbj-anon:'+SH.k);return (isTest()?'TE
 const sidOf=async tok=>(await sha('mbj-sid:'+tok)).slice(0,12);
 async function message(s){const rows=rowsOf(s,'');if(!rows.length)return null;const b=shareBand(s.spot);const T=SCH.tide,LI=SCH.light,SO=SCH.sol;
   const sid=await sidOf(s.tok);
-  const m={v:1,app:'mbj',anon:await anonId(),sid,bk:b.bk,ln:b.ln||'B',rg:b.rg||'',...(b.sy?{sy:b.sy}:{}),ts:s.ctx.tideSrc,mp:rows[0].mp,bt:s.bait&&s.bait.cat||'',...(rows[0].st?{st:rows[0].st}:{}),s0:Math.round(rows[0].t/1000),
+  const m={v:1,app:'mbj',anon:await anonId(),sid,bk:b.bk,ln:b.ln||'B',rg:b.rg||'',...(b.sy?{sy:b.sy}:{}),ts:s.ctx.tideSrc,mp:rows[0].mp,bt:s.bait&&s.bait.cat||'',...(rows[0].st?{st:rows[0].st}:{}),s0:Math.round(rows[0].t/1000),...(isHist(s)?{hi:1}:{}),
     sl:rows.map(r=>[r.score,T.indexOf(r.tide),r.ri,LI.indexOf(r.light),SO.indexOf(r.sol),r.wind,r.dp3,r.bites,r.fish,r.mj,r.kept,r.ml,r.sp.join(';'),r.stg?SCH.stage.indexOf(r.stg):null])};
   if(isTest())m.test=1;return{m,sid};}
 async function shareSession(s){if(!s.ctx)return;const r=await message(s);if(!r)return;s.share={st:'queued',sid:r.sid,at:Date.now(),tries:(s.share&&s.share.tries||0)};if(isTest())s.test=1;
@@ -3019,9 +3021,9 @@ async function shareSession(s){if(!s.ctx)return;const r=await message(s);if(!r)r
 function queueDel(s){if(!s.share||!s.share.sid)return;const q=LS.get(K.q,[]).filter(x=>x.id!==s.id||x.kind!=='add');q.push({kind:'del',id:s.id,body:JSON.stringify({v:1,app:'mbj',op:'del',tok:s.tok})});LS.set(K.q,q);}
 let flushing=false;
 async function flush(){if(flushing)return;flushing=true;try{let q=LS.get(K.q,[]);const left=[];
-  for(const it of q){let ok=false;try{const r=await fetch(RELAY,{method:'POST',body:it.body,headers:{'Content-Type':'text/plain'}});ok=r.ok;}catch(e){}
+  let n=0;for(const it of q){if(n>=40){left.push(it);continue;}if(n++)await new Promise(r=>setTimeout(r,1500));let ok=false;try{const r=await fetch(RELAY,{method:'POST',body:it.body,headers:{'Content-Type':'text/plain'}});ok=r.ok;}catch(e){}
     if(ok){if(it.kind==='add'){const s=byId(it.id);if(s&&s.share){s.share.st='sent';s.share.at=Date.now();s.share.tries=(s.share.tries||0)+1;}}}else left.push(it);}
-  LS.set(K.q,left);save();shareInfo();renderList();}finally{flushing=false;}}
+  LS.set(K.q,left);save();shareInfo();renderList();if(left.length&&n>=40&&left.length<q.length)setTimeout(flush,60e3);}finally{flushing=false;}}
 function shareInfo(){const q=LS.get(K.q,[]);const n=LOG.filter(s=>s.share&&s.share.sid).length,p=LOG.filter(s=>s.share&&s.share.st==='published').length;
   const unshared=LOG.filter(s=>s.end!=null&&s.ctx&&!(s.share&&s.share.sid)).length;
   $('cShareInfo').innerHTML=SH.on?`Sharing <b>on</b>${isTest()?' <span class="ctag q">TEST mode</span>':''} · ${n} session${n===1?'':'s'} shared${p?` (${p} already in the community table)`:''}${q.length?` · ${q.length} waiting to send (offline?) <button class="sm" id="cFlush">retry</button>`:''}${unshared?` · <button class="sm" id="cShareOld">share my ${unshared} earlier session${unshared>1?'s':''}</button>`:''}. New uploads appear in Community after the next hourly update.`
@@ -3095,6 +3097,54 @@ function stypeTable(rows){const R=rows.filter(r=>r.stg&&r.ts!=='none');const ty=
   return o+'</tbody></table></div><p class="mut" style="margin:4px 0 8px">Bites per hour fished in each cell (hours underneath; faded = under 1 h, too little to judge). Shows whether your run-in spots really fire on the run-in, your run-out spots on the run-out, etc.</p>';}
 function myRows(){return LOG.filter(s=>s.end!=null).flatMap(s=>rowsOf(s,'me'));}
 function renderMine(){const rows=myRows();$('cMySum').textContent=rows.length?`· ${(rows.length/4).toFixed(1)} h logged`:'';renderCharts(rows,'my',$('cMyViews'),$('cMyCharts'),false);}
+/* ---- bulk import of historical catches (simple CSV) ----
+   header (any order, case-insensitive): date,time,spot,system,km,line,caught,count,size,species,hours,notes */
+function parseRoughDate(v){v=String(v||'').trim();let m;
+  if(m=/^(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})/.exec(v))return [+m[1],+m[2],+m[3]];
+  if(m=/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{2,4})$/.exec(v)){let y=+m[3];if(y<100)y+=y<50?2000:1900;return [y,+m[2],+m[1]];}
+  const MO=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  if(m=/^(\d{1,2})\s*([a-z]{3})[a-z]*\.?\s*(\d{2,4})$/i.exec(v)){let y=+m[3];if(y<100)y+=y<50?2000:1900;const mo=MO.indexOf(m[2].toLowerCase());if(mo>=0)return [y,mo+1,+m[1]];}
+  return null;}
+/* → {min (minutes after local midnight), rough} ; tolerant: 18:30, 6.30pm, 6pm, ~7am, 0630, dawn, dusk, morning, arvo, night, blank */
+function parseRoughTime(v){v=String(v||'').trim().toLowerCase().replace(/^(~|about|approx\.?|around|ca\.?)\s*/,'');let rough=/~|ish|approx|about|around/.test(v);v=v.replace(/ish$/,'').trim();let m;
+  const W={dawn:330,sunrise:360,'early morning':330,morning:420,am:420,midday:720,noon:720,lunch:720,afternoon:900,arvo:900,pm:900,evening:1080,dusk:1080,sunset:1080,night:1260,'late night':1380,midnight:0};
+  if(!v)return{min:420,rough:true};if(W[v]!=null)return{min:W[v],rough:true};
+  if(m=/^(\d{1,2})(?:[:.h](\d{2}))?\s*(am|pm|a|p)?$/.exec(v)){let h=+m[1],mi=+(m[2]||0);const ap=m[3];if(ap){h%=12;if(ap[0]==='p')h+=12;}if(h>23||mi>59)return null;return{min:h*60+mi,rough:rough||!m[2]&&!ap&&false};}
+  if(m=/^(\d{2})(\d{2})$/.exec(v)){const h=+m[1],mi=+m[2];if(h>23||mi>59)return null;return{min:h*60+mi,rough};}
+  return null;}
+function spotFromName(nm,km,line){const L=BT.LANDMARKS;nm=(nm||'').trim();
+  if(km!=null&&!isNaN(km)){const ln=line||(GEN?'M':'B');const mx=BT.lineMaxKm?BT.lineMaxKm(ln):BT.MAXKM;if(km<0||km>mx+1e-6)return null;
+    const p=GEN?BT.pointOnLine(km,ln):(ln==='B'?BT.pointAtKm(km):(FT.spots&&FT.spots.pointAt?FT.spots.pointAt(km,ln):BT.pointAtKm(km)));
+    const sp=spotFromLatLng(p[0],p[1],null,'landmark',nm||('km '+km));sp.km=+(+km).toFixed(2);sp.line=ln;if(GEN)sp.lineName=BT.lineName(ln);return sp;}
+  if(!nm)return null;const lo=nm.toLowerCase();
+  const l=L.find(l=>l.name.toLowerCase()===lo)||L.find(l=>l.name.toLowerCase().includes(lo))||L.find(l=>lo.includes(l.name.toLowerCase()));
+  return l?landmarkSpot(l):null;}
+function importSimple(H,A){const h=H.map(x=>x.toLowerCase().replace(/[^a-z]/g,''));const col=(...ks)=>{for(const k of ks){const i=h.indexOf(k);if(i>=0)return i;}return -1;};
+  const C={date:col('date','day'),time:col('time','start','starttime'),spot:col('spot','location','place','spotname'),sys:col('system','creek','river'),km:col('km','creekkm'),line:col('line','channel'),
+    caught:col('caught','catch','success','fish'),count:col('count','n','number','qty'),size:col('size','length','lengthcm','sizecm','len'),sp:col('species'),hrs:col('hours','duration','hrs'),note:col('notes','note','comment','comments')};
+  if(C.date<0)throw new Error('not a catch CSV — need at least a "date" column (date,time,spot,caught,count,size,notes)');
+  let added=0,skipped=0;const errs=[],other={};const seen=new Set(LOG.map(s=>s.imp).filter(Boolean));
+  A.forEach((a,ri)=>{const g=i=>i<0?'':String(a[i]||'').trim();if(!a.some(x=>String(x).trim()))return;const bad=m=>{skipped++;if(errs.length<8)errs.push(`row ${ri+2}: ${m}`);};
+    const sy=g(C.sys).toLowerCase();if(sy&&FT.sysById){const me=FT.sysById(SYS);const hit=[SYS,me&&me.name,me&&me.short].filter(Boolean).some(x=>String(x).toLowerCase().includes(sy)||sy.includes(String(x).toLowerCase().replace(/ (creek|river)$/,'')));
+      if(!hit){other[sy]=(other[sy]||0)+1;skipped++;return;}}
+    const d=parseRoughDate(g(C.date));if(!d)return bad('date “'+g(C.date)+'” not understood');
+    const tm=parseRoughTime(g(C.time));if(!tm)return bad('time “'+g(C.time)+'” not understood');
+    const dd=new Date(Date.UTC(d[0],d[1]-1,d[2]));if(dd.getUTCMonth()!==d[1]-1||dd.getUTCDate()!==d[2])return bad('date “'+g(C.date)+'” doesn’t exist');const start=Date.UTC(d[0],d[1]-1,d[2],0,tm.min)-AEST;if(isNaN(start))return bad('bad date');
+    let hrs=parseFloat(g(C.hrs));if(!(hrs>0&&hrs<=16))hrs=2;const end=start+Math.round(hrs*4)*Q;
+    const kmv=g(C.km)!==''?parseFloat(g(C.km)):null;let ln=g(C.line);if(ln&&!GEN&&BT.channels){}
+    if(ln&&FT.spots&&FT.spots.channels){const c=FT.spots.channels().find(c=>c.id.toLowerCase()===ln.toLowerCase()||c.name.toLowerCase().includes(ln.toLowerCase()));ln=c?c.id:'';}
+    let kmx=kmv;if(kmx!=null&&ln&&FT.spots&&FT.spots.channels){const c=FT.spots.channels().find(c=>c.id===ln);if(c&&!c.main&&kmx<c.min)kmx=+(c.min+kmx).toFixed(2);} /* side-creek km may be given from its junction */
+    const sp=spotFromName(g(C.spot),kmx,ln||null);if(!sp)return bad('spot “'+(g(C.spot)||'')+'”'+(kmv!=null?' / km '+kmv:'')+' not found — use a landmark/My-spot name or a km');
+    const cv=g(C.caught).toLowerCase();let n=parseInt(g(C.count),10);const yes=/^(y|yes|true|1|caught)/.test(cv)||(!cv&&n>0);if(!(n>0))n=yes?1:0;if(!yes)n=0;n=Math.min(20,n);
+    let len=null;const sz=g(C.size).toLowerCase();const sm=/([\d.]+)\s*(cm|mm|in|inch|")?/.exec(sz);if(sm){len=+sm[1];if(sm[2]==='mm')len/=10;if(sm[2]&&/in|"/.test(sm[2]))len*=2.54;len=len>=1&&len<=150?Math.round(len*2)/2:null;}
+    const spc=(()=>{const v=g(C.sp).toLowerCase();if(!v)return 'MJ';const f=SCH.species.find(([c,l])=>c.toLowerCase()===v||l.toLowerCase().includes(v)||v.includes(l.toLowerCase()));return f?f[0]:'OT';})();
+    const key=[d.join('-'),tm.min,sp.km,sp.name,n,len,g(C.note)].join('|');if(seen.has(key)){skipped++;return;}
+    const s={id:rid(8),tok:rid(12),v:1,start,end,spot:sp,bait:{cat:'',txt:''},note:g(C.note).slice(0,500),noBites:!n,catches:[],ctx:null,share:{st:'local'},imp:key,rough:tm.rough||undefined};
+    if(n)s.catches.push({id:rid(6),t:Math.min(end-Q,start+Q),sp:spc,n,len,fate:'released',note:''});
+    const err=validate(s);if(err)return bad(err);
+    s.ctx=computeCtx(s);s.saved=Date.now();LOG.push(s);seen.add(key);added++;});
+  save();const o=Object.entries(other);
+  return{added,skipped,spots:0,errs,other:o.length?o.map(([k,v])=>`${v}× “${k}”`).join(', ')+' — switch to that system and import the file there':''};}
 /* ---- community ---- */
 let COM=null,comAt=0;
 function parseCSV(txt){const out=[];let row=[],f='',q=false;for(let i=0;i<txt.length;i++){const c=txt[i];
@@ -3107,7 +3157,7 @@ async function loadCom(force){if(!force&&COM&&Date.now()-comAt<5*60e3){renderCom
     const A=parseCSV(txt);const H=A.shift()||[];const ix=k=>H.indexOf(k);const num=(x)=>x===''||x==null?null:+x;
     COM={cache:!!r.headers.get('x-ft-cache'),rows:A.filter(a=>a.length>=H.length-1).map(a=>{const g=k=>a[ix(k)];const t=Date.parse(g('slot_start'));
       return{anon:g('anon'),sid:g('session'),t,bk:g('band_km')===''?-1:+g('band_km'),ln:g('line')||'',rg:g('region')||'',band:g('band'),score:+g('score'),tide:g('tide'),ri:num(g('min_from_runin')),light:g('light'),sol:g('solunar'),
-        mp:Math.max(0,PH.findIndex(p=>p===g('moon_phase'))),ts:g('tide_source'),wind:num(g('wind_kmh')),dp3:num(g('dp3_hpa')),bites:+g('bites')||0,fish:+g('fish')||0,mj:+g('mj')||0,kept:+g('kept')||0,ml:num(g('max_len_cm')),sp:(g('species')||'').split(';').filter(Boolean),bait:g('bait'),sy:g('system')||'baffle',stg:g('stage')||'',st:g('spot_type')||''};}).filter(r=>!isNaN(r.t))};
+        mp:Math.max(0,PH.findIndex(p=>p===g('moon_phase'))),ts:g('tide_source'),wind:num(g('wind_kmh')),dp3:num(g('dp3_hpa')),bites:+g('bites')||0,fish:+g('fish')||0,mj:+g('mj')||0,kept:+g('kept')||0,ml:num(g('max_len_cm')),sp:(g('species')||'').split(';').filter(Boolean),bait:g('bait'),sy:g('system')||'baffle',stg:g('stage')||'',st:g('spot_type')||'',hi:g('historical')==='y'};}).filter(r=>!isNaN(r.t))};
     comAt=Date.now();}
   catch(e){if(!COM){$('cComHead').innerHTML=`<div class="notice err">Couldn’t load community data (${esc(e.message)}). Connect once to cache it.</div>`;return;}}
   // mark my shared sessions that made it into the table; resend if lost
@@ -3123,6 +3173,7 @@ function renderCom(){if(!COM)return;const all=LS.get('mbj_comall',0);const rows0
   $('cComThis').onclick=()=>{LS.set('mbj_comall',0);renderCom();};$('cComAll').onclick=()=>{LS.set('mbj_comall',1);renderCom();};
   renderCharts(rows,'com',$('cComViews'),$('cComCharts'),true);
   $('cComNote').innerHTML=`Anonymous sessions shared by app users (creek stretch only), validated & merged hourly into <a href="https://github.com/JonathanAgronica/fishing-apps/blob/main/data/catches.csv" target="_blank" rel="noopener">data/catches.csv</a>. Rates use 15-minute slots of time actually fished, so “no bites” sessions count. Faded bars = under 1 h of effort — treat as anecdotes.${tests?` (${tests} TEST rows hidden)`:''}`;
+  {const hs=new Set(rows.filter(r=>r.hi).map(r=>r.anon+'|'+r.sid)).size;if(hs)$('cComNote').innerHTML+=` <span class="ctag">${hs} historical session${hs>1?'s':''}</span> (logged >1 yr after the trip — tide/moon/sun from the model, weather unknown).`;}
   shareInfo();renderList();}
 /* ---- CSV export / import (personal, full detail incl. GPS — stays on the phone) ---- */
 const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json','spot_id','color','system','spot_type','stage'];
@@ -3142,7 +3193,7 @@ function exportCSV(){const out=[COLS.join(',')];
   const blob=new Blob([out.join('\n')+'\n'],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='macs-jacks-catch-log-'+toLocalInput(Date.now()).slice(0,10)+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
   $('cIoMsg').textContent=`Exported ${LOG.filter(s=>s.end!=null).length} sessions.`;window.__MBJ_LAST_EXPORT=out.join('\n');}
 function lineFromCsv(v){if(v==='Euleilah')return 'E';if(SCH.sides)for(const k in SCH.sides)if(SCH.sides[k][0]===v)return k;return 'B';}
-function importCSV(txt){const A=parseCSV(txt);const H=A.shift()||[];if(!H.includes('record')||!H.includes('session_id'))throw new Error('not a Mac’s Jacks catch-log CSV');
+function importCSV(txt){const A=parseCSV(txt.replace(/^\uFEFF/,''));const H=(A.shift()||[]).map(h=>h.trim());if(!H.includes('record')||!H.includes('session_id'))return importSimple(H,A);
   const g=(a,k)=>{const i=H.indexOf(k);return i<0?'':a[i]||'';};const spCode=n=>{const f=SCH.species.find(([c,l])=>l===n||c===n);return f?f[0]:'OT';};
   const S=new Map();let added=0,skipped=0,spots=0;
   if(FT.spots){const X={spots:[],alias:{}};for(const a of A){const r=g(a,'record');
@@ -3184,7 +3235,7 @@ function init(){fillSelects();
     if(s.end==null){const err=validate(s);if(err){$('cFormMsg').textContent='⚠ '+err;return;}const o=byId(s.id);if(o)LOG[LOG.indexOf(o)]=s;else LOG.push(s);save();closeForm();renderAll();return;}
     if(await commit(s)){closeForm();renderAll();flush();}};
   $('cExport').onclick=exportCSV;
-  $('cImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=importCSV(await f.text());$('cIoMsg').textContent=`Imported ${r.added} session(s)${r.spots?`, ${r.spots} spot(s)`:''}${r.skipped?`, skipped ${r.skipped} (duplicates/invalid)`:''}.`;renderAll();}catch(err){$('cIoMsg').textContent='Import failed: '+err.message;}e.target.value='';};
+  $('cImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=importCSV(await f.text());$('cIoMsg').innerHTML=esc(`Imported ${r.added} session(s)${r.spots?`, ${r.spots} spot(s)`:''}${r.skipped?`, skipped ${r.skipped} (duplicates/invalid/other system)`:''}.`)+(r.errs&&r.errs.length?'<br>'+r.errs.map(esc).join('<br>'):'')+(r.other?'<br>'+esc(r.other):'');renderAll();}catch(err){$('cIoMsg').textContent='Import failed: '+err.message;}e.target.value='';};
   addEventListener('online',flush);
   if(FT.spots)FT.spots.onChange.push(()=>{fillSpotSel();if(F)spotUI();renderList();});
   FT.catchLogAt=l=>{const sp=landmarkSpot(l);curSpot=sp;LS.set('mbj_lastspot',sp);FT.showTab('log');const a=activeS();
@@ -3196,7 +3247,7 @@ function init(){fillSelects();
   if(document.body.dataset.tab==='log'){loadCom();}
   if(LS.get(K.q,[]).length)flush();
   document.body.dataset.logReady='1';
-  FT.catchLog={importCSV,exportCSV,flush,loadCom,get log(){return LOG;},reload(){LOG=LS.get(K.log,[]);renderAll();}};}
+  FT.catchLog={importCSV,parseRoughTime,parseRoughDate,exportCSV,flush,loadCom,get log(){return LOG;},reload(){LOG=LS.get(K.log,[]);renderAll();}};}
 try{init();}catch(e){console.error('catch log init',e);}
 })();
 </script>

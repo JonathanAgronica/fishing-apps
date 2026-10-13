@@ -26,6 +26,14 @@ def state(M, cls, now):
             hi = max(M[i-1][1], M[i+1][1])
             if v - hi > jump and abs(M[i-1][1] - M[i+1][1]) < 0.5 * (v - hi): continue
         K.append((m, v))
+    # Drop an unconfirmed terminal spike (BoM often emits a single wild last sample).
+    while len(K) >= 2:
+        m, v = K[-1]
+        pm, pv = K[-2]
+        if m - pm <= 720 and v - pv > jump:
+            K.pop()
+            continue
+        break
     M = K
     segs = []; seg = None
     for m, v in M:

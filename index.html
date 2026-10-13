@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610132231"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610132231"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610132231">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610132231">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610132244"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610132244"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610132244">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610132244">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610132231">
+<meta name="app-version" content="202610132244">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -248,6 +248,10 @@ nav.tabs a .ts{display:none}
 .mtype button i{width:11px;height:11px;border-radius:50%;background:var(--tc);display:inline-block;border:1px solid #fff8}
 .mtype button.on{background:var(--tc);color:#111;border-color:var(--tc);font-weight:700}
 .ttag{display:inline-block;border-radius:6px;padding:0 4px;font-size:.66rem;font-weight:800;color:#111;vertical-align:middle}
+
+.mpin-d{position:absolute;left:18px;bottom:-2px;background:#0b1a1c;color:#cfeeff;border:1px solid #4a8fa0;border-radius:6px;font-size:8.5px;line-height:1;padding:1px 2px;white-space:nowrap;font-weight:700}
+.mpop select.mdp{width:100%;margin:2px 0 4px}
+.tag.mdep{background:#12303d;color:#cfeeff;border:1px solid #245a72}
 
 nav.tabs a[data-tab=cal].on{box-shadow:inset 0 3px 0 #b48cff}
 .calcard{padding:10px}
@@ -745,7 +749,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610132231</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610132244</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1040,7 +1044,7 @@ function spotTide(T,t,ext,runIn,type){const N=STYPES[type];if(!N||!T)return T;co
 /* --- main day computation --- */
 const W={light:0.28,tide:0.38,sol:0.14,moon:0.05,wx:0.15};
 function computeDay(opts){
-  const{dateStr,tz,lat,lng,tideFn,ext,wxFn,sstFn,stepMin=15,weekRange,runIn,spotType,fresh}=opts;
+  const{dateStr,tz,lat,lng,tideFn,ext,wxFn,sstFn,stepMin=15,weekRange,runIn,spotType,fresh,spotDepth}=opts;
   const t0=dayStart(dateStr,tz),t1=dayStart(addDays(dateStr,1),tz);
   const ev=opts.ev||sunMoonEvents(t0-4*3600e3,t1+4*3600e3,lat,lng);
   const illum=moonIllum((t0+t1)/2);const mpf=moonPhaseFactor(illum.phase);
@@ -1049,6 +1053,10 @@ function computeDay(opts){
   let range=null;const dayExt=ext?ext.filter(x=>x.t>=t0-6*3600e3&&x.t<=t1+6*3600e3):[];
   if(dayExt.length>=2){let r=0;for(let i=1;i<dayExt.length;i++)r=Math.max(r,Math.abs(dayExt[i].h-dayExt[i-1].h));range=r;}
   const rangeBonus=(range!=null&&weekRange)?clamp((range/weekRange.max-0.6)/0.4)*0.04:0;const rangeN=(range!=null&&weekRange)?clamp((range/weekRange.max-0.5)/0.5):null;
+  /* depth class: shallow (1–3 m) likes big/spring tides, deep (6 m+) likes neaps; 3–6 m neutral. ±8% max, scaled by today's range vs the period's biggest */
+  const DEP=(()=>{if(!(spotDepth==='s'||spotDepth==='d')||range==null||!weekRange||!weekRange.max)return null;const dev=Math.max(-1,Math.min(1,(range/weekRange.max-0.75)/0.25));
+    const adj=(spotDepth==='s'?1:-1)*0.08*dev;if(Math.abs(adj)<0.005)return null;
+    return{adj,depth:spotDepth,label:`${spotDepth==='s'?'Shallow (1–3 m)':'Deep (6 m+)'} spot on a ${dev>0?'big / spring':'small / neap'} tide ${adj>0?'+':'−'}${Math.round(Math.abs(adj)*100)}%`};})();
   const pts=[];
   for(let t=t0;t<t1;t+=stepMin*60e3){
     const wx=wxFn?wxFn(t):null;
@@ -1064,8 +1072,8 @@ function computeDay(opts){
     else{raw=(W.light*L.v+W.sol*S.v+W.moon*mpf+W.wx*WX.v)/(1-W.tide);wsum=1;}
     const mult=0.45+0.55*TF.v;
     // map: raw ~0.35..0.95 => 0..100
-    let score=clamp((raw*mult-0.25)/0.70)*100;
-    pts.push({t,score:Math.round(score),L,T,S,TF,WX,wx,sst,tide:tideFn?tideFn(t):null,alt:sunAlt(t,lat,lng)});
+    let score=clamp((raw*mult-0.25)/0.70)*100;if(T&&DEP)score=Math.max(0,Math.min(100,score*(1+DEP.adj)));
+    pts.push({t,score:Math.round(score),DEP:T?DEP:null,L,T,S,TF,WX,wx,sst,tide:tideFn?tideFn(t):null,alt:sunAlt(t,lat,lng)});
   }
   const hourly=[];for(let i=0;i<pts.length;i+=60/stepMin){const sl=pts.slice(i,i+60/stepMin);hourly.push({t:sl[0].t,score:Math.round(sl.reduce((a,b)=>a+b.score,0)/sl.length)});}
   const top4=[...hourly].sort((a,b)=>b.score-a.score).slice(0,4);
@@ -1077,7 +1085,7 @@ function computeDay(opts){
     if(X.heavy)wxDay.heavyH+=stepMin/60;
     const st=p.wx&&p.wx.storm;if(st&&st.v>=0.15){const tp=p.t+st.inH*3600e3;if(tp<t1&&(!wxDay.storm||st.v>wxDay.storm.v))wxDay.storm={v:st.v,t:tp,cape:st.cape,li:st.li,pp:st.pp};}}
   wxDay.heavyH=Math.round(wxDay.heavyH);
-  return{dateStr,t0,t1,ev,illum,mpf,pts,hourly,rating,wxDay,range,dayExt:ext?ext.filter(x=>x.t>=t0&&x.t<t1):[],runIns:runIn?runIn.filter(r=>r.t>=t0&&r.t<t1):[],windows:findWindows(pts,stepMin)};
+  return{dep:DEP,dateStr,t0,t1,ev,illum,mpf,pts,hourly,rating,wxDay,range,dayExt:ext?ext.filter(x=>x.t>=t0&&x.t<t1):[],runIns:runIn?runIn.filter(r=>r.t>=t0&&r.t<t1):[],windows:findWindows(pts,stepMin)};
 }
 function findWindows(pts,stepMin){
   const max=Math.max(...pts.map(p=>p.score));const thr=Math.max(45,max-14);
@@ -1373,10 +1381,13 @@ function advise(o){const why=[];let c=0.22;
   k=k.slice(0,3);
   const rattle=clar==='muddy'||(light==='night'&&clar!=='clear');
   const prof=clar==='muddy'?'vibe or deep-diving hardbody'+(rattle?' with rattle':''):light==='night'?'surface walker or shallow hardbody'+(rattle?' with rattle':''):clar==='clear'?'natural prawn / shad soft plastic, weedless, slow past cover':'paddle-tail soft plastic or suspending hardbody';
+  let prof2=prof;if(o.depth==='d')prof2=(clar==='muddy'?'heavier vibe (15–20 g)':'heavier vibe or weighted plastic (1/4–3/8 oz)')+' to get down the 6 m+ face'+(rattle?', rattle':'');
+  else if(o.depth==='s'&&(light==='low'||light==='night'))prof2='shallow diver or topwater over the 1–3 m flat'+(rattle?', rattle':'');
+  else if(o.depth==='s')prof2=prof.replace('deep-diving hardbody','shallow-running hardbody')+' — keep it shallow (1–3 m)';
   const ST={ri:'run-in',flood:'flood tide',tot:'top of tide',ro:'run-out',bot:'bottom of tide'}[o.stage]||'';
   const LW={bright:'bright',overcast:'overcast',low:'low light',night:'night'}[light];
   const head=`${clar[0].toUpperCase()+clar.slice(1)}${tannin&&clar!=='muddy'?' tannin':''}${ST?' '+ST:''}, ${LW}`;
-  return{clarity:clar,c:Math.round(c*100)/100,light,tannin,keys:k,colours:k.map(x=>C[x][0]),swatch:k.map(x=>C[x][1]),rattle,profile:prof,head,why,
+  return{clarity:clar,c:Math.round(c*100)/100,light,tannin,keys:k,colours:k.map(x=>C[x][0]),swatch:k.map(x=>C[x][1]),rattle,profile:prof2,depth:o.depth||null,head,why,
     line:`${head}: ${k.map(x=>C[x][0].toLowerCase()).join(', ')}`};}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function sw(k){return `<span class="lsw" style="background:${C[k][1]}" title="${esc(C[k][0])}"></span>`;}
@@ -1481,7 +1492,7 @@ function makeCore(B,MJ,cfg){
   /* forecast status of a day: weather forecast covers it (≥ 12 h of it) or it is an outlook day (tide + sun/moon, neutral weather) */
   function fcOf(ds){const t0=MJ.dayStart(ds,TZ);return wxFn&&wxT0<=t0+12*HR&&wxT1>=t0+12*HR;}
   function day(pt,T,ds,stepMin,ev){
-    return MJ.computeDay({dateStr:ds,tz:TZ,lat:pt.lat,lng:pt.lng,tideFn:T.fn,ext:T.ext,wxFn,sstFn,fresh,weekRange:T.wr||wrOf(T.ext),runIn:T.runIn,spotType:pt.type&&MJ.STYPES&&MJ.STYPES[pt.type]?pt.type:null,stepMin,ev});}
+    return MJ.computeDay({dateStr:ds,tz:TZ,lat:pt.lat,lng:pt.lng,tideFn:T.fn,ext:T.ext,wxFn,sstFn,fresh,weekRange:T.wr||wrOf(T.ext),runIn:T.runIn,spotType:pt.type&&MJ.STYPES&&MJ.STYPES[pt.type]?pt.type:null,spotDepth:pt.depth||null,stepMin,ev});}
   /* coarse (30-min) day summary for one point: [best, minute-of-day of best, best in dawn/dusk, its minute] */
   function coarse(pt,T,ds,ev){const t0=MJ.dayStart(ds,TZ),a=MJ.dayStart(MJ.addDays(ds,-1),TZ)-6*HR,b=MJ.dayStart(MJ.addDays(ds,8),TZ)+6*HR;
     const sub=T.ext.filter(x=>x.t>=a&&x.t<=b);const dd=day(pt,Object.assign({},T,{wr:wrOf(sub)}),ds,30,ev);
@@ -1558,7 +1569,7 @@ function planDay(core,R){const MJ=core.MJ,GEN=core.GEN,STEP=15,SM=STEP*6e4;
       o.avg=c?Math.round(sum/c):0;o.peak=pk?pk.score:0;o.peakT=pk?pk.t:o.t0;const why=[];
       const ri=S.runIn.find(r=>r.t>=o.t0-75*6e4&&r.t<=o.t1);if(ri)why.push(`${ri.kind==='rise'?'Water '+(ri.t<o.t0?'started':'starts')+' rising':'Run-in '+(ri.t<o.t0?'started':'starts')} ~${'@T'+Math.round(ri.t)} ${fmtU(ri.u)}`);
       if(pk){if(pk.L&&/twilight|Sunrise|sunset|Low sun|Night/i.test(pk.L.label))why.push(pk.L.label);if(pk.T&&!ri)why.push(pk.T.label);else if(pk.T&&pk.T.stype)why.push(pk.T.label);
-        if(pk.S&&pk.S.v>=0.3)why.push(pk.S.label);if(pk.WX&&pk.WX.notes)for(const nn of pk.WX.notes.slice(0,2))why.push(nn);}
+        if(pk.DEP)why.push(pk.DEP.label);if(pk.S&&pk.S.v>=0.3)why.push(pk.S.label);if(pk.WX&&pk.WX.notes)for(const nn of pk.WX.notes.slice(0,2))why.push(nn);}
       const sd=S.stands.find(x=>x.t1>o.t0&&x.t0<o.t1);if(sd)why.push(`Tide stand ${'@T'+Math.round(sd.t0)}–${'@T'+Math.round(sd.t1)} (single-high day — no rise from the small high)`);
       const u=ri?ri.u:(S.cal&&S.cal.hwU)||null;o.u=u;if(u!=null&&u>=45)why.push(`Timing ${fmtU(u)} this far up — allow slack`);
       o.why=why;o.optional=o.avg<thr+4||o.peak<thr+6;o.ri=ri||null;}
@@ -1738,7 +1749,8 @@ const channels=()=>GEN?B.LINES.map(L=>({id:L.id,name:lineLabel(L.id),short:lineL
 /* "Mosquito Ck 2.0 km" style label for a km on a side creek (km from its junction); null on the main channel */
 const alongLabel=(km,line)=>{if(GEN||!B.isSide||!B.isSide(line))return null;const s=B.sideOf(line);return s.short+' '+Math.max(0,km-s.jk).toFixed(1)+' km';};
 const kmLabel=(km,line,d=2)=>{const a=alongLabel(km,line);return a?a+' up (km '+(+km).toFixed(1)+' from mouth, est. tides)':'km '+(+km).toFixed(d)+' '+lineLabel(line)+(!GEN&&line==='E'&&B.EUCAL&&km>B.EUCAL+1e-6?' (est. tides)':'');};
-const S={onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typeFromColor,pointAt,snap:snapPt,EUMAX,lineLabel,GEN,SYS,
+const DEPTHS={s:{n:'1–3 m',s:'1-3',k:'shallow'},m:{n:'3–6 m',s:'3-6',k:'mid'},d:{n:'6 m+',s:'6+',k:'deep'}};
+const S={DEPTHS,onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typeFromColor,pointAt,snap:snapPt,EUMAX,lineLabel,GEN,SYS,
   typeOf:l=>l&&TYPES[l.type]?l.type:'',
   migration:()=>{const m=load(KM,null);return m&&!m.seen&&Array.isArray(m.items)&&m.items.length?m:null;},
   migrationSeen:()=>{const m=load(KM,null);if(m){m.seen=true;try{localStorage.setItem(KM,JSON.stringify(m));}catch(e){}}S.onChange.forEach(f=>{try{f()}catch(e){}});},
@@ -1748,10 +1760,10 @@ const S={onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typ
   latLng:l=>l.custom?[l.lat,l.lng]:pointAt(l.km,l.line),
   add(o){const sn=snapPt(o.lat,o.lng);if(sn.offKm>(o.maxOff||1.2))throw new Error(`That point is ${sn.offKm.toFixed(1)} km from the creek centreline — tap closer to the creek.`);
     const c={id:rid(),name:clean(o.name).slice(0,60)||('My spot km '+sn.km.toFixed(1)),lat:+(+o.lat).toFixed(6),lng:+(+o.lng).toFixed(6),km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),...(GEN?{sys:SYS}:{}),
-      type:TYPES[o.type]?o.type:'',color:TYPES[o.type]?TYPES[o.type].col:(COLORS.includes(o.color)?o.color:GENCOL),note:clean(o.note).slice(0,200),created:Date.now()};
+      type:TYPES[o.type]?o.type:'',depth:DEPTHS[o.depth]?o.depth:'',color:TYPES[o.type]?TYPES[o.type].col:(COLORS.includes(o.color)?o.color:GENCOL),note:clean(o.note).slice(0,200),created:Date.now()};
     custom.push(c);save();return S.get(c.id);},
   update(id,p){const c=custom.find(x=>x.id===id);if(!c)return null;
-    if(p.name!=null)c.name=clean(p.name).slice(0,60)||c.name;if(p.note!=null)c.note=clean(p.note).slice(0,200);if(p.type!==undefined&&(p.type===''||TYPES[p.type])){c.type=p.type;c.color=p.type?TYPES[p.type].col:GENCOL;}else if(p.color&&COLORS.includes(p.color))c.color=p.color;
+    if(p.depth!==undefined&&(p.depth===''||DEPTHS[p.depth]))c.depth=p.depth;if(p.name!=null)c.name=clean(p.name).slice(0,60)||c.name;if(p.note!=null)c.note=clean(p.note).slice(0,200);if(p.type!==undefined&&(p.type===''||TYPES[p.type])){c.type=p.type;c.color=p.type?TYPES[p.type].col:GENCOL;}else if(p.color&&COLORS.includes(p.color))c.color=p.color;
     if(p.lat!=null&&p.lng!=null){const sn=snapPt(p.lat,p.lng);if(sn.offKm>1.2)throw new Error(`${sn.offKm.toFixed(1)} km from the creek — not moved.`);c.lat=+(+p.lat).toFixed(6);c.lng=+(+p.lng).toFixed(6);c.km=sn.km;c.line=sn.line;c.offKm=+sn.offKm.toFixed(3);}
     save();return S.get(id);},
   remove(id){const n=custom.length;custom=custom.filter(x=>x.id!==id);if(custom.length!==n)save();},
@@ -1763,7 +1775,7 @@ const S={onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typ
     for(const x of o.spots){if(typeof x.lat!=='number'||typeof x.lng!=='number')continue;if(merge&&custom.some(c=>c.id===x.id))continue;
       if((x.sys||'baffle')!==SYS){/* another system's spot: keep it as-is for when that system is open */
         const a=load(KS,[]);if(Array.isArray(a)&&!a.some(c=>c.id===x.id)&&/^c[0-9a-f]{10}$/.test(x.id||'')){a.push(x);try{localStorage.setItem(KS,JSON.stringify(a));}catch(e){}n++;}continue;}
-      try{const sn=snapPt(x.lat,x.lng);if(sn.offKm>1.2)continue;const ty=TYPES[x.type]?x.type:x.type===''?'':typeFromColor(x.color);if(x.type===undefined)impMig.push({name:clean(x.name).slice(0,60)||'Spot',sys:SYS,from:x.color||'',to:ty});custom.push({type:ty,id:/^c[0-9a-f]{10}$/.test(x.id)?x.id:rid(),name:clean(x.name).slice(0,60)||'Spot',lat:x.lat,lng:x.lng,km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),...(GEN?{sys:SYS}:{}),color:ty?TYPES[ty].col:(COLORS.includes(x.color)?x.color:GENCOL),note:clean(x.note).slice(0,200),created:x.created||Date.now()});n++;}catch(e){}}
+      try{const sn=snapPt(x.lat,x.lng);if(sn.offKm>1.2)continue;const ty=TYPES[x.type]?x.type:x.type===''?'':typeFromColor(x.color);if(x.type===undefined)impMig.push({name:clean(x.name).slice(0,60)||'Spot',sys:SYS,from:x.color||'',to:ty});custom.push({type:ty,depth:DEPTHS[x.depth]?x.depth:'',id:/^c[0-9a-f]{10}$/.test(x.id)?x.id:rid(),name:clean(x.name).slice(0,60)||'Spot',lat:x.lat,lng:x.lng,km:sn.km,line:sn.line,offKm:+sn.offKm.toFixed(3),...(GEN?{sys:SYS}:{}),color:ty?TYPES[ty].col:(COLORS.includes(x.color)?x.color:GENCOL),note:clean(x.note).slice(0,200),created:x.created||Date.now()});n++;}catch(e){}}
     if(impMig.length){try{const old=load(KM,null);localStorage.setItem(KM,JSON.stringify({at:Date.now(),items:((old&&!old.seen&&old.items)||[]).concat(impMig).slice(-200),seen:false}));}catch(e){}}
     if(o.alias&&typeof o.alias==='object')for(const [k,v] of Object.entries(o.alias))if(AL.test(k)&&BUILTIN.some(b=>b.id===k)&&typeof v==='string'&&clean(v))alias[k]=clean(v).slice(0,60);
     save();return n;}};
@@ -1987,7 +1999,7 @@ async function getJSON(url,key){
 }
 
 async function run(){
-  document.body.dataset.biteReady='';$('mj-notices').innerHTML='';const BZ=(loc.baffleKm!=null&&window.BT)?loc.baffleKm:null;$('mj-tideOff').disabled=BZ!=null;const SPT=curSpotType(BZ);$('mj-windows').innerHTML='<span class="spin"></span> Fetching tide &amp; weather…';
+  document.body.dataset.biteReady='';$('mj-notices').innerHTML='';const BZ=(loc.baffleKm!=null&&window.BT)?loc.baffleKm:null;$('mj-tideOff').disabled=BZ!=null;const SPT=curSpotType(BZ);const SPD=curSpotDepth(BZ);$('mj-windows').innerHTML='<span class="spin"></span> Fetching tide &amp; weather…';
   const dateStr=$('mj-date').value||todayIn(loc.tz||DEF.tz);
   const off=+$('mj-tideOff').value||0;localStorage.setItem('mj_tideoff',off);
   const start=MJ.addDays(dateStr,-1),end=MJ.addDays(dateStr,7);
@@ -2030,8 +2042,8 @@ async function run(){
   const fresh=BZ!=null?await getFresh().catch(()=>null):null;
   // week
   let weekRange=null;if(ext&&ext.length>1){let mx=0;for(let i=1;i<ext.length;i++)mx=Math.max(mx,Math.abs(ext[i].h-ext[i-1].h));weekRange={max:mx};}
-  const days=[];for(let i=0;i<7;i++){const ds=MJ.addDays(dateStr,i);days.push(MJ.computeDay({dateStr:ds,tz,lat:loc.lat,lng:loc.lng,tideFn,ext,wxFn,sstFn,weekRange,runIn,spotType:SPT,fresh}));}
-  state={tz,days,sel:0,dateStr,hasTide:!!tideFn,spotType:SPT,wxFn,sstFn,fresh,runId:Date.now()};
+  const days=[];for(let i=0;i<7;i++){const ds=MJ.addDays(dateStr,i);days.push(MJ.computeDay({dateStr:ds,tz,lat:loc.lat,lng:loc.lng,tideFn,ext,wxFn,sstFn,weekRange,runIn,spotType:SPT,fresh,spotDepth:SPD}));}
+  state={tz,days,sel:0,dateStr,hasTide:!!tideFn,spotType:SPT,spotDepth:SPD,wxFn,sstFn,fresh,runId:Date.now()};
   window.__MJ_STATE=state;
   renderDay(0);renderWeek();
   document.body.dataset.biteReady='1';
@@ -2076,6 +2088,7 @@ function reasons(p){const tz=state.tz,r=[];
   if(p.T&&p.T.riRef&&/run-in start|first of the run-in/i.test(p.T.label)){const q=p.T.riRef;r.push(`${p.T.label} (${q.kind==='rise'?'water starts rising':'low turn'} ${fmtT(q.t,tz)} ±${Math.round(q.u)}′)`);}
   else if(p.T&&p.T.stype){const a=p.T.prev,b=p.T.next;r.push(`${p.T.label} (${a.high?'high':'low'} ${fmtT(a.t,tz)} → ${b.high?'high':'low'} ${fmtT(b.t,tz)})`);}
   else if(p.T){let s=p.T.label;s+=p.T.rising?` (high ${fmtT(p.T.next.t,tz)})`:(/Last/.test(p.T.label)?` (low ${fmtT(p.T.next.t,tz)})`:` (high was ${fmtT(p.T.prev.t,tz)})`);r.push(s);}
+  if(p.DEP)r.push(p.DEP.label);
   if(p.S.v>0.3)r.push(p.S.label+' '+fmtT(p.S.ev.t,tz));
   const d=state.days[state.sel];if(d.mpf>0.6)r.push(MJ.phaseName(d.illum.phase)+' boost');
   r.push(p.TF.label+(p.TF.v>=0.9?' — ideal':p.TF.v<0.55?' — fish sluggish':''));
@@ -2170,13 +2183,13 @@ function lureFromPt(p,spot,V,t){const T=p.T;let stage=null,range=null;
   if(wf){let s=0,n=0;for(let h=0;h<24;h++){const x=wf(t-h*3600e3);if(x&&x.rain!=null){s+=x.rain;n++;}}if(n>=12)rain24=s*24/n;}
   const fl=state&&state.fresh&&MJ.floodAdj?MJ.floodAdj(state.fresh,t):null;
   const il=MJ.moonIllum(t);
-  return FTLure.advise({stage,range,rangeMax:V.mx||null,tide:!!T,km:spot.km,maxKm:lureMaxKm(spot),flood:fl,rain24,rain:w&&w.rain,wind:w&&w.wind,cloud:w&&w.cloud,code:w&&w.code,alt:p.alt,moon:il.fraction});}
+  return FTLure.advise({depth:spot.depth||null,stage,range,rangeMax:V.mx||null,tide:!!T,km:spot.km,maxKm:lureMaxKm(spot),flood:fl,rain24,rain:w&&w.rain,wind:w&&w.wind,cloud:w&&w.cloud,code:w&&w.code,alt:p.alt,moon:il.fraction});}
 FT.lureAt=function(spot,t){try{const ds=MJ.ymd(t,'Australia/Brisbane');const V=lureDay(spot,ds);const d=V.dd;
   const p=d.pts[Math.max(0,Math.min(d.pts.length-1,Math.round((t-d.t0)/(15*60e3))))];return p?lureFromPt(p,spot,V,t):null;}catch(e){console.error('lure',e);return null;}};
 FT.lureHtml=(spot,t,full)=>FTLure.html(FT.lureAt(spot,t),full);
 /* Bite tab card: now (if the selected day is today) else the best window; chart touch moves it */
 let lureT=null;
-function lureSpot(){return{km:loc.baffleKm!=null?loc.baffleKm:null,line:loc.baffleLine||null,lat:loc.lat,lng:loc.lng};}
+function lureSpot(){const l=loc.spotId&&FT.spots?FT.spots.get(loc.spotId):null;return{depth:l&&l.depth||null,km:loc.baffleKm!=null?loc.baffleKm:null,line:loc.baffleLine||null,lat:loc.lat,lng:loc.lng};}
 function renderLure(p){const el=$('mj-lure');if(!el||!state||!state.days)return;const d=state.days[state.sel];if(!d)return;
   let pt=p;if(!pt){const now=Date.now();if(now>=d.t0&&now<d.t1)pt=d.pts[Math.round((now-d.t0)/(15*60e3))];else{const W=(d.windows||[]).slice().sort((a,b)=>b.score-a.score)[0];pt=W?W.peak:d.pts[Math.floor(d.pts.length/2)];}}
   if(!pt)return;lureT=pt.t;const V={r:null,mx:null};try{const sp=lureSpot();if(sp.km!=null&&window.BT){const v=lureDay(sp,d.dateStr);V.r=v.r;V.mx=v.mx;}}catch(e){}
@@ -2235,6 +2248,7 @@ function curSpotType(BZ){if(BZ==null||!FT.spots||!MJ.STYPES)return null;if((loc.
   if(l&&!(Math.abs(l.km-BZ)<0.02&&(!GENB||(l.line||'M')===(loc.baffleLine||'M'))))l=null;
   if(!l)l=FT.spots.customs().find(c=>Math.abs(c.km-BZ)<0.011&&(!GENB||(c.line||'M')===(loc.baffleLine||'M'))&&(loc.name||'').indexOf(c.name)===0)||null;
   return l&&MJ.STYPES[l.type]?l.type:null;}
+function curSpotDepth(BZ){if(BZ==null||!FT.spots)return null;if((loc.sys||'baffle')!==(FT.SYS||'baffle'))return null;const l=loc.spotId?FT.spots.get(loc.spotId):null;return l&&l.custom&&Math.abs(l.km-BZ)<0.02&&(l.depth==='s'||l.depth==='d'||l.depth==='m')?l.depth:null;}
 function spotTypeNote(t){const T=STYC(t);if(!T)return '';
   const what={ri:'from the run-in start through mid run-in (peak ~30–120 min after the turn)',tot:'about 1 h either side of the high — slack and the first of the run-out',bot:'about 1 h either side of the low / resting low — the last of the run-out and the first push',ro:'through the run-out, best mid-to-last'}[t];
   return `<div class="src">${stTag(t)} <b>Your ${esc(T.n.toLowerCase())} spot</b> — tide score = 65% this spot’s preferred stage (${what}, from this spot’s own predicted tide, widened by its ± timing) + 35% the general tide curve. Change the type on the 🗺️ Map tab.</div>`;}
@@ -2245,22 +2259,22 @@ function renderMySpots(){const el=$('mj-mySpots');if(!el||!state||!state.days||!
   const M0=FT.spots&&FT.spots.migration&&FT.spots.migration();const mig=M0?M0.items.filter(x=>(x.sys||'baffle')===(FT.SYS||'baffle')):null;
   const migH=mig&&mig.length?`<div class="notice">🎨 Your spot colours were turned into <b>spot types</b>: ${mig.slice(0,12).map(m=>`${esc(m.name)} → <b>${m.to?esc(FT.spots.TYPES[m.to].n):'General'}</b>`).join(', ')}${mig.length>12?' …':''}. Wrong? Fix it on the 🗺️ Map tab (✏️ Edit → Spot type). <button class="sm" id="msMigOk">Got it</button></div>`:'';
   if(!L.length){el.innerHTML=migH+`<p class="mut" style="margin:0">Give your own spots a <b>type</b> on the 🗺️ Map tab (✏️ Edit → Spot type: ${['ri','tot','bot','ro'].map(stTag).join(' ')} Run-in, Top of tide, Bottom of tide, Run-out) and they’re ranked here by their best window for the selected day.</p>`;}
-  else{const key=d.dateStr+'|'+state.runId+'|'+L.map(c=>c.id+c.type+c.km+(c.line||'')).join(',');
+  else{const key=d.dateStr+'|'+state.runId+'|'+L.map(c=>c.id+c.type+(c.depth||'')+c.km+(c.line||'')).join(',');
     let R=msCache[key];
     if(!R){R=L.map(c=>{try{const r=baffleTide(d.dateStr,c.km,c.line);let mx=0;for(let i=1;i<r.ext.length;i++)mx=Math.max(mx,Math.abs(r.ext[i].h-r.ext[i-1].h));
-        const dd=MJ.computeDay({dateStr:d.dateStr,tz:state.tz,lat:c.lat,lng:c.lng,tideFn:r.fn,ext:r.ext,wxFn:state.wxFn,sstFn:state.sstFn,fresh:state.fresh,weekRange:r.ext.length>1?{max:mx}:null,runIn:r.runIn,spotType:c.type});
+        const dd=MJ.computeDay({dateStr:d.dateStr,tz:state.tz,lat:c.lat,lng:c.lng,tideFn:r.fn,ext:r.ext,wxFn:state.wxFn,sstFn:state.sstFn,fresh:state.fresh,weekRange:r.ext.length>1?{max:mx}:null,runIn:r.runIn,spotType:c.type,spotDepth:c.depth||null});
         const W=dd.windows.slice().sort((a,b)=>b.score-a.score);const dS=Date.UTC(+d.dateStr.slice(0,4),+d.dateStr.slice(5,7)-1,+d.dateStr.slice(8,10))-10*3600e3;return{c,w:W[0]||null,more:W.slice(1,3),rating:dd.rating,stand:(r.stands||[]).find(x=>x.t>=dS&&x.t<dS+864e5)||null};}catch(e){console.error('myspots',e);return{c,w:null,more:[],rating:0};}})
         .sort((a,b)=>(b.w?b.w.score:-1)-(a.w?a.w.score:-1)||b.rating-a.rating);msCache={[key]:R};}
     const tz=state.tz;
     el.innerHTML=migH+`<div class="mys">${R.map((x,i)=>{const w=x.w,T=w&&w.peak.T;const sel=loc.spotId===x.c.id;
       return `<div class="myrow${sel?' on':''}" data-id="${esc(x.c.id)}"><div class="myrk">${i+1}</div><div class="mysc" style="color:${w?scoreColor(w.score):'#9db5b1'}">${w?w.score:'—'}</div><div class="myb"><div>${stTag(x.c.type)} <b>${esc(x.c.name)}</b> <small class="mut">km ${(+x.c.km).toFixed(1)}</small></div>`+
-        `<div class="mut">${w?`<b style="color:#e8f1ef">${fmtT(w.start,tz)} – ${fmtT(w.end,tz)}</b> · ${esc(T&&T.stageL?T.stageL:T?T.label:'')}${x.stand?` · <span title="single-high day: the small high doesn’t reach this spot">🌗 stand ${fmtT(x.stand.t0,tz)}–${fmtT(x.stand.t1,tz)} (no rise)</span>`:''}${x.more.length?` · also ${x.more.map(m=>fmtT(m.start,tz)+' ('+m.score+')').join(', ')}`:''}`:'no good window'}</div>${w&&FT.lureHtml?FT.lureHtml({km:x.c.km,line:x.c.line||null,lat:x.c.lat,lng:x.c.lng},w.peak.t):''}</div><button class="sm">🎣</button></div>`;}).join('')}</div><p class="mut" style="margin:6px 0 0;font-size:.78rem">Each spot scored on its own predicted tide and type for ${esc(d.dateStr)}; same weather &amp; water temp. Tap a spot to open its full bite times.</p>`;
+        `<div class="mut">${w?`<b style="color:#e8f1ef">${fmtT(w.start,tz)} – ${fmtT(w.end,tz)}</b> · ${esc(T&&T.stageL?T.stageL:T?T.label:'')}${x.stand?` · <span title="single-high day: the small high doesn’t reach this spot">🌗 stand ${fmtT(x.stand.t0,tz)}–${fmtT(x.stand.t1,tz)} (no rise)</span>`:''}${x.more.length?` · also ${x.more.map(m=>fmtT(m.start,tz)+' ('+m.score+')').join(', ')}`:''}`:'no good window'}</div>${w&&FT.lureHtml?FT.lureHtml({depth:x.c.depth,km:x.c.km,line:x.c.line||null,lat:x.c.lat,lng:x.c.lng},w.peak.t):''}</div><button class="sm">🎣</button></div>`;}).join('')}</div><p class="mut" style="margin:6px 0 0;font-size:.78rem">Each spot scored on its own predicted tide and type for ${esc(d.dateStr)}; same weather &amp; water temp. Tap a spot to open its full bite times.</p>`;
     el.querySelectorAll('.myrow').forEach(r=>r.onclick=()=>{const c=FT.spots.get(r.dataset.id);if(!c)return;
       setLoc(Object.assign({name:c.name+SFX,lat:c.lat,lng:c.lng,tz:'Australia/Brisbane',baffleKm:c.km,spotId:c.id},GENB?{baffleLine:c.line||'M',sys:FT.SYS}:c.line?{baffleLine:c.line}:{}));});}
   if($('msMigOk'))$('msMigOk').onclick=()=>FT.spots.migrationSeen();}
 /* spot edited (type / position) → re-score if it is the selected location; refresh the ranking */
 if(FT.spots)FT.spots.onChange.push(()=>{msCache={};try{const BZ=(loc.baffleKm!=null&&window.BT)?loc.baffleKm:null;
-  if(state&&state.days&&(curSpotType(BZ)||null)!==(state.spotType||null))run();else renderMySpots();}catch(e){console.error(e);}});
+  if(state&&state.days&&((curSpotType(BZ)||null)!==(state.spotType||null)||(curSpotDepth(BZ)||null)!==(state.spotDepth||null)))run();else renderMySpots();}catch(e){console.error(e);}});
 
 /* ---- Catch log hooks (injected into the Bite times closure) ----
    FT.biteCtx(spot,t0,t1): predicted context for every 15-min slot of a fishing session at a spot.
@@ -3435,7 +3449,9 @@ function setLayer(l){pref.layer=l;savePref();for(const k in base)if(map.hasLayer
   document.querySelectorAll('#mLayers button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));}
 /* ---- spots on the map ---- */
 function pinIcon(l,sc){const T=S.TYPES[l.type];const c=T?T.col:(l.color||S.GENCOL);
-  return LF.divIcon({className:'mpin-wrap',html:`<div class="mpin${T?' typed':''}" style="background:${c}"></div><b class="mpin-t${T&&T.s.length>2?' l3':''}">${T?T.s:'•'}</b>${sc!=null?`<span class="mpin-sc" style="background:${scoreColor(sc)}">${sc}</span>`:''}`,iconSize:[26,26],iconAnchor:[13,28],popupAnchor:[0,-26]});}
+  return LF.divIcon({className:'mpin-wrap',html:`<div class="mpin${T?' typed':''}" style="background:${c}"></div><b class="mpin-t${T&&T.s.length>2?' l3':''}">${T?T.s:'•'}</b>${sc!=null?`<span class="mpin-sc" style="background:${scoreColor(sc)}">${sc}</span>`:''}${S.DEPTHS[l.depth]?`<span class="mpin-d">${S.DEPTHS[l.depth].s}</span>`:''}`,iconSize:[26,26],iconAnchor:[13,28],popupAnchor:[0,-26]});}
+function depthTag(l){const D=S.DEPTHS[l.depth];return D?`<span class="tag mdep">⚓ ${D.n}</span>`:'';}
+function depthSel(v){return `<div class="mut">Depth</div><select class="mdp"><option value="">— unset —</option>${Object.entries(S.DEPTHS).map(([k,D])=>`<option value="${k}"${v===k?' selected':''}>${D.n} (${D.k})</option>`).join('')}</select>`;}
 function typeTag(l){const T=S.TYPES[l.type];return T?`<span class="ttag" style="background:${T.col}">${T.s}</span>`:'';}
 function typeSel(cur){return `<div class="mtype">${[['','General'],...Object.entries(S.TYPES).map(([k,T])=>[k,T.n+' ('+T.s+')'])].map(([k,n])=>`<button type="button" data-t="${k}" class="${k===(cur||'')?'on':''}" style="--tc:${k?S.TYPES[k].col:S.GENCOL}"><i></i>${n}</button>`).join('')}</div>`;}
 function wireType(box,st){box.querySelectorAll('.mtype button').forEach(b=>b.onclick=()=>{st.type=b.dataset.t;box.querySelectorAll('.mtype button').forEach(x=>x.classList.toggle('on',x===b));});}
@@ -3458,7 +3474,7 @@ function spotInfo(l){const o=Object.assign({},FT.baffleOpts?FT.baffleOpts():{},G
   const v=P.curve(nh),v2=P.curve(nh+0.25);
   return{P,hi,lo,sd,cur,nxt,sc,now:v,trend:v==null||v2==null?null:v2>v+0.005?'rising':v2<v-0.005?'falling':'slack',cal:P.cal};}
 function popHtml(l){const I=spotInfo(l);const u=x=>` <span class="mut">±${Math.round(x)}′</span>`;
-  const tag=typeTag(l)+(l.custom?'<span class="tag mine">my spot</span>':l.alias?`<span class="tag">renamed · ${esc(l.base)}</span>`:'');
+  const tag=typeTag(l)+depthTag(l)+(l.custom?'<span class="tag mine">my spot</span>':l.alias?`<span class="tag">renamed · ${esc(l.base)}</span>`:'');
   return `<div class="mpop" data-km="${l.km}"><h3>${esc(l.name)} ${tag}</h3>
    <div class="mut">${S.kmLabel(l.km,l.line)}${l.custom&&l.offKm>0.05?` · pin ${Math.round(l.offKm*1000)} m off centreline`:''}${l.note?'<br>📝 '+esc(l.note):''}</div>
    <table>
@@ -3468,7 +3484,7 @@ function popHtml(l){const I=spotInfo(l);const u=x=>` <span class="mut">±${Math.
     <tr><td>🎣 Run-in start</td><td class="mri">${I.cur?`<b>now</b> (started ${fWhen(I.cur.t)}${u(I.cur.u)})${I.nxt?'<br>next ':''}`:''}${I.nxt?`<b>${fWhen(I.nxt.t)}</b>${u(I.nxt.u)}${I.nxt.kind==='rise'?' <span class="mut">water starts rising</span>':''}`:(I.cur?'':'— <span class="mut">(neap: tide not reaching)</span>')}</td></tr>
     ${S.TYPES[l.type]?`<tr><td colspan="2" class="mut">${esc(S.TYPES[l.type].n)} spot — its bite score favours the ${esc(S.TYPES[l.type].n.toLowerCase())} at this spot</td></tr>`:''}<tr><td>🐟 Bite score now</td><td class="msc">${I.sc?`<b style="color:${scoreColor(I.sc.score)}">${I.sc.score}</b> <span class="mut">${esc(I.sc.tl||'')}</span>`:'—'}</td></tr>
     <tr><td>🌊 Now</td><td>${I.now!=null?I.now.toFixed(2)+' m AHD, '+I.trend:'—'}</td></tr>
-    ${FT.lureHtml?(()=>{const ll=S.latLng(l);const h=FT.lureHtml({km:l.km,line:l.line||null,lat:ll[0],lng:ll[1]},Date.now());return h?`<tr><td>🎨 Lure now</td><td class="mlure">${h.replace(/^<div class="lure1"[^>]*>🎨 /,'<div class="lure1">')}</td></tr>`:'';})():''}
+    ${FT.lureHtml?(()=>{const ll=S.latLng(l);const h=FT.lureHtml({depth:l.depth,km:l.km,line:l.line||null,lat:ll[0],lng:ll[1]},Date.now());return h?`<tr><td>🎨 Lure now</td><td class="mlure">${h.replace(/^<div class="lure1"[^>]*>🎨 /,'<div class="lure1">')}</td></tr>`:'';})():''}
    </table>
    <div class="b"><button class="pri" data-a="bite">🎣 Bite times here</button><button data-a="tides">🌊 Tides here</button><button data-a="log">📝 Log catch here</button>
    ${l.custom?'<button data-a="edit">✏️ Edit</button>':l.id?'<button data-a="alias">✏️ Rename</button>':''}</div><div class="medit"></div></div>`;}
@@ -3489,9 +3505,9 @@ function reopen(id){const l=S.get(id);const m=markers.get(id);if(l&&m)openSpot(l
 function swatches(cur){return `<div class="sw">${S.COLORS.map(c=>`<span data-c="${c}" style="background:${c}" class="${c===cur?'on':''}"></span>`).join('')}</div>`;}
 function wireSw(box,st){box.querySelectorAll('.sw span').forEach(s=>s.onclick=()=>{st.color=s.dataset.c;box.querySelectorAll('.sw span').forEach(x=>x.classList.toggle('on',x===s));});}
 function editForm(l,m,el){const box=el.querySelector('.medit');const st={type:S.typeOf(l)};
-  box.innerHTML=`<input type="text" class="mnm" maxlength="60" value="${esc(l.name)}" placeholder="Spot name"><input type="text" class="mnt" maxlength="200" value="${esc(l.note||'')}" placeholder="Note (optional)"><div class="mut">Spot type</div>${typeSel(st.type)}
+  box.innerHTML=`<input type="text" class="mnm" maxlength="60" value="${esc(l.name)}" placeholder="Spot name"><input type="text" class="mnt" maxlength="200" value="${esc(l.note||'')}" placeholder="Note (optional)"><div class="mut">Spot type</div>${typeSel(st.type)}${depthSel(l.depth||'')}
    <div class="b"><button class="pri" data-x="ok">Save</button><button data-x="del">🗑 Delete</button></div><div class="mut">Drag the pin to move it.</div>`;wireType(box,st);
-  box.querySelector('[data-x=ok]').onclick=()=>{S.update(l.id,{name:box.querySelector('.mnm').value,note:box.querySelector('.mnt').value,type:st.type});reopen(l.id);};
+  box.querySelector('[data-x=ok]').onclick=()=>{S.update(l.id,{name:box.querySelector('.mnm').value,note:box.querySelector('.mnt').value,type:st.type,depth:box.querySelector('.mdp').value});reopen(l.id);};
   box.querySelector('[data-x=del]').onclick=()=>{if(!confirm(`Delete “${l.name}”?`))return;map.closePopup();S.remove(l.id);hint('🗑 Spot deleted',2500);};
   box.querySelector('.mnm').focus();}
 /* ---- add a spot ---- */
@@ -3501,10 +3517,10 @@ function addAt(ll){let sn;try{sn=S.snap(ll.lat,ll.lng);}catch(e){return;}
     if(FT.nearestSystems)FT.nearestSystems(ll.lat,ll.lng).then(N=>{const b=N[0],e=document.getElementById('mOther');if(e&&b&&b.s.id!==FT.SYS&&b.d<1.2){e.innerHTML=`It’s on <b>${esc(b.s.name)}</b> — <button class="sm pri">Switch to it</button>`;e.querySelector('button').onclick=()=>FT.switchSystem(b.s.id);}}).catch(()=>{});return;}
   const near=S.nearest(sn.km,sn.line,0.3);const st={type:''};
   pop.setContent(`<div class="mpop"><h3>➕ New spot</h3><div class="mut">Snaps to <b>${S.kmLabel(sn.km,sn.line)}</b> for tides (${Math.round(sn.offKm*1000)} m from centreline)${near?' · near '+esc(near.name):''}</div>
-    <input type="text" class="mnm" maxlength="60" placeholder="Name e.g. Snag bend"><input type="text" class="mnt" maxlength="200" placeholder="Note (optional)"><div class="mut">Spot type — which stage of the tide it fishes best</div>${typeSel(st.type)}
+    <input type="text" class="mnm" maxlength="60" placeholder="Name e.g. Snag bend"><input type="text" class="mnt" maxlength="200" placeholder="Note (optional)"><div class="mut">Spot type — which stage of the tide it fishes best</div>${typeSel(st.type)}${depthSel('')}
     <div class="b"><button class="pri" data-x="ok">💾 Save spot</button><button data-x="no">Cancel</button></div></div>`).openOn(map);
   const el=pop.getElement();wireType(el,st);const nm=el.querySelector('.mnm');setTimeout(()=>nm.focus(),50);
-  const ok=()=>{try{const l=S.add({lat:ll.lat,lng:ll.lng,name:nm.value,note:el.querySelector('.mnt').value,type:st.type});map.closePopup();setTimeout(()=>reopen(l.id),50);}catch(e){hint('⚠ '+esc(e.message),4000);}};
+  const ok=()=>{try{const l=S.add({lat:ll.lat,lng:ll.lng,name:nm.value,note:el.querySelector('.mnt').value,type:st.type,depth:el.querySelector('.mdp').value});map.closePopup();setTimeout(()=>reopen(l.id),50);}catch(e){hint('⚠ '+esc(e.message),4000);}};
   el.querySelector('[data-x=ok]').onclick=ok;nm.onkeydown=e=>{if(e.key==='Enter')ok();};el.querySelector('[data-x=no]').onclick=()=>map.closePopup();}
 function setAdd(on){addMode=on;$('mAdd').classList.toggle('on',on);if(on)hint('Tap the map near the creek to drop a spot…');else hint('');if(map)map.getContainer().style.cursor=on?'crosshair':'';}
 /* ---- my position ---- */
@@ -3623,7 +3639,7 @@ const lineList=()=>S&&S.channels?S.channels().map(c=>({id:c.id,a:c.min,b:c.max,m
 const pAt=(km,line)=>S?S.pointAt(km,line):(GEN?B.pointOnLine(km,line||'M'):B.pointAtKm(km));
 const lineShort=id=>S?S.lineLabel(id,false):(GEN?B.lineName(id):'Baffle Ck');
 const isMainLine=id=>GEN?id==='M':(id||'B')==='B';
-function lmPt(l){const p=S?S.latLng(l):pAt(l.km,l.line);return{id:l.id||null,name:l.name,km:+l.km,line:GEN?(l.line||'M'):(l.line||'B'),lat:p[0],lng:p[1],type:l.custom&&MJ.STYPES&&MJ.STYPES[l.type]?l.type:'',custom:!!l.custom,lm:true};}
+function lmPt(l){const p=S?S.latLng(l):pAt(l.km,l.line);return{id:l.id||null,name:l.name,km:+l.km,line:GEN?(l.line||'M'):(l.line||'B'),lat:p[0],lng:p[1],type:l.custom&&MJ.STYPES&&MJ.STYPES[l.type]?l.type:'',depth:l.custom&&l.depth?l.depth:'',custom:!!l.custom,lm:true};}
 function scanPts(){const out=[];
   for(const L of lineList()){const len=L.b-L.a;if(len<0.3)continue;const ks=[];
     if(L.main){const step=len<=30?1.5:2;for(let km=Math.min(0.5,len/2);km<=L.b+1e-6;km+=step)ks.push(km);if(L.b-ks[ks.length-1]>0.6)ks.push(L.b);}
@@ -3743,7 +3759,7 @@ function renderLegend(){const P=st.cfg;const wx=P&&P.wxInfo&&P.wxInfo.ok?`weathe
 /* ---------- day detail ---------- */
 function stageOf(T,t){for(const s of T.stands||[])if(t>=s.t0-15*6e4&&t<=s.t1)return'stand';const a=MJ.stageAt?MJ.stageAt(t,T.ext,T.runIn):{c:''};return a.c==='flood'?'ri':a.c||'';}
 const stTag=c=>{const s=STG[c];return s?`<span class="cstg" style="background:${s[1]}">${s[0]}</span>`:'';};
-function reasonsOf(p,dd){const r=[];if(p.L)r.push(p.L.label);if(p.T)r.push(p.T.label);if(p.S&&p.S.v>=0.3)r.push(p.S.label);
+function reasonsOf(p,dd){const r=[];if(p.L)r.push(p.L.label);if(p.T)r.push(p.T.label);if(p.DEP)r.push(p.DEP.label);if(p.S&&p.S.v>=0.3)r.push(p.S.label);
   if(dd.mpf>=0.75)r.push(MJ.phaseName(dd.illum.phase)+' (strong moon)');if(p.WX&&p.WX.notes)r.push(...p.WX.notes.slice(0,2));if(p.TF&&p.TF.est)r.push('Water temp: seasonal estimate');return r;}
 function winsOf(R){const dd=R.dd;let W=dd.windows.slice();if(set.dd){W=W.filter(w=>w.peak.alt>=C.DDLO&&w.peak.alt<=C.DDHI);
     if(!W.length){let b=null;for(const p of dd.pts)if(p.alt>=C.DDLO&&p.alt<=C.DDHI&&(!b||p.score>b.score))b=p;if(b)W=[{start:b.t-30*6e4,end:b.t+45*6e4,peak:b,score:b.score}];}}
@@ -3763,7 +3779,7 @@ async function openDay(ds){const sh=$('calSheet');sh.hidden=false;document.body.
   const mine=(S?S.customs():[]).map(lmPt).map(p=>{try{const W=winsOf(refine(p,ds)).sort((a,b)=>b.score-a.score);return{p,w:W[0]||null,more:W.slice(1,3)};}catch(e){return{p,w:null,more:[]};}}).sort((a,b)=>(b.w?b.w.score:-1)-(a.w?a.w.score:-1));
   const ms=performance.now()-t0;st.sheet={ds,top,mine,ms,targets:[]};
   const T=st.sheet.targets,btns=x=>{T.push(x.pt);const k=T.length-1;return `<div class="cwbtn"><button class="sm pri" data-act="bite" data-k="${k}">🎣 Bite times here</button><button class="sm" data-act="tides" data-k="${k}">🌊 Tides</button><button class="sm" data-act="map" data-k="${k}">🗺 Map</button></div>`;};
-  const win=x=>`<div class="cwin" style="border-left-color:${scoreColor(x.score)}"><div class="cws" style="color:${scoreColor(x.score)}">${x.score}</div><div class="cwb"><b>${fmtT(x.w.start)} – ${fmtT(x.w.end)}</b> ${stTag(x.stage)} <span class="mut">${STG[x.stage]?STG[x.stage][2]:''}</span><br>${ptLabel(x.pt)}<ul>${x.reasons.map(s=>'<li>'+esc(s)+'</li>').join('')}</ul>${FT.lureHtml?FT.lureHtml({km:x.pt.km,line:x.pt.line||null,lat:x.pt.lat,lng:x.pt.lng},x.w.peak.t):''}${btns(x)}</div></div>`;
+  const win=x=>`<div class="cwin" style="border-left-color:${scoreColor(x.score)}"><div class="cws" style="color:${scoreColor(x.score)}">${x.score}</div><div class="cwb"><b>${fmtT(x.w.start)} – ${fmtT(x.w.end)}</b> ${stTag(x.stage)} <span class="mut">${STG[x.stage]?STG[x.stage][2]:''}</span><br>${ptLabel(x.pt)}<ul>${x.reasons.map(s=>'<li>'+esc(s)+'</li>').join('')}</ul>${FT.lureHtml?FT.lureHtml({depth:x.pt.depth,km:x.pt.km,line:x.pt.line||null,lat:x.pt.lat,lng:x.pt.lng},x.w.peak.t):''}${btns(x)}</div></div>`;
   const stands=[];if(!GEN)for(const x of top){const R=refine(x.pt,ds);const s0=MJ.dayStart(ds,TZ);for(const s of R.T.stands||[])if(s.t>=s0&&s.t<s0+DAY&&!stands.some(q=>q.n===x.pt.name))stands.push({n:x.pt.name,s});}
   $('calSheetB').innerHTML=`<p class="csub">${mo.e} ${esc(mo.n)}, ${Math.round(mo.f*100)}% lit · ${fc?'<span class="tagf">FORECAST</span> weather &amp; sea temp from the forecast':'<span class="tago">OUTLOOK</span> tide, sun &amp; moon (+ flood cycle) — weather neutral, seasonal water temp'}${set.dd?' · dawn/dusk only':''}</p>`+
     `<div class="row" style="margin:-2px 0 8px"><button class="sm pri" id="calPlan">🗓 Plan my day</button><span class="mut" style="font-size:.76rem">fish / move / rest schedule for ${esc(FT.SYSSHORT)}</span></div>`+
@@ -3898,7 +3914,7 @@ const span=(a,b)=>`${fmtT(a).replace(/(am|pm)$/,m=>fmtT(b).slice(-2)===m?'':m)}�
 function render(P,cfg){const fc=cfg&&cfg.wx&&cfg.wx.tt.length&&cfg.wx.tt[cfg.wx.tt.length-1]>=P.t0+6*36e5;
   const B0=P.blocks,fish=B0.filter(b=>b.ty==='fish');
   const R5=(cls,c4,why,narrow=true)=>`<tr class="${cls}${narrow?'':' pone1'}">${c4}<td class="pwc">${why}</td></tr>${narrow?`<tr class="pwr ${cls}"><td colspan="4">${why}</td></tr>`:''}`;
-  const rows=B0.map((b,k)=>{if(b.ty==='fish')return R5('fish'+(b.optional?' opt':''),`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">🎣 Fish${b.optional?'<br><span class="popt">optional</span>':''}</td><td>${nmKm(P,b.loc)}</td><td class="ps" style="color:${scoreColor(b.peak)}">${b.peak}<small>avg ${b.avg}</small></td>`,`<ul>${b.why.map(w=>'<li>'+esc(T(w))+'</li>').join('')}</ul>${(()=>{const p=P.spots[b.loc];return p&&FT.lureHtml?FT.lureHtml({km:p.km,line:p.line||null,lat:p.lat,lng:p.lng},(b.t0+b.t1)/2):'';})()}`);
+  const rows=B0.map((b,k)=>{if(b.ty==='fish')return R5('fish'+(b.optional?' opt':''),`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">🎣 Fish${b.optional?'<br><span class="popt">optional</span>':''}</td><td>${nmKm(P,b.loc)}</td><td class="ps" style="color:${scoreColor(b.peak)}">${b.peak}<small>avg ${b.avg}</small></td>`,`<ul>${b.why.map(w=>'<li>'+esc(T(w))+'</li>').join('')}</ul>${(()=>{const p=P.spots[b.loc];return p&&FT.lureHtml?FT.lureHtml({depth:p.depth,km:p.km,line:p.line||null,lat:p.lat,lng:p.lng},(b.t0+b.t1)/2):'';})()}`);
     if(b.ty==='move')return R5('move',`<td class="pt">${fmtT(b.t0)}</td><td class="pp">🚤 Move</td><td>→ ${nmKm(P,b.loc)}<small class="mut pmv"> · ${b.km} km, ~${b.min} min</small></td><td class="ps">—</td>`,`<span class="mut">${b.km} km · ~${b.min} min</span>`,false);
     const first=k===0,last=k===B0.length-1,sl=P.best.slice(Math.round((b.t0-P.t0)/9e5),Math.round((b.t1-P.t0)/9e5)),mx=Math.max(...sl),av=sl.length?Math.round(sl.reduce((a,v)=>a+v,0)/sl.length):NaN,here=nm(P,b.loc);
     const what=first&&b.next?`Launch from ${here}${b.leaveT?' by '+fmtT(b.leaveT):''}`:last||!b.next?`Done — back to ${nm(P,P.launch)}`:`At ${here} — be back at ${nm(P,b.next.loc)} by ${fmtT(b.next.t)}`;

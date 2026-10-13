@@ -20,7 +20,7 @@ OUT = os.path.join(REPO, 'data', 'catches.csv')
 AEST = dt.timezone(dt.timedelta(hours=10))
 COLS = ['session','anon','slot_start','band_km','line','band','region','score','tide','min_from_runin','light','solunar','moon_phase',
         'tide_source','wind_kmh','dp3_hpa','bites','fish','mj','kept','max_len_cm','species','bait','received','system',
-        'stage','spot_type','historical']
+        'stage','spot_type','historical','catch_only']
 PH = ['New','Wax cres','1st qtr','Wax gib','Full','Wan gib','Last qtr','Wan cres']
 STAGE = SCH.get('stage', ['ri','flood','tot','ro','bot']); STYPE = SCH.get('stype', ['ri','tot','bot','ro'])
 SPECIES = [c for c,_ in SCH['species']]; BAIT = [c for c,_ in SCH['bait']]
@@ -118,7 +118,7 @@ def validate(m, now):
                      'moon_phase': PH[mp], 'tide_source': ts, 'wind_kmh': '' if wind is None else wind, 'dp3_hpa': '' if dp3 is None else dp3,
                      'bites': bites, 'fish': fish, 'mj': mj, 'kept': kept, 'max_len_cm': '' if ml is None else ml, 'species': sp, 'bait': bait,
                      'received': dt.datetime.now(AEST).strftime('%Y-%m-%d'), 'system': sysid,
-                     'stage': stage, 'spot_type': stype, 'historical': hist})
+                     'stage': stage, 'spot_type': stype, 'historical': hist, 'catch_only': 'y' if m.get('co') == 1 else ''})
     if sum(r['bites'] for r in rows) > 60: raise ValueError('implausible bite count')
     return {'sid': sid, 'anon': anon, 'test': test, 'day': iso(s0)[:10]}, rows
 

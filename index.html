@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610132132"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610132132"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610132132">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610132132">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610132231"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610132231"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610132231">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610132231">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610132132">
+<meta name="app-version" content="202610132231">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -328,6 +328,14 @@ nav.tabs a[data-tab=cal].on{box-shadow:inset 0 3px 0 #b48cff}
 .pnote{font-size:.76rem;color:var(--mut)}
 .pshare{width:100%;min-height:140px;font-size:.78rem;background:#0d1f22;color:var(--ink);border:1px solid #2b5157;border-radius:8px}
 
+.lsw{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid #ffffff55;vertical-align:-2px;margin-right:3px;flex:none}
+.lure .lchs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.lch{display:inline-flex;align-items:center;gap:2px;background:#0d1f22;border:1px solid #2b5157;border-radius:14px;padding:3px 9px 3px 5px;font-size:.84rem}
+.lch .lsw{width:16px;height:16px}
+.lure .mut{font-size:.8rem}
+.lure1{font-size:.76rem;color:var(--mut,#9db5b1);margin-top:2px;line-height:1.35}
+.lure1 .lsw{width:11px;height:11px;margin-right:1px}
+
 .tab[hidden]{display:none}
 .sysbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1000px;margin:0 auto 8px;font-size:.85rem}
 .sysbar label{flex:1 1 110px;min-width:0;display:flex;align-items:center;gap:4px}
@@ -381,6 +389,7 @@ input:disabled{opacity:.4}
   <section class="card">
     <h2>🎯 Best bite windows</h2>
     <div id="mj-windows"><span class="spin"></span> Loading…</div>
+    <div id="mj-lure"></div>
   </section>
 
   <section class="card">
@@ -680,6 +689,7 @@ input:disabled{opacity:.4}
       <label class="mut">Count <input type="number" id="cN" min="1" max="20" value="1" style="width:64px"></label>
       <label class="mut">Length <input type="number" id="cLen" min="1" max="150" step="0.5" placeholder="cm" style="width:76px"></label>
       <select id="cFate"></select>
+      <input type="text" id="cColour" list="cColourL" placeholder="Lure colour (optional)" style="flex:1 1 140px"><datalist id="cColourL"></datalist>
     </div>
     <div class="row" style="margin-top:6px"><input type="text" id="cCnote" placeholder="Catch note (optional, stays on phone)"><button id="cAddCatch">＋ Add bite/catch</button></div>
   </div></div>
@@ -723,7 +733,7 @@ input:disabled{opacity:.4}
     <button class="sm" id="cExport">⬇ Export CSV</button>
     <label class="sm cfile">⬆ Import CSV<input type="file" id="cImport" accept=".csv,text/csv" hidden></label>
     <span class="mut" id="cIoMsg"></span>
-    <details class="mut" style="margin-top:6px"><summary>Import old catches (any year back to 1990)</summary>A plain CSV with a header row works, e.g.<br><code>date,time,spot,km,caught,count,size,species,hours,notes<br>2014-03-08,6pm,Flat Rock Rd ramp,,y,2,48cm,jack,3,run-in<br>12/01/2009,dawn,,22.5,n,,,,2,</code><br>Only <b>date</b> is required. Dates: YYYY-MM-DD or DD/MM/YYYY. Times can be rough (18:30, 6pm, dawn, dusk, morning, arvo, night; blank = 7am). Spot = a landmark or My-spot name, or give <b>km</b> (plus <b>line</b> for side creeks, e.g. mosq / Mosquito, with km from its junction). caught y/n; size in cm (mm/inch ok); hours defaults to 2; a row with a catch but no hours becomes a <b>catch-only</b> 30-min entry centred on the time (presence-only in the stats). Tide, moon, solunar &amp; sun are computed from the model; weather is marked unknown for old dates. Re-importing the same file skips duplicates.</details>
+    <details class="mut" style="margin-top:6px"><summary>Import old catches (any year back to 1990)</summary>A plain CSV with a header row works, e.g.<br><code>date,time,spot,km,caught,count,size,species,hours,notes<br>2014-03-08,6pm,Flat Rock Rd ramp,,y,2,48cm,jack,3,run-in<br>12/01/2009,dawn,,22.5,n,,,,2,</code><br>Only <b>date</b> is required. Dates: YYYY-MM-DD or DD/MM/YYYY. Times can be rough (18:30, 6pm, dawn, dusk, morning, arvo, night; blank = 7am). Spot = a landmark or My-spot name, or give <b>km</b> (plus <b>line</b> for side creeks, e.g. mosq / Mosquito, with km from its junction). caught y/n; size in cm (mm/inch ok); optional <b>colour</b> = lure colour; hours defaults to 2; a row with a catch but no hours becomes a <b>catch-only</b> 30-min entry centred on the time (presence-only in the stats). Tide, moon, solunar &amp; sun are computed from the model; weather is marked unknown for old dates. Re-importing the same file skips duplicates.</details>
   </div>
 </section>
 
@@ -735,7 +745,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610132132</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610132231</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1330,6 +1340,52 @@ for(const s of SIDES){const jn=s.short.replace(/ Ck$/,' Creek')+' junction';
 L.push({name:'Euleilah Ck tidal limit (est.)',km:EUMAX,line:'E',est:true,note:(EUMAX-EJ).toFixed(1)+' km up Euleilah — DEM/OSM estimate, benchmark me'});
 const hr=L.find(l=>/Hills Rd gauge/.test(l.name));if(hr)hr.line='E';
 })();
+</script>
+<script id="ft-lure">/* ---- Lure colour guide for mangrove jack (pure; window.FTLure) ----
+   Blend of a generic clarity × light chart with QLD estuary jack lore: natural prawn / mullet / pearl in clear bright water,
+   dark silhouettes (black, purple, motor oil, deep red) in dirty water and at night, gold / copper / pink flash in tea-coloured tannin water,
+   chartreuse & firetiger when stained but light still gets in; rattles / vibes when it's muddy. A guide, not gospel. */
+(function(G){
+const C={pearl:['Pearl / white','#f3efe4'],prawn:['Natural prawn','#c9a27e'],mullet:['Silver mullet','#a9b4ba'],ghost:['Translucent / ghost','#dfeceb'],
+  green:['Green / olive','#6b8e4e'],chart:['Chartreuse','#b8f02a'],orange:['Fluoro orange','#ff8a1f'],red:['Deep red','#a3122a'],gold:['Gold flash','#d4a017'],
+  pink:['Pink','#ff6fae'],black:['Black','#151515'],blue:['Dark blue','#1f3f9f'],purple:['Purple','#5b2a86'],fire:['Firetiger','linear-gradient(90deg,#b8f02a,#ff8a1f 55%,#1d3b1a)'],
+  glow:['Glow','#d8ffb0'],uv:['UV','#8a5cff'],oil:['Motor oil','#4a3a1a']};
+/* top-3 per clarity × light (chart, re-ordered / swapped with local lore) */
+const T={clear:{bright:['prawn','pearl','mullet'],overcast:['pearl','fire','red'],low:['pearl','uv','red'],night:['black','blue','uv']},
+  stained:{bright:['chart','gold','orange'],overcast:['chart','fire','purple'],low:['fire','orange','red'],night:['purple','chart','glow']},
+  muddy:{bright:['black','chart','gold'],overcast:['black','purple','chart'],low:['black','blue','glow'],night:['black','purple','glow']}};
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+/* o: {stage:'ri'|'flood'|'tot'|'ro'|'bot', range, rangeMax, km, maxKm, flood:{phase,day}|null, rain24, rain, wind, cloud, code, alt, moon(0..1), tide:boolean} */
+function advise(o){const why=[];let c=0.22;
+  const up=o.km!=null&&o.maxKm?cl(o.km/o.maxKm):0;const tannin=up>0.55;c+=0.28*up;if(up>0.55)why.push('upper creek (tannin)');
+  if(o.tide!==false&&o.range!=null&&o.rangeMax){const rN=cl(o.range/o.rangeMax);c+=0.24*(rN-0.55);if(rN>0.85)why.push('spring tide stirring');}
+  const SG={ri:-0.13,flood:-0.08,tot:-0.1,ro:0.08,bot:0.15}[o.stage]||0;c+=SG;
+  const F=o.flood;if(F){const d={rising:0.6,dirty:0.6,clearing:0.35-0.05*Math.max(0,(F.day||4)-4),prime:0.12,tapering:0.05,runoff:0.25}[F.phase]||0;c+=d;if(d>0.1)why.push(F.phase==='runoff'?'runoff':'flood '+F.phase);}
+  if(o.rain24!=null&&o.rain24>3){c+=Math.min(0.25,o.rain24/40);why.push(Math.round(o.rain24)+' mm rain 24 h');}
+  if(o.wind!=null&&o.wind>20){c+=cl((o.wind-20)/30,0,0.15);if(o.wind>28)why.push('wind chop');}
+  c=cl(c);const clar=c<0.34?'clear':c<0.62?'stained':'muddy';
+  let light;const a=o.alt;const storm=o.code!=null&&o.code>=95,dark=(o.cloud!=null&&o.cloud>=70)||storm||(o.rain!=null&&o.rain>1);
+  if(a!=null&&a<-6)light='night';else if(a!=null&&a<6)light='low';else if(dark)light=a<12?'low':'overcast';else if(a!=null&&a<14)light='low';else light='bright';
+  if(light==='night'&&o.moon!=null&&o.moon>0.75&&!(o.cloud>60))why.push('bright moon');
+  let k=T[clar][light].slice();
+  if(tannin&&clar!=='muddy'&&(light==='bright'||light==='overcast'))k=k.includes('gold')?['gold',...k.filter(x=>x!=='gold')]:['gold',k[0],k[1]];
+  if(light==='night'&&o.moon>0.75&&!(o.cloud>60)&&clar==='clear')k=['black','pearl','blue'];
+  k=k.slice(0,3);
+  const rattle=clar==='muddy'||(light==='night'&&clar!=='clear');
+  const prof=clar==='muddy'?'vibe or deep-diving hardbody'+(rattle?' with rattle':''):light==='night'?'surface walker or shallow hardbody'+(rattle?' with rattle':''):clar==='clear'?'natural prawn / shad soft plastic, weedless, slow past cover':'paddle-tail soft plastic or suspending hardbody';
+  const ST={ri:'run-in',flood:'flood tide',tot:'top of tide',ro:'run-out',bot:'bottom of tide'}[o.stage]||'';
+  const LW={bright:'bright',overcast:'overcast',low:'low light',night:'night'}[light];
+  const head=`${clar[0].toUpperCase()+clar.slice(1)}${tannin&&clar!=='muddy'?' tannin':''}${ST?' '+ST:''}, ${LW}`;
+  return{clarity:clar,c:Math.round(c*100)/100,light,tannin,keys:k,colours:k.map(x=>C[x][0]),swatch:k.map(x=>C[x][1]),rattle,profile:prof,head,why,
+    line:`${head}: ${k.map(x=>C[x][0].toLowerCase()).join(', ')}`};}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function sw(k){return `<span class="lsw" style="background:${C[k][1]}" title="${esc(C[k][0])}"></span>`;}
+/* compact (one line) or full card */
+function html(r,full){if(!r)return '';const chips=r.keys.map(k=>`<span class="lch">${sw(k)}${esc(C[k][0])}</span>`).join('');
+  if(!full)return `<div class="lure1" title="Lure colour guide">🎨 ${r.keys.map(sw).join('')} <span>${esc(r.head)}: ${esc(r.keys.map(k=>C[k][0].toLowerCase()).join(', '))}</span></div>`;
+  return `<div class="lure"><div class="lchs">${chips}</div><div class="mut">${esc(r.head)}${r.why.length?' · '+esc(r.why.join(', ')):''}</div><div class="mut">Profile: ${esc(r.profile)}.</div></div>`;}
+G.FTLure={advise,html,COLOURS:C,TABLE:T};
+})(typeof window!=='undefined'?window:self);
 </script>
 <script id="ft-engine">/* ===== Multi-system tide engine =====
    FT.makeSystemBT(S) turns a data/systems/<id>.json file into an object with the same API as the Baffle model (window.BT),
@@ -2008,7 +2064,7 @@ function renderDay(i){
   $('mj-stats').innerHTML=stats.map(s=>`<div class="stat"><small>${s[0]}</small><b>${s[1]}</b></div>`).join('');
   // windows
   $('mj-windows').innerHTML=d.windows.length?d.windows.map(w=>{const r=reasons(w.peak);return `<div class="win" style="border-color:${scoreColor(w.score)}"><div class="sc" style="color:${scoreColor(w.score)}">${w.score}</div><div><div class="t">${fmtT(w.start,tz)} – ${fmtT(w.end,tz)}</div><ul>${r.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div></div>`;}).join(''):'<p class="mut">No standout windows.</p>';
-  drawChart(d);try{renderMySpots();}catch(e){console.error('myspots',e);}
+  drawChart(d);try{renderMySpots();}catch(e){console.error('myspots',e);}try{renderLure();}catch(e){console.error('lure',e);}
   $('mj-hours').innerHTML=d.hourly.map(h=>`<div class="hr" style="background:${scoreColor(h.score)}" title="${fmtT(h.t,tz)}: ${h.score}">${h.score}<span>${fmtT(h.t,tz,{minute:undefined}).replace(':00','')}</span></div>`).join('');
   document.querySelectorAll('.day').forEach((el,k)=>el.classList.toggle('sel',k===i));
 }
@@ -2069,7 +2125,7 @@ function drawChart(d){
   const move=ev2=>{const r=svg.getBoundingClientRect();const cx=(ev2.touches?ev2.touches[0].clientX:ev2.clientX)-r.left;const vx=cx/r.width*W;if(vx<L||vx>W-R){tip.style.display='none';return;}
     const t=d.t0+(vx-L)/pw*(d.t1-d.t0);const i=Math.max(0,Math.min(d.pts.length-1,Math.round((t-d.t0)/(d.pts[1].t-d.t0))));const p=d.pts[i];
     tip.innerHTML=`<b>${fmtT(p.t,tz)} · ${p.score}</b><br>${p.L.label}${p.T?'<br>'+p.T.label:''}${p.tide!=null?' ('+p.tide.toFixed(2)+'m)':''}${p.S.v>0.3?'<br>'+p.S.label:''}`;
-    tip.style.display='block';const left=Math.min(r.width-tip.offsetWidth-4,Math.max(0,cx+10));tip.style.left=left+'px';tip.style.top='8px';
+    tip.style.display='block';try{renderLure(p);}catch(e){}const left=Math.min(r.width-tip.offsetWidth-4,Math.max(0,cx+10));tip.style.left=left+'px';tip.style.top='8px';
     const c=svg.querySelector('#cur');c.setAttribute('x1',x(p.t));c.setAttribute('x2',x(p.t));c.setAttribute('opacity','.6');};
   svg.onmousemove=move;svg.ontouchstart=move;svg.ontouchmove=move;svg.onmouseleave=()=>{tip.style.display='none';};
 }
@@ -2096,6 +2152,38 @@ $('mj-defBtn').onclick=()=>setLoc({...DEF});
 $('mj-goBtn').onclick=run;$('mj-date').onchange=()=>{FT.setDate($('mj-date').value,'bite');run();};
 FT.biteSetLoc=setLoc;FT.biteGo=(l,v)=>{if(v&&$('mj-date').value!==v){$('mj-date').value=v;FT.setDate(v,'bite');}setLoc(l);};FT.biteSetDate=v=>{if($('mj-date').value!==v){$('mj-date').value=v;run();}};
 FT.biteRefreshIfBaffle=()=>{if(loc.baffleKm!=null)run();};
+/* ---- lure colour (injected into the Bite times closure) ----
+   FT.lureAt(spot{km,line,lat,lng},t) → FTLure advice from the spot's own predicted tide stage/range at t, sun/moon, the loaded
+   forecast weather (if it covers t), recent rain and the flood cycle. */
+const lureCache=new Map();
+function lureDay(spot,ds){const k=ds+'|'+(spot.km!=null?(+spot.km).toFixed(2)+(spot.line||''):spot.lat.toFixed(3)+','+spot.lng.toFixed(3))+'|'+(state&&state.runId||0);
+  let v=lureCache.get(k);if(v)return v;if(lureCache.size>300)lureCache.clear();
+  const tz='Australia/Brisbane';let r=null;
+  if(spot.km!=null&&window.BT){try{r=baffleTide(ds,spot.km,spot.line);}catch(e){r=null;}}
+  let mx=0;if(r)for(let i=1;i<r.ext.length;i++)mx=Math.max(mx,Math.abs(r.ext[i].h-r.ext[i-1].h));
+  const dd=MJ.computeDay(Object.assign({dateStr:ds,tz,lat:spot.lat,lng:spot.lng,wxFn:state&&state.wxFn,fresh:state&&state.fresh},r?{tideFn:r.fn,ext:r.ext,runIn:r.runIn,weekRange:r.ext.length>1?{max:mx}:null}:{}));
+  v={dd,r,mx};lureCache.set(k,v);return v;}
+function lureMaxKm(spot){if(spot.km==null||!window.BT)return null;try{return BT.lineMaxKm?BT.lineMaxKm(spot.line||(BT.generic?'M':'B')):(BT.lineMax?BT.lineMax(spot.line||'M'):BT.MAXKM);}catch(e){return null;}}
+function lureFromPt(p,spot,V,t){const T=p.T;let stage=null,range=null;
+  if(T){stage=T.stage!=null?T.stage:(T.prev&&T.next?(MJ.stageAt(t,[T.prev,T.next],V.r?V.r.runIn:[])||{}).c:null);if(T.prev&&T.next)range=Math.abs(T.next.h-T.prev.h);}
+  const w=p.wx||null;let rain24=null;const wf=state&&state.wxFn;
+  if(wf){let s=0,n=0;for(let h=0;h<24;h++){const x=wf(t-h*3600e3);if(x&&x.rain!=null){s+=x.rain;n++;}}if(n>=12)rain24=s*24/n;}
+  const fl=state&&state.fresh&&MJ.floodAdj?MJ.floodAdj(state.fresh,t):null;
+  const il=MJ.moonIllum(t);
+  return FTLure.advise({stage,range,rangeMax:V.mx||null,tide:!!T,km:spot.km,maxKm:lureMaxKm(spot),flood:fl,rain24,rain:w&&w.rain,wind:w&&w.wind,cloud:w&&w.cloud,code:w&&w.code,alt:p.alt,moon:il.fraction});}
+FT.lureAt=function(spot,t){try{const ds=MJ.ymd(t,'Australia/Brisbane');const V=lureDay(spot,ds);const d=V.dd;
+  const p=d.pts[Math.max(0,Math.min(d.pts.length-1,Math.round((t-d.t0)/(15*60e3))))];return p?lureFromPt(p,spot,V,t):null;}catch(e){console.error('lure',e);return null;}};
+FT.lureHtml=(spot,t,full)=>FTLure.html(FT.lureAt(spot,t),full);
+/* Bite tab card: now (if the selected day is today) else the best window; chart touch moves it */
+let lureT=null;
+function lureSpot(){return{km:loc.baffleKm!=null?loc.baffleKm:null,line:loc.baffleLine||null,lat:loc.lat,lng:loc.lng};}
+function renderLure(p){const el=$('mj-lure');if(!el||!state||!state.days)return;const d=state.days[state.sel];if(!d)return;
+  let pt=p;if(!pt){const now=Date.now();if(now>=d.t0&&now<d.t1)pt=d.pts[Math.round((now-d.t0)/(15*60e3))];else{const W=(d.windows||[]).slice().sort((a,b)=>b.score-a.score)[0];pt=W?W.peak:d.pts[Math.floor(d.pts.length/2)];}}
+  if(!pt)return;lureT=pt.t;const V={r:null,mx:null};try{const sp=lureSpot();if(sp.km!=null&&window.BT){const v=lureDay(sp,d.dateStr);V.r=v.r;V.mx=v.mx;}}catch(e){}
+  const r=lureFromPt(pt,lureSpot(),V,pt.t);
+  el.innerHTML=`<h3 style="margin:10px 0 4px;font-size:.95rem">🎨 Lure colour <span class="mut" style="font-weight:400">· ${fmtT(pt.t,state.tz)}${p?'':Date.now()>=d.t0&&Date.now()<d.t1?' (now)':' (best window)'} · guide</span></h3>${FTLure.html(r,true)}<p class="mut" style="margin:2px 0 0;font-size:.74rem">Estimated water clarity (tide stage &amp; range, km up the creek, flood/rain, wind) × light (sun, cloud, moon). Touch the chart to see another time. A guide only — log the colour you used in the 📝 Catch log to test it.</p>`;
+  document.body.dataset.lure=r.keys.join(',');}
+
 /* ---- weather v2 (Bite closure): fresh-flow gauge for this system, storm/drizzle day badges ---- */
 let _fresh={k:null,at:0,v:null};
 /* flood-cycle state from this system's fresh-flow gauge record (Baffle: Mimdale 539132 archive + 7-day table; other systems:
@@ -2166,7 +2254,7 @@ function renderMySpots(){const el=$('mj-mySpots');if(!el||!state||!state.days||!
     const tz=state.tz;
     el.innerHTML=migH+`<div class="mys">${R.map((x,i)=>{const w=x.w,T=w&&w.peak.T;const sel=loc.spotId===x.c.id;
       return `<div class="myrow${sel?' on':''}" data-id="${esc(x.c.id)}"><div class="myrk">${i+1}</div><div class="mysc" style="color:${w?scoreColor(w.score):'#9db5b1'}">${w?w.score:'—'}</div><div class="myb"><div>${stTag(x.c.type)} <b>${esc(x.c.name)}</b> <small class="mut">km ${(+x.c.km).toFixed(1)}</small></div>`+
-        `<div class="mut">${w?`<b style="color:#e8f1ef">${fmtT(w.start,tz)} – ${fmtT(w.end,tz)}</b> · ${esc(T&&T.stageL?T.stageL:T?T.label:'')}${x.stand?` · <span title="single-high day: the small high doesn’t reach this spot">🌗 stand ${fmtT(x.stand.t0,tz)}–${fmtT(x.stand.t1,tz)} (no rise)</span>`:''}${x.more.length?` · also ${x.more.map(m=>fmtT(m.start,tz)+' ('+m.score+')').join(', ')}`:''}`:'no good window'}</div></div><button class="sm">🎣</button></div>`;}).join('')}</div><p class="mut" style="margin:6px 0 0;font-size:.78rem">Each spot scored on its own predicted tide and type for ${esc(d.dateStr)}; same weather &amp; water temp. Tap a spot to open its full bite times.</p>`;
+        `<div class="mut">${w?`<b style="color:#e8f1ef">${fmtT(w.start,tz)} – ${fmtT(w.end,tz)}</b> · ${esc(T&&T.stageL?T.stageL:T?T.label:'')}${x.stand?` · <span title="single-high day: the small high doesn’t reach this spot">🌗 stand ${fmtT(x.stand.t0,tz)}–${fmtT(x.stand.t1,tz)} (no rise)</span>`:''}${x.more.length?` · also ${x.more.map(m=>fmtT(m.start,tz)+' ('+m.score+')').join(', ')}`:''}`:'no good window'}</div>${w&&FT.lureHtml?FT.lureHtml({km:x.c.km,line:x.c.line||null,lat:x.c.lat,lng:x.c.lng},w.peak.t):''}</div><button class="sm">🎣</button></div>`;}).join('')}</div><p class="mut" style="margin:6px 0 0;font-size:.78rem">Each spot scored on its own predicted tide and type for ${esc(d.dateStr)}; same weather &amp; water temp. Tap a spot to open its full bite times.</p>`;
     el.querySelectorAll('.myrow').forEach(r=>r.onclick=()=>{const c=FT.spots.get(r.dataset.id);if(!c)return;
       setLoc(Object.assign({name:c.name+SFX,lat:c.lat,lng:c.lng,tz:'Australia/Brisbane',baffleKm:c.km,spotId:c.id},GENB?{baffleLine:c.line||'M',sys:FT.SYS}:c.line?{baffleLine:c.line}:{}));});}
   if($('msMigOk'))$('msMigOk').onclick=()=>FT.spots.migrationSeen();}
@@ -2920,6 +3008,7 @@ function rowsOf(s,anon){const c=s.ctx;if(!c||!c.slots||!c.slots.length)return []
 function fillSelects(){
   $('cSp').innerHTML=SCH.species.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
   $('cFate').innerHTML=SCH.fates.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
+  if(window.FTLure)$('cColourL').innerHTML=Object.values(FTLure.COLOURS).map(c=>`<option value="${esc(c[0])}">`).join('');
   $('cBaitCat').innerHTML=SCH.bait.map(([c,n])=>`<option value="${c}">${esc(n)}</option>`).join('');
   fillSpotSel();}
 function fillSpotSel(){const L=BT.LANDMARKS,mine=L.map((l,i)=>[l,i]).filter(x=>x[0].custom),bi=L.map((l,i)=>[l,i]).filter(x=>!x[0].custom);
@@ -2943,14 +3032,14 @@ function setCaught(v){$('cYesBites').checked=v==='y';$('cNoBites').checked=v==='
 function coUI(CO){const fc=$('cFormCard');fc.classList.toggle('co',CO);['cSessRow','cCaughtRow','cSessExtra','cCatchH','cCatchList','cAddCatch'].forEach(id=>$(id).hidden=CO);
   $('cCtLab').textContent=CO?'Date & time caught':'Time';$('cCnote').placeholder=CO?'Notes (optional, stays on phone)':'Catch note (optional, stays on phone)';
   if(CO){$('cCatchSec').hidden=false;const c=(F.catches||[])[0];$('cCt').value=toLocalInput(c?c.t:Math.min(Date.now(),Math.floor(Date.now()/60e3)*60e3));
-    if(c){$('cSp').value=c.sp;$('cN').value=c.n||1;$('cLen').value=c.len||'';$('cFate').value=c.fate;$('cCnote').value=c.note||'';}else{$('cLen').value='';$('cCnote').value='';$('cN').value=1;}}}
-const fishTyped=()=>$('cLen').value!==''||$('cCnote').value.trim()!=='';
+    if(c){$('cSp').value=c.sp;$('cN').value=c.n||1;$('cLen').value=c.len||'';$('cFate').value=c.fate;$('cCnote').value=c.note||'';$('cColour').value=c.colour||'';}else{$('cLen').value='';$('cCnote').value='';$('cN').value=1;$('cColour').value='';}}}
+const fishTyped=()=>$('cLen').value!==''||$('cCnote').value.trim()!==''||$('cColour').value.trim()!=='';
 function closeForm(){F=null;$('cFormCard').hidden=true;}
 function spotUI(){const sp=F&&F.spot;$('cSpotSel').value=sp?(sp.kind==='landmark'?((i=>i>=0?'L'+i:'cur')(BT.LANDMARKS.findIndex(l=>sp.spotId?l.id===sp.spotId:Math.abs(l.km-sp.km)<0.01))):sp.kind==='region'?'R'+sp.rg:'cur'):'';
   const b=shareBand(sp);
   $('cSpotInfo').innerHTML=sp?`📍 <b>${spotDesc(sp)}</b>${sp.acc!=null?' ±'+sp.acc+' m':''}<br>🔒 Shared as: <b>${esc(b.label)}</b>${sp.km==null&&sp.offKm!=null?` <span class="mut">(${sp.offKm.toFixed(1)} km from the ${GEN?esc(FT.SYSNAME):'Baffle'} channel — not snapped)</span>`:''}`:'Pick a spot: 📡 GPS (snaps to the creek), a landmark, the Bite-times spot, or a broad off-creek area.';}
 function catchUI(){const L=(F.catches||[]).slice().sort((a,b)=>a.t-b.t);
-  $('cCatchList').innerHTML=L.length?L.map(x=>`<div class="citem"><div class="ci">🐟 <b>${x.n>1?x.n+'× ':''}${esc(SPN[x.sp]||x.sp)}</b>${x.len?' '+x.len+' cm':''} · ${esc(FATEN[x.fate]||x.fate)} <span class="mut">${fT(x.t)}${x.note?' · '+esc(x.note):''}</span></div><button class="sm" data-del="${x.id}">✕</button></div>`).join('')
+  $('cCatchList').innerHTML=L.length?L.map(x=>`<div class="citem"><div class="ci">🐟 <b>${x.n>1?x.n+'× ':''}${esc(SPN[x.sp]||x.sp)}</b>${x.len?' '+x.len+' cm':''}${x.colour?' · 🎨 '+esc(x.colour):''} · ${esc(FATEN[x.fate]||x.fate)} <span class="mut">${fT(x.t)}${x.note?' · '+esc(x.note):''}</span></div><button class="sm" data-del="${x.id}">✕</button></div>`).join('')
     :`<div class="cempty">${$('cNoBites').checked?'No bites — that’s useful data too.':'No bites/catches added yet.'}</div>`;
   $('cCatchList').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{F.catches=F.catches.filter(x=>x.id!==b.dataset.del);catchUI();});}
 function readForm(){if(F._mode==='catch'){const old=(F.catches||[])[0];F.catches=[];addCatch();if(old&&F.catches[0])F.catches[0].id=old.id;const c=(F.catches||[]).slice().sort((a,b)=>a.t-b.t)[0];
@@ -2973,7 +3062,7 @@ function validate(s){const now=Date.now();
 function addCatch(){if(!F)return;const t=fromLocalInput($('cCt').value)||Date.now();let n=Math.round(+$('cN').value||1);n=Math.max(1,Math.min(20,n));
   let len=+$('cLen').value||null;if(len!=null){if(len<1||len>150){$('cFormMsg').textContent='Length must be 1–150 cm.';return;}len=Math.round(len*2)/2;}
   if(t>Date.now()+5*60e3){$('cFormMsg').textContent='Catch time is in the future.';return;}
-  F.catches=F.catches||[];F.catches.push({id:rid(6),t,sp:$('cSp').value,n,len,fate:$('cFate').value,note:$('cCnote').value.trim().slice(0,200)});
+  F.catches=F.catches||[];F.catches.push({id:rid(6),t,sp:$('cSp').value,n,len,fate:$('cFate').value,note:$('cCnote').value.trim().slice(0,200),...($('cColour').value.trim()?{colour:$('cColour').value.trim().slice(0,40)}:{})});$('cColour').value='';
   F.noBites=false;if(F._mode!=='catch')setCaught('y');$('cLen').value='';$('cCnote').value='';$('cN').value=1;$('cFormMsg').textContent='';catchUI();}
 async function commit(s,{silent}={}){
   const err=validate(s);if(err){if(!silent)$('cFormMsg').textContent='⚠ '+err;return false;}
@@ -3144,7 +3233,7 @@ function spotFromName(nm,km,line){const L=BT.LANDMARKS;nm=(nm||'').trim();
   return l?landmarkSpot(l):null;}
 function importSimple(H,A){const h=H.map(x=>x.toLowerCase().replace(/[^a-z]/g,''));const col=(...ks)=>{for(const k of ks){const i=h.indexOf(k);if(i>=0)return i;}return -1;};
   const C={date:col('date','day'),time:col('time','start','starttime'),spot:col('spot','location','place','spotname'),sys:col('system','creek','river'),km:col('km','creekkm'),line:col('line','channel'),
-    caught:col('caught','catch','success','fish'),count:col('count','n','number','qty'),size:col('size','length','lengthcm','sizecm','len'),sp:col('species'),hrs:col('hours','duration','hrs'),note:col('notes','note','comment','comments')};
+    caught:col('caught','catch','success','fish'),count:col('count','n','number','qty'),size:col('size','length','lengthcm','sizecm','len'),sp:col('species'),hrs:col('hours','duration','hrs'),note:col('notes','note','comment','comments'),col:col('colour','color','lurecolour','lurecolor','lure')};
   if(C.date<0)throw new Error('not a catch CSV — need at least a "date" column (date,time,spot,caught,count,size,notes)');
   let added=0,skipped=0;const errs=[],other={};const seen=new Set(LOG.map(s=>s.imp).filter(Boolean));
   A.forEach((a,ri)=>{const g=i=>i<0?'':String(a[i]||'').trim();if(!a.some(x=>String(x).trim()))return;const bad=m=>{skipped++;if(errs.length<8)errs.push(`row ${ri+2}: ${m}`);};
@@ -3164,7 +3253,7 @@ function importSimple(H,A){const h=H.map(x=>x.toLowerCase().replace(/[^a-z]/g,''
     const key=[d.join('-'),tm.min,sp.km,sp.name,n,len,g(C.note)].join('|');if(seen.has(key)){skipped++;return;}
     const co=!hasH&&n>0;const st0=co?Math.round(start/Q)*Q-Q:start;if(co)end=st0+2*Q;
     const s={id:rid(8),tok:rid(12),v:1,start:st0,end,co:co?1:undefined,spot:sp,bait:{cat:'',txt:''},note:g(C.note).slice(0,500),noBites:!n,catches:[],ctx:null,share:{st:'local'},imp:key,rough:tm.rough||undefined};
-    if(n)s.catches.push({id:rid(6),t:co?start:Math.min(end-Q,start+Q),sp:spc,n,len,fate:'released',note:''});
+    if(n)s.catches.push({id:rid(6),t:co?start:Math.min(end-Q,start+Q),sp:spc,n,len,fate:'released',note:'',...(g(C.col)?{colour:g(C.col).slice(0,40)}:{})});
     const err=validate(s);if(err)return bad(err);
     s.ctx=computeCtx(s);s.saved=Date.now();LOG.push(s);seen.add(key);added++;});
   save();const o=Object.entries(other);
@@ -3200,7 +3289,7 @@ function renderCom(){if(!COM)return;const all=LS.get('mbj_comall',0);const rows0
   {const hs=new Set(rows.filter(r=>r.hi).map(r=>r.anon+'|'+r.sid)).size;if(hs)$('cComNote').innerHTML+=` <span class="ctag">${hs} historical session${hs>1?'s':''}</span> (logged >1 yr after the trip — tide/moon/sun from the model, weather unknown).`;}
   shareInfo();renderList();}
 /* ---- CSV export / import (personal, full detail incl. GPS — stays on the phone) ---- */
-const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json','spot_id','color','system','spot_type','stage'];
+const COLS=['record','session_id','event_id','start_aest','end_aest','time_aest','spot_kind','spot_name','lat','lng','gps_acc_m','creek_km','creek_line','share_band','species','count','length_cm','fate','bait_type','bait','note','no_bites','pred_score','pred_score_avg','pred_score_max','tide_stage','min_from_runin','light','solunar','moon_phase','moon_illum','tide_source','wind_kmh','pressure_hpa','pressure_3h_hpa','cloud_pct','sst_c','shared','ctx_json','spot_id','color','system','spot_type','stage','lure_colour'];
 function slotAt(s,t){const sl=s.ctx&&s.ctx.slots;if(!sl||!sl.length)return null;let i=Math.floor((t-sl[0].t)/Q);i=Math.max(0,Math.min(sl.length-1,i));return sl[i];}
 function exportCSV(){const out=[COLS.join(',')];
   for(const s of LOG.filter(s=>s.end!=null).sort((a,b)=>a.start-b.start)){const sp=s.spot||{},b=shareBand(s.spot),c=s.ctx,sl=c?c.slots:[];
@@ -3210,7 +3299,7 @@ function exportCSV(){const out=[COLS.join(',')];
     const rec=o=>COLS.map(k=>csvCell(o[k])).join(',');
     out.push(rec({...base,...ctxCols(sl[0]),record:'session',note:s.note,no_bites:s.noBites?1:0,pred_score_avg:sl.length?Math.round(sl.reduce((a,x)=>a+x.score,0)/sl.length):'',pred_score_max:sl.length?Math.max(...sl.map(x=>x.score)):'',
       shared:s.share&&s.share.st||'',ctx_json:c?JSON.stringify(c):''}));
-    for(const x of (s.catches||[]).slice().sort((a,b)=>a.t-b.t))out.push(rec({...base,...ctxCols(slotAt(s,x.t)),record:'catch',event_id:x.id,time_aest:isoA(x.t),species:SPN[x.sp]||x.sp,count:x.n,length_cm:x.len,fate:x.fate,note:x.note}));}
+    for(const x of (s.catches||[]).slice().sort((a,b)=>a.t-b.t))out.push(rec({...base,...ctxCols(slotAt(s,x.t)),record:'catch',event_id:x.id,time_aest:isoA(x.t),species:SPN[x.sp]||x.sp,count:x.n,length_cm:x.len,fate:x.fate,note:x.note,lure_colour:x.colour||''}));}
   if(FT.spots){const X=FT.spots.exportData();const rec=o=>COLS.map(k=>csvCell(o[k])).join(',');
     for(const c of X.spots)out.push(rec({record:'spot',spot_id:c.id,spot_kind:'custom',spot_name:c.name,lat:c.lat,lng:c.lng,creek_km:c.km,creek_line:(c.sys||'baffle')!=='baffle'?c.line:c.line==='E'?'Euleilah':(SCH.sides&&SCH.sides[c.line])?SCH.sides[c.line][0]:'Baffle',note:c.note,color:c.color,spot_type:c.type||'',system:c.sys||'baffle',start_aest:isoA(c.created||Date.now())}));
     for(const [k,v] of Object.entries(X.alias))out.push(rec({record:'alias',spot_id:k,spot_name:v}));}
@@ -3234,7 +3323,7 @@ function importCSV(txt){const A=parseCSV(txt.replace(/^\uFEFF/,''));const H=(A.s
       let ctx=null;try{ctx=g(a,'ctx_json')?JSON.parse(g(a,'ctx_json')):null;if(ctx&&!Array.isArray(ctx.slots))ctx=null;}catch(e){}
       S.set(id,{id,tok:rid(12),v:1,start:fromLocalInput(g(a,'start_aest')),end:fromLocalInput(g(a,'end_aest')),spot:sp,bait:{cat:SCH.bait.some(b=>b[0]===g(a,'bait_type'))?g(a,'bait_type'):'',txt:g(a,'bait').slice(0,120)},note:g(a,'note').slice(0,500),noBites:g(a,'no_bites')==='1',catches:[],ctx,share:{st:'local'}});}}
   for(const a of A){if(g(a,'record')!=='catch')continue;const s=S.get(g(a,'session_id'));if(!s)continue;const t=fromLocalInput(g(a,'time_aest'));if(t==null)continue;
-    const len=+g(a,'length_cm');s.catches.push({id:g(a,'event_id').slice(0,16)||rid(6),t,sp:spCode(g(a,'species')),n:Math.max(1,Math.min(20,+g(a,'count')||1)),len:len>=1&&len<=150?len:null,fate:FATEN[g(a,'fate')]?g(a,'fate'):'released',note:g(a,'note').slice(0,200)});}
+    const len=+g(a,'length_cm');s.catches.push({id:g(a,'event_id').slice(0,16)||rid(6),t,sp:spCode(g(a,'species')),n:Math.max(1,Math.min(20,+g(a,'count')||1)),len:len>=1&&len<=150?len:null,fate:FATEN[g(a,'fate')]?g(a,'fate'):'released',note:g(a,'note').slice(0,200),...(g(a,'lure_colour')?{colour:g(a,'lure_colour').slice(0,40)}:{})});}
   for(const s of S.values()){if(byId(s.id)||validate(s)){skipped++;continue;}if(!s.ctx)s.ctx=computeCtx(s);LOG.push(s);added++;}
   save();return{added,skipped,spots};}
 /* ---- wiring ---- */
@@ -3379,6 +3468,7 @@ function popHtml(l){const I=spotInfo(l);const u=x=>` <span class="mut">±${Math.
     <tr><td>🎣 Run-in start</td><td class="mri">${I.cur?`<b>now</b> (started ${fWhen(I.cur.t)}${u(I.cur.u)})${I.nxt?'<br>next ':''}`:''}${I.nxt?`<b>${fWhen(I.nxt.t)}</b>${u(I.nxt.u)}${I.nxt.kind==='rise'?' <span class="mut">water starts rising</span>':''}`:(I.cur?'':'— <span class="mut">(neap: tide not reaching)</span>')}</td></tr>
     ${S.TYPES[l.type]?`<tr><td colspan="2" class="mut">${esc(S.TYPES[l.type].n)} spot — its bite score favours the ${esc(S.TYPES[l.type].n.toLowerCase())} at this spot</td></tr>`:''}<tr><td>🐟 Bite score now</td><td class="msc">${I.sc?`<b style="color:${scoreColor(I.sc.score)}">${I.sc.score}</b> <span class="mut">${esc(I.sc.tl||'')}</span>`:'—'}</td></tr>
     <tr><td>🌊 Now</td><td>${I.now!=null?I.now.toFixed(2)+' m AHD, '+I.trend:'—'}</td></tr>
+    ${FT.lureHtml?(()=>{const ll=S.latLng(l);const h=FT.lureHtml({km:l.km,line:l.line||null,lat:ll[0],lng:ll[1]},Date.now());return h?`<tr><td>🎨 Lure now</td><td class="mlure">${h.replace(/^<div class="lure1"[^>]*>🎨 /,'<div class="lure1">')}</td></tr>`:'';})():''}
    </table>
    <div class="b"><button class="pri" data-a="bite">🎣 Bite times here</button><button data-a="tides">🌊 Tides here</button><button data-a="log">📝 Log catch here</button>
    ${l.custom?'<button data-a="edit">✏️ Edit</button>':l.id?'<button data-a="alias">✏️ Rename</button>':''}</div><div class="medit"></div></div>`;}
@@ -3673,7 +3763,7 @@ async function openDay(ds){const sh=$('calSheet');sh.hidden=false;document.body.
   const mine=(S?S.customs():[]).map(lmPt).map(p=>{try{const W=winsOf(refine(p,ds)).sort((a,b)=>b.score-a.score);return{p,w:W[0]||null,more:W.slice(1,3)};}catch(e){return{p,w:null,more:[]};}}).sort((a,b)=>(b.w?b.w.score:-1)-(a.w?a.w.score:-1));
   const ms=performance.now()-t0;st.sheet={ds,top,mine,ms,targets:[]};
   const T=st.sheet.targets,btns=x=>{T.push(x.pt);const k=T.length-1;return `<div class="cwbtn"><button class="sm pri" data-act="bite" data-k="${k}">🎣 Bite times here</button><button class="sm" data-act="tides" data-k="${k}">🌊 Tides</button><button class="sm" data-act="map" data-k="${k}">🗺 Map</button></div>`;};
-  const win=x=>`<div class="cwin" style="border-left-color:${scoreColor(x.score)}"><div class="cws" style="color:${scoreColor(x.score)}">${x.score}</div><div class="cwb"><b>${fmtT(x.w.start)} – ${fmtT(x.w.end)}</b> ${stTag(x.stage)} <span class="mut">${STG[x.stage]?STG[x.stage][2]:''}</span><br>${ptLabel(x.pt)}<ul>${x.reasons.map(s=>'<li>'+esc(s)+'</li>').join('')}</ul>${btns(x)}</div></div>`;
+  const win=x=>`<div class="cwin" style="border-left-color:${scoreColor(x.score)}"><div class="cws" style="color:${scoreColor(x.score)}">${x.score}</div><div class="cwb"><b>${fmtT(x.w.start)} – ${fmtT(x.w.end)}</b> ${stTag(x.stage)} <span class="mut">${STG[x.stage]?STG[x.stage][2]:''}</span><br>${ptLabel(x.pt)}<ul>${x.reasons.map(s=>'<li>'+esc(s)+'</li>').join('')}</ul>${FT.lureHtml?FT.lureHtml({km:x.pt.km,line:x.pt.line||null,lat:x.pt.lat,lng:x.pt.lng},x.w.peak.t):''}${btns(x)}</div></div>`;
   const stands=[];if(!GEN)for(const x of top){const R=refine(x.pt,ds);const s0=MJ.dayStart(ds,TZ);for(const s of R.T.stands||[])if(s.t>=s0&&s.t<s0+DAY&&!stands.some(q=>q.n===x.pt.name))stands.push({n:x.pt.name,s});}
   $('calSheetB').innerHTML=`<p class="csub">${mo.e} ${esc(mo.n)}, ${Math.round(mo.f*100)}% lit · ${fc?'<span class="tagf">FORECAST</span> weather &amp; sea temp from the forecast':'<span class="tago">OUTLOOK</span> tide, sun &amp; moon (+ flood cycle) — weather neutral, seasonal water temp'}${set.dd?' · dawn/dusk only':''}</p>`+
     `<div class="row" style="margin:-2px 0 8px"><button class="sm pri" id="calPlan">🗓 Plan my day</button><span class="mut" style="font-size:.76rem">fish / move / rest schedule for ${esc(FT.SYSSHORT)}</span></div>`+
@@ -3808,7 +3898,7 @@ const span=(a,b)=>`${fmtT(a).replace(/(am|pm)$/,m=>fmtT(b).slice(-2)===m?'':m)}�
 function render(P,cfg){const fc=cfg&&cfg.wx&&cfg.wx.tt.length&&cfg.wx.tt[cfg.wx.tt.length-1]>=P.t0+6*36e5;
   const B0=P.blocks,fish=B0.filter(b=>b.ty==='fish');
   const R5=(cls,c4,why,narrow=true)=>`<tr class="${cls}${narrow?'':' pone1'}">${c4}<td class="pwc">${why}</td></tr>${narrow?`<tr class="pwr ${cls}"><td colspan="4">${why}</td></tr>`:''}`;
-  const rows=B0.map((b,k)=>{if(b.ty==='fish')return R5('fish'+(b.optional?' opt':''),`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">🎣 Fish${b.optional?'<br><span class="popt">optional</span>':''}</td><td>${nmKm(P,b.loc)}</td><td class="ps" style="color:${scoreColor(b.peak)}">${b.peak}<small>avg ${b.avg}</small></td>`,`<ul>${b.why.map(w=>'<li>'+esc(T(w))+'</li>').join('')}</ul>`);
+  const rows=B0.map((b,k)=>{if(b.ty==='fish')return R5('fish'+(b.optional?' opt':''),`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">🎣 Fish${b.optional?'<br><span class="popt">optional</span>':''}</td><td>${nmKm(P,b.loc)}</td><td class="ps" style="color:${scoreColor(b.peak)}">${b.peak}<small>avg ${b.avg}</small></td>`,`<ul>${b.why.map(w=>'<li>'+esc(T(w))+'</li>').join('')}</ul>${(()=>{const p=P.spots[b.loc];return p&&FT.lureHtml?FT.lureHtml({km:p.km,line:p.line||null,lat:p.lat,lng:p.lng},(b.t0+b.t1)/2):'';})()}`);
     if(b.ty==='move')return R5('move',`<td class="pt">${fmtT(b.t0)}</td><td class="pp">🚤 Move</td><td>→ ${nmKm(P,b.loc)}<small class="mut pmv"> · ${b.km} km, ~${b.min} min</small></td><td class="ps">—</td>`,`<span class="mut">${b.km} km · ~${b.min} min</span>`,false);
     const first=k===0,last=k===B0.length-1,sl=P.best.slice(Math.round((b.t0-P.t0)/9e5),Math.round((b.t1-P.t0)/9e5)),mx=Math.max(...sl),av=sl.length?Math.round(sl.reduce((a,v)=>a+v,0)/sl.length):NaN,here=nm(P,b.loc);
     const what=first&&b.next?`Launch from ${here}${b.leaveT?' by '+fmtT(b.leaveT):''}`:last||!b.next?`Done — back to ${nm(P,P.launch)}`:`At ${here} — be back at ${nm(P,b.next.loc)} by ${fmtT(b.next.t)}`;

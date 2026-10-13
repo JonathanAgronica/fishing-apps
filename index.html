@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610132116"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610132116"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610132116">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610132116">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610132132"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610132132"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610132132">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610132132">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610132116">
+<meta name="app-version" content="202610132132">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -183,6 +183,11 @@ label.cfile{display:inline-block;cursor:pointer;background:#20454a;border:1px so
 .sttab thead th{color:var(--mut);font-weight:600;font-size:.7rem}
 .sttab tbody th{text-align:left;white-space:nowrap}
 .sttab td b{display:block}.sttab td small{color:var(--mut);font-size:.66rem}
+
+.cyn{display:inline-flex;align-items:center;gap:4px;padding:6px 10px;border:1px solid #2c5a5f;border-radius:16px;margin-left:6px}
+.cyn:has(input:checked){background:#1f4b50;border-color:#5fd1c1}
+#cFormCard.co .cadd{background:none;padding:0}
+#cFormCard [hidden]{display:none!important}
 
 nav.tabs a[data-tab=map].on{box-shadow:inset 0 3px 0 #7bd88f}
 nav.tabs a .ts{display:none}
@@ -655,18 +660,21 @@ input:disabled{opacity:.4}
   <div class="row" id="cSessRow" style="margin-top:10px">
     <label class="mut">Start <input type="datetime-local" id="cS0" step="60"></label>
     <label class="mut" id="cEndLab">End <input type="datetime-local" id="cS1" step="60"></label>
-    <label class="mut"><input type="checkbox" id="cNoBites"> No bites this session</label>
   </div>
-  <div class="row" style="margin-top:8px">
+  <div class="row" id="cCaughtRow" style="margin-top:8px"><b>Caught anything?</b>
+    <label class="cyn"><input type="radio" name="cCaught" id="cYesBites" value="y"> Yes</label>
+    <label class="cyn"><input type="radio" name="cCaught" id="cNoBites" value="n"> No — blank session</label>
+  </div>
+  <div id="cSessExtra"><div class="row" style="margin-top:8px">
     <label class="mut">Bait / lure <select id="cBaitCat"></select></label>
     <input type="text" id="cBait" placeholder="details e.g. 4&quot; prawn plastic (stays on phone)">
   </div>
-  <div class="row" style="margin-top:6px"><input type="text" id="cNote" placeholder="Note (stays on this phone)"></div>
-  <h3 class="ch3">Bites &amp; catches</h3>
+  <div class="row" style="margin-top:6px"><input type="text" id="cNote" placeholder="Note (stays on this phone)"></div></div>
+  <div id="cCatchSec"><h3 class="ch3" id="cCatchH">Bites &amp; catches</h3>
   <div id="cCatchList"></div>
   <div class="cadd">
     <div class="row">
-      <label class="mut">Time <input type="datetime-local" id="cCt" step="60"></label>
+      <label class="mut"><span id="cCtLab">Time</span> <input type="datetime-local" id="cCt" step="60"></label>
       <button class="sm" id="cCtNow">now</button>
       <select id="cSp"></select>
       <label class="mut">Count <input type="number" id="cN" min="1" max="20" value="1" style="width:64px"></label>
@@ -674,7 +682,7 @@ input:disabled{opacity:.4}
       <select id="cFate"></select>
     </div>
     <div class="row" style="margin-top:6px"><input type="text" id="cCnote" placeholder="Catch note (optional, stays on phone)"><button id="cAddCatch">＋ Add bite/catch</button></div>
-  </div>
+  </div></div>
   <div class="row" style="margin-top:12px">
     <button class="pri" id="cSave">💾 Save session</button><button id="cCancel">Cancel</button>
     <span class="mut" id="cFormMsg"></span>
@@ -727,7 +735,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610132116</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610132132</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -2926,11 +2934,17 @@ function openForm(s,mode){F=JSON.parse(JSON.stringify(s));F._mode=mode;$('cFormC
   $('cFormTitle').textContent=CO?'Log a catch (catch-only)':mode==='active'?'Session in progress':mode==='edit'?'Edit session':'Log a past session';
   $('cEndLab').style.display=mode==='active'?'none':'';
   $('cS0').value=toLocalInput(F.start);$('cS1').value=F.end!=null?toLocalInput(F.end):toLocalInput(Date.now());
-  $('cNoBites').checked=!!F.noBites;$('cBaitCat').value=F.bait&&F.bait.cat||'';$('cBait').value=F.bait&&F.bait.txt||'';$('cNote').value=F.note||'';
+  setCaught(F.noBites?'n':(F.catches||[]).length||mode==='active'?'y':mode==='edit'?'n':'');$('cBaitCat').value=F.bait&&F.bait.cat||'';$('cBait').value=F.bait&&F.bait.txt||'';$('cNote').value=F.note||'';
   $('cSpotName').value=F.spot&&F.spot.name||'';nameTyped=false;$('cCt').value=toLocalInput(Math.min(Date.now(),F.end||Date.now()));$('cFormMsg').textContent='';
   $('cSave').textContent=CO?'💾 Save catch':mode==='active'?'💾 Save (keep session running)':'💾 Save session';
-  if(CO){$('cCt').value=toLocalInput(F.catches&&F.catches[0]?F.catches[0].t:Date.now());$('cFormMsg').textContent='Just the catch — a 30-min session centred on the catch time is created for it, counted as presence-only (not as hours fished).';}
-  spotUI();catchUI();$('cFormCard').scrollIntoView({behavior:'smooth',block:'start'});}
+  if(CO){$('cFormMsg').textContent='';}
+  spotUI();catchUI();coUI(mode==='catch');$('cFormCard').scrollIntoView({behavior:'smooth',block:'start'});}
+function setCaught(v){$('cYesBites').checked=v==='y';$('cNoBites').checked=v==='n';const co=F&&F._mode==='catch';$('cCatchSec').hidden=!co&&v!=='y';}
+function coUI(CO){const fc=$('cFormCard');fc.classList.toggle('co',CO);['cSessRow','cCaughtRow','cSessExtra','cCatchH','cCatchList','cAddCatch'].forEach(id=>$(id).hidden=CO);
+  $('cCtLab').textContent=CO?'Date & time caught':'Time';$('cCnote').placeholder=CO?'Notes (optional, stays on phone)':'Catch note (optional, stays on phone)';
+  if(CO){$('cCatchSec').hidden=false;const c=(F.catches||[])[0];$('cCt').value=toLocalInput(c?c.t:Math.min(Date.now(),Math.floor(Date.now()/60e3)*60e3));
+    if(c){$('cSp').value=c.sp;$('cN').value=c.n||1;$('cLen').value=c.len||'';$('cFate').value=c.fate;$('cCnote').value=c.note||'';}else{$('cLen').value='';$('cCnote').value='';$('cN').value=1;}}}
+const fishTyped=()=>$('cLen').value!==''||$('cCnote').value.trim()!=='';
 function closeForm(){F=null;$('cFormCard').hidden=true;}
 function spotUI(){const sp=F&&F.spot;$('cSpotSel').value=sp?(sp.kind==='landmark'?((i=>i>=0?'L'+i:'cur')(BT.LANDMARKS.findIndex(l=>sp.spotId?l.id===sp.spotId:Math.abs(l.km-sp.km)<0.01))):sp.kind==='region'?'R'+sp.rg:'cur'):'';
   const b=shareBand(sp);
@@ -2939,10 +2953,11 @@ function catchUI(){const L=(F.catches||[]).slice().sort((a,b)=>a.t-b.t);
   $('cCatchList').innerHTML=L.length?L.map(x=>`<div class="citem"><div class="ci">🐟 <b>${x.n>1?x.n+'× ':''}${esc(SPN[x.sp]||x.sp)}</b>${x.len?' '+x.len+' cm':''} · ${esc(FATEN[x.fate]||x.fate)} <span class="mut">${fT(x.t)}${x.note?' · '+esc(x.note):''}</span></div><button class="sm" data-del="${x.id}">✕</button></div>`).join('')
     :`<div class="cempty">${$('cNoBites').checked?'No bites — that’s useful data too.':'No bites/catches added yet.'}</div>`;
   $('cCatchList').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{F.catches=F.catches.filter(x=>x.id!==b.dataset.del);catchUI();});}
-function readForm(){if(F._mode==='catch'){if(!(F.catches||[]).length)addCatch();const c=(F.catches||[]).slice().sort((a,b)=>a.t-b.t)[0];
+function readForm(){if(F._mode==='catch'){const old=(F.catches||[])[0];F.catches=[];addCatch();if(old&&F.catches[0])F.catches[0].id=old.id;const c=(F.catches||[]).slice().sort((a,b)=>a.t-b.t)[0];
     if(c){F.start=Math.round(c.t/Q)*Q-Q;F.end=F.start+2*Q;}F.co=1;F.noBites=false;F.bait={cat:$('cBaitCat').value,txt:$('cBait').value.trim().slice(0,120)};F.note=$('cNote').value.trim().slice(0,500);if(F.spot)F.spot.name=$('cSpotName').value.trim().slice(0,80);return;}
   F.start=fromLocalInput($('cS0').value)||F.start;if(F._mode!=='active')F.end=fromLocalInput($('cS1').value);
-  F.noBites=$('cNoBites').checked;F.bait={cat:$('cBaitCat').value,txt:$('cBait').value.trim().slice(0,120)};F.note=$('cNote').value.trim().slice(0,500);
+  F.noBites=$('cNoBites').checked;if(F.noBites)F.catches=[];else if($('cYesBites').checked&&fishTyped())addCatch();
+  F.bait={cat:$('cBaitCat').value,txt:$('cBait').value.trim().slice(0,120)};F.note=$('cNote').value.trim().slice(0,500);
   if(F.spot)F.spot.name=$('cSpotName').value.trim().slice(0,80);}
 const MIN_T=Date.UTC(1990,0,1)-AEST,HIST_MS=400*864e5;const isHist=s=>s&&s.start<Date.now()-HIST_MS;
 function validate(s){const now=Date.now();
@@ -2959,7 +2974,7 @@ function addCatch(){if(!F)return;const t=fromLocalInput($('cCt').value)||Date.no
   let len=+$('cLen').value||null;if(len!=null){if(len<1||len>150){$('cFormMsg').textContent='Length must be 1–150 cm.';return;}len=Math.round(len*2)/2;}
   if(t>Date.now()+5*60e3){$('cFormMsg').textContent='Catch time is in the future.';return;}
   F.catches=F.catches||[];F.catches.push({id:rid(6),t,sp:$('cSp').value,n,len,fate:$('cFate').value,note:$('cCnote').value.trim().slice(0,200)});
-  F.noBites=false;$('cNoBites').checked=false;$('cLen').value='';$('cCnote').value='';$('cN').value=1;$('cFormMsg').textContent='';catchUI();}
+  F.noBites=false;if(F._mode!=='catch')setCaught('y');$('cLen').value='';$('cCnote').value='';$('cN').value=1;$('cFormMsg').textContent='';catchUI();}
 async function commit(s,{silent}={}){
   const err=validate(s);if(err){if(!silent)$('cFormMsg').textContent='⚠ '+err;return false;}
   if(s.end!=null&&s.start>s.end)return false;
@@ -3236,12 +3251,15 @@ function init(){fillSelects();
     if(v[0]==='L'){const l=BT.LANDMARKS[+v.slice(1)];nameTyped=false;setSpot(landmarkSpot(l));}
     else{const g=SCH.regions.find(x=>x[0]===v.slice(1));const sp={kind:'region',rg:g[0],lat:g[2],lng:g[3],acc:null,name:'',km:null,line:null,offKm:null};setSpot(sp);}};
   $('cSpotName').oninput=()=>{nameTyped=!!$('cSpotName').value.trim();};
-  $('cNoBites').onchange=()=>{if(F){F.noBites=$('cNoBites').checked;catchUI();}};
+  $('cNoBites').onchange=$('cYesBites').onchange=()=>{if(F){F.noBites=$('cNoBites').checked;setCaught(F.noBites?'n':'y');catchUI();}};
   $('cCtNow').onclick=()=>$('cCt').value=toLocalInput(Date.now());
   $('cAddCatch').onclick=addCatch;
   $('cCancel').onclick=closeForm;
+  ['input','change'].forEach(ev=>$('cFormCard').addEventListener(ev,()=>{$('cFormMsg').textContent='';}));
   $('cCatchOnlyBtn').onclick=()=>{const now=Math.floor(Date.now()/Q)*Q;openForm(newSession(now-Q,now+Q),'catch');};
-  $('cSave').onclick=async()=>{readForm();const s=F;if(s.co&&!(s.catches||[]).length){$('cFormMsg').textContent='⚠ Add the catch first.';return;}delete s._mode;const mode=$('cFormTitle').textContent;
+  $('cSave').onclick=async()=>{readForm();const s=F;if(s.co&&!(s.catches||[]).length){if(!$('cFormMsg').textContent)$('cFormMsg').textContent='⚠ Add the catch first.';else $('cFormMsg').textContent='⚠ '+$('cFormMsg').textContent.replace(/^⚠ /,'');return;}
+    {const e0=s.end!=null&&validate(s);if(e0){$('cFormMsg').textContent='⚠ '+e0;return;}}
+    if(s.end!=null&&!s.co&&!s.noBites&&!(s.catches||[]).length){$('cFormMsg').textContent=($('cYesBites').checked?'⚠ You chose “Yes” but added no fish — add it, or choose “No — blank session”.':'⚠ Caught anything? Choose “Yes” (and add the fish) or “No — blank session”.');return;}delete s._mode;const mode=$('cFormTitle').textContent;
     if(s.end==null){const err=validate(s);if(err){$('cFormMsg').textContent='⚠ '+err;return;}const o=byId(s.id);if(o)LOG[LOG.indexOf(o)]=s;else LOG.push(s);save();closeForm();renderAll();return;}
     if(await commit(s)){closeForm();renderAll();flush();}};
   $('cExport').onclick=exportCSV;

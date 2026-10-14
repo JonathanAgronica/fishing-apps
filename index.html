@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610140516"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610140516"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610140516">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610140516">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610141954"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610141954"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610141954">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610141954">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610140516">
+<meta name="app-version" content="202610141954">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -346,6 +346,16 @@ nav.tabs a[data-tab=cal].on{box-shadow:inset 0 3px 0 #b48cff}
 .rbadge{display:inline-block;min-width:1.7em;text-align:center;border-radius:8px;padding:0 4px;font-weight:700;box-shadow:0 0 0 1px #0007}
 .mysc.rbadge{padding:2px 4px}
 .mpin-sc{box-shadow:0 0 0 1.5px #0b1416!important;border:1.5px solid #fff!important}
+
+details.dc{margin:6px 0}
+details.dc>summary{cursor:pointer;color:var(--mut,#9db5b1);font-size:.86rem;padding:4px 0;list-style:none}
+details.dc>summary::-webkit-details-marker{display:none}
+details.dc>summary::before{content:'▸';display:inline-block;width:1em;transition:transform .15s}
+details.dc[open]>summary::before{transform:rotate(90deg)}
+.dcard>details.dc{margin:0}.dcard>details.dc>summary{color:var(--ink,#e8f1ef);font-size:1.02rem;font-weight:700}
+.dcard>details.dc>summary .dch{font-weight:700}
+.dcard{padding-top:10px;padding-bottom:10px}
+.sysbar .ftspot{flex:1 1 150px}
 
 .tab[hidden]{display:none}
 .sysbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1000px;margin:0 auto 8px;font-size:.85rem}
@@ -756,7 +766,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610140516</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610141954</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1999,7 +2009,7 @@ function fmtDay(dateStr,o){const [y,m,d]=dateStr.split('-').map(Number);return n
 function setLocInfo(extra){$('mj-locInfo').innerHTML=`<b>${esc(loc.name)}</b> · ${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)} · TZ ${esc(loc.tz||'?')}${extra?' · '+extra:''}`;}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function notice(html,err){const d=document.createElement('div');d.className='notice'+(err?' err':'');d.innerHTML=html;$('mj-notices').appendChild(d);}
-function scoreColor(s){const h=s<50?lerp(s,0,50,210,45):lerp(s,50,100,45,135);const l=s<20?40:52;return `hsl(${h},75%,${l}%)`;}
+function scoreColor(s){return window.FTRamp?FTRamp(s):'#888';}
 function lerp(x,x0,x1,y0,y1){return y0+(y1-y0)*Math.max(0,Math.min(1,(x-x0)/(x1-x0)));}
 
 /* fetch with localStorage cache fallback and end_date clamping */
@@ -2130,8 +2140,8 @@ function drawChart(d){
   for(const w of d.windows)o+=`<rect x="${x(w.start)}" y="${T}" width="${x(w.end)-x(w.start)}" height="${ph}" fill="#f0a03a" opacity=".13"/>`;
   // score area
   const sp=d.pts.map(p=>`${x(p.t).toFixed(1)},${y(p.score).toFixed(1)}`);
-  o+=`<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6b3d" stop-opacity=".75"/><stop offset="1" stop-color="#f0a03a" stop-opacity=".08"/></linearGradient></defs>`;
-  o+=`<path d="M${x(d.t0)},${y(0)} L${sp.join(' L')} L${x(d.pts[d.pts.length-1].t)},${y(0)} Z" fill="url(#g)"/><polyline points="${sp.join(' ')}" fill="none" stroke="#f0a03a" stroke-width="2.5"/>`;
+  o+=`<defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="${y(100)}" y2="${y(0)}">${(()=>{const B=window.FTRamp?FTRamp.bands:[[0,'#f0a03a']];let s='';for(let i=B.length-1;i>=0;i--){const hi=i===B.length-1?100:B[i+1][0],lo=B[i][0];s+=`<stop offset="${(100-hi)/100}" stop-color="${B[i][1]}" stop-opacity=".8"/><stop offset="${(100-lo)/100}" stop-color="${B[i][1]}" stop-opacity=".8"/>`;}return s;})()}</linearGradient><linearGradient id="gl" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="${y(100)}" y2="${y(0)}">${(()=>{const B=window.FTRamp?FTRamp.bands:[[0,'#f0a03a']];let s='';for(let i=B.length-1;i>=0;i--){const hi=i===B.length-1?100:B[i+1][0],lo=B[i][0];s+=`<stop offset="${(100-hi)/100}" stop-color="${B[i][1]}"/><stop offset="${(100-lo)/100}" stop-color="${B[i][1]}"/>`;}return s;})()}</linearGradient></defs>`;
+  o+=`<path d="M${x(d.t0)},${y(0)} L${sp.join(' L')} L${x(d.pts[d.pts.length-1].t)},${y(0)} Z" fill="url(#g)"/><polyline points="${sp.join(' ')}" fill="none" stroke="url(#gl)" stroke-width="2.5"/>`;
   // tide
   const tp=d.pts.filter(p=>p.tide!=null);
   if(tp.length){const all=state.days.flatMap(dd=>dd.dayExt.map(e=>e.h));let mn=Math.min(...all,...tp.map(p=>p.tide)),mx=Math.max(...all,...tp.map(p=>p.tide));const pad=(mx-mn)*0.08;mn-=pad;mx+=pad;
@@ -2207,7 +2217,7 @@ function renderLure(p){const el=$('mj-lure');if(!el||!state||!state.days)return;
   let pt=p;if(!pt){const now=Date.now();if(now>=d.t0&&now<d.t1)pt=d.pts[Math.round((now-d.t0)/(15*60e3))];else{const W=(d.windows||[]).slice().sort((a,b)=>b.score-a.score)[0];pt=W?W.peak:d.pts[Math.floor(d.pts.length/2)];}}
   if(!pt)return;lureT=pt.t;const V={r:null,mx:null};try{const sp=lureSpot();if(sp.km!=null&&window.BT){const v=lureDay(sp,d.dateStr);V.r=v.r;V.mx=v.mx;}}catch(e){}
   const r=lureFromPt(pt,lureSpot(),V,pt.t);
-  el.innerHTML=`<h3 style="margin:10px 0 4px;font-size:.95rem">🎨 Lure colour <span class="mut" style="font-weight:400">· ${fmtT(pt.t,state.tz)}${p?'':Date.now()>=d.t0&&Date.now()<d.t1?' (now)':' (best window)'} · guide</span></h3>${FTLure.html(r,true)}<p class="mut" style="margin:2px 0 0;font-size:.74rem">Estimated water clarity (tide stage &amp; range, km up the creek, flood/rain, wind) × light (sun, cloud, moon). Touch the chart to see another time. A guide only — log the colour you used in the 📝 Catch log to test it.</p>`;
+  el.innerHTML=`<h3 style="margin:10px 0 4px;font-size:.95rem">🎨 Lure colour <span class="mut" style="font-weight:400">· ${fmtT(pt.t,state.tz)}${p?'':Date.now()>=d.t0&&Date.now()<d.t1?' (now)':' (best window)'} · guide</span></h3>${FTLure.html(r,true)}<details class="dc" data-k="lureinfo"${FT.dcOpen&&FT.dcOpen('lureinfo')?' open':''}><summary>How the lure guide works</summary><p class="mut" style="margin:2px 0 0;font-size:.74rem">Estimated water clarity (tide stage &amp; range, km up the creek, flood/rain, wind) × light (sun, cloud, moon). Touch the chart to see another time. A guide only — log the colour you used in the 📝 Catch log to test it.</p></details>`;
   document.body.dataset.lure=r.keys.join(',');}
 
 /* ---- weather v2 (Bite closure): fresh-flow gauge for this system, storm/drizzle day badges ---- */
@@ -3980,6 +3990,62 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('planSheet').hidden)close
 const pb=document.getElementById('mj-planBtn');if(pb)pb.onclick=()=>{const d=document.getElementById('mj-date');FT.planDay(d&&d.value);};
 if(S)S.onChange.push(()=>{if(!$('planSheet').hidden)run();});
 })();
+</script>
+<script type="text/ft-deferred" id="ft-dc">/* ---- declutter: key answer first, secondary detail in remembered drop-downs; one shared spot picker ---- */
+(function(){const K='ft_dc';let ST={};try{ST=JSON.parse(localStorage.getItem(K)||'{}')||{};}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(ST));}catch(e){}};
+FT.dcOpen=(k,def)=>window.__DC_OPEN?true:k in ST?!!ST[k]:!!def; /* __DC_OPEN: test hook (all drop-downs open) */
+/* remember every .dc drop-down (also ones rendered later, e.g. the lure note) */
+document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.classList&&d.classList.contains('dc')&&d.dataset.k){ST[d.dataset.k]=d.open;save();}},true);
+const mk=(k,title,def)=>{const d=document.createElement('details');d.className='dc';d.dataset.k=k;d.open=FT.dcOpen(k,def);const s=document.createElement('summary');s.innerHTML=title;d.appendChild(s);return d;};
+/* wrap nodes (kept in order, same ids) into a drop-down placed where the first one was */
+function wrap(nodes,k,title,def){nodes=nodes.filter(Boolean).sort((a,b)=>a.compareDocumentPosition(b)&4?-1:1);if(!nodes.length)return null;const d=mk(k,title,def);nodes[0].before(d);nodes.forEach(n=>d.appendChild(n));return d;}
+/* fold a whole card: its h2 becomes the summary */
+function fold(sec,k,def,title){if(!sec)return null;const h=sec.querySelector(':scope>h2');const t=title||(h?h.innerHTML:k);if(h)h.remove();
+  const d=mk(k,`<span class="dch">${t}</span>`,def);while(sec.firstChild)d.appendChild(sec.firstChild);sec.appendChild(d);sec.classList.add('dcard');return d;}
+const secBy=(tab,re)=>[...document.querySelectorAll(`#tab-${tab}>section, #tab-${tab}>.card`)].find(s=>{const h=s.querySelector(':scope>h2');return h&&re.test(h.textContent);});
+const $=id=>document.getElementById(id);const par=(el,sel)=>el&&el.closest(sel);
+try{
+/* ---------- Bite ---------- */
+const locSec=secBy('bite',/Location/);if(locSec){const rows=[...locSec.querySelectorAll(':scope>.row')];
+  const keep=rows.find(r=>r.querySelector('#mj-date'));wrap([...rows.filter(r=>r!==keep),$('mj-results')].filter(Boolean),'bLoc','🔎 Change location — search, GPS, creek spot',false);
+  wrap([$('mj-tideSrc')],'bSrc','ℹ️ Tide source &amp; accuracy',false);
+  const off=$('mj-tideOff');const lab=off&&off.closest('label');if(lab&&keep&&keep.contains(lab)){const d=locSec.querySelector('details[data-k=bLoc]');d&&d.appendChild(lab);}}
+wrap([$('mj-stats')],'bDay','☀️ Day details — tides, sun, moon, weather',false);
+{const w=$('mj-windows')&&$('mj-windows').closest('section'),sc=$('mj-summaryCard');if(w&&sc)sc.after(w);}
+fold(secBy('bite',/How the score works/),'bWhy',false,'🧠 Why this score — weights &amp; method');
+fold(secBy('bite',/rules reminder/),'bRules',false);
+const ch=$('mj-chartWrap')&&$('mj-chartWrap').closest('section');if(ch)wrap([ch.querySelector(':scope>.legend'),$('mj-hours')],'bHours','Legend &amp; hour-by-hour scores',false);
+const sd=secBy('bite',/7-day/);if(sd)wrap([sd.querySelector(':scope>p.mut')],'b7n','About the outlook',false);
+/* ---------- Tides ---------- */
+fold(secBy('baffle',/Whole stretch/),'tStretch',false);fold(secBy('baffle',/Benchmark log/),'tBench',false,'📝 Benchmark log — calibration (advanced)');
+fold(secBy('baffle',/Live gauges/),'tLive',false);fold(secBy('baffle',/How predictions/),'tHow',false,'🧪 Accuracy &amp; method');
+/* ---------- Gauges ---------- */
+const gs=$('gStatsH')&&$('gStatsH').closest('section');if(gs){const h=$('gStatsH');const t=h.innerHTML;fold(gs,'gStats',false,t);}
+wrap([$('gHelp')],'gHelp','How to read this chart',false);
+/* ---------- Calendar ---------- */
+wrap([$('calLegend'),$('calNote')],'cLeg','Legend &amp; notes',false);
+/* ---------- Map ---------- */
+const mc=document.querySelector('#tab-map .mcard');if(mc)wrap([mc.querySelector(':scope>p.mut')],'mHelp','How to use the map',false);
+const ms=secBy('map',/My spots/);if(ms){const io=$('mExport')&&$('mExport').closest('.row');const nt=ms.querySelector(':scope>p.mut');const d=wrap([io,nt],'mIO','⚙ Backup / restore spots (JSON)',false);
+  const bd=$('mBuiltDet');if(d&&bd){const s2=bd.closest('section');d.appendChild(bd);if(s2&&!s2.children.length)s2.remove();}}
+/* ---------- Catch log ---------- */
+const ca=$('cActiveCard');if(ca)wrap([ca.querySelector(':scope>p.mut')],'lWhy','Why log blank sessions?',false);
+fold(secBy('log',/Sharing/),'lShare',false,'🔒 Sharing &amp; privacy');fold(secBy('log',/Community/),'lCom',false);
+const ls=secBy('log',/My sessions/);if(ls)wrap([$('cExport')&&$('cExport').closest('.row')],'lIO','⚙ Import / export CSV (old catches too)',false);
+}catch(e){console.error('declutter',e);}
+/* ---------- one shared spot picker in the header (drives Bite + Tides) ---------- */
+try{const bar=document.querySelector('.sysbar');if(bar&&window.BT){const lab=document.createElement('label');lab.className='ftspot';lab.innerHTML='🎯 <select id="ftSpot" aria-label="Spot"></select>';bar.insertBefore(lab,bar.children[1]||null);
+  const sel=lab.querySelector('select');
+  const fill=()=>{const L=BT.LANDMARKS||[];const o=(l,i)=>`<option value="${i}">${l.custom?'★ ':''}${String(l.name).replace(/[&<]/g,c=>c==='&'?'&amp;':'&lt;')} · ${(+l.km).toFixed(1)} km</option>`;
+    const mine=L.map((l,i)=>[l,i]).filter(x=>x[0].custom),bi=L.map((l,i)=>[l,i]).filter(x=>!x[0].custom);
+    sel.innerHTML='<option value="">— spot —</option>'+(mine.length?'<optgroup label="My spots">'+mine.map(x=>o(...x)).join('')+'</optgroup>':'')+'<optgroup label="Creek spots">'+bi.map(x=>o(...x)).join('')+'</optgroup>';sync();};
+  const sync=()=>{const L=FT.biteLoc&&FT.biteLoc();if(!L||L.km==null){sel.value='';return;}const i=(BT.LANDMARKS||[]).findIndex(l=>L.spotId?l.id===L.spotId:Math.abs(l.km-L.km)<0.01&&(!l.line||!L.line||l.line===L.line));sel.value=i>=0?String(i):'';};
+  sel.onchange=()=>{const l=(BT.LANDMARKS||[])[+sel.value];if(!l||sel.value==='')return;const ll=FT.spots?FT.spots.latLng(l):BT.pointAtKm(l.km);const sx=BT.generic?' — '+(FT.SYSSHORT||''):' — Baffle Ck';
+    FT.biteSetLoc&&FT.biteSetLoc(Object.assign({name:l.name+sx,lat:ll[0],lng:ll[1],tz:'Australia/Brisbane',baffleKm:l.km,spotId:l.id||null},l.line?{baffleLine:l.line}:{},BT.generic?{sys:FT.SYS}:{}));
+    try{FT.baffleSelect&&FT.baffleSelect(l.km,l.name,l.line);}catch(e){}};
+  fill();FT.onTab.push(()=>sync());if(FT.spots)FT.spots.onChange.push(fill);FT.spotPickerSync=sync;setInterval(()=>{if(document.activeElement!==sel)sync();},4000);}}catch(e){console.error('ftSpot',e);}
+document.body.dataset.dc='1';})();
 </script>
 <script type="text/ft-deferred">
 FT.showTab((location.hash||'').slice(1)||(function(){try{return localStorage.getItem('ft_tab')}catch(e){return null}})()||'bite');

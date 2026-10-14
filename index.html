@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610141954"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610141954"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610141954">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610141954">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610142144"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610142144"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610142144">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610142144">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610141954">
+<meta name="app-version" content="202610142144">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -766,7 +766,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610141954</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610142144</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -4023,6 +4023,7 @@ fold(secBy('baffle',/Live gauges/),'tLive',false);fold(secBy('baffle',/How predi
 /* ---------- Gauges ---------- */
 const gs=$('gStatsH')&&$('gStatsH').closest('section');if(gs){const h=$('gStatsH');const t=h.innerHTML;fold(gs,'gStats',false,t);}
 wrap([$('gHelp')],'gHelp','How to read this chart',false);
+{const gl=$('gLatest')&&$('gLatest').closest('section'),gt=document.getElementById('tab-gauges');if(gl&&gt){gt.appendChild(gl);gl.classList.add('glatest-bottom');}} /* chart first, latest readings at the bottom (all systems) */
 /* ---------- Calendar ---------- */
 wrap([$('calLegend'),$('calNote')],'cLeg','Legend &amp; notes',false);
 /* ---------- Map ---------- */

@@ -540,8 +540,10 @@
 "tab": "IDQ65390",
 "name": "Golden Beach",
 "datum": "LGH",
-"role": "ref",
-"systems": []
+"role": "tidal",
+"systems": [
+"pumicestone-passage"
+]
 },
 {
 "id": "540468",
@@ -895,10 +897,9 @@
 "tab": "DES",
 "name": "Halls Bay (Pumicestone Passage)",
 "datum": "LAT",
-"role": "ref",
+"role": "tidal",
 "systems": [
-"hussey-creek",
-"halls-creek"
+"pumicestone-passage"
 ],
 "cols": "level m LAT, MSQ prediction m LAT"
 },

@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-10-17T04:40+10:00",
+ "generated_aest": "2026-10-17T05:37+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": false,
-   "span_days": 14.5,
+   "span_days": 14.6,
    "base": 0.76,
    "level": 0.85,
    "kind": "none",
@@ -171,7 +171,7 @@
    "onset_aest": "2026-10-11 21:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.3
+   "day": 5.4
   },
   "noosa-river": {
    "gauge": "540774",

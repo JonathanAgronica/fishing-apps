@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610172142"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610172142"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610172142">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610172142">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610180751"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610180751"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610180751">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610180751">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610172142">
+<meta name="app-version" content="202610180751">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -76,6 +76,9 @@ footer{color:var(--mut);font-size:.8rem;text-align:center;padding:10px 12px 30px
 .myb{flex:1;min-width:0;font-size:.85rem}.myb>div{overflow:hidden;text-overflow:ellipsis}
 
 .wxb{color:#ffd27a}
+
+.adjb{display:inline-block;font-size:.78rem;padding:2px 8px;border-radius:999px;background:#1d3a44;border:1px solid #2e6a7a;color:#cfeeff;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.adjrow{margin:6px 0}
 
 /* ---- Baffle tides ---- */
 
@@ -570,6 +573,7 @@ input:disabled{opacity:.4}
 
   <section class="card">
     <h2>🧪 How predictions are made</h2>
+    <p class="mut" id="bt-adjInfo" style="margin-top:0"></p>
     <details open><summary>1 · Base tide: Bundaberg (Burnett Heads) harmonic model</summary>
       <p>41 tidal constituents (M2, S2, N2, K2, K1, O1, P1, Q1, M4, MS4, MN4, M6 …, with nodal corrections) fitted by least squares to the MSQ Bundaberg port gauge 051011A observed 10-minute record 2021–2025 (≈260k readings). Runs offline for any date.
       Validation: vs official MSQ 2026 high/low predictions (1411 tides) HW timing RMS 4.5 min, LW 4.9 min, height RMS 0.02 m; vs held-out observed gauge data 2–9 Oct 2026, height RMS 0.06 m, HW timing RMS 12 min. Official MSQ 2026 Bundaberg times are also embedded and shown for comparison.</p></details>
@@ -582,7 +586,7 @@ input:disabled{opacity:.4}
       <li>No calibration between Winfield (3.4 km) and the Hills Rd gauge, which is on Euleilah Creek (≈25 km channel distance) and used as a proxy for the 16–35 km reach.</li>
       <li>Mouth timing is assumed equal to Bundaberg/Bargara (open coast, MSQ planes); the Winfield offsets are MSQ “non-linear transfer” values (**), not a long gauge record.</li>
       <li>Above Essendean the tidal limit is unknown — values are held at Essendean’s and flagged.</li>
-      <li>Wind, pressure and swell can shift real levels by 0.1–0.3 m (use the live residual).</li></ul></details>
+      <li>Wind, pressure and swell can shift real levels by 0.1–0.3 m — the live surge adjustment (top of this section) adds the measured Bundaberg residual for the next ~2 days; small Mimdale freshes raise the upper-creek highs (live fresh adjustment). Big floods are not modelled.</li></ul></details>
   </section>
 
   <div class="notice">⚠️ Not for navigation. Predictions are estimates. Always use the official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ tide tables</a> and local knowledge; Baffle Creek’s bar and shallows change.</div>
@@ -633,6 +637,7 @@ input:disabled{opacity:.4}
     <button class="sm" data-r="2">2d</button><button class="sm on" data-r="7">7d</button><button class="sm" data-r="30">30d</button><button class="sm" data-r="all">All</button>
     <span style="flex:1"></span><button class="sm" id="gZo" aria-label="Zoom out">−</button><button class="sm" id="gZi" aria-label="Zoom in">＋</button>
   </div>
+  <div id="gAdj" style="margin:4px 0"></div>
   <div class="row gleg" id="gLegend"></div>
   <div id="gSpots"></div>
   <div id="gWrap"><svg id="gChart" role="img" aria-label="Gauge levels and lag chart"></svg><div id="gTip"></div></div>
@@ -780,7 +785,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610172142</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610180751</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1239,13 +1244,14 @@ function predictAt(km,t0,t1,opts){opts=opts||{};let cal=calAt(km,opts);cal=apply
   let ext=base.map((e,j)=>{const H=e.h+hoff;const pl=j>0&&!base[j-1].hi?base[j-1]:null;
     return e.hi?{t:e.t+cal.hwLag/60,h:cal.hwLvl(H),hi:true,u:cal.hwU,src:e,rB:pl?e.h-pl.h:null}:{t:e.t+cal.lwLag/60,h:cal.lwLvl(H),hi:false,u:cal.lwU,src:e};});
   ext.sort((a,b)=>a.t-b.t);
+  const AJ=opts.adj!==undefined?opts.adj:(root.BT_ADJ||null),AJL=lineOf(km,opts);if(AJ)for(const e of ext){const d=AJ.dh(km,e.t,e.hi,AJL,cal.trunc);if(d){e.h+=d;e.adj=d;}}
   // truncated reach: local rise above the preceding (pool-level) low, for display
   if(cal.trunc){for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi){const pl=ext[i-1]&&!ext[i-1].hi?ext[i-1]:null;if(pl)e.rise=e.h-pl.h;}}}
   // single-high days: suppress small highs → tide stand; the low before it merges into the next low (run-out continues)
   const thr=supThr(km,Object.assign({},opts,{cal}));cal.supThr=thr;cal.line=lineOf(km,opts);const drop=new Set();
-  if(thr>0)for(let i=1;i<ext.length-1;i++){const e=ext[i];if(!e.hi||e.src.h+hoff>=thr)continue;const a=ext[i-1],b=ext[i+1];if(a.hi||b.hi||drop.has(a))continue;
+  if(thr>0)for(let i=1;i<ext.length-1;i++){const e=ext[i];const thrE=thr+(AJ?AJ.sup(km,e.t,AJL):0);if(!e.hi||e.src.h+hoff>=thrE)continue;const a=ext[i-1],b=ext[i+1];if(a.hi||b.hi||drop.has(a))continue;
     /* no flood tide arrives after the low before it, so the water keeps draining to the next low: drop the earlier low */
-    drop.add(a);b.h=Math.min(a.h,b.h);e.weak=true;e.stand=true;e.sup={H:e.src.h+hoff,thr};e.standT0=a.t;e.standT1=e.t;e.mergedLow=a;}
+    drop.add(a);b.h=Math.min(a.h,b.h);e.weak=true;e.stand=true;e.sup={H:e.src.h+hoff,thr:thrE};e.standT0=a.t;e.standT1=e.t;e.mergedLow=a;}
   ext=ext.filter(e=>!drop.has(e));
   // enforce alternation after shifting (stands excluded)
   const clean=[];for(const e of ext){if(e.weak)continue;const l=clean[clean.length-1];if(l&&l.hi===e.hi){if((e.hi&&e.h>l.h)||(!e.hi&&e.h<l.h))clean[clean.length-1]=e;}else clean.push(e);}
@@ -1296,6 +1302,58 @@ const LANDMARKS=[
  {name:'Christensens',km:39.03,note:'above calibration'}];
 
 root.BT={fuAll,nowH,SUP,supThr,smallHigh,lineOf,hToDate,dateToH,dayStr,fmtT,fmtDT,fmtDay,bundH,bundExtremes,officialHiLo,NODES,calAt,predictAt,snap,pointAtKm,LANDMARKS,MAXKM,applyCorr};
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script id="bt-adj">/* ===== Baffle live tide adjustments (coastal surge + Mimdale fresh) =====
+   Data: data/baffle_adj.json (scripts/baffle_adj.py, refreshed by the hourly gauge routine).
+   - surge(t): Bundaberg trailing 25 h mean residual (obs − MSQ pred); gain 1, capped ±0.3 m; all Baffle reaches
+     (main channel, Euleilah, side creeks), highs and lows (pool-level lows above ~30 km: only a positive surge lifts them). Past = archived hourly series; after the last value it
+     fades (e-fold 24 h) and is 0 from 48 h on — later dates are unchanged.
+   - F(t) = max(0, Mimdale(t−3 h) − M0), M0 = 10th percentile of the previous 14 d. Highs += 0.5·F·w(km) on the main
+     channel only, w = ((km−16.4)/18.85)^1.5 clipped 0..1 (0 at/below the Euleilah junction, 1 at Essendean and above);
+     single-high threshold += F·w/0.423 (same as the upper-creek base adj, but lows are not raised). Fades e-fold 48 h, 0 from 72 h.
+   The Baffle core reads window.BT_ADJ in predictAt (opts.adj===null disables). No data → no adjustment (identical output). */
+(function(root){'use strict';
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+function make(J){if(!J||!J.series||!J.params)return null;const P=J.params,C=J.cols||['t','surge','F'],iS=C.indexOf('surge'),iF=C.indexOf('F');
+  const S=J.series.filter(r=>r[0]!=null),T=S.map(r=>r[0]/60);/* model hours */
+  const L=J.live||{},tS=L.surge_t!=null?L.surge_t/60:null,tF=L.F_t!=null?L.F_t/60:null,s0=+L.surge||0,f0=+L.F||0;
+  const fade=(dt,tau,cut)=>dt<=0?1:dt>=cut?0:Math.exp(-dt/tau)*Math.min(1,(cut-dt)/(cut*0.25));
+  function at(t,i){/* linear interpolation in the hourly series (null → 0); 0 before the record */
+    if(!T.length||t<T[0])return 0;let lo=0,hi=T.length-1;if(t>=T[hi])return +S[hi][i]||0;
+    while(hi-lo>1){const m=(lo+hi)>>1;if(T[m]<=t)lo=m;else hi=m;}const a=+S[lo][i]||0,b=+S[hi][i]||0;return a+(b-a)*(t-T[lo])/(T[hi]-T[lo]);}
+  const surge=t=>tS==null?0:t<=tS?at(t,iS):s0*fade(t-tS,P.surge_tau_h,P.surge_cut_h);
+  const fresh=t=>tF==null?0:t<=tF?at(t,iF):f0*fade(t-tF,P.f_tau_h,P.f_cut_h);
+  const w=km=>Math.pow(clamp((km-P.w_j)/P.w_span,0,1),P.w_pow);
+  const A={J,P,surge,fresh,w,
+    surgeM:t=>clamp(P.gain*surge(t),-P.cap,P.cap),
+    dh(km,t,hi,line,trunc){let s=clamp(P.gain*surge(t),-P.cap,P.cap);if(trunc&&!hi&&s<0)s=0;/* pool-level lows (upper creek) are bed/fresh-held: setup can lift them, a negative residual can't drain them */const f=line==='B'?(hi?P.kH:P.kL)*fresh(t)*w(km):0;return s+f;},
+    sup(km,t,line){return line==='B'?fresh(t)*w(km)/P.sup_div:0;},
+    flood:!!L.flood,live:L};
+  return A;}
+const LS='ft_baffle_adj';
+const ADJ={make,cur:null,onChange:[],ver:0,
+  set(J,silent){const a=make(J);if(!a)return;const old=ADJ.cur&&ADJ.cur.J&&ADJ.cur.J.generated;ADJ.cur=a;root.BT_ADJ=a;ADJ.ver++;
+    if(!silent&&old!==J.generated)ADJ.onChange.forEach(f=>{try{f(a)}catch(e){console.error('adj',e)}});},
+  async load(){try{const r=await fetch('data/baffle_adj.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const J=await r.json();
+      if(!J||!J.series)return;try{localStorage.setItem(LS,JSON.stringify(J));}catch(e){}ADJ.set(J);}catch(e){console.warn('baffle_adj',e);}},
+  /* summary at model hour t for a spot (km, line); null when no data */
+  info(t,km,line){const a=ADJ.cur;if(!a)return null;const s=a.surgeM(t),F=a.fresh(t),E=a.P.kH*F*a.w(35.25),here=km!=null&&line==='B'?a.P.kH*F*a.w(km):null;
+    return{s,F,E,here,sup:km!=null?a.sup(km,t,line||'B'):0,M0:a.live.M0,mim:a.live.mimdale,minor:a.live.mim_minor,flood:a.flood,gen:a.J.generated,
+      wind:s>0.015?'wind/pressure set-up':s<-0.015?'wind/pressure set-down':''};},
+  cm:x=>(x>=0?'+':'−')+Math.abs(Math.round(x*100))+' cm',
+  line(t,km,line){const I=ADJ.info(t,km,line);if(!I)return '';const cm=ADJ.cm;
+    let s=`Live adj: ${cm(I.s)} surge${I.wind?' ('+I.wind+')':''}, ${cm(I.E)} fresh at Essendean highs`;
+    if(I.here!=null&&km!=null&&Math.abs(km-35.25)>0.5)s+=` (${cm(I.here)} here)`;
+    return s;},
+  badge(t,km,line){const I=ADJ.info(t,km,line);if(!I)return '';const cm=ADJ.cm;const tot=I.s+(I.here||0);if(Math.abs(I.s)<0.005&&I.E<0.005&&!I.flood)return '';
+    return `<span class="adjb" title="${ADJ.line(t,km,line).replace(/"/g,'&quot;')}">⚖ live adj ${cm(I.s)} surge${I.E>=0.005?' · '+cm(I.here!=null?I.here:I.E)+' fresh'+(I.here!=null?'':' (Essendean)'):''}</span>`;},
+  floodHtml(){const I=ADJ.info(0);if(!I||!I.flood)return '';return `<div class="notice err">🌊 <b>Mimdale is above its minor flood level</b> (${I.mim!=null?I.mim.toFixed(2):'?'} m ≥ ${I.minor} m). The upper creek may be <b>non-tidal / fresh-dominated</b> — tide times and heights above ~25 km are unreliable; the live fresh adjustment only covers small freshes.</div>`;}};
+root.FTADJ=ADJ;
+if(root.FT&&root.FT.SYS&&root.FT.SYS!=='baffle')return; /* other systems: never adjusted */
+try{const J=JSON.parse(localStorage.getItem(LS)||'null');if(J)ADJ.set(J,true);}catch(e){}
+if(typeof fetch==='function'&&typeof location!=='undefined')ADJ.load();
+setInterval&&typeof document!=='undefined'&&setInterval(()=>{if(!document.hidden)ADJ.load();},20*60e3);
 })(typeof window!=='undefined'?window:globalThis);
 </script>
 <script id="bt-runin">/* Run-in start times along Baffle Creek (shared by Bite times + Baffle tides tabs).
@@ -2191,7 +2249,11 @@ function render(){
   else if(cal.beyond)warn+='<div class="notice">Above Essendean Bridge (the last calibration point). Tidal limit unknown — values held at Essendean’s, timing likely later and range smaller or nil. Great place to benchmark.</div>';
   else if(cal.est)warn+='<div class="notice info">Between calibration points '+esc(cal.nodeA.name)+' and '+esc(cal.nodeB.name)+' ('+(cal.nodeB.km-cal.nodeA.km).toFixed(0)+' km apart) — interpolated, uncertainty larger. A benchmark here would help a lot.</div>';
   if(cal.corr&&(cal.corr.hw||cal.corr.lw||cal.corr.lv))warn+=`<div class="notice info">Your applied benchmarks shift this spot: HW ${Math.round(cal.corr.hw)} min, LW ${Math.round(cal.corr.lw)} min, level ${cal.corr.lv.toFixed(2)} m.</div>`;
-  {const sd=P.ext.filter(e=>e.stand&&e.t>=t0&&e.t<t0+24);if(sd.length)warn+=`<div class="notice info">🌗 <b>Single-high day here.</b> The small high around ${sd.map(e=>B.fmtT(e.t)).join(', ')} (Bundaberg ${sd.map(e=>e.sup.H.toFixed(2)).join(', ')} m LAT, below the ${cal.supThr.toFixed(2)} m needed at this km) doesn’t make it up the creek — the water just stands for a few hours, then keeps falling to the next low. No run-in or top of tide from it.</div>`;}
+  {const sd=P.ext.filter(e=>e.stand&&e.t>=t0&&e.t<t0+24);if(sd.length)warn+=`<div class="notice info">🌗 <b>Single-high day here.</b> The small high around ${sd.map(e=>B.fmtT(e.t)).join(', ')} (Bundaberg ${sd.map(e=>e.sup.H.toFixed(2)).join(', ')} m LAT, below the ${sd[0].sup.thr.toFixed(2)} m needed at this km) doesn’t make it up the creek — the water just stands for a few hours, then keeps falling to the next low. No run-in or top of tide from it.</div>`;}
+  if(!GEN&&window.FTADJ&&FTADJ.cur){const nh=B.nowH(),tq=nh>=t0&&nh<t0+24?nh:t0+12,AL=(!st.bline||st.bline==='B')?'B':'X';
+    warn+=FTADJ.floodHtml();const bd=FTADJ.badge(tq,km,AL);if(bd)warn+=`<div class="adjrow">${bd}</div>`;
+    const ai=document.getElementById('bt-adjInfo');if(ai){const I=FTADJ.info(tq,km,AL);ai.innerHTML=`⚖ <b>${esc(FTADJ.line(tq,km,AL))}</b> (${tq===nh?'now':B.fmtDay(tq)}). Coastal surge = Bundaberg observed − MSQ predicted, 25 h mean (gain 1, capped ±0.3 m), added to every reach incl. Euleilah and side creeks. Fresh = Mimdale ${I.mim!=null?I.mim.toFixed(2):'?'} m vs its dry baseline ${I.M0!=null?I.M0.toFixed(2):'?'} m (14-day 10th percentile, 3 h lag): highs + 0.5 × fresh × a weight rising from 0 at the Euleilah junction (16.4 km) to 1 at Essendean, single-high threshold +${I.sup.toFixed(2)} m here; lows unchanged. Both fade out ahead (surge gone after 48 h, fresh after 72 h), so later dates are pure harmonic predictions. Data ${esc(I.gen||'')}.`;}}
+  else{const ai=document.getElementById('bt-adjInfo');if(ai)ai.textContent='';}
   $('bt-locWarn').innerHTML=warn;
   // stats
   $('bt-dayTitle').textContent=B.fmtDay(t0+12,true)+' — '+(st.landmark||('km '+km.toFixed(1)));
@@ -2244,7 +2306,7 @@ if(GEN&&document.getElementById('bt-line'))document.getElementById('bt-line').on
 $('bt-date').onchange=()=>{render();renderBench();FT.setDate($('bt-date').value,'baffle');};
 ['bt-hoff','bt-badj'].forEach(id=>document.getElementById(id).onchange=()=>{render();renderBench();FT.biteRefreshIfBaffle&&FT.biteRefreshIfBaffle();});
 const FT=window.FT;
-FT.baffleOpts=opts;FT.baffleSelect=(km,name,line)=>selectKm(km,name,line);
+FT.baffleOpts=opts;if(!GEN&&window.FTADJ)FTADJ.onChange.push(()=>{render();FT.biteRefreshIfBaffle&&FT.biteRefreshIfBaffle();});FT.baffleSelect=(km,name,line)=>selectKm(km,name,line);
 if(FT.spots)FT.spots.onChange.push(()=>{rebuildLm(true);render();});
 FT.baffleSetDate=v=>{if($('bt-date').value!==v){$('bt-date').value=v;render();renderBench();}};
 $('bt-toBite').onclick=()=>{const p=st.gps?[st.gps.lat,st.gps.lon]:(GEN?B.pointOnLine(st.km,st.line):B.pointAtKm(st.km));
@@ -2791,9 +2853,9 @@ const SER=[ // id, label, colour, kind, default on
  {id:'bundaberg_pred',lab:'Bundaberg MSQ pred',col:'#8fb8de',k:'line',dash:'3 3',on:false},
  {id:'win',lab:'Winfield pred (MSQ offsets)',col:'#17becf',k:'model',dash:'7 4',on:true},
  {id:'hillsrd',lab:'Hills Rd 539135',col:'#2ca02c',k:'step',on:true},
- {id:'hills_m',lab:'Hills Rd model',col:'#98df8a',k:'model',dash:'2 3',on:false},
+ {id:'hills_m',lab:'Hills Rd model (+live adj)',col:'#98df8a',k:'model',dash:'2 3',on:false},
  {id:'essendean',lab:'Essendean 039267',col:'#e5484d',k:'step',on:true,dots:true},
- {id:'ess_m',lab:'Essendean model',col:'#ff9896',k:'model',dash:'2 3',on:false},
+ {id:'ess_m',lab:'Essendean model (+live adj)',col:'#ff9896',k:'model',dash:'2 3',on:false},
  {id:'lags',lab:'Lag panel',col:'#c9a227',k:'panel',on:true},
  {id:'mimdale',lab:'Mimdale 539132',col:'#b48cff',k:'panel',on:true}];
 const on=JSON.parse(localStorage.getItem('ft_gauge_on')||'null')||{};SER.forEach(s=>{if(on[s.id]===undefined)on[s.id]=s.on;});
@@ -2829,8 +2891,11 @@ function latest(){const S=D.series;const card=(k,lab,unit,extra)=>{const a=S[k];
     const lvl=above>0.5||rise24>0.3?'bad':above>0.1||rise24>0.08?'warn':'ok';
     html=`<div class="notice ${lvl==='ok'?'info':lvl==='bad'?'err':''}">💧 <b>Fresh-flow &amp; tide-model reliability (Mimdale, upstream of the tide):</b> ${L[1].toFixed(2)} m, ${rise24>=0?'+':''}${rise24.toFixed(2)} m in 24 h, ${above.toFixed(2)} m above its 7-day low. `+
       (lvl==='ok'?'Steady base flow — tide-driven readings at Essendean/Hills Rd are representative.':lvl==='warn'?'Rising — some fresh coming down: upper-creek lows will sit higher and peaks look smaller; consider the Baffle tab\'s “Upper-creek base adj”.':'<b>Fresh / flood flow</b> — upper-creek levels are flow-dominated; tide lags & the model are unreliable above ~25 km.')+'</div>';}
-  $('gFresh').innerHTML=html;
+  if(window.FTADJ&&FTADJ.cur){const nh=nowM()/60;html=FTADJ.floodHtml()+html;}
+  $('gFresh').innerHTML=html;adjBadge();
   if(FT.floodInfo){const el=$('gFresh');FT.floodInfo().then(h=>{if(h&&el.isConnected){const o=el.querySelector('.gflood');if(o)o.remove();el.insertAdjacentHTML('beforeend','<div class="gflood">'+h+'</div>');}}).catch(()=>{});}}
+function adjBadge(){const el=$('gAdj');if(!el)return;if(!window.FTADJ||!FTADJ.cur){el.innerHTML='';return;}const nh=nowM()/60;
+  el.innerHTML=(FTADJ.badge(nh,KM.ess,'B')||'<span class="adjb">⚖ live adj: none</span>')+' <span class="mut" style="font-size:.78rem">model lines include it</span>';}
 function statAdj(k){const s=D.stats[k];if(!s||!/_HW$/.test(k))return s;const gk=k.replace('_HW','');const C=hwCheck(gk,gk==='essendean'?KM.ess:KM.hills);if(!C)return s;
   const bad=new Set(C.filter(c=>c.stand&&c.obs).map(c=>c.obs));if(!bad.size)return s;
   const ev=D.events[gk].filter(e=>e.k==='HW'&&!bad.has(e));const L=ev.map(e=>e.lag),last=D.series[gk][D.series[gk].length-1][0],W=ev.filter(e=>e.t>=last-7*1440).map(e=>e.lag);
@@ -2845,7 +2910,8 @@ function stats(){const S={};for(const k in D.stats)S[k]=statAdj(k);const row=(la
     return `<tr><td>${lab}<br><span class="mut">single-high check</span></td><td>${C.length}</td><td colspan="4">${okH}/${ph.length} predicted highs seen${st.length?` · ${okS}/${st.length} predicted stands with no peak (matched)`:' · no stands predicted'}${all?'':` · <b>${C.length-okH-okS} mismatch</b>`}</td><td class="${all?'drift-ok':'drift-warn'}">${all?'✓':'✗'}</td></tr>`;};
   $('gStats').innerHTML+=chk('Essendean HW','essendean',KM.ess)+chk('Hills Rd HW','hillsrd',KM.hills);
   const ev=D.events;const first=Math.min(...['essendean','hillsrd'].flatMap(k=>ev[k].map(e=>e.bt)));
-  $('gStatsNote').innerHTML=`Since ${isFinite(first)?fDT(first):'—'}. Drift = running mean − lag the app's tide model uses (green &lt;15′, amber &lt;40′, red ≥40′). A steady drift means the model needs re-calibrating; a jump during a fresh (see Mimdale) is expected. Single-high check: on neap days the small high doesn’t reach Essendean (model shows a <b>tide stand</b>); a stand counts as matched when the gauge shows no peak, and an observed peak at a predicted stand is left out of the lag/drift stats${['essendean_HW','hillsrd_HW'].some(k=>S[k]&&S[k].excl)?' (excluded: '+['essendean_HW','hillsrd_HW'].map(k=>S[k]&&S[k].excl||0).reduce((a,b)=>a+b,0)+')':''}.`;}
+  const AJ=window.FTADJ&&FTADJ.cur?`<br>⚖ <b>${esc(FTADJ.line(nowM()/60,KM.ess,'B'))}</b>. Model lines, next-HW cards and the single-high check include the live adjustments (hindcast from the hourly archive: surge = Bundaberg 25 h mean residual, fresh = Mimdale above its 14-day dry baseline; Essendean highs +0.5 × fresh, its single-high threshold + fresh/0.423; Hills Rd on Euleilah gets the surge only).`:'';
+  $('gStatsNote').innerHTML=`Since ${isFinite(first)?fDT(first):'—'}. Drift = running mean − lag the app's tide model uses (green &lt;15′, amber &lt;40′, red ≥40′). A steady drift means the model needs re-calibrating; a jump during a fresh (see Mimdale) is expected. Single-high check: on neap days the small high doesn’t reach Essendean (model shows a <b>tide stand</b>); a stand counts as matched when the gauge shows no peak, and an observed peak at a predicted stand is left out of the lag/drift stats${['essendean_HW','hillsrd_HW'].some(k=>S[k]&&S[k].excl)?' (excluded: '+['essendean_HW','hillsrd_HW'].map(k=>S[k]&&S[k].excl||0).reduce((a,b)=>a+b,0)+')':''}.${AJ}`;}
 function events(){const rows=[];for(const L of LAGS)for(const e of D.events[L.k])if(e.k===L.kind)rows.push({...e,lab:L.lab});
   for(const [gk,km,lab] of [['essendean',KM.ess,'Essendean'],['hillsrd',KM.hills,'Hills Rd']])for(const c of hwCheck(gk,km)||[])if(c.stand){const v=lastVal(D.series[gk],c.t);rows.push({stand:true,t:c.t,s:c.s0,e:c.s1,v:v?v[1]:null,bt:c.bt,bh:c.bh,ok:c.ok,lab:lab+' tide stand'});}
   rows.sort((a,b)=>b.t-a.t);
@@ -2859,6 +2925,7 @@ function setRange(r,silent){const [a,b]=dataSpan();let end=Math.max(b,Math.min(n
 function clampView(){let [a,b]=dataSpan();const fe=FT.gSpots&&FT.gSpots.futureEnd();if(fe)b=Math.max(b,fe-1440);if(on.ess_m||on.hills_m||on.win)b=Math.max(b,nowM()+9*1440); /* model curves can be scrolled ~10 days ahead */let w=view[1]-view[0];w=Math.max(180,Math.min(w,(b-a)+3*1440));
   let v0=view[0];v0=Math.max(a-1440,Math.min(v0,b+1440-w));view=[v0,v0+w];}
 const modelCache={};
+if(window.FTADJ)FTADJ.onChange.push(()=>{for(const k in modelCache)delete modelCache[k];for(const k in pcache)delete pcache[k];if(D)render();});
 /* Baffle model at a gauge, incl. single-high suppression (Hills Rd is on Euleilah Ck → never suppressed) */
 const LINE={[KM.win]:'B',[KM.hills]:'E',[KM.ess]:'B'};const pcache={};
 function pred(km,h0,h1){const k=km+':'+Math.floor(h0)+':'+Math.ceil(h1);if(pcache[k])return pcache[k];if(Object.keys(pcache).length>12)for(const x in pcache)delete pcache[x];

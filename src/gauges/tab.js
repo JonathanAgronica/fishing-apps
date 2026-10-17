@@ -16,9 +16,9 @@ const SER=[ // id, label, colour, kind, default on
  {id:'bundaberg_pred',lab:'Bundaberg MSQ pred',col:'#8fb8de',k:'line',dash:'3 3',on:false},
  {id:'win',lab:'Winfield pred (MSQ offsets)',col:'#17becf',k:'model',dash:'7 4',on:true},
  {id:'hillsrd',lab:'Hills Rd 539135',col:'#2ca02c',k:'step',on:true},
- {id:'hills_m',lab:'Hills Rd model',col:'#98df8a',k:'model',dash:'2 3',on:false},
+ {id:'hills_m',lab:'Hills Rd model (+live adj)',col:'#98df8a',k:'model',dash:'2 3',on:false},
  {id:'essendean',lab:'Essendean 039267',col:'#e5484d',k:'step',on:true,dots:true},
- {id:'ess_m',lab:'Essendean model',col:'#ff9896',k:'model',dash:'2 3',on:false},
+ {id:'ess_m',lab:'Essendean model (+live adj)',col:'#ff9896',k:'model',dash:'2 3',on:false},
  {id:'lags',lab:'Lag panel',col:'#c9a227',k:'panel',on:true},
  {id:'mimdale',lab:'Mimdale 539132',col:'#b48cff',k:'panel',on:true}];
 const on=JSON.parse(localStorage.getItem('ft_gauge_on')||'null')||{};SER.forEach(s=>{if(on[s.id]===undefined)on[s.id]=s.on;});
@@ -54,8 +54,11 @@ function latest(){const S=D.series;const card=(k,lab,unit,extra)=>{const a=S[k];
     const lvl=above>0.5||rise24>0.3?'bad':above>0.1||rise24>0.08?'warn':'ok';
     html=`<div class="notice ${lvl==='ok'?'info':lvl==='bad'?'err':''}">💧 <b>Fresh-flow &amp; tide-model reliability (Mimdale, upstream of the tide):</b> ${L[1].toFixed(2)} m, ${rise24>=0?'+':''}${rise24.toFixed(2)} m in 24 h, ${above.toFixed(2)} m above its 7-day low. `+
       (lvl==='ok'?'Steady base flow — tide-driven readings at Essendean/Hills Rd are representative.':lvl==='warn'?'Rising — some fresh coming down: upper-creek lows will sit higher and peaks look smaller; consider the Baffle tab\'s “Upper-creek base adj”.':'<b>Fresh / flood flow</b> — upper-creek levels are flow-dominated; tide lags & the model are unreliable above ~25 km.')+'</div>';}
-  $('gFresh').innerHTML=html;
+  if(window.FTADJ&&FTADJ.cur){const nh=nowM()/60;html=FTADJ.floodHtml()+html;}
+  $('gFresh').innerHTML=html;adjBadge();
   if(FT.floodInfo){const el=$('gFresh');FT.floodInfo().then(h=>{if(h&&el.isConnected){const o=el.querySelector('.gflood');if(o)o.remove();el.insertAdjacentHTML('beforeend','<div class="gflood">'+h+'</div>');}}).catch(()=>{});}}
+function adjBadge(){const el=$('gAdj');if(!el)return;if(!window.FTADJ||!FTADJ.cur){el.innerHTML='';return;}const nh=nowM()/60;
+  el.innerHTML=(FTADJ.badge(nh,KM.ess,'B')||'<span class="adjb">⚖ live adj: none</span>')+' <span class="mut" style="font-size:.78rem">model lines include it</span>';}
 function statAdj(k){const s=D.stats[k];if(!s||!/_HW$/.test(k))return s;const gk=k.replace('_HW','');const C=hwCheck(gk,gk==='essendean'?KM.ess:KM.hills);if(!C)return s;
   const bad=new Set(C.filter(c=>c.stand&&c.obs).map(c=>c.obs));if(!bad.size)return s;
   const ev=D.events[gk].filter(e=>e.k==='HW'&&!bad.has(e));const L=ev.map(e=>e.lag),last=D.series[gk][D.series[gk].length-1][0],W=ev.filter(e=>e.t>=last-7*1440).map(e=>e.lag);
@@ -70,7 +73,8 @@ function stats(){const S={};for(const k in D.stats)S[k]=statAdj(k);const row=(la
     return `<tr><td>${lab}<br><span class="mut">single-high check</span></td><td>${C.length}</td><td colspan="4">${okH}/${ph.length} predicted highs seen${st.length?` · ${okS}/${st.length} predicted stands with no peak (matched)`:' · no stands predicted'}${all?'':` · <b>${C.length-okH-okS} mismatch</b>`}</td><td class="${all?'drift-ok':'drift-warn'}">${all?'✓':'✗'}</td></tr>`;};
   $('gStats').innerHTML+=chk('Essendean HW','essendean',KM.ess)+chk('Hills Rd HW','hillsrd',KM.hills);
   const ev=D.events;const first=Math.min(...['essendean','hillsrd'].flatMap(k=>ev[k].map(e=>e.bt)));
-  $('gStatsNote').innerHTML=`Since ${isFinite(first)?fDT(first):'—'}. Drift = running mean − lag the app's tide model uses (green &lt;15′, amber &lt;40′, red ≥40′). A steady drift means the model needs re-calibrating; a jump during a fresh (see Mimdale) is expected. Single-high check: on neap days the small high doesn’t reach Essendean (model shows a <b>tide stand</b>); a stand counts as matched when the gauge shows no peak, and an observed peak at a predicted stand is left out of the lag/drift stats${['essendean_HW','hillsrd_HW'].some(k=>S[k]&&S[k].excl)?' (excluded: '+['essendean_HW','hillsrd_HW'].map(k=>S[k]&&S[k].excl||0).reduce((a,b)=>a+b,0)+')':''}.`;}
+  const AJ=window.FTADJ&&FTADJ.cur?`<br>⚖ <b>${esc(FTADJ.line(nowM()/60,KM.ess,'B'))}</b>. Model lines, next-HW cards and the single-high check include the live adjustments (hindcast from the hourly archive: surge = Bundaberg 25 h mean residual, fresh = Mimdale above its 14-day dry baseline; Essendean highs +0.5 × fresh, its single-high threshold + fresh/0.423; Hills Rd on Euleilah gets the surge only).`:'';
+  $('gStatsNote').innerHTML=`Since ${isFinite(first)?fDT(first):'—'}. Drift = running mean − lag the app's tide model uses (green &lt;15′, amber &lt;40′, red ≥40′). A steady drift means the model needs re-calibrating; a jump during a fresh (see Mimdale) is expected. Single-high check: on neap days the small high doesn’t reach Essendean (model shows a <b>tide stand</b>); a stand counts as matched when the gauge shows no peak, and an observed peak at a predicted stand is left out of the lag/drift stats${['essendean_HW','hillsrd_HW'].some(k=>S[k]&&S[k].excl)?' (excluded: '+['essendean_HW','hillsrd_HW'].map(k=>S[k]&&S[k].excl||0).reduce((a,b)=>a+b,0)+')':''}.${AJ}`;}
 function events(){const rows=[];for(const L of LAGS)for(const e of D.events[L.k])if(e.k===L.kind)rows.push({...e,lab:L.lab});
   for(const [gk,km,lab] of [['essendean',KM.ess,'Essendean'],['hillsrd',KM.hills,'Hills Rd']])for(const c of hwCheck(gk,km)||[])if(c.stand){const v=lastVal(D.series[gk],c.t);rows.push({stand:true,t:c.t,s:c.s0,e:c.s1,v:v?v[1]:null,bt:c.bt,bh:c.bh,ok:c.ok,lab:lab+' tide stand'});}
   rows.sort((a,b)=>b.t-a.t);
@@ -84,6 +88,7 @@ function setRange(r,silent){const [a,b]=dataSpan();let end=Math.max(b,Math.min(n
 function clampView(){let [a,b]=dataSpan();const fe=FT.gSpots&&FT.gSpots.futureEnd();if(fe)b=Math.max(b,fe-1440);if(on.ess_m||on.hills_m||on.win)b=Math.max(b,nowM()+9*1440); /* model curves can be scrolled ~10 days ahead */let w=view[1]-view[0];w=Math.max(180,Math.min(w,(b-a)+3*1440));
   let v0=view[0];v0=Math.max(a-1440,Math.min(v0,b+1440-w));view=[v0,v0+w];}
 const modelCache={};
+if(window.FTADJ)FTADJ.onChange.push(()=>{for(const k in modelCache)delete modelCache[k];for(const k in pcache)delete pcache[k];if(D)render();});
 /* Baffle model at a gauge, incl. single-high suppression (Hills Rd is on Euleilah Ck → never suppressed) */
 const LINE={[KM.win]:'B',[KM.hills]:'E',[KM.ess]:'B'};const pcache={};
 function pred(km,h0,h1){const k=km+':'+Math.floor(h0)+':'+Math.ceil(h1);if(pcache[k])return pcache[k];if(Object.keys(pcache).length>12)for(const x in pcache)delete pcache[x];

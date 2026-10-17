@@ -1,0 +1,15 @@
+import puppeteer from 'puppeteer-core';
+const URL=process.argv[2]||'http://localhost:18080/test-apps/',OUT=process.argv[3]||'/tmp/adj';
+const b=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox']});const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push(m.text());});
+await p.setViewport({width:390,height:844,deviceScaleFactor:2,isMobile:true,hasTouch:true});
+await p.goto(URL+'#gauges',{waitUntil:'networkidle0'});await p.waitForSelector('body[data-gauges-ready="1"]',{timeout:60000});await sleep(1500);
+await p.evaluate(()=>{const b=[...document.querySelectorAll('#gLegend button')].find(x=>/Essendean model/.test(x.textContent));if(b&&b.classList.contains('off'))b.click();});await sleep(800);
+const g=await p.evaluate(()=>({adj:document.getElementById('gAdj').innerText,note:document.getElementById('gStatsNote').textContent.slice(-420),fresh:document.getElementById('gFresh').innerText.slice(0,200),ow:document.documentElement.scrollWidth}));
+await p.screenshot({path:OUT+'_gauges.png'});
+const el=await p.$('#gChart');await el.screenshot({path:OUT+'_gauges_chart.png'});
+await p.goto(URL+'#baffle',{waitUntil:'networkidle0'});await p.waitForSelector('body[data-bt-ready="1"]');await sleep(1200);
+await p.evaluate(()=>{const s=[...document.querySelectorAll('#bt-lm option')].find(o=>/Essendean/.test(o.textContent));if(s){const sel=document.getElementById('bt-lm');sel.value=s.value;sel.onchange&&sel.onchange();sel.dispatchEvent(new Event('change'));}});await sleep(800);
+const t=await p.evaluate(()=>({warn:document.getElementById('bt-locWarn').innerText,info:document.getElementById('bt-adjInfo').textContent,ow:document.documentElement.scrollWidth}));
+await p.screenshot({path:OUT+'_tides.png'});
+console.log(JSON.stringify({g,t,errs},null,1));await b.close();

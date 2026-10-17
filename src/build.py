@@ -277,6 +277,7 @@ bt_ui=patch(bt_ui,"  drawChart(P,t0,t1,o);\n","  drawChart(P,t0,t1,o);if(window.
 
 exec(open(f'{SRC}/sides/build_patches.py').read())
 exec(open(f'{SRC}/lure/build_patches.py').read())
+exec(open(f'{SRC}/adj/build_patches.py').read())
 DC_JS=open(f'{SRC}/declutter/dc.js').read();DC_CSS=open(f'{SRC}/declutter/dc.css').read()
 # ---------- namespace IDs ----------
 def ids(html): return set(re.findall(r'\bid="([A-Za-z0-9_-]+)"',html))
@@ -430,6 +431,7 @@ BODY=f'''<main>
 <script id="mj-core">{mj_core}</script>
 <script id="bt-data">{bt_data}</script>
 <script id="bt-core">{bt_core}</script>
+<script id="bt-adj">{ADJ_JS}</script>
 <script id="bt-runin">{RUNIN_JS}</script>
 <script id="bt-sides">{SIDES_JS}</script>
 <script id="ft-lure">{LURE_CORE}</script>
@@ -476,7 +478,7 @@ open(f'{SITE}/manifest.webmanifest','w').write(json.dumps({"id":"./","name":"Mac
   "icons":[{"src":"icons/icon-192.png?v="+VER,"sizes":"192x192","type":"image/png","purpose":"any"},{"src":"icons/icon-512.png?v="+VER,"sizes":"512x512","type":"image/png","purpose":"any"},{"src":"icons/maskable-192.png?v="+VER,"sizes":"192x192","type":"image/png","purpose":"maskable"},{"src":"icons/maskable-512.png?v="+VER,"sizes":"512x512","type":"image/png","purpose":"maskable"}],
   "shortcuts":[{"name":"Bite times","url":"./#bite"},{"name":"Tides","url":"./#baffle"},{"name":"Map","url":"./#map"},{"name":"Gauges","url":"./#gauges"},{"name":"Calendar","url":"./#cal"},{"name":"Catch log","url":"./#log"}]},indent=1))
 ASSETS=['./','./index.html','./manifest.webmanifest','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/icon-64.png','./icons/icon-128.png','./icons/icon-32.png','./favicon.ico',
-        './mangrove-jack/','./mangrove-jack/index.html','./baffle-tides/','./baffle-tides/index.html','./data/gauges.json','./data/catches.csv','./data/systems/index.json','./vendor/leaflet/leaflet.js','./vendor/leaflet/leaflet.css']
+        './mangrove-jack/','./mangrove-jack/index.html','./baffle-tides/','./baffle-tides/index.html','./data/gauges.json','./data/baffle_adj.json','./data/catches.csv','./data/systems/index.json','./vendor/leaflet/leaflet.js','./vendor/leaflet/leaflet.css']
 SW=f'''/* Mac's Jacks service worker {VER} */
 const CACHE='fishtimes-{VER}';
 const OURS=/^(fishtimes|landing|mangrove-jack|baffle-tides)-/;
@@ -522,6 +524,8 @@ for f in os.listdir(f'{SITE}/data/systems'):
 for f in os.listdir(SYSOUT):
     if f.endswith('.json'): shutil.copy(f'{SYSOUT}/{f}',f'{SITE}/data/systems/{f}')
 shutil.copy(f'{SRC}/scripts/update_sys_gauges.py',f'{SITE}/scripts/update_sys_gauges.py')
+shutil.copy(f'{SRC}/scripts/baffle_adj.py',f'{SITE}/scripts/baffle_adj.py')
+assert os.path.exists(f'{SITE}/data/baffle_adj.json') or os.path.exists(f'{REPO}/data/baffle_adj.json'), 'data/baffle_adj.json must exist (precached by the SW): run scripts/baffle_adj.py'
 # multi-system gauge archive: station list from the system builder (archives in data/sysg/arch are written by the routine)
 os.makedirs(f'{SITE}/data/sysg',exist_ok=True);shutil.copy(f'{MSOUT}/sysg_stations.json',f'{SITE}/data/sysg/stations.json')
 os.makedirs(f'{SITE}/vendor/leaflet',exist_ok=True)

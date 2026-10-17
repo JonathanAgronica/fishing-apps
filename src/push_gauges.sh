@@ -8,6 +8,8 @@ git pull -q --rebase --autostash origin main || true
 ARGS=()
 [ -d /workspace/baffle-tides/archive ] && ARGS+=(--ingest /workspace/baffle-tides/archive)
 python3 scripts/update_gauges.py "${ARGS[@]}" | cut -c1-600
+# Baffle live tide adjustments (surge + Mimdale fresh) for the app -> data/baffle_adj.json (non-fatal)
+[ -f scripts/baffle_adj.py ] && { python3 scripts/baffle_adj.py | cut -c1-300 || echo "baffle_adj: failed (non-fatal)"; }
 # multi-system gauges (BoM tables for every river system; self-throttled to one fetch per ~3 h, ~1 min when it runs)
 [ -f scripts/update_sys_gauges.py ] && { python3 scripts/update_sys_gauges.py | cut -c1-300 || echo "sysgauges: failed (non-fatal)"; }
 git add data

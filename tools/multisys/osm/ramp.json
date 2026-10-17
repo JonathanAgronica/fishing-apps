@@ -1,0 +1,3293 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-09T23:12:39Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 14046011,
+  "lat": -27.0538262,
+  "lon": 153.0971835,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Moffatt Esplanade Boat Ramp",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 14056930,
+  "lat": -27.5171832,
+  "lon": 153.0070478,
+  "tags": {
+    "leisure": "slipway",
+    "source": "PGS;survey"
+  }
+},
+{
+  "type": "node",
+  "id": 14063928,
+  "lat": -27.2595792,
+  "lon": 153.0863992,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 14088516,
+  "lat": -27.1810623,
+  "lon": 153.0295097,
+  "tags": {
+    "leisure": "slipway",
+    "source": "PGS"
+  }
+},
+{
+  "type": "node",
+  "id": 14088944,
+  "lat": -27.5409127,
+  "lon": 152.8514023,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 14097746,
+  "lat": -26.8411571,
+  "lon": 153.1111166,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 14121793,
+  "lat": -27.0322777,
+  "lon": 153.1000005,
+  "tags": {
+    "leisure": "slipway",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 14143721,
+  "lat": -27.3031519,
+  "lon": 153.0654733,
+  "tags": {
+    "leisure": "slipway",
+    "source": "PGS"
+  }
+},
+{
+  "type": "node",
+  "id": 26336801,
+  "lat": -27.4411112,
+  "lon": 153.0440164,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 81321853,
+  "lat": -27.5096818,
+  "lon": 153.2887586,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 169727143,
+  "lat": -27.5419367,
+  "lon": 152.9736515,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 186061541,
+  "lat": -27.2612451,
+  "lon": 153.0771983,
+  "tags": {
+    "leisure": "slipway",
+    "note": "small watercraft only"
+  }
+},
+{
+  "type": "node",
+  "id": 186153438,
+  "lat": -27.1926798,
+  "lon": 153.1101070,
+  "tags": {
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 186153439,
+  "lat": -27.1944967,
+  "lon": 153.1085561,
+  "tags": {
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 186153444,
+  "lat": -27.1948623,
+  "lon": 153.1053819,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 193245264,
+  "lat": -27.5409568,
+  "lon": 152.8512379,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 198488407,
+  "lat": -27.4375152,
+  "lon": 153.0423022,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 203984744,
+  "lat": -27.5749079,
+  "lon": 153.3297470,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 231397497,
+  "lat": -27.4424119,
+  "lon": 153.0139000,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 267209760,
+  "lat": -27.2989334,
+  "lon": 153.0351934,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 310256107,
+  "lat": -27.5563709,
+  "lon": 152.8002678,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 316735176,
+  "lat": -27.4772429,
+  "lon": 153.0344428,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 320411224,
+  "lat": -27.4724006,
+  "lon": 153.0100029,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 332522267,
+  "lat": -26.8061041,
+  "lon": 153.1259139,
+  "tags": {
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 378685765,
+  "lat": -27.3299182,
+  "lon": 153.0847860,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 378685778,
+  "lat": -27.3296677,
+  "lon": 153.0862970,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 410114158,
+  "lat": -26.5758700,
+  "lon": 153.0088752,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "lanes": "1",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 430111068,
+  "lat": -24.8152012,
+  "lon": 152.4654834,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Bargara Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 430601870,
+  "lat": -24.7586572,
+  "lon": 152.4011738,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Burnett Heads"
+  }
+},
+{
+  "type": "node",
+  "id": 447782817,
+  "lat": -26.5692431,
+  "lon": 153.0648249,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 481773434,
+  "lat": -27.4587668,
+  "lon": 153.1889039,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "name": "WMYC"
+  }
+},
+{
+  "type": "node",
+  "id": 481789109,
+  "lat": -27.4561519,
+  "lon": 153.1885246,
+  "tags": {
+    "leisure": "slipway",
+    "name": "WMYC Slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 481791159,
+  "lat": -27.4520726,
+  "lon": 153.1900911,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 528521114,
+  "lat": -27.4491263,
+  "lon": 153.0832615,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Colmslie Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 528553623,
+  "lat": -27.4394694,
+  "lon": 153.1264343,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Hemmant Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 561810907,
+  "lat": -27.1919278,
+  "lon": 153.0336149,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 564669250,
+  "lat": -27.4008233,
+  "lon": 153.1663851,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Whyte Island boat ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 581408338,
+  "lat": -27.1513130,
+  "lon": 153.0107883,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Burpengary Boat Ramp",
+    "note": "small boats only"
+  }
+},
+{
+  "type": "node",
+  "id": 587456419,
+  "lat": -27.2778158,
+  "lon": 153.0414871,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 587664668,
+  "lat": -27.5894630,
+  "lon": 153.3566694,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Dalpura Bay Half Tide Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 597609900,
+  "lat": -27.0313358,
+  "lon": 153.0993533,
+  "tags": {
+    "access": "yes",
+    "lanes": "2",
+    "leisure": "slipway",
+    "name": "Toorbul Boat Ramp",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 598121530,
+  "lat": -27.3025709,
+  "lon": 153.0130483,
+  "tags": {
+    "leisure": "slipway",
+    "note": "small boats only"
+  }
+},
+{
+  "type": "node",
+  "id": 610618142,
+  "lat": -26.6387358,
+  "lon": 153.0878756,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 610642074,
+  "lat": -27.4918924,
+  "lon": 152.9977442,
+  "tags": {
+    "access": "foot",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 616541094,
+  "lat": -27.3434429,
+  "lon": 153.1010713,
+  "tags": {
+    "leisure": "slipway",
+    "source": "nearmap"
+  }
+},
+{
+  "type": "node",
+  "id": 621177164,
+  "lat": -24.7613597,
+  "lon": 152.3876003,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 638044849,
+  "lat": -26.8959996,
+  "lon": 153.0854232,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "lanes": "1",
+    "leisure": "slipway",
+    "ref": "LB55",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 660560429,
+  "lat": -24.1712864,
+  "lon": 151.8831359,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Town of 1770"
+  }
+},
+{
+  "type": "node",
+  "id": 665853340,
+  "lat": -27.3013442,
+  "lon": 152.5182520,
+  "tags": {
+    "leisure": "slipway",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 726581506,
+  "lat": -27.3039627,
+  "lon": 152.9969590,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 747719495,
+  "lat": -27.2102475,
+  "lon": 153.1170854,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 763073007,
+  "lat": -27.4707060,
+  "lon": 153.1071478,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Bulimba Creek Canoe Trail"
+  }
+},
+{
+  "type": "node",
+  "id": 827190337,
+  "lat": -27.1858669,
+  "lon": 153.0307113,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 923876534,
+  "lat": -26.3930407,
+  "lon": 153.0415343,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 939236406,
+  "lat": -27.4741691,
+  "lon": 153.1928764,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 987480274,
+  "lat": -26.3809409,
+  "lon": 152.9354334,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1178466847,
+  "lat": -24.8771864,
+  "lon": 151.8483424,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1240600348,
+  "lat": -27.3309897,
+  "lon": 153.0825671,
+  "tags": {
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 1300512046,
+  "lat": -27.5149586,
+  "lon": 153.2862287,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1300512134,
+  "lat": -27.5145884,
+  "lon": 153.2863808,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1315967803,
+  "lat": -27.4864583,
+  "lon": 153.1166416,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Bulimba Creek Canoe Trail"
+  }
+},
+{
+  "type": "node",
+  "id": 1321310828,
+  "lat": -26.6244378,
+  "lon": 153.0461509,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Muller Park Boat Ramp",
+    "source": "SM"
+  }
+},
+{
+  "type": "node",
+  "id": 1352140362,
+  "lat": -27.4872225,
+  "lon": 153.1861727,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1360039184,
+  "lat": -27.3626933,
+  "lon": 153.1028059,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Nudgee Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 1440099508,
+  "lat": -27.0803960,
+  "lon": 153.1580258,
+  "tags": {
+    "leisure": "slipway",
+    "maxweight": "5",
+    "name": "Boat Ramp",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 1450397481,
+  "lat": -25.2940845,
+  "lon": 152.9095336,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1545630930,
+  "lat": -27.5053050,
+  "lon": 153.0156793,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1677032202,
+  "lat": -27.5293248,
+  "lon": 153.2845427,
+  "tags": {
+    "leisure": "slipway",
+    "source": "Bing"
+  }
+},
+{
+  "type": "node",
+  "id": 1738919386,
+  "lat": -27.1028170,
+  "lon": 152.5626364,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1821246440,
+  "lat": -27.1494763,
+  "lon": 153.0313095,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway",
+    "name": "Burpengary East Boat Ramp",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 1859998237,
+  "lat": -24.9629051,
+  "lon": 153.3482628,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1881202853,
+  "lat": -27.0671956,
+  "lon": 153.1337190,
+  "tags": {
+    "leisure": "slipway",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 1881203031,
+  "lat": -27.0694171,
+  "lon": 153.1339378,
+  "tags": {
+    "leisure": "slipway",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 1901285222,
+  "lat": -26.3853375,
+  "lon": 152.9295483,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1901387241,
+  "lat": -26.5097354,
+  "lon": 152.5815183,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 1919602590,
+  "lat": -25.7146244,
+  "lon": 152.5769045,
+  "tags": {
+    "leisure": "slipway",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 1937684026,
+  "lat": -27.1448361,
+  "lon": 153.0362140,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway",
+    "lit": "no",
+    "maxweight": "5",
+    "name": "Beachmere Boat Ramp",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 1937684027,
+  "lat": -27.1452087,
+  "lon": 153.0360691,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway",
+    "lit": "no",
+    "maxweight": "3",
+    "name": "Beachmere Boat Ramp",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 1953022140,
+  "lat": -26.6433044,
+  "lon": 153.0519458,
+  "tags": {
+    "access": "customers",
+    "leisure": "slipway",
+    "name": "Maroochy Waterfront"
+  }
+},
+{
+  "type": "node",
+  "id": 1994821904,
+  "lat": -25.5417940,
+  "lon": 152.7105229,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2017247394,
+  "lat": -27.3899907,
+  "lon": 151.9431800,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2041529226,
+  "lat": -27.2481400,
+  "lon": 153.1108586,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2049271857,
+  "lat": -27.4601284,
+  "lon": 153.1898832,
+  "tags": {
+    "leisure": "slipway",
+    "source": "Bing"
+  }
+},
+{
+  "type": "node",
+  "id": 2049272080,
+  "lat": -27.4591938,
+  "lon": 153.1914378,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2049272081,
+  "lat": -27.4597475,
+  "lon": 153.1908070,
+  "tags": {
+    "leisure": "slipway",
+    "source": "Bing"
+  }
+},
+{
+  "type": "node",
+  "id": 2088221104,
+  "lat": -27.4783946,
+  "lon": 153.1979745,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2099412420,
+  "lat": -25.2972444,
+  "lon": 152.9078603,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2099412421,
+  "lat": -25.2972923,
+  "lon": 152.9072428,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2102453394,
+  "lat": -27.1940105,
+  "lon": 153.1049342,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2341900138,
+  "lat": -27.4562499,
+  "lon": 153.1885364,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "name": "WMYC slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2341900156,
+  "lat": -27.4602077,
+  "lon": 153.1897586,
+  "tags": {
+    "access": "yes",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2432557774,
+  "lat": -25.2959802,
+  "lon": 152.9090004,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2432557777,
+  "lat": -25.2963961,
+  "lon": 152.9085488,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2432557781,
+  "lat": -25.2966790,
+  "lon": 152.9081665,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2584504894,
+  "lat": -26.8309178,
+  "lon": 153.1200641,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 2651739744,
+  "lat": -27.3408841,
+  "lon": 152.6144400,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3096870875,
+  "lat": -27.2749508,
+  "lon": 152.9806061,
+  "tags": {
+    "leisure": "slipway",
+    "note": "small boats only"
+  }
+},
+{
+  "type": "node",
+  "id": 3100213199,
+  "lat": -24.5114109,
+  "lon": 152.0215264,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3100213207,
+  "lat": -24.5118723,
+  "lon": 152.0020832,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3106934192,
+  "lat": -24.5168824,
+  "lon": 152.0137943,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3106935244,
+  "lat": -24.5319806,
+  "lon": 152.0270216,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3119868313,
+  "lat": -24.6764600,
+  "lon": 152.1985557,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3127061392,
+  "lat": -24.7026862,
+  "lon": 152.1738363,
+  "tags": {
+    "leisure": "slipway",
+    "source": "Bing"
+  }
+},
+{
+  "type": "node",
+  "id": 3130502726,
+  "lat": -24.8669089,
+  "lon": 152.0746770,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3139498705,
+  "lat": -24.8739617,
+  "lon": 151.8450376,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3145351123,
+  "lat": -24.7585917,
+  "lon": 152.3971351,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3155722074,
+  "lat": -25.5413279,
+  "lon": 152.7090913,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3238917815,
+  "lat": -25.0249980,
+  "lon": 152.2362697,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3270329079,
+  "lat": -25.3564946,
+  "lon": 151.9171744,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3308947178,
+  "lat": -27.2304324,
+  "lon": 152.8919305,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Boral Landing"
+  }
+},
+{
+  "type": "node",
+  "id": 3328383976,
+  "lat": -27.2437030,
+  "lon": 152.9577706,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3328383987,
+  "lat": -27.2464027,
+  "lon": 152.9569968,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3356904346,
+  "lat": -27.5648635,
+  "lon": 153.3371872,
+  "tags": {
+    "leisure": "slipway",
+    "note": "High tide access only, and small boats."
+  }
+},
+{
+  "type": "node",
+  "id": 3483412826,
+  "lat": -27.3447778,
+  "lon": 153.0920264,
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway",
+    "ref": "RA6021"
+  }
+},
+{
+  "type": "node",
+  "id": 3506690632,
+  "lat": -27.4529715,
+  "lon": 153.1891510,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 3549047090,
+  "lat": -27.2233891,
+  "lon": 152.4875842,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3554528270,
+  "lat": -24.8617178,
+  "lon": 152.3485518,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3554528274,
+  "lat": -24.8618537,
+  "lon": 152.3486549,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3559958563,
+  "lat": -27.3276676,
+  "lon": 153.0717813,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Curlew Street canoe launching ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 3628350497,
+  "lat": -24.8628737,
+  "lon": 152.3455945,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3628872224,
+  "lat": -24.8972998,
+  "lon": 152.2729907,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3628872229,
+  "lat": -24.8978338,
+  "lon": 152.2739110,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3628872230,
+  "lat": -24.8979482,
+  "lon": 152.2743357,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3772770082,
+  "lat": -24.9296420,
+  "lon": 152.4746242,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3791014910,
+  "lat": -25.0752861,
+  "lon": 152.5450939,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3791030316,
+  "lat": -25.0918897,
+  "lon": 152.5540969,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3791080232,
+  "lat": -25.1715595,
+  "lon": 152.5887377,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3870973185,
+  "lat": -24.8292523,
+  "lon": 152.3731020,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3895956758,
+  "lat": -27.4619854,
+  "lon": 153.1270853,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Fleming Road Canoe Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 3910363657,
+  "lat": -25.6127986,
+  "lon": 152.8755222,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3910374210,
+  "lat": -25.7228842,
+  "lon": 152.9137309,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3943238889,
+  "lat": -26.6876276,
+  "lon": 153.1320965,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3949668094,
+  "lat": -26.8069781,
+  "lon": 153.1244986,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3951048508,
+  "lat": -26.7890406,
+  "lon": 153.1421411,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 4217198227,
+  "lat": -27.4206687,
+  "lon": 152.4484799,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 4351222041,
+  "lat": -25.8272553,
+  "lon": 153.0542138,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Bullock Point boat ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 4381767016,
+  "lat": -27.3499486,
+  "lon": 152.5433557,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 4398304241,
+  "lat": -25.1834854,
+  "lon": 152.6098778,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 4582204436,
+  "lat": -26.2574930,
+  "lon": 152.9966920,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Canoe Launch"
+  }
+},
+{
+  "type": "node",
+  "id": 4582262076,
+  "lat": -26.2270807,
+  "lon": 152.9949259,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Canoe Launch"
+  }
+},
+{
+  "type": "node",
+  "id": 4586791068,
+  "lat": -26.6417845,
+  "lon": 153.0618076,
+  "tags": {
+    "fee": "no",
+    "leisure": "slipway",
+    "name": "Cod Hole Boat Ramp",
+    "ref": "MA11"
+  }
+},
+{
+  "type": "node",
+  "id": 4670632885,
+  "lat": -27.0859800,
+  "lon": 153.1133055,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 4686460086,
+  "lat": -26.2826516,
+  "lon": 152.9963106,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 4719716443,
+  "lat": -27.2604345,
+  "lon": 153.1021725,
+  "tags": {
+    "leisure": "slipway",
+    "name": "light craft"
+  }
+},
+{
+  "type": "node",
+  "id": 4721728965,
+  "lat": -27.1389193,
+  "lon": 153.0507787,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5042008202,
+  "lat": -27.5410988,
+  "lon": 152.8406804,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5245374864,
+  "lat": -27.1880699,
+  "lon": 153.0316201,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5439421450,
+  "lat": -25.2455125,
+  "lon": 152.8122403,
+  "tags": {
+    "description": "Gatakers Bay Boat Ramp",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5510649639,
+  "lat": -27.1733141,
+  "lon": 152.9455597,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5581646111,
+  "lat": -27.4390350,
+  "lon": 153.1270765,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5646649736,
+  "lat": -25.3948277,
+  "lon": 151.7772420,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5646649744,
+  "lat": -25.3946840,
+  "lon": 151.7789850,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5670221612,
+  "lat": -26.6435807,
+  "lon": 153.0843382,
+  "tags": {
+    "fee": "no",
+    "lanes": "1",
+    "leisure": "slipway",
+    "name": "Picnic Point Boat Ramp",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 5793660192,
+  "lat": -27.4830959,
+  "lon": 153.1138194,
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5836443726,
+  "lat": -27.4676979,
+  "lon": 153.2408493,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Kayak Ramp",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 5836443741,
+  "lat": -27.4673997,
+  "lon": 153.2411686,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Kayak Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 6139952095,
+  "lat": -27.1999373,
+  "lon": 153.1030904,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Canoe launch site",
+    "sport": "canoe"
+  }
+},
+{
+  "type": "node",
+  "id": 6203003117,
+  "lat": -27.4494430,
+  "lon": 153.0792505,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "name": "BSE MaritimeSolutions - Brisbane Slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 6267220652,
+  "lat": -27.0192206,
+  "lon": 152.5629257,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 6711936034,
+  "lat": -27.1701911,
+  "lon": 152.9486923,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 6813392511,
+  "lat": -26.7125488,
+  "lon": 152.8720647,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 7153337574,
+  "lat": -27.0000235,
+  "lon": 153.0712784,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "lanes": "1",
+    "leisure": "slipway",
+    "name": "Donnybrook Boat Ramp",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 7202375749,
+  "lat": -27.0686428,
+  "lon": 153.1593690,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 7281505608,
+  "lat": -26.5966864,
+  "lon": 153.0566356,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 7281505610,
+  "lat": -26.8343529,
+  "lon": 153.1186271,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 7281505611,
+  "lat": -26.8345881,
+  "lon": 153.1185033,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 7281505612,
+  "lat": -26.8027138,
+  "lon": 153.1458644,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 7281505613,
+  "lat": -26.6957679,
+  "lon": 153.1172999,
+  "tags": {
+    "lanes": "1",
+    "leisure": "slipway",
+    "name": "Outrigger Park",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 7491762855,
+  "lat": -27.4854328,
+  "lon": 153.0515549,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 7932897023,
+  "lat": -26.6649702,
+  "lon": 153.0780178,
+  "tags": {
+    "access": "no",
+    "fee": "no",
+    "lanes": "1",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 8074814889,
+  "lat": -26.4028125,
+  "lon": 152.9472275,
+  "tags": {
+    "fee": "no",
+    "leisure": "slipway",
+    "note": "small craft only"
+  }
+},
+{
+  "type": "node",
+  "id": 8370191228,
+  "lat": -27.4451797,
+  "lon": 153.0692279,
+  "tags": {
+    "access": "private",
+    "barrier": "gate",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 8451655314,
+  "lat": -27.0704416,
+  "lon": 153.1362000,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 8623705788,
+  "lat": -26.6436987,
+  "lon": 153.0548946,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Maroochy Lions Park Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 8623705789,
+  "lat": -26.6437823,
+  "lon": 153.0549088,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Maroochy Lions Park Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 9018538493,
+  "lat": -27.0216209,
+  "lon": 152.5610707,
+  "tags": {
+    "lanes": "1",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 9018538494,
+  "lat": -27.0217021,
+  "lon": 152.5611851,
+  "tags": {
+    "lanes": "1",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 9024721512,
+  "lat": -27.0335317,
+  "lon": 153.0775893,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "lanes": "1",
+    "leisure": "slipway",
+    "name": "Meldale Boat Ramp",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 9068757039,
+  "lat": -26.1900190,
+  "lon": 153.0306325,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway",
+    "name": "Canoe Landing - Harry's Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9068757040,
+  "lat": -26.1905607,
+  "lon": 153.0305424,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway",
+    "name": "Public Jetty - Harry's Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9068757041,
+  "lat": -26.1913570,
+  "lon": 153.0303724,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "name": "Commercial Tour Jetty - Harry's Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9068757042,
+  "lat": -26.1883991,
+  "lon": 153.0306873,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Canoe Landing - Harry's Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9068757043,
+  "lat": -26.1876992,
+  "lon": 153.0309095,
+  "tags": {
+    "access": "permissive",
+    "fee": "no",
+    "leisure": "slipway",
+    "name": "Group Site Jetty - Harry's Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9213987048,
+  "lat": -27.0809393,
+  "lon": 153.1581298,
+  "tags": {
+    "leisure": "slipway",
+    "maxweight": "5",
+    "name": "Boat Ramp",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 9444537889,
+  "lat": -27.3444135,
+  "lon": 153.0930715,
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway",
+    "ref": "RA6020"
+  }
+},
+{
+  "type": "node",
+  "id": 9457662245,
+  "lat": -27.5143677,
+  "lon": 153.2864686,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 9512947908,
+  "lat": -27.5239665,
+  "lon": 152.9943347,
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway",
+    "ref": "RA6014"
+  }
+},
+{
+  "type": "node",
+  "id": 9512947909,
+  "lat": -27.3449527,
+  "lon": 153.0976923,
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway",
+    "ref": "RA6016"
+  }
+},
+{
+  "type": "node",
+  "id": 9512987455,
+  "lat": -27.4791558,
+  "lon": 153.0506229,
+  "tags": {
+    "boat": "designated",
+    "description": "One lane boat ramp",
+    "leisure": "slipway",
+    "ref": "RA6002"
+  }
+},
+{
+  "type": "node",
+  "id": 9512987456,
+  "lat": -27.4790137,
+  "lon": 153.0509797,
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway",
+    "ref": "RA6001"
+  }
+},
+{
+  "type": "node",
+  "id": 9512996861,
+  "lat": -27.5362414,
+  "lon": 152.9725546,
+  "tags": {
+    "boat": "designated",
+    "description": "One lane boat ramp",
+    "leisure": "slipway",
+    "ref": "RA6007"
+  }
+},
+{
+  "type": "node",
+  "id": 9513025653,
+  "lat": -27.5583246,
+  "lon": 152.9822546,
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway",
+    "ref": "RA6023"
+  }
+},
+{
+  "type": "node",
+  "id": 9596531755,
+  "lat": -27.2595093,
+  "lon": 153.0863736,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 9602481779,
+  "lat": -27.3316426,
+  "lon": 153.0822383,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 9758856137,
+  "lat": -26.7653075,
+  "lon": 153.1287340,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "lanes": "1",
+    "leisure": "slipway",
+    "maxweight": "5t",
+    "name": "Westaway Parade",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 9845687866,
+  "lat": -26.7038617,
+  "lon": 153.1357302,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 9863490369,
+  "lat": -27.4526191,
+  "lon": 153.1892601,
+  "tags": {
+    "access": "yes",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 9863490371,
+  "lat": -27.4525296,
+  "lon": 153.1893136,
+  "tags": {
+    "access": "yes",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 9863575994,
+  "lat": -27.4518738,
+  "lon": 153.1905496,
+  "tags": {
+    "access": "unknown",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 9863576074,
+  "lat": -27.4530673,
+  "lon": 153.1891107,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 10200818711,
+  "lat": -27.0643825,
+  "lon": 153.1440618,
+  "tags": {
+    "leisure": "slipway",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 10200818716,
+  "lat": -27.0642900,
+  "lon": 153.1440318,
+  "tags": {
+    "leisure": "slipway",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 10248421903,
+  "lat": -27.2114261,
+  "lon": 153.0786684,
+  "tags": {
+    "leisure": "slipway",
+    "name": "paddlecraft launch point"
+  }
+},
+{
+  "type": "node",
+  "id": 10713541216,
+  "lat": -25.8110632,
+  "lon": 152.9245648,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Kauri Creek Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 10842048677,
+  "lat": -25.7576145,
+  "lon": 152.9554345,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 11043430322,
+  "lat": -26.6858943,
+  "lon": 153.1277508,
+  "tags": {
+    "access": "yes",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 11049006258,
+  "lat": -27.0306105,
+  "lon": 153.0973348,
+  "tags": {
+    "access": "yes",
+    "lanes": "1",
+    "leisure": "slipway",
+    "name": "Boat Ramp",
+    "seamark:small_craft_facility:category": "slipway",
+    "seamark:type": "small_craft_facility"
+  }
+},
+{
+  "type": "node",
+  "id": 11056091119,
+  "lat": -27.5745776,
+  "lon": 153.2915809,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 11234827915,
+  "lat": -27.1942416,
+  "lon": 153.1089917,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 11427788447,
+  "lat": -27.5294812,
+  "lon": 152.9285934,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Jindalee Boat Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 11580435539,
+  "lat": -26.1545519,
+  "lon": 153.0497589,
+  "tags": {
+    "fee": "no",
+    "leisure": "slipway",
+    "man_made": "wharf"
+  }
+},
+{
+  "type": "node",
+  "id": 11580698752,
+  "lat": -26.1501449,
+  "lon": 153.0438935,
+  "tags": {
+    "fee": "no",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 11580920747,
+  "lat": -26.1680418,
+  "lon": 153.0414135,
+  "tags": {
+    "fee": "no",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 11580920748,
+  "lat": -26.1671377,
+  "lon": 153.0315067,
+  "tags": {
+    "fee": "no",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12045186608,
+  "lat": -26.6361903,
+  "lon": 153.0849205,
+  "tags": {
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 12072151670,
+  "lat": -27.4843316,
+  "lon": 153.2200212,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12072151770,
+  "lat": -27.4837843,
+  "lon": 153.2198455,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12072152493,
+  "lat": -27.4833182,
+  "lon": 153.2201781,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12080229446,
+  "lat": -27.4832543,
+  "lon": 153.2187052,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12181324614,
+  "lat": -26.6164702,
+  "lon": 153.0835083,
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "surface": "paved"
+  }
+},
+{
+  "type": "node",
+  "id": 12481897393,
+  "lat": -24.9787408,
+  "lon": 152.4831319,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12762189504,
+  "lat": -27.2770960,
+  "lon": 153.0455592,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Blue Topping's Ramp"
+  }
+},
+{
+  "type": "node",
+  "id": 12762189505,
+  "lat": -27.2771507,
+  "lon": 153.0433222,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 12911732087,
+  "lat": -25.8979042,
+  "lon": 153.0574197,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Sunset Harbour Boatramp",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "node",
+  "id": 13094242566,
+  "lat": -25.4051775,
+  "lon": 152.5328251,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13257083233,
+  "lat": -27.5153633,
+  "lon": 153.2861282,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13257083234,
+  "lat": -27.5152927,
+  "lon": 153.2861533,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13257083242,
+  "lat": -27.5144820,
+  "lon": 153.2864231,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13257553381,
+  "lat": -27.5789711,
+  "lon": 153.3155146,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13257553383,
+  "lat": -27.5789841,
+  "lon": 153.3155846,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13257553385,
+  "lat": -27.5821559,
+  "lon": 153.3180946,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13433911778,
+  "lat": -27.3341369,
+  "lon": 153.0636111,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 13999426685,
+  "lat": -26.3120284,
+  "lon": 152.9756727,
+  "tags": {
+    "leisure": "slipway",
+    "name": "Boat Launching Ramp"
+  }
+},
+{
+  "type": "way",
+  "id": 40118607,
+  "center": {
+    "lat": -27.4974152,
+    "lon": 153.1859385
+  },
+  "tags": {
+    "landuse": "industrial",
+    "leisure": "slipway",
+    "name": "Multihull Marine",
+    "source:geometry": "DCDB trace (CC-BY-3.0-AU ©State of Queensland (Department of Natural Resources and Mines) 2015)"
+  }
+},
+{
+  "type": "way",
+  "id": 46982735,
+  "center": {
+    "lat": -27.5172228,
+    "lon": 153.0071580
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 58640944,
+  "center": {
+    "lat": -27.3039850,
+    "lon": 152.9968561
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 80511408,
+  "center": {
+    "lat": -27.4741004,
+    "lon": 153.1927799
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 189136465,
+  "center": {
+    "lat": -27.4933172,
+    "lon": 153.2525532
+  },
+  "tags": {
+    "description": "Boat Ramp (Restricted)",
+    "leisure": "slipway",
+    "surface": "dirt"
+  }
+},
+{
+  "type": "way",
+  "id": 202780919,
+  "center": {
+    "lat": -27.5295215,
+    "lon": 152.9286627
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 277206362,
+  "center": {
+    "lat": -24.0747906,
+    "lon": 151.6520697
+  },
+  "tags": {
+    "highway": "unclassified",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 286007841,
+  "center": {
+    "lat": -27.3626540,
+    "lon": 153.1027610
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 308337754,
+  "center": {
+    "lat": -25.4302807,
+    "lon": 152.9232584
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 308338178,
+  "center": {
+    "lat": -25.4294680,
+    "lon": 152.9238636
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 330775360,
+  "center": {
+    "lat": -27.5014656,
+    "lon": 153.1840568
+  },
+  "tags": {
+    "bicycle": "no",
+    "highway": "service",
+    "horse": "no",
+    "leisure": "slipway",
+    "name": "Chadwell Street Canoe Ramp RA6010",
+    "service": "slipway",
+    "source:name": "survey",
+    "sport": "canoe",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 348318386,
+  "center": {
+    "lat": -27.4765974,
+    "lon": 152.9799471
+  },
+  "tags": {
+    "highway": "service",
+    "lanes": "1",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 352726848,
+  "center": {
+    "lat": -27.4494095,
+    "lon": 153.0792664
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 462317003,
+  "center": {
+    "lat": -25.2473304,
+    "lon": 152.6657603
+  },
+  "tags": {
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 463412869,
+  "center": {
+    "lat": -26.6419266,
+    "lon": 153.0617079
+  },
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "highway": "service",
+    "lanes": "2",
+    "leisure": "slipway",
+    "name": "Cod Hole Boat Ramp",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 514628289,
+  "center": {
+    "lat": -25.5443625,
+    "lon": 152.6884042
+  },
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 516499804,
+  "center": {
+    "lat": -27.5427246,
+    "lon": 152.8409975
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 525495967,
+  "center": {
+    "lat": -26.6854740,
+    "lon": 153.1265484
+  },
+  "tags": {
+    "area": "yes",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 525495969,
+  "center": {
+    "lat": -26.6854450,
+    "lon": 153.1264221
+  },
+  "tags": {
+    "area": "yes",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 542549142,
+  "center": {
+    "lat": -27.1920008,
+    "lon": 153.0334505
+  },
+  "tags": {
+    "leisure": "slipway",
+    "lit": "yes",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 550516086,
+  "center": {
+    "lat": -24.0747496,
+    "lon": 151.6525125
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 606749394,
+  "center": {
+    "lat": -26.7890882,
+    "lon": 153.1420952
+  },
+  "tags": {
+    "highway": "footway",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 612159961,
+  "center": {
+    "lat": -27.4439427,
+    "lon": 153.0507672
+  },
+  "tags": {
+    "access": "private",
+    "leisure": "slipway",
+    "operator": "Brisbane Sailing Squadron"
+  }
+},
+{
+  "type": "way",
+  "id": 616240101,
+  "center": {
+    "lat": -27.4619832,
+    "lon": 153.1270160
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 624388059,
+  "center": {
+    "lat": -27.4875885,
+    "lon": 152.9963738
+  },
+  "tags": {
+    "leisure": "slipway",
+    "maxweight": "5",
+    "name": "South Brisbane Sailing Club Boat Ramp",
+    "note": "trailer boats only",
+    "ref": "RA2006"
+  }
+},
+{
+  "type": "way",
+  "id": 629480460,
+  "center": {
+    "lat": -27.4356696,
+    "lon": 153.1740779
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 695895080,
+  "center": {
+    "lat": -27.3340206,
+    "lon": 153.0814098
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 695895081,
+  "center": {
+    "lat": -27.3341237,
+    "lon": 153.0813623
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 702365183,
+  "center": {
+    "lat": -27.4173872,
+    "lon": 153.1395996
+  },
+  "tags": {
+    "highway": "service",
+    "lanes": "2",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 777447897,
+  "center": {
+    "lat": -25.1838173,
+    "lon": 152.6070489
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 864561459,
+  "center": {
+    "lat": -27.4665059,
+    "lon": 153.2413249
+  },
+  "tags": {
+    "highway": "service",
+    "lanes": "4",
+    "leisure": "slipway",
+    "maxweight": "5",
+    "service": "driveway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 864561460,
+  "center": {
+    "lat": -27.4659461,
+    "lon": 153.2414244
+  },
+  "tags": {
+    "access": "yes",
+    "highway": "service",
+    "lanes": "2",
+    "leisure": "slipway",
+    "maxweight": "5",
+    "service": "driveway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 868311150,
+  "center": {
+    "lat": -27.4833499,
+    "lon": 153.1921654
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 888517747,
+  "center": {
+    "lat": -27.4350005,
+    "lon": 153.1740263
+  },
+  "tags": {
+    "canoe": "designated",
+    "leisure": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 977487006,
+  "center": {
+    "lat": -27.4932001,
+    "lon": 153.4033217
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1007914327,
+  "center": {
+    "lat": -26.3938809,
+    "lon": 153.0735251
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1020034567,
+  "center": {
+    "lat": -25.5358140,
+    "lon": 152.7061623
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1022253615,
+  "center": {
+    "lat": -27.2363379,
+    "lon": 153.0189416
+  },
+  "tags": {
+    "highway": "footway",
+    "leisure": "slipway",
+    "lit": "no",
+    "smoothness": "bad",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1024212981,
+  "center": {
+    "lat": -27.3627550,
+    "lon": 153.1027924
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1037105279,
+  "center": {
+    "lat": -27.2618070,
+    "lon": 152.1923537
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1037105280,
+  "center": {
+    "lat": -27.2615701,
+    "lon": 152.1926779
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1040835255,
+  "center": {
+    "lat": -25.1832819,
+    "lon": 152.6117658
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1043343719,
+  "center": {
+    "lat": -27.3336919,
+    "lon": 153.0815868
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1043343724,
+  "center": {
+    "lat": -27.3343885,
+    "lon": 153.0810354
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1043343725,
+  "center": {
+    "lat": -27.3343465,
+    "lon": 153.0811038
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1043487719,
+  "center": {
+    "lat": -25.1714140,
+    "lon": 152.5887315
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1155346598,
+  "center": {
+    "lat": -26.6243859,
+    "lon": 153.0462354
+  },
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "highway": "service",
+    "leisure": "slipway",
+    "name": "Muller Park Boat Ramp",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1156220993,
+  "center": {
+    "lat": -25.2836171,
+    "lon": 152.8709463
+  },
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1161223729,
+  "center": {
+    "lat": -27.3025588,
+    "lon": 153.0130447
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1161223731,
+  "center": {
+    "lat": -27.3027021,
+    "lon": 153.0130707
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "source": "GPS"
+  }
+},
+{
+  "type": "way",
+  "id": 1190748534,
+  "center": {
+    "lat": -27.5737294,
+    "lon": 153.2873503
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1196722101,
+  "center": {
+    "lat": -27.4009014,
+    "lon": 153.1663972
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "maxheight": "5",
+    "maxspeed": "40",
+    "service": "slipway",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1198238111,
+  "center": {
+    "lat": -25.1830254,
+    "lon": 152.6148142
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1201069052,
+  "center": {
+    "lat": -27.4273098,
+    "lon": 152.9711527
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1202746593,
+  "center": {
+    "lat": -25.6626436,
+    "lon": 152.9035737
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1207909236,
+  "center": {
+    "lat": -27.5243718,
+    "lon": 152.9700711
+  },
+  "tags": {
+    "access": "private",
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1208227395,
+  "center": {
+    "lat": -27.5735122,
+    "lon": 153.2916944
+  },
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "lanes": "1",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1212639258,
+  "center": {
+    "lat": -27.1943055,
+    "lon": 153.1090770
+  },
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1212639260,
+  "center": {
+    "lat": -27.1945873,
+    "lon": 153.1087017
+  },
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1215207971,
+  "center": {
+    "lat": -26.7007694,
+    "lon": 153.1280109
+  },
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "lanes": "1",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 1233934181,
+  "center": {
+    "lat": -26.5097401,
+    "lon": 152.5815339
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1247052801,
+  "center": {
+    "lat": -24.8055178,
+    "lon": 152.3575545
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1302843044,
+  "center": {
+    "lat": -27.1919494,
+    "lon": 153.0335701
+  },
+  "tags": {
+    "leisure": "slipway",
+    "lit": "no",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1307144690,
+  "center": {
+    "lat": -27.5285217,
+    "lon": 152.9313215
+  },
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1338508639,
+  "center": {
+    "lat": -24.7606646,
+    "lon": 152.4015317
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1424568881,
+  "center": {
+    "lat": -25.4051506,
+    "lon": 152.5328232
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1428435985,
+  "center": {
+    "lat": -26.3059718,
+    "lon": 151.9820854
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1428436645,
+  "center": {
+    "lat": -26.3062773,
+    "lon": 151.9928516
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1433749299,
+  "center": {
+    "lat": -27.5157643,
+    "lon": 153.0428309
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1433940827,
+  "center": {
+    "lat": -26.3930304,
+    "lon": 153.0415940
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1502681947,
+  "center": {
+    "lat": -27.4415427,
+    "lon": 153.0421225
+  },
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "way",
+  "id": 1561509076,
+  "center": {
+    "lat": -25.2498327,
+    "lon": 152.8267155
+  },
+  "tags": {
+    "highway": "service",
+    "leisure": "slipway",
+    "service": "slipway",
+    "surface": "concrete"
+  }
+}
+
+  ]
+}

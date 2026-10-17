@@ -1,0 +1,26 @@
+<section class="card">
+  <h2>📡 Latest gauge readings</h2>
+  <div class="grid" id="gLatest"><span class="spin"></span> Loading gauge data…</div>
+  <div class="row" style="margin-top:8px;justify-content:space-between"><span class="mut" id="gUpd"></span><button class="sm" id="gRefresh">⟳ Refresh</button></div>
+  <div id="gFresh"></div>
+</section>
+<section class="card">
+  <h2 id="gTitle">📈 Tide propagation up Baffle Creek</h2>
+  <div class="row gbar">
+    <button class="sm" data-r="2">2d</button><button class="sm on" data-r="7">7d</button><button class="sm" data-r="30">30d</button><button class="sm" data-r="all">All</button>
+    <span style="flex:1"></span><button class="sm" id="gZo" aria-label="Zoom out">−</button><button class="sm" id="gZi" aria-label="Zoom in">＋</button>
+  </div>
+  <div class="row gleg" id="gLegend"></div>
+  <div id="gSpots"></div>
+  <div id="gWrap"><svg id="gChart" role="img" aria-label="Gauge levels and lag chart"></svg><div id="gTip"></div></div>
+  <p class="mut" style="margin:6px 0 0" id="gHelp">Drag sideways to pan · pinch / mouse-wheel or −/＋ to zoom · tap for values. Times AEST. Levels m AHD (Bundaberg LAT −1.693 m). Lower panel: lag of each upstream peak/low after the matching Bundaberg observed high/low; error bars = ± half the time the 5 cm-step gauge sat on that value.</p>
+</section>
+<section class="card">
+  <h2 id="gStatsH">⏱ Running lag stats — calibration drift</h2>
+  <div class="tw"><table id="gStats"></table></div>
+  <p class="mut" id="gStatsNote"></p>
+</section>
+<section class="card">
+  <details><summary>Recent peaks &amp; lows (per tide)</summary><div class="tw"><table id="gEvents"></table></div></details>
+  <p class="mut" style="margin:8px 0 0" id="gSrc">Sources: BoM river-height tables IDQ65392 (039267 Essendean Bridge, 539135 Euleilah Ck @ Hills Rd, 539132 Mimdale; 5 cm event-reported, m AHD) and Qld DES storm-tide 7-day feed (Bundaberg 051011A, CC BY 4.0). Archived hourly-ish into the app repo (<a href="https://github.com/JonathanAgronica/fishing-apps/tree/main/data" target="_blank" rel="noopener">data/*.csv</a>) so the record keeps growing beyond BoM's 7-day window.</p>
+</section>

@@ -1,0 +1,4373 @@
+{
+"039000": {
+"n": 0,
+"tidal": false
+},
+"039011": {
+"n": 0,
+"tidal": false
+},
+"039137": {
+"n": 0,
+"tidal": false
+},
+"039165": {
+"n": 0,
+"tidal": false
+},
+"039177": {
+"n": 0,
+"tidal": false
+},
+"039191": {
+"n": 0,
+"tidal": false
+},
+"039216": {
+"n": 0,
+"tidal": false
+},
+"039246": {
+"n": 235,
+"tidal": false
+},
+"039259": {
+"n": 0,
+"tidal": false
+},
+"039267": {
+"n": 148,
+"r2": 0.94,
+"m2": 0.064,
+"k1": 0.047,
+"rng": 0.27,
+"tidal": true,
+"name": "Baffle Creek at Essendean Bridge",
+"tab": "IDQ65392",
+"last": 0.57
+},
+"039319": {
+"n": 55,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Three Moon Creek at Abercorn",
+"tab": "IDQ65391",
+"last": 1.45
+},
+"039320": {
+"n": 173,
+"r2": 0.78,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Jones Weir (TW)",
+"tab": "IDQ65391",
+"last": 0.2
+},
+"039352": {
+"n": 893,
+"r2": 0.97,
+"m2": 0.834,
+"k1": 0.147,
+"rng": 2.0,
+"tidal": true,
+"name": "Burnett River at Bundaberg",
+"tab": "IDQ65391",
+"last": 1.3
+},
+"040365": {
+"n": 0,
+"tidal": false
+},
+"040386": {
+"n": 0,
+"tidal": false
+},
+"040387": {
+"n": 0,
+"tidal": false
+},
+"040428": {
+"n": 0,
+"tidal": false
+},
+"040440": {
+"n": 0,
+"tidal": false
+},
+"040441": {
+"n": 0,
+"tidal": false
+},
+"040443": {
+"n": 430,
+"r2": 0.84,
+"m2": 0.422,
+"k1": 0.112,
+"rng": 1.14,
+"tidal": true,
+"name": "Mary River at Maryborough (Portside)",
+"tab": "IDQ65390",
+"last": 2.75
+},
+"040444": {
+"n": 0,
+"tidal": false
+},
+"040455": {
+"n": 0,
+"tidal": false
+},
+"040500": {
+"n": 0,
+"tidal": false
+},
+"040647": {
+"n": 0,
+"tidal": false
+},
+"040679": {
+"n": 166,
+"r2": 0.1,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Tinana Creek at Bauple East",
+"tab": "IDQ65390",
+"last": 0.5
+},
+"040702": {
+"n": 0,
+"tidal": false
+},
+"040713": {
+"n": 0,
+"tidal": false
+},
+"040716": {
+"n": 0,
+"tidal": false
+},
+"040751": {
+"n": 0,
+"tidal": false
+},
+"040755": {
+"n": 0,
+"tidal": false
+},
+"040777": {
+"n": 50,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Yabba Creek at Imbil",
+"tab": "IDQ65390",
+"last": 2.14
+},
+"040778": {
+"n": 181,
+"r2": 0.39,
+"m2": 0.001,
+"k1": 0.004,
+"rng": 0.01,
+"tidal": false,
+"name": "Amamoor Creek at Zachariah",
+"tab": "IDQ65390",
+"last": 1.29
+},
+"040780": {
+"n": 168,
+"r2": 0.42,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Kandanga Creek at Hygait",
+"tab": "IDQ65390",
+"last": 0.28
+},
+"040788": {
+"n": 0,
+"tidal": false
+},
+"040789": {
+"n": 0,
+"tidal": false
+},
+"040791": {
+"n": 118,
+"r2": 0.09,
+"m2": 0.014,
+"k1": 0.02,
+"rng": 0.09,
+"tidal": false,
+"name": "Stable Swamp Creek at Coopers Plains (Musgrave Rd)",
+"tab": "IDQ65389",
+"last": 4.06
+},
+"040796": {
+"n": 42,
+"r2": 0.07,
+"m2": 0.0,
+"k1": 0.004,
+"rng": 0.01,
+"tidal": false,
+"name": "Oxley Creek at Acacia Ridge (Beatty Rd)",
+"tab": "IDQ65389",
+"last": 1.02
+},
+"040811": {
+"n": 181,
+"r2": 0.69,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Wide Bay Creek at Kilkivan",
+"tab": "IDQ65390",
+"last": -0.05
+},
+"040812": {
+"n": 2457,
+"r2": 0.95,
+"m2": 0.863,
+"k1": 0.19,
+"rng": 2.23,
+"tidal": true,
+"name": "Brisbane River at Moggill",
+"tab": "IDQ65389",
+"last": 0.52
+},
+"040813": {
+"n": 335,
+"r2": 0.31,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Moggill Creek at Upper Brookfield",
+"tab": "IDQ65389",
+"last": 0.51
+},
+"040816": {
+"n": 335,
+"r2": 0.91,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Warrill Creek at Amberley DRDMW",
+"tab": "IDQ65389",
+"last": 1.58
+},
+"040817": {
+"n": 335,
+"r2": 0.37,
+"m2": 0.001,
+"k1": 0.004,
+"rng": 0.02,
+"tidal": false,
+"name": "Lockyer Creek at Rifle Range Rd",
+"tab": "IDQ65389",
+"last": 0.71
+},
+"040820": {
+"n": 469,
+"r2": 0.88,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Stanley River at Somerset Dam",
+"tab": "IDQ65389",
+"last": 96.89
+},
+"040824": {
+"n": 174,
+"r2": 0.39,
+"m2": 0.001,
+"k1": 0.005,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at Fishermans Pocket",
+"tab": "IDQ65390",
+"last": 1.71
+},
+"040825": {
+"n": 172,
+"r2": 0.47,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Munna Creek at Marodian",
+"tab": "IDQ65390",
+"last": 0.81
+},
+"040826": {
+"n": 188,
+"r2": 0.84,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at Miva",
+"tab": "IDQ65390",
+"last": 1.57
+},
+"040827": {
+"n": 177,
+"r2": 0.63,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Barambah Creek at Ban Ban",
+"tab": "IDQ65391",
+"last": 0.55
+},
+"040831": {
+"n": 2036,
+"r2": 0.94,
+"m2": 0.834,
+"k1": 0.186,
+"rng": 2.14,
+"tidal": true,
+"name": "Bremer River at Ipswich",
+"tab": "IDQ65389",
+"last": 0.32
+},
+"040833": {
+"n": 169,
+"r2": 0.94,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at Home Park",
+"tab": "IDQ65390",
+"last": 1.25
+},
+"040834": {
+"n": 167,
+"r2": 0.84,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Barambah Creek at Litzows",
+"tab": "IDQ65391",
+"last": 0.86
+},
+"040835": {
+"n": 339,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Laidley Creek at Mulgowie",
+"tab": "IDQ65389",
+"last": 1.39
+},
+"040836": {
+"n": 133,
+"r2": 0.21,
+"m2": 0.01,
+"k1": 0.026,
+"rng": 0.1,
+"tidal": false,
+"name": "Bremer River at One Mile Bridge",
+"tab": "IDQ65389",
+"last": 4.3
+},
+"040837": {
+"n": 171,
+"r2": 0.67,
+"m2": 0.003,
+"k1": 0.006,
+"rng": 0.02,
+"tidal": false,
+"name": "Barambah Creek at Stonelands",
+"tab": "IDQ65391",
+"last": 1.03
+},
+"040838": {
+"n": 112,
+"r2": 0.09,
+"m2": 0.011,
+"k1": 0.017,
+"rng": 0.11,
+"tidal": false,
+"name": "Bremer River at Three Mile Bridge",
+"tab": "IDQ65389",
+"last": 10.18
+},
+"040872": {
+"n": 149,
+"r2": 0.22,
+"m2": 0.011,
+"k1": 0.034,
+"rng": 0.12,
+"tidal": false,
+"name": "Bundamba Creek at Blackstone Bridge",
+"tab": "IDQ65389",
+"last": 14.44
+},
+"040873": {
+"n": 128,
+"r2": 0.12,
+"m2": 0.01,
+"k1": 0.008,
+"rng": 0.06,
+"tidal": false,
+"name": "Bundamba Creek at Harding Street",
+"tab": "IDQ65389",
+"last": 20.82
+},
+"040874": {
+"n": 1430,
+"r2": 0.92,
+"m2": 0.589,
+"k1": 0.151,
+"rng": 1.53,
+"tidal": true,
+"name": "Woogaroo Creek at Brisbane Road",
+"tab": "IDQ65389",
+"last": 1.07
+},
+"040875": {
+"n": 129,
+"r2": 0.23,
+"m2": 0.003,
+"k1": 0.013,
+"rng": 0.04,
+"tidal": false,
+"name": "Bundamba Creek at Bundamba School",
+"tab": "IDQ65389",
+"last": 11.16
+},
+"040896": {
+"n": 6,
+"tidal": false
+},
+"040903": {
+"n": 693,
+"r2": 0.9,
+"m2": 0.592,
+"k1": 0.137,
+"rng": 1.52,
+"tidal": true,
+"name": "Cherwell River at Pacific Haven",
+"tab": "IDQ65391",
+"last": 1.54
+},
+"040904": {
+"n": 0,
+"tidal": false
+},
+"040906": {
+"n": 307,
+"r2": 0.41,
+"m2": 0.004,
+"k1": 0.016,
+"rng": 0.06,
+"tidal": false,
+"name": "Burrum River at Lenthalls Dam",
+"tab": "IDQ65391",
+"last": 24.94
+},
+"040907": {
+"n": 54,
+"r2": 0.55,
+"m2": 0.009,
+"k1": 0.008,
+"rng": 0.04,
+"tidal": false,
+"name": "Burrum River at Howard",
+"tab": "IDQ65391",
+"last": 4.76
+},
+"040985": {
+"n": 110,
+"r2": 0.14,
+"m2": 0.019,
+"k1": 0.04,
+"rng": 0.17,
+"tidal": false,
+"name": "Woogaroo Creek at Bellbird Park (Purser Rd)",
+"tab": "IDQ65389",
+"last": 0.05
+},
+"040993": {
+"n": 55,
+"r2": 0.05,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Mary River at Gympie",
+"tab": "IDQ65390",
+"last": -0.24
+},
+"042059": {
+"n": 56,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Auburn River at Auburn",
+"tab": "IDQ65391",
+"last": 0.16
+},
+"042123": {
+"n": 335,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Auburn River Tm at Andrews Road",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"140004": {
+"n": 0,
+"tidal": false
+},
+"140024": {
+"n": 114,
+"r2": 0.11,
+"m2": 0.004,
+"k1": 0.003,
+"rng": 0.02,
+"tidal": false,
+"name": "Warrill Creek at Willowbank",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"140030": {
+"n": 112,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Boyne River at Mclaughlins Rd",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539032": {
+"n": 10072,
+"r2": 0.99,
+"m2": 1.343,
+"k1": 0.213,
+"rng": 3.38,
+"tidal": true,
+"name": "Gladstone Tide",
+"tab": "IDQ65392",
+"last": 3.77
+},
+"539033": {
+"n": 0,
+"tidal": false
+},
+"539035": {
+"n": 167,
+"r2": 0.93,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Burnett River at John Goleby Weir (HW)",
+"tab": "IDQ65391",
+"last": -1.12
+},
+"539037": {
+"n": 167,
+"r2": 0.08,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Auburn River at Dykehead",
+"tab": "IDQ65391",
+"last": 0.81
+},
+"539039": {
+"n": 166,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Burnett River at Yarrol",
+"tab": "IDQ65391",
+"last": 0.69
+},
+"539040": {
+"n": 593,
+"r2": 0.68,
+"m2": 0.002,
+"k1": 0.009,
+"rng": 0.02,
+"tidal": false,
+"name": "Three Moon Creek at Monto",
+"tab": "IDQ65391",
+"last": 0.55
+},
+"539042": {
+"n": 165,
+"r2": 0.46,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Cadarga Creek at Brovinia",
+"tab": "IDQ65391",
+"last": 0.43
+},
+"539044": {
+"n": 167,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Monal Creek at Upper Monal",
+"tab": "IDQ65391",
+"last": 0.19
+},
+"539049": {
+"n": 167,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Burnett River at Wharton Weir",
+"tab": "IDQ65391",
+"last": 92.6
+},
+"539051": {
+"n": 170,
+"r2": 0.88,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Nogo River at Wuruma Dam (HW)",
+"tab": "IDQ65391",
+"last": -0.57
+},
+"539052": {
+"n": 166,
+"r2": 0.97,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Eastern Creek at Lands End",
+"tab": "IDQ65391",
+"last": 1.21
+},
+"539055": {
+"n": 166,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Reid Creek",
+"tab": "IDQ65391",
+"last": 0.31
+},
+"539060": {
+"n": 167,
+"r2": 0.63,
+"m2": 0.001,
+"k1": 0.004,
+"rng": 0.01,
+"tidal": false,
+"name": "Elliott River at Dr Mays Crossing",
+"tab": "IDQ65391",
+"last": 0.73
+},
+"539061": {
+"n": 167,
+"r2": 0.79,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Gregory River at Burrum Highway",
+"tab": "IDQ65391",
+"last": 1.35
+},
+"539066": {
+"n": 173,
+"r2": 0.97,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Jones Weir (HW)",
+"tab": "IDQ65391",
+"last": 109.62
+},
+"539069": {
+"n": 172,
+"r2": 0.45,
+"m2": 0.002,
+"k1": 0.004,
+"rng": 0.01,
+"tidal": false,
+"name": "Boyne River at Cooranga",
+"tab": "IDQ65391",
+"last": 1.6
+},
+"539073": {
+"n": 175,
+"r2": 0.92,
+"m2": 0.001,
+"k1": 0.005,
+"rng": 0.02,
+"tidal": false,
+"name": "Barambah Creek at Silverleaf Weir (TW)",
+"tab": "IDQ65391",
+"last": 1.02
+},
+"539074": {
+"n": 181,
+"r2": 0.79,
+"m2": 0.003,
+"k1": 0.013,
+"rng": 0.05,
+"tidal": false,
+"name": "Nogo River at Wuruma Dam (TW)",
+"tab": "IDQ65391",
+"last": 0.52
+},
+"539076": {
+"n": 10077,
+"r2": 1.0,
+"m2": 0.981,
+"k1": 0.178,
+"rng": 2.49,
+"tidal": true,
+"name": "Burnett Heads Tide",
+"tab": "IDQ65391",
+"last": 2.75
+},
+"539077": {
+"n": 437,
+"r2": 0.97,
+"m2": 0.001,
+"k1": 0.004,
+"rng": 0.02,
+"tidal": false,
+"name": "Barambah Creek at Silverleaf Weir (HW)",
+"tab": "IDQ65391",
+"last": -0.24
+},
+"539092": {
+"n": 169,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Three Moon Creek at Cania Dam (HW)",
+"tab": "IDQ65391",
+"last": -14.39
+},
+"539093": {
+"n": 10070,
+"r2": 0.99,
+"m2": 1.0,
+"k1": 0.179,
+"rng": 2.53,
+"tidal": true,
+"name": "Bundaberg Port Tide",
+"tab": "IDQ65391",
+"last": 2.8
+},
+"539096": {
+"n": 167,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Burnett River at Ned Churchward Weir (TW)",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539103": {
+"n": 168,
+"r2": 0.59,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Gregory River at Leesons",
+"tab": "IDQ65391",
+"last": 1.46
+},
+"539108": {
+"n": 171,
+"r2": 1.0,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Burnett River at Paradise Dam (HW)",
+"tab": "IDQ65391",
+"last": -1.56
+},
+"539113": {
+"n": 210,
+"r2": 0.17,
+"m2": 0.009,
+"k1": 0.006,
+"rng": 0.04,
+"tidal": false,
+"name": "Kolan River at Fred Haigh Dam TW",
+"tab": "IDQ65391",
+"last": 0.3
+},
+"539114": {
+"n": 177,
+"r2": 0.84,
+"m2": 0.006,
+"k1": 0.012,
+"rng": 0.05,
+"tidal": false,
+"name": "Three Moon Creek at Cania Dam (TW)",
+"tab": "IDQ65391",
+"last": 0.76
+},
+"539118": {
+"n": 177,
+"r2": 0.37,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Oyster Creek at Rapleys",
+"tab": "IDQ65392",
+"last": 0.31
+},
+"539132": {
+"n": 177,
+"r2": 0.76,
+"m2": 0.005,
+"k1": 0.013,
+"rng": 0.04,
+"tidal": false,
+"name": "Baffle Creek at Mimdale",
+"tab": "IDQ65392",
+"last": 0.89
+},
+"539135": {
+"n": 374,
+"r2": 0.98,
+"m2": 0.281,
+"k1": 0.109,
+"rng": 0.76,
+"tidal": true,
+"name": "Euleilah Creek at Hills Road",
+"tab": "IDQ65392",
+"last": 0.58
+},
+"539143": {
+"n": 61,
+"r2": 0.34,
+"m2": 0.011,
+"k1": 0.008,
+"rng": 0.05,
+"tidal": false,
+"name": "Bundaberg Creek at Bundaberg South (Ford St)",
+"tab": "IDQ65391",
+"last": 4.51
+},
+"539146": {
+"n": 56,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Degilbo Creek at Coringa",
+"tab": "IDQ65391",
+"last": 1.0
+},
+"539147": {
+"n": 0,
+"tidal": false
+},
+"539148": {
+"n": 167,
+"r2": 0.62,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Fig Tree",
+"tab": "IDQ65391",
+"last": 1.24
+},
+"539149": {
+"n": 63,
+"r2": 0.19,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Ned Churchward Weir (HW)",
+"tab": "IDQ65391",
+"last": 17.38
+},
+"539150": {
+"n": 0,
+"tidal": false
+},
+"539151": {
+"n": 166,
+"r2": 0.66,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Burnett River at Mt Lawless",
+"tab": "IDQ65391",
+"last": 0.67
+},
+"539153": {
+"n": 173,
+"r2": 0.79,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Branyan (Woongarra PS)",
+"tab": "IDQ65391",
+"last": 2.85
+},
+"539183": {
+"n": 167,
+"r2": 0.18,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Ceratodus",
+"tab": "IDQ65391",
+"last": 1.55
+},
+"539185": {
+"n": 166,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Splinter Creek at Dakiel",
+"tab": "IDQ65391",
+"last": 0.72
+},
+"539186": {
+"n": 70,
+"r2": 0.81,
+"m2": 0.005,
+"k1": 0.025,
+"rng": 0.06,
+"tidal": false,
+"name": "Reid Creek at Dalgangal Road",
+"tab": "IDQ65391",
+"last": 0.3
+},
+"539187": {
+"n": 169,
+"r2": 0.28,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.02,
+"tidal": false,
+"name": "Boyne River at Derra",
+"tab": "IDQ65391",
+"last": 0.41
+},
+"539189": {
+"n": 171,
+"r2": 0.32,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Eidsvold",
+"tab": "IDQ65391",
+"last": 0.87
+},
+"539190": {
+"n": 56,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Auburn River at Flagstone Bridge",
+"tab": "IDQ65391",
+"last": -0.01
+},
+"539191": {
+"n": 188,
+"r2": 0.73,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Burnett River at Gayndah Flume",
+"tab": "IDQ65391",
+"last": -0.14
+},
+"539194": {
+"n": 167,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Burnett River at Marriages",
+"tab": "IDQ65391",
+"last": 0.89
+},
+"539197": {
+"n": 57,
+"r2": 0.38,
+"m2": 1.627,
+"k1": 1.565,
+"rng": 6.66,
+"tidal": true,
+"name": "Burnett River at Mundubbera",
+"tab": "IDQ65391",
+"last": 5.52
+},
+"539198": {
+"n": 59,
+"r2": 0.22,
+"m2": 0.035,
+"k1": 0.034,
+"rng": 0.19,
+"tidal": false,
+"name": "Monal Creek at Mungungo Weir",
+"tab": "IDQ65391",
+"last": 0.05
+},
+"539201": {
+"n": 71,
+"r2": 0.15,
+"m2": 0.153,
+"k1": 0.162,
+"rng": 1.04,
+"tidal": false,
+"name": "Splinter Creek at Stewarts Bridge",
+"tab": "IDQ65391",
+"last": 0.25
+},
+"539205": {
+"n": 69,
+"r2": 0.98,
+"m2": 0.001,
+"k1": 0.009,
+"rng": 0.03,
+"tidal": false,
+"name": "Kolan River at Bucca Weir",
+"tab": "IDQ65391",
+"last": 14.42
+},
+"539206": {
+"n": 0,
+"tidal": false
+},
+"539207": {
+"n": 167,
+"r2": 0.79,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Kolan River at Fred Haigh Dam HW",
+"tab": "IDQ65391",
+"last": -0.91
+},
+"539210": {
+"n": 167,
+"r2": 0.76,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Gin Gin Creek at Gin Gin",
+"tab": "IDQ65391",
+"last": -0.16
+},
+"539211": {
+"n": 167,
+"r2": 0.83,
+"m2": 0.002,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Kolan River at Moorlands (Gooburrum PS) AL",
+"tab": "IDQ65391",
+"last": 2.14
+},
+"539214": {
+"n": 180,
+"r2": 0.91,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Kolan River at Springfield",
+"tab": "IDQ65391",
+"last": 0.88
+},
+"539215": {
+"n": 115,
+"r2": 0.9,
+"m2": 0.002,
+"k1": 0.011,
+"rng": 0.04,
+"tidal": false,
+"name": "St Agnes Creek at Walla Road",
+"tab": "IDQ65391",
+"last": 0.4
+},
+"539220": {
+"n": 58,
+"r2": 0.47,
+"m2": 1.039,
+"k1": 1.23,
+"rng": 8.34,
+"tidal": true,
+"name": "Three Mile Creek at Alligator Flats",
+"tab": "IDQ65392",
+"last": 0.0
+},
+"539231": {
+"n": 71,
+"r2": 0.22,
+"m2": 0.004,
+"k1": 0.006,
+"rng": 0.02,
+"tidal": false,
+"name": "Perry River at Morganville",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539254": {
+"n": 0,
+"tidal": false
+},
+"539255": {
+"n": 0,
+"tidal": false
+},
+"539257": {
+"n": 60,
+"r2": 0.39,
+"m2": 0.005,
+"k1": 0.007,
+"rng": 0.03,
+"tidal": false,
+"name": "St John Creek at Coonambula",
+"tab": "IDQ65391",
+"last": 0.15
+},
+"539259": {
+"n": 0,
+"tidal": false
+},
+"539260": {
+"n": 56,
+"r2": 0.15,
+"m2": 0.005,
+"k1": 0.006,
+"rng": 0.03,
+"tidal": false,
+"name": "Saltwater Creek at Barolin Street",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539261": {
+"n": 55,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Cherry Creek at Givelda (Lenihans Rd)",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539262": {
+"n": 46,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Geramanbulyan Creek at Bungadoo Goondoon Road",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539263": {
+"n": 50,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Pine Creek at Pine Creek Road",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539264": {
+"n": 39,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Stony Creek at Bucca Road",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"539265": {
+"n": 50,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Hermans Gully at Bucca Road",
+"tab": "IDQ65391",
+"last": -0.93
+},
+"539266": {
+"n": 52,
+"r2": 0.16,
+"m2": 0.003,
+"k1": 0.003,
+"rng": 0.02,
+"tidal": false,
+"name": "Tidal Creek at Malvern Drive",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"540025": {
+"n": 176,
+"r2": 0.53,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.0,
+"tidal": false,
+"name": "Barambah Creek at West Barambah",
+"tab": "IDQ65391",
+"last": 1.06
+},
+"540027": {
+"n": 167,
+"r2": 0.99,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Tinana Creek at Tinana Barrage (HG)",
+"tab": "IDQ65390",
+"last": 2.09
+},
+"540036": {
+"n": 10067,
+"r2": 0.99,
+"m2": 1.229,
+"k1": 0.177,
+"rng": 3.01,
+"tidal": true,
+"name": "Urangan Tide",
+"tab": "IDQ65391",
+"last": 3.51
+},
+"540039": {
+"n": 175,
+"r2": 0.49,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at The Barrage",
+"tab": "IDQ65390",
+"last": 3.01
+},
+"540041": {
+"n": 185,
+"r2": 0.16,
+"m2": 0.002,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Barker Creek at Brooklands",
+"tab": "IDQ65391",
+"last": 0.4
+},
+"540042": {
+"n": 197,
+"r2": 0.4,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Barker Creek at Glenmore",
+"tab": "IDQ65391",
+"last": 0.52
+},
+"540043": {
+"n": 192,
+"r2": 0.64,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Wide Bay Creek at Brooyar",
+"tab": "IDQ65390",
+"last": 1.53
+},
+"540053": {
+"n": 178,
+"r2": 0.53,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Barker Creek at Bjelke-Petersen Dam (HW)",
+"tab": "IDQ65391",
+"last": -0.54
+},
+"540055": {
+"n": 169,
+"r2": 0.32,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Stuart River at Proston",
+"tab": "IDQ65391",
+"last": 1.4
+},
+"540056": {
+"n": 167,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Boyne River at Carters",
+"tab": "IDQ65391",
+"last": 0.07
+},
+"540057": {
+"n": 336,
+"r2": 0.41,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Warrill Creek at Kalbar Weir TW",
+"tab": "IDQ65389",
+"last": 70.3
+},
+"540058": {
+"n": 431,
+"r2": 0.31,
+"m2": 0.003,
+"k1": 0.008,
+"rng": 0.03,
+"tidal": false,
+"name": "Warrill Creek at Kalbar Weir HG",
+"tab": "IDQ65389",
+"last": 74.4
+},
+"540059": {
+"n": 335,
+"r2": 0.77,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.01,
+"tidal": false,
+"name": "Stanley River at Peachester",
+"tab": "IDQ65389",
+"last": 0.31
+},
+"540061": {
+"n": 42,
+"r2": 0.13,
+"m2": 0.02,
+"k1": 0.019,
+"rng": 0.09,
+"tidal": false,
+"name": "Moggill Creek at Kenmore (Fortose St)",
+"tab": "IDQ65389",
+"last": 3.79
+},
+"540062": {
+"n": 335,
+"r2": 0.99,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Purga Creek at Loamside",
+"tab": "IDQ65389",
+"last": 0.42
+},
+"540063": {
+"n": 609,
+"r2": 0.77,
+"m2": 0.236,
+"k1": 0.095,
+"rng": 0.75,
+"tidal": true,
+"name": "Brisbane River at Colleges Crossing",
+"tab": "IDQ65389",
+"last": 0.59
+},
+"540064": {
+"n": 122,
+"r2": 0.15,
+"m2": 0.002,
+"k1": 0.004,
+"rng": 0.02,
+"tidal": false,
+"name": "Western Creek at Grandchester",
+"tab": "IDQ65389",
+"last": 0.15
+},
+"540065": {
+"n": 124,
+"r2": 0.12,
+"m2": 0.016,
+"k1": 0.025,
+"rng": 0.11,
+"tidal": false,
+"name": "Purga Creek at Peak Crossing",
+"tab": "IDQ65389",
+"last": 0.41
+},
+"540071": {
+"n": 1756,
+"r2": 0.96,
+"m2": 0.715,
+"k1": 0.183,
+"rng": 1.88,
+"tidal": true,
+"name": "Oxley Creek at Corinda (Corinda High School)",
+"tab": "IDQ65389",
+"last": 0.82
+},
+"540075": {
+"n": 160,
+"r2": 0.72,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Boonara Creek at Ettiewyn",
+"tab": "IDQ65391",
+"last": 1.18
+},
+"540076": {
+"n": 167,
+"r2": 0.85,
+"m2": 0.001,
+"k1": 0.006,
+"rng": 0.02,
+"tidal": false,
+"name": "Isis River at Bruce Highway",
+"tab": "IDQ65391",
+"last": 1.19
+},
+"540077": {
+"n": 167,
+"r2": 0.98,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Barambah Creek at Ficks Crossing",
+"tab": "IDQ65391",
+"last": 1.24
+},
+"540083": {
+"n": 101,
+"r2": 0.56,
+"m2": 0.012,
+"k1": 0.04,
+"rng": 0.08,
+"tidal": false,
+"name": "Paynter Creek at Diddillibah",
+"tab": "IDQ65390",
+"last": 0.56
+},
+"540087": {
+"n": 200,
+"r2": 0.82,
+"m2": 0.116,
+"k1": 0.057,
+"rng": 0.4,
+"tidal": true,
+"name": "Eudlo Creek at Kiels Mountain",
+"tab": "IDQ65390",
+"last": -0.09
+},
+"540088": {
+"n": 63,
+"r2": 0.24,
+"m2": 0.033,
+"k1": 0.03,
+"rng": 0.15,
+"tidal": false,
+"name": "Petrie Creek at Warana Bridge",
+"tab": "IDQ65390",
+"last": 1.19
+},
+"540089": {
+"n": 55,
+"r2": 0.83,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "South Maroochy River at Kiamba",
+"tab": "IDQ65390",
+"last": 0.63
+},
+"540092": {
+"n": 173,
+"r2": 0.81,
+"m2": 0.002,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "South Maroochy River at Yandina",
+"tab": "IDQ65390",
+"last": 0.44
+},
+"540093": {
+"n": 171,
+"r2": 0.8,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "North Maroochy River at Eumundi",
+"tab": "IDQ65390",
+"last": 0.02
+},
+"540094": {
+"n": 490,
+"r2": 0.98,
+"m2": 0.39,
+"k1": 0.134,
+"rng": 0.99,
+"tidal": true,
+"name": "Maroochy River at Picnic Point",
+"tab": "IDQ65390",
+"last": 0.76
+},
+"540095": {
+"n": 467,
+"r2": 0.97,
+"m2": 0.403,
+"k1": 0.125,
+"rng": 0.99,
+"tidal": true,
+"name": "Maroochy River at Dunethin Rock",
+"tab": "IDQ65390",
+"last": 0.61
+},
+"540097": {
+"n": 335,
+"r2": 0.96,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Oxley Creek at New Beith Road (Greenbank)",
+"tab": "IDQ65389",
+"last": 49.56
+},
+"540107": {
+"n": 110,
+"r2": 0.96,
+"m2": 0.001,
+"k1": 0.0,
+"rng": 0.01,
+"tidal": false,
+"name": "Gold Creek Reservoir",
+"tab": "IDQ65389",
+"last": 91.24
+},
+"540111": {
+"n": 14,
+"tidal": false
+},
+"540113": {
+"n": 11,
+"tidal": false
+},
+"540118": {
+"n": 36,
+"r2": 0.17,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Enoggera Creek at Kelvin Grove (Bancroft Park)",
+"tab": "IDQ65389",
+"last": 1.74
+},
+"540119": {
+"n": 60,
+"r2": 0.98,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Enoggera Creek at Enoggera Dam",
+"tab": "IDQ65389",
+"last": 74.2
+},
+"540120": {
+"n": 26,
+"tidal": false
+},
+"540121": {
+"n": 16,
+"tidal": false
+},
+"540122": {
+"n": 24,
+"tidal": false
+},
+"540124": {
+"n": 895,
+"r2": 0.99,
+"m2": 0.845,
+"k1": 0.185,
+"rng": 1.99,
+"tidal": true,
+"name": "Cabbage Tree Creek at Deagon (Burralong St)",
+"tab": "IDQ65389",
+"last": 1.03
+},
+"540126": {
+"n": 47,
+"r2": 0.33,
+"m2": 0.001,
+"k1": 0.006,
+"rng": 0.02,
+"tidal": false,
+"name": "Bulimba Creek at Mansfield (Edwards Park)",
+"tab": "IDQ65389",
+"last": 6.1
+},
+"540127": {
+"n": 33,
+"r2": 0.25,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.02,
+"tidal": false,
+"name": "Bulimba Creek at Wishart (Greenwood St)",
+"tab": "IDQ65389",
+"last": 18.34
+},
+"540128": {
+"n": 49,
+"r2": 0.11,
+"m2": 0.001,
+"k1": 0.004,
+"rng": 0.02,
+"tidal": false,
+"name": "Bulimba Creek at Carindale (Old Cleveland Rd)",
+"tab": "IDQ65389",
+"last": 2.12
+},
+"540129": {
+"n": 1813,
+"r2": 0.97,
+"m2": 0.775,
+"k1": 0.191,
+"rng": 2.05,
+"tidal": true,
+"name": "Bulimba Creek at Hemmant (Doughboy Pde)",
+"tab": "IDQ65389",
+"last": 1.08
+},
+"540130": {
+"n": 1783,
+"r2": 0.97,
+"m2": 0.764,
+"k1": 0.185,
+"rng": 2.0,
+"tidal": true,
+"name": "Breakfast Creek at Bowen Hills (Mayne Railway Yards)",
+"tab": "IDQ65389",
+"last": 1.07
+},
+"540132": {
+"n": 1821,
+"r2": 0.97,
+"m2": 0.771,
+"k1": 0.184,
+"rng": 2.02,
+"tidal": true,
+"name": "Norman Creek at East Brisbane (Caswell St)",
+"tab": "IDQ65389",
+"last": 1.07
+},
+"540134": {
+"n": 62,
+"r2": 0.16,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Norman Creek at Holland Park West (Joachim St)",
+"tab": "IDQ65389",
+"last": 15.32
+},
+"540139": {
+"n": 117,
+"r2": 0.14,
+"m2": 0.003,
+"k1": 0.004,
+"rng": 0.03,
+"tidal": false,
+"name": "Brisbane River at Gregor Creek",
+"tab": "IDQ65389",
+"last": 0.88
+},
+"540141": {
+"n": 343,
+"r2": 0.89,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Emu Creek at Boat Mountain",
+"tab": "IDQ65389",
+"last": 0.14
+},
+"540142": {
+"n": 164,
+"r2": 0.69,
+"m2": 0.001,
+"k1": 0.012,
+"rng": 0.03,
+"tidal": false,
+"name": "Cressbrook Creek at Cressbrook Dam",
+"tab": "IDQ65389",
+"last": 274.86
+},
+"540143": {
+"n": 345,
+"r2": 0.1,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Lockyer Creek at Helidon",
+"tab": "IDQ65389",
+"last": 0.49
+},
+"540146": {
+"n": 302,
+"r2": 0.18,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Cooyar Creek",
+"tab": "IDQ65389",
+"last": 0.76
+},
+"540147": {
+"n": 112,
+"r2": 0.1,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Bremer River at Five Mile Bridge",
+"tab": "IDQ65389",
+"last": -0.38
+},
+"540148": {
+"n": 356,
+"r2": 0.11,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Cressbrook Creek at Rosentreters Bridge",
+"tab": "IDQ65389",
+"last": 1.15
+},
+"540149": {
+"n": 117,
+"r2": 0.69,
+"m2": 0.004,
+"k1": 0.009,
+"rng": 0.04,
+"tidal": false,
+"name": "Lockyer Creek at Glenore Grove",
+"tab": "IDQ65389",
+"last": 1.92
+},
+"540150": {
+"n": 122,
+"r2": 0.35,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Brisbane River at Savages Crossing",
+"tab": "IDQ65389",
+"last": 1.32
+},
+"540151": {
+"n": 159,
+"r2": 0.31,
+"m2": 0.004,
+"k1": 0.005,
+"rng": 0.03,
+"tidal": false,
+"name": "Warrill Creek at Kalbar Weir HW",
+"tab": "IDQ65389",
+"last": 74.41
+},
+"540152": {
+"n": 180,
+"r2": 0.81,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.02,
+"tidal": false,
+"name": "Tenthill Creek at Tenthill",
+"tab": "IDQ65389",
+"last": 0.42
+},
+"540153": {
+"n": 111,
+"r2": 0.94,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Lockyer Creek at O'Reilly's Weir",
+"tab": "IDQ65389",
+"last": 7.68
+},
+"540155": {
+"n": 187,
+"r2": 0.59,
+"m2": 0.002,
+"k1": 0.021,
+"rng": 0.06,
+"tidal": false,
+"name": "Caboonbah",
+"tab": "IDQ65389",
+"last": 64.72
+},
+"540156": {
+"n": 455,
+"r2": 0.73,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Lockyer Creek at Gatton",
+"tab": "IDQ65389",
+"last": -0.06
+},
+"540157": {
+"n": 112,
+"r2": 0.93,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Bremer River at Adams Bridge",
+"tab": "IDQ65389",
+"last": 0.6
+},
+"540158": {
+"n": 454,
+"r2": 0.53,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Laidley Creek at Showground Weir",
+"tab": "IDQ65389",
+"last": 4.34
+},
+"540174": {
+"n": 0,
+"tidal": false
+},
+"540177": {
+"n": 149,
+"r2": 0.1,
+"m2": 0.124,
+"k1": 0.16,
+"rng": 0.88,
+"tidal": false,
+"name": "Brisbane River at Wivenhoe Dam HG",
+"tab": "IDQ65389",
+"last": 64.72
+},
+"540178": {
+"n": 138,
+"r2": 0.11,
+"m2": 0.003,
+"k1": 0.002,
+"rng": 0.02,
+"tidal": false,
+"name": "Brisbane River at Wivenhoe Dam TW",
+"tab": "IDQ65389",
+"last": 26.96
+},
+"540180": {
+"n": 147,
+"r2": 0.78,
+"m2": 0.002,
+"k1": 0.029,
+"rng": 0.07,
+"tidal": false,
+"name": "Warrill Creek at Amberley",
+"tab": "IDQ65389",
+"last": -0.16
+},
+"540182": {
+"n": 111,
+"r2": 0.08,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.02,
+"tidal": false,
+"name": "Brisbane River at Lowood",
+"tab": "IDQ65389",
+"last": 0.12
+},
+"540183": {
+"n": 0,
+"tidal": false
+},
+"540188": {
+"n": 120,
+"r2": 0.1,
+"m2": 0.008,
+"k1": 0.005,
+"rng": 0.03,
+"tidal": false,
+"name": "Brisbane River at Devon Hills",
+"tab": "IDQ65389",
+"last": 0.84
+},
+"540192": {
+"n": 3274,
+"r2": 0.96,
+"m2": 0.774,
+"k1": 0.2,
+"rng": 2.01,
+"tidal": true,
+"name": "Brisbane River at Jindalee Alert",
+"tab": "IDQ65389",
+"last": 0.66
+},
+"540194": {
+"n": 112,
+"r2": 0.06,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Western Creek at Kuss Road",
+"tab": "IDQ65389",
+"last": 0.06
+},
+"540195": {
+"n": 0,
+"tidal": false
+},
+"540198": {
+"n": 7740,
+"r2": 0.97,
+"m2": 0.803,
+"k1": 0.193,
+"rng": 2.12,
+"tidal": true,
+"name": "Brisbane River at Brisbane City",
+"tab": "IDQ65389",
+"last": 1.03
+},
+"540199": {
+"n": 156,
+"r2": 0.15,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Brisbane River at Mt Crosby",
+"tab": "IDQ65389",
+"last": 6.84
+},
+"540201": {
+"n": 1242,
+"r2": 0.9,
+"m2": 0.544,
+"k1": 0.141,
+"rng": 1.43,
+"tidal": true,
+"name": "Brisbane River at Moggill (Aitcheson St East)",
+"tab": "IDQ65389",
+"last": 0.48
+},
+"540204": {
+"n": 56,
+"r2": 0.22,
+"m2": 0.22,
+"k1": 0.239,
+"rng": 1.12,
+"tidal": false,
+"name": "Sideling Creek at Lake Kurwongbah",
+"tab": "IDQ65389",
+"last": 20.17
+},
+"540205": {
+"n": 130,
+"r2": 0.17,
+"m2": 0.197,
+"k1": 0.107,
+"rng": 0.66,
+"tidal": false,
+"name": "South Pine River at Drapers Crossing Alert",
+"tab": "IDQ65389",
+"last": 0.54
+},
+"540215": {
+"n": 186,
+"r2": 0.26,
+"m2": 0.0,
+"k1": 0.007,
+"rng": 0.02,
+"tidal": false,
+"name": "Mary River at Gympie Weir",
+"tab": "IDQ65390",
+"last": 0.61
+},
+"540216": {
+"n": 335,
+"r2": 0.7,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Bremer River at Berry's Lagoon",
+"tab": "IDQ65389",
+"last": 7.41
+},
+"540218": {
+"n": 54,
+"r2": 0.26,
+"m2": 0.002,
+"k1": 0.005,
+"rng": 0.02,
+"tidal": false,
+"name": "Doonan Creek",
+"tab": "IDQ65390",
+"last": 2.0
+},
+"540220": {
+"n": 56,
+"r2": 0.36,
+"m2": 0.031,
+"k1": 0.031,
+"rng": 0.13,
+"tidal": false,
+"name": "Mountain Creek at Dixon Road",
+"tab": "IDQ65390",
+"last": 0.96
+},
+"540222": {
+"n": 54,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Eudlo Creek at Eudlo",
+"tab": "IDQ65390",
+"last": 0.97
+},
+"540223": {
+"n": 61,
+"r2": 0.24,
+"m2": 0.034,
+"k1": 0.039,
+"rng": 0.18,
+"tidal": false,
+"name": "Yandina Creek",
+"tab": "IDQ65390",
+"last": 1.59
+},
+"540231": {
+"n": 196,
+"r2": 0.56,
+"m2": 0.015,
+"k1": 0.004,
+"rng": 0.07,
+"tidal": false,
+"name": "Stuart River at Weens Bridge",
+"tab": "IDQ65391",
+"last": 1.21
+},
+"540242": {
+"n": 39,
+"r2": 0.19,
+"m2": 0.011,
+"k1": 0.018,
+"rng": 0.08,
+"tidal": false,
+"name": "Burpengary Creek at Burpengary (Dale St)",
+"tab": "IDQ65389",
+"last": 3.39
+},
+"540243": {
+"n": 47,
+"r2": 0.49,
+"m2": 0.006,
+"k1": 0.009,
+"rng": 0.03,
+"tidal": false,
+"name": "Caboolture River at Caboolture WTP",
+"tab": "IDQ65389",
+"last": 3.95
+},
+"540244": {
+"n": 42,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Wararba Creek at Wamuran",
+"tab": "IDQ65389",
+"last": 25.21
+},
+"540245": {
+"n": 55,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Burpengary Creek at Burpengary (Rowley Rd)",
+"tab": "IDQ65389",
+"last": 13.3
+},
+"540248": {
+"n": 113,
+"r2": 0.27,
+"m2": 0.001,
+"k1": 0.011,
+"rng": 0.03,
+"tidal": false,
+"name": "Deebing Creek at Churchill",
+"tab": "IDQ65389",
+"last": 12.71
+},
+"540249": {
+"n": 1197,
+"r2": 0.87,
+"m2": 0.507,
+"k1": 0.141,
+"rng": 1.37,
+"tidal": true,
+"name": "Bundamba Creek at Bundamba (Hanlon St)",
+"tab": "IDQ65389",
+"last": 0.25
+},
+"540250": {
+"n": 1363,
+"r2": 0.72,
+"m2": 0.513,
+"k1": 0.119,
+"rng": 1.38,
+"tidal": true,
+"name": "Bremer River at Brassall (Hancocks Bridge)",
+"tab": "IDQ65389",
+"last": 0.32
+},
+"540256": {
+"n": 116,
+"r2": 0.15,
+"m2": 0.028,
+"k1": 0.01,
+"rng": 0.13,
+"tidal": false,
+"name": "Brisbane River at Kholo Bridge",
+"tab": "IDQ65389",
+"last": 0.18
+},
+"540257": {
+"n": 114,
+"r2": 0.06,
+"m2": 0.016,
+"k1": 0.017,
+"rng": 0.12,
+"tidal": false,
+"name": "Brisbane River at Burtons Bridge Alert",
+"tab": "IDQ65389",
+"last": -0.36
+},
+"540260": {
+"n": 0,
+"tidal": false
+},
+"540261": {
+"n": 345,
+"r2": 0.64,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Brisbane River at Linville Alert",
+"tab": "IDQ65389",
+"last": -0.04
+},
+"540262": {
+"n": 176,
+"r2": 0.93,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Boyne River at Boondooma Dam (HW)",
+"tab": "IDQ65391",
+"last": -1.4
+},
+"540272": {
+"n": 0,
+"tidal": false
+},
+"540274": {
+"n": 1879,
+"r2": 0.97,
+"m2": 0.781,
+"k1": 0.196,
+"rng": 2.04,
+"tidal": true,
+"name": "Oxley Creek Mouth at Graceville",
+"tab": "IDQ65389",
+"last": 0.98
+},
+"540276": {
+"n": 0,
+"tidal": false
+},
+"540277": {
+"n": 56,
+"r2": 0.81,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "North Pine River at North Pine Dam",
+"tab": "IDQ65389",
+"last": 33.14
+},
+"540278": {
+"n": 79,
+"r2": 0.34,
+"m2": 0.003,
+"k1": 0.015,
+"rng": 0.05,
+"tidal": false,
+"name": "Wynnum Creek at Wynnum (Byrneside Tce)",
+"tab": "IDQ65389",
+"last": 1.38
+},
+"540279": {
+"n": 0,
+"tidal": false
+},
+"540286": {
+"n": 1959,
+"r2": 0.96,
+"m2": 0.773,
+"k1": 0.184,
+"rng": 2.03,
+"tidal": true,
+"name": "Breakfast Creek Mouth at Newstead",
+"tab": "IDQ65389",
+"last": 1.09
+},
+"540288": {
+"n": 175,
+"r2": 0.33,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Tinana Creek at Tagigan Road",
+"tab": "IDQ65390",
+"last": 0.54
+},
+"540296": {
+"n": 508,
+"r2": 0.52,
+"m2": 0.049,
+"k1": 0.039,
+"rng": 0.23,
+"tidal": true,
+"name": "Pullen Pullen Creek at Pinjarra Hills",
+"tab": "IDQ65389",
+"last": 0.88
+},
+"540298": {
+"n": 0,
+"tidal": false
+},
+"540308": {
+"n": 173,
+"r2": 0.7,
+"m2": 0.021,
+"k1": 0.01,
+"rng": 0.06,
+"tidal": false,
+"name": "Lake Cootharaba at Boreen Point",
+"tab": "IDQ65390",
+"last": 0.22
+},
+"540309": {
+"n": 1600,
+"r2": 0.66,
+"m2": 0.105,
+"k1": 0.048,
+"rng": 0.31,
+"tidal": true,
+"name": "Noosa River at Lake Cooroibah",
+"tab": "IDQ65390",
+"last": 0.38
+},
+"540310": {
+"n": 0,
+"tidal": false
+},
+"540311": {
+"n": 826,
+"r2": 0.98,
+"m2": 0.4,
+"k1": 0.107,
+"rng": 1.0,
+"tidal": true,
+"name": "Noosa Bar",
+"tab": "IDQ65390",
+"last": 0.65
+},
+"540312": {
+"n": 117,
+"r2": 0.06,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Black Snake Creek at Marburg",
+"tab": "IDQ65389",
+"last": 0.3
+},
+"540313": {
+"n": 101,
+"r2": 0.21,
+"m2": 0.007,
+"k1": 0.016,
+"rng": 0.06,
+"tidal": false,
+"name": "Western Creek at Rosewood WWTP",
+"tab": "IDQ65389",
+"last": 0.35
+},
+"540314": {
+"n": 122,
+"r2": 0.63,
+"m2": 0.004,
+"k1": 0.01,
+"rng": 0.03,
+"tidal": false,
+"name": "Bremer River at Spressers Bridge",
+"tab": "IDQ65389",
+"last": 0.05
+},
+"540316": {
+"n": 112,
+"r2": 0.4,
+"m2": 0.001,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Warrill Creek at Churchbank Weir Alert",
+"tab": "IDQ65389",
+"last": 0.03
+},
+"540317": {
+"n": 100,
+"r2": 0.09,
+"m2": 0.006,
+"k1": 0.014,
+"rng": 0.08,
+"tidal": false,
+"name": "Spring Creek at Greys Plains Rd",
+"tab": "IDQ65389",
+"last": 0.08
+},
+"540326": {
+"n": 168,
+"r2": 0.42,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Six Mile Creek at Cooran Alert",
+"tab": "IDQ65390",
+"last": 1.24
+},
+"540327": {
+"n": 31,
+"r2": 0.43,
+"m2": 0.005,
+"k1": 0.016,
+"rng": 0.04,
+"tidal": false,
+"name": "Six Mile Creek at Lake Macdonald Drive",
+"tab": "IDQ65390",
+"last": 0.25
+},
+"540330": {
+"n": 181,
+"r2": 0.61,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at Moy Pocket",
+"tab": "IDQ65390",
+"last": 0.67
+},
+"540331": {
+"n": 64,
+"r2": 0.59,
+"m2": 0.004,
+"k1": 0.018,
+"rng": 0.04,
+"tidal": false,
+"name": "Mary River at Kenilworth Homestead",
+"tab": "IDQ65390",
+"last": -0.34
+},
+"540332": {
+"n": 177,
+"r2": 0.84,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at Bellbird Creek",
+"tab": "IDQ65390",
+"last": 0.44
+},
+"540338": {
+"n": 335,
+"r2": 0.78,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Stanley River at Woodford",
+"tab": "IDQ65389",
+"last": 1.78
+},
+"540342": {
+"n": 55,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Coochin Creek at Old Gympie Rd",
+"tab": "IDQ65390",
+"last": 0.0
+},
+"540343": {
+"n": 60,
+"r2": 0.37,
+"m2": 0.328,
+"k1": 0.412,
+"rng": 1.65,
+"tidal": true,
+"name": "Coochin Creek at Beerwah",
+"tab": "IDQ65390",
+"last": 0.44
+},
+"540344": {
+"n": 44,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Mooloolah River at Jordan St",
+"tab": "IDQ65390",
+"last": 0.0
+},
+"540345": {
+"n": 167,
+"r2": 0.76,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Mooloolah River at Mooloolah",
+"tab": "IDQ65390",
+"last": 0.18
+},
+"540346": {
+"n": 221,
+"r2": 0.82,
+"m2": 0.002,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Mooloolah River at Ewen Maddock Dam HW",
+"tab": "IDQ65390",
+"last": 24.98
+},
+"540347": {
+"n": 10075,
+"r2": 1.0,
+"m2": 0.624,
+"k1": 0.158,
+"rng": 1.55,
+"tidal": true,
+"name": "Mooloolaba Tide",
+"tab": "IDQ65390",
+"last": 1.53
+},
+"540348": {
+"n": 531,
+"r2": 0.98,
+"m2": 0.57,
+"k1": 0.155,
+"rng": 1.37,
+"tidal": true,
+"name": "Mooloolah River at Parrearra Weir US",
+"tab": "IDQ65390",
+"last": 0.7
+},
+"540350": {
+"n": 401,
+"r2": 0.96,
+"m2": 0.382,
+"k1": 0.118,
+"rng": 0.96,
+"tidal": true,
+"name": "Mooloolah River at Palmview",
+"tab": "IDQ65390",
+"last": 0.72
+},
+"540351": {
+"n": 55,
+"r2": 0.73,
+"m2": 0.003,
+"k1": 0.013,
+"rng": 0.04,
+"tidal": false,
+"name": "Currumundi Creek at Meridan Way",
+"tab": "IDQ65390",
+"last": 1.03
+},
+"540357": {
+"n": 168,
+"r2": 0.63,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Caboolture River at Upper Caboolture (Hausman Lane)",
+"tab": "IDQ65389",
+"last": 0.63
+},
+"540361": {
+"n": 172,
+"r2": 0.09,
+"m2": 0.002,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Barambah Creek at Joe Sippel Weir (TW)",
+"tab": "IDQ65391",
+"last": 1.26
+},
+"540362": {
+"n": 167,
+"r2": 0.46,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Barambah Creek at Joe Sippel Weir (HW)",
+"tab": "IDQ65391",
+"last": 0.02
+},
+"540373": {
+"n": 356,
+"r2": 0.23,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Kilcoy Creek at Kilcoy Weir (DS)",
+"tab": "IDQ65389",
+"last": 0.71
+},
+"540378": {
+"n": 71,
+"r2": 0.08,
+"m2": 0.002,
+"k1": 0.007,
+"rng": 0.03,
+"tidal": false,
+"name": "Wolston Creek at Sumner (Brumby Cct)",
+"tab": "IDQ65389",
+"last": 2.18
+},
+"540386": {
+"n": 121,
+"r2": 0.07,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Sandy Creek at Sandy Creek Road",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540387": {
+"n": 113,
+"r2": 0.09,
+"m2": 0.001,
+"k1": 0.005,
+"rng": 0.03,
+"tidal": false,
+"name": "Warrill Creek at Harrisville",
+"tab": "IDQ65389",
+"last": 0.1
+},
+"540388": {
+"n": 120,
+"r2": 0.1,
+"m2": 0.009,
+"k1": 0.014,
+"rng": 0.08,
+"tidal": false,
+"name": "Bremer River at Rosewood",
+"tab": "IDQ65389",
+"last": 0.17
+},
+"540398": {
+"n": 172,
+"r2": 0.77,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "South Pine River at Drapers Crossing Tm",
+"tab": "IDQ65389",
+"last": 0.55
+},
+"540403": {
+"n": 168,
+"r2": 0.57,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Obi Obi Creek at Gardners Falls",
+"tab": "IDQ65390",
+"last": 0.21
+},
+"540404": {
+"n": 168,
+"r2": 0.62,
+"m2": 0.001,
+"k1": 0.008,
+"rng": 0.02,
+"tidal": false,
+"name": "Glastonbury Creek at Glastonbury",
+"tab": "IDQ65390",
+"last": 0.7
+},
+"540405": {
+"n": 335,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Flagstone Creek at Lilydale",
+"tab": "IDQ65389",
+"last": 1.02
+},
+"540406": {
+"n": 335,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Ma Ma Creek at Harms",
+"tab": "IDQ65389",
+"last": 0.81
+},
+"540412": {
+"n": 41,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "North Pine River at Youngs Crossing",
+"tab": "IDQ65389",
+"last": 0.81
+},
+"540413": {
+"n": 71,
+"r2": 0.2,
+"m2": 0.033,
+"k1": 0.047,
+"rng": 0.2,
+"tidal": false,
+"name": "Four Mile Creek at John Bray Park",
+"tab": "IDQ65389",
+"last": 0.6
+},
+"540415": {
+"n": 83,
+"r2": 0.19,
+"m2": 0.026,
+"k1": 0.067,
+"rng": 0.19,
+"tidal": false,
+"name": "South Pine River at Cash's Crossing",
+"tab": "IDQ65389",
+"last": -0.51
+},
+"540416": {
+"n": 71,
+"r2": 0.1,
+"m2": 0.029,
+"k1": 0.021,
+"rng": 0.12,
+"tidal": false,
+"name": "Samford Creek at Samford Village",
+"tab": "IDQ65389",
+"last": 0.05
+},
+"540417": {
+"n": 974,
+"r2": 0.98,
+"m2": 0.866,
+"k1": 0.194,
+"rng": 2.01,
+"tidal": true,
+"name": "North Pine River at Murrumba Downs",
+"tab": "IDQ65389",
+"last": 1.41
+},
+"540419": {
+"n": 74,
+"r2": 0.21,
+"m2": 0.005,
+"k1": 0.012,
+"rng": 0.04,
+"tidal": false,
+"name": "Petrie Creek at West Woombye",
+"tab": "IDQ65390",
+"last": 0.38
+},
+"540420": {
+"n": 61,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Paynter Creek at Palmwoods Sportsground",
+"tab": "IDQ65390",
+"last": 0.42
+},
+"540421": {
+"n": 56,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Mountain Creek at Tanawha",
+"tab": "IDQ65390",
+"last": 0.1
+},
+"540424": {
+"n": 408,
+"r2": 0.98,
+"m2": 0.331,
+"k1": 0.114,
+"rng": 0.85,
+"tidal": true,
+"name": "Maroochy River at Stoney Wharf Road",
+"tab": "IDQ65390",
+"last": 0.52
+},
+"540426": {
+"n": 54,
+"r2": 0.99,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Obi Obi Creek at Baroon Pocket Dam (HG)",
+"tab": "IDQ65390",
+"last": 215.44
+},
+"540431": {
+"n": 28,
+"tidal": false
+},
+"540432": {
+"n": 549,
+"r2": 0.39,
+"m2": 0.052,
+"k1": 0.053,
+"rng": 0.27,
+"tidal": true,
+"name": "Stable Swamp Creek at Rocklea (Marshall Rd)",
+"tab": "IDQ65389",
+"last": 0.74
+},
+"540433": {
+"n": 90,
+"r2": 0.12,
+"m2": 0.011,
+"k1": 0.016,
+"rng": 0.08,
+"tidal": false,
+"name": "Rocky Waterholes at Moorooka (Muriel Ave)",
+"tab": "IDQ65389",
+"last": 2.56
+},
+"540439": {
+"n": 984,
+"r2": 0.98,
+"m2": 0.877,
+"k1": 0.2,
+"rng": 2.05,
+"tidal": true,
+"name": "North Pine River at Lawnton",
+"tab": "IDQ65389",
+"last": 1.19
+},
+"540441": {
+"n": 348,
+"r2": 0.95,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Esk Creek at Falls Rd",
+"tab": "IDQ65389",
+"last": 0.9
+},
+"540442": {
+"n": 1019,
+"r2": 0.25,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "North Pine River at Dayboro",
+"tab": "IDQ65389",
+"last": 0.16
+},
+"540444": {
+"n": 65,
+"r2": 0.22,
+"m2": 0.036,
+"k1": 0.037,
+"rng": 0.14,
+"tidal": false,
+"name": "Cedar Creek at Cedar Ck Rd",
+"tab": "IDQ65389",
+"last": 0.75
+},
+"540445": {
+"n": 50,
+"r2": 0.28,
+"m2": 0.01,
+"k1": 0.009,
+"rng": 0.05,
+"tidal": false,
+"name": "Saltwater Creek at Lipscombe Rd",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540446": {
+"n": 331,
+"r2": 0.23,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Maronghi Creek at Glendale",
+"tab": "IDQ65389",
+"last": 0.95
+},
+"540448": {
+"n": 10070,
+"r2": 0.98,
+"m2": 0.452,
+"k1": 0.141,
+"rng": 1.15,
+"tidal": true,
+"name": "Golden Beach",
+"tab": "IDQ65390",
+"last": 1.02
+},
+"540449": {
+"n": 55,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Torbanlea",
+"tab": "IDQ65391",
+"last": -0.75
+},
+"540450": {
+"n": 74,
+"r2": 0.73,
+"m2": 0.001,
+"k1": 0.029,
+"rng": 0.06,
+"tidal": false,
+"name": "Black Swamp Creek at Maryborough Road",
+"tab": "IDQ65390",
+"last": -2.55
+},
+"540452": {
+"n": 0,
+"tidal": false
+},
+"540460": {
+"n": 53,
+"r2": 0.16,
+"m2": 0.181,
+"k1": 0.208,
+"rng": 1.18,
+"tidal": false,
+"name": "Cooloolabin Dam HW",
+"tab": "IDQ65390",
+"last": 292.54
+},
+"540461": {
+"n": 998,
+"r2": 0.99,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Poona Dam HW",
+"tab": "IDQ65390",
+"last": 151.76
+},
+"540462": {
+"n": 55,
+"r2": 0.27,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "South Maroochy River at Wappa Dam",
+"tab": "IDQ65390",
+"last": 44.82
+},
+"540463": {
+"n": 156,
+"r2": 0.11,
+"m2": 0.024,
+"k1": 0.023,
+"rng": 0.08,
+"tidal": false,
+"name": "Six Mile Creek at Lake Macdonald Dam (HG)",
+"tab": "IDQ65390",
+"last": 92.78
+},
+"540468": {
+"n": 346,
+"r2": 0.79,
+"m2": 0.284,
+"k1": 0.124,
+"rng": 0.85,
+"tidal": true,
+"name": "Cannery Creek at Northgate (Crockford Street)",
+"tab": "IDQ65389",
+"last": 1.07
+},
+"540469": {
+"n": 859,
+"r2": 0.95,
+"m2": 0.333,
+"k1": 0.069,
+"rng": 0.78,
+"tidal": true,
+"name": "Pound Creek at Hendra",
+"tab": "IDQ65389",
+"last": -0.16
+},
+"540474": {
+"n": 119,
+"r2": 0.92,
+"m2": 0.002,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Reynolds Creek at Moogerah Dam HG",
+"tab": "IDQ65389",
+"last": -2.59
+},
+"540476": {
+"n": 153,
+"r2": 0.23,
+"m2": 0.347,
+"k1": 0.526,
+"rng": 2.13,
+"tidal": false,
+"name": "Deep Creek at Cedar Pocket Dam HG",
+"tab": "IDQ65390",
+"last": 100.4
+},
+"540478": {
+"n": 20,
+"tidal": false
+},
+"540483": {
+"n": 66,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Kobble Creek at Mt Samson Road",
+"tab": "IDQ65389",
+"last": 1.1
+},
+"540484": {
+"n": 54,
+"r2": 0.2,
+"m2": 0.007,
+"k1": 0.004,
+"rng": 0.03,
+"tidal": false,
+"name": "North Pine River at Dayboro WWTP",
+"tab": "IDQ65389",
+"last": 0.16
+},
+"540495": {
+"n": 1727,
+"r2": 0.78,
+"m2": 0.305,
+"k1": 0.105,
+"rng": 1.08,
+"tidal": true,
+"name": "Moreton Bay at Whyte Island",
+"tab": "IDQ65389",
+"last": -1.48
+},
+"540496": {
+"n": 116,
+"r2": 0.78,
+"m2": 0.025,
+"k1": 0.012,
+"rng": 0.08,
+"tidal": false,
+"name": "Beachmere",
+"tab": "IDQ65389",
+"last": 0.6
+},
+"540499": {
+"n": 50,
+"r2": 0.23,
+"m2": 0.012,
+"k1": 0.01,
+"rng": 0.05,
+"tidal": false,
+"name": "Doonan Creek at Coolum West",
+"tab": "IDQ65390",
+"last": 0.81
+},
+"540501": {
+"n": 0,
+"tidal": false
+},
+"540503": {
+"n": 114,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Moson's Gully at Rosewood Detention Basin",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540504": {
+"n": 335,
+"r2": 0.97,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Bremer River at Walloon",
+"tab": "IDQ65389",
+"last": 0.89
+},
+"540506": {
+"n": 466,
+"r2": 0.98,
+"m2": 0.37,
+"k1": 0.137,
+"rng": 0.95,
+"tidal": true,
+"name": "Petrie Creek and Bli Bli",
+"tab": "IDQ65390",
+"last": 0.75
+},
+"540508": {
+"n": 56,
+"r2": 0.27,
+"m2": 0.028,
+"k1": 0.026,
+"rng": 0.12,
+"tidal": false,
+"name": "Burpengary Creek at Narangba (Oakey Flat Rd)",
+"tab": "IDQ65389",
+"last": 22.01
+},
+"540513": {
+"n": 357,
+"r2": 0.39,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Reynolds Creek at Moogerah Dam TW",
+"tab": "IDQ65389",
+"last": 0.72
+},
+"540514": {
+"n": 191,
+"r2": 0.8,
+"m2": 0.004,
+"k1": 0.008,
+"rng": 0.03,
+"tidal": false,
+"name": "Yabba Creek at Borumba Dam TW",
+"tab": "IDQ65390",
+"last": 0.16
+},
+"540516": {
+"n": 0,
+"tidal": false
+},
+"540527": {
+"n": 121,
+"r2": 0.06,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Murphys Creek at Spring Bluff ALERT",
+"tab": "IDQ65389",
+"last": 1.06
+},
+"540529": {
+"n": 335,
+"r2": 0.29,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Laidley Creek at Warrego Highway",
+"tab": "IDQ65389",
+"last": 0.66
+},
+"540531": {
+"n": 159,
+"r2": 0.94,
+"m2": 0.003,
+"k1": 0.014,
+"rng": 0.04,
+"tidal": false,
+"name": "Barker Creek at Bjelke-Petersen Dam TW",
+"tab": "IDQ65391",
+"last": 1.18
+},
+"540532": {
+"n": 177,
+"r2": 0.67,
+"m2": 0.002,
+"k1": 0.009,
+"rng": 0.02,
+"tidal": false,
+"name": "Teewah Creek at Coops Corner",
+"tab": "IDQ65390",
+"last": 0.64
+},
+"540533": {
+"n": 167,
+"r2": 0.25,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Coochin Creek at Mawsons Rd",
+"tab": "IDQ65390",
+"last": 0.19
+},
+"540535": {
+"n": 72,
+"r2": 0.66,
+"m2": 0.0,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Forest Lake Dam at Lakeside Crescent",
+"tab": "IDQ65389",
+"last": 36.46
+},
+"540536": {
+"n": 54,
+"r2": 0.16,
+"m2": 0.021,
+"k1": 0.01,
+"rng": 0.12,
+"tidal": false,
+"name": "Coonowrin Creek at Glasshouse Mountains",
+"tab": "IDQ65390",
+"last": 0.1
+},
+"540542": {
+"n": 57,
+"r2": 0.38,
+"m2": 0.001,
+"k1": 0.006,
+"rng": 0.02,
+"tidal": false,
+"name": "Sheep Station Creek at Morayfield",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540543": {
+"n": 54,
+"r2": 0.22,
+"m2": 0.008,
+"k1": 0.009,
+"rng": 0.04,
+"tidal": false,
+"name": "Six Mile Creek at Elimbah (Rose Creek Rd)",
+"tab": "IDQ65389",
+"last": 0.05
+},
+"540546": {
+"n": 450,
+"r2": 0.97,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Lake Clarendon Dam HW",
+"tab": "IDQ65389",
+"last": 93.4
+},
+"540547": {
+"n": 2012,
+"r2": 0.99,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Buaraba Ck at Atkinson Dam HG",
+"tab": "IDQ65389",
+"last": 63.19
+},
+"540548": {
+"n": 904,
+"r2": 0.98,
+"m2": 0.852,
+"k1": 0.183,
+"rng": 2.01,
+"tidal": true,
+"name": "Kedron Brook at Toombul (Nudgee Rd)",
+"tab": "IDQ65389",
+"last": 1.35
+},
+"540549": {
+"n": 446,
+"r2": 0.05,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Warrill Creek at Toohills Crossing",
+"tab": "IDQ65389",
+"last": 0.48
+},
+"540557": {
+"n": 54,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Lagoon Creek at Moodlu (Williams Rd)",
+"tab": "IDQ65389",
+"last": -0.1
+},
+"540558": {
+"n": 779,
+"r2": 0.98,
+"m2": 0.814,
+"k1": 0.155,
+"rng": 1.88,
+"tidal": true,
+"name": "Caboolture River at Beachmere (Riversleigh Rd)",
+"tab": "IDQ65389",
+"last": 1.99
+},
+"540560": {
+"n": 335,
+"r2": 0.8,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Reedy Creek at Mt Byron",
+"tab": "IDQ65389",
+"last": 0.16
+},
+"540561": {
+"n": 56,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "King John Creek at Caboolture (Pumicestone Rd)",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540562": {
+"n": 55,
+"r2": 0.24,
+"m2": 0.003,
+"k1": 0.011,
+"rng": 0.03,
+"tidal": false,
+"name": "Todds Gully at Lawnton (Todds Rd)",
+"tab": "IDQ65389",
+"last": -0.34
+},
+"540563": {
+"n": 352,
+"r2": 0.99,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Lake Dyer at Bill Gunn Dam",
+"tab": "IDQ65389",
+"last": 107.12
+},
+"540566": {
+"n": 95,
+"r2": 0.1,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Lockyer Creek at Upper Lockyer",
+"tab": "IDQ65389",
+"last": -0.02
+},
+"540567": {
+"n": 0,
+"tidal": false
+},
+"540568": {
+"n": 113,
+"r2": 0.07,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Blackfellow Creek at Junction View",
+"tab": "IDQ65389",
+"last": 0.85
+},
+"540569": {
+"n": 0,
+"tidal": false
+},
+"540574": {
+"n": 109,
+"r2": 0.1,
+"m2": 0.113,
+"k1": 0.139,
+"rng": 0.68,
+"tidal": false,
+"name": "Bremer River at Lower Mt Walker",
+"tab": "IDQ65389",
+"last": 0.1
+},
+"540575": {
+"n": 56,
+"r2": 0.36,
+"m2": 0.001,
+"k1": 0.0,
+"rng": 0.01,
+"tidal": false,
+"name": "Yabba Creek at Borumba Dam (HG)",
+"tab": "IDQ65390",
+"last": -0.29
+},
+"540599": {
+"n": 57,
+"r2": 0.92,
+"m2": 0.006,
+"k1": 0.01,
+"rng": 0.04,
+"tidal": false,
+"name": "South Maroochy River at Maroochy Intake Weir",
+"tab": "IDQ65390",
+"last": 163.86
+},
+"540604": {
+"n": 347,
+"r2": 0.98,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Enoggera Creek at Enoggera Dam HG",
+"tab": "IDQ65389",
+"last": 74.2
+},
+"540605": {
+"n": 160,
+"r2": 0.86,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Sideling Creek at Lake Kurwongbah HG",
+"tab": "IDQ65389",
+"last": 20.17
+},
+"540606": {
+"n": 357,
+"r2": 0.93,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Cabbage Tree Creek at Lake Manchester HG",
+"tab": "IDQ65389",
+"last": 49.63
+},
+"540609": {
+"n": 359,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Gold Creek at Gold Ck Reservoir HG",
+"tab": "IDQ65389",
+"last": 91.24
+},
+"540618": {
+"n": 174,
+"r2": 0.91,
+"m2": 0.001,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Deep Creek at Cedar Pocket Dam TW",
+"tab": "IDQ65390",
+"last": 0.54
+},
+"540619": {
+"n": 53,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Burpengary Creek at Burpengary (Mathew Cr)",
+"tab": "IDQ65389",
+"last": 2.08
+},
+"540620": {
+"n": 55,
+"r2": 0.3,
+"m2": 0.007,
+"k1": 0.015,
+"rng": 0.05,
+"tidal": false,
+"name": "Mary River at Conondale",
+"tab": "IDQ65390",
+"last": 1.3
+},
+"540623": {
+"n": 55,
+"r2": 0.27,
+"m2": 0.003,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Little Burpengary Creek at Deception Bay (Creek Rd)",
+"tab": "IDQ65389",
+"last": 0.1
+},
+"540624": {
+"n": 0,
+"tidal": false
+},
+"540625": {
+"n": 901,
+"r2": 0.95,
+"m2": 0.633,
+"k1": 0.146,
+"rng": 1.52,
+"tidal": true,
+"name": "South Pine River at Strathpine (Gympie Rd)",
+"tab": "IDQ65389",
+"last": 1.38
+},
+"540627": {
+"n": 57,
+"r2": 0.44,
+"m2": 0.002,
+"k1": 0.004,
+"rng": 0.03,
+"tidal": false,
+"name": "King John Creek at Caboolture (Bribie Is Rd)",
+"tab": "IDQ65389",
+"last": 0.28
+},
+"540628": {
+"n": 54,
+"r2": 0.75,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Terrors Creek at Dayboro",
+"tab": "IDQ65389",
+"last": 0.09
+},
+"540635": {
+"n": 586,
+"r2": 0.97,
+"m2": 0.525,
+"k1": 0.143,
+"rng": 1.26,
+"tidal": true,
+"name": "Elimbah Creek at Toorbul (Donnybrook Rd)",
+"tab": "IDQ65389",
+"last": 0.5
+},
+"540636": {
+"n": 13,
+"tidal": false
+},
+"540637": {
+"n": 825,
+"r2": 0.91,
+"m2": 1.287,
+"k1": 0.203,
+"rng": 2.87,
+"tidal": true,
+"name": "Mary River at Maryborough (Churchill Street)",
+"tab": "IDQ65390",
+"last": 2.45
+},
+"540639": {
+"n": 56,
+"r2": 0.72,
+"m2": 0.002,
+"k1": 0.014,
+"rng": 0.04,
+"tidal": false,
+"name": "Kin Kin Creek at Kin Kin",
+"tab": "IDQ65390",
+"last": 0.0
+},
+"540646": {
+"n": 109,
+"r2": 0.1,
+"m2": 0.707,
+"k1": 0.87,
+"rng": 5.03,
+"tidal": false,
+"name": "Oxley Creek at Goodna Road",
+"tab": "IDQ65389",
+"last": 36.13
+},
+"540658": {
+"n": 61,
+"r2": 0.34,
+"m2": 0.004,
+"k1": 0.015,
+"rng": 0.03,
+"tidal": false,
+"name": "Freshwater Creek at Kallangur",
+"tab": "IDQ65389",
+"last": 0.2
+},
+"540659": {
+"n": 758,
+"r2": 0.97,
+"m2": 0.772,
+"k1": 0.158,
+"rng": 1.82,
+"tidal": true,
+"name": "Saltwater Creek at Rothwell",
+"tab": "IDQ65389",
+"last": 1.3
+},
+"540660": {
+"n": 2806,
+"r2": 0.96,
+"m2": 0.83,
+"k1": 0.169,
+"rng": 1.94,
+"tidal": true,
+"name": "Caboolture River at Caboolture (Short St)",
+"tab": "IDQ65389",
+"last": 1.35
+},
+"540661": {
+"n": 1886,
+"r2": 0.95,
+"m2": 0.888,
+"k1": 0.202,
+"rng": 2.29,
+"tidal": true,
+"name": "Bremer River at Karalee",
+"tab": "IDQ65389",
+"last": 1.59
+},
+"540664": {
+"n": 116,
+"r2": 0.07,
+"m2": 0.002,
+"k1": 0.003,
+"rng": 0.02,
+"tidal": false,
+"name": "Six Mile Ck at Redbank Plains Road",
+"tab": "IDQ65389",
+"last": 30.91
+},
+"540666": {
+"n": 98,
+"r2": 0.12,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Bundamba Creek at South Ripley (Wards Rd)",
+"tab": "IDQ65389",
+"last": 63.07
+},
+"540669": {
+"n": 104,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Bremer River at Seven Mile Bridge",
+"tab": "IDQ65389",
+"last": 29.8
+},
+"540670": {
+"n": 1262,
+"r2": 0.95,
+"m2": 0.822,
+"k1": 0.2,
+"rng": 2.13,
+"tidal": true,
+"name": "Brisbane River at Goodna",
+"tab": "IDQ65389",
+"last": 0.5
+},
+"540672": {
+"n": 175,
+"r2": 0.05,
+"m2": 0.005,
+"k1": 0.01,
+"rng": 0.05,
+"tidal": false,
+"name": "Goodna Creek at Collingwood Park",
+"tab": "IDQ65389",
+"last": 19.59
+},
+"540677": {
+"n": 38,
+"r2": 0.55,
+"m2": 0.016,
+"k1": 0.016,
+"rng": 0.07,
+"tidal": false,
+"name": "Tinana Creek at Bidwell",
+"tab": "IDQ65390",
+"last": 1.6
+},
+"540678": {
+"n": 48,
+"r2": 0.27,
+"m2": 0.015,
+"k1": 0.02,
+"rng": 0.07,
+"tidal": false,
+"name": "Tinana Creek at Magnolia",
+"tab": "IDQ65390",
+"last": 1.05
+},
+"540679": {
+"n": 167,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Barambah Creek at Cherbourg",
+"tab": "IDQ65391",
+"last": 0.0
+},
+"540680": {
+"n": 113,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Sandy Creek at Woodlands Road",
+"tab": "IDQ65389",
+"last": 0.05
+},
+"540682": {
+"n": 2273,
+"r2": 0.87,
+"m2": 0.383,
+"k1": 0.127,
+"rng": 1.08,
+"tidal": true,
+"name": "Brisbane River at Jindalee (Boat Ramp Park)",
+"tab": "IDQ65389",
+"last": 0.77
+},
+"540683": {
+"n": 1926,
+"r2": 0.96,
+"m2": 0.776,
+"k1": 0.192,
+"rng": 2.04,
+"tidal": true,
+"name": "Brisbane River at St Lucia",
+"tab": "IDQ65389",
+"last": 0.94
+},
+"540684": {
+"n": 4757,
+"r2": 0.97,
+"m2": 0.801,
+"k1": 0.193,
+"rng": 2.11,
+"tidal": true,
+"name": "Brisbane River at Brisbane Port Office",
+"tab": "IDQ65389",
+"last": 1.04
+},
+"540685": {
+"n": 2042,
+"r2": 0.97,
+"m2": 0.788,
+"k1": 0.183,
+"rng": 2.07,
+"tidal": true,
+"name": "Brisbane River at Hawthorne",
+"tab": "IDQ65389",
+"last": 1.05
+},
+"540686": {
+"n": 72,
+"r2": 0.67,
+"m2": 0.003,
+"k1": 0.003,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at Owanyilla",
+"tab": "IDQ65390",
+"last": 2.05
+},
+"540687": {
+"n": 75,
+"r2": 0.49,
+"m2": 0.012,
+"k1": 0.022,
+"rng": 0.07,
+"tidal": false,
+"name": "Mary River at Sexton",
+"tab": "IDQ65390",
+"last": 0.05
+},
+"540701": {
+"n": 343,
+"r2": 0.71,
+"m2": 0.002,
+"k1": 0.004,
+"rng": 0.02,
+"tidal": false,
+"name": "Lockyer Creek at Clarendon",
+"tab": "IDQ65389",
+"last": 0.78
+},
+"540702": {
+"n": 0,
+"tidal": false
+},
+"540706": {
+"n": 170,
+"r2": 0.6,
+"m2": 0.014,
+"k1": 0.138,
+"rng": 0.32,
+"tidal": false,
+"name": "Mary River at Tiaro",
+"tab": "IDQ65390",
+"last": 1.94
+},
+"540719": {
+"n": 112,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Sandy Creek at Whiteway Rd Overflow",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540720": {
+"n": 113,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Sandy Creek at Whiteway Rd",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540721": {
+"n": 114,
+"r2": 0.11,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Lagoon Creek at Narda Lagoon",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540722": {
+"n": 0,
+"tidal": false
+},
+"540723": {
+"n": 0,
+"tidal": false
+},
+"540727": {
+"n": 156,
+"r2": 0.14,
+"m2": 0.019,
+"k1": 0.02,
+"rng": 0.13,
+"tidal": false,
+"name": "Bundamba Creek at South Ripley (James Ivory Bridge)",
+"tab": "IDQ65389",
+"last": 39.67
+},
+"540728": {
+"n": 153,
+"r2": 0.1,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Woogaroo Creek at Bellbird Park (Eugene St)",
+"tab": "IDQ65389",
+"last": 13.63
+},
+"540730": {
+"n": 10059,
+"r2": 0.99,
+"m2": 0.791,
+"k1": 0.169,
+"rng": 1.88,
+"tidal": true,
+"name": "Scarborough Tide",
+"tab": "IDQ65389",
+"last": 2.14
+},
+"540736": {
+"n": 54,
+"r2": 0.17,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Lagoon Creek at Caboolture (Machinery Pde)",
+"tab": "IDQ65389",
+"last": 0.25
+},
+"540739": {
+"n": 54,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "South Pine River at Samford Valley",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540740": {
+"n": 868,
+"r2": 0.98,
+"m2": 0.8,
+"k1": 0.165,
+"rng": 1.88,
+"tidal": true,
+"name": "Caboolture River at Beachmere (St Smith Rd)",
+"tab": "IDQ65389",
+"last": 0.94
+},
+"540741": {
+"n": 55,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Saltwater Creek at Deception Bay (Major St)",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540750": {
+"n": 741,
+"r2": 0.93,
+"m2": 0.0,
+"k1": 0.011,
+"rng": 0.03,
+"tidal": false,
+"name": "Cressbrook Creek at Cressbrook Dam HW",
+"tab": "IDQ65389",
+"last": 274.86
+},
+"540754": {
+"n": 327,
+"r2": 0.87,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Warrill Creek at Kents Lagoon",
+"tab": "IDQ65389",
+"last": 0.31
+},
+"540755": {
+"n": 178,
+"r2": 0.56,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Six Mile Creek at Lake Macdonald (HG)",
+"tab": "IDQ65390",
+"last": 92.78
+},
+"540762": {
+"n": 10057,
+"r2": 0.99,
+"m2": 0.817,
+"k1": 0.175,
+"rng": 1.95,
+"tidal": true,
+"name": "Shorncliffe Tide",
+"tab": "IDQ65389",
+"last": 2.27
+},
+"540764": {
+"n": 59,
+"r2": 0.17,
+"m2": 0.003,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Lamerough Creek at Koala Court",
+"tab": "IDQ65390",
+"last": 4.47
+},
+"540768": {
+"n": 109,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Yarraman Creek at Emmert St",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540769": {
+"n": 110,
+"r2": 0.66,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Cooyar Creek at Cooyar-Kooralgin Rd",
+"tab": "IDQ65389",
+"last": 0.07
+},
+"540770": {
+"n": 0,
+"tidal": false
+},
+"540771": {
+"n": 0,
+"tidal": false
+},
+"540773": {
+"n": 109,
+"r2": 0.97,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "King John Creek at Beerburrum Rd",
+"tab": "IDQ65389",
+"last": -2.98
+},
+"540774": {
+"n": 59,
+"r2": 0.16,
+"m2": 0.186,
+"k1": 0.181,
+"rng": 1.23,
+"tidal": false,
+"name": "Kin Kin Creek at Wahpunga Lane",
+"tab": "IDQ65390",
+"last": 0.05
+},
+"540775": {
+"n": 34,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Cooroora Creek at Pomona (Hill Street)",
+"tab": "IDQ65390",
+"last": 0.0
+},
+"540776": {
+"n": 11,
+"tidal": false
+},
+"540777": {
+"n": 53,
+"r2": 0.46,
+"m2": 0.469,
+"k1": 0.8,
+"rng": 2.69,
+"tidal": true,
+"name": "Six Mile Creek at Liane Drive",
+"tab": "IDQ65390",
+"last": -0.07
+},
+"540778": {
+"n": 53,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Six Mile Creek at Cooroy (Elm Street)",
+"tab": "IDQ65390",
+"last": 0.0
+},
+"540779": {
+"n": 53,
+"r2": 0.1,
+"m2": 0.008,
+"k1": 0.008,
+"rng": 0.08,
+"tidal": false,
+"name": "Cooroy Creek at Cooroy (Garnet St)",
+"tab": "IDQ65390",
+"last": 0.3
+},
+"540784": {
+"n": 29,
+"tidal": false
+},
+"540789": {
+"n": 112,
+"r2": 0.5,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Laidley Creek at Thornton (School Road)",
+"tab": "IDQ65389",
+"last": -0.71
+},
+"540792": {
+"n": 827,
+"r2": 0.95,
+"m2": 0.706,
+"k1": 0.163,
+"rng": 1.79,
+"tidal": true,
+"name": "Burrum River at Walls Camp (Pacific Haven)",
+"tab": "IDQ65391",
+"last": 1.54
+},
+"540793": {
+"n": 59,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Wararba Creek at Wamuran (Eureka Ct)",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540794": {
+"n": 32,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "South Pine River at Eatons Hill",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540795": {
+"n": 112,
+"r2": 0.11,
+"m2": 0.002,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Limestone Park Detention Basin",
+"tab": "IDQ65389",
+"last": 0.0
+},
+"540799": {
+"n": 75,
+"r2": 0.27,
+"m2": 0.011,
+"k1": 0.045,
+"rng": 0.14,
+"tidal": false,
+"name": "Ithaca Creek at Bardon (Lugg St)",
+"tab": "IDQ65389",
+"last": 11.88
+},
+"540804": {
+"n": 30,
+"r2": 0.53,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Enoggera Creek at Ashgrove (Royal Pde)",
+"tab": "IDQ65389",
+"last": 0.43
+},
+"540805": {
+"n": 1787,
+"r2": 0.22,
+"m2": 0.614,
+"k1": 1.371,
+"rng": 5.98,
+"tidal": false,
+"name": "Oxley Creek at Upstream Ipswich Motorway",
+"tab": "IDQ65389",
+"last": 0.24
+},
+"540806": {
+"n": 116,
+"r2": 0.25,
+"m2": 0.001,
+"k1": 0.004,
+"rng": 0.01,
+"tidal": false,
+"name": "Franklin Vale Creek at Meadow Flat Road Bridge",
+"tab": "IDQ65389",
+"last": 0.55
+},
+"540807": {
+"n": 110,
+"r2": 0.79,
+"m2": 0.0,
+"k1": 0.001,
+"rng": 0.0,
+"tidal": false,
+"name": "Six Mile Creek at Riverview (Conway St)",
+"tab": "IDQ65389",
+"last": 0.1
+},
+"540808": {
+"n": 111,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Deebing Creek at Flinders View (Ash St)",
+"tab": "IDQ65389",
+"last": -0.62
+},
+"540822": {
+"n": 44,
+"r2": 0.21,
+"m2": 0.002,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Norman Creek at Ekibin Park South (Arnwood Rd)",
+"tab": "IDQ65389",
+"last": 6.72
+},
+"540823": {
+"n": 0,
+"tidal": false
+},
+"540824": {
+"n": 103,
+"r2": 1.0,
+"m2": 0.0,
+"k1": 0.0,
+"rng": 0.0,
+"tidal": false,
+"name": "Springfield Lakes High Level Dam",
+"tab": "IDQ65389",
+"last": 0.4
+},
+"540825": {
+"n": 109,
+"r2": 0.05,
+"m2": 0.001,
+"k1": 0.002,
+"rng": 0.01,
+"tidal": false,
+"name": "Springfield Lakes Low Level Dam",
+"tab": "IDQ65389",
+"last": 0.1
+},
+"540826": {
+"n": 60,
+"r2": 0.14,
+"m2": 0.016,
+"k1": 0.01,
+"rng": 0.05,
+"tidal": false,
+"name": "North Pine River at Lees Crossing",
+"tab": "IDQ65389",
+"last": 0.62
+},
+"540827": {
+"n": 58,
+"r2": 0.72,
+"m2": 0.002,
+"k1": 0.004,
+"rng": 0.01,
+"tidal": false,
+"name": "Mary River at Coles Crossing",
+"tab": "IDQ65390",
+"last": 0.7
+},
+"540829": {
+"n": 117,
+"r2": 0.1,
+"m2": 0.001,
+"k1": 0.001,
+"rng": 0.01,
+"tidal": false,
+"name": "Sandy Creek at Fords Road",
+"tab": "IDQ65389",
+"last": 0.0
+}
+}

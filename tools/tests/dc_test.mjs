@@ -1,0 +1,15 @@
+import puppeteer from 'puppeteer-core';
+const BASE=process.env.BASE||'http://localhost:18080/test-apps/';
+const b=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox']});
+const p=await (await b.createBrowserContext()).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.setViewport({width:390,height:844,isMobile:true,hasTouch:true});
+const ok=(c,m)=>{console.log((c?'  ok  ':'  FAIL ')+m);if(!c)process.exitCode=1;};const sl=ms=>new Promise(r=>setTimeout(r,ms));
+await p.goto(BASE+'?sys=baffle#bite',{waitUntil:'networkidle0'});await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'networkidle0'});await p.waitForSelector('body[data-bite-ready="1"]');
+const n=await p.evaluate(()=>document.querySelectorAll('details.dc').length);ok(n>=15,'drop-downs created: '+n);
+await p.tap('details[data-k=bWhy]>summary');await sl(200);await p.reload({waitUntil:'networkidle0'});await p.waitForSelector('body[data-dc="1"]');
+ok(await p.$eval('details[data-k=bWhy]',e=>e.open)&&!(await p.$eval('details[data-k=tHow]',e=>e.open)),'open state remembered across reloads');
+const opts=await p.$$eval('#ftSpot option',os=>os.map(o=>o.value).filter(Boolean));await p.select('#ftSpot',opts[5]);await sl(3000);
+const loc=await p.evaluate(()=>({bite:FT.biteLoc().name,km:FT.biteLoc().km,tides:document.getElementById('bt-locInfo').innerText.slice(0,60)}));
+ok(loc.km!=null&&/km/.test(loc.tides),'shared spot picker drives Bite + Tides: '+JSON.stringify(loc));
+for(const id of ['mj-q','mj-geoBtn','mj-bafSel','mj-tideOff','bt-bAdd','cExport','cImport','mExport','mImport','cShareInfo'])ok(!!(await p.$('#'+id)),'still reachable: #'+id);
+ok(errs.length===0,'no JS errors '+errs.join('|'));await b.close();

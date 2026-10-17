@@ -1,0 +1,10 @@
+import puppeteer from 'puppeteer-core';import {execSync} from 'child_process';
+const b=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox']});
+const p=await b.newPage();
+await p.goto('http://localhost:18080/fishing-apps/#gauges',{waitUntil:'networkidle0'});await p.waitForSelector('body[data-gauges-ready="1"]');
+await p.evaluate(()=>navigator.serviceWorker.ready);await new Promise(r=>setTimeout(r,1000));
+console.log(await p.evaluate(async()=>JSON.stringify({ctrl:!!navigator.serviceWorker.controller,keys:(await (await caches.open((await caches.keys())[0])).keys()).map(r=>r.url).filter(u=>u.includes('data'))})));
+execSync('kill 503634');
+await p.reload({waitUntil:'domcontentloaded'});await new Promise(r=>setTimeout(r,2000));
+console.log(await p.evaluate(async()=>{const r=await fetch('data/gauges.json?t=1',{cache:'no-store'});return JSON.stringify({ctrl:!!navigator.serviceWorker.controller,st:r.status,h:[...r.headers].map(x=>x.join(':')),upd:document.querySelector('#gUpd').innerText});}));
+await b.close();

@@ -1,0 +1,1 @@
+[out:json][timeout:300];(way["natural"="wetland"](-24.62,151.65,-24.38,152.12);relation["natural"="wetland"](-24.62,151.65,-24.38,152.12);way["natural"="water"](-24.62,151.65,-24.38,152.12);relation["natural"="water"](-24.62,151.65,-24.38,152.12);way["waterway"="riverbank"](-24.62,151.65,-24.38,152.12););out geom tags;

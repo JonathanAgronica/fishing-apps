@@ -1,0 +1,29 @@
+<section class="card calcard">
+  <h2>📅 Bite calendar — <span id="calSys"></span></h2>
+  <div class="row calctl">
+    <label class="mut calscope">Scope <select id="calScope"></select></label>
+    <label class="mut"><input type="checkbox" id="calDD"> Dawn/dusk only</label>
+    <label class="mut">Min <select id="calMin"><option value="0">any</option><option value="50">50+</option><option value="60">60+</option><option value="70">70+</option><option value="80">80+</option><option value="90">90+</option></select></label>
+    <label class="mut"><input type="checkbox" id="calWk"> Weekends</label>
+  </div>
+  <div class="calnav">
+    <button id="calPrev" aria-label="Previous month">‹</button>
+    <b id="calMonth"></b>
+    <button id="calNext" aria-label="Next month">›</button>
+    <span style="flex:1"></span>
+    <div class="mseg" id="calViewSeg"><button data-v="grid">📅 Month</button><button data-v="list">🏆 Best days</button></div>
+  </div>
+  <div id="calProg" class="calprog" hidden><div class="calbar"><i></i></div><span></span></div>
+  <div id="calGridWrap">
+    <div class="calhead"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+    <div id="calGrid" class="calgrid"></div>
+  </div>
+  <div id="calList" hidden></div>
+  <div id="calLegend" class="calleg mut"></div>
+  <div class="row" style="margin-top:8px"><button class="sm" id="calIcsMonth">📆 Add this month’s 90+ days to my calendar (.ics)</button></div>
+  <div id="calNote" class="mut calnote"></div>
+</section>
+<div id="calSheet" class="calsheet" hidden><div class="calsheet-bg" data-close="1"></div><div class="calsheet-in" role="dialog" aria-modal="true" aria-labelledby="calSheetT">
+  <div class="calsheet-h"><b id="calSheetT"></b><button class="sm" id="calSheetX" aria-label="Close">✕</button></div>
+  <div id="calSheetB"></div>
+</div></div>

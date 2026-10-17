@@ -1,0 +1,35 @@
+nav.tabs a[data-tab=log].on{box-shadow:inset 0 3px 0 #b48cff}
+.ch3{font-size:.95rem;margin:12px 0 6px}
+.cadd{background:var(--panel2);border-radius:10px;padding:8px}
+#tab-log input[type=datetime-local],#tab-log input[type=number]{padding:7px 8px}
+#tab-log input[type=text]{flex:1 1 180px;min-width:0}
+.cact{background:#1d2f45;border:1px solid #3a5a86;border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.cact .big{font-size:1.15rem;font-weight:700}
+.citem{background:var(--panel2);border-radius:10px;padding:8px 10px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.citem .ci{flex:1;min-width:0}
+.citem .sc{font-weight:700;min-width:40px;text-align:center;border-radius:8px;padding:2px 4px;color:#071012}
+.ctag{display:inline-block;font-size:.72rem;border-radius:6px;padding:1px 6px;margin-left:4px;background:#2b4b52;color:#cfe}
+.ctag.sh{background:#2d3f6b}.ctag.ok{background:#1f5a3a}.ctag.q{background:#5a4a1f}
+.cseg{gap:4px;margin-bottom:6px}
+.cseg button{padding:5px 9px;font-size:.82rem;border-radius:8px}
+.cseg button.on{background:#b48cff;color:#140b24;border-color:#b48cff;font-weight:600}
+.cchart{width:100%;height:auto;display:block}
+.cnums{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px}
+.cnums div{background:var(--panel2);border-radius:10px;padding:5px 3px;text-align:center}
+.cnums b{display:block;font-size:1.02rem}
+.cnums small{color:var(--mut);font-size:.68rem;line-height:1.1;display:block}
+.cshare{display:flex;gap:8px;align-items:flex-start}
+.cshare input{width:22px;height:22px;margin-top:1px}
+label.cfile{display:inline-block;cursor:pointer;background:#20454a;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:.86rem}
+.cempty{color:var(--mut);font-size:.9rem;padding:10px;text-align:center;background:var(--panel2);border-radius:10px}
+.sttab{overflow-x:auto;margin:4px 0}
+.sttab table{border-collapse:collapse;width:100%;font-size:.78rem}
+.sttab th,.sttab td{border:1px solid #25464b;padding:4px 3px;text-align:center}
+.sttab thead th{color:var(--mut);font-weight:600;font-size:.7rem}
+.sttab tbody th{text-align:left;white-space:nowrap}
+.sttab td b{display:block}.sttab td small{color:var(--mut);font-size:.66rem}
+
+.cyn{display:inline-flex;align-items:center;gap:4px;padding:6px 10px;border:1px solid #2c5a5f;border-radius:16px;margin-left:6px}
+.cyn:has(input:checked){background:#1f4b50;border-color:#5fd1c1}
+#cFormCard.co .cadd{background:none;padding:0}
+#cFormCard [hidden]{display:none!important}

@@ -1,0 +1,375 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-09T03:45:21Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 3100212384,
+  "lat": -24.4939654,
+  "lon": 152.0370016,
+  "tags": {
+    "name": "Rules Beach",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3100212385,
+  "lat": -24.5020474,
+  "lon": 151.9300868,
+  "tags": {
+    "name": "Wartburg",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3660164315,
+  "lat": -24.5344662,
+  "lon": 152.0200801,
+  "tags": {
+    "name": "Winfield",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 6036335722,
+  "lat": -24.4888900,
+  "lon": 151.9250030,
+  "tags": {
+    "gaz2012:ref": "QLD46587",
+    "name": "Baffle Creek",
+    "place": "locality",
+    "source": "Gazetteer of Australia 2012"
+  }
+},
+{
+  "type": "node",
+  "id": 6036337019,
+  "lat": -24.5416660,
+  "lon": 151.8249970,
+  "tags": {
+    "gaz2012:ref": "QLD46615",
+    "name": "Mount Maria",
+    "place": "locality",
+    "source": "Gazetteer of Australia 2012"
+  }
+},
+{
+  "type": "way",
+  "id": 246087072,
+  "center": {
+    "lat": -24.6010511,
+    "lon": 151.8448889
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "100",
+    "name": "Tableland Road",
+    "oneway": "no",
+    "source": "survey",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 305847844,
+  "center": {
+    "lat": -24.5452297,
+    "lon": 151.9833786
+  },
+  "tags": {
+    "name": "Bottle Creek",
+    "waterway": "river"
+  }
+},
+{
+  "type": "way",
+  "id": 634013171,
+  "center": {
+    "lat": -24.5781593,
+    "lon": 151.7435930
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Scrubby Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 634013173,
+  "center": {
+    "lat": -24.5561467,
+    "lon": 151.7172539
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Harpur Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 649401588,
+  "center": {
+    "lat": -24.4762077,
+    "lon": 151.8885131
+  },
+  "tags": {
+    "name": "Euleilah Creek",
+    "source": "Bing",
+    "waterway": "river"
+  }
+},
+{
+  "type": "way",
+  "id": 837497710,
+  "center": {
+    "lat": -24.5182398,
+    "lon": 151.8764544
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "river"
+  }
+},
+{
+  "type": "way",
+  "id": 949235913,
+  "center": {
+    "lat": -24.5204371,
+    "lon": 151.7454192
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "maxspeed": "80",
+    "name": "Gorge Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1208189512,
+  "center": {
+    "lat": -24.5336195,
+    "lon": 152.0422612
+  },
+  "tags": {
+    "name": "Duck Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208229657,
+  "center": {
+    "lat": -24.5247829,
+    "lon": 151.9018544
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "river"
+  }
+},
+{
+  "type": "way",
+  "id": 1208229658,
+  "center": {
+    "lat": -24.5141289,
+    "lon": 151.9010618
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208230780,
+  "center": {
+    "lat": -24.6014843,
+    "lon": 151.8937262
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Sleepy Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208230781,
+  "center": {
+    "lat": -24.5782513,
+    "lon": 151.8541043
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Manning Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208231403,
+  "center": {
+    "lat": -24.5683295,
+    "lon": 151.8405562
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Sandy Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208233122,
+  "center": {
+    "lat": -24.6292987,
+    "lon": 151.7999979
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Grevillea Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208233888,
+  "center": {
+    "lat": -24.6078429,
+    "lon": 151.8185251
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Spring Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208233890,
+  "center": {
+    "lat": -24.6054218,
+    "lon": 151.8284876
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208234897,
+  "center": {
+    "lat": -24.5243398,
+    "lon": 151.8044268
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Island Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208234898,
+  "center": {
+    "lat": -24.5864018,
+    "lon": 151.7816363
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Reedy Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208234901,
+  "center": {
+    "lat": -24.5095138,
+    "lon": 151.7813663
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Emu Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208237320,
+  "center": {
+    "lat": -24.4298088,
+    "lon": 151.6864465
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208237322,
+  "center": {
+    "lat": -24.4285960,
+    "lon": 151.6876210
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208237323,
+  "center": {
+    "lat": -24.4437945,
+    "lon": 151.7103281
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208237324,
+  "center": {
+    "lat": -24.4539421,
+    "lon": 151.7217615
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "way",
+  "id": 1208237325,
+  "center": {
+    "lat": -24.4920396,
+    "lon": 151.7427622
+  },
+  "tags": {
+    "name": "Baffle Creek",
+    "waterway": "stream"
+  }
+}
+
+  ]
+}

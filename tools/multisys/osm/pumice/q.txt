@@ -1,0 +1,7 @@
+[out:json][timeout:120];
+(way["waterway"~"river|stream|tidal_channel|canal|drain"]["name"](-27.13,152.93,-26.77,153.20);
+ node["leisure"="slipway"](-27.13,152.98,-26.77,153.20);
+ way["leisure"="slipway"](-27.13,152.98,-26.77,153.20);
+ node["amenity"="boat_ramp"](-27.13,152.98,-26.77,153.20);
+ way["bridge"="yes"]["highway"](-27.13,152.98,-26.77,153.20););
+out geom;

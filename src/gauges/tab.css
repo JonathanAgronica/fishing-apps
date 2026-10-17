@@ -1,0 +1,17 @@
+.gbar button.on{background:var(--acc);color:#1b1205;border-color:var(--acc)}
+.gleg{margin-top:8px;gap:6px}
+.gleg button{font-size:.74rem;padding:3px 8px;border-radius:14px;display:inline-flex;align-items:center;gap:5px}
+.gleg button i{display:inline-block;width:14px;height:4px;border-radius:2px}
+.gleg button.off{opacity:.38;text-decoration:line-through}
+#gWrap{position:relative;margin-top:6px}
+#gChart{width:100%;display:block;touch-action:pan-y;user-select:none;-webkit-user-select:none;background:#0f2427;border-radius:10px}
+#gTip{position:absolute;pointer-events:none;background:#081416ee;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:.76rem;display:none;white-space:nowrap;z-index:2}
+.gst{background:var(--panel2);border-radius:10px;padding:8px 10px}
+.gst b{display:block;font-size:1.05rem}.gst small{color:var(--mut)}
+.drift-ok{color:var(--good)}.drift-warn{color:#ffd38a}.drift-bad{color:var(--bad)}
+.gsp{margin-top:8px;background:var(--panel2);border-radius:10px;padding:6px 10px}.gsp summary{cursor:pointer;font-size:.85rem}
+.gsp .gleg{margin-top:4px}.gsp input[type=number]{padding:3px 6px}
+.gsp-card small i{font-style:italic;color:#cfe}
+.gsp-card .gsp-bite{margin-top:4px;display:block}
+.gsp-ty{display:inline-block;padding:0 4px;border-radius:5px;color:#111;font-weight:800;font-size:.64rem;line-height:1.35}
+.gflood .notice.ok,.notice.ok{background:#12351f;border:1px solid #2f7a45;color:#c9f7d6}

@@ -1,0 +1,965 @@
+{
+"039267": {
+"name": "Baffle Creek at Essendean Bridge",
+"tab": "IDQ65392",
+"river": "Baffle Creek",
+"geo": null,
+"m2": 0.064,
+"r2": 0.94,
+"n": 148
+},
+"039352": {
+"name": "Burnett River at Bundaberg",
+"tab": "IDQ65391",
+"river": "Burnett River",
+"geo": [
+"Bundaberg, Queensland",
+[
+-24.8653253,
+152.3516785,
+"Bundaberg, Queensland, 4670, Australia",
+"city"
+]
+],
+"m2": 0.834,
+"r2": 0.97,
+"n": 893
+},
+"040443": {
+"name": "Mary River at Maryborough (Portside)",
+"tab": "IDQ65390",
+"river": "Mary River",
+"geo": [
+"Portside, Maryborough, Queensland",
+[
+-25.5384169,
+152.7055591,
+"Portside Cafe & Restaurant, 103, Wharf Street, Maryborough, Queensland, 4650, Au",
+"restaurant"
+]
+],
+"m2": 0.422,
+"r2": 0.84,
+"n": 430
+},
+"040812": {
+"name": "Brisbane River at Moggill",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"Moggill, Queensland",
+[
+-27.583271,
+152.8879225,
+"Moggill, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.863,
+"r2": 0.95,
+"n": 2457
+},
+"040831": {
+"name": "Bremer River at Ipswich",
+"tab": "IDQ65389",
+"river": "Bremer River",
+"geo": [
+"Ipswich, Queensland",
+[
+-27.6160323,
+152.7608348,
+"Ipswich, Queensland, 4305, Australia",
+"city"
+]
+],
+"m2": 0.834,
+"r2": 0.94,
+"n": 2036
+},
+"040874": {
+"name": "Woogaroo Creek at Brisbane Road",
+"tab": "IDQ65389",
+"river": "Woogaroo Creek",
+"geo": [
+"Brisbane Road, Queensland",
+[
+-27.6056695,
+152.9181434,
+"Brisbane Road, Gailes, Wacol, Brisbane, Queensland, 4300, Australia",
+"secondary"
+]
+],
+"m2": 0.589,
+"r2": 0.92,
+"n": 1430
+},
+"040903": {
+"name": "Cherwell River at Pacific Haven",
+"tab": "IDQ65391",
+"river": "Cherwell River",
+"geo": [
+"Pacific Haven, Queensland",
+[
+-25.262254,
+152.546954,
+"Pacific Haven, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.592,
+"r2": 0.9,
+"n": 693
+},
+"539032": {
+"name": "Gladstone Tide",
+"tab": "IDQ65392",
+"river": null,
+"geo": [
+"Gladstone, Queensland",
+[
+-27.5564802,
+152.9780095,
+"Gladstone Street Park, Oxley, Logan City, Brisbane, Queensland, Australia",
+"park"
+]
+],
+"m2": 1.343,
+"r2": 0.99,
+"n": 10072
+},
+"539076": {
+"name": "Burnett Heads Tide",
+"tab": "IDQ65391",
+"river": null,
+"geo": [
+"Burnett Heads, Queensland",
+[
+-24.7656579,
+152.4096358,
+"Burnett Heads, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.981,
+"r2": 1.0,
+"n": 10077
+},
+"539093": {
+"name": "Bundaberg Port Tide",
+"tab": "IDQ65391",
+"river": null,
+"geo": [
+"Bundaberg Port, Queensland",
+[
+-24.7711044,
+152.3850191,
+"Bundaberg Port, Burnett Heads, Queensland, 4670, Australia",
+"hamlet"
+]
+],
+"m2": 1.0,
+"r2": 0.99,
+"n": 10070
+},
+"539135": {
+"name": "Euleilah Creek at Hills Road",
+"tab": "IDQ65392",
+"river": "Euleilah Creek",
+"geo": [
+"Hills Road, Queensland",
+[
+-24.7669353,
+152.3047671,
+"Hills Road, Fairymead, Bundaberg, Queensland, 4670, Australia",
+"unclassified"
+]
+],
+"m2": 0.281,
+"r2": 0.98,
+"n": 374
+},
+"540036": {
+"name": "Urangan Tide",
+"tab": "IDQ65391",
+"river": null,
+"geo": [
+"Urangan, Queensland",
+[
+-25.287209,
+152.8981059,
+"Urangan, Hervey Bay, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 1.229,
+"r2": 0.99,
+"n": 10067
+},
+"540063": {
+"name": "Brisbane River at Colleges Crossing",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"Colleges Crossing, Queensland",
+[
+-27.556787,
+152.8028479,
+"Colleges Crossing, Chuwar, Brisbane, Queensland, 4306, Australia",
+"neighbourhood"
+]
+],
+"m2": 0.236,
+"r2": 0.77,
+"n": 609
+},
+"540071": {
+"name": "Oxley Creek at Corinda (Corinda High School)",
+"tab": "IDQ65389",
+"river": "Oxley Creek",
+"geo": [
+"Corinda High School, Corinda, Queensland",
+[
+-27.5459026,
+152.9875492,
+"Corinda State High School, 46, Pratten Street, Corinda, Logan City, Brisbane, Qu",
+"school"
+]
+],
+"m2": 0.715,
+"r2": 0.96,
+"n": 1756
+},
+"540087": {
+"name": "Eudlo Creek at Kiels Mountain",
+"tab": "IDQ65390",
+"river": "Eudlo Creek",
+"geo": [
+"Kiels Mountain, Queensland",
+[
+-26.6579915,
+153.0073921,
+"Kiels Mountain, Sunshine Coast, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.116,
+"r2": 0.82,
+"n": 200
+},
+"540094": {
+"name": "Maroochy River at Picnic Point",
+"tab": "IDQ65390",
+"river": "Maroochy River",
+"geo": [
+"Picnic Point, Queensland",
+[
+-27.5790131,
+151.9866561,
+"Picnic Point, Rangeville, Toowoomba, Queensland, 4350, Australia",
+"locality"
+]
+],
+"m2": 0.39,
+"r2": 0.98,
+"n": 490
+},
+"540095": {
+"name": "Maroochy River at Dunethin Rock",
+"tab": "IDQ65390",
+"river": "Maroochy River",
+"geo": [
+"Dunethin Rock, Queensland",
+[
+-26.5775,
+153.0130556,
+"Dunethin Rock, Sunshine Coast, Queensland, 4561, Australia",
+"peak"
+]
+],
+"m2": 0.403,
+"r2": 0.97,
+"n": 467
+},
+"540124": {
+"name": "Cabbage Tree Creek at Deagon (Burralong St)",
+"tab": "IDQ65389",
+"river": "Cabbage Tree Creek",
+"geo": [
+"Burralong St, Deagon, Queensland",
+[
+-27.3337281,
+153.0565862,
+"Burralong Street, Deagon, Brisbane, Queensland, 4017, Australia",
+"residential"
+]
+],
+"m2": 0.845,
+"r2": 0.99,
+"n": 895
+},
+"540129": {
+"name": "Bulimba Creek at Hemmant (Doughboy Pde)",
+"tab": "IDQ65389",
+"river": "Bulimba Creek",
+"geo": [
+"Doughboy Pde, Hemmant, Queensland",
+[
+-27.4490098,
+153.1255364,
+"Doughboy Parade, Hemmant, Brisbane, Queensland, 4174, Australia",
+"residential"
+]
+],
+"m2": 0.775,
+"r2": 0.97,
+"n": 1813
+},
+"540130": {
+"name": "Breakfast Creek at Bowen Hills (Mayne Railway Yards)",
+"tab": "IDQ65389",
+"river": "Breakfast Creek",
+"geo": [
+"Bowen Hills, Queensland",
+[
+-27.4434045,
+153.0373122,
+"Bowen Hills, Brisbane, Queensland, 4006, Australia",
+"administrative"
+]
+],
+"m2": 0.764,
+"r2": 0.97,
+"n": 1783
+},
+"540132": {
+"name": "Norman Creek at East Brisbane (Caswell St)",
+"tab": "IDQ65389",
+"river": "Norman Creek",
+"geo": [
+"Caswell St, East Brisbane, Queensland",
+[
+-27.4877198,
+153.0502292,
+"Caswell Street, East Brisbane, Brisbane, Queensland, 4169, Australia",
+"primary"
+]
+],
+"m2": 0.771,
+"r2": 0.97,
+"n": 1821
+},
+"540192": {
+"name": "Brisbane River at Jindalee Alert",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": null,
+"m2": 0.774,
+"r2": 0.96,
+"n": 3274
+},
+"540198": {
+"name": "Brisbane River at Brisbane City",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"Brisbane City, Queensland",
+[
+-27.470301,
+153.0258187,
+"Brisbane City, Brisbane, Queensland, 4000, Australia",
+"administrative"
+]
+],
+"m2": 0.803,
+"r2": 0.97,
+"n": 7740
+},
+"540201": {
+"name": "Brisbane River at Moggill (Aitcheson St East)",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"Moggill, Queensland",
+[
+-27.583271,
+152.8879225,
+"Moggill, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.544,
+"r2": 0.9,
+"n": 1242
+},
+"540249": {
+"name": "Bundamba Creek at Bundamba (Hanlon St)",
+"tab": "IDQ65389",
+"river": "Bundamba Creek",
+"geo": [
+"Hanlon St, Bundamba, Queensland",
+[
+-27.5916314,
+152.7994724,
+"Hanlon Street, Bundamba, Ipswich, Brisbane, Queensland, 4304, Australia",
+"residential"
+]
+],
+"m2": 0.507,
+"r2": 0.87,
+"n": 1197
+},
+"540250": {
+"name": "Bremer River at Brassall (Hancocks Bridge)",
+"tab": "IDQ65389",
+"river": "Bremer River",
+"geo": [
+"Brassall, Queensland",
+[
+-27.5899637,
+152.7370408,
+"Brassall, Ipswich, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.513,
+"r2": 0.72,
+"n": 1363
+},
+"540274": {
+"name": "Oxley Creek Mouth at Graceville",
+"tab": "IDQ65389",
+"river": "Oxley Creek Mouth",
+"geo": [
+"Graceville, Queensland",
+[
+-27.5214645,
+152.9814787,
+"Graceville, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.781,
+"r2": 0.97,
+"n": 1879
+},
+"540286": {
+"name": "Breakfast Creek Mouth at Newstead",
+"tab": "IDQ65389",
+"river": "Breakfast Creek Mouth",
+"geo": [
+"Newstead, Queensland",
+[
+-27.4483345,
+153.0461534,
+"Newstead, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.773,
+"r2": 0.96,
+"n": 1959
+},
+"540296": {
+"name": "Pullen Pullen Creek at Pinjarra Hills",
+"tab": "IDQ65389",
+"river": "Pullen Pullen Creek",
+"geo": [
+"Pinjarra Hills, Queensland",
+[
+-27.538146,
+152.9114761,
+"Pinjarra Hills, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.049,
+"r2": 0.52,
+"n": 508
+},
+"540309": {
+"name": "Noosa River at Lake Cooroibah",
+"tab": "IDQ65390",
+"river": "Noosa River",
+"geo": [
+"Lake Cooroibah, Queensland",
+[
+-26.3557445,
+153.0256849,
+"Lake Cooroibah, Cooroibah, Tewantin, Queensland, 4565, Australia",
+"lake"
+]
+],
+"m2": 0.105,
+"r2": 0.66,
+"n": 1600
+},
+"540311": {
+"name": "Noosa Bar",
+"tab": "IDQ65390",
+"river": null,
+"geo": [
+"Noosa Bar, Queensland",
+[
+-26.401031,
+153.0637944,
+"Villa Noosa Hotel, Gibson Road, Noosaville, Noosa Heads, Queensland, 4566, Austr",
+"pub"
+]
+],
+"m2": 0.4,
+"r2": 0.98,
+"n": 826
+},
+"540347": {
+"name": "Mooloolaba Tide",
+"tab": "IDQ65390",
+"river": null,
+"geo": [
+"Mooloolaba, Queensland",
+[
+-26.6852565,
+153.1131849,
+"Mooloolaba, Sunshine Coast, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.624,
+"r2": 1.0,
+"n": 10075
+},
+"540348": {
+"name": "Mooloolah River at Parrearra Weir US",
+"tab": "IDQ65390",
+"river": "Mooloolah River",
+"geo": null,
+"m2": 0.57,
+"r2": 0.98,
+"n": 531
+},
+"540350": {
+"name": "Mooloolah River at Palmview",
+"tab": "IDQ65390",
+"river": "Mooloolah River",
+"geo": [
+"Palmview, Queensland",
+[
+-26.7484795,
+153.0537793,
+"Palmview, Sunshine Coast, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.382,
+"r2": 0.96,
+"n": 401
+},
+"540417": {
+"name": "North Pine River at Murrumba Downs",
+"tab": "IDQ65389",
+"river": "North Pine River",
+"geo": [
+"Murrumba Downs, Queensland",
+[
+-27.2645498,
+153.0065013,
+"Murrumba Downs, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.866,
+"r2": 0.98,
+"n": 974
+},
+"540424": {
+"name": "Maroochy River at Stoney Wharf Road",
+"tab": "IDQ65390",
+"river": "Maroochy River",
+"geo": [
+"Stoney Wharf Road, Queensland",
+[
+-26.5970878,
+153.0538032,
+"Stoney Wharf Road, Bli Bli, Queensland, 4560, Australia",
+"unclassified"
+]
+],
+"m2": 0.331,
+"r2": 0.98,
+"n": 408
+},
+"540439": {
+"name": "North Pine River at Lawnton",
+"tab": "IDQ65389",
+"river": "North Pine River",
+"geo": [
+"Lawnton, Queensland",
+[
+-27.2826166,
+152.9808511,
+"Lawnton, Brisbane, Queensland, 4501, Australia",
+"administrative"
+]
+],
+"m2": 0.877,
+"r2": 0.98,
+"n": 984
+},
+"540448": {
+"name": "Golden Beach",
+"tab": "IDQ65390",
+"river": null,
+"geo": [
+"Golden Beach, Queensland",
+[
+-26.8156844,
+153.1197588,
+"Golden Beach, Caloundra, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.452,
+"r2": 0.98,
+"n": 10070
+},
+"540468": {
+"name": "Cannery Creek at Northgate (Crockford Street)",
+"tab": "IDQ65389",
+"river": "Cannery Creek",
+"geo": [
+"Crockford Street, Northgate, Queensland",
+[
+-27.3883342,
+153.0791319,
+"Crockford Street, Northgate, Brisbane, Queensland, 4013, Australia",
+"unclassified"
+]
+],
+"m2": 0.284,
+"r2": 0.79,
+"n": 346
+},
+"540469": {
+"name": "Pound Creek at Hendra",
+"tab": "IDQ65389",
+"river": "Pound Creek",
+"geo": [
+"Hendra, Queensland",
+[
+-27.4175215,
+153.0705448,
+"Hendra, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.333,
+"r2": 0.95,
+"n": 859
+},
+"540495": {
+"name": "Moreton Bay at Whyte Island",
+"tab": "IDQ65389",
+"river": "Moreton Bay",
+"geo": [
+"Whyte Island, Queensland",
+[
+-27.4008233,
+153.1663851,
+"Whyte Island boat ramp, Port Drive, Port of Brisbane, Brisbane, Queensland, 4178",
+"slipway"
+]
+],
+"m2": 0.305,
+"r2": 0.78,
+"n": 1727
+},
+"540506": {
+"name": "Petrie Creek and Bli Bli",
+"tab": "IDQ65390",
+"river": null,
+"geo": null,
+"m2": 0.37,
+"r2": 0.98,
+"n": 466
+},
+"540548": {
+"name": "Kedron Brook at Toombul (Nudgee Rd)",
+"tab": "IDQ65389",
+"river": "Kedron Brook",
+"geo": [
+"Toombul, Queensland",
+[
+-27.4079227,
+153.0586704,
+"Toombul, Bradbury Street, Toombul, Nundah, Brisbane, Queensland, 4012, Australia",
+"station"
+]
+],
+"m2": 0.852,
+"r2": 0.98,
+"n": 904
+},
+"540558": {
+"name": "Caboolture River at Beachmere (Riversleigh Rd)",
+"tab": "IDQ65389",
+"river": "Caboolture River",
+"geo": [
+"Riversleigh Rd, Beachmere, Queensland",
+[
+-27.1028496,
+153.0085958,
+"Riversleigh Road, Beachmere, Brisbane, Queensland, 4510, Australia",
+"residential"
+]
+],
+"m2": 0.814,
+"r2": 0.98,
+"n": 779
+},
+"540625": {
+"name": "South Pine River at Strathpine (Gympie Rd)",
+"tab": "IDQ65389",
+"river": "South Pine River",
+"geo": [
+"Gympie Rd, Strathpine, Queensland",
+[
+-27.3160303,
+152.9996686,
+"Gympie Road, Brisbane, Queensland, 4500, Australia",
+"trunk"
+]
+],
+"m2": 0.633,
+"r2": 0.95,
+"n": 901
+},
+"540635": {
+"name": "Elimbah Creek at Toorbul (Donnybrook Rd)",
+"tab": "IDQ65389",
+"river": "Elimbah Creek",
+"geo": [
+"Donnybrook Rd, Toorbul, Queensland",
+[
+-27.0273858,
+153.0406206,
+"Donnybrook Road, Brisbane, Queensland, 4510, Australia",
+"secondary"
+]
+],
+"m2": 0.525,
+"r2": 0.97,
+"n": 586
+},
+"540637": {
+"name": "Mary River at Maryborough (Churchill Street)",
+"tab": "IDQ65390",
+"river": "Mary River",
+"geo": [
+"Churchill Street, Maryborough, Queensland",
+[
+-25.5290054,
+152.7045507,
+"Churchill Street, Maryborough, Queensland, 4650, Australia",
+"residential"
+]
+],
+"m2": 1.287,
+"r2": 0.91,
+"n": 825
+},
+"540659": {
+"name": "Saltwater Creek at Rothwell",
+"tab": "IDQ65389",
+"river": "Saltwater Creek",
+"geo": [
+"Rothwell, Queensland",
+[
+-27.2153199,
+153.0478394,
+"Rothwell, Brisbane, Queensland, 4022, Australia",
+"administrative"
+]
+],
+"m2": 0.772,
+"r2": 0.97,
+"n": 758
+},
+"540660": {
+"name": "Caboolture River at Caboolture (Short St)",
+"tab": "IDQ65389",
+"river": "Caboolture River",
+"geo": [
+"Short St, Caboolture, Queensland",
+[
+-27.0866624,
+152.9600563,
+"Short Street, Brisbane, Queensland, 4510, Australia",
+"residential"
+]
+],
+"m2": 0.83,
+"r2": 0.96,
+"n": 2806
+},
+"540661": {
+"name": "Bremer River at Karalee",
+"tab": "IDQ65389",
+"river": "Bremer River",
+"geo": [
+"Karalee, Queensland",
+[
+-27.5598123,
+152.8235219,
+"Karalee, Ipswich, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.888,
+"r2": 0.95,
+"n": 1886
+},
+"540670": {
+"name": "Brisbane River at Goodna",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"Goodna, Queensland",
+[
+-27.608852,
+152.8927727,
+"Goodna, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.822,
+"r2": 0.95,
+"n": 1262
+},
+"540682": {
+"name": "Brisbane River at Jindalee (Boat Ramp Park)",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"Jindalee, Queensland",
+[
+-27.5353665,
+152.9378593,
+"Jindalee, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.383,
+"r2": 0.87,
+"n": 2273
+},
+"540683": {
+"name": "Brisbane River at St Lucia",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"St Lucia, Queensland",
+[
+-27.4989435,
+153.0064984,
+"St Lucia, Brisbane, Queensland, 4067, Australia",
+"administrative"
+]
+],
+"m2": 0.776,
+"r2": 0.96,
+"n": 1926
+},
+"540684": {
+"name": "Brisbane River at Brisbane Port Office",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": null,
+"m2": 0.801,
+"r2": 0.97,
+"n": 4757
+},
+"540685": {
+"name": "Brisbane River at Hawthorne",
+"tab": "IDQ65389",
+"river": "Brisbane River",
+"geo": [
+"Hawthorne, Queensland",
+[
+-27.4623063,
+153.0598051,
+"Hawthorne, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.788,
+"r2": 0.97,
+"n": 2042
+},
+"540730": {
+"name": "Scarborough Tide",
+"tab": "IDQ65389",
+"river": null,
+"geo": [
+"Scarborough, Queensland",
+[
+-27.2062945,
+153.1139465,
+"Scarborough, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.791,
+"r2": 0.99,
+"n": 10059
+},
+"540740": {
+"name": "Caboolture River at Beachmere (St Smith Rd)",
+"tab": "IDQ65389",
+"river": "Caboolture River",
+"geo": [
+"St Smith Rd, Beachmere, Queensland",
+[
+-27.1454883,
+153.0372786,
+"Saint Smith Road, Beachmere, Brisbane, Queensland, 4510, Australia",
+"tertiary"
+]
+],
+"m2": 0.8,
+"r2": 0.98,
+"n": 868
+},
+"540762": {
+"name": "Shorncliffe Tide",
+"tab": "IDQ65389",
+"river": null,
+"geo": [
+"Shorncliffe, Queensland",
+[
+-27.3269485,
+153.0827762,
+"Shorncliffe, Brisbane, Queensland, Australia",
+"administrative"
+]
+],
+"m2": 0.817,
+"r2": 0.99,
+"n": 10057
+},
+"540792": {
+"name": "Burrum River at Walls Camp (Pacific Haven)",
+"tab": "IDQ65391",
+"river": "Burrum River",
+"geo": [
+"Walls Camp, Queensland",
+[
+-25.2396866,
+152.5602709,
+"Walls Camp Road, Pacific Haven, Queensland, 4659, Australia",
+"residential"
+]
+],
+"m2": 0.706,
+"r2": 0.95,
+"n": 827
+}
+}

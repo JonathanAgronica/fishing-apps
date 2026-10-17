@@ -1,0 +1,13 @@
+import puppeteer from 'puppeteer-core';
+const b=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox']});
+const p=await (await b.createBrowserContext()).newPage();await p.setBypassServiceWorker(true);
+await p.goto('http://localhost:18080/test-apps/?sys='+(process.env.SYS||'baffle')+'#bite',{waitUntil:'networkidle0'});await p.waitForSelector('body[data-bite-ready="1"]',{timeout:90000});
+const r=await p.evaluate(()=>{const B=BT,E0=Date.UTC(2025,11,31,14),o=FT.baffleOpts();const out={};
+ let t=performance.now();const h0=B.dateToH(2026,10,11,0,0);const P=B.predictAt(12,h0-24,h0+24*45,o);out.pred45=performance.now()-t;
+ t=performance.now();const RI=B.runInStarts(12,h0-24,h0+24*45,o);out.ri45=performance.now()-t;
+ const fn=x=>P.curve((x-E0)/3.6e6),ext=P.ext.filter(e=>!e.weak).map(e=>({t:E0+e.t*3.6e6,h:e.h,high:!!e.hi,u:e.u})),runIn=RI.map(r=>({t:E0+r.t*3.6e6,u:r.u,kind:r.kind}));
+ const pt=B.pointAtKm(12);t=performance.now();for(let i=0;i<30;i++)MJ.computeDay({dateStr:MJ.addDays('2026-10-12',i),tz:'Australia/Brisbane',lat:pt[0],lng:pt[1],tideFn:fn,ext,runIn,stepMin:30,weekRange:{max:2}});out.day30=(performance.now()-t)/30;
+ t=performance.now();for(let i=0;i<30;i++)MJ.sunMoonEvents(Date.now()+i*864e5-4*3600e3,Date.now()+i*864e5+28*3600e3,pt[0],pt[1]);out.ev=(performance.now()-t)/30;
+ t=performance.now();for(let i=0;i<30;i++)MJ.computeDay({dateStr:MJ.addDays('2026-10-12',i),tz:'Australia/Brisbane',lat:pt[0],lng:pt[1],tideFn:fn,ext,runIn,stepMin:15,weekRange:{max:2}});out.day15=(performance.now()-t)/30;
+ out.nlm=B.LANDMARKS.length;out.lines=B.LINES?B.LINES.map(l=>l.id):null;out.max=B.MAXKM;return out;});
+console.log(JSON.stringify(r));await b.close();

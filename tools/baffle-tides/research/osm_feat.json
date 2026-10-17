@@ -1,0 +1,287 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-09T03:44:19Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 2828694347,
+  "lat": -24.5293055,
+  "lon": 151.7529324,
+  "tags": {
+    "name": "Lowmead",
+    "place": "town"
+  }
+},
+{
+  "type": "node",
+  "id": 3100212385,
+  "lat": -24.5020474,
+  "lon": 151.9300868,
+  "tags": {
+    "name": "Wartburg",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3100213199,
+  "lat": -24.5114109,
+  "lon": 152.0215264,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3100213207,
+  "lat": -24.5118723,
+  "lon": 152.0020832,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3106934192,
+  "lat": -24.5168824,
+  "lon": 152.0137943,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 3106935244,
+  "lat": -24.5319806,
+  "lon": 152.0270216,
+  "tags": {
+    "leisure": "slipway"
+  }
+},
+{
+  "type": "node",
+  "id": 5641731022,
+  "lat": -24.5171018,
+  "lon": 152.0135917,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 5641731322,
+  "lat": -24.5049591,
+  "lon": 152.0016400,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 5641751521,
+  "lat": -24.5173141,
+  "lon": 151.9731502,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "way",
+  "id": 246087072,
+  "center": {
+    "lat": -24.6010511,
+    "lon": 151.8448889
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "100",
+    "name": "Tableland Road",
+    "oneway": "no",
+    "source": "survey",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 305398846,
+  "center": {
+    "lat": -24.5082923,
+    "lon": 152.0021327
+  },
+  "tags": {
+    "addr:housenumber": "1384",
+    "addr:street": "Coast Road",
+    "addr:suburb": "Baffle Creek",
+    "fee": "yes",
+    "name": "Baffle Creek Caravan and Camping Park",
+    "phone": "+61 7 4156 6421",
+    "power_supply": "yes",
+    "tents": "yes",
+    "tourism": "caravan_site"
+  }
+},
+{
+  "type": "way",
+  "id": 305398847,
+  "center": {
+    "lat": -24.5091414,
+    "lon": 152.0197607
+  },
+  "tags": {
+    "highway": "unclassified",
+    "name": "Flat Rock Road"
+  }
+},
+{
+  "type": "way",
+  "id": 305398855,
+  "center": {
+    "lat": -24.5061176,
+    "lon": 151.9294857
+  },
+  "tags": {
+    "highway": "unclassified",
+    "name": "Boat Ramp Road",
+    "surface": "unpaved"
+  }
+},
+{
+  "type": "way",
+  "id": 305969176,
+  "center": {
+    "lat": -24.5176766,
+    "lon": 152.0135488
+  },
+  "tags": {
+    "highway": "unclassified",
+    "name": "Rocky Point Road",
+    "source": "Bing",
+    "source:name": "State of Queensland (Department of Natural Resources, Mines and Energy) 2019"
+  }
+},
+{
+  "type": "way",
+  "id": 305969180,
+  "center": {
+    "lat": -24.5189698,
+    "lon": 152.0151642
+  },
+  "tags": {
+    "highway": "residential",
+    "name": "Island View Drive",
+    "source": "Bing"
+  }
+},
+{
+  "type": "way",
+  "id": 305969183,
+  "center": {
+    "lat": -24.5284611,
+    "lon": 152.0145718
+  },
+  "tags": {
+    "highway": "tertiary",
+    "name": "Rocky Point Road",
+    "source": "Bing",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 361152435,
+  "center": {
+    "lat": -24.5203930,
+    "lon": 152.0169037
+  },
+  "tags": {
+    "highway": "residential",
+    "name": "Island View Drive",
+    "source": "Bing"
+  }
+},
+{
+  "type": "way",
+  "id": 949235913,
+  "center": {
+    "lat": -24.5204371,
+    "lon": 151.7454192
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "maxspeed": "80",
+    "name": "Gorge Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1200725904,
+  "center": {
+    "lat": -24.4909232,
+    "lon": 151.9106723
+  },
+  "tags": {
+    "name": "Baffle Creek Hideaway",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "way",
+  "id": 1208234897,
+  "center": {
+    "lat": -24.5243398,
+    "lon": 151.8044268
+  },
+  "tags": {
+    "intermittent": "yes",
+    "name": "Island Creek",
+    "waterway": "stream"
+  }
+},
+{
+  "type": "relation",
+  "id": 5382576,
+  "center": {
+    "lat": -24.5640845,
+    "lon": 152.0018555
+  },
+  "tags": {
+    "admin_level": "9",
+    "boundary": "administrative",
+    "name": "Winfield",
+    "ref:psma:loc_pid": "loc213ab55eaab3",
+    "type": "boundary",
+    "wikidata": "Q31202465"
+  }
+},
+{
+  "type": "relation",
+  "id": 11676351,
+  "center": {
+    "lat": -23.9794343,
+    "lon": 151.6881639
+  },
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Gladstone Regional",
+    "place": "municipality",
+    "ref:psma:lga_pid": "QLD278",
+    "short_name": "Gladstone",
+    "source": "PSMA_Admin_Boundaries",
+    "type": "boundary",
+    "wikidata": "Q925987"
+  }
+}
+
+  ]
+}

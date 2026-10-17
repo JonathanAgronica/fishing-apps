@@ -1,0 +1,2461 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-09T23:12:39Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 262147499,
+  "lat": -27.5033720,
+  "lon": 152.9899228,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 307356231,
+  "lat": -26.5743217,
+  "lon": 152.3221962,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 467098226,
+  "lat": -26.6265240,
+  "lon": 152.9550457,
+  "tags": {
+    "material": "stone",
+    "name": "Mill Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 467098305,
+  "lat": -26.6253872,
+  "lon": 152.9631777,
+  "tags": {
+    "material": "concrete",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 621166554,
+  "lat": -27.4101254,
+  "lon": 152.4193736,
+  "tags": {
+    "material": "concrete",
+    "name": "Buaraba Diversion Weir",
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1240852000,
+  "lat": -27.5183432,
+  "lon": 152.4053961,
+  "tags": {
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1241696170,
+  "lat": -27.4966709,
+  "lon": 152.5012537,
+  "tags": {
+    "material": "concrete",
+    "name": "Brightveiw Weir",
+    "operator": "SEQWater",
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1241696529,
+  "lat": -27.4925636,
+  "lon": 152.4377470,
+  "tags": {
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1241870472,
+  "lat": -27.4182370,
+  "lon": 152.5907456,
+  "tags": {
+    "material": "concrete",
+    "name": "O'Reillys Weir",
+    "operator": "SEQWater",
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1520980001,
+  "lat": -26.4339607,
+  "lon": 152.6213766,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 1532486122,
+  "lat": -26.8742929,
+  "lon": 152.0259773,
+  "tags": {
+    "name": "Ted Pukallus Weir",
+    "source": "Bing",
+    "waterway": "weir",
+    "website": "https://en.wikipedia.org/wiki/Gilla,_Queensland"
+  }
+},
+{
+  "type": "node",
+  "id": 1687010391,
+  "lat": -25.2282637,
+  "lon": 152.4480992,
+  "tags": {
+    "material": "concrete",
+    "name": "Isis River Barrage",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1731318076,
+  "lat": -26.9159952,
+  "lon": 152.5841384,
+  "tags": {
+    "name": "Kilcoy Weir",
+    "operator": "Seqwater",
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1746297725,
+  "lat": -27.5717747,
+  "lon": 152.1569476,
+  "tags": {
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1746547925,
+  "lat": -27.5423814,
+  "lon": 152.3180098,
+  "tags": {
+    "name": "Jordan I Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1746548314,
+  "lat": -27.5796458,
+  "lon": 152.2173941,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1842632356,
+  "lat": -26.1941904,
+  "lon": 152.6571706,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1859986873,
+  "lat": -27.4674561,
+  "lon": 152.7391924,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 1883954761,
+  "lat": -26.1659498,
+  "lon": 151.8142861,
+  "tags": {
+    "material": "concrete",
+    "name": "Silverleaf Weir",
+    "operator": "Sunwater",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1901361327,
+  "lat": -26.4572469,
+  "lon": 152.6852483,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 1986184636,
+  "lat": -27.5604325,
+  "lon": 152.2571287,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 2078329418,
+  "lat": -27.3883310,
+  "lon": 151.8430622,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 2078329488,
+  "lat": -27.3914615,
+  "lon": 151.8436118,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 3127091944,
+  "lat": -24.7348539,
+  "lon": 152.1928745,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 3657560865,
+  "lat": -26.9397760,
+  "lon": 152.7588248,
+  "tags": {
+    "name": "Woodford Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 3930092235,
+  "lat": -26.7063685,
+  "lon": 153.1221758,
+  "tags": {
+    "material": "concrete",
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 3930092236,
+  "lat": -26.7061828,
+  "lon": 153.1221289,
+  "tags": {
+    "material": "concrete",
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 4279997261,
+  "lat": -27.5397517,
+  "lon": 152.3419814,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 5731744379,
+  "lat": -25.8452746,
+  "lon": 152.4172210,
+  "tags": {
+    "seamark:type": "pile",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 6114909371,
+  "lat": -27.2082703,
+  "lon": 153.0918804,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 6780474319,
+  "lat": -27.2082312,
+  "lon": 153.0920962,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 7295937461,
+  "lat": -26.3995336,
+  "lon": 153.0548025,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 7296141105,
+  "lat": -26.3996246,
+  "lon": 153.0546582,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 7296141106,
+  "lat": -26.3997269,
+  "lon": 153.0547720,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 7478091571,
+  "lat": -27.4662974,
+  "lon": 152.7388854,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 7830845183,
+  "lat": -27.4405379,
+  "lon": 153.0159947,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 7831029452,
+  "lat": -27.4818481,
+  "lon": 153.0601073,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 8369738943,
+  "lat": -27.5004989,
+  "lon": 152.8006936,
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "node",
+  "id": 8382269338,
+  "lat": -27.4944716,
+  "lon": 152.8131518,
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "node",
+  "id": 8770961717,
+  "lat": -26.8390414,
+  "lon": 153.1084589,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 8770961718,
+  "lat": -26.8388670,
+  "lon": 153.1084843,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 9221120416,
+  "lat": -26.4251244,
+  "lon": 152.6211642,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 9533641642,
+  "lat": -26.4476414,
+  "lon": 152.5754912,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 11378801969,
+  "lat": -27.5921859,
+  "lon": 152.9275222,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 11378801970,
+  "lat": -27.5975238,
+  "lon": 152.9253519,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 11597189409,
+  "lat": -27.5027552,
+  "lon": 152.9881254,
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 11597452192,
+  "lat": -26.8136614,
+  "lon": 153.1069228,
+  "tags": {
+    "man_made": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 13544986559,
+  "lat": -27.3286029,
+  "lon": 153.0087259,
+  "tags": {
+    "name": "Bus stop entrance (locked with code access)",
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 13676239658,
+  "lat": -26.4886032,
+  "lon": 152.6016428,
+  "tags": {
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 14100426289,
+  "lat": -27.5323342,
+  "lon": 152.3070695,
+  "tags": {
+    "material": "concrete_and_metal",
+    "name": "Redbank Creek Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 14100453260,
+  "lat": -27.5409439,
+  "lon": 152.3174470,
+  "tags": {
+    "name": "Jordan II Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "node",
+  "id": 14121889976,
+  "lat": -27.0797208,
+  "lon": 152.4293632,
+  "tags": {
+    "material": "concrete",
+    "name": "Lower Creessbook Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 16469533,
+  "center": {
+    "lat": -27.4881809,
+    "lon": 152.7513267
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 45608150,
+  "center": {
+    "lat": -26.7251087,
+    "lon": 153.1204184
+  },
+  "tags": {
+    "bicycle": "designated",
+    "foot": "designated",
+    "highway": "cycleway",
+    "name": "Weir",
+    "surface": "concrete",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 46034575,
+  "center": {
+    "lat": -27.0867235,
+    "lon": 152.9576859
+  },
+  "tags": {
+    "source": "nearmap",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 46098506,
+  "center": {
+    "lat": -27.4271921,
+    "lon": 152.4434203
+  },
+  "tags": {
+    "name": "Aktinson Dam",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 66984117,
+  "center": {
+    "lat": -27.4466126,
+    "lon": 152.9277538
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Enoggera Dam",
+    "waterway": "dam",
+    "wikidata": "Q5379360",
+    "wikipedia": "en:Enoggera Dam"
+  }
+},
+{
+  "type": "way",
+  "id": 96026753,
+  "center": {
+    "lat": -27.4611619,
+    "lon": 152.8818418
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Gold Creek Dam",
+    "old_name": "Gold Scrub dam",
+    "waterway": "dam",
+    "website": "https://www.seqwater.com.au/dams/gold-creek",
+    "wikipedia": "en:Gold Creek Dam"
+  }
+},
+{
+  "type": "way",
+  "id": 102117578,
+  "center": {
+    "lat": -24.8719337,
+    "lon": 151.8506350
+  },
+  "tags": {
+    "material": "earth",
+    "name": "Fred Haigh Dam",
+    "operator": "SunWater",
+    "waterway": "dam",
+    "website": "https://www.sunwater.com.au/dams/Fred-Haigh%20Dam/"
+  }
+},
+{
+  "type": "way",
+  "id": 108210349,
+  "center": {
+    "lat": -27.4144461,
+    "lon": 152.4460889
+  },
+  "tags": {
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 108842774,
+  "center": {
+    "lat": -27.3056823,
+    "lon": 152.9564585
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 156278100,
+  "center": {
+    "lat": -25.4009338,
+    "lon": 152.5319262
+  },
+  "tags": {
+    "source": "AGRI",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 158852074,
+  "center": {
+    "lat": -25.3501873,
+    "lon": 151.9183862
+  },
+  "tags": {
+    "material": "concrete",
+    "name": "Paradise Dam",
+    "operator": "SunWater",
+    "waterway": "dam",
+    "website": "https://www.sunwater.com.au/dams/Paradise-Dam/"
+  }
+},
+{
+  "type": "way",
+  "id": 173575450,
+  "center": {
+    "lat": -26.3028873,
+    "lon": 151.9774233
+  },
+  "tags": {
+    "material": "earth",
+    "name": "Bjelke-Petersen Dam",
+    "operator": "SunWater",
+    "source": "bing",
+    "waterway": "dam",
+    "website": "https://www.sunwater.com.au/dams/Bjelke-Petersen-Dam/"
+  }
+},
+{
+  "type": "way",
+  "id": 183523252,
+  "center": {
+    "lat": -25.5879243,
+    "lon": 152.6237562
+  },
+  "tags": {
+    "name": "Mary River Barrage",
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 183679060,
+  "center": {
+    "lat": -26.2114398,
+    "lon": 152.7923558
+  },
+  "tags": {
+    "source": "Bing",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 189295360,
+  "center": {
+    "lat": -26.5695317,
+    "lon": 152.9220749
+  },
+  "tags": {
+    "description": "Concrete gravity arch dam with earth abutments",
+    "height": "24",
+    "material": "concrete",
+    "name": "Wappa Dam Spillway",
+    "operator": "seqwater",
+    "start_date": "1963",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 191141657,
+  "center": {
+    "lat": -27.3828576,
+    "lon": 151.9251350
+  },
+  "tags": {
+    "waterway": "dam",
+    "wikidata": "Q5166804"
+  }
+},
+{
+  "type": "way",
+  "id": 211257601,
+  "center": {
+    "lat": -26.7717934,
+    "lon": 151.9164445
+  },
+  "tags": {
+    "man_made": "embankment",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 241408406,
+  "center": {
+    "lat": -26.5066736,
+    "lon": 152.5820222
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 286370384,
+  "center": {
+    "lat": -26.7771671,
+    "lon": 153.0063533
+  },
+  "tags": {
+    "name": "Ewen Maddock Dam",
+    "operator": "seqwater",
+    "waterway": "dam",
+    "wikidata": "Q5418990"
+  }
+},
+{
+  "type": "way",
+  "id": 286554933,
+  "center": {
+    "lat": -27.1154147,
+    "lon": 152.5566027
+  },
+  "tags": {
+    "name": "Somerset Dam",
+    "source": "Bing",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 286558010,
+  "center": {
+    "lat": -27.3426469,
+    "lon": 152.6303627
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 286558019,
+  "center": {
+    "lat": -27.3716110,
+    "lon": 152.6413495
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 323933642,
+  "center": {
+    "lat": -27.2570083,
+    "lon": 152.9570634
+  },
+  "tags": {
+    "area": "yes",
+    "material": "concrete",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 327172920,
+  "center": {
+    "lat": -26.7061761,
+    "lon": 153.1226691
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 338276244,
+  "center": {
+    "lat": -27.0871667,
+    "lon": 152.9468074
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 340226906,
+  "center": {
+    "lat": -26.7538759,
+    "lon": 152.0794543
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 353815057,
+  "center": {
+    "lat": -27.2863304,
+    "lon": 152.1200788
+  },
+  "tags": {
+    "waterway": "dam",
+    "wikidata": "Q7170144"
+  }
+},
+{
+  "type": "way",
+  "id": 353815098,
+  "center": {
+    "lat": -27.2875565,
+    "lon": 152.1212749
+  },
+  "tags": {
+    "layer": "-1",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 354466212,
+  "center": {
+    "lat": -24.8883511,
+    "lon": 152.2900992
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 357306848,
+  "center": {
+    "lat": -27.4760472,
+    "lon": 152.9640988
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 358647482,
+  "center": {
+    "lat": -24.7407223,
+    "lon": 152.1645740
+  },
+  "tags": {
+    "source": "Bing",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 388041754,
+  "center": {
+    "lat": -26.6581421,
+    "lon": 153.0829713
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 398687871,
+  "center": {
+    "lat": -27.5869874,
+    "lon": 152.7081530
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 413872517,
+  "center": {
+    "lat": -27.4433374,
+    "lon": 153.0056677
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 455674179,
+  "center": {
+    "lat": -27.4606738,
+    "lon": 152.8828586
+  },
+  "tags": {
+    "name": "Spillway",
+    "waterway": "dam",
+    "wikipedia": "en:Gold Creek Dam"
+  }
+},
+{
+  "type": "way",
+  "id": 479023553,
+  "center": {
+    "lat": -27.5443479,
+    "lon": 152.7974617
+  },
+  "tags": {
+    "bridge": "yes",
+    "layer": "1",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 493817732,
+  "center": {
+    "lat": -27.5512498,
+    "lon": 152.5010115
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 514627168,
+  "center": {
+    "lat": -25.6500621,
+    "lon": 152.6658893
+  },
+  "tags": {
+    "name": "Teddington Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 514627170,
+  "center": {
+    "lat": -25.5692470,
+    "lon": 152.7192551
+  },
+  "tags": {
+    "name": "Tinana Barrage",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 537731793,
+  "center": {
+    "lat": -24.8594595,
+    "lon": 152.0730825
+  },
+  "tags": {
+    "name": "Bucca Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 546048810,
+  "center": {
+    "lat": -26.5556316,
+    "lon": 152.8785408
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Cooloolabin Dam Spillway",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 546065715,
+  "center": {
+    "lat": -26.7796346,
+    "lon": 153.0103315
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Ewen Maddock Dam Spillway",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 546067166,
+  "center": {
+    "lat": -26.5688469,
+    "lon": 152.9225522
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 546067167,
+  "center": {
+    "lat": -26.5553219,
+    "lon": 152.8815747
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 546067168,
+  "center": {
+    "lat": -26.5500742,
+    "lon": 152.8841860
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 546072799,
+  "center": {
+    "lat": -26.5982395,
+    "lon": 152.9116993
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Poona Dam Spillway",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 546072800,
+  "center": {
+    "lat": -26.5955586,
+    "lon": 152.9100800
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 546079473,
+  "center": {
+    "lat": -26.5881665,
+    "lon": 152.8908223
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Intake Weir",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 550989379,
+  "center": {
+    "lat": -26.3811933,
+    "lon": 152.9300121
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Lake Macdonald Spillway",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 550989380,
+  "center": {
+    "lat": -26.3814088,
+    "lon": 152.9313299
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 550989381,
+  "center": {
+    "lat": -26.3817723,
+    "lon": 152.9292865
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 550995003,
+  "center": {
+    "lat": -26.5061304,
+    "lon": 152.5809975
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 550995004,
+  "center": {
+    "lat": -26.5057533,
+    "lon": 152.5808223
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 550995005,
+  "center": {
+    "lat": -26.5058631,
+    "lon": 152.5810056
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 558085522,
+  "center": {
+    "lat": -27.3919796,
+    "lon": 152.5963941
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Auxiliary Spillway",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 573932452,
+  "center": {
+    "lat": -27.1696406,
+    "lon": 152.9486485
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 586335838,
+  "center": {
+    "lat": -27.5307154,
+    "lon": 153.1805859
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Leslie Harrison Dam",
+    "source:geometry": "bing;survey",
+    "waterway": "dam",
+    "wikidata": "Q7334549"
+  }
+},
+{
+  "type": "way",
+  "id": 586335845,
+  "center": {
+    "lat": -27.5282180,
+    "lon": 153.1803656
+  },
+  "tags": {
+    "source": "bing;survey",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 595228789,
+  "center": {
+    "lat": -27.5372491,
+    "lon": 152.7979763
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 609229909,
+  "center": {
+    "lat": -27.2123367,
+    "lon": 152.8407471
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 613805458,
+  "center": {
+    "lat": -25.1140897,
+    "lon": 151.9720281
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 617760277,
+  "center": {
+    "lat": -24.9121091,
+    "lon": 152.0649839
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 617760280,
+  "center": {
+    "lat": -24.9289959,
+    "lon": 152.0686099
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 617824680,
+  "center": {
+    "lat": -24.9354279,
+    "lon": 152.1212431
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 617824687,
+  "center": {
+    "lat": -24.9095729,
+    "lon": 152.0856371
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 638897635,
+  "center": {
+    "lat": -26.7534765,
+    "lon": 153.1210243
+  },
+  "tags": {
+    "name": "Lake Kawana Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 660929698,
+  "center": {
+    "lat": -27.5926964,
+    "lon": 153.2377649
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 660929711,
+  "center": {
+    "lat": -27.5870801,
+    "lon": 153.2349064
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 662250449,
+  "center": {
+    "lat": -27.5939114,
+    "lon": 153.2020089
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 662250452,
+  "center": {
+    "lat": -27.5882638,
+    "lon": 153.2021611
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 686424479,
+  "center": {
+    "lat": -24.8649408,
+    "lon": 152.3673366
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 722856967,
+  "center": {
+    "lat": -27.2081332,
+    "lon": 153.0919831
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 726049424,
+  "center": {
+    "lat": -27.2332114,
+    "lon": 153.0371076
+  },
+  "tags": {
+    "material": "stone",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 801463615,
+  "center": {
+    "lat": -27.4264885,
+    "lon": 152.9716795
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 857244790,
+  "center": {
+    "lat": -26.7949821,
+    "lon": 153.1117696
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 864998230,
+  "center": {
+    "lat": -27.5614501,
+    "lon": 153.2519655
+  },
+  "tags": {
+    "area": "yes",
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 864998234,
+  "center": {
+    "lat": -27.5594502,
+    "lon": 153.2609564
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 864998235,
+  "center": {
+    "lat": -27.5584186,
+    "lon": 153.2595430
+  },
+  "tags": {
+    "area": "yes",
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 893580690,
+  "center": {
+    "lat": -26.6992322,
+    "lon": 152.8644335
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Baroon Pocket Dam",
+    "operator": "seqwater",
+    "start_date": "1989",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 904390304,
+  "center": {
+    "lat": -25.2361978,
+    "lon": 151.7983311
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 930093288,
+  "center": {
+    "lat": -26.7707375,
+    "lon": 152.9535863
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 947576095,
+  "center": {
+    "lat": -26.8389238,
+    "lon": 153.1082738
+  },
+  "tags": {
+    "material": "concrete",
+    "operator": "Pelican Waters Heart",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 960652967,
+  "center": {
+    "lat": -26.6223521,
+    "lon": 152.9500235
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 966094580,
+  "center": {
+    "lat": -26.7050797,
+    "lon": 153.1128837
+  },
+  "tags": {
+    "height": "0.8",
+    "material": "concrete",
+    "operator": "Sunshine Coast Council",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 992975040,
+  "center": {
+    "lat": -25.7661887,
+    "lon": 152.7072903
+  },
+  "tags": {
+    "name": "Talegalla Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 997901554,
+  "center": {
+    "lat": -27.0721568,
+    "lon": 153.1566935
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 997901556,
+  "center": {
+    "lat": -27.0720376,
+    "lon": 153.1566074
+  },
+  "tags": {
+    "seamark:gate:category": "lock",
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "way",
+  "id": 997925086,
+  "center": {
+    "lat": -26.1941918,
+    "lon": 152.6571728
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 997925087,
+  "center": {
+    "lat": -26.1942168,
+    "lon": 152.6572127
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1001607163,
+  "center": {
+    "lat": -26.7744013,
+    "lon": 151.8975344
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1001607165,
+  "center": {
+    "lat": -26.7733815,
+    "lon": 151.9068920
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1001607167,
+  "center": {
+    "lat": -26.7604078,
+    "lon": 151.9149117
+  },
+  "tags": {
+    "man_made": "embankment",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1002617816,
+  "center": {
+    "lat": -27.5240546,
+    "lon": 153.2384289
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1005479748,
+  "center": {
+    "lat": -26.7107318,
+    "lon": 153.0511685
+  },
+  "tags": {
+    "height": "2",
+    "material": "stone",
+    "operator": "Sunshine Coast Council",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1030559942,
+  "center": {
+    "lat": -27.5735512,
+    "lon": 153.1936017
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1030896030,
+  "center": {
+    "lat": -27.5679162,
+    "lon": 153.1884841
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1030896032,
+  "center": {
+    "lat": -27.5685504,
+    "lon": 153.1884296
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1037090363,
+  "center": {
+    "lat": -27.2636370,
+    "lon": 152.2080946
+  },
+  "tags": {
+    "name": "Cressbrook Dam",
+    "waterway": "dam",
+    "wikidata": "Q5184489"
+  }
+},
+{
+  "type": "way",
+  "id": 1057046649,
+  "center": {
+    "lat": -26.6236457,
+    "lon": 152.9958664
+  },
+  "tags": {
+    "material": "earth",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1067815399,
+  "center": {
+    "lat": -27.2576827,
+    "lon": 152.9543519
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Sideling Creek Dam",
+    "waterway": "dam",
+    "website": "https://www.seqwater.com.au/recreation/locations-and-guides",
+    "wikidata": "Q46854977",
+    "wikipedia": "en:Sideling Creek Dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1067815405,
+  "center": {
+    "lat": -27.2579700,
+    "lon": 152.9513540
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1070126526,
+  "center": {
+    "lat": -26.9041552,
+    "lon": 152.9545837
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1071806109,
+  "center": {
+    "lat": -26.7337149,
+    "lon": 153.0491057
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1071806111,
+  "center": {
+    "lat": -26.7334030,
+    "lon": 153.0505229
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1072488515,
+  "center": {
+    "lat": -27.5101709,
+    "lon": 152.7073139
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1072488516,
+  "center": {
+    "lat": -27.5100942,
+    "lon": 152.7064711
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1081028768,
+  "center": {
+    "lat": -27.2322099,
+    "lon": 153.1098158
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1081028771,
+  "center": {
+    "lat": -27.2316991,
+    "lon": 153.1103748
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1081028784,
+  "center": {
+    "lat": -27.2262028,
+    "lon": 153.1136160
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1119455629,
+  "center": {
+    "lat": -26.1174165,
+    "lon": 151.6296128
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1150669739,
+  "center": {
+    "lat": -27.3717150,
+    "lon": 152.6413288
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1151408105,
+  "center": {
+    "lat": -27.3768113,
+    "lon": 152.8936294
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1165372144,
+  "center": {
+    "lat": -26.1972000,
+    "lon": 152.7020453
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1172642246,
+  "center": {
+    "lat": -27.1159111,
+    "lon": 152.5560562
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1198277990,
+  "center": {
+    "lat": -27.5930725,
+    "lon": 153.2060894
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1201050358,
+  "center": {
+    "lat": -27.5867824,
+    "lon": 153.1904718
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1206285947,
+  "center": {
+    "lat": -26.4350372,
+    "lon": 151.7347349
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1206891516,
+  "center": {
+    "lat": -26.7997892,
+    "lon": 152.8683213
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1210740281,
+  "center": {
+    "lat": -26.7420276,
+    "lon": 152.8773067
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1215226825,
+  "center": {
+    "lat": -26.6583904,
+    "lon": 153.0885148
+  },
+  "tags": {
+    "material": "concrete",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1251488810,
+  "center": {
+    "lat": -27.5677836,
+    "lon": 153.1555965
+  },
+  "tags": {
+    "material": "concrete",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1286538015,
+  "center": {
+    "lat": -26.7742328,
+    "lon": 151.8970647
+  },
+  "tags": {
+    "name": "Meandu Creek Dam",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1286538017,
+  "center": {
+    "lat": -26.7745383,
+    "lon": 151.9000361
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1286952968,
+  "center": {
+    "lat": -26.7860455,
+    "lon": 151.9214558
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1286953045,
+  "center": {
+    "lat": -26.7753217,
+    "lon": 151.9261795
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1287389358,
+  "center": {
+    "lat": -26.7734825,
+    "lon": 151.9068928
+  },
+  "tags": {
+    "man_made": "embankment",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1287389359,
+  "center": {
+    "lat": -26.7734882,
+    "lon": 151.9068928
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1288608714,
+  "center": {
+    "lat": -26.7818576,
+    "lon": 151.9068609
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1291314646,
+  "center": {
+    "lat": -26.7589990,
+    "lon": 152.8352979
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1308559714,
+  "center": {
+    "lat": -27.1256858,
+    "lon": 152.9990141
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1308559715,
+  "center": {
+    "lat": -27.1245076,
+    "lon": 152.9987525
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1309606620,
+  "center": {
+    "lat": -26.6152194,
+    "lon": 152.8905530
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1309607423,
+  "center": {
+    "lat": -26.6400782,
+    "lon": 152.8755492
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1309611022,
+  "center": {
+    "lat": -26.6444620,
+    "lon": 152.8482981
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1311931855,
+  "center": {
+    "lat": -27.5728490,
+    "lon": 153.2086106
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1311953540,
+  "center": {
+    "lat": -27.5801784,
+    "lon": 153.2115134
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1311953541,
+  "center": {
+    "lat": -27.5797565,
+    "lon": 153.2111193
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1311953542,
+  "center": {
+    "lat": -27.5791320,
+    "lon": 153.2109949
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1312189703,
+  "center": {
+    "lat": -27.5836923,
+    "lon": 153.2199012
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1312189707,
+  "center": {
+    "lat": -27.5851071,
+    "lon": 153.2200626
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1312189708,
+  "center": {
+    "lat": -27.5854749,
+    "lon": 153.2200739
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1313130967,
+  "center": {
+    "lat": -27.5959607,
+    "lon": 153.2279804
+  },
+  "tags": {
+    "material": "soil",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1315356623,
+  "center": {
+    "lat": -26.6989326,
+    "lon": 152.8679267
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Baroon Pocket Dam",
+    "operator": "seqwater",
+    "start_date": "1989",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1315662841,
+  "center": {
+    "lat": -26.2649794,
+    "lon": 151.9155162
+  },
+  "tags": {
+    "name": "Murgon Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1365696397,
+  "center": {
+    "lat": -27.5171377,
+    "lon": 151.9409911
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1370347588,
+  "center": {
+    "lat": -26.7774388,
+    "lon": 152.2743876
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1387650014,
+  "center": {
+    "lat": -27.0707307,
+    "lon": 152.9545693
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1412441975,
+  "center": {
+    "lat": -27.0720137,
+    "lon": 153.1567636
+  },
+  "tags": {
+    "seamark:gate:category": "lock",
+    "seamark:type": "gate",
+    "waterway": "lock_gate"
+  }
+},
+{
+  "type": "way",
+  "id": 1463858135,
+  "center": {
+    "lat": -27.0869051,
+    "lon": 152.9483613
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1530772587,
+  "center": {
+    "lat": -27.5766047,
+    "lon": 152.1194718
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1530777305,
+  "center": {
+    "lat": -27.5686813,
+    "lon": 152.1015304
+  },
+  "tags": {
+    "area": "yes",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1549805399,
+  "center": {
+    "lat": -27.4062823,
+    "lon": 152.6358694
+  },
+  "tags": {
+    "material": "rock",
+    "name": "Whivenhoe Saddle Dam 2",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1549805910,
+  "center": {
+    "lat": -27.3628070,
+    "lon": 152.6379955
+  },
+  "tags": {
+    "name": "Splityard Creek Saddle Dam 2",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1549805956,
+  "center": {
+    "lat": -27.3646698,
+    "lon": 152.6367843
+  },
+  "tags": {
+    "name": "Splityard Creek Saddle Dam 1",
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1552187085,
+  "center": {
+    "lat": -27.1131947,
+    "lon": 152.3576728
+  },
+  "tags": {
+    "material": "concrete",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1557245480,
+  "center": {
+    "lat": -26.5804482,
+    "lon": 151.8316975
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1557245481,
+  "center": {
+    "lat": -26.5795466,
+    "lon": 151.8319547
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1558303083,
+  "center": {
+    "lat": -25.0504920,
+    "lon": 152.0979312
+  },
+  "tags": {
+    "name": "Ned Chirchward Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1558303084,
+  "center": {
+    "lat": -25.0270394,
+    "lon": 152.2340019
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1558304326,
+  "center": {
+    "lat": -25.1568295,
+    "lon": 152.4637997
+  },
+  "tags": {
+    "material": "concrete",
+    "name": "Gregory River Weir",
+    "waterway": "weir"
+  }
+},
+{
+  "type": "way",
+  "id": 1558476183,
+  "center": {
+    "lat": -26.3017932,
+    "lon": 151.9888539
+  },
+  "tags": {
+    "waterway": "dam"
+  }
+},
+{
+  "type": "way",
+  "id": 1558476184,
+  "center": {
+    "lat": -26.2687273,
+    "lon": 152.0069362
+  },
+  "tags": {
+    "waterway": "weir"
+  }
+}
+
+  ]
+}

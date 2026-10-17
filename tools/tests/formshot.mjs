@@ -1,0 +1,10 @@
+import puppeteer from '/workspace/tools/node_modules/puppeteer-core/lib/esm/puppeteer/puppeteer-core.js';
+const b=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox']});
+const p=await b.newPage();await p.setViewport({width:400,height:900,deviceScaleFactor:2,isMobile:true,hasTouch:true});
+await p.goto('https://jonathanagronica.github.io/fishing-apps/#log',{waitUntil:'domcontentloaded'});
+await p.waitForSelector('body[data-log-ready="1"]');
+await p.click('#cPastBtn');await new Promise(r=>setTimeout(r,300));
+const v=await p.$$eval('#cSpotSel option',os=>os.find(o=>/Rocky Point/.test(o.textContent)).value);await p.select('#cSpotSel',v);
+await p.select('#cSp','MJ');await p.$eval('#cLen',e=>e.value='47');await p.click('#cAddCatch');
+await p.$eval('#cFormCard',e=>e.scrollIntoView({block:'start'}));await new Promise(r=>setTimeout(r,300));
+await p.screenshot({path:'/workspace/fishing-site-src/shot-catchlog-form.png'});await b.close();

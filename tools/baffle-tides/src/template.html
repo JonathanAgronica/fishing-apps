@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b3b3a">
+<title>Baffle Creek Tides — mouth to Essendean</title>
+<style>
+:root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--tide:#5cc8ff;--good:#57d18a;--bad:#ff7b6b;--line:#25464b}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(135deg,#0b3b3a,#1b2b40 60%,#16303b);padding:16px 16px 14px}
+header h1{margin:0;font-size:1.35rem}
+header h1 span{color:var(--tide)}
+header p{margin:4px 0 0;color:var(--mut);font-size:.88rem}
+main{max-width:1000px;margin:0 auto;padding:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h2{margin:0 0 10px;font-size:1.05rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input,button,select,textarea{font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+select{max-width:100%}
+button{cursor:pointer;background:#20454a}
+button.pri{background:var(--acc);color:#1b1205;border-color:var(--acc);font-weight:600}
+button.sm{padding:4px 8px;font-size:.8rem}
+button:hover{filter:brightness(1.12)}
+input[type=range]{width:100%;padding:0}
+.mut{color:var(--mut);font-size:.86rem}
+.notice{background:#3d2a12;border:1px solid #7a5420;color:#ffd9a8;border-radius:10px;padding:9px 12px;margin:8px 0;font-size:.9rem}
+.notice.info{background:#12303d;border-color:#245a72;color:#cfeeff}
+.notice.err{background:#3d1616;border-color:#7a2a2a;color:#ffc4c4}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.stat{background:var(--panel2);border-radius:10px;padding:8px 10px}
+.stat b{display:block;font-size:1.05rem}
+.stat small{color:var(--mut)}
+.hw{color:var(--tide)} .lw{color:#c9b6ff}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600;position:sticky;top:0;background:var(--panel)}
+tr.sel td{background:#20393e}
+tr.click{cursor:pointer}
+.tw{overflow-x:auto;max-height:520px}
+.tag{display:inline-block;font-size:.7rem;padding:1px 6px;border-radius:8px;background:#2a4a50;color:var(--mut);margin-left:4px}
+.tag.warn{background:#4a3a1a;color:#ffd38a}
+.tag.cal{background:#1d4a33;color:#9ff0c0}
+#chart{width:100%;height:auto;display:block}
+details{background:var(--panel2);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+details summary{cursor:pointer;font-weight:600}
+details p,details li{color:var(--mut);font-size:.9rem}
+.pos{color:var(--bad)} .neg{color:var(--good)}
+a{color:#7fd6ff}
+footer{color:var(--mut);font-size:.8rem;text-align:center;padding:10px 12px 30px}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:.8rem;color:var(--mut)}
+@media(max-width:560px){th,td{padding:5px 3px;font-size:.8rem}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🌊 <span>Baffle Creek</span> tide times — mouth to Essendean Bridge</h1>
+  <p>Along-creek tide predictions calibrated from Bundaberg tide gauge, MSQ Winfield offsets and BoM river gauges · AEST (Australia/Brisbane)</p>
+</header>
+<main>
+  <div class="notice">⚠️ <b>Not for navigation.</b> Estimates only, from a model built on limited calibration data (one week of upstream gauge records). Use official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ Queensland Tide Tables</a> for anything that matters, and watch the water.</div>
+
+  <section class="card">
+    <h2>📍 Spot on the creek</h2>
+    <div class="row">
+      <select id="lm" aria-label="Landmark"></select>
+      <button id="gps">📡 Use GPS</button>
+    </div>
+    <div style="margin-top:10px">
+      <input type="range" id="km" min="0" max="40" step="0.1" value="35.25" aria-label="Distance from mouth (km)">
+      <div class="row mut" style="justify-content:space-between"><span>Mouth 0 km</span><span id="kmLbl"></span><span>40 km</span></div>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <label class="f">Date <input type="date" id="date"></label>
+      <label class="f" title="Adds to all predicted heights, e.g. from live Bundaberg residual (storm surge / wind setup)">Height offset (m) <input type="number" id="hoff" value="0" step="0.05" style="width:90px"></label>
+      <label class="f" title="Raise/lower the Essendean low-water base level (freshwater flow). Dry-weather default 0.">Upper-creek base adj (m) <input type="number" id="badj" value="0" step="0.05" style="width:90px"></label>
+    </div>
+    <p class="mut" id="locInfo" style="margin:8px 0 0"></p>
+    <div id="locWarn"></div>
+  </section>
+
+  <section class="card">
+    <h2 id="dayTitle">Today</h2>
+    <div class="grid" id="stats"></div>
+    <svg id="chart" viewBox="0 0 960 320" role="img" aria-label="Tide curve"></svg>
+    <div class="mut" style="display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem">
+      <span><b style="color:var(--acc)">━</b> Selected spot</span><span><b style="color:var(--tide)">━</b> Mouth (≈ Bundaberg, open coast)</span><span><b style="color:#ff7b6b">┅</b> Essendean Bridge</span><span>Heights m AHD (≈ mean sea level). Shaded band = timing uncertainty.</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>📅 7-day highs & lows at this spot</h2>
+    <div class="tw"><table id="week"></table></div>
+  </section>
+
+  <section class="card">
+    <h2>🗺️ Whole stretch — selected day</h2>
+    <p class="mut" style="margin-top:0">Tap a row to select it. <span class="tag cal">cal</span> = calibration point, <span class="tag warn">est</span> = interpolated across a long uncalibrated gap.</p>
+    <div class="tw"><table id="stretch"></table></div>
+  </section>
+
+  <section class="card">
+    <h2>📝 Benchmark log</h2>
+    <p class="mut" style="margin-top:0">Record what you actually see. The app compares it with the prediction for the same spot. Tick <b>apply</b> to fold your offsets into predictions near that spot (fades out over ±6 km).</p>
+    <div class="row">
+      <label class="f">Where <select id="bLoc"><option value="cur">Current spot (slider)</option><option value="gps">GPS now</option></select></label>
+      <label class="f">When (AEST) <input type="datetime-local" id="bTime"></label>
+      <label class="f">What <select id="bType">
+        <option value="HW">High-tide turn (stopped rising)</option>
+        <option value="LW">Low-tide turn (started rising)</option>
+        <option value="LVL_AHD">Gauge-board reading (m AHD, e.g. Essendean flood board)</option>
+        <option value="LVL_LOCAL">Marker reading (local / arbitrary datum)</option>
+      </select></label>
+      <label class="f">Value (m) <input type="number" id="bVal" step="0.01" style="width:90px"></label>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <input type="text" id="bNote" placeholder="Note (e.g. 'measured at bridge pylon, slack water')" style="flex:1 1 240px">
+      <button class="pri" id="bAdd">＋ Log observation</button>
+      <button id="bNow" class="sm">time = now</button>
+    </div>
+    <div class="tw" style="margin-top:10px"><table id="bTable"></table></div>
+    <div class="row" style="margin-top:8px">
+      <button id="bExp">⬇ Export CSV</button>
+      <label class="f" style="flex-direction:row;align-items:center;gap:6px"><span>⬆ Import CSV</span><input type="file" id="bImp" accept=".csv,text/csv"></label>
+      <button id="bClear" class="sm">Clear all</button>
+    </div>
+    <p class="mut" id="bSummary"></p>
+  </section>
+
+  <section class="card">
+    <h2>📡 Live gauges</h2>
+    <div class="row"><button id="live">Load live Bundaberg gauge (≈2 MB)</button></div>
+    <div id="liveOut" class="mut" style="margin-top:8px"></div>
+    <p class="mut">Upstream BoM gauges can't be read by a web page (no CORS) — open them directly:
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.039267.tbl.shtml" target="_blank" rel="noopener">Essendean Bridge 039267 (table)</a> ·
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.039267.plt.shtml" target="_blank" rel="noopener">plot</a> ·
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.539135.tbl.shtml" target="_blank" rel="noopener">Euleilah Ck @ Hills Rd 539135</a> ·
+      <a href="https://www.bom.gov.au/fwo/IDQ65392/IDQ65392.539132.tbl.shtml" target="_blank" rel="noopener">Mimdale 539132 (fresh flow)</a> ·
+      <a href="https://www.qld.gov.au/environment/coasts-waterways/beach/storm/storm-sites/burnett-heads" target="_blank" rel="noopener">Burnett Heads storm-tide site</a></p>
+  </section>
+
+  <section class="card">
+    <h2>🧪 How predictions are made</h2>
+    <details open><summary>1 · Base tide: Bundaberg (Burnett Heads) harmonic model</summary>
+      <p>41 tidal constituents (M2, S2, N2, K2, K1, O1, P1, Q1, M4, MS4, MN4, M6 …, with nodal corrections) fitted by least squares to the MSQ Bundaberg port gauge 051011A observed 10-minute record 2021–2025 (≈260k readings). Runs offline for any date.
+      Validation: vs official MSQ 2026 high/low predictions (1411 tides) HW timing RMS 4.5 min, LW 4.9 min, height RMS 0.02 m; vs held-out observed gauge data 2–9 Oct 2026, height RMS 0.06 m, HW timing RMS 12 min. Official MSQ 2026 Bundaberg times are also embedded and shown for comparison.</p></details>
+    <details><summary>2 · Along-creek transfer (calibration nodes)</summary><div id="nodesTbl"></div>
+      <p>Each Bundaberg high/low is shifted in time and mapped in height using the values at your spot, interpolated linearly by distance between nodes; the curve between turns uses the standard cosine interpolation. Heights are m AHD (Bundaberg LAT→AHD −1.693 m per TMR; Winfield AHD ≈ LAT −1.53 assumes local MSL≈AHD, unverified).</p></details>
+    <details><summary>3 · What the Essendean gauge shows</summary>
+      <p>BoM 039267 (gauge zero = 0.00 m AHD, event-reported in 5 cm steps). 2–9 Oct 2026: 10 tidal peaks, on average 5 h 39 min (sd 44 min, range 4:44–6:51) after the observed Bundaberg high, i.e. ≈ 4 h 34 min after the MSQ-predicted Winfield high. Peak level ≈ −0.52 + 0.42 × Bundaberg HW (m LAT), r = 0.93. Lows are truncated at 0.37–0.57 m AHD (bed/fresh water pool), so the creek there drains for ~7 h and floods in 1–2 h. Bundaberg highs ≤ 2.13 m LAT produced no visible peak; ≥ 2.35 m did — Essendean only “sees” the bigger tide of each day in this period.</p></details>
+    <details><summary>4 · Limitations</summary>
+      <ul><li>Upstream calibration is one week (2–9 Oct 2026), low steady fresh flow (Mimdale 0.78 m all week). Floods or heavy rain will delay/flatten tides and raise levels upstream — expect big errors after rain.</li>
+      <li>No calibration between Winfield (3.4 km) and the Hills Rd gauge, which is on Euleilah Creek (≈25 km channel distance) and used as a proxy for the 16–35 km reach.</li>
+      <li>Mouth timing is assumed equal to Bundaberg/Bargara (open coast, MSQ planes); the Winfield offsets are MSQ “non-linear transfer” values (**), not a long gauge record.</li>
+      <li>Above Essendean the tidal limit is unknown — values are held at Essendean’s and flagged.</li>
+      <li>Wind, pressure and swell can shift real levels by 0.1–0.3 m (use the live residual).</li></ul></details>
+  </section>
+
+  <div class="notice">⚠️ Not for navigation. Predictions are estimates. Always use the official <a href="https://www.msq.qld.gov.au/tides/tide-tables.aspx" target="_blank" rel="noopener">MSQ tide tables</a> and local knowledge; Baffle Creek’s bar and shallows change.</div>
+</main>
+<footer>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.</footer>
+
+<script id="data">window.BAFFLE_DATA=/*DATA*/;</script>
+<script id="core">
+(function(root){
+'use strict';
+const D=root.BAFFLE_DATA;
+const EPOCH_UTC=Date.UTC(2025,11,31,14,0); // 2026-01-01 00:00 AEST
+const AEST_MS=Date.UTC(2026,0,1);
+const nowH=()=> (Date.now()-EPOCH_UTC)/3.6e6;
+const hToDate=h=>new Date(AEST_MS+h*3.6e6); // read with UTC getters = AEST wall time
+function dateToH(y,m,d,hh,mi){return (Date.UTC(y,m-1,d,hh||0,mi||0)-AEST_MS)/3.6e6;}
+function dayStr(h){const d=hToDate(h);return d.toISOString().slice(0,10);}
+function fmtT(h){const d=hToDate(h);let H=d.getUTCHours(),M=d.getUTCMinutes();const ap=H<12?'am':'pm';H=H%12||12;return H+':'+String(M).padStart(2,'0')+ap;}
+function fmtDT(h){const d=hToDate(Math.round(h*60)/60);return d.toISOString().slice(0,16).replace('T',' ');}
+function fmtDay(h,long){const d=hToDate(h);return d.toLocaleDateString('en-AU',Object.assign({timeZone:'UTC',weekday:'short',day:'numeric',month:'short'},long?{weekday:'long',year:'numeric',month:'long'}:{}));}
+
+/* ---------- nodal corrections + harmonic prediction (Bundaberg, m LAT) ---------- */
+const RAD=Math.PI/180;
+function nodeN(h){const d0=(EPOCH_UTC-Date.UTC(2000,0,1,12))/864e5;return (125.0445-0.0529538*(d0+h/24))*RAD;}
+function fuAll(h){const N=nodeN(h),c=Math.cos,s=Math.sin;
+  const fM2=1.0004-0.0373*c(N)+0.0002*c(2*N),uM2=-2.14*s(N);
+  const fK1=1.0060+0.1150*c(N)-0.0088*c(2*N)+0.0006*c(3*N),uK1=-8.86*s(N)+0.68*s(2*N)-0.07*s(3*N);
+  const fO1=1.0089+0.1871*c(N)-0.0147*c(2*N)+0.0014*c(3*N),uO1=10.80*s(N)-1.34*s(2*N)+0.19*s(3*N);
+  const fK2=1.0241+0.2863*c(N)+0.0083*c(2*N)-0.0015*c(3*N),uK2=-17.74*s(N)+0.68*s(2*N)-0.04*s(3*N);
+  const T={SA:[1,0],SSA:[1,0],MM:[1-0.13*c(N),0],MSF:[fM2,-uM2],MF:[1.0429+0.4135*c(N)-0.004*c(2*N),-23.74*s(N)+2.68*s(2*N)-0.38*s(3*N)],
+  '2Q1':[fO1,uO1],Q1:[fO1,uO1],RHO1:[fO1,uO1],O1:[fO1,uO1],M1:[fO1,uO1],P1:[1,0],S1:[1,0],K1:[fK1,uK1],
+  J1:[1.0129+0.1676*c(N)-0.017*c(2*N),-12.94*s(N)+1.34*s(2*N)-0.19*s(3*N)],OO1:[1.1027+0.6504*c(N)+0.0317*c(2*N)-0.0014*c(3*N),-36.68*s(N)+4.02*s(2*N)-0.57*s(3*N)],
+  '2N2':[fM2,uM2],MU2:[fM2,uM2],N2:[fM2,uM2],NU2:[fM2,uM2],M2:[fM2,uM2],LAM2:[fM2,uM2],L2:[fM2,uM2],T2:[1,0],S2:[1,0],R2:[1,0],K2:[fK2,uK2],'2SM2':[fM2,-uM2],
+  MO3:[fM2*fO1,uM2+uO1],M3:[Math.pow(fM2,1.5),1.5*uM2],MK3:[fM2*fK1,uM2+uK1],SK3:[fK1,uK1],
+  MN4:[fM2*fM2,2*uM2],M4:[fM2*fM2,2*uM2],MS4:[fM2,uM2],MK4:[fM2*fK2,uM2+uK2],S4:[1,0],
+  '2MN6':[fM2**3,3*uM2],M6:[fM2**3,3*uM2],'2MS6':[fM2*fM2,2*uM2],'2SM6':[fM2,uM2],M8:[fM2**4,4*uM2]};
+  return T;}
+let fuCache={k:null,v:null};
+function bundH(h){const H=D.harm;const k=Math.floor(h/24);if(fuCache.k!==k){fuCache={k,v:fuAll(k*24+12)};}const F=fuCache.v;let z=H.z0;
+  for(let i=0;i<H.names.length;i++){const fu=F[H.names[i]];z+=fu[0]*H.amp[i]*Math.cos((H.speeds[i]*h+fu[1]-H.pha[i])*RAD);}return z;}
+function bundExtremes(t0,t1){const st=0.1,out=[];let a=bundH(t0-st),b=bundH(t0);
+  for(let t=t0+st;t<=t1+1e-9;t+=st){const c=bundH(t);if((b>a&&b>=c)||(b<a&&b<=c)){const den=a-2*b+c,off=den?0.5*(a-c)/den:0;out.push({t:t-st+off*st,h:b-0.25*(a-c)*off,hi:b>a});}a=b;b=c;}
+  // remove tiny double-stands
+  const f=[];for(const x of out){const l=f[f.length-1];if(l&&l.hi===x.hi){if((x.hi&&x.h>l.h)||(!x.hi&&x.h<l.h))f[f.length-1]=x;}else if(l&&Math.abs(l.h-x.h)<0.05){f.pop();}else f.push(x);}return f;}
+function officialHiLo(t0,t1){const r=[];for(const [m,cm,hi] of D.hilo2026){const t=m/60;if(t>=t0&&t<t1)r.push({t,h:cm/100,hi:!!hi});}return r;}
+
+/* ---------- along-creek calibration ---------- */
+const LAT2AHD_BUND=1.693, LAT2AHD_WIN=1.53;
+const NODES=[
+ {km:0,name:'Mouth (open coast)',hwLag:0,lwLag:0,hwU:15,lwU:15,src:'Assumed = Bundaberg/Bargara (MSQ planes: Bargara +0:00, Lady Elliot −0:24)',
+  hwLvl:H=>H-LAT2AHD_BUND,lwLvl:L=>L-LAT2AHD_BUND},
+ {km:3.4,name:'Baffle Ck (Winfield) — MSQ secondary place',hwLag:65,lwLag:116,hwU:15,lwU:20,src:'MSQ 2025 Tidal Planes: HW +1:05, LW +1:56 on Bundaberg; MHWS 2.27 MHWN 1.81 MLWN 1.02 MLWS 1.01 m LAT (** non-linear transfer)',
+  hwLvl:H=>1.81+(H-2.35)*(2.27-1.81)/(2.94-2.35)-LAT2AHD_WIN,lwLvl:L=>1.02+(L-1.20)*(1.01-1.02)/(0.61-1.20)-LAT2AHD_WIN},
+ {km:25.24,name:'Euleilah Ck @ Hills Rd gauge (proxy)',hwLag:179,lwLag:277,hwU:35,lwU:45,src:'BoM 539135, 2–9 Oct 2026: 13 HW (lag 179 ± 18 min), 13 LW (277 ± 25 min); HW lvl = −0.981+0.613·H r=0.99; LW lvl = 0.225−0.220·L r=0.50. On Euleilah Ck 8.9 km above its junction (16.4 km).',
+  hwLvl:H=>-0.981+0.613*H,lwLvl:L=>0.225-0.220*L},
+ {km:35.25,name:'Essendean Bridge gauge',hwLag:339,lwLag:415,hwU:60,lwU:150,src:'BoM 039267, 2–9 Oct 2026: 10 HW (lag 339 ± 44 min, ±60 min gauge resolution); HW lvl = −0.520+0.423·H r=0.93; lows truncated: base ≈ 0.738−0.384·L (≥0.30) m AHD.',
+  hwLvl:H=>-0.520+0.423*H,lwLvl:L=>Math.max(0.30,0.738-0.384*L),trunc:true}
+];
+const MAXKM=40;
+function calAt(km,opts){opts=opts||{};km=Math.max(0,Math.min(MAXKM,km));
+  let i=0;while(i<NODES.length-2&&km>NODES[i+1].km)i++;
+  const a=NODES[i],b=NODES[i+1];const beyond=km>b.km;const f=beyond?1:(km-a.km)/(b.km-a.km);
+  const gap=Math.min(Math.abs(km-a.km),Math.abs(km-b.km));const span=b.km-a.km;
+  const L=(x,y)=>x+(y-x)*f;
+  const badj=opts.badj||0;
+  const trunc=f>0.5&&b.trunc;
+  const cal={km,beyond,nodeA:a,nodeB:b,f,
+    hwLag:L(a.hwLag,b.hwLag),lwLag:L(a.lwLag,b.lwLag),
+    hwU:L(a.hwU,b.hwU)+(beyond?(km-b.km)*10:gap*(span>10?3:1)),lwU:L(a.lwU,b.lwU)+(beyond?(km-b.km)*15:gap*(span>10?4:1)),
+    hwLvl:H=>L(a.hwLvl(H),b.hwLvl(H)),
+    lwLvl:Lw=>L(a.lwLvl(Lw)+(a.trunc?badj:0),b.lwLvl(Lw)+(b.trunc?badj:0)),
+    est:(span>10&&gap>3)||beyond, trunc};
+  return cal;}
+function applyCorr(cal,corr){if(!corr)return cal;const c=Object.assign({},cal);const k=cal.km;
+  const w=(p)=>Math.max(0,1-Math.abs(p.km-k)/6);let sw={HW:0,LW:0,L:0},sv={HW:0,LW:0,L:0};
+  for(const p of corr){const ww=w(p);if(!ww)continue;sw[p.kind]+=ww;sv[p.kind]+=ww*p.d;}
+  const hw=sw.HW?sv.HW/Math.max(1,sw.HW):0,lw=sw.LW?sv.LW/Math.max(1,sw.LW):0,lv=sw.L?sv.L/Math.max(1,sw.L):0;
+  c.hwLag+=hw;c.lwLag+=lw;const h0=c.hwLvl,l0=c.lwLvl;c.hwLvl=H=>h0(H)+lv;c.lwLvl=L=>l0(L)+lv;c.corr={hw,lw,lv};return c;}
+/* predict extremes + curve at a spot */
+function predictAt(km,t0,t1,opts){opts=opts||{};let cal=calAt(km,opts);cal=applyCorr(cal,opts.corr);
+  const hoff=opts.hoff||0;
+  const base=bundExtremes(t0-14,t1+14);
+  let ext=base.map(e=>{const H=e.h+hoff;return e.hi?{t:e.t+cal.hwLag/60,h:cal.hwLvl(H),hi:true,u:cal.hwU,src:e}:{t:e.t+cal.lwLag/60,h:cal.lwLvl(H),hi:false,u:cal.lwU,src:e};});
+  ext.sort((a,b)=>a.t-b.t);
+  // truncated reach: highs below the floor (pool level) are not visible
+  if(cal.nodeB.trunc||cal.nodeA.trunc){for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi){const nb=[ext[i-1],ext[i+1]].filter(x=>x&&!x.hi);const fl=nb.length?Math.max(...nb.map(x=>x.h)):-9;e.rise=e.h-fl;if(e.h<fl+0.05){e.weak=true;}}}}
+  // enforce alternation after shifting
+  const clean=[];for(const e of ext){const l=clean[clean.length-1];if(l&&l.hi===e.hi){if((e.hi&&e.h>l.h)||(!e.hi&&e.h<l.h))clean[clean.length-1]=e;}else clean.push(e);}
+  const curve=t=>{let i=0;while(i<clean.length-2&&clean[i+1].t<t)i++;const a=clean[i],b=clean[i+1];if(!a||!b)return null;if(t<a.t||t>b.t)return null;const f=(t-a.t)/(b.t-a.t);const v=a.h+(b.h-a.h)*(1-Math.cos(Math.PI*f))/2;return v;};
+  return {cal,ext:clean,curve,inWin:clean.filter(e=>e.t>=t0&&e.t<t1)};}
+
+/* ---------- geometry: snap a GPS fix onto the creek ---------- */
+function havKm(a,b){const R=6371.0088,la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+function cum(line){const c=[0];for(let i=1;i<line.length;i++)c.push(c[i-1]+havKm(line[i-1],line[i]));return c;}
+const MAIN=D.main, MAINC=cum(MAIN), EU=D.euleilah, EUC=cum(EU);
+function projLine(line,cc,lat,lon){const kx=111.32*Math.cos(lat*RAD),ky=110.54;let best={d:1e9};
+  for(let i=0;i<line.length-1;i++){const ax=(line[i][1]-lon)*kx,ay=(line[i][0]-lat)*ky,bx=(line[i+1][1]-lon)*kx,by=(line[i+1][0]-lat)*ky;const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy;let t=L2?-(ax*dx+ay*dy)/L2:0;t=Math.max(0,Math.min(1,t));const px=ax+t*dx,py=ay+t*dy,d=Math.hypot(px,py);
+    if(d<best.d)best={d,s:cc[i]+t*(cc[i+1]-cc[i]),lat:line[i][0]+t*(line[i+1][0]-line[i][0]),lon:line[i][1]+t*(line[i+1][1]-line[i][1])};}return best;}
+function snap(lat,lon){const m=projLine(MAIN,MAINC,lat,lon),e=projLine(EU,EUC,lat,lon);
+  if(e.d<m.d-0.05)return{km:D.euleilahJunctionKm+e.s,offKm:e.d,line:'Euleilah Creek',lat:e.lat,lon:e.lon,alongKm:e.s};
+  return{km:m.s,offKm:m.d,line:'Baffle Creek',lat:m.lat,lon:m.lon};}
+function pointAtKm(km){for(let i=1;i<MAINC.length;i++)if(MAINC[i]>=km){const f=(km-MAINC[i-1])/(MAINC[i]-MAINC[i-1]);return[MAIN[i-1][0]+f*(MAIN[i][0]-MAIN[i-1][0]),MAIN[i-1][1]+f*(MAIN[i][1]-MAIN[i-1][1])];}return MAIN[MAIN.length-1];}
+
+const LANDMARKS=[
+ {name:'Mouth / entrance',km:0},
+ {name:'Duck Creek junction',km:2.93},
+ {name:'Winfield (MSQ tide place, approx.)',km:3.4,cal:true},
+ {name:'Winfield ramp (side channel)',km:3.74,note:'OSM slipway 1.3 km off main channel'},
+ {name:'Flat Rock Rd ramp',km:5.77,note:'unnamed OSM slipway at end of Flat Rock Rd'},
+ {name:'Rocky Point boat ramp',km:6.51},
+ {name:'Caravan park ramp (Flat Rock area)',km:7.75,note:'OSM slipway by Baffle Creek Caravan & Camping Park'},
+ {name:'Bottle Creek junction',km:8.07},
+ {name:'Newton Rd',km:10.58},
+ {name:'Wartburg (Boat Ramp Rd)',km:15.9},
+ {name:'Euleilah Creek junction',km:16.38},
+ {name:'Hills Rd gauge (Euleilah Ck)',km:25.24,cal:true,note:'on Euleilah Ck, 8.9 km above junction'},
+ {name:'Sleepy Creek junction',km:27.68},
+ {name:'Manning Creek junction',km:30.92},
+ {name:'Sandy Creek junction',km:34.05},
+ {name:'Essendean Bridge (gauge 039267)',km:35.25,cal:true},
+ {name:'Christensens',km:39.03,note:'above calibration'}];
+
+root.BT={nowH,hToDate,dateToH,dayStr,fmtT,fmtDT,fmtDay,bundH,bundExtremes,officialHiLo,NODES,calAt,predictAt,snap,pointAtKm,LANDMARKS,MAXKM,applyCorr};
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);const B=window.BT;
+const st={km:+(localStorage.getItem('bt_km')||35.25),gps:null,landmark:null};
+const todayStr=B.dayStr(B.nowH());
+$('date').value=todayStr;$('km').value=st.km;
+$('hoff').value=localStorage.getItem('bt_hoff')||0;$('badj').value=localStorage.getItem('bt_badj')||0;
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+B.LANDMARKS.forEach((l,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${l.name} — ${l.km.toFixed(1)} km`;$('lm').appendChild(o);});
+const o0=document.createElement('option');o0.value='';o0.textContent='— pick a landmark —';$('lm').prepend(o0);
+function opts(){return{hoff:+$('hoff').value||0,badj:+$('badj').value||0,corr:corrections()};}
+function dayH(){const [y,m,d]=$('date').value.split('-').map(Number);return B.dateToH(y,m,d,0,0);}
+function fmtU(u){return '±'+Math.round(u/5)*5+' min';}
+function lvl(h){return (h>=0?'+':'')+h.toFixed(2)+' m';}
+/* ---- benchmarks ---- */
+let bench=JSON.parse(localStorage.getItem('bt_bench')||'[]');
+function saveBench(){localStorage.setItem('bt_bench',JSON.stringify(bench));}
+function corrections(){return bench.filter(b=>b.applied&&b.diff!=null).map(b=>({km:b.km,kind:b.type==='HW'?'HW':b.type==='LW'?'LW':'L',d:b.type==='LVL_AHD'?-b.diff:-b.diff}));}
+// note: diff = predicted - observed (min or m); correction adds observed-predicted
+function evalBench(b,useCorr){const o={hoff:+$('hoff').value||0,badj:+$('badj').value||0,corr:useCorr?corrections().filter(c=>!(c.km===b.km&&b.applied)):null};
+  const p=B.predictAt(b.km,b.t-12,b.t+12,o);
+  if(b.type==='HW'||b.type==='LW'){const want=b.type==='HW';const c=p.ext.filter(e=>e.hi===want).sort((x,y)=>Math.abs(x.t-b.t)-Math.abs(y.t-b.t))[0];if(!c)return{};return{predT:c.t,diff:(c.t-b.t)*60,u:c.u};}
+  const v=p.curve(b.t);if(v==null)return{};return{predV:v,diff:b.type==='LVL_AHD'&&b.value!=null?v-b.value:null};}
+function renderBench(){
+  bench.forEach(b=>{const r=evalBench(b,false);b.predT=r.predT;b.predV=r.predV;b.diff=r.diff;b.u=r.u;});saveBench();
+  if(!bench.length){$('bTable').innerHTML='<tr><td class="mut">No observations yet. On your next trip, log high/low turns and gauge-board readings — especially at Essendean Bridge, Wartburg, Rocky Point and the mouth.</td></tr>';$('bSummary').textContent='';return;}
+  $('bTable').innerHTML='<tr><th>When (AEST)</th><th>Where</th><th>What</th><th>Observed</th><th>Predicted</th><th>Pred − obs</th><th>apply</th><th></th></tr>'+bench.map((b,i)=>{
+    const obs=b.type==='HW'||b.type==='LW'?B.fmtT(b.t):(b.value!=null?b.value.toFixed(2)+' m':'—');
+    const pred=b.predT!=null?B.fmtT(b.predT)+' <span class="mut">'+fmtU(b.u||0)+'</span>':(b.predV!=null?b.predV.toFixed(2)+' m AHD':'—');
+    const d=b.diff==null?'—':(b.type==='HW'||b.type==='LW'?`<span class="${b.diff>0?'pos':'neg'}">${b.diff>0?'+':''}${Math.round(b.diff)} min</span>`:`<span class="${b.diff>0?'pos':'neg'}">${b.diff>0?'+':''}${b.diff.toFixed(2)} m</span>`);
+    const canApply=b.diff!=null;
+    return `<tr><td>${B.fmtDT(b.t)}</td><td>${esc(b.place)}<br><span class="mut">${b.km.toFixed(2)} km</span></td><td>${esc({HW:'High turn',LW:'Low turn',LVL_AHD:'Gauge (AHD)',LVL_LOCAL:'Marker (local)'}[b.type])}${b.note?'<br><span class="mut">'+esc(b.note)+'</span>':''}</td><td>${obs}</td><td>${pred}</td><td>${d}</td><td>${canApply?`<input type="checkbox" data-a="${i}" ${b.applied?'checked':''}>`:''}</td><td><button class="sm" data-d="${i}">✕</button></td></tr>`;}).join('');
+  $('bTable').querySelectorAll('[data-d]').forEach(x=>x.onclick=()=>{bench.splice(+x.dataset.d,1);saveBench();renderBench();render();});
+  $('bTable').querySelectorAll('[data-a]').forEach(x=>x.onchange=()=>{bench[+x.dataset.a].applied=x.checked;saveBench();renderBench();render();});
+  const hw=bench.filter(b=>b.type==='HW'&&b.diff!=null).map(b=>b.diff),lw=bench.filter(b=>b.type==='LW'&&b.diff!=null).map(b=>b.diff);
+  const rms=a=>Math.sqrt(a.reduce((s,x)=>s+x*x,0)/a.length);
+  $('bSummary').textContent=(hw.length?`High turns: n=${hw.length}, mean ${Math.round(hw.reduce((a,b)=>a+b,0)/hw.length)} min, RMS ${Math.round(rms(hw))} min. `:'')+(lw.length?`Low turns: n=${lw.length}, mean ${Math.round(lw.reduce((a,b)=>a+b,0)/lw.length)} min, RMS ${Math.round(rms(lw))} min. `:'')+'Positive = prediction later/higher than observed.';
+}
+function nowLocalInput(){const d=B.hToDate(B.nowH());return d.toISOString().slice(0,16);}
+$('bTime').value=nowLocalInput();$('bNow').onclick=()=>{$('bTime').value=nowLocalInput();};
+$('bAdd').onclick=()=>{
+  const v=$('bTime').value;if(!v){alert('Set a time');return;}const [dd,tt]=v.split('T');const [y,m,d]=dd.split('-').map(Number);const [hh,mi]=tt.split(':').map(Number);
+  const add=(km,place,lat,lon)=>{const type=$('bType').value;const val=$('bVal').value===''?null:+$('bVal').value;
+    if((type==='LVL_AHD'||type==='LVL_LOCAL')&&val==null){alert('Enter the reading (m)');return;}
+    bench.push({id:Date.now(),logged:B.fmtDT(B.nowH()),t:B.dateToH(y,m,d,hh,mi),km:+km.toFixed(3),place,lat,lon,type,value:val,note:$('bNote').value,applied:false});
+    saveBench();renderBench();$('bNote').value='';$('bVal').value='';};
+  if($('bLoc').value==='gps'){if(!navigator.geolocation){alert('No GPS');return;}navigator.geolocation.getCurrentPosition(p=>{const s=B.snap(p.coords.latitude,p.coords.longitude);add(s.km,`GPS (${s.line}, ${Math.round(s.offKm*1000)} m off line)`,p.coords.latitude,p.coords.longitude);},e=>alert('GPS failed: '+e.message),{enableHighAccuracy:true,timeout:20000});}
+  else{const pt=B.pointAtKm(st.km);add(st.km,st.landmark||('km '+st.km.toFixed(2)),pt[0],pt[1]);}
+};
+const CSVH=['id','logged_aest','obs_time_aest','km','place','lat','lon','type','value_m','note','pred_time_aest','pred_value_m_ahd','pred_minus_obs','applied'];
+const q=s=>{s=String(s==null?'':s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+$('bExp').onclick=()=>{const rows=[CSVH.join(',')].concat(bench.map(b=>[b.id,b.logged,B.fmtDT(b.t),b.km,b.place,b.lat??'',b.lon??'',b.type,b.value??'',b.note,b.predT!=null?B.fmtDT(b.predT):'',b.predV!=null?b.predV.toFixed(3):'',b.diff!=null?(b.type==='HW'||b.type==='LW'?Math.round(b.diff):b.diff.toFixed(3)):'',b.applied?1:0].map(q).join(',')));
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='baffle-benchmarks-'+B.dayStr(B.nowH())+'.csv';a.click();};
+function parseCSV(txt){const out=[];let row=[],f='',inq=false;for(let i=0;i<txt.length;i++){const c=txt[i];if(inq){if(c==='"'){if(txt[i+1]==='"'){f+='"';i++;}else inq=false;}else f+=c;}else if(c==='"')inq=true;else if(c===','){row.push(f);f='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&txt[i+1]==='\n')i++;row.push(f);out.push(row);row=[];f='';}else f+=c;}if(f!==''||row.length){row.push(f);out.push(row);}return out;}
+$('bImp').onchange=async e=>{const file=e.target.files[0];if(!file)return;const rows=parseCSV(await file.text());const h=rows.shift().map(s=>s.trim());const ix=k=>h.indexOf(k);let n=0;
+  for(const r of rows){if(r.length<5)continue;const ot=r[ix('obs_time_aest')];const m=/(\d{4})-(\d\d)-(\d\d)[ T](\d\d):(\d\d)/.exec(ot||'');if(!m)continue;
+    const id=+r[ix('id')]||Date.now()+n;if(bench.some(b=>b.id===id))continue;
+    bench.push({id,logged:r[ix('logged_aest')],t:B.dateToH(+m[1],+m[2],+m[3],+m[4],+m[5]),km:+r[ix('km')],place:r[ix('place')],lat:r[ix('lat')]?+r[ix('lat')]:null,lon:r[ix('lon')]?+r[ix('lon')]:null,type:r[ix('type')],value:r[ix('value_m')]===''?null:+r[ix('value_m')],note:r[ix('note')],applied:r[ix('applied')]==='1'});n++;}
+  saveBench();renderBench();render();alert('Imported '+n+' observations');e.target.value='';};
+$('bClear').onclick=()=>{if(confirm('Delete all logged observations on this device?')){bench=[];saveBench();renderBench();render();}};
+
+/* ---- main render ---- */
+function render(){
+  const km=st.km;localStorage.setItem('bt_km',km);localStorage.setItem('bt_hoff',$('hoff').value);localStorage.setItem('bt_badj',$('badj').value);
+  const t0=dayH(),t1=t0+24,o=opts();
+  const P=B.predictAt(km,t0-6,t1+6,o);const cal=P.cal;const pt=B.pointAtKm(Math.min(km,B.MAXKM));
+  $('kmLbl').textContent=km.toFixed(2)+' km from mouth';
+  $('locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${km.toFixed(2)} km up Baffle Creek from the mouth · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
+  let warn='';
+  if(st.gps&&st.gps.offKm>1.5)warn+='<div class="notice err">Your GPS position is '+st.gps.offKm.toFixed(1)+' km from the creek centreline — snapped to the nearest point; check this is right.</div>';
+  if(cal.beyond)warn+='<div class="notice">Above Essendean Bridge (the last calibration point). Tidal limit unknown — values held at Essendean’s, timing likely later and range smaller or nil. Great place to benchmark.</div>';
+  else if(cal.est)warn+='<div class="notice info">Between calibration points '+esc(cal.nodeA.name)+' and '+esc(cal.nodeB.name)+' ('+(cal.nodeB.km-cal.nodeA.km).toFixed(0)+' km apart) — interpolated, uncertainty larger. A benchmark here would help a lot.</div>';
+  if(cal.corr&&(cal.corr.hw||cal.corr.lw||cal.corr.lv))warn+=`<div class="notice info">Your applied benchmarks shift this spot: HW ${Math.round(cal.corr.hw)} min, LW ${Math.round(cal.corr.lw)} min, level ${cal.corr.lv.toFixed(2)} m.</div>`;
+  $('locWarn').innerHTML=warn;
+  // stats
+  $('dayTitle').textContent=B.fmtDay(t0+12,true)+' — '+(st.landmark||('km '+km.toFixed(1)));
+  const day=P.ext.filter(e=>e.t>=t0&&e.t<t1);P.day=day;
+  const cards=day.map(e=>`<div class="stat"><small>${e.hi?'High':'Low'}${e.weak?' (weak/none)':''}${cal.trunc&&!e.hi?' (pool level)':''}</small><b class="${e.hi?'hw':'lw'}">${B.fmtT(e.t)} <span class="mut" style="font-size:.75rem">${fmtU(e.u)}</span></b><small>${lvl(e.h)} AHD${e.hi&&e.rise!=null?' · rise '+Math.max(0,e.rise).toFixed(2)+' m':''}</small></div>`);
+  const nh=B.nowH();let nowTxt='';if(nh>=t0&&nh<t1){const v=P.curve(nh),v2=P.curve(nh+0.25);if(v!=null)nowTxt=`<div class="stat"><small>Now (${B.fmtT(nh)})</small><b>${lvl(v)} AHD</b><small>${v2>v+0.005?'rising ↑':v2<v-0.005?'falling ↓':'near slack'}</small></div>`;}
+  const mouth=B.predictAt(0,t0,t1,o).inWin;
+  const off=B.officialHiLo(t0,t1);
+  $('stats').innerHTML=nowTxt+cards.join('')+`<div class="stat"><small>Mouth (model)</small><b style="font-size:.85rem">${mouth.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)).join(' · ')}</b><small>${off.length?'Official MSQ Bundaberg: '+off.map(e=>(e.hi?'H ':'L ')+B.fmtT(e.t)+' '+e.h.toFixed(2)).join(' · ')+' m LAT':'Official MSQ times embedded for 2026 only'}</small></div>`;
+  drawChart(P,t0,t1,o);
+  // week
+  const W=B.predictAt(km,t0,t0+24*7,o).inWin;const byDay={};W.forEach(e=>{const k=B.dayStr(e.t);(byDay[k]=byDay[k]||[]).push(e);});
+  $('week').innerHTML='<tr><th>Day</th><th>Highs</th><th>Lows</th></tr>'+Object.keys(byDay).map(k=>{const es=byDay[k];const d=es[0].t;return `<tr><td>${B.fmtDay(d)}</td><td class="hw">${es.filter(e=>e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+(e.weak?' weak':'')+'</span>').join('<br>')}</td><td class="lw">${es.filter(e=>!e.hi).map(e=>B.fmtT(e.t)+' <span class="mut">'+lvl(e.h)+'</span>').join('<br>')}</td></tr>`;}).join('')+`<tr><td colspan="3" class="mut">Timing uncertainty here: highs ${fmtU(cal.hwU)}, lows ${fmtU(cal.lwU)}. Heights m AHD.</td></tr>`;
+  // stretch
+  $('stretch').innerHTML='<tr><th>Place</th><th>km</th><th>Highs</th><th>Lows</th><th>±</th></tr>'+B.LANDMARKS.map((l,i)=>{const p=B.predictAt(l.km,t0,t1,o);const c=p.cal;
+    const tags=(l.cal?'<span class="tag cal">cal</span>':'')+(c.est?'<span class="tag warn">est</span>':'');
+    return `<tr class="click${Math.abs(l.km-km)<0.01?' sel':''}" data-i="${i}"><td>${esc(l.name)}${tags}${l.note?'<br><span class="mut">'+esc(l.note)+'</span>':''}</td><td>${l.km.toFixed(1)}</td><td class="hw">${p.inWin.filter(e=>e.hi).map(e=>B.fmtT(e.t)+(e.weak?'*':'')).join('<br>')}</td><td class="lw">${p.inWin.filter(e=>!e.hi).map(e=>B.fmtT(e.t)).join('<br>')}</td><td class="mut">H ${Math.round(c.hwU)}′<br>L ${Math.round(c.lwU)}′</td></tr>`;}).join('')+'<tr><td colspan="5" class="mut">* weak/no visible high expected (tide doesn’t clear the upper-creek pool level). Lows above ~30 km are a pool level, not a true low.</td></tr>';
+  $('stretch').querySelectorAll('tr[data-i]').forEach(tr=>tr.onclick=()=>{const l=B.LANDMARKS[+tr.dataset.i];selectKm(l.km,l.name);});
+}
+function drawChart(P,t0,t1,o){
+  const svg=$('chart'),W=960,H=320,L=44,R=14,T=14,Bm=40,pw=W-L-R,ph=H-T-Bm;
+  const ts=[];for(let t=t0;t<=t1+1e-9;t+=0.1)ts.push(t);
+  const M=B.predictAt(0,t0-6,t1+6,o),E=B.predictAt(35.25,t0-6,t1+6,o);
+  const series=[[M.curve,'#5cc8ff',1.5,''],[E.curve,'#ff7b6b',1.5,'6 4'],[P.curve,'#f0a03a',3,'']];
+  let mn=1e9,mx=-1e9;for(const [f] of series)for(const t of ts){const v=f(t);if(v!=null){mn=Math.min(mn,v);mx=Math.max(mx,v);}}
+  mn=Math.floor(mn*4)/4;mx=Math.ceil(mx*4)/4;
+  const x=t=>L+(t-t0)/(t1-t0)*pw,y=v=>T+ph-(v-mn)/(mx-mn)*ph;
+  let s='';
+  for(let v=mn;v<=mx+1e-9;v+=0.25)s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#25464b" ${Math.abs(v)<1e-9?'':'stroke-dasharray="3 4"'}/><text x="${L-5}" y="${y(v)+4}" fill="#9db5b1" font-size="11" text-anchor="end">${v.toFixed(2)}</text>`;
+  for(let h=0;h<=24;h+=3)s+=`<text x="${x(t0+h)}" y="${H-Bm+16}" fill="#9db5b1" font-size="11" text-anchor="middle">${h===24?'':B.fmtT(t0+h).replace(':00','')}</text>`;
+  // uncertainty bands for selected extremes
+  for(const e of P.day){const u=e.u/60;s+=`<rect x="${Math.max(L,x(e.t-u))}" y="${T}" width="${Math.max(0,Math.min(W-R,x(e.t+u))-Math.max(L,x(e.t-u)))}" height="${ph}" fill="${e.hi?'#5cc8ff':'#c9b6ff'}" opacity=".07"/>`;}
+  for(const [f,col,w,da] of series){const pts=ts.map(t=>{const v=f(t);return v==null?null:`${x(t).toFixed(1)},${y(v).toFixed(1)}`;}).filter(Boolean);s+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${col}" stroke-width="${w}" ${da?`stroke-dasharray="${da}"`:''}/>`;}
+  for(const e of P.day){s+=`<circle cx="${x(e.t)}" cy="${y(e.h)}" r="4.5" fill="#f0a03a"/><text x="${x(e.t)}" y="${y(e.h)+(e.hi?-10:18)}" fill="#ffe2b8" font-size="12" text-anchor="middle">${e.hi?'H':'L'} ${B.fmtT(e.t)}</text>`;}
+  const nh=B.nowH();if(nh>=t0&&nh<t1)s+=`<line x1="${x(nh)}" x2="${x(nh)}" y1="${T}" y2="${T+ph}" stroke="#57d18a" stroke-width="1.5"/><text x="${x(nh)+3}" y="${T+12}" fill="#57d18a" font-size="11">now</text>`;
+  s+=`<text x="${L}" y="${H-6}" fill="#9db5b1" font-size="11">m AHD</text>`;
+  svg.innerHTML=s;}
+function selectKm(km,name){st.km=Math.max(0,Math.min(B.MAXKM,km));st.landmark=name||null;st.gps=null;$('km').value=st.km;const i=B.LANDMARKS.findIndex(l=>l.name===name);$('lm').value=i>=0?i:'';render();}
+$('km').oninput=()=>{st.km=+$('km').value;st.landmark=null;st.gps=null;$('lm').value='';render();};
+$('lm').onchange=()=>{if($('lm').value==='')return;const l=B.LANDMARKS[+$('lm').value];selectKm(l.km,l.name);};
+['date','hoff','badj'].forEach(id=>$(id).onchange=()=>{render();renderBench();});
+$('gps').onclick=()=>{if(!navigator.geolocation){alert('Geolocation not supported');return;}$('gps').disabled=true;
+  navigator.geolocation.getCurrentPosition(p=>{$('gps').disabled=false;const s=B.snap(p.coords.latitude,p.coords.longitude);st.km=Math.min(B.MAXKM,s.km);st.landmark='GPS fix';st.gps={lat:p.coords.latitude,lon:p.coords.longitude,offKm:s.offKm,line:s.line};$('km').value=st.km;$('lm').value='';render();},
+  e=>{$('gps').disabled=false;alert('GPS failed: '+e.message);},{enableHighAccuracy:true,timeout:20000,maximumAge:60000});};
+/* ---- live Bundaberg (DES storm tide CSV, CORS-enabled) ---- */
+$('live').onclick=async()=>{const out=$('liveOut');out.textContent='Loading…';
+  try{const r=await fetch('https://apps.des.qld.gov.au/data-sets/storm-tides/stdtide-7dayopdata.csv');const txt=await r.text();
+    const rows=txt.split('\n').filter(l=>l.startsWith('bundaberg,')).map(l=>l.split(',')).map(p=>({t:B.dateToH(...p[2].match(/\d+/g).map(Number)),o:+p[3],p:+p[4],res:+p[5]})).filter(r=>r.o>-1&&r.o<7);
+    if(!rows.length)throw new Error('no Bundaberg rows');const last=rows[rows.length-1];const recent=rows.filter(r=>r.t>last.t-6);const mres=recent.reduce((a,b)=>a+b.res,0)/recent.length;
+    let se=0;rows.forEach(r=>{se+=(B.bundH(r.t)-r.o)**2;});const rms=Math.sqrt(se/rows.length);
+    out.innerHTML=`Bundaberg gauge latest <b>${B.fmtDT(last.t)}</b>: observed ${last.o.toFixed(2)} m LAT (${(last.o-1.693).toFixed(2)} m AHD), MSQ predicted ${last.p.toFixed(2)} → residual <b>${last.res>=0?'+':''}${last.res.toFixed(2)} m</b> (6-h mean ${mres>=0?'+':''}${mres.toFixed(2)} m). This app's harmonic model vs the last ${rows.length} observations: RMS ${rms.toFixed(3)} m. <button class="sm" id="applyRes">Use ${mres.toFixed(2)} m as height offset</button>`;
+    $('applyRes').onclick=()=>{$('hoff').value=mres.toFixed(2);render();renderBench();};
+  }catch(e){out.innerHTML='<span class="pos">Couldn’t load live data ('+esc(e.message)+'). Offline? Predictions still work.</span>';}};
+/* nodes table */
+$('nodesTbl').innerHTML='<table><tr><th>km</th><th>Node</th><th>HW lag</th><th>LW lag</th><th>Source</th></tr>'+B.NODES.map(n=>`<tr><td>${n.km}</td><td>${esc(n.name)}</td><td>+${Math.floor(n.hwLag/60)}:${String(n.hwLag%60).padStart(2,'0')} ±${n.hwU}′</td><td>+${Math.floor(n.lwLag/60)}:${String(n.lwLag%60).padStart(2,'0')} ±${n.lwU}′</td><td class="mut">${esc(n.src)}</td></tr>`).join('')+'</table><p class="mut">Lags are after the Bundaberg (Burnett Heads) high/low.</p>';
+const i0=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01);if(i0>=0){st.landmark=B.LANDMARKS[i0].name;$('lm').value=i0;}
+render();renderBench();document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>

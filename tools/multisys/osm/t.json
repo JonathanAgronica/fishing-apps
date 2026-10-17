@@ -1,0 +1,44 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-09T23:16:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 361152410,
+  "tags": {
+    "natural": "wetland"
+  }
+},
+{
+  "type": "relation",
+  "id": 4069574,
+  "tags": {
+    "natural": "wetland",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 4094068,
+  "tags": {
+    "natural": "wetland",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 4096481,
+  "tags": {
+    "natural": "wetland",
+    "source": "Bing",
+    "type": "multipolygon"
+  }
+}
+
+  ]
+}

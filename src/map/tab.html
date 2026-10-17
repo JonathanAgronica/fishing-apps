@@ -1,0 +1,29 @@
+<div id="mMig"></div>
+<section class="card mcard">
+  <div class="row mbar">
+    <div class="mseg" id="mLayers"><button data-l="sat">🛰 Satellite</button><button data-l="osm">🗺 Street</button><button data-l="none">▫ None</button></div>
+    <span style="flex:1"></span>
+    <button class="sm" id="mMe">📍 Me</button><button class="sm" id="mAdd">➕ Add spot</button>
+  </div>
+  <div id="mWrap"><div id="mMap" role="application" aria-label="River map"><div class="mload"><span class="spin"></span> Loading map…</div></div><div id="mHint"></div></div>
+  <div class="row mbar2">
+    <label class="mut">Colour creek <select id="mColour"><option value="off">off</option><option value="bite">by bite score</option><option value="tide">by tide stage</option></select></label>
+    <input type="range" id="mTime" min="0" max="95" step="1" aria-label="Time of day">
+    <span id="mTimeLbl" class="mut"></span>
+  </div>
+  <div id="mLegend" class="mut"></div>
+  <p class="mut" style="margin:6px 0 0"><b>Long-press</b> the map near the creek (or tap <b>➕ Add spot</b>, then tap) to drop your own named spot — it snaps to the creek centreline for tide timing but keeps the exact point you tapped. Drag your pins to move them. Give each spot a <b>type</b> — Run-in (RI, yellow), Top of tide (TOT, green), Bottom of tide (BOT, purple) or Run-out (RO, pink) — and its bite score favours that stage of its own tide. Tap any spot for its next high/low/run-in start and bite score. Your spots appear in Bite times, Tides and the Catch log too.</p>
+</section>
+<section class="card">
+  <h2>⭐ My spots <span class="mut" id="mCount"></span></h2>
+  <div id="mList"></div>
+  <div class="row" style="margin-top:8px">
+    <button class="sm" id="mExport">⬇ Backup spots (JSON)</button>
+    <label class="sm cfile">⬆ Restore spots<input type="file" id="mImport" accept=".json,application/json" hidden></label>
+    <span class="mut" id="mIoMsg"></span>
+  </div>
+  <p class="mut" style="margin:8px 0 0">🔒 Your spots, names, notes and exact positions are stored <b>only on this phone</b> (also included in the Catch log CSV export for backup). Community sharing never sends spot names or coordinates — only the ~2 km creek stretch.</p>
+</section>
+<section class="card">
+  <details id="mBuiltDet"><summary><b>Rename built-in landmarks</b> <span class="mut">(personal display name — tide calibration unchanged)</span></summary><div id="mBuiltins" style="margin-top:8px"></div></details>
+</section>

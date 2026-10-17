@@ -1,0 +1,1 @@
+[out:json][timeout:600];(way[natural=wetland][wetland~"^(mangrove|saltmarsh|tidalflat)$"](-24.6,151.6,-24.0,153.6););out geom qt;

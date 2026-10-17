@@ -1,0 +1,1 @@
+[out:json][timeout:800];(way[highway][bridge=yes][highway!~"^(footway|path|cycleway|service|track|steps|pedestrian)$"](-27.6,151.6,-24.0,153.6);way[railway][bridge=yes](-27.6,151.6,-24.0,153.6););out center tags;

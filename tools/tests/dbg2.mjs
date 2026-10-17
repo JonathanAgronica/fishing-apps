@@ -1,0 +1,12 @@
+import puppeteer from 'puppeteer-core';
+const b=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox']});
+const p=await b.newPage();p.on('pageerror',e=>console.log('PE',e.message));p.on('console',m=>console.log('C',m.text()));
+await p.setViewport({width:400,height:850,deviceScaleFactor:2,isMobile:true,hasTouch:true});
+await p.goto('http://localhost:18080/fishing-apps/#gauges',{waitUntil:'networkidle0'});await p.waitForSelector('body[data-gauges-ready="1"]');
+await p.evaluate(()=>{const s=document.querySelector('#gChart');['pointerdown','pointermove','pointerup','pointercancel'].forEach(t=>s.addEventListener(t,e=>console.log(t,e.pointerType,e.clientX)));});
+const box=await (await p.$('#gChart')).boundingBox();console.log(JSON.stringify(box));
+await p.touchscreen.tap(box.x+box.width*0.6,box.y+120);await new Promise(r=>setTimeout(r,300));
+console.log('tip',await p.evaluate(()=>document.querySelector('#gTip').innerText));
+await p.mouse.move(box.x+300,box.y+100);await p.mouse.down();await p.mouse.move(box.x+150,box.y+100,{steps:5});await p.mouse.up();
+console.log(JSON.stringify(await p.evaluate(()=>window.__FT_GAUGES().view)));
+await b.close();

@@ -1,0 +1,1 @@
+[out:json][timeout:800];(node[waterway~"^(weir|dam|lock_gate)$"](-27.6,151.6,-24.0,153.6);way[waterway~"^(weir|dam|lock_gate)$"](-27.6,151.6,-24.0,153.6);node[man_made=weir](-27.6,151.6,-24.0,153.6););out center tags;

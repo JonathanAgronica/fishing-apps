@@ -1,0 +1,9 @@
+details.dc{margin:6px 0}
+details.dc>summary{cursor:pointer;color:var(--mut,#9db5b1);font-size:.86rem;padding:4px 0;list-style:none}
+details.dc>summary::-webkit-details-marker{display:none}
+details.dc>summary::before{content:'▸';display:inline-block;width:1em;transition:transform .15s}
+details.dc[open]>summary::before{transform:rotate(90deg)}
+.dcard>details.dc{margin:0}.dcard>details.dc>summary{color:var(--ink,#e8f1ef);font-size:1.02rem;font-weight:700}
+.dcard>details.dc>summary .dch{font-weight:700}
+.dcard{padding-top:10px;padding-bottom:10px}
+.sysbar .ftspot{flex:1 1 150px}

@@ -1,0 +1,1 @@
+[out:json][timeout:800];(way[natural=wetland][wetland~"^(mangrove|saltmarsh|tidalflat)$"](-27.6,151.6,-24.0,153.6);relation[natural=wetland][wetland~"^(mangrove|saltmarsh|tidalflat)$"](-27.6,151.6,-24.0,153.6););out geom qt;

@@ -1,0 +1,1 @@
+{ "name": "fishing-apps-tests", "private": true, "description": "puppeteer-core UI/regression tests for Mac's Jacks (run against http://localhost:18080/{fishing-apps,test-apps}/)", "dependencies": { "puppeteer-core": "*" } }

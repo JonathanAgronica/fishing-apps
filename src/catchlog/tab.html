@@ -1,0 +1,89 @@
+<section class="card" id="cActiveCard">
+  <h2>📝 Catch log <span class="mut" id="cCount"></span></h2>
+  <div id="cActive"></div>
+  <div class="row" id="cStartRow">
+    <button class="pri" id="cStart">▶ Start session now</button>
+    <button id="cQuick">🐟 Quick log a catch now</button>
+    <button id="cPastBtn">🗓 Log a past session</button>
+    <button id="cCatchOnlyBtn">🎣 Log catch only</button>
+  </div>
+  <p class="mut" style="margin:8px 0 0">Log every session, including ones with <b>no bites</b> — catch <i>rate</i> per hour is what tests the bite-time predictions. The predicted score, tide stage (minutes from run-in start), light, solunar, moon and tide source are attached automatically (weather too if Bite times has the forecast loaded for that spot).</p>
+</section>
+
+<section class="card" id="cFormCard" hidden>
+  <h2 id="cFormTitle">Session</h2>
+  <div class="row"><b style="min-width:52px">Spot</b>
+    <button class="sm" id="cGps">📡 GPS</button><button class="sm" id="cBiteSpot">🎣 Bite-times spot</button>
+    <select id="cSpotSel" style="flex:1 1 220px"></select></div>
+  <div class="row" style="margin-top:6px"><input type="text" id="cSpotName" placeholder="Spot name (optional — stays on this phone)"></div>
+  <div class="src" id="cSpotInfo"></div>
+  <div class="row" id="cSessRow" style="margin-top:10px">
+    <label class="mut">Start <input type="datetime-local" id="cS0" step="60"></label>
+    <label class="mut" id="cEndLab">End <input type="datetime-local" id="cS1" step="60"></label>
+  </div>
+  <div class="row" id="cCaughtRow" style="margin-top:8px"><b>Caught anything?</b>
+    <label class="cyn"><input type="radio" name="cCaught" id="cYesBites" value="y"> Yes</label>
+    <label class="cyn"><input type="radio" name="cCaught" id="cNoBites" value="n"> No — blank session</label>
+  </div>
+  <div id="cSessExtra"><div class="row" style="margin-top:8px">
+    <label class="mut">Bait / lure <select id="cBaitCat"></select></label>
+    <input type="text" id="cBait" placeholder="details e.g. 4&quot; prawn plastic (stays on phone)">
+  </div>
+  <div class="row" style="margin-top:6px"><input type="text" id="cNote" placeholder="Note (stays on this phone)"></div></div>
+  <div id="cCatchSec"><h3 class="ch3" id="cCatchH">Bites &amp; catches</h3>
+  <div id="cCatchList"></div>
+  <div class="cadd">
+    <div class="row">
+      <label class="mut"><span id="cCtLab">Time</span> <input type="datetime-local" id="cCt" step="60"></label>
+      <button class="sm" id="cCtNow">now</button>
+      <select id="cSp"></select>
+      <label class="mut">Count <input type="number" id="cN" min="1" max="20" value="1" style="width:64px"></label>
+      <label class="mut">Length <input type="number" id="cLen" min="1" max="150" step="0.5" placeholder="cm" style="width:76px"></label>
+      <select id="cFate"></select>
+      <input type="text" id="cColour" list="cColourL" placeholder="Lure colour (optional)" style="flex:1 1 140px"><datalist id="cColourL"></datalist>
+    </div>
+    <div class="row" style="margin-top:6px"><input type="text" id="cCnote" placeholder="Catch note (optional, stays on phone)"><button id="cAddCatch">＋ Add bite/catch</button></div>
+  </div></div>
+  <div class="row" style="margin-top:12px">
+    <button class="pri" id="cSave">💾 Save session</button><button id="cCancel">Cancel</button>
+    <span class="mut" id="cFormMsg"></span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>🔒 Sharing</h2>
+  <label class="cshare"><input type="checkbox" id="cShareOn"> <b>Share my catches anonymously (only creek stretch, never GPS)</b></label>
+  <div class="mut" id="cShareInfo" style="margin-top:6px"></div>
+  <details style="margin-top:6px"><summary class="mut">Privacy — what is shared?</summary><div class="mut" id="cPrivacy" style="margin-top:6px">
+    Your log (incl. exact GPS, spot names, notes and bait details) and your own map spots &amp; renamed landmarks are stored <b>only on this phone</b>. If you turn sharing on, each saved session is sent with only:
+    the river system and ~2 km stretch (e.g. “km 4–6, Winfield–Flat Rock” on Baffle Creek, “km 0–2, Burnett River”) or, off the mapped channels, a broad area (e.g. “Off-creek: near Noosa River”); times rounded to 15-minute slots;
+    species, counts, kept/released, longest length; bait <i>type</i>; the app’s predicted score / tide / light / solunar / moon / wind values; and a random anonymous id (no name, account, device id or GPS).
+    Submissions go through a public no-account relay (ntfy.sh) to the app’s maintainer box, which validates them and publishes the combined table as
+    <a href="https://github.com/JonathanAgronica/fishing-apps/blob/main/data/catches.csv" target="_blank" rel="noopener">data/catches.csv</a> (public). Deleting a shared session here also removes it from the shared table at the next update.
+  </div></details>
+</section>
+
+<section class="card">
+  <h2>📊 My results <span class="mut" id="cMySum"></span></h2>
+  <div class="row cseg" id="cMyViews"></div>
+  <div id="cMyCharts"></div>
+</section>
+
+<section class="card">
+  <h2>🌐 Community <span class="mut" id="cComSum"></span></h2>
+  <div id="cComHead"></div>
+  <div class="row cseg" id="cComViews"></div>
+  <div id="cComCharts"></div>
+  <p class="mut" id="cComNote" style="margin:8px 0 0"></p>
+</section>
+
+<section class="card">
+  <h2>🗂 My sessions</h2>
+  <div id="cList"></div>
+  <div class="row" style="margin-top:10px">
+    <button class="sm" id="cExport">⬇ Export CSV</button>
+    <label class="sm cfile">⬆ Import CSV<input type="file" id="cImport" accept=".csv,text/csv" hidden></label>
+    <span class="mut" id="cIoMsg"></span>
+    <details class="mut" style="margin-top:6px"><summary>Import old catches (any year back to 1990)</summary>A plain CSV with a header row works, e.g.<br><code>date,time,spot,km,caught,count,size,species,hours,notes<br>2014-03-08,6pm,Flat Rock Rd ramp,,y,2,48cm,jack,3,run-in<br>12/01/2009,dawn,,22.5,n,,,,2,</code><br>Only <b>date</b> is required. Dates: YYYY-MM-DD or DD/MM/YYYY. Times can be rough (18:30, 6pm, dawn, dusk, morning, arvo, night; blank = 7am). Spot = a landmark or My-spot name, or give <b>km</b> (plus <b>line</b> for side creeks, e.g. mosq / Mosquito, with km from its junction). caught y/n; size in cm (mm/inch ok); optional <b>colour</b> = lure colour; hours defaults to 2; a row with a catch but no hours becomes a <b>catch-only</b> 30-min entry centred on the time (presence-only in the stats). Tide, moon, solunar &amp; sun are computed from the model; weather is marked unknown for old dates. Re-importing the same file skips duplicates.</details>
+  </div>
+</section>

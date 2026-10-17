@@ -1,0 +1,12 @@
+.lsw{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid #ffffff55;vertical-align:-2px;margin-right:3px;flex:none}
+.lure .lchs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.lch{display:inline-flex;align-items:center;gap:2px;background:#0d1f22;border:1px solid #2b5157;border-radius:14px;padding:3px 9px 3px 5px;font-size:.84rem}
+.lch .lsw{width:16px;height:16px}
+.lure .mut{font-size:.8rem}
+.lure1{font-size:.76rem;color:var(--mut,#9db5b1);margin-top:2px;line-height:1.35}
+.lure1 .lsw{width:11px;height:11px;margin-right:1px}
+
+.rlg{display:inline-flex;align-items:center;gap:3px;margin-right:6px;white-space:nowrap}.rlg i{display:inline-block;width:14px;height:10px;border-radius:3px;border:1px solid #0008}
+.rbadge{display:inline-block;min-width:1.7em;text-align:center;border-radius:8px;padding:0 4px;font-weight:700;box-shadow:0 0 0 1px #0007}
+.mysc.rbadge{padding:2px 4px}
+.mpin-sc{box-shadow:0 0 0 1.5px #0b1416!important;border:1.5px solid #fff!important}

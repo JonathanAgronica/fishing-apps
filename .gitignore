@@ -1,0 +1,4 @@
+# box-local helpers (never commit)
+tools/tests/node_modules
+__pycache__/
+*.pyc

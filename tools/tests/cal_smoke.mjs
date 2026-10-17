@@ -1,0 +1,11 @@
+import puppeteer from 'puppeteer-core';
+const BASE=process.env.BASE||'http://localhost:18080/test-apps/',SYS=process.env.SYS||'baffle';
+const b=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox']});
+const p=await (await b.createBrowserContext()).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'||m.type()==='warning')errs.push(m.type()+': '+m.text());});
+await p.setBypassServiceWorker(true);await p.setViewport({width:400,height:860,deviceScaleFactor:2,isMobile:true,hasTouch:true});
+const t0=Date.now();await p.goto(BASE+'?sys='+SYS+'#cal',{waitUntil:'networkidle0'});
+await p.waitForSelector('body[data-cal-done]:not([data-cal-done=""])',{timeout:600000});
+console.log('done in',(Date.now()-t0)/1000,'s');
+const r=await p.evaluate(()=>({perf:FT.cal.st.perf,mode:FT.cal.st.mode,pts:FT.cal.st.pts.length,first:Object.keys(FT.cal.st.data).sort().slice(0,3).map(d=>[d,FT.cal.cellVal(d)]),n:Object.keys(FT.cal.st.data).length}));
+console.log(JSON.stringify({...r,perf:{...r.perf,blocks:r.perf.blocks.slice(0,3)}},null,0));
+await p.screenshot({path:'/tmp/cal-smoke.png'});console.log(errs);await b.close();

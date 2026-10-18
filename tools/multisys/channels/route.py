@@ -215,6 +215,11 @@ def refine(C, L, parent=None, G=None):
 # lines kept as mapped after visual QA against imagery (reason recorded in the overlay)
 KEEP = {
     'pumicestone-passage/M': 'kept: wide clear-water passage - seagrass beds read as deep in the optical depth proxy and pulled the route onto the western flats; the mapped line is inside the low-tide channel',
+    'burpengary-creek/T1': 'kept: re-route chased residential lakes / ponds beside the creek',
+    'eli-creek/M': 'kept: narrow urban creek, the 10 m water mask picks up ponds and drains',
+    'eprapah-creek/M': 'kept: re-route jumped to a different branch near the mouth',
+    'mary-river/M': 'kept: re-route took the side anabranch around a mid-river island',
+    'noosa-river/M': 'kept: re-route short-cut over a vegetated strip into the lake; mapped line follows the channel',
     'burnett-river/T7': 'kept: hand-traced 2026-10 from imagery; the island split and an imagery-tile edge confuse the 10 m water mask',
 }
 

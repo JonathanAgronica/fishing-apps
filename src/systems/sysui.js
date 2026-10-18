@@ -76,8 +76,8 @@ const nl=tab.querySelectorAll(':scope > .notice');const last=nl[nl.length-1];if(
 (function(){const FT=window.FT,B=window.BT;if(!B||!B.fedFrom)return;
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const NM=B.TWONM;
-FT.fedInfo=function(km,line){const f=B.fedFrom(km,line||'M');if(!f)return null;const c=B.calAt(km,{line:line||'M'});const n=Math.round(f.n*100),s=100-n;
-  let g=c.est?(f.side?'C':'B'):'A';if(NM.gradeCap&&g<NM.gradeCap)g=NM.gradeCap;return{n,s,g,est:!!c.est,side:f.side,x:f.x,dom:n>=60?NM.nWord+' ('+NM.nName+')':s>=60?NM.sWord+' ('+NM.sName+')':'both ends (tidal node)'};};
+FT.fedInfo=function(km,line){const f=B.fedFrom(km,line||'M');if(!f)return null;const N=f.nm||NM;const c=B.calAt(km,{line:line||'M'});const n=Math.round(f.n*100),s=100-n;
+  let g=c.est?(f.side?'C':'B'):'A';if(N.gradeCap&&g<N.gradeCap)g=N.gradeCap;return{n,s,g,est:!!c.est,side:f.side,x:f.x,node:f.node,nm:N,dom:n>=60?N.nWord+' ('+N.nName+')':s>=60?N.sWord+' ('+N.sName+')':'both ends (tidal node)'};};
 FT.twoNote=function(km,line){const i=FT.fedInfo(km,line);if(!i)return '';
-  return `<div class="fed" data-fed="${i.n}">🌊 <b>Fed from:</b> ${esc(NM.nWord)} ${i.n}% / ${esc(NM.sWord)} ${i.s}% — ${esc(i.dom)}${i.side?' (via the creek junction at passage km '+i.x.toFixed(1)+')':''} · accuracy <span class="sysconf c${i.g}">${i.g}</span>${i.est?' <b>est.</b>':''}${Math.abs(i.x-B.TWO.node)<3?' · near the tidal node: small range, flattened/late highs':''}</div>`;};
+  return `<div class="fed" data-fed="${i.n}">🌊 <b>Fed from:</b> ${esc(i.nm.nWord)} ${i.n}% / ${esc(i.nm.sWord)} ${i.s}% — ${esc(i.dom)}${i.side?' (via the creek junction at passage km '+i.x.toFixed(1)+')':''} · accuracy <span class="sysconf c${i.g}">${i.g}</span>${i.est?' <b>est.</b>':''}${Math.abs(i.x-i.node)<(i.nm.near||3)?' · near the tidal node: small range, flattened/late highs':''}</div>`;};
 })();

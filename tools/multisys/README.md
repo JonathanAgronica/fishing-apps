@@ -21,8 +21,9 @@ The app build needs nothing else from here.
    - `build/ext_skyring.py` (2026-10-18): adds Skyring Creek (Skyringville) to the Burnett as line T7, a two-entrance
      channel (Burnett via the Hole in the Wall ↔ its own sea mouth; `twoEnt.line = 'T7'`, estimate, grade C on that line).
      Geometry is pinned in `base/geo/skyring_parts.json` (QLD watercourse lines CC BY 4.0 + imagery trace; OSM has no line).
-   - `build/new_pancake.py` (2026-10-18): new system `pancake-creek` (Pancake Ck ↔ Middle Ck two-entrance passage over the
-     Middle Island divide, Jenny Lind Ck with its own entrance, Tanti Ck). MSQ places Pancake Creek and Seventeen Seventy,
+   - `build/new_pancake.py` (2026-10-18): new system `pancake-creek` (Pancake Ck ↔ Middle Ck two-entrance passage, node at the
+     Middle–Pancake junction; Jenny Lind Ck with its own entrance; Tanti Ck; Jenny Lind–Pancake channel as a second
+     two-entrance line via `twoEntMore`, node at the Jenny Lind–Pancake junction). MSQ places Pancake Creek and Seventeen Seventy,
      grade C. Geometry pinned in `base/geo/pancake_parts.json`. Helpers shared by both: `build/newsys.py`.
    - Inputs: `base/*.pre-*.json` (pre-extension snapshots, reconstructed from the published output) and
      `base/*.spec.json` (curated or fitted values plus pinned geometry).

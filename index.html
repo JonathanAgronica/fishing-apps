@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610181300"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610181300"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610181300">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610181300">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610181321"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610181321"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610181321">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610181321">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610181300">
+<meta name="app-version" content="202610181321">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -785,7 +785,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610181300</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610181321</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1562,7 +1562,10 @@ function makeSystemBT(S){
   const dl=LANDMARKS.filter(l=>l.line==='M'&&l.km>0.2&&(l.ramp||l.cal));const DEFKM=dl.length?dl[0].km:Math.min(1,LMAX.M);
   const R=Object.assign({},B0,{generic:true,SYS:S,bundH:portH,bundExtremes:portExtremes,portH,portExtremes,officialHiLo:()=>[],NODES,calAt,predictAt,runInStarts,
     snap,pointAtKm,pointOnLine,lineName,sameReach,LINES,LANDMARKS,MAXKM,applyCorr,RISE:null,NBY,lineMax,REFKM,REFNAME,DEFKM});
-  return S.twoEnt?addTwoEnt(R,S):R;}
+  let X=S.twoEnt?addTwoEnt(R,S.twoEnt):R;
+  /* further two-entrance channels in the same system (2026-10-18: Pancake Ck ↔ Jenny Lind Ck link): each wraps the previous model and only takes over its own line */
+  if(S.twoEnt&&S.twoEntMore)for(const te of S.twoEntMore)X=addTwoEnt(X,te);
+  return X;}
 /* ===== Two-entrance passages (S.twoEnt, e.g. Pumicestone Passage: Bribie bridge south ↔ Caloundra bar north) =====
    South wave: the normal node model on the base port (calibrated nodes up to TE.X0, then lag growth + attenuation).
    North wave: second port (Mooloolaba) through the north nodes (TE.nn, y = km from the north entrance).
@@ -1578,10 +1581,12 @@ function makePort(H,fuAll){let fc={k:null,v:null};
     for(let t=t0+st;t<=t1+1e-9;t+=st){const c=h(t);if((b>a&&b>=c)||(b<a&&b<=c)){const den=a-2*b+c,off=den?0.5*(a-c)/den:0;out.push({t:t-st+off*st,h:b-0.25*(a-c)*off,hi:b>a});}a=b;b=c;}
     const f=[];for(const x of out){const l=f[f.length-1];if(l&&l.hi===x.hi){if((x.hi&&x.h>l.h)||(!x.hi&&x.h<l.h))f[f.length-1]=x;}else if(l&&Math.abs(l.h-x.h)<0.05){f.pop();}else f.push(x);}return f;}
   return{h,ext};}
-function addTwoEnt(R,S){const TE=S.twoEnt,B=R,NP=makePort(TE.north.harm,B0.fuAll);
+function addTwoEnt(R,TE){const B=R,NP=makePort(TE.north.harm,B0.fuAll),PRIM=!R.TWO,PREV={fedFrom:R.fedFrom,kmBoth:R.kmBoth};
   /* optional fields (defaults = Pumicestone): line = passage line id (km 0 at the 'south' entrance, TE.L at the other end;
      a side channel such as Burnett → Skyring Creek uses its own id), nodeBand = km range with extra node uncertainty,
-     u0 = base ± min (HW, LW) on the passage, est = mark the whole passage as estimated */
+     u0 = base ± min (HW, LW) on the passage, est = mark the whole passage as estimated,
+     nOff = km of the far end along its own creek (labels count 'km from the far entrance' = L − km + nOff),
+     floor = {km,h,span}: the channel drains near km (lows held at h there, fading out over ±span km; highs stay above the lows) */
   const PL=TE.line||'M',NB=TE.nodeBand||[18,30],U0=TE.u0||[12,16];
   const ca0=R.calAt,pa0=R.predictAt,LBY={};R.LINES.forEach(l=>LBY[l.id]=l);
   const NS=R.NBY[PL].filter(n=>n.km<=TE.X0+1e-6);
@@ -1634,6 +1639,8 @@ function addTwoEnt(R,S){const TE=S.twoEnt,B=R,NP=makePort(TE.north.harm,B0.fuAll
     const dH=(cal.hwLag-cal0.hwLag)/60,dL=(cal.lwLag-cal0.lwLag)/60,dLv=cal.lwLvl(1)-cal0.lwLvl(1),dHv=cal.hwLvl(1)-cal0.hwLvl(1);
     const r=blendSide(Math.max(0,Math.min(R.lineMax(line),km)),line,t0,t1,hoff);
     let ext=r.ext.map(e=>e.hi?{t:e.t+dH,h:e.h+dHv,hi:true,u:cal.hwU}:{t:e.t+dL,h:e.h+dLv,hi:false,u:cal.lwU});
+    if(TE.floor){const fl=TE.floor.h-1.5*Math.abs(km-TE.floor.km)/TE.floor.span;for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi)continue;const nb=[ext[i-1],ext[i+1]].filter(x=>x&&x.hi);
+      const cap=nb.length?Math.min(...nb.map(x=>x.h))-0.05:9;if(e.h<fl)e.h=Math.max(e.h,Math.min(fl,cap));}}
     if(cal.trunc){for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi){const nb=[ext[i-1],ext[i+1]].filter(x=>x&&!x.hi);const fl=nb.length?Math.max(...nb.map(x=>x.h)):-9;e.rise=e.h-fl;if(e.h<fl+0.05)e.weak=true;}}}
     const clean=[];for(const e of ext){const l=clean[clean.length-1];if(l&&l.hi===e.hi){if((e.hi&&e.h>l.h)||(!e.hi&&e.h<l.h))clean[clean.length-1]=e;}else clean.push(e);}
     const curve=t=>{let i=0;while(i<clean.length-2&&clean[i+1].t<t)i++;const a=clean[i],b=clean[i+1];if(!a||!b||t<a.t||t>b.t)return null;const f=(t-a.t)/(b.t-a.t);return a.h+(b.h-a.h)*(1-Math.cos(Math.PI*f))/2;};
@@ -1641,13 +1648,14 @@ function addTwoEnt(R,S){const TE=S.twoEnt,B=R,NP=makePort(TE.north.harm,B0.fuAll
   function runInStarts(km,h0,h1,opts){const P=predictAt(km,h0,h1,opts);const tr=P.cal.trunc;
     return P.ext.filter((e,i)=>!e.hi&&e.t>=h0-6&&e.t<=h1+6&&!(tr&&P.ext[i+1]&&P.ext[i+1].weak)).map(e=>({t:e.t,u:e.u,kind:tr?'rise':'low'}));}
   /* "Fed from" for UI: weights at a spot */
-  function fedFrom(km,line){const m=mainX(km,line||'M');if(!m)return null;const w=wN(m.x);return{n:w,s:1-w,x:m.x,side:m.side,node:TE.node};}
+  function fedFrom(km,line){const m=mainX(km,line||'M');if(!m)return PRIM||!PREV.fedFrom?null:PREV.fedFrom(km,line);const w=wN(m.x);const r={n:w,s:1-w,x:m.x,side:m.side,node:TE.node};if(!PRIM)r.nm=NM;return r;}
   /* km labels both ways: from the south entrance (model chainage) and from the Caloundra bar */
-  function kmBoth(km,line){const m=mainX(km,line||'M');if(!m||m.side)return null;return{s:km,n:Math.max(0,TE.L-km)};}
+  function kmBoth(km,line){const m=mainX(km,line||'M');if(!m||m.side)return PRIM||!PREV.kmBoth||m?null:PREV.kmBoth(km,line);return{s:km,n:Math.max(0,TE.L-km)+(TE.nOff||0)};}
   /* display names (defaults = Pumicestone) */
   const NM={line:PL,sName:TE.sName||'Bribie bridge',nName:TE.nName||'Caloundra bar',sWord:TE.sWord||'south',nWord:TE.nWord||'north',sTide:TE.sTide||'Scarborough tide',nTide:TE.nTide||'Mooloolaba tide',sAb:TE.sAb||'S',nAb:TE.nAb||'N',gradeCap:TE.gradeCap||null,
-    gNote:TE.gNote||'Gauges north of the node are compared with the blended model.'};
-  return Object.assign(R,{calAt,predictAt,runInStarts,fedFrom,kmBoth,TWO:TE,TWONM:NM,northPort:NP});}
+    gNote:TE.gNote||'Gauges north of the node are compared with the blended model.',L:TE.L,nOff:TE.nOff||0,node:TE.node,near:TE.nearKm||3};
+  if(!PRIM)return Object.assign(R,{calAt,predictAt,runInStarts,fedFrom,kmBoth,TWOS:R.TWOS.concat([NM])});
+  return Object.assign(R,{calAt,predictAt,runInStarts,fedFrom,kmBoth,TWO:TE,TWONM:NM,northPort:NP,TWOS:[NM],passNM:line=>R.TWOS.find(N=>N.line===line)||null});}
 FT.makeSystemBT=makeSystemBT;
 })();
 </script>
@@ -1883,10 +1891,10 @@ const nl=tab.querySelectorAll(':scope > .notice');const last=nl[nl.length-1];if(
 (function(){const FT=window.FT,B=window.BT;if(!B||!B.fedFrom)return;
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const NM=B.TWONM;
-FT.fedInfo=function(km,line){const f=B.fedFrom(km,line||'M');if(!f)return null;const c=B.calAt(km,{line:line||'M'});const n=Math.round(f.n*100),s=100-n;
-  let g=c.est?(f.side?'C':'B'):'A';if(NM.gradeCap&&g<NM.gradeCap)g=NM.gradeCap;return{n,s,g,est:!!c.est,side:f.side,x:f.x,dom:n>=60?NM.nWord+' ('+NM.nName+')':s>=60?NM.sWord+' ('+NM.sName+')':'both ends (tidal node)'};};
+FT.fedInfo=function(km,line){const f=B.fedFrom(km,line||'M');if(!f)return null;const N=f.nm||NM;const c=B.calAt(km,{line:line||'M'});const n=Math.round(f.n*100),s=100-n;
+  let g=c.est?(f.side?'C':'B'):'A';if(N.gradeCap&&g<N.gradeCap)g=N.gradeCap;return{n,s,g,est:!!c.est,side:f.side,x:f.x,node:f.node,nm:N,dom:n>=60?N.nWord+' ('+N.nName+')':s>=60?N.sWord+' ('+N.sName+')':'both ends (tidal node)'};};
 FT.twoNote=function(km,line){const i=FT.fedInfo(km,line);if(!i)return '';
-  return `<div class="fed" data-fed="${i.n}">🌊 <b>Fed from:</b> ${esc(NM.nWord)} ${i.n}% / ${esc(NM.sWord)} ${i.s}% — ${esc(i.dom)}${i.side?' (via the creek junction at passage km '+i.x.toFixed(1)+')':''} · accuracy <span class="sysconf c${i.g}">${i.g}</span>${i.est?' <b>est.</b>':''}${Math.abs(i.x-B.TWO.node)<3?' · near the tidal node: small range, flattened/late highs':''}</div>`;};
+  return `<div class="fed" data-fed="${i.n}">🌊 <b>Fed from:</b> ${esc(i.nm.nWord)} ${i.n}% / ${esc(i.nm.sWord)} ${i.s}% — ${esc(i.dom)}${i.side?' (via the creek junction at passage km '+i.x.toFixed(1)+')':''} · accuracy <span class="sysconf c${i.g}">${i.g}</span>${i.est?' <b>est.</b>':''}${Math.abs(i.x-i.node)<(i.nm.near||3)?' · near the tidal node: small range, flattened/late highs':''}</div>`;};
 })();
 </script>
 <script type="text/ft-deferred" id="ft-spots">/* ===== Spots registry: built-in Baffle landmarks (+ personal aliases) and the user's own custom spots =====
@@ -1944,7 +1952,8 @@ const channels=()=>GEN?B.LINES.map(L=>({id:L.id,name:lineLabel(L.id),short:lineL
     .concat((B.SIDES||[]).map(s=>({id:s.id,name:s.short,short:s.short.replace(/ Ck$/,''),min:s.jk,max:s.max,main:false,est:true,parent:s.parent,j:s.jk})));
 /* "Mosquito Ck 2.0 km" style label for a km on a side creek (km from its junction); null on the main channel */
 const alongLabel=(km,line)=>{if(GEN||!B.isSide||!B.isSide(line))return null;const s=B.sideOf(line);return s.short+' '+Math.max(0,km-s.jk).toFixed(1)+' km';};
-const kmLabel=(km,line,d=2)=>{if(GEN&&B.TWO){const NM=B.TWONM,L=B.LINES.find(x=>x.id===(line||'M'));
+const kmLabel=(km,line,d=2)=>{if(GEN&&B.TWO){const NM=B.TWONM,L=B.LINES.find(x=>x.id===(line||'M'));const PN=B.passNM&&B.passNM(line||'M');
+    if(PN&&PN!==NM){const kb=B.kmBoth(km,line);return 'km '+(+km).toFixed(1)+' from '+PN.sName+' · '+(kb?kb.n:0).toFixed(1)+' from '+PN.nName;}
     if(NM.line==='M'||(L&&L.id===NM.line)){if(!L||L.id===NM.line)return 'km '+(+km).toFixed(1)+' from '+NM.sName+' · '+Math.max(0,B.TWO.L-km).toFixed(1)+' from '+NM.nName;return B.lineName(L.id)+' '+Math.max(0,km-L.j).toFixed(1)+' km up (est. tides)';}}const a=alongLabel(km,line);return a?a+' up (km '+(+km).toFixed(1)+' from mouth, est. tides)':'km '+(+km).toFixed(d)+' '+lineLabel(line)+(!GEN&&line==='E'&&B.EUCAL&&km>B.EUCAL+1e-6?' (est. tides)':'');};
 const DEPTHS={s:{n:'1–3 m',s:'1-3',k:'shallow'},m:{n:'3–6 m',s:'3-6',k:'mid'},d:{n:'6 m+',s:'6+',k:'deep'}};
 const S={DEPTHS,onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typeFromColor,pointAt,snap:snapPt,EUMAX,lineLabel,GEN,SYS,
@@ -2132,7 +2141,7 @@ function popHtml(c){const th=eff(c);const st=th!=null?statusAt(c,Date.now()):nul
    <div class="mut">${S.kmLabel(c.km,c.line)}${c.note?'<br>📝 '+esc(c.note):''}</div>
    <table><tr><td>Needs</td><td>${th!=null?`<b>${th.toFixed(2)} m</b> at the crossing <span class="mut">(draft ${draft().toFixed(2)} m)</span>${c.mode==='gauge'&&c.gin?`<br><span class="mut">set as ${esc(c.gin.name)} ≥ ${(+c.gin.v).toFixed(2)} m</span>`:''}`:'<span class="mut">not set yet</span>'}</td></tr>
    <tr><td>Now</td><td>${h!=null?h.toFixed(2)+' m predicted':'—'}${st?(st.shut?` · <b class="xshut">no passage until ${fT(st.until)}</b>`:` · <b class="xopen">open</b>${st.next?` · next closed ${fD(st.next.ta)} ${span(st.next.ta,st.next.tb)}`:''}`):''}</td></tr></table>
-   <div class="b"><button data-xa="stuck">🛑 I got stuck here now</button><button data-xa="over">✅ I just got over here now</button></div>
+   <div class="b"><button data-xa="stuck">🛑 I got stuck here now</button><button data-xa="over">✅ I just got over here now</button><button data-xa="copy">📋 Copy coordinates</button></div><div class="xcopy"></div>
    <div class="xform"><div class="mut">Name</div><input type="text" class="xnm" maxlength="60" value="${esc(c.name)}">
     <div class="mut">Height needed, entered as</div><select class="xmode"><option value="pred"${c.mode!=='gauge'?' selected':''}>predicted height at this crossing (m)</option>${gs.map(g=>`<option value="g:${esc(g.id)}"${c.mode==='gauge'&&c.gin&&c.gin.id===g.id?' selected':''}>reading at ${esc(g.name)} (m, Gauges chart)</option>`).join('')}</select>
     <input type="number" step="0.01" class="xthrI" value="${c.mode==='gauge'&&c.gin?(+c.gin.v).toFixed(2):(c.thr!=null?c.thr.toFixed(2):'')}" placeholder="m — or use the buttons above">
@@ -2148,6 +2157,7 @@ function wire(c,m){const el=m.getPopup().getElement();if(!el)return;API._cur=c;c
     if(a==='stuck'||a==='over'){const r=API.observe(c.id,a);openX(c.id);setTimeout(()=>{const e=m.getPopup()&&m.getPopup().getElement();const x=e&&e.querySelector('.xmsg');if(x)x.innerHTML=(a==='stuck'?'Logged: stuck at ':'Logged: got over at ')+r.h.toFixed(2)+' m predicted → needs '+r.thr.toFixed(2)+' m. Refine any time.';},30);}
     else if(a==='save'){const t=readThr(el);const p={name:el.querySelector('.xnm').value,note:el.querySelector('.xnt').value,g:el.querySelector('.xg').checked};if(t.thr!==undefined)Object.assign(p,t);API.update(c.id,p);openX(c.id);}
     else if(a==='del'){if(!confirm(`Delete crossing “${c.name}”?`))return;map.closePopup();API.remove(c.id);}
+    else if(a==='copy'){FT.copyCoords&&FT.copyCoords(c.lat,c.lng,el.querySelector('.xcopy'));}
     else if(a==='tides'){map.closePopup();FT.baffleSelect&&FT.baffleSelect(c.km,c.name,c.line);FT.showTab&&FT.showTab('baffle');}}catch(e){msg('⚠ '+esc(e.message));}});}
 API.drawMap=function(lf,mp){LF=lf;map=mp;if(!grp)grp=LF.layerGroup().addTo(map);grp.clearLayers();mk.clear();
   for(const c of API.list()){const m=LF.marker([c.lat,c.lng],{icon:icon(c),draggable:true,title:c.name,zIndexOffset:600}).addTo(grp);m.bindTooltip('⚠ '+esc(c.name),{direction:'top',offset:[0,-22]});
@@ -2256,7 +2266,7 @@ function render(){
   const t0=dayH(),t1=t0+24,o=opts();
   const P=B.predictAt(km,t0-6,t1+6,o);const cal=P.cal;const pt=GEN?B.pointOnLine(km,st.line):(window.FT.spots?window.FT.spots.pointAt(km,st.bline||'B'):B.pointAtKm(Math.min(km,B.MAXKM)));
   $('bt-kmLbl').textContent=km.toFixed(2)+' km from mouth';
-  $('bt-locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${GEN?((B.kmBoth&&st.line===B.TWONM.line)?km.toFixed(2)+' km from the '+esc(B.TWONM.sWord)+' entrance ('+esc(B.TWONM.sName)+') · '+B.kmBoth(km,st.line).n.toFixed(2)+' km from the '+esc(B.TWONM.nName):st.line==='M'?km.toFixed(2)+' km up '+esc(FT.SYSNAME)+' from the mouth':!B.LINES.find(l=>l.id===st.line).parent?km.toFixed(2)+' km up '+esc(B.lineName(st.line))+' from its own entrance':km.toFixed(2)+' km from the '+esc(FT.SYSNAME)+' mouth, on '+esc(B.lineName(st.line))+' (joins at km '+B.LINES.find(l=>l.id===st.line).j.toFixed(1)+')')+(FT.twoNote?FT.twoNote(km,st.line):''):(window.FT.spots&&window.FT.spots.alongLabel(km,st.bline)?esc(window.FT.spots.alongLabel(km,st.bline))+' up (joins Baffle'+(B.parentOf(st.bline)==='E'?' via Euleilah Ck':'')+'; '+km.toFixed(2)+' km from the mouth) · <b>est.</b> tides':st.bline==='E'?km.toFixed(2)+' km from the mouth, on Euleilah Ck ('+(km-16.38).toFixed(1)+' km above its junction)'+(B.EUCAL&&km>B.EUCAL+1e-6?' · <b>est.</b> above the mapped river channel':''):km.toFixed(2)+' km up Baffle Creek from the mouth')} · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?((n=>n?` · nearest spot <b>${esc(n.name)}</b> (${Math.round(Math.abs(n.km-km)*1000)} m along)`:'')(window.FT.spots&&window.FT.spots.nearest(km,GEN?st.line:null,1.0))):'')+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
+  $('bt-locInfo').innerHTML=`<b>${esc(st.landmark||('km '+km.toFixed(2)))}</b> · ${GEN?((B.passNM&&B.passNM(st.line))?(N=>km.toFixed(2)+' km from the '+esc(N.sWord)+' entrance ('+esc(N.sName)+') · '+B.kmBoth(km,st.line).n.toFixed(2)+' km from the '+esc(N.nName))(B.passNM(st.line)):st.line==='M'?km.toFixed(2)+' km up '+esc(FT.SYSNAME)+' from the mouth':!B.LINES.find(l=>l.id===st.line).parent?km.toFixed(2)+' km up '+esc(B.lineName(st.line))+' from its own entrance':km.toFixed(2)+' km from the '+esc(FT.SYSNAME)+' mouth, on '+esc(B.lineName(st.line))+' (joins at km '+B.LINES.find(l=>l.id===st.line).j.toFixed(1)+')')+(FT.twoNote?FT.twoNote(km,st.line):''):(window.FT.spots&&window.FT.spots.alongLabel(km,st.bline)?esc(window.FT.spots.alongLabel(km,st.bline))+' up (joins Baffle'+(B.parentOf(st.bline)==='E'?' via Euleilah Ck':'')+'; '+km.toFixed(2)+' km from the mouth) · <b>est.</b> tides':st.bline==='E'?km.toFixed(2)+' km from the mouth, on Euleilah Ck ('+(km-16.38).toFixed(1)+' km above its junction)'+(B.EUCAL&&km>B.EUCAL+1e-6?' · <b>est.</b> above the mapped river channel':''):km.toFixed(2)+' km up Baffle Creek from the mouth')} · ${pt[0].toFixed(5)}, ${pt[1].toFixed(5)}`+(st.gps?((n=>n?` · nearest spot <b>${esc(n.name)}</b> (${Math.round(Math.abs(n.km-km)*1000)} m along)`:'')(window.FT.spots&&window.FT.spots.nearest(km,GEN?st.line:null,1.0))):'')+(st.gps?` · GPS ${st.gps.lat.toFixed(5)}, ${st.gps.lon.toFixed(5)} (${Math.round(st.gps.offKm*1000)} m from ${esc(st.gps.line)} centreline)`:'');
   let warn='';
   if(st.gps&&st.gps.offKm>1.5)warn+='<div class="notice err">Your GPS position is '+st.gps.offKm.toFixed(1)+' km from the creek centreline — snapped to the nearest point; check this is right.</div>';
   if(GEN&&cal.beyond)warn+='<div class="notice">Above '+esc(cal.nodeB.name)+' (the last model node). Values held there — real timing likely later and range smaller or nil. Great place to benchmark.</div>';
@@ -3206,7 +3216,7 @@ function gaugeEvents(A,partial){const n=A.length,out=[];if(n<5)return out;
 function lastVal(arr,m){let lo=0,hi=arr.length-1,r=null;while(lo<=hi){const mid=(lo+hi)>>1;if(arr[mid][0]<=m){r=arr[mid];lo=mid+1;}else hi=mid-1;}return r;}
 function fedNote(){if(!FT.twoNote)return;let el=$('gFed');if(!el){el=document.createElement('div');el.id='gFed';const lg=$('gLegend');if(lg)lg.before(el);else return;}
   let km=parseFloat(localStorage.getItem(FT.k('bt_km')));let line=localStorage.getItem(FT.k('bt_line'))||'M';if(!(km>=0)){km=BT.DEFKM;line='M';}if(!BT.NBY[line])line='M';
-  const tn=FT.twoNote(km,line),NM=BT.TWONM;if(!tn){el.innerHTML='';return;}
+  const tn=FT.twoNote(km,line),fi=FT.fedInfo(km,line),NM=fi&&fi.nm||BT.TWONM;if(!tn){el.innerHTML='';return;}
   el.innerHTML=tn.replace('Fed from:','Fed from (Tides spot '+(line==='M'?'km '+km.toFixed(1):esc(BT.lineName(line)))+'):')+'<div class="mut" style="font-size:.8rem">Two entrances: '+esc(NM.sName)+' ('+esc(NM.sWord)+', '+esc(NM.sTide)+') and '+esc(NM.nName)+' ('+esc(NM.nWord)+', '+esc(NM.nTide)+'). '+esc(NM.gNote)+'</div>';}
 function render(){latest();fedNote();statsTbl();events();draw();upd();document.body.dataset.gaugesReady='1';}
 function upd(){if(!IDX||!IDX.fetched){$('gUpd').textContent='';return;}const gm=(Date.parse(IDX.fetched)-E0)/60000;
@@ -3842,7 +3852,11 @@ async function init(){if(ready)return;try{await loadLeaflet();}catch(e){$('mMap'
   if(GEN&&B.TWO){/* two-entrance passage: km both ways on the passage, junction-relative km on side creeks */
     const sh=n=>n.replace(/ Creek/,' Ck').replace(/\s*\(.*\)/,''),NM=B.TWONM,PL=NM.line;
     const onP=id=>{let L=B.LINES.find(x=>x.id===id);while(L){if(L.id===PL)return true;L=L.parent?B.LINES.find(x=>x.id===L.parent):null;}return false;};
-    for(const L of LL){if(PL!=='M'&&!onP(L.id)){/* not on the passage (e.g. the Burnett and its other creeks): plain km ticks as for any system */
+    const PN2=id=>{const N=B.passNM&&B.passNM(id);return N&&N!==NM?N:null;};
+    for(const L of LL){if(PN2(L.id)){/* a further two-entrance channel (e.g. Pancake ↔ Jenny Lind link): km both ways */const N=PN2(L.id);
+        for(let k=Math.ceil(L.a+0.2);k<=Math.floor(L.b);k++){const p=S.pointAt(k,L.id);LF.circleMarker(p,{radius:2.5,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
+          LF.marker(p,{icon:LF.divIcon({className:'mkm mk2',html:k+' '+esc(N.sAb)+' · '+Math.round(N.L-k+N.nOff)+' '+esc(N.nAb),iconSize:[110,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}continue;}
+      if(PL!=='M'&&!onP(L.id)){/* not on the passage (e.g. the Burnett and its other creeks): plain km ticks as for any system */
         for(let k=Math.ceil(L.a);k<=Math.floor(L.b);k++){if(L.id!=='M'&&k<=L.a+0.2)continue;const p=S.pointAt(k,L.id);LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
           if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}continue;}
       if(L.id===PL){for(let k=Math.ceil(L.a-1e-6);k<=Math.floor(L.b);k++){const p=S.pointAt(k,PL);LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
@@ -3913,7 +3927,14 @@ function popHtml(l){const I=spotInfo(l);const u=x=>` <span class="mut">±${Math.
     ${FT.lureHtml?(()=>{const ll=S.latLng(l);const h=FT.lureHtml({depth:l.depth,km:l.km,line:l.line||null,lat:ll[0],lng:ll[1]},Date.now());return h?`<tr><td>🎨 Lure now</td><td class="mlure">${h.replace(/^<div class="lure1"[^>]*>🎨 /,'<div class="lure1">')}</td></tr>`:'';})():''}
    </table>
    <div class="b"><button class="pri" data-a="bite">🎣 Bite times here</button><button data-a="tides">🌊 Tides here</button><button data-a="log">📝 Log catch here</button>
-   ${l.custom?'<button data-a="edit">✏️ Edit</button>':l.id?'<button data-a="alias">✏️ Rename</button>':''}</div><div class="medit"></div></div>`;}
+   ${l.custom?'<button data-a="edit">✏️ Edit</button><button data-a="copy">📋 Copy coordinates</button>':l.id?'<button data-a="alias">✏️ Rename</button>':''}</div><div class="mcopy"></div><div class="medit"></div></div>`;}
+/* 📋 Copy coordinates (custom spots + crossings): 'lat, lng' to 6 dp on the clipboard; if the clipboard is blocked, a
+   selected read-only text box to copy by hand. Local only — nothing is sent anywhere. */
+FT.copyCoords=function(lat,lng,box){const txt=(+lat).toFixed(6)+', '+(+lng).toFixed(6);
+  const ok=()=>{if(box)box.innerHTML='<div class="mut">📋 Copied: <b>'+esc(txt)+'</b></div>';};
+  const fb=()=>{if(!box)return;box.innerHTML='<div class="mut">Clipboard blocked — copy this:</div><input type="text" readonly class="ccopy" value="'+esc(txt)+'" style="width:100%">';const i=box.querySelector('.ccopy');i.focus();i.select();i.onclick=()=>i.select();};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText&&window.isSecureContext!==false)navigator.clipboard.writeText(txt).then(ok,fb);else fb();}catch(e){fb();}
+  return txt;};
 let openM=null;
 function openSpot(l,m){if(!l)return;openM=m;m.unbindPopup();m.bindPopup(popHtml(l),{maxWidth:300,autoPanPadding:[20,60]}).openPopup();wirePopup(l,m);}
 function wirePopup(l,m){const el=m.getPopup().getElement();if(!el)return;
@@ -3924,6 +3945,7 @@ function action(a,l,m,el){
   else if(a==='tides'){map.closePopup();FT.baffleSelect(l.km,l.name,l.line);FT.showTab('baffle');}
   else if(a==='log'){map.closePopup();FT.catchLogAt&&FT.catchLogAt(l);}
   else if(a==='edit')editForm(l,m,el);
+  else if(a==='copy'){const ll=l.lat!=null&&l.lng!=null?[l.lat,l.lng]:S.latLng(l);FT.copyCoords(ll[0],ll[1],el.querySelector('.mcopy'));}
   else if(a==='alias'){const box=el.querySelector('.medit');box.innerHTML=`<input type="text" class="mnm" maxlength="60" value="${esc(l.name)}" placeholder="${esc(l.base)}"><div class="b"><button class="pri" data-x="ok">Save name</button>${l.alias?'<button data-x="reset">Reset to “'+esc(l.base)+'”</button>':''}</div>`;
     box.querySelector('[data-x=ok]').onclick=()=>{S.setAlias(l.id,box.querySelector('.mnm').value);reopen(l.id);};
     const r=box.querySelector('[data-x=reset]');if(r)r.onclick=()=>{S.setAlias(l.id,'');reopen(l.id);};box.querySelector('.mnm').focus();}}

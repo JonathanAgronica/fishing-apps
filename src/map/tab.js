@@ -44,7 +44,11 @@ async function init(){if(ready)return;try{await loadLeaflet();}catch(e){$('mMap'
   if(GEN&&B.TWO){/* two-entrance passage: km both ways on the passage, junction-relative km on side creeks */
     const sh=n=>n.replace(/ Creek/,' Ck').replace(/\s*\(.*\)/,''),NM=B.TWONM,PL=NM.line;
     const onP=id=>{let L=B.LINES.find(x=>x.id===id);while(L){if(L.id===PL)return true;L=L.parent?B.LINES.find(x=>x.id===L.parent):null;}return false;};
-    for(const L of LL){if(PL!=='M'&&!onP(L.id)){/* not on the passage (e.g. the Burnett and its other creeks): plain km ticks as for any system */
+    const PN2=id=>{const N=B.passNM&&B.passNM(id);return N&&N!==NM?N:null;};
+    for(const L of LL){if(PN2(L.id)){/* a further two-entrance channel (e.g. Pancake ↔ Jenny Lind link): km both ways */const N=PN2(L.id);
+        for(let k=Math.ceil(L.a+0.2);k<=Math.floor(L.b);k++){const p=S.pointAt(k,L.id);LF.circleMarker(p,{radius:2.5,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
+          LF.marker(p,{icon:LF.divIcon({className:'mkm mk2',html:k+' '+esc(N.sAb)+' · '+Math.round(N.L-k+N.nOff)+' '+esc(N.nAb),iconSize:[110,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}continue;}
+      if(PL!=='M'&&!onP(L.id)){/* not on the passage (e.g. the Burnett and its other creeks): plain km ticks as for any system */
         for(let k=Math.ceil(L.a);k<=Math.floor(L.b);k++){if(L.id!=='M'&&k<=L.a+0.2)continue;const p=S.pointAt(k,L.id);LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
           if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}continue;}
       if(L.id===PL){for(let k=Math.ceil(L.a-1e-6);k<=Math.floor(L.b);k++){const p=S.pointAt(k,PL);LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
@@ -115,7 +119,14 @@ function popHtml(l){const I=spotInfo(l);const u=x=>` <span class="mut">±${Math.
     ${FT.lureHtml?(()=>{const ll=S.latLng(l);const h=FT.lureHtml({depth:l.depth,km:l.km,line:l.line||null,lat:ll[0],lng:ll[1]},Date.now());return h?`<tr><td>🎨 Lure now</td><td class="mlure">${h.replace(/^<div class="lure1"[^>]*>🎨 /,'<div class="lure1">')}</td></tr>`:'';})():''}
    </table>
    <div class="b"><button class="pri" data-a="bite">🎣 Bite times here</button><button data-a="tides">🌊 Tides here</button><button data-a="log">📝 Log catch here</button>
-   ${l.custom?'<button data-a="edit">✏️ Edit</button>':l.id?'<button data-a="alias">✏️ Rename</button>':''}</div><div class="medit"></div></div>`;}
+   ${l.custom?'<button data-a="edit">✏️ Edit</button><button data-a="copy">📋 Copy coordinates</button>':l.id?'<button data-a="alias">✏️ Rename</button>':''}</div><div class="mcopy"></div><div class="medit"></div></div>`;}
+/* 📋 Copy coordinates (custom spots + crossings): 'lat, lng' to 6 dp on the clipboard; if the clipboard is blocked, a
+   selected read-only text box to copy by hand. Local only — nothing is sent anywhere. */
+FT.copyCoords=function(lat,lng,box){const txt=(+lat).toFixed(6)+', '+(+lng).toFixed(6);
+  const ok=()=>{if(box)box.innerHTML='<div class="mut">📋 Copied: <b>'+esc(txt)+'</b></div>';};
+  const fb=()=>{if(!box)return;box.innerHTML='<div class="mut">Clipboard blocked — copy this:</div><input type="text" readonly class="ccopy" value="'+esc(txt)+'" style="width:100%">';const i=box.querySelector('.ccopy');i.focus();i.select();i.onclick=()=>i.select();};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText&&window.isSecureContext!==false)navigator.clipboard.writeText(txt).then(ok,fb);else fb();}catch(e){fb();}
+  return txt;};
 let openM=null;
 function openSpot(l,m){if(!l)return;openM=m;m.unbindPopup();m.bindPopup(popHtml(l),{maxWidth:300,autoPanPadding:[20,60]}).openPopup();wirePopup(l,m);}
 function wirePopup(l,m){const el=m.getPopup().getElement();if(!el)return;
@@ -126,6 +137,7 @@ function action(a,l,m,el){
   else if(a==='tides'){map.closePopup();FT.baffleSelect(l.km,l.name,l.line);FT.showTab('baffle');}
   else if(a==='log'){map.closePopup();FT.catchLogAt&&FT.catchLogAt(l);}
   else if(a==='edit')editForm(l,m,el);
+  else if(a==='copy'){const ll=l.lat!=null&&l.lng!=null?[l.lat,l.lng]:S.latLng(l);FT.copyCoords(ll[0],ll[1],el.querySelector('.mcopy'));}
   else if(a==='alias'){const box=el.querySelector('.medit');box.innerHTML=`<input type="text" class="mnm" maxlength="60" value="${esc(l.name)}" placeholder="${esc(l.base)}"><div class="b"><button class="pri" data-x="ok">Save name</button>${l.alias?'<button data-x="reset">Reset to “'+esc(l.base)+'”</button>':''}</div>`;
     box.querySelector('[data-x=ok]').onclick=()=>{S.setAlias(l.id,box.querySelector('.mnm').value);reopen(l.id);};
     const r=box.querySelector('[data-x=reset]');if(r)r.onclick=()=>{S.setAlias(l.id,'');reopen(l.id);};box.querySelector('.mnm').focus();}}

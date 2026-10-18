@@ -119,7 +119,7 @@ function gaugeEvents(A,partial){const n=A.length,out=[];if(n<5)return out;
 function lastVal(arr,m){let lo=0,hi=arr.length-1,r=null;while(lo<=hi){const mid=(lo+hi)>>1;if(arr[mid][0]<=m){r=arr[mid];lo=mid+1;}else hi=mid-1;}return r;}
 function fedNote(){if(!FT.twoNote)return;let el=$('gFed');if(!el){el=document.createElement('div');el.id='gFed';const lg=$('gLegend');if(lg)lg.before(el);else return;}
   let km=parseFloat(localStorage.getItem(FT.k('bt_km')));let line=localStorage.getItem(FT.k('bt_line'))||'M';if(!(km>=0)){km=BT.DEFKM;line='M';}if(!BT.NBY[line])line='M';
-  const tn=FT.twoNote(km,line),NM=BT.TWONM;if(!tn){el.innerHTML='';return;}
+  const tn=FT.twoNote(km,line),fi=FT.fedInfo(km,line),NM=fi&&fi.nm||BT.TWONM;if(!tn){el.innerHTML='';return;}
   el.innerHTML=tn.replace('Fed from:','Fed from (Tides spot '+(line==='M'?'km '+km.toFixed(1):esc(BT.lineName(line)))+'):')+'<div class="mut" style="font-size:.8rem">Two entrances: '+esc(NM.sName)+' ('+esc(NM.sWord)+', '+esc(NM.sTide)+') and '+esc(NM.nName)+' ('+esc(NM.nWord)+', '+esc(NM.nTide)+'). '+esc(NM.gNote)+'</div>';}
 function render(){latest();fedNote();statsTbl();events();draw();upd();document.body.dataset.gaugesReady='1';}
 function upd(){if(!IDX||!IDX.fetched){$('gUpd').textContent='';return;}const gm=(Date.parse(IDX.fetched)-E0)/60000;

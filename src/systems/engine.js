@@ -62,7 +62,10 @@ function makeSystemBT(S){
   const dl=LANDMARKS.filter(l=>l.line==='M'&&l.km>0.2&&(l.ramp||l.cal));const DEFKM=dl.length?dl[0].km:Math.min(1,LMAX.M);
   const R=Object.assign({},B0,{generic:true,SYS:S,bundH:portH,bundExtremes:portExtremes,portH,portExtremes,officialHiLo:()=>[],NODES,calAt,predictAt,runInStarts,
     snap,pointAtKm,pointOnLine,lineName,sameReach,LINES,LANDMARKS,MAXKM,applyCorr,RISE:null,NBY,lineMax,REFKM,REFNAME,DEFKM});
-  return S.twoEnt?addTwoEnt(R,S):R;}
+  let X=S.twoEnt?addTwoEnt(R,S.twoEnt):R;
+  /* further two-entrance channels in the same system (2026-10-18: Pancake Ck ↔ Jenny Lind Ck link): each wraps the previous model and only takes over its own line */
+  if(S.twoEnt&&S.twoEntMore)for(const te of S.twoEntMore)X=addTwoEnt(X,te);
+  return X;}
 /* ===== Two-entrance passages (S.twoEnt, e.g. Pumicestone Passage: Bribie bridge south ↔ Caloundra bar north) =====
    South wave: the normal node model on the base port (calibrated nodes up to TE.X0, then lag growth + attenuation).
    North wave: second port (Mooloolaba) through the north nodes (TE.nn, y = km from the north entrance).
@@ -78,10 +81,12 @@ function makePort(H,fuAll){let fc={k:null,v:null};
     for(let t=t0+st;t<=t1+1e-9;t+=st){const c=h(t);if((b>a&&b>=c)||(b<a&&b<=c)){const den=a-2*b+c,off=den?0.5*(a-c)/den:0;out.push({t:t-st+off*st,h:b-0.25*(a-c)*off,hi:b>a});}a=b;b=c;}
     const f=[];for(const x of out){const l=f[f.length-1];if(l&&l.hi===x.hi){if((x.hi&&x.h>l.h)||(!x.hi&&x.h<l.h))f[f.length-1]=x;}else if(l&&Math.abs(l.h-x.h)<0.05){f.pop();}else f.push(x);}return f;}
   return{h,ext};}
-function addTwoEnt(R,S){const TE=S.twoEnt,B=R,NP=makePort(TE.north.harm,B0.fuAll);
+function addTwoEnt(R,TE){const B=R,NP=makePort(TE.north.harm,B0.fuAll),PRIM=!R.TWO,PREV={fedFrom:R.fedFrom,kmBoth:R.kmBoth};
   /* optional fields (defaults = Pumicestone): line = passage line id (km 0 at the 'south' entrance, TE.L at the other end;
      a side channel such as Burnett → Skyring Creek uses its own id), nodeBand = km range with extra node uncertainty,
-     u0 = base ± min (HW, LW) on the passage, est = mark the whole passage as estimated */
+     u0 = base ± min (HW, LW) on the passage, est = mark the whole passage as estimated,
+     nOff = km of the far end along its own creek (labels count 'km from the far entrance' = L − km + nOff),
+     floor = {km,h,span}: the channel drains near km (lows held at h there, fading out over ±span km; highs stay above the lows) */
   const PL=TE.line||'M',NB=TE.nodeBand||[18,30],U0=TE.u0||[12,16];
   const ca0=R.calAt,pa0=R.predictAt,LBY={};R.LINES.forEach(l=>LBY[l.id]=l);
   const NS=R.NBY[PL].filter(n=>n.km<=TE.X0+1e-6);
@@ -134,6 +139,8 @@ function addTwoEnt(R,S){const TE=S.twoEnt,B=R,NP=makePort(TE.north.harm,B0.fuAll
     const dH=(cal.hwLag-cal0.hwLag)/60,dL=(cal.lwLag-cal0.lwLag)/60,dLv=cal.lwLvl(1)-cal0.lwLvl(1),dHv=cal.hwLvl(1)-cal0.hwLvl(1);
     const r=blendSide(Math.max(0,Math.min(R.lineMax(line),km)),line,t0,t1,hoff);
     let ext=r.ext.map(e=>e.hi?{t:e.t+dH,h:e.h+dHv,hi:true,u:cal.hwU}:{t:e.t+dL,h:e.h+dLv,hi:false,u:cal.lwU});
+    if(TE.floor){const fl=TE.floor.h-1.5*Math.abs(km-TE.floor.km)/TE.floor.span;for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi)continue;const nb=[ext[i-1],ext[i+1]].filter(x=>x&&x.hi);
+      const cap=nb.length?Math.min(...nb.map(x=>x.h))-0.05:9;if(e.h<fl)e.h=Math.max(e.h,Math.min(fl,cap));}}
     if(cal.trunc){for(let i=0;i<ext.length;i++){const e=ext[i];if(e.hi){const nb=[ext[i-1],ext[i+1]].filter(x=>x&&!x.hi);const fl=nb.length?Math.max(...nb.map(x=>x.h)):-9;e.rise=e.h-fl;if(e.h<fl+0.05)e.weak=true;}}}
     const clean=[];for(const e of ext){const l=clean[clean.length-1];if(l&&l.hi===e.hi){if((e.hi&&e.h>l.h)||(!e.hi&&e.h<l.h))clean[clean.length-1]=e;}else clean.push(e);}
     const curve=t=>{let i=0;while(i<clean.length-2&&clean[i+1].t<t)i++;const a=clean[i],b=clean[i+1];if(!a||!b||t<a.t||t>b.t)return null;const f=(t-a.t)/(b.t-a.t);return a.h+(b.h-a.h)*(1-Math.cos(Math.PI*f))/2;};
@@ -141,12 +148,13 @@ function addTwoEnt(R,S){const TE=S.twoEnt,B=R,NP=makePort(TE.north.harm,B0.fuAll
   function runInStarts(km,h0,h1,opts){const P=predictAt(km,h0,h1,opts);const tr=P.cal.trunc;
     return P.ext.filter((e,i)=>!e.hi&&e.t>=h0-6&&e.t<=h1+6&&!(tr&&P.ext[i+1]&&P.ext[i+1].weak)).map(e=>({t:e.t,u:e.u,kind:tr?'rise':'low'}));}
   /* "Fed from" for UI: weights at a spot */
-  function fedFrom(km,line){const m=mainX(km,line||'M');if(!m)return null;const w=wN(m.x);return{n:w,s:1-w,x:m.x,side:m.side,node:TE.node};}
+  function fedFrom(km,line){const m=mainX(km,line||'M');if(!m)return PRIM||!PREV.fedFrom?null:PREV.fedFrom(km,line);const w=wN(m.x);const r={n:w,s:1-w,x:m.x,side:m.side,node:TE.node};if(!PRIM)r.nm=NM;return r;}
   /* km labels both ways: from the south entrance (model chainage) and from the Caloundra bar */
-  function kmBoth(km,line){const m=mainX(km,line||'M');if(!m||m.side)return null;return{s:km,n:Math.max(0,TE.L-km)};}
+  function kmBoth(km,line){const m=mainX(km,line||'M');if(!m||m.side)return PRIM||!PREV.kmBoth||m?null:PREV.kmBoth(km,line);return{s:km,n:Math.max(0,TE.L-km)+(TE.nOff||0)};}
   /* display names (defaults = Pumicestone) */
   const NM={line:PL,sName:TE.sName||'Bribie bridge',nName:TE.nName||'Caloundra bar',sWord:TE.sWord||'south',nWord:TE.nWord||'north',sTide:TE.sTide||'Scarborough tide',nTide:TE.nTide||'Mooloolaba tide',sAb:TE.sAb||'S',nAb:TE.nAb||'N',gradeCap:TE.gradeCap||null,
-    gNote:TE.gNote||'Gauges north of the node are compared with the blended model.'};
-  return Object.assign(R,{calAt,predictAt,runInStarts,fedFrom,kmBoth,TWO:TE,TWONM:NM,northPort:NP});}
+    gNote:TE.gNote||'Gauges north of the node are compared with the blended model.',L:TE.L,nOff:TE.nOff||0,node:TE.node,near:TE.nearKm||3};
+  if(!PRIM)return Object.assign(R,{calAt,predictAt,runInStarts,fedFrom,kmBoth,TWOS:R.TWOS.concat([NM])});
+  return Object.assign(R,{calAt,predictAt,runInStarts,fedFrom,kmBoth,TWO:TE,TWONM:NM,northPort:NP,TWOS:[NM],passNM:line=>R.TWOS.find(N=>N.line===line)||null});}
 FT.makeSystemBT=makeSystemBT;
 })();

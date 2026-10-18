@@ -150,7 +150,7 @@ function popHtml(c){const th=eff(c);const st=th!=null?statusAt(c,Date.now()):nul
    <div class="mut">${S.kmLabel(c.km,c.line)}${c.note?'<br>📝 '+esc(c.note):''}</div>
    <table><tr><td>Needs</td><td>${th!=null?`<b>${th.toFixed(2)} m</b> at the crossing <span class="mut">(draft ${draft().toFixed(2)} m)</span>${c.mode==='gauge'&&c.gin?`<br><span class="mut">set as ${esc(c.gin.name)} ≥ ${(+c.gin.v).toFixed(2)} m</span>`:''}`:'<span class="mut">not set yet</span>'}</td></tr>
    <tr><td>Now</td><td>${h!=null?h.toFixed(2)+' m predicted':'—'}${st?(st.shut?` · <b class="xshut">no passage until ${fT(st.until)}</b>`:` · <b class="xopen">open</b>${st.next?` · next closed ${fD(st.next.ta)} ${span(st.next.ta,st.next.tb)}`:''}`):''}</td></tr></table>
-   <div class="b"><button data-xa="stuck">🛑 I got stuck here now</button><button data-xa="over">✅ I just got over here now</button></div>
+   <div class="b"><button data-xa="stuck">🛑 I got stuck here now</button><button data-xa="over">✅ I just got over here now</button><button data-xa="copy">📋 Copy coordinates</button></div><div class="xcopy"></div>
    <div class="xform"><div class="mut">Name</div><input type="text" class="xnm" maxlength="60" value="${esc(c.name)}">
     <div class="mut">Height needed, entered as</div><select class="xmode"><option value="pred"${c.mode!=='gauge'?' selected':''}>predicted height at this crossing (m)</option>${gs.map(g=>`<option value="g:${esc(g.id)}"${c.mode==='gauge'&&c.gin&&c.gin.id===g.id?' selected':''}>reading at ${esc(g.name)} (m, Gauges chart)</option>`).join('')}</select>
     <input type="number" step="0.01" class="xthrI" value="${c.mode==='gauge'&&c.gin?(+c.gin.v).toFixed(2):(c.thr!=null?c.thr.toFixed(2):'')}" placeholder="m — or use the buttons above">
@@ -166,6 +166,7 @@ function wire(c,m){const el=m.getPopup().getElement();if(!el)return;API._cur=c;c
     if(a==='stuck'||a==='over'){const r=API.observe(c.id,a);openX(c.id);setTimeout(()=>{const e=m.getPopup()&&m.getPopup().getElement();const x=e&&e.querySelector('.xmsg');if(x)x.innerHTML=(a==='stuck'?'Logged: stuck at ':'Logged: got over at ')+r.h.toFixed(2)+' m predicted → needs '+r.thr.toFixed(2)+' m. Refine any time.';},30);}
     else if(a==='save'){const t=readThr(el);const p={name:el.querySelector('.xnm').value,note:el.querySelector('.xnt').value,g:el.querySelector('.xg').checked};if(t.thr!==undefined)Object.assign(p,t);API.update(c.id,p);openX(c.id);}
     else if(a==='del'){if(!confirm(`Delete crossing “${c.name}”?`))return;map.closePopup();API.remove(c.id);}
+    else if(a==='copy'){FT.copyCoords&&FT.copyCoords(c.lat,c.lng,el.querySelector('.xcopy'));}
     else if(a==='tides'){map.closePopup();FT.baffleSelect&&FT.baffleSelect(c.km,c.name,c.line);FT.showTab&&FT.showTab('baffle');}}catch(e){msg('⚠ '+esc(e.message));}});}
 API.drawMap=function(lf,mp){LF=lf;map=mp;if(!grp)grp=LF.layerGroup().addTo(map);grp.clearLayers();mk.clear();
   for(const c of API.list()){const m=LF.marker([c.lat,c.lng],{icon:icon(c),draggable:true,title:c.name,zIndexOffset:600}).addTo(grp);m.bindTooltip('⚠ '+esc(c.name),{direction:'top',offset:[0,-22]});

@@ -17,6 +17,8 @@ const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==nul
 const MAIN=GEN?'M':'B';const nl=l=>l||MAIN;
 let all=load(KX,[]);if(!Array.isArray(all))all=[];
 const mine=c=>(c.sys||'baffle')===SYS;
+/* re-snap this system's crossings from lat/lng at load (in memory; same rule as spots: <=1.2 km and same line) */
+if(S.resnap)all.forEach(c=>{if(c&&mine(c))S.resnap(c);});
 const hooks=[];
 function save(){try{localStorage.setItem(KX,JSON.stringify(all));}catch(e){}cache.clear();hooks.forEach(f=>{try{f()}catch(e){console.error('cross hook',e)}});}
 const rid=()=>{const a=new Uint8Array(5);crypto.getRandomValues(a);return 'x'+Array.from(a,b=>b.toString(16).padStart(2,'0')).join('');};

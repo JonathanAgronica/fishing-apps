@@ -1,4 +1,5 @@
 # box-local helpers (never commit)
 tools/tests/node_modules
+tools/multisys/channels/node_modules
 __pycache__/
 *.pyc

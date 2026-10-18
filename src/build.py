@@ -26,7 +26,14 @@ bt_data=between(BTH,'<script id="data">','</script>')
 SIDES=json.load(open(f'{SRC}/sides/baffle_sides.json'))
 assert len(SIDES['sides'])>=8 and SIDES['euCalEnd']>31 and SIDES['euLim']>SIDES['euCalEnd']-16.38, 'side-creek data looks wrong'
 bt_data=bt_data.rstrip().rstrip(';')+';\n(function(D,X){D.sides=X.sides;D.euCalEnd=X.euCalEnd;D.euleilah=D.euleilah.concat(X.euExt);})(window.BAFFLE_DATA,'+json.dumps({k:SIDES[k] for k in ('sides','euCalEnd','euExt')},separators=(',',':'),ensure_ascii=False)+');'
+# channel re-route overlays (tools/multisys/channels: Sentinel-2 low-tide water-frequency thalweg; anchored km "kc" so every
+# km-keyed value and prediction is unchanged) - applied here, the generated source data is left untouched
+import sys as _sys; _sys.path.insert(0,f'{REPO}/tools/multisys/channels'); import apply as CHN; CHLOG=[]
+_bd=json.loads(re.search(r'window.BAFFLE_DATA=(\{.*\});?\s*$',between(BTH,'<script id="data">','</script>').strip(),re.S).group(1))
+_bd['euleilah']=_bd['euleilah']+SIDES['euExt']; _bx=json.loads(json.dumps(SIDES)); CH_BAF=CHN.apply_baffle(_bd,_bx,CHLOG)
+if CH_BAF: bt_data+='\n(function(D,Y){if(Y.main){D.main=Y.main;D.mainKc=Y.mainKc;}if(Y.euleilah){D.euleilah=Y.euleilah;D.euKc=Y.euKc;}for(const s of D.sides){const o=Y.sides&&Y.sides[s.id];if(o){s.pts=o.pts;s.kc=o.kc;}}})(window.BAFFLE_DATA,'+json.dumps(CH_BAF,separators=(',',':'))+');'
 bt_core=between(BTH,'<script id="core">','</script>')
+bt_core=patch(bt_core,"const MAIN=D.main, MAINC=cum(MAIN), EU=D.euleilah, EUC=cum(EU);","const MAIN=D.main, MAINC=D.mainKc||cum(MAIN), EU=D.euleilah, EUC=D.euKc||cum(EU);")
 bt_ui=BTH[BTH.index('<script>',BTH.index('<script id="core">')):]; bt_ui=between(bt_ui,'<script>','</script>')
 bt_foot=between(BTH,'<footer>','</footer>'); mj_foot=between(MJ,'<footer>','</footer>')
 
@@ -522,7 +529,13 @@ os.makedirs(f'{SITE}/data/systems',exist_ok=True)
 for f in os.listdir(f'{SITE}/data/systems'):
     if f.endswith('.json'): os.remove(f'{SITE}/data/systems/{f}')
 for f in os.listdir(SYSOUT):
-    if f.endswith('.json'): shutil.copy(f'{SYSOUT}/{f}',f'{SITE}/data/systems/{f}')
+    if not f.endswith('.json'): continue
+    if f!='index.json':
+        _S=json.load(open(f'{SYSOUT}/{f}',encoding='utf-8'))
+        if CHN.apply_system(_S,CHLOG):
+            json.dump(_S,open(f'{SITE}/data/systems/{f}','w',encoding='utf-8'),ensure_ascii=False,separators=(',',':')); continue
+    shutil.copy(f'{SYSOUT}/{f}',f'{SITE}/data/systems/{f}')
+for _m in CHLOG: print('channels:',_m)
 shutil.copy(f'{SRC}/scripts/update_sys_gauges.py',f'{SITE}/scripts/update_sys_gauges.py')
 shutil.copy(f'{SRC}/scripts/baffle_adj.py',f'{SITE}/scripts/baffle_adj.py')
 assert os.path.exists(f'{SITE}/data/baffle_adj.json') or os.path.exists(f'{REPO}/data/baffle_adj.json'), 'data/baffle_adj.json must exist (precached by the SW): run scripts/baffle_adj.py'

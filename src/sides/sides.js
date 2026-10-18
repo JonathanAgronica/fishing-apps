@@ -9,9 +9,9 @@
 const RAD=Math.PI/180,EJ=D.euleilahJunctionKm,EUCAL=D.euCalEnd;
 const hav=(a,b)=>{const la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*6371.0088*Math.asin(Math.sqrt(x));};
 const cum=L=>{const c=[0];for(let i=1;i<L.length;i++)c.push(c[i-1]+hav(L[i-1],L[i]));return c;};
-const SIDES=D.sides.map(s=>{const C=cum(s.pts);return Object.assign({},s,{C,len:C[C.length-1],max:+(s.jk+C[C.length-1]).toFixed(2)});});
+const SIDES=D.sides.map(s=>{const C=s.kc||cum(s.pts);return Object.assign({},s,{C,len:C[C.length-1],max:+(s.jk+C[C.length-1]).toFixed(2)});});
 const BY={};SIDES.forEach(s=>BY[s.id]=s);
-const EUC=cum(D.euleilah),EUMAX=+(EJ+EUC[EUC.length-1]).toFixed(2);
+const EUC=D.euKc||cum(D.euleilah),EUMAX=+(EJ+EUC[EUC.length-1]).toFixed(2);
 const R={hw:5.2,lw:7.4,hiDrop:0.025,loRise:0.05,u0:15,hwU:8,lwU:12};
 function baseOf(km,line){if(line==='E'&&km>EUCAL+1e-6)return{bkm:EUCAL,d:km-EUCAL};const s=BY[line];if(s)return{bkm:s.jk,d:Math.max(0,Math.min(s.len,km-s.jk))};return null;}
 const P0=BT.predictAt,RI0=BT.runInStarts,SN0=BT.snap;

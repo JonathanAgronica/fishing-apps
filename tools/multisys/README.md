@@ -43,3 +43,30 @@ The app build needs nothing else from here.
 
 Conventions are in `build/common.py`: DP 12 m, 5 dp, haversine chainage, DEM tidal limit (rolling min ≥ 4 m over
 1 km, at least 0.6 km; the s5 builder used a 3 km window).
+
+## Channel re-routing from multi-year imagery (`channels/`, 2026-10-18)
+
+Moves each system's drawn channel centreline onto the persistent low-tide channel / thalweg, without changing any
+prediction. Box work data: `/workspace/multisys/work/channels/` (not in git).
+
+1. `channels/imagery.py clusters|scenes|composite` - systems grouped into ≤0.3° windows; Sentinel-2 L2A scenes from the
+   Earth Search STAC (AWS open data, Copernicus licence) 2018-2026; `tide_at.mjs` adds the port tide height at each
+   scene time (from the app's own harmonics); per epoch (2018-20, 2021-23, 2024-26) the ≤24 lowest-tide days (port height
+   ≤ the 40th percentile) give a low-tide water frequency F (NDWI(B03,B08)>0 or SCL water, SCL-masked), the 8 lowest days a
+   very-low-tide frequency, plus a scene-normalised green-brightness depth proxy for water pixels (shoals bright,
+   channel dark).
+2. `channels/route.py [sys]` - least-cost path along each line within ±300 m (cost from F, very-low F and the depth proxy,
+   recent epoch weighted 0.6), smoothed; only resolved stretches are spliced in, judged in ~1 km pieces, and each
+   piece must gain clearly, stay in the same water body, not double back, not be >1.3× longer, not run along the parent
+   channel (side creeks), not jump >80 m for a side creek already in water and not chase patchy wetland water. Lines
+   that fail an OSM lateral-mark gate check (`beacons.py`, seamarks ODbL) more than before are kept. Visual-QA
+   exceptions live in `KEEP`. Migration between the first and last epoch is reported per line.
+   Output: `channels/out/<sys>.json` (`coords`, `kc`, `orig` hash, shifts, F before/after, gates, rejected pieces).
+3. `src/build.py` applies the overlays at build time (`channels/apply.py`): new coords + `kc` = the km of every new vertex
+   on the replaced line's scale (monotone). Every km-keyed value (nodes, gauges, landmarks, junction km, two-entrance
+   params, calibration, crossings, spot km) keeps its km and predictions are identical by construction; side lines are
+   re-attached to the moved parent at their junction km. Overlays whose `orig` hash no longer matches are skipped (build
+   prints `channels: ... stale`). The generated `out/systems` files and BAFFLE_DATA are not modified (regen checks stay
+   byte-identical). Engine/Baffle/sides/spots use `kc` when present.
+4. QA (box): `viz.py`, `qa_along.py`, `qa_marks.py`; tests `tools/tests/channels_snap.mjs` (km/snap consistency),
+   `channels_shot.mjs` (before/after shots, views from `views.py`), plus `multisys_allregress.mjs` / `baffle_regress_test.mjs`.

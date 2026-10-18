@@ -33,12 +33,16 @@ function typeFromColor(c){if(typeof c!=='string'||!/^#[0-9a-f]{6}$/i.test(c))ret
 allCustom=load(KS,[]);if(!Array.isArray(allCustom))allCustom=[];custom=allCustom.filter(mine);
 /* line-aware centreline geometry */
 const RAD=Math.PI/180;const hav=(a,b)=>{const la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*6371.0088*Math.asin(Math.sqrt(x));};
-const EU=D.euleilah,EUC=[0];for(let i=1;i<EU.length;i++)EUC.push(EUC[i-1]+hav(EU[i-1],EU[i]));
+const EU=D.euleilah,EUC=[0];for(let i=1;i<EU.length;i++)EUC.push(EUC[i-1]+hav(EU[i-1],EU[i]));if(D.euKc)EUC.splice(0,EUC.length,...D.euKc);
 const EJ=D.euleilahJunctionKm;
 function pointAt(km,line){if(GEN)return B.pointOnLine(km,line||'M');if(B.isSide&&B.isSide(line))return B.pointOnSide(km,line);if(line!=='E'||km<EJ)return B.pointAtKm(Math.max(0,Math.min(B.MAXKM,km)));const s=km-EJ;
   for(let i=1;i<EU.length;i++)if(EUC[i]>=s){const f=(s-EUC[i-1])/(EUC[i]-EUC[i-1]);return[EU[i-1][0]+f*(EU[i][0]-EU[i-1][0]),EU[i-1][1]+f*(EU[i][1]-EU[i-1][1])];}return EU[EU.length-1];}
 const EUMAX=EJ+EUC[EUC.length-1];
 function snapPt(lat,lng){if(GEN){const s=B.snap(lat,lng);return{km:+Math.max(0,Math.min(B.lineMax(s.lineId),s.km)).toFixed(2),line:s.lineId,offKm:s.offKm,slat:s.lat,slng:s.lon};}const s=B.snap(lat,lng);const line=s.lineId||(s.line==='Euleilah Creek'?'E':'B');return{km:+Math.min(B.lineMaxKm?B.lineMaxKm(line):B.MAXKM,Math.max(0,s.km)).toFixed(2),line,offKm:s.offKm,slat:s.lat,slng:s.lon};}
+/* re-snap stored spots from their lat/lng at load (the channel line can be re-routed between builds; km is anchored so it
+   barely moves). In memory only; kept when the point is now >1.2 km off or would land on a different line. */
+function resnap(c){try{if(c==null||c.lat==null||c.lng==null)return c;const sn=snapPt(+c.lat,+c.lng);if(sn.offKm>1.2||(c.line&&sn.line!==c.line))return c;c.km=sn.km;c.line=sn.line;c.offKm=+sn.offKm.toFixed(3);}catch(e){}return c;}
+custom.forEach(resnap);
 function apply(){BUILTIN.forEach(l=>{const a=alias[l.id];l.name=a||l.base;l.alias=!!a;});
   const C=custom.map(c=>Object.assign(c,{custom:true}));
   const all=BUILTIN.concat(C).sort((a,b)=>a.km-b.km||(a.builtin?-1:1));LM.length=0;LM.push(...all);}
@@ -57,7 +61,7 @@ const kmLabel=(km,line,d=2)=>{if(GEN&&B.TWO){const NM=B.TWONM,L=B.LINES.find(x=>
     if(PN&&PN!==NM){const kb=B.kmBoth(km,line);return 'km '+(+km).toFixed(1)+' from '+PN.sName+' · '+(kb?kb.n:0).toFixed(1)+' from '+PN.nName;}
     if(NM.line==='M'||(L&&L.id===NM.line)){if(!L||L.id===NM.line)return 'km '+(+km).toFixed(1)+' from '+NM.sName+' · '+Math.max(0,B.TWO.L-km).toFixed(1)+' from '+NM.nName;return B.lineName(L.id)+' '+Math.max(0,km-L.j).toFixed(1)+' km up (est. tides)';}}const a=alongLabel(km,line);return a?a+' up (km '+(+km).toFixed(1)+' from mouth, est. tides)':'km '+(+km).toFixed(d)+' '+lineLabel(line)+(!GEN&&line==='E'&&B.EUCAL&&km>B.EUCAL+1e-6?' (est. tides)':'');};
 const DEPTHS={s:{n:'1–3 m',s:'1-3',k:'shallow'},m:{n:'3–6 m',s:'3-6',k:'mid'},d:{n:'6 m+',s:'6+',k:'deep'}};
-const S={DEPTHS,onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typeFromColor,pointAt,snap:snapPt,EUMAX,lineLabel,GEN,SYS,
+const S={resnap,DEPTHS,onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typeFromColor,pointAt,snap:snapPt,EUMAX,lineLabel,GEN,SYS,
   typeOf:l=>l&&TYPES[l.type]?l.type:'',
   migration:()=>{const m=load(KM,null);return m&&!m.seen&&Array.isArray(m.items)&&m.items.length?m:null;},
   migrationSeen:()=>{const m=load(KM,null);if(m){m.seen=true;try{localStorage.setItem(KM,JSON.stringify(m));}catch(e){}}S.onChange.forEach(f=>{try{f()}catch(e){}});},

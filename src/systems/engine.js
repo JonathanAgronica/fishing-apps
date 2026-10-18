@@ -41,7 +41,7 @@ function makeSystemBT(S){
     return P.ext.filter((e,i)=>!e.hi&&e.t>=h0-6&&e.t<=h1+6&&!(tr&&P.ext[i+1]&&P.ext[i+1].weak)).map(e=>({t:e.t,u:e.u,kind:tr?'rise':'low'}));}
   /* geometry */
   const havKm=(a,b)=>{const la1=a[0]*RAD,la2=b[0]*RAD,dl=(b[0]-a[0])*RAD,dn=(b[1]-a[1])*RAD;const x=Math.sin(dl/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dn/2)**2;return 2*6371.0088*Math.asin(Math.sqrt(x));};
-  const LINES=S.lines.map(l=>{const c=[0];for(let i=1;i<l.coords.length;i++)c.push(c[i-1]+havKm(l.coords[i-1],l.coords[i]));return Object.assign({},l,{cc:c,len:c[c.length-1],j:l.junctionKm||0});});
+  const LINES=S.lines.map(l=>{let c=[0];for(let i=1;i<l.coords.length;i++)c.push(c[i-1]+havKm(l.coords[i-1],l.coords[i]));if(l.kc&&l.kc.length===l.coords.length)c=l.kc.slice(); /* re-routed channel: km anchored to the replaced line */return Object.assign({},l,{cc:c,len:c[c.length-1],j:l.junctionKm||0});});
   const LBYID={};LINES.forEach(l=>LBYID[l.id]=l);
   function projLine(L,lat,lon){const line=L.coords,cc=L.cc;const kx=111.32*Math.cos(lat*RAD),ky=110.54;let best={d:1e9};
     for(let i=0;i<line.length-1;i++){const ax=(line[i][1]-lon)*kx,ay=(line[i][0]-lat)*ky,bx=(line[i+1][1]-lon)*kx,by=(line[i+1][0]-lat)*ky;const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy;let t=L2?-(ax*dx+ay*dy)/L2:0;t=Math.max(0,Math.min(1,t));const d=Math.hypot(ax+t*dx,ay+t*dy);

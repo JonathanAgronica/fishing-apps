@@ -22,7 +22,7 @@ into `data/baffle_adj.json`, and applied in the app by `src/adj/adj.js` (core ho
 | term | definition | applied |
 |---|---|---|
 | coastal surge | trailing 25 h mean of Bundaberg 051011A observed − MSQ predicted | gain 1, capped ±0.3 m, all Baffle reaches incl. Euleilah and side creeks, highs and lows (pool-level lows above ~30 km: only a positive surge lifts them) |
-| fresh F | max(0, Mimdale(t − 3 h) − M0), M0 = 10th percentile of hourly Mimdale over the previous 14 d | highs + 0.5·F·w(km), w = ((km − 16.4)/18.85)^1.5 clipped 0..1 on the main channel (0 on Euleilah, side creeks and below the junction); single-high threshold + F·w/0.423; lows unchanged |
+| fresh F | max(0, Mimdale(t − 3 h) − M0), M0 = 10th percentile of hourly Mimdale over the previous 14 d | highs + 0.5·F·w(km), w = ((km − 16.4)/18.85)^1.5 clipped 0..1 on the main channel (0 on Euleilah, side creeks and below the junction); single-high threshold + F·w/0.423 (only the smaller of two neighbouring highs can become a stand, so turning points always alternate H/L and the curve always draws); lows unchanged |
 
 Past times use the archived hourly series (what was known then), so the Gauges model lines are a fair hindcast.
 Ahead of the last value both terms fade: surge e-fold 24 h and gone at 48 h, fresh e-fold 48 h and gone at 72 h, so later

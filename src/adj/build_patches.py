@@ -7,6 +7,17 @@ bt_core=patch(bt_core,"ext.sort((a,b)=>a.t-b.t);",
  "ext.sort((a,b)=>a.t-b.t);\n  const AJ=opts.adj!==undefined?opts.adj:(root.BT_ADJ||null),AJL=lineOf(km,opts);if(AJ)for(const e of ext){const d=AJ.dh(km,e.t,e.hi,AJL,cal.trunc);if(d){e.h+=d;e.adj=d;}}")
 assert bt_core.count("const AJ=opts.adj")==1 and bt_core.index("const AJ=opts.adj")>bt_core.index("function predictAt(")
 bt_core=patch(bt_core,"if(!e.hi||e.src.h+hoff>=thr)continue;","const thrE=thr+(AJ?AJ.sup(km,e.t,AJL):0);if(!e.hi||e.src.h+hoff>=thrE)continue;")
+# Turning points are never removed in a row: a raised threshold (live fresh) can put BOTH highs of a day under it, and
+# suppressing every high dropped every low before it -> H/H/H with no low between, so the curve could not be drawn (blank
+# Tides graph above ~km 35 on 18 Oct 2026). Only the smaller of two neighbouring highs can become a stand: skip a high if
+# the previous high is already a stand, or if the next high is smaller and also under the threshold (that one goes instead).
+# Only active with live adjustments, so the unadjusted model is byte-identical.
+bt_core=patch(bt_core,"const a=ext[i-1],b=ext[i+1];if(a.hi||b.hi||drop.has(a))continue;",
+ "const a=ext[i-1],b=ext[i+1];if(a.hi||b.hi||drop.has(a))continue;\n    if(AJ){let pH=null,nH=null;for(let j=i-1;j>=0;j--)if(ext[j].hi){pH=ext[j];break;}for(let j=i+1;j<ext.length;j++)if(ext[j].hi){nH=ext[j];break;}\n      if(pH&&pH.stand)continue;if(nH&&nH.src.h<e.src.h&&nH.src.h+hoff<thr+AJ.sup(km,nH.t,AJL))continue;}")
+# Heights only from here: with live adjustments a lowered high (negative surge) must stay above its neighbouring lows and a
+# raised low below its neighbouring highs, so the drawn curve keeps the same H/L order (no-op without adjustments).
+bt_core=patch(bt_core,"  const knots=clean.map(",
+ "  if(AJ)for(let i=0;i<clean.length;i++){const c=clean[i],nb=[clean[i-1],clean[i+1]].filter(Boolean);if(!nb.length)continue;\n    if(c.hi){const m=Math.max(...nb.map(x=>x.h))+0.02;if(c.h<m)c.h=m;}else{const m=Math.min(...nb.map(x=>x.h))-0.02;if(c.h>m)c.h=m;}}\n  const knots=clean.map(")
 bt_core=patch(bt_core,"e.sup={H:e.src.h+hoff,thr}","e.sup={H:e.src.h+hoff,thr:thrE}")
 # Tides: compact badge + flood warning in the spot notices; detail line in "Accuracy & method"; re-render when new data arrives
 bt_ui=patch(bt_ui,"below the ${cal.supThr.toFixed(2)} m needed","below the ${sd[0].sup.thr.toFixed(2)} m needed")

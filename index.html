@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610180751"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610180751"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610180751">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610180751">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610181225"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610181225"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610181225">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610181225">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610180751">
+<meta name="app-version" content="202610181225">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -785,7 +785,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610180751</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610181225</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1250,12 +1250,16 @@ function predictAt(km,t0,t1,opts){opts=opts||{};let cal=calAt(km,opts);cal=apply
   // single-high days: suppress small highs → tide stand; the low before it merges into the next low (run-out continues)
   const thr=supThr(km,Object.assign({},opts,{cal}));cal.supThr=thr;cal.line=lineOf(km,opts);const drop=new Set();
   if(thr>0)for(let i=1;i<ext.length-1;i++){const e=ext[i];const thrE=thr+(AJ?AJ.sup(km,e.t,AJL):0);if(!e.hi||e.src.h+hoff>=thrE)continue;const a=ext[i-1],b=ext[i+1];if(a.hi||b.hi||drop.has(a))continue;
+    if(AJ){let pH=null,nH=null;for(let j=i-1;j>=0;j--)if(ext[j].hi){pH=ext[j];break;}for(let j=i+1;j<ext.length;j++)if(ext[j].hi){nH=ext[j];break;}
+      if(pH&&pH.stand)continue;if(nH&&nH.src.h<e.src.h&&nH.src.h+hoff<thr+AJ.sup(km,nH.t,AJL))continue;}
     /* no flood tide arrives after the low before it, so the water keeps draining to the next low: drop the earlier low */
     drop.add(a);b.h=Math.min(a.h,b.h);e.weak=true;e.stand=true;e.sup={H:e.src.h+hoff,thr:thrE};e.standT0=a.t;e.standT1=e.t;e.mergedLow=a;}
   ext=ext.filter(e=>!drop.has(e));
   // enforce alternation after shifting (stands excluded)
   const clean=[];for(const e of ext){if(e.weak)continue;const l=clean[clean.length-1];if(l&&l.hi===e.hi){if((e.hi&&e.h>l.h)||(!e.hi&&e.h<l.h))clean[clean.length-1]=e;}else clean.push(e);}
   // curve knots: real extremes + a flat stand (slight drift in the direction of the tide) in place of each suppressed high
+  if(AJ)for(let i=0;i<clean.length;i++){const c=clean[i],nb=[clean[i-1],clean[i+1]].filter(Boolean);if(!nb.length)continue;
+    if(c.hi){const m=Math.max(...nb.map(x=>x.h))+0.02;if(c.h<m)c.h=m;}else{const m=Math.min(...nb.map(x=>x.h))-0.02;if(c.h>m)c.h=m;}}
   const knots=clean.map(e=>({t:e.t,h:e.h}));
   for(const e of ext){if(!e.stand)continue;let p=null,n=null;for(const k of clean){if(k.t<e.standT0)p=k;else if(k.t>e.standT1){n=k;break;}}if(!p||!n)continue;
     const fall=p.h>n.h,lo=Math.min(p.h,n.h)+0.04,hi=Math.max(p.h,n.h)-0.04;let m=(e.mergedLow.h+e.h)/2;m=lo>hi?(p.h+n.h)/2:Math.max(lo,Math.min(hi,m));

@@ -61,7 +61,7 @@ const lv=$('bt-live');if(lv){const card=lv.closest('section');const G=(S.gauges|
   const a=g=>`<a href="https://www.bom.gov.au/fwo/${g.tab}/${g.tab}.${g.id}.tbl.shtml" target="_blank" rel="noopener">${esc(g.name)} ${g.id}</a> (<a href="https://www.bom.gov.au/fwo/${g.tab}/${g.tab}.${g.id}.plt.shtml" target="_blank" rel="noopener">plot</a>)`;
   card.innerHTML=`<h2>📡 Live gauges</h2><p class="mut">${G.length?'Tidal water-level gauges on this system (BoM, opens their page): '+G.map(g=>a(g)+(g.km!=null?` <span class="mut">km ${g.km.toFixed(1)}${g.line!=='M'?' '+esc(g.lineName):''}</span>`:'')).join(' · '):'No BoM tide-affected gauge on this system.'}${C.length?'<br>Coastal tide gauges nearby: '+C.map(a).join(' · '):''}<br>See the 📡 Gauges tab for gauge-vs-model comparisons.</p>`;}
 /* how-predictions card */
-const nt=$('bt-nodesTbl');if(nt){const card=nt.closest('section');const lim=S.lines.map(l=>`<li><b>${esc(l.name)}</b>${l.id==='M'?'':' (joins at km '+l.junctionKm.toFixed(1)+')'}: modelled to km ${(l.junctionKm+l.limitKm).toFixed(1)} — ${esc(l.limitSrc)}</li>`).join('');
+const nt=$('bt-nodesTbl');if(nt){const card=nt.closest('section');const lim=S.lines.map(l=>`<li><b>${esc(l.name)}</b>${l.id==='M'?'':!l.parent?' (own entrance)':' (joins at km '+l.junctionKm.toFixed(1)+')'}: modelled to km ${(l.junctionKm+l.limitKm).toFixed(1)} — ${esc(l.limitSrc)}</li>`).join('');
   card.innerHTML=`<h2>🧪 How predictions are made — ${esc(FT.SYSNAME)}</h2>
   <p><span class="sysconf c${I.conf}">${I.conf}</span> <b>${esc(S.confidence.why)}</b></p>
   <details open><summary>1 · Base tide: ${esc(port)} harmonic model</summary><p>41 tidal constituents with nodal corrections, least-squares fitted offline to the MSQ official 2026 10-minute predictions for ${esc(port)} (data.qld.gov.au). Runs offline for any date. Same method as the Baffle Creek model (Bundaberg), which validates to ≈5 min against official MSQ times.</p></details>
@@ -75,8 +75,9 @@ const nl=tab.querySelectorAll(':scope > .notice');const last=nl[nl.length-1];if(
 /* ===== two-entrance passages: "Fed from" note + km both ways ===== */
 (function(){const FT=window.FT,B=window.BT;if(!B||!B.fedFrom)return;
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-FT.fedInfo=function(km,line){const f=B.fedFrom(km,line||'M'),c=B.calAt(km,{line:line||'M'});const n=Math.round(f.n*100),s=100-n;
-  const g=c.est?(f.side?'C':'B'):'A';return{n,s,g,est:!!c.est,side:f.side,x:f.x,dom:n>=60?'north (Caloundra bar)':s>=60?'south (Bribie bridge)':'both ends (tidal node)'};};
-FT.twoNote=function(km,line){const i=FT.fedInfo(km,line);
-  return `<div class="fed" data-fed="${i.n}">🌊 <b>Fed from:</b> north ${i.n}% / south ${i.s}% — ${esc(i.dom)}${i.side?' (via the creek junction at passage km '+i.x.toFixed(1)+')':''} · accuracy <span class="sysconf c${i.g}">${i.g}</span>${i.est?' <b>est.</b>':''}${Math.abs(i.x-B.TWO.node)<3?' · near the tidal node: small range, flattened/late highs':''}</div>`;};
+const NM=B.TWONM;
+FT.fedInfo=function(km,line){const f=B.fedFrom(km,line||'M');if(!f)return null;const c=B.calAt(km,{line:line||'M'});const n=Math.round(f.n*100),s=100-n;
+  let g=c.est?(f.side?'C':'B'):'A';if(NM.gradeCap&&g<NM.gradeCap)g=NM.gradeCap;return{n,s,g,est:!!c.est,side:f.side,x:f.x,dom:n>=60?NM.nWord+' ('+NM.nName+')':s>=60?NM.sWord+' ('+NM.sName+')':'both ends (tidal node)'};};
+FT.twoNote=function(km,line){const i=FT.fedInfo(km,line);if(!i)return '';
+  return `<div class="fed" data-fed="${i.n}">🌊 <b>Fed from:</b> ${esc(NM.nWord)} ${i.n}% / ${esc(NM.sWord)} ${i.s}% — ${esc(i.dom)}${i.side?' (via the creek junction at passage km '+i.x.toFixed(1)+')':''} · accuracy <span class="sysconf c${i.g}">${i.g}</span>${i.est?' <b>est.</b>':''}${Math.abs(i.x-B.TWO.node)<3?' · near the tidal node: small range, flattened/late highs':''}</div>`;};
 })();

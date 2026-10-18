@@ -18,9 +18,15 @@ The app build needs nothing else from here.
    - `build/ext_maroochy_yandina.py`: extends Maroochy M from km 26.39 to Yandina (James Low Bridge ford, km 28.67).
    - `build/ext_pumicestone.py`: adds the Pumicestone two-entrance model (Caloundra bar, side creeks, twoEnt fit)
      and merges hussey-creek and halls-creek into it.
+   - `build/ext_skyring.py` (2026-10-18): adds Skyring Creek (Skyringville) to the Burnett as line T7, a two-entrance
+     channel (Burnett via the Hole in the Wall ↔ its own sea mouth; `twoEnt.line = 'T7'`, estimate, grade C on that line).
+     Geometry is pinned in `base/geo/skyring_parts.json` (QLD watercourse lines CC BY 4.0 + imagery trace; OSM has no line).
+   - `build/new_pancake.py` (2026-10-18): new system `pancake-creek` (Pancake Ck ↔ Middle Ck two-entrance passage over the
+     Middle Island divide, Jenny Lind Ck with its own entrance, Tanti Ck). MSQ places Pancake Creek and Seventeen Seventy,
+     grade C. Geometry pinned in `base/geo/pancake_parts.json`. Helpers shared by both: `build/newsys.py`.
    - Inputs: `base/*.pre-*.json` (pre-extension snapshots, reconstructed from the published output) and
      `base/*.spec.json` (curated or fitted values plus pinned geometry).
-   - Both scripts accept `--check`, which applies the extension to a temp copy and compares it byte-for-byte with `out/`.
+   - All four scripts accept `--check`, which applies the extension to a temp copy and compares it byte-for-byte with `out/`.
 3. **Baffle side creeks** (Baffle itself is built into the app from `src/upstream/baffle-tides`):
    `src/sides/make_sides.py` with `osm/baffle_side/` → `src/sides/baffle_sides.json` (byte-identical).
 
@@ -29,6 +35,7 @@ The app build needs nothing else from here.
 |---|---|
 | ext_pumicestone `--check` | system JSON, index.json and stations byte-identical. M regenerated exactly from OSM; 8 of the 13 new side creeks regenerated exactly; 5 pinned (4 differ ≤1.5 m, 1 differs by one vertex) |
 | ext_maroochy_yandina `--check` | byte-identical; 42 new vertices from OSM; the end point on the ford is pinned |
+| ext_skyring / new_pancake `--check` | byte-identical (geometry and nodes generated from the pinned parts) |
 | make_sides.py | byte-identical |
 | derived fields (bbox, maxKm, index n/g/km/conf/port) | all 82 systems match, apart from 2 index entries the extensions set deliberately |
 | index `ov` overview lines | carried over; it was simplified from unrounded coordinates (DP 60 m of the published coords reproduces 17/82 exactly) |

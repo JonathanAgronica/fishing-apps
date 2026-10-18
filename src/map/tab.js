@@ -42,9 +42,13 @@ async function init(){if(ready)return;try{await loadLeaflet();}catch(e){$('mMap'
     for(const ln of est)LF.polyline(ln,{color:'#ffd27a',weight:1.4,opacity:.95,dashArray:'4 5',interactive:false}).addTo(creekG);}
   // km ticks: every 1 km (dot), labels every 2 km
   if(GEN&&B.TWO){/* two-entrance passage: km both ways on the passage, junction-relative km on side creeks */
-    const sh=n=>n.replace(/ Creek/,' Ck').replace(/\s*\(.*\)/,'');
-    for(const L of LL){if(L.id==='M'){for(let k=0;k<=Math.floor(L.b);k++){const p=S.pointAt(k,'M');LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
-        if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm mk2',html:k+' S · '+Math.round(B.TWO.L-k)+' N',iconSize:[70,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}}
+    const sh=n=>n.replace(/ Creek/,' Ck').replace(/\s*\(.*\)/,''),NM=B.TWONM,PL=NM.line;
+    const onP=id=>{let L=B.LINES.find(x=>x.id===id);while(L){if(L.id===PL)return true;L=L.parent?B.LINES.find(x=>x.id===L.parent):null;}return false;};
+    for(const L of LL){if(PL!=='M'&&!onP(L.id)){/* not on the passage (e.g. the Burnett and its other creeks): plain km ticks as for any system */
+        for(let k=Math.ceil(L.a);k<=Math.floor(L.b);k++){if(L.id!=='M'&&k<=L.a+0.2)continue;const p=S.pointAt(k,L.id);LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
+          if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm',html:k+' km',iconSize:[40,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}continue;}
+      if(L.id===PL){for(let k=Math.ceil(L.a-1e-6);k<=Math.floor(L.b);k++){const p=S.pointAt(k,PL);LF.circleMarker(p,{radius:k%2?2:3,color:'#fff',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
+        if(k%2===0)LF.marker(p,{icon:LF.divIcon({className:'mkm mk2',html:k+' '+NM.sAb+' · '+Math.round(B.TWO.L-k)+' '+NM.nAb,iconSize:[70,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}}
       else{const nm=sh(B.lineName(L.id));for(let k=1;k<=Math.floor(L.b-L.a+1e-6);k++){const p=S.pointAt(L.a+k,L.id);LF.circleMarker(p,{radius:k%2?2:3,color:'#ffd27a',weight:1,fillColor:'#03141a',fillOpacity:1,interactive:false}).addTo(tickG);
         LF.marker(p,{icon:LF.divIcon({className:'mkm mkms',html:esc(nm)+' '+k+' km',iconSize:[100,12],iconAnchor:[-6,6]}),interactive:false,keyboard:false}).addTo(labG);}}}
     map.fitBounds(LF.latLngBounds(LL.flatMap(L=>L.coords)).pad(0.05));}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Verify how much of the published river-system data the recreated scripts reproduce.
-  1. ext_pumicestone.py --check / ext_maroochy_yandina.py --check (byte-for-byte)
+  1. ext_pumicestone.py / ext_maroochy_yandina.py / ext_skyring.py / new_pancake.py --check (byte-for-byte)
   2. Baffle side creeks: src/sides/make_sides.py -> byte-for-byte vs src/sides/baffle_sides.json
   3. derived fields of every system (bbox, maxKm, index.json n/g/km/conf/port/bbox/mouth)
   4. geometry convention: every line's vertices are OSM waterway nodes (needs the statewide cache
@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import *
 H = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(os.path.dirname(MS))
 ok = True
-for s in ('ext_pumicestone.py', 'ext_maroochy_yandina.py'):
+for s in ('ext_pumicestone.py', 'ext_maroochy_yandina.py', 'ext_skyring.py', 'new_pancake.py'):
     r = subprocess.run([sys.executable, f'{H}/{s}', '--check'], capture_output=True, text=True)
     print(f'[{s}]', r.stdout.strip().replace('\n', ' | ')); ok &= r.returncode == 0
 t = tempfile.mktemp(suffix='.json')

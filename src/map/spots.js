@@ -48,12 +48,13 @@ const rid=()=>{const a=new Uint8Array(5);crypto.getRandomValues(a);return 'c'+Ar
 const clean=s=>String(s==null?'':s).replace(/[\u0000-\u001f]/g,' ').trim();
 const lineLabel=(id,short)=>{if(!GEN&&B.bLineName)return B.bLineName(id,short);if(!GEN)return id==='E'?(short?'Euleilah':'Euleilah Ck'):(short?'Baffle':'Baffle Ck');const n=B.lineName(id);return short?n.replace(/ (Creek|River|Passage)$/,''):n.replace(/ Creek$/,' Ck').replace(/ River$/,' R');};
 /* channels of this system: [{id,name,short,min,max,main,est,parent,j}] (km from the mouth; side creeks: junction km + distance up) */
-const channels=()=>GEN?B.LINES.map(L=>({id:L.id,name:lineLabel(L.id),short:lineLabel(L.id,true),min:L.id==='M'?0:L.j,max:B.lineMax(L.id),main:L.id==='M',est:false,parent:L.id==='M'?null:'M',j:L.id==='M'?0:L.j}))
+const channels=()=>GEN?B.LINES.map(L=>({id:L.id,name:lineLabel(L.id),short:lineLabel(L.id,true),min:L.id==='M'?0:L.j,max:B.lineMax(L.id),main:L.id==='M',est:false,parent:L.id==='M'?null:'M',j:L.id==='M'?0:L.j,...(L.id!=='M'&&!L.parent?{own:true}:{})}))
   :[{id:'B',name:'Baffle Ck',short:'Baffle',min:0,max:B.MAXKM,main:true,est:false,parent:null,j:0},{id:'E',name:'Euleilah Ck',short:'Euleilah',min:EJ,max:EUMAX,main:false,est:false,estFrom:B.EUCAL,parent:'B',j:EJ}]
     .concat((B.SIDES||[]).map(s=>({id:s.id,name:s.short,short:s.short.replace(/ Ck$/,''),min:s.jk,max:s.max,main:false,est:true,parent:s.parent,j:s.jk})));
 /* "Mosquito Ck 2.0 km" style label for a km on a side creek (km from its junction); null on the main channel */
 const alongLabel=(km,line)=>{if(GEN||!B.isSide||!B.isSide(line))return null;const s=B.sideOf(line);return s.short+' '+Math.max(0,km-s.jk).toFixed(1)+' km';};
-const kmLabel=(km,line,d=2)=>{if(GEN&&B.TWO){const L=B.LINES.find(x=>x.id===(line||'M'));if(!L||L.id==='M')return 'km '+(+km).toFixed(1)+' from Bribie bridge · '+Math.max(0,B.TWO.L-km).toFixed(1)+' from Caloundra bar';return B.lineName(L.id)+' '+Math.max(0,km-L.j).toFixed(1)+' km up (est. tides)';}const a=alongLabel(km,line);return a?a+' up (km '+(+km).toFixed(1)+' from mouth, est. tides)':'km '+(+km).toFixed(d)+' '+lineLabel(line)+(!GEN&&line==='E'&&B.EUCAL&&km>B.EUCAL+1e-6?' (est. tides)':'');};
+const kmLabel=(km,line,d=2)=>{if(GEN&&B.TWO){const NM=B.TWONM,L=B.LINES.find(x=>x.id===(line||'M'));
+    if(NM.line==='M'||(L&&L.id===NM.line)){if(!L||L.id===NM.line)return 'km '+(+km).toFixed(1)+' from '+NM.sName+' · '+Math.max(0,B.TWO.L-km).toFixed(1)+' from '+NM.nName;return B.lineName(L.id)+' '+Math.max(0,km-L.j).toFixed(1)+' km up (est. tides)';}}const a=alongLabel(km,line);return a?a+' up (km '+(+km).toFixed(1)+' from mouth, est. tides)':'km '+(+km).toFixed(d)+' '+lineLabel(line)+(!GEN&&line==='E'&&B.EUCAL&&km>B.EUCAL+1e-6?' (est. tides)':'');};
 const DEPTHS={s:{n:'1–3 m',s:'1-3',k:'shallow'},m:{n:'3–6 m',s:'3-6',k:'mid'},d:{n:'6 m+',s:'6+',k:'deep'}};
 const S={DEPTHS,onChange:[],channels,alongLabel,kmLabel,COLORS,TYPES,GENCOL,typeCol,typeFromColor,pointAt,snap:snapPt,EUMAX,lineLabel,GEN,SYS,
   typeOf:l=>l&&TYPES[l.type]?l.type:'',

@@ -13,7 +13,7 @@ _p('mj_ui',r"""const c=r.cal,nm=bafName(BZ);
 _p('bt_ui',r"""function syncLine(){if(!GEN)return;""",
  r"""function syncLine(){if(!GEN){if(!B.SIDES||!window.FT.spots)return;const CH=window.FT.spots.channels();const L=CH.find(c=>c.id===(st.bline||'B'))||CH[0];
   let s=document.getElementById('bt-line');if(!s){s=document.createElement('select');s.id='bt-line';s.setAttribute('aria-label','Channel');$('lm').after(s);
-    s.innerHTML=CH.map(c=>`<option value="${c.id}">${esc(c.name)}${c.main?' (main)':' — joins km '+c.j.toFixed(1)+(c.est?' (est.)':'')}</option>`).join('');
+    s.innerHTML=CH.map(c=>`<option value="${c.id}">${esc(c.name)}${c.main?' (main)':c.own?' (own entrance)':' — joins km '+c.j.toFixed(1)+(c.est?' (est.)':'')}</option>`).join('');
     s.onchange=e=>{const C=CH.find(c=>c.id===e.target.value);if(!C)return;st.bline=C.main?null:C.id;syncLine();st.km=C.main?Math.min(st.km,C.max):Math.max(C.min,Math.min(C.max,st.km<=C.min||st.km>C.max?C.min+Math.min(1,(C.max-C.min)/2):st.km));st.landmark=null;st.gps=null;$('km').value=st.km;$('lm').value='';render();};}
   s.value=L.id;$('km').min=+L.min.toFixed(2);$('km').max=+L.max.toFixed(2);$('km').step=0.05;const kl=$('kmLbl');if(kl&&kl.nextElementSibling)kl.nextElementSibling.textContent=L.max.toFixed(1)+' km';return;}""")
 _p('bt_ui',r"""else st.bline=line||null;st.km=Math.max(GEN&&st.line!=='M'?B.LINES.find(l=>l.id===st.line).j:0,Math.min(GEN?B.lineMax(st.line):B.MAXKM,km));""",

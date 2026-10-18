@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-10-18T10:48+10:00",
+ "generated_aest": "2026-10-18T11:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": false,
-   "span_days": 15.8,
+   "span_days": 15.9,
    "base": 0.76,
    "level": 0.83,
    "kind": "none",
@@ -113,7 +113,7 @@
    "onset_aest": "2026-10-16 07:39",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.1
+   "day": 2.2
   },
   "kedron-brook": {
    "gauge": "540478",

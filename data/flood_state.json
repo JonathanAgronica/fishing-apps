@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-18T14:43+10:00",
+ "generated_aest": "2026-10-18T15:39+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -50,7 +50,7 @@
    "onset_aest": "2026-10-17 04:04",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.4
+   "day": 1.5
   },
   "burrum-river": {
    "gauge": "040907",
@@ -176,7 +176,7 @@
    "onset_aest": "2026-10-16 07:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.3
+   "day": 2.4
   },
   "noosa-river": {
    "gauge": "540774",

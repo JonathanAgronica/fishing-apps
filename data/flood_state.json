@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-20T08:43+10:00",
+ "generated_aest": "2026-10-20T09:40+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -50,7 +50,7 @@
    "onset_aest": "2026-10-17 08:26",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   },
   "burrum-river": {
    "gauge": "040907",
@@ -128,7 +128,7 @@
    "onset_aest": "2026-10-19 07:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.0
+   "day": 1.1
   },
   "kolan-river": {
    "gauge": "539205",
@@ -221,7 +221,7 @@
    "onset_aest": "2026-10-19 14:45",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.7
+   "day": 0.8
   },
   "saltwater-creek": {
    "gauge": "540741",

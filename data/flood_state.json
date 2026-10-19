@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-19T10:42+10:00",
+ "generated_aest": "2026-10-19T11:37+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -128,7 +128,7 @@
    "onset_aest": "2026-10-19 07:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.1
+   "day": 0.2
   },
   "kolan-river": {
    "gauge": "539205",
@@ -179,7 +179,7 @@
    "onset_aest": "2026-10-16 22:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.5
+   "day": 2.6
   },
   "noosa-river": {
    "gauge": "540774",

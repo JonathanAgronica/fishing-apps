@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-21T02:40+10:00",
+ "generated_aest": "2026-10-21T03:42+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -77,7 +77,7 @@
    "onset_aest": "2026-10-19 06:33",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.8
+   "day": 1.9
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -155,7 +155,7 @@
    "onset_aest": "2026-10-17 09:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.7
+   "day": 3.8
   },
   "mary-river": {
    "gauge": "540686",
@@ -182,7 +182,7 @@
    "onset_aest": "2026-10-19 09:30",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.7
+   "day": 1.8
   },
   "noosa-river": {
    "gauge": "540774",
@@ -236,7 +236,7 @@
    "onset_aest": "2026-10-18 14:02",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.5
+   "day": 2.6
   }
  },
  "alerts": []

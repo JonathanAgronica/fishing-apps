@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-10-21T05:41+10:00",
+ "generated_aest": "2026-10-21T06:45+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": false,
-   "span_days": 18.6,
+   "span_days": 18.7,
    "base": 0.76,
    "level": 0.84,
    "kind": "none",
@@ -128,7 +128,7 @@
    "onset_aest": "2026-10-19 07:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.9
+   "day": 2.0
   },
   "kolan-river": {
    "gauge": "539205",
@@ -155,7 +155,7 @@
    "onset_aest": "2026-10-17 09:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.8
+   "day": 3.9
   },
   "mary-river": {
    "gauge": "540686",
@@ -182,7 +182,7 @@
    "onset_aest": "2026-10-19 09:45",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.8
+   "day": 1.9
   },
   "noosa-river": {
    "gauge": "540774",
@@ -221,7 +221,7 @@
    "onset_aest": "2026-10-19 15:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.6
+   "day": 1.7
   },
   "saltwater-creek": {
    "gauge": "540741",

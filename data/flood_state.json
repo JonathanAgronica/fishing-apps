@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-22T08:46+10:00",
+ "generated_aest": "2026-10-22T09:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -50,7 +50,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 0.0,
+   "day": 0.1,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -122,7 +122,7 @@
    "onset_aest": "2026-10-19 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -218,7 +218,7 @@
    "onset_aest": "2026-10-22 03:38",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.2
+   "day": 0.3
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -233,7 +233,7 @@
    "onset_aest": "2026-10-19 15:20",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.7
+   "day": 2.8
   },
   "saltwater-creek": {
    "gauge": "540741",
@@ -248,7 +248,7 @@
    "onset_aest": "2026-10-19 20:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.5
+   "day": 2.6
   }
  },
  "alerts": []

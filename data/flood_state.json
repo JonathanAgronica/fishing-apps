@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-22T06:41+10:00",
+ "generated_aest": "2026-10-22T07:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -116,7 +116,7 @@
    "onset_aest": "2026-10-19 05:31",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -131,7 +131,7 @@
    "onset_aest": "2026-10-19 08:10",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.9
+   "day": 3.0
   },
   "kolan-river": {
    "gauge": "539205",

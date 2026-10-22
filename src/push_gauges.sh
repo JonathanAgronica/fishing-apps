@@ -11,7 +11,7 @@ python3 scripts/update_gauges.py "${ARGS[@]}" | cut -c1-600
 # Baffle live tide adjustments (surge + Mimdale fresh) for the app -> data/baffle_adj.json (non-fatal)
 [ -f scripts/baffle_adj.py ] && { python3 scripts/baffle_adj.py | cut -c1-300 || echo "baffle_adj: failed (non-fatal)"; }
 # multi-system gauges (BoM tables for every river system; self-throttled to one fetch per ~3 h, ~1 min when it runs)
-[ -f scripts/update_sys_gauges.py ] && { python3 scripts/update_sys_gauges.py | cut -c1-300 || echo "sysgauges: failed (non-fatal)"; }
+[ -f scripts/update_sys_gauges.py ] && { timeout 300 python3 scripts/update_sys_gauges.py | cut -c1-300 || echo "sysgauges: failed (non-fatal)"; }
 git add data
 if git diff --cached --quiet -- data; then echo "gauges: no change"; exit 0; fi
 git -c user.name="JonathanAgronica" -c user.email="JonathanAgronica@users.noreply.github.com" commit -q -m "gauges: update $(TZ=Australia/Brisbane date +%Y-%m-%dT%H:%M+10:00) (box)" -- data

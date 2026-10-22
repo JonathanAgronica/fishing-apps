@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-22T19:42+10:00",
+ "generated_aest": "2026-10-22T20:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -80,7 +80,7 @@
    "onset_aest": "2026-10-19 06:58",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.5
+   "day": 3.6
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -95,7 +95,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.5
+   "day": 0.6
   },
   "elliott-river": {
    "gauge": "539060",
@@ -137,7 +137,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.4
+   "day": 3.5
   },
   "kolan-river": {
    "gauge": "539205",
@@ -191,7 +191,7 @@
    "onset_aest": "2026-10-19 14:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.2
+   "day": 3.3
   },
   "noosa-river": {
    "gauge": "540774",
@@ -206,7 +206,7 @@
    "onset_aest": "2026-10-21 08:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.4
+   "day": 1.5
   },
   "pine-river": {
    "gauge": "540412",
@@ -236,7 +236,7 @@
    "onset_aest": "2026-10-22 08:25",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 0.1,
+   "day": 0.2,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -254,7 +254,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.7
+   "day": 0.8
   }
  },
  "alerts": []

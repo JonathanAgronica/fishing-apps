@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-22T14:45+10:00",
+ "generated_aest": "2026-10-22T15:40+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -80,7 +80,7 @@
    "onset_aest": "2026-10-19 06:58",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.3
+   "day": 3.4
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -95,7 +95,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.3
+   "day": 0.4
   },
   "elliott-river": {
    "gauge": "539060",
@@ -248,7 +248,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.5
+   "day": 0.6
   }
  },
  "alerts": []

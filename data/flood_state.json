@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-22T18:45+10:00",
+ "generated_aest": "2026-10-22T19:42+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -50,7 +50,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 0.4,
+   "day": 0.5,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -221,7 +221,7 @@
    "onset_aest": "2026-10-22 03:38",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.6
+   "day": 0.7
   },
   "pumicestone-passage": {
    "gauge": "540533",

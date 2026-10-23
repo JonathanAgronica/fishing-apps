@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-24T04:47+10:00",
+ "generated_aest": "2026-10-24T05:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -49,7 +49,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 1.8,
+   "day": 1.9,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -112,7 +112,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.7
+   "day": 0.8
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -184,7 +184,7 @@
    "onset_aest": "2026-10-23 06:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.9
+   "day": 1.0
   },
   "mooloolah-river": {
    "gauge": "540345",
@@ -229,7 +229,7 @@
    "onset_aest": "2026-10-22 03:38",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.0
+   "day": 2.1
   },
   "pumicestone-passage": {
    "gauge": "540533",

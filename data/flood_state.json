@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-23T09:43+10:00",
+ "generated_aest": "2026-10-23T10:46+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -50,7 +50,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 1.0,
+   "day": 1.1,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -83,7 +83,7 @@
    "onset_aest": "2026-10-19 06:58",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.1
+   "day": 4.2
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -98,7 +98,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.1
+   "day": 1.2
   },
   "elliott-river": {
    "gauge": "539060",
@@ -194,7 +194,7 @@
    "onset_aest": "2026-10-19 14:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.8
+   "day": 3.9
   },
   "noosa-river": {
    "gauge": "540774",

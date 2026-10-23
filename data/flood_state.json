@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-23T16:46+10:00",
+ "generated_aest": "2026-10-23T17:46+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -49,7 +49,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 1.3,
+   "day": 1.4,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -82,7 +82,7 @@
    "onset_aest": "2026-10-19 06:58",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.4
+   "day": 4.5
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -196,7 +196,7 @@
    "onset_aest": "2026-10-19 14:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.1
+   "day": 4.2
   },
   "noosa-river": {
    "gauge": "540774",
@@ -226,7 +226,7 @@
    "onset_aest": "2026-10-22 03:38",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.5
+   "day": 1.6
   },
   "pumicestone-passage": {
    "gauge": "540533",

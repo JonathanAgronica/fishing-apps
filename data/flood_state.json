@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-10-24T03:46+10:00",
+ "generated_aest": "2026-10-24T04:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 21.5,
+   "span_days": 21.6,
    "base": 0.76,
    "level": 0.99,
    "kind": "none",
@@ -67,7 +67,7 @@
    "onset_aest": "2026-10-18 17:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.4
+   "day": 5.5
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -127,7 +127,7 @@
    "onset_aest": "2026-10-19 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.8
+   "day": 4.9
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -142,7 +142,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.7
+   "day": 4.8
   },
   "kolan-river": {
    "gauge": "539205",
@@ -169,7 +169,7 @@
    "onset_aest": "2026-10-22 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.8
+   "day": 1.9
   },
   "mary-river": {
    "gauge": "540686",
@@ -214,7 +214,7 @@
    "onset_aest": "2026-10-22 17:24",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.4
+   "day": 1.5
   },
   "pine-river": {
    "gauge": "540412",
@@ -244,7 +244,7 @@
    "onset_aest": "2026-10-22 08:30",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 1.4,
+   "day": 1.5,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-25T02:38+10:00",
+ "generated_aest": "2026-10-25T03:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 22.5,
    "base": 0.76,
-   "level": 1.22,
+   "level": 1.27,
    "kind": "none",
    "phase": null,
    "day": null
@@ -48,7 +48,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 2.7,
+   "day": 2.8,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -66,7 +66,7 @@
    "onset_aest": "2026-10-22 20:46",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -81,7 +81,7 @@
    "onset_aest": "2026-10-19 06:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.8
+   "day": 5.9
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -96,7 +96,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.8
+   "day": 2.9
   },
   "elliott-river": {
    "gauge": "539060",
@@ -156,7 +156,7 @@
    "onset_aest": "2026-10-23 01:45",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.0
+   "day": 2.1
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -201,7 +201,7 @@
    "onset_aest": "2026-10-19 14:20",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.5
+   "day": 5.6
   },
   "noosa-river": {
    "gauge": "540774",
@@ -216,7 +216,7 @@
    "onset_aest": "2026-10-22 20:49",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "pine-river": {
    "gauge": "540412",
@@ -264,7 +264,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   }
  },
  "alerts": []

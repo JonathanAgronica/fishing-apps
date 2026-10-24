@@ -1,0 +1,3 @@
+.mcw{width:22px;height:22px;border-radius:5px;background:#7fd7ff;color:#05202a;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 0 0 2px #fff,0 0 3px #000}
+.mcw.sm{display:inline-flex;width:14px;height:14px;font-size:9px;margin-right:4px;vertical-align:middle;box-shadow:none}
+.cwbox{margin-top:8px}.cwg{background:#7fd7ff;color:#05202a;border-radius:3px;padding:0 3px;font-size:.7rem}

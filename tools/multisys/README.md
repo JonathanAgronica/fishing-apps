@@ -25,6 +25,12 @@ The app build needs nothing else from here.
      Middle–Pancake junction; Jenny Lind Ck with its own entrance; Tanti Ck; Jenny Lind–Pancake channel as a second
      two-entrance line via `twoEntMore`, node at the Jenny Lind–Pancake junction). MSQ places Pancake Creek and Seventeen Seventy,
      grade C. Geometry pinned in `base/geo/pancake_parts.json`. Helpers shared by both: `build/newsys.py`.
+   - `build/new_moneys.py` (2026-10-24): new system `moneys-creek` (Moneys Creek, Kellys Beach, Bargara): line M = beach mouth → sand basin →
+     causeway with council tide gates (lagoon behind not modelled as tidal). Tide ≈ Burnett Heads −3 min, ratio 1.016 (interpolated towards
+     MSQ Elliott River Entrance), lows held at the perched basin level 0.75 m AHD (QLD LiDAR); grade C. Adds `S.causeway` (location, flow
+     line = lagoon level 0.95 m AHD est., road 2.51 m, 2026 council gate timetable) used by `src/causeway/causeway.js` (map marker, Tides
+     run-in/out shading + 7-day list, per-phone override `mbj_cw`). Geometry pinned in `base/geo/moneys_parts.json`. Hand trace only: the basin
+     channel (~0.3 km, ~50 m wide) is below what the 10 m Sentinel-2 `channels/` re-routing can resolve, so no overlay.
    - Inputs: `base/*.pre-*.json` (pre-extension snapshots, reconstructed from the published output) and
      `base/*.spec.json` (curated or fitted values plus pinned geometry).
    - All four scripts accept `--check`, which applies the extension to a temp copy and compares it byte-for-byte with `out/`.

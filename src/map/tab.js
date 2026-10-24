@@ -96,7 +96,8 @@ function drawSpots(){if(!map)return;lmG.clearLayers();myG.clearLayers();markers.
       markers.set(l.id,m);}
     else{const m=LF.circleMarker(S.latLng(l),{radius:7,color:'#fff',weight:2,fillColor:l.alias?'#ffd38a':'#0b3b3a',fillOpacity:.95}).addTo(lmG);
       m.bindTooltip(esc(l.name),{direction:'top',offset:[0,-6]});m.on('click',()=>openSpot(S.get(l.id),m));markers.set(l.id,m);}}
-  if(FT.cross)try{FT.cross.drawMap(LF,map);}catch(e){console.error('crossings',e);}}
+  if(FT.cross)try{FT.cross.drawMap(LF,map);}catch(e){console.error('crossings',e);}
+  if(FT.causeway)try{FT.causeway.drawMap(LF,map);}catch(e){console.error('causeway',e);}}
 /* ---- popup: next high / low / run-in start + bite score ---- */
 function spotInfo(l){const o=Object.assign({},FT.baffleOpts?FT.baffleOpts():{},GEN?{line:l.line||'M'}:l.line?{line:l.line}:{});const nh=msToH(Date.now());
   const P=B.predictAt(l.km,nh-3,nh+30,o);const ext=P.ext.filter(e=>!e.weak);

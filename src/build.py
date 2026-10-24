@@ -278,9 +278,9 @@ bt_ui=patch(bt_ui,"$('live').onclick=async()=>{","if($('live'))$('live').onclick
 bt_ui=patch(bt_ui,"$('nodesTbl').innerHTML='<table>","if(GEN){const fm=m=>(m<0?'−':'+')+Math.floor(Math.abs(m)/60)+':'+String(Math.round(Math.abs(m)%60)).padStart(2,'0');const K={bom:'gauge',gaugefit:'gauge',port:'base port',msq:'MSQ',mouth:'mouth',junction:'junction',generic:'generic',limit:'limit'};\n  $('nodesTbl').innerHTML='<div class=\"tw\"><table><tr><th>Channel</th><th>km</th><th>Node</th><th>HW lag</th><th>LW lag</th><th>Type</th></tr>'+B.LINES.map(L=>B.NBY[L.id].filter(n=>L.id==='M'||n.km>L.j-1e-6).map(n=>`<tr><td class=\"mut\">${esc(L.id==='M'?'main':L.name)}</td><td>${n.km.toFixed(1)}</td><td>${esc(n.name)}</td><td>${fm(n.hwLag)} ±${Math.round(n.hwU)}′</td><td>${fm(n.lwLag)} ±${Math.round(n.lwU)}′${n.trunc?' <span class=\"mut\">pool</span>':''}</td><td class=\"mut\">${esc(K[n.kind]||n.kind||'')}</td></tr>`).join('')).join('')+'</table></div><p class=\"mut\">Lags are after the '+esc(B.SYS.port.name)+' high/low.</p>';}\nelse $('nodesTbl').innerHTML='<table>")
 bt_ui=patch(bt_ui,"const i0=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01);","syncLine();if(GEN)$('km').value=st.km;\nconst i0=B.LANDMARKS.findIndex(l=>Math.abs(l.km-st.km)<0.01&&(!GEN||(l.line||'M')===st.line));")
 # --- shallow crossings (cross/cross.js): Tides graph shading + threshold line + 7-day list ---
-bt_ui=patch(bt_ui,"mn=Math.floor(mn*4)/4;mx=Math.ceil(mx*4)/4;","if(window.FT&&FT.cross){const xr=FT.cross.tideRange(st.km,o);if(xr){mn=Math.min(mn,xr.lo-0.1);mx=Math.max(mx,xr.hi+0.1);}}mn=Math.floor(mn*4)/4;mx=Math.ceil(mx*4)/4;")
-bt_ui=patch(bt_ui,"  svg.innerHTML=s;}\n","  if(window.FT&&FT.cross)try{s+=FT.cross.tideSvg({x,y,t0,t1,mn,mx,L,R,T,W,ph,km:st.km,o});}catch(e){console.error('crossings',e);}\n  svg.innerHTML=s;}\n")
-bt_ui=patch(bt_ui,"  drawChart(P,t0,t1,o);\n","  drawChart(P,t0,t1,o);if(window.FT&&FT.cross)try{FT.cross.tideList(st.km,o,t0);}catch(e){console.error('crossings',e);}\n")
+bt_ui=patch(bt_ui,"mn=Math.floor(mn*4)/4;mx=Math.ceil(mx*4)/4;","if(window.FT&&FT.cross){const xr=FT.cross.tideRange(st.km,o);if(xr){mn=Math.min(mn,xr.lo-0.1);mx=Math.max(mx,xr.hi+0.1);}}if(window.FT&&FT.causeway){const cr=FT.causeway.tideRange(st.km);if(cr){mn=Math.min(mn,cr.lo-0.1);mx=Math.max(mx,cr.hi+0.1);}}mn=Math.floor(mn*4)/4;mx=Math.ceil(mx*4)/4;")
+bt_ui=patch(bt_ui,"  svg.innerHTML=s;}\n","  if(window.FT&&FT.cross)try{s+=FT.cross.tideSvg({x,y,t0,t1,mn,mx,L,R,T,W,ph,km:st.km,o});}catch(e){console.error('crossings',e);}\n  if(window.FT&&FT.causeway)try{s+=FT.causeway.tideSvg({x,y,t0,t1,mn,mx,L,R,T,W,ph,km:st.km,o});}catch(e){console.error('causeway',e);}\n  svg.innerHTML=s;}\n")
+bt_ui=patch(bt_ui,"  drawChart(P,t0,t1,o);\n","  drawChart(P,t0,t1,o);if(window.FT&&FT.cross)try{FT.cross.tideList(st.km,o,t0);}catch(e){console.error('crossings',e);}if(window.FT&&FT.causeway)try{FT.causeway.tideList(st.km,o,t0);}catch(e){console.error('causeway',e);}\n")
 
 exec(open(f'{SRC}/sides/build_patches.py').read())
 exec(open(f'{SRC}/lure/build_patches.py').read())
@@ -305,6 +305,7 @@ mj_css='\n'.join(l for l in mj_css.split('\n') if not l.startswith('header'))
 RUNIN_JS=open(f'{SRC}/runin.js').read()
 SIDES_JS=open(f'{SRC}/sides/sides.js').read()
 SPOTS_JS=open(f'{SRC}/map/spots.js').read();CROSS_JS=open(f'{SRC}/cross/cross.js').read();CROSS_CSS=open(f'{SRC}/cross/cross.css').read()
+CW_JS=open(f'{SRC}/causeway/causeway.js').read();CW_CSS=open(f'{SRC}/causeway/causeway.css').read()
 M_CSS=open(f'{SRC}/map/tab.css').read();M_HTML=open(f'{SRC}/map/tab.html').read();M_JS=open(f'{SRC}/map/tab.js').read()
 C_SCHEMA=json.load(open(f'{SRC}/catchlog/schema.json'))
 C_CSS=open(f'{SRC}/catchlog/tab.css').read();C_HTML=open(f'{SRC}/catchlog/tab.html').read()
@@ -376,6 +377,7 @@ nav.tabs a[data-tab=gauges].on{{box-shadow:inset 0 3px 0 #e5484d}}
 {LURE_CSS}
 {DC_CSS}
 {CROSS_CSS}
+{CW_CSS}
 .tab[hidden]{{display:none}}
 .sysbar{{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1000px;margin:0 auto 8px;font-size:.85rem}}
 .sysbar label{{flex:1 1 110px;min-width:0;display:flex;align-items:center;gap:4px}}
@@ -447,6 +449,7 @@ BODY=f'''<main>
 <script type="text/ft-deferred" id="ft-sysui">{SYSUI_JS}</script>
 <script type="text/ft-deferred" id="ft-spots">{SPOTS_JS}</script>
 <script type="text/ft-deferred" id="ft-cross">{CROSS_JS}</script>
+<script type="text/ft-deferred" id="ft-cw">{CW_JS}</script>
 <script type="text/ft-deferred">{bt_ui}</script>
 <script type="text/ft-deferred">{mj_ui}</script>
 <script type="text/ft-deferred" id="ft-gspots">{GSP_JS}</script>

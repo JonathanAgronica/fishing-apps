@@ -1,14 +1,14 @@
 {
- "generated_aest": "2026-10-24T12:55+10:00",
+ "generated_aest": "2026-10-24T13:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 21.9,
+   "span_days": 22.0,
    "base": 0.76,
-   "level": 1.06,
+   "level": 1.1,
    "kind": "none",
    "phase": null,
    "day": null
@@ -81,7 +81,7 @@
    "onset_aest": "2026-10-19 06:58",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.2
+   "day": 5.3
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -96,7 +96,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "elliott-river": {
    "gauge": "539060",
@@ -126,7 +126,7 @@
    "onset_aest": "2026-10-19 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.2
+   "day": 5.3
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -141,7 +141,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.1
+   "day": 5.2
   },
   "kolan-river": {
    "gauge": "539205",
@@ -167,7 +167,7 @@
    "onset_aest": "2026-10-22 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "mary-river": {
    "gauge": "540686",
@@ -197,7 +197,7 @@
    "onset_aest": "2026-10-19 14:10",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.9
+   "day": 5.0
   },
   "noosa-river": {
    "gauge": "540774",
@@ -260,7 +260,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.4
+   "day": 2.5
   }
  },
  "alerts": []

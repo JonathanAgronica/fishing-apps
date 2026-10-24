@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-24T09:41+10:00",
+ "generated_aest": "2026-10-24T10:43+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 21.8,
    "base": 0.76,
-   "level": 1.0,
+   "level": 1.01,
    "kind": "none",
    "phase": null,
    "day": null
@@ -49,7 +49,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 2.0,
+   "day": 2.1,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -82,7 +82,7 @@
    "onset_aest": "2026-10-19 06:58",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.1
+   "day": 5.2
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -97,7 +97,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.1
+   "day": 2.2
   },
   "elliott-river": {
    "gauge": "539060",
@@ -112,7 +112,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.9
+   "day": 1.0
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -183,7 +183,7 @@
    "onset_aest": "2026-10-23 06:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.1
+   "day": 1.2
   },
   "mooloolah-river": {
    "gauge": "540345",
@@ -198,7 +198,7 @@
    "onset_aest": "2026-10-19 14:10",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.8
+   "day": 4.9
   },
   "noosa-river": {
    "gauge": "540774",

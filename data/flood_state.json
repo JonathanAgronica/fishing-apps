@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-25T08:45+10:00",
+ "generated_aest": "2026-10-25T09:42+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -130,7 +130,7 @@
    "onset_aest": "2026-10-19 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.0
+   "day": 6.1
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -160,7 +160,7 @@
    "onset_aest": "2026-10-24 15:26",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.7
+   "day": 0.8
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -175,7 +175,7 @@
    "onset_aest": "2026-10-22 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   },
   "mary-river": {
    "gauge": "540686",
@@ -249,7 +249,7 @@
    "onset_aest": "2026-10-22 08:40",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 2.6,
+   "day": 2.7,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

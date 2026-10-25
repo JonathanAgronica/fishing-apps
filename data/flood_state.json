@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-26T02:39+10:00",
+ "generated_aest": "2026-10-26T03:49+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,11 +8,11 @@
    "known": true,
    "span_days": 23.5,
    "base": 0.77,
-   "level": 3.34,
+   "level": 3.51,
    "kind": "light",
-   "peak": 3.34,
-   "peak_aest": "2026-10-26 01:10",
-   "onset_aest": "2026-10-25 14:45",
+   "peak": 3.51,
+   "peak_aest": "2026-10-26 03:00",
+   "onset_aest": "2026-10-25 14:55",
    "peak_at_record_start": false,
    "phase": "runoff",
    "day": 0.5
@@ -41,7 +41,7 @@
    "onset_aest": "2026-10-24 23:43",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.1
+   "day": 1.2
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -56,7 +56,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 3.7,
+   "day": 3.8,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -89,7 +89,7 @@
    "onset_aest": "2026-10-19 06:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.8
+   "day": 6.9
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -104,7 +104,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.8
+   "day": 3.9
   },
   "elliott-river": {
    "gauge": "539060",
@@ -270,7 +270,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.0
+   "day": 4.1
   }
  },
  "alerts": []

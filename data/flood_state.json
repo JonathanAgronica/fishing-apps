@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-10-25T14:41+10:00",
+ "generated_aest": "2026-10-25T15:43+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 23.0,
+   "span_days": 23.1,
    "base": 0.76,
-   "level": 1.3,
+   "level": 1.6,
    "kind": "light",
-   "peak": 1.33,
-   "peak_aest": "2026-10-25 07:00",
-   "onset_aest": "2026-10-23 02:43",
+   "peak": 1.6,
+   "peak_aest": "2026-10-25 15:15",
+   "onset_aest": "2026-10-23 05:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.5
+   "day": 2.4
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -41,7 +41,7 @@
    "onset_aest": "2026-10-20 02:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.5
+   "day": 5.6
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -56,7 +56,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 3.2,
+   "day": 3.3,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -89,7 +89,7 @@
    "onset_aest": "2026-10-19 06:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.3
+   "day": 6.4
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -104,7 +104,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.3
+   "day": 3.4
   },
   "elliott-river": {
    "gauge": "539060",
@@ -164,7 +164,7 @@
    "onset_aest": "2026-10-24 20:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.7
+   "day": 0.8
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -212,7 +212,7 @@
    "onset_aest": "2026-10-19 14:25",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.0
+   "day": 6.1
   },
   "noosa-river": {
    "gauge": "540774",
@@ -274,7 +274,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.5
+   "day": 3.6
   }
  },
  "alerts": []

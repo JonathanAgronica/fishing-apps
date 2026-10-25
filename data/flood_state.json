@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-25T19:44+10:00",
+ "generated_aest": "2026-10-25T20:39+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,14 +8,14 @@
    "known": true,
    "span_days": 23.2,
    "base": 0.76,
-   "level": 2.45,
+   "level": 2.63,
    "kind": "light",
-   "peak": 2.45,
-   "peak_aest": "2026-10-25 18:15",
-   "onset_aest": "2026-10-24 15:53",
+   "peak": 2.63,
+   "peak_aest": "2026-10-25 19:15",
+   "onset_aest": "2026-10-25 02:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.2
+   "day": 0.8
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -89,7 +89,7 @@
    "onset_aest": "2026-10-19 06:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.5
+   "day": 6.6
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -104,7 +104,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.5
+   "day": 3.6
   },
   "elliott-river": {
    "gauge": "539060",
@@ -145,7 +145,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.4
+   "day": 6.5
   },
   "kolan-river": {
    "gauge": "539205",
@@ -208,7 +208,7 @@
    "onset_aest": "2026-10-19 14:25",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.2
+   "day": 6.3
   },
   "noosa-river": {
    "gauge": "540774",
@@ -270,7 +270,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.7
+   "day": 3.8
   }
  },
  "alerts": []

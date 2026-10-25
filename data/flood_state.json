@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-10-25T22:44+10:00",
+ "generated_aest": "2026-10-25T23:43+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 23.3,
+   "span_days": 23.4,
    "base": 0.77,
-   "level": 2.91,
+   "level": 3.14,
    "kind": "light",
-   "peak": 2.91,
-   "peak_aest": "2026-10-25 21:10",
-   "onset_aest": "2026-10-25 06:00",
+   "peak": 3.14,
+   "peak_aest": "2026-10-25 23:10",
+   "onset_aest": "2026-10-25 14:30",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.7
+   "day": 0.4
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -145,7 +145,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.5
+   "day": 6.6
   },
   "kolan-river": {
    "gauge": "539205",
@@ -160,7 +160,7 @@
    "onset_aest": "2026-10-24 21:56",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.0
+   "day": 1.1
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -175,7 +175,7 @@
    "onset_aest": "2026-10-22 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.6
+   "day": 3.7
   },
   "mary-river": {
    "gauge": "540686",
@@ -190,7 +190,7 @@
    "onset_aest": "2026-10-24 18:07",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 0.2,
+   "day": 0.3,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -208,7 +208,7 @@
    "onset_aest": "2026-10-19 14:30",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.3
+   "day": 6.4
   },
   "noosa-river": {
    "gauge": "540774",
@@ -252,7 +252,7 @@
    "onset_aest": "2026-10-22 08:45",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 3.2,
+   "day": 3.3,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -270,7 +270,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.8
+   "day": 3.9
   }
  },
  "alerts": []

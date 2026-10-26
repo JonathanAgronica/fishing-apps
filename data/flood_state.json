@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-10-27T08:38+10:00",
+ "generated_aest": "2026-10-27T09:42+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 24.7,
+   "span_days": 24.8,
    "base": 0.77,
-   "level": 2.44,
+   "level": 2.35,
    "kind": "light",
    "peak": 3.97,
    "peak_aest": "2026-10-26 11:00",
    "onset_aest": "2026-10-25 15:10",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.7
+   "day": 1.8
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -41,7 +41,7 @@
    "onset_aest": "2026-10-25 00:18",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.3
+   "day": 2.4
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -74,7 +74,7 @@
    "onset_aest": "2026-10-23 08:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.0
+   "day": 4.1
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -145,7 +145,7 @@
    "onset_aest": "2026-10-24 22:30",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.4
+   "day": 2.5
   },
   "kolan-river": {
    "gauge": "539205",
@@ -160,7 +160,7 @@
    "onset_aest": "2026-10-24 21:56",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.4
+   "day": 2.5
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -175,7 +175,7 @@
    "onset_aest": "2026-10-22 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.0
+   "day": 5.1
   },
   "mary-river": {
    "gauge": "540686",
@@ -190,7 +190,7 @@
    "onset_aest": "2026-10-24 18:07",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 1.6,
+   "day": 1.7,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -208,7 +208,7 @@
    "onset_aest": "2026-10-19 14:45",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.7
+   "day": 7.8
   },
   "noosa-river": {
    "gauge": "540774",
@@ -223,7 +223,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 1.8,
+   "day": 1.9,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -252,7 +252,7 @@
    "onset_aest": "2026-10-22 08:45",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 4.6,
+   "day": 4.7,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

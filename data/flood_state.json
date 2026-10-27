@@ -1,14 +1,14 @@
 {
- "generated_aest": "2026-10-28T07:43+10:00",
+ "generated_aest": "2026-10-28T08:43+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 25.7,
+   "span_days": 25.8,
    "base": 0.77,
-   "level": 1.85,
+   "level": 1.82,
    "kind": "light",
    "peak": 3.97,
    "peak_aest": "2026-10-26 11:00",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 00:18",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.3
+   "day": 3.4
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-10-19 07:01",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 9.0
+   "day": 9.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.0
+   "day": 6.1
   },
   "elliott-river": {
    "gauge": "539060",
@@ -270,7 +270,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.2
+   "day": 6.3
   }
  },
  "alerts": []

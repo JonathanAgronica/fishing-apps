@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-28T01:50+10:00",
+ "generated_aest": "2026-10-28T02:43+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,14 +8,14 @@
    "known": true,
    "span_days": 25.5,
    "base": 0.77,
-   "level": 1.91,
+   "level": 1.9,
    "kind": "light",
    "peak": 3.97,
    "peak_aest": "2026-10-26 11:00",
    "onset_aest": "2026-10-25 15:10",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.4
+   "day": 2.5
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-22 22:38",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.1
+   "day": 5.2
   },
   "burnett-river": {
    "gauge": "539153",
@@ -78,7 +78,7 @@
    "onset_aest": "2026-10-23 08:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.7
+   "day": 4.8
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -123,7 +123,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.6
+   "day": 4.7
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -149,7 +149,7 @@
    "onset_aest": "2026-10-24 22:30",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.1
+   "day": 3.2
   },
   "kolan-river": {
    "gauge": "539205",
@@ -227,7 +227,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 2.5,
+   "day": 2.6,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -256,7 +256,7 @@
    "onset_aest": "2026-10-22 08:45",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 5.3,
+   "day": 5.4,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

@@ -1,14 +1,14 @@
 {
- "generated_aest": "2026-10-28T05:38+10:00",
+ "generated_aest": "2026-10-28T06:45+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 25.6,
+   "span_days": 25.7,
    "base": 0.77,
-   "level": 1.87,
+   "level": 1.85,
    "kind": "light",
    "peak": 3.97,
    "peak_aest": "2026-10-26 11:00",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 00:18",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.2
+   "day": 3.3
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-10-19 07:01",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.9
+   "day": 9.0
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.9
+   "day": 6.0
   },
   "elliott-river": {
    "gauge": "539060",
@@ -164,7 +164,7 @@
    "onset_aest": "2026-10-24 21:56",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.3
+   "day": 3.4
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -179,7 +179,7 @@
    "onset_aest": "2026-10-22 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.9
+   "day": 6.0
   },
   "mary-river": {
    "gauge": "540686",
@@ -194,7 +194,7 @@
    "onset_aest": "2026-10-24 18:07",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 2.5,
+   "day": 2.6,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -212,7 +212,7 @@
    "onset_aest": "2026-10-19 14:55",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.6
+   "day": 8.7
   },
   "noosa-river": {
    "gauge": "540774",
@@ -274,7 +274,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.1
+   "day": 6.2
   }
  },
  "alerts": []

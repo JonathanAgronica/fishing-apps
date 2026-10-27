@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-27T16:45+10:00",
+ "generated_aest": "2026-10-27T17:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 25.1,
    "base": 0.77,
-   "level": 2.11,
+   "level": 2.09,
    "kind": "light",
    "peak": 3.97,
    "peak_aest": "2026-10-26 11:00",
@@ -56,7 +56,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 5.3,
+   "day": 5.4,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -74,7 +74,7 @@
    "onset_aest": "2026-10-23 08:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.3
+   "day": 4.4
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -119,7 +119,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.2
+   "day": 4.3
   },
   "freshwater-creek": {
    "gauge": "540658",

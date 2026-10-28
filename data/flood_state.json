@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-10-28T10:46+10:00",
+ "generated_aest": "2026-10-28T11:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 25.8,
+   "span_days": 25.9,
    "base": 0.77,
-   "level": 1.79,
+   "level": 1.78,
    "kind": "light",
    "peak": 3.97,
    "peak_aest": "2026-10-26 11:00",
    "onset_aest": "2026-10-25 15:10",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.8
+   "day": 2.9
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 00:18",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.4
+   "day": 3.5
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -149,7 +149,7 @@
    "onset_aest": "2026-10-24 22:30",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.5
+   "day": 3.6
   },
   "kolan-river": {
    "gauge": "539205",
@@ -164,7 +164,7 @@
    "onset_aest": "2026-10-24 21:56",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.5
+   "day": 3.6
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -190,7 +190,7 @@
    "onset_aest": "2026-10-24 18:07",
    "peak_at_record_start": false,
    "phase": "dirty",
-   "day": 2.7,
+   "day": 2.8,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -208,7 +208,7 @@
    "onset_aest": "2026-10-19 14:55",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.8
+   "day": 8.9
   },
   "noosa-river": {
    "gauge": "540774",
@@ -252,7 +252,7 @@
    "onset_aest": "2026-10-22 08:45",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 5.7,
+   "day": 5.8,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -270,7 +270,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.3
+   "day": 6.4
   }
  },
  "alerts": [

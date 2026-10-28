@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-28T16:49+10:00",
+ "generated_aest": "2026-10-28T17:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -23,7 +23,7 @@
    "known": true,
    "span_days": 32.2,
    "base": 6.76,
-   "level": 7.43,
+   "level": 7.42,
    "kind": "light",
    "peak": 7.59,
    "peak_aest": "2026-10-28 02:02",
@@ -36,9 +36,9 @@
    "gauge": "539153",
    "gauge_name": "Burnett River at Branyan (Woongarra PS)",
    "known": true,
-   "span_days": 25.2,
+   "span_days": 25.3,
    "base": 2.8,
-   "level": 3.07,
+   "level": 3.09,
    "kind": "light",
    "peak": 4.58,
    "peak_aest": "2026-10-25 21:18",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 6.3,
+   "day": 6.4,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": true
@@ -69,16 +69,16 @@
    "gauge": "040907",
    "gauge_name": "Burrum River at Howard",
    "known": true,
-   "span_days": 25.2,
+   "span_days": 25.3,
    "base": 4.71,
-   "level": 5.11,
+   "level": 5.21,
    "kind": "light",
    "peak": 6.51,
    "peak_aest": "2026-10-25 20:28",
    "onset_aest": "2026-10-23 08:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.3
+   "day": 5.4
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -123,7 +123,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.2
+   "day": 5.3
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -255,7 +255,7 @@
    "day": 6.0,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
-   "entering_prime": false
+   "entering_prime": true
   },
   "saltwater-creek": {
    "gauge": "540741",
@@ -277,6 +277,10 @@
   {
    "system": "burpengary-creek",
    "msg": "burpengary-creek: prime post-flood window (day 7-14 after the 10.3 m peak on Burpengary Creek at Burpengary (Dale St)) from 2026-10-29 to 2026-11-05"
+  },
+  {
+   "system": "pumicestone-passage",
+   "msg": "pumicestone-passage: prime post-flood window (day 7-14 after the 5.4 m peak on Coochin Creek at Mawsons Rd) from 2026-10-29 to 2026-11-05"
   }
  ]
 }

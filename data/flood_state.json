@@ -1,17 +1,17 @@
 {
- "generated_aest": "2026-10-30T07:49+10:00",
+ "generated_aest": "2026-10-30T08:45+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 27.7,
+   "span_days": 27.8,
    "base": 0.77,
-   "level": 4.5,
+   "level": 4.54,
    "kind": "light",
-   "peak": 4.5,
-   "peak_aest": "2026-10-30 07:00",
+   "peak": 4.54,
+   "peak_aest": "2026-10-30 08:00",
    "onset_aest": "2026-10-25 15:35",
    "peak_at_record_start": false,
    "phase": "runoff",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 00:18",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.3
+   "day": 5.4
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -63,7 +63,7 @@
    "day": 8.0,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
-   "entering_prime": true
+   "entering_prime": false
   },
   "burrum-river": {
    "gauge": "040907",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-10-19 07:01",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.0
+   "day": 11.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.0
+   "day": 8.1
   },
   "elliott-river": {
    "gauge": "539060",
@@ -164,7 +164,7 @@
    "onset_aest": "2026-10-24 21:56",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.4
+   "day": 5.5
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -270,14 +270,10 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.2
+   "day": 8.3
   }
  },
  "alerts": [
-  {
-   "system": "burpengary-creek",
-   "msg": "burpengary-creek: prime post-flood window (day 7-14 after the 10.3 m peak on Burpengary Creek at Burpengary (Dale St)) from 2026-10-29 to 2026-11-05"
-  },
   {
    "system": "pumicestone-passage",
    "msg": "pumicestone-passage: prime post-flood window (day 7-14 after the 5.4 m peak on Coochin Creek at Mawsons Rd) from 2026-10-29 to 2026-11-05"

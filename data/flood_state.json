@@ -1,14 +1,14 @@
 {
- "generated_aest": "2026-10-29T12:51+10:00",
+ "generated_aest": "2026-10-29T13:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 26.9,
+   "span_days": 27.0,
    "base": 0.77,
-   "level": 3.48,
+   "level": 3.55,
    "kind": "light",
    "peak": 3.97,
    "peak_aest": "2026-10-26 11:00",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 00:18",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.5
+   "day": 4.6
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-10-19 07:01",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.2
+   "day": 10.3
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.2
+   "day": 7.3
   },
   "elliott-river": {
    "gauge": "539060",
@@ -164,7 +164,7 @@
    "onset_aest": "2026-10-24 21:56",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.6
+   "day": 4.7
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -208,7 +208,7 @@
    "onset_aest": "2026-10-19 14:55",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 9.9
+   "day": 10.0
   },
   "noosa-river": {
    "gauge": "540774",
@@ -222,7 +222,7 @@
    "peak_aest": "2026-10-25 12:59",
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
-   "phase": "dirty",
+   "phase": "clearing",
    "day": 4.0,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
@@ -270,7 +270,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.4
+   "day": 7.5
   }
  },
  "alerts": [

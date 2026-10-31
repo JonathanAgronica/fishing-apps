@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-10-31T23:38+10:00",
+ "generated_aest": "2026-11-01T00:43+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 29.3,
+   "span_days": 29.4,
    "base": 0.77,
-   "level": 2.17,
+   "level": 2.11,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 15:40",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.3
+   "day": 6.4
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-22 22:38",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 9.0
+   "day": 9.1
   },
   "burnett-river": {
    "gauge": "539153",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "prime",
-   "day": 9.6,
+   "day": 9.7,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -78,7 +78,7 @@
    "onset_aest": "2026-10-23 08:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.6
+   "day": 8.7
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -123,7 +123,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.5
+   "day": 8.6
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -219,7 +219,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 6.4,
+   "day": 6.5,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": true

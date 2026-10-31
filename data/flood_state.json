@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-31T16:47+10:00",
+ "generated_aest": "2026-10-31T17:45+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,14 +8,14 @@
    "known": true,
    "span_days": 29.1,
    "base": 0.77,
-   "level": 2.46,
+   "level": 2.39,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 15:40",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.0
+   "day": 6.1
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
    "phase": "prime",
-   "day": 9.3,
+   "day": 9.4,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -78,7 +78,7 @@
    "onset_aest": "2026-10-23 08:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.3
+   "day": 8.4
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -123,7 +123,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.2
+   "day": 8.3
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -189,7 +189,7 @@
    "day": 6.0,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
-   "entering_prime": false
+   "entering_prime": true
   },
   "mooloolah-river": {
    "gauge": "540345",
@@ -270,6 +270,10 @@
   }
  },
  "alerts": [
+  {
+   "system": "mary-river",
+   "msg": "mary-river: prime post-flood window (day 7-14 after the 6.8 m peak on Mary River at Owanyilla) from 2026-11-01 to 2026-11-08"
+  },
   {
    "system": "noosa-river",
    "msg": "noosa-river: prime post-flood window (day 7-14 after the 3.1 m peak on Kin Kin Creek at Wahpunga Lane) from 2026-11-01 to 2026-11-08"

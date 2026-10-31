@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-31T22:40+10:00",
+ "generated_aest": "2026-10-31T23:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 29.3,
    "base": 0.77,
-   "level": 2.2,
+   "level": 2.17,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 00:18",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.9
+   "day": 7.0
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 9.6
+   "day": 9.7
   },
   "elliott-river": {
    "gauge": "539060",
@@ -149,7 +149,7 @@
    "onset_aest": "2026-10-24 17:32",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.2
+   "day": 7.3
   },
   "kolan-river": {
    "gauge": "539205",
@@ -186,7 +186,7 @@
    "onset_aest": "2026-10-24 18:37",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 6.2,
+   "day": 6.3,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": true
@@ -204,7 +204,7 @@
    "onset_aest": "2026-10-19 15:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.3
+   "day": 12.4
   },
   "noosa-river": {
    "gauge": "540774",
@@ -248,7 +248,7 @@
    "onset_aest": "2026-10-22 08:50",
    "peak_at_record_start": false,
    "phase": "prime",
-   "day": 9.2,
+   "day": 9.3,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

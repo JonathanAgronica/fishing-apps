@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-10-31T13:45+10:00",
+ "generated_aest": "2026-10-31T14:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,14 +8,14 @@
    "known": true,
    "span_days": 29.0,
    "base": 0.77,
-   "level": 2.71,
+   "level": 2.62,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 15:40",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.9
+   "day": 6.0
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-22 22:38",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.6
+   "day": 8.7
   },
   "burnett-river": {
    "gauge": "539153",
@@ -78,7 +78,7 @@
    "onset_aest": "2026-10-23 08:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.2
+   "day": 8.3
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -123,7 +123,7 @@
    "onset_aest": "2026-10-23 11:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.1
+   "day": 8.2
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -149,7 +149,7 @@
    "onset_aest": "2026-10-24 17:32",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.8
+   "day": 6.9
   },
   "kolan-river": {
    "gauge": "539205",
@@ -186,7 +186,7 @@
    "onset_aest": "2026-10-24 18:37",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 5.8,
+   "day": 5.9,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -204,7 +204,7 @@
    "onset_aest": "2026-10-19 15:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.9
+   "day": 12.0
   },
   "noosa-river": {
    "gauge": "540774",
@@ -219,7 +219,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "clearing",
-   "day": 6.0,
+   "day": 6.1,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": true
@@ -248,7 +248,7 @@
    "onset_aest": "2026-10-22 08:50",
    "peak_at_record_start": false,
    "phase": "prime",
-   "day": 8.8,
+   "day": 8.9,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

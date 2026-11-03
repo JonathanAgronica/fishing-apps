@@ -160,7 +160,10 @@ function renderActive(){const s=activeS();
   let sc='';try{const c=FT.biteCtx&&s.spot?FT.biteCtx(s.spot,Date.now(),Date.now()+Q):null;if(c&&c.slots[0])sc=`Predicted now <b style="color:${scoreColor(c.slots[0].score)}">${c.slots[0].score}</b> · ${esc(c.slots[0].tl||'no tide')}`+(c.slots[0].ri!=null?` · ${c.slots[0].ri>=0?'+':''}${dur(Math.abs(c.slots[0].ri)).replace(' ','\u00a0')} ${c.slots[0].ri>=0?'after':'before'} run-in start`:'');}catch(e){}
   $('cActive').innerHTML=`<div class="cact"><div class="big">🟢 Fishing since ${fT(s.start)} <span class="mut">(${dur(m)})</span></div>
    <div class="mut">${spotDesc(s.spot)} · ${n} bite${n===1?'':'s'}/catch${n===1?'':'es'} logged</div><div class="mut">${sc}</div>
-   <div class="row" style="margin-top:8px"><button class="pri" id="cBite">🐟 Bite / catch now</button><button id="cNone">➕ No-bite note</button><button id="cEdit">✏️ Details</button><button id="cEnd">⏹ End session</button></div></div>`;
+   <div class="row" style="margin-top:8px"><button class="pri" id="cBite">🐟 Bite / catch now</button><button id="cNone">➕ No-bite note</button><button id="cEdit">✏️ Details</button><button id="cEnd">⏹ End session</button></div>
+   <div class="row ccan" style="margin-top:8px;align-items:center;gap:6px"><span>🍺 Can count: <b id="cCanN">${s.cans||0}</b> tinn${(s.cans||0)===1?'y':'ies'}</span><button class="sm" id="cCanM" title="One less">−</button><button class="sm" id="cCanP" title="Crack another">+</button><span class="mut" style="font-size:.74rem">phone only · never shared</span></div></div>`;
+  $('cCanP').onclick=()=>{const x=byId(s.id);x.cans=Math.min(99,(x.cans||0)+1);if(F&&F.id===x.id)F.cans=x.cans;save();renderActive();};
+  $('cCanM').onclick=()=>{const x=byId(s.id);x.cans=Math.max(0,(x.cans||0)-1);if(F&&F.id===x.id)F.cans=x.cans;save();renderActive();};
   $('cBite').onclick=()=>{openForm(s,'active');$('cCt').value=toLocalInput(Date.now());$('cSp').focus();};
   $('cEdit').onclick=()=>openForm(s,'active');
   $('cNone').onclick=()=>{openForm(s,'active');$('cNote').focus();};
@@ -179,7 +182,7 @@ function renderList(){const L=LOG.filter(s=>s.end!=null).sort((a,b)=>b.start-a.s
     return `<div class="citem"><div class="sc" style="background:${avg!=null?scoreColor(avg):'#555'}" title="mean predicted score">${avg!=null?avg:'?'}</div><div class="ci">
       <b>${fD(s.start)} ${fT(s.start)}–${fT(s.end)}</b> <span class="mut">(${dur((s.end-s.start)/60e3)})</span>${shareTag(s)}${isTest()&&s.test?'<span class="ctag q">TEST</span>':''}<br>
       <span class="mut">${spotDesc(s.spot)}</span><br>
-      ${n?`🐟 ${n} bite${n>1?'s':''}${fish!==n?` (${fish} landed)`:''} — ${esc(sp)}`:'<span class="mut">No bites</span>'} · <span class="mut">peak ${mx!=null?mx:'—'}, ${s.ctx?TSRCN[s.ctx.tideSrc]+(s.ctx.wx?' + weather':(isHist(s)?' · weather unknown':'')):'no context'}${isHist(s)?' <span class="ctag">historical</span>':''}${s.rough?' <span class="ctag">approx. time</span>':''}${s.co?' <span class="ctag">catch-only</span>':''}${s.bait&&s.bait.cat?' · '+esc(BAITN[s.bait.cat]):''}</span>
+      ${n?`🐟 ${n} bite${n>1?'s':''}${fish!==n?` (${fish} landed)`:''} — ${esc(sp)}`:'<span class="mut">No bites</span>'} · <span class="mut">peak ${mx!=null?mx:'—'}, ${s.ctx?TSRCN[s.ctx.tideSrc]+(s.ctx.wx?' + weather':(isHist(s)?' · weather unknown':'')):'no context'}${isHist(s)?' <span class="ctag">historical</span>':''}${s.rough?' <span class="ctag">approx. time</span>':''}${s.co?' <span class="ctag">catch-only</span>':''}${s.bait&&s.bait.cat?' · '+esc(BAITN[s.bait.cat]):''}</span>${s.cans?`<br><span class="mut">🍺 ${s.cans} tinn${s.cans===1?'y':'ies'} cracked</span>`:''}
       </div><div class="row" style="flex-direction:column;gap:4px"><button class="sm" data-ed="${s.id}">✏️</button><button class="sm" data-rm="${s.id}">🗑</button></div></div>`;}).join('');
   $('cList').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>openForm(byId(b.dataset.ed),'edit'));
   $('cList').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const s=byId(b.dataset.rm);if(!confirm('Delete this session'+(s.share&&s.share.sid?' (and remove it from the shared table)':'')+'?'))return;

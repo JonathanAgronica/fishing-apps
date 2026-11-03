@@ -45,7 +45,7 @@ mj_core=patch(mj_core,"if(!prev||!next)return null;","if(!prev||!next)return nul
 # ---------- patches: bite UI ----------
 mj_main=patch(mj_main,'<ul id="results"></ul>','''<ul id="results"></ul>
     <div class="row" style="margin-top:8px"><label class="mut" style="flex:1 1 220px">Baffle Creek spot <select id="bafSel" style="width:100%"><option value="">— pick a Baffle Creek landmark —</option></select></label></div>''')
-mj_main=patch(mj_main,'<button class="pri" id="goBtn">Calculate</button>','<button class="pri" id="goBtn">Calculate</button>\n      <button id="planBtn" title="Suggested fish / move / rest schedule for this date">🗓 Plan my day</button>')
+mj_main=patch(mj_main,'<button class="pri" id="goBtn">Calculate</button>','<button class="pri" id="goBtn">Calculate</button>\n      <button id="planBtn" title="Suggested fish / move / tinny time schedule for this date">🗓 Plan my day</button>')
 mj_main=patch(mj_main,'<p class="mut" id="locInfo" style="margin:8px 0 0"></p>','<p class="mut" id="locInfo" style="margin:8px 0 0"></p>\n    <div id="tideSrc" class="src"></div>')
 mj_ui=patch(mj_ui,"let state={};","""if(loc.baffleKm===undefined)loc.baffleKm=null;
 let state={};

@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202610241835"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202610241835"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202610241835">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202610241835">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202611032037"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202611032037"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202611032037">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202611032037">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202610241835">
+<meta name="app-version" content="202611032037">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -415,7 +415,7 @@ input:disabled{opacity:.4}
       <label class="mut">Date <input type="date" id="mj-date"></label>
       <label class="mut" title="Shift model tide times to suit your spot, e.g. up-river creeks run later than the river mouth">Tide offset (min) <input type="number" id="mj-tideOff" value="0" step="5" style="width:80px"></label>
       <button class="pri" id="mj-goBtn">Calculate</button>
-      <button id="mj-planBtn" title="Suggested fish / move / rest schedule for this date">🗓 Plan my day</button>
+      <button id="mj-planBtn" title="Suggested fish / move / tinny time schedule for this date">🗓 Plan my day</button>
     </div>
     <p class="mut" id="mj-locInfo" style="margin:8px 0 0"></p>
     <div id="mj-tideSrc" class="src"></div>
@@ -785,11 +785,11 @@ input:disabled{opacity:.4}
 </main>
 <div id="planSheet" class="calsheet" hidden><div class="calsheet-bg" data-close="1"></div><div class="calsheet-in plansheet" role="dialog" aria-modal="true" aria-labelledby="planT">
   <div class="calsheet-h"><b id="planT">🗓 Plan my day</b><button class="sm" id="planX" aria-label="Close">✕</button></div>
-  <details id="planOpts"><summary>⚙️ Options — spots, hours, launch, boat speed, rest threshold</summary><div id="planOptsB"></div></details>
+  <details id="planOpts"><summary>⚙️ Options — spots, hours, launch, boat speed, tinny time threshold</summary><div id="planOptsB"></div></details>
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202610241835</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202611032037</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -3615,7 +3615,10 @@ function renderActive(){const s=activeS();
   let sc='';try{const c=FT.biteCtx&&s.spot?FT.biteCtx(s.spot,Date.now(),Date.now()+Q):null;if(c&&c.slots[0])sc=`Predicted now <b style="color:${scoreColor(c.slots[0].score)}">${c.slots[0].score}</b> · ${esc(c.slots[0].tl||'no tide')}`+(c.slots[0].ri!=null?` · ${c.slots[0].ri>=0?'+':''}${dur(Math.abs(c.slots[0].ri)).replace(' ','\u00a0')} ${c.slots[0].ri>=0?'after':'before'} run-in start`:'');}catch(e){}
   $('cActive').innerHTML=`<div class="cact"><div class="big">🟢 Fishing since ${fT(s.start)} <span class="mut">(${dur(m)})</span></div>
    <div class="mut">${spotDesc(s.spot)} · ${n} bite${n===1?'':'s'}/catch${n===1?'':'es'} logged</div><div class="mut">${sc}</div>
-   <div class="row" style="margin-top:8px"><button class="pri" id="cBite">🐟 Bite / catch now</button><button id="cNone">➕ No-bite note</button><button id="cEdit">✏️ Details</button><button id="cEnd">⏹ End session</button></div></div>`;
+   <div class="row" style="margin-top:8px"><button class="pri" id="cBite">🐟 Bite / catch now</button><button id="cNone">➕ No-bite note</button><button id="cEdit">✏️ Details</button><button id="cEnd">⏹ End session</button></div>
+   <div class="row ccan" style="margin-top:8px;align-items:center;gap:6px"><span>🍺 Can count: <b id="cCanN">${s.cans||0}</b> tinn${(s.cans||0)===1?'y':'ies'}</span><button class="sm" id="cCanM" title="One less">−</button><button class="sm" id="cCanP" title="Crack another">+</button><span class="mut" style="font-size:.74rem">phone only · never shared</span></div></div>`;
+  $('cCanP').onclick=()=>{const x=byId(s.id);x.cans=Math.min(99,(x.cans||0)+1);if(F&&F.id===x.id)F.cans=x.cans;save();renderActive();};
+  $('cCanM').onclick=()=>{const x=byId(s.id);x.cans=Math.max(0,(x.cans||0)-1);if(F&&F.id===x.id)F.cans=x.cans;save();renderActive();};
   $('cBite').onclick=()=>{openForm(s,'active');$('cCt').value=toLocalInput(Date.now());$('cSp').focus();};
   $('cEdit').onclick=()=>openForm(s,'active');
   $('cNone').onclick=()=>{openForm(s,'active');$('cNote').focus();};
@@ -3634,7 +3637,7 @@ function renderList(){const L=LOG.filter(s=>s.end!=null).sort((a,b)=>b.start-a.s
     return `<div class="citem"><div class="sc" style="background:${avg!=null?scoreColor(avg):'#555'}" title="mean predicted score">${avg!=null?avg:'?'}</div><div class="ci">
       <b>${fD(s.start)} ${fT(s.start)}–${fT(s.end)}</b> <span class="mut">(${dur((s.end-s.start)/60e3)})</span>${shareTag(s)}${isTest()&&s.test?'<span class="ctag q">TEST</span>':''}<br>
       <span class="mut">${spotDesc(s.spot)}</span><br>
-      ${n?`🐟 ${n} bite${n>1?'s':''}${fish!==n?` (${fish} landed)`:''} — ${esc(sp)}`:'<span class="mut">No bites</span>'} · <span class="mut">peak ${mx!=null?mx:'—'}, ${s.ctx?TSRCN[s.ctx.tideSrc]+(s.ctx.wx?' + weather':(isHist(s)?' · weather unknown':'')):'no context'}${isHist(s)?' <span class="ctag">historical</span>':''}${s.rough?' <span class="ctag">approx. time</span>':''}${s.co?' <span class="ctag">catch-only</span>':''}${s.bait&&s.bait.cat?' · '+esc(BAITN[s.bait.cat]):''}</span>
+      ${n?`🐟 ${n} bite${n>1?'s':''}${fish!==n?` (${fish} landed)`:''} — ${esc(sp)}`:'<span class="mut">No bites</span>'} · <span class="mut">peak ${mx!=null?mx:'—'}, ${s.ctx?TSRCN[s.ctx.tideSrc]+(s.ctx.wx?' + weather':(isHist(s)?' · weather unknown':'')):'no context'}${isHist(s)?' <span class="ctag">historical</span>':''}${s.rough?' <span class="ctag">approx. time</span>':''}${s.co?' <span class="ctag">catch-only</span>':''}${s.bait&&s.bait.cat?' · '+esc(BAITN[s.bait.cat]):''}</span>${s.cans?`<br><span class="mut">🍺 ${s.cans} tinn${s.cans===1?'y':'ies'} cracked</span>`:''}
       </div><div class="row" style="flex-direction:column;gap:4px"><button class="sm" data-ed="${s.id}">✏️</button><button class="sm" data-rm="${s.id}">🗑</button></div></div>`;}).join('');
   $('cList').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>openForm(byId(b.dataset.ed),'edit'));
   $('cList').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const s=byId(b.dataset.rm);if(!confirm('Delete this session'+(s.share&&s.share.sid?' (and remove it from the shared table)':'')+'?'))return;
@@ -4314,7 +4317,7 @@ async function openDay(ds){const sh=$('calSheet');sh.hidden=false;document.body.
   const win=x=>`<div class="cwin" style="border-left-color:${scoreColor(x.score)}"><div class="cws" style="color:${scoreColor(x.score)}">${x.score}</div><div class="cwb"><b>${fmtT(x.w.start)} – ${fmtT(x.w.end)}</b> ${stTag(x.stage)} <span class="mut">${STG[x.stage]?STG[x.stage][2]:''}</span><br>${ptLabel(x.pt)}<ul>${x.reasons.map(s=>'<li>'+esc(s)+'</li>').join('')}</ul>${FT.lureHtml?FT.lureHtml({depth:x.pt.depth,km:x.pt.km,line:x.pt.line||null,lat:x.pt.lat,lng:x.pt.lng},x.w.peak.t):''}${FT.cross?FT.cross.reachNote(x.pt,x.w.start,x.w.end):''}${btns(x)}</div></div>`;
   const stands=[];if(!GEN)for(const x of top){const R=refine(x.pt,ds);const s0=MJ.dayStart(ds,TZ);for(const s of R.T.stands||[])if(s.t>=s0&&s.t<s0+DAY&&!stands.some(q=>q.n===x.pt.name))stands.push({n:x.pt.name,s});}
   $('calSheetB').innerHTML=`<p class="csub">${mo.e} ${esc(mo.n)}, ${Math.round(mo.f*100)}% lit · ${fc?'<span class="tagf">FORECAST</span> weather &amp; sea temp from the forecast':'<span class="tago">OUTLOOK</span> tide, sun &amp; moon (+ flood cycle) — weather neutral, seasonal water temp'}${set.dd?' · dawn/dusk only':''}</p>`+
-    `<div class="row" style="margin:-2px 0 8px"><button class="sm pri" id="calPlan">🗓 Plan my day</button><span class="mut" style="font-size:.76rem">fish / move / rest schedule for ${esc(FT.SYSSHORT)}</span></div>`+
+    `<div class="row" style="margin:-2px 0 8px"><button class="sm pri" id="calPlan">🗓 Plan my day</button><span class="mut" style="font-size:.76rem">fish / move / tinny time schedule for ${esc(FT.SYSSHORT)}</span></div>`+
     `<h3 class="csec">🎯 Top windows — ${set.scope==='sys'?'whole '+esc(FT.SYSSHORT):set.scope==='mine'?'my spots':esc(st.pts[0]?st.pts[0].name:'')}</h3>`+(top.length?top.map(win).join(''):'<p class="mut">No standout windows.</p>')+
     (stands.length?`<p class="mut" style="font-size:.78rem">🌗 Single-high day: tide stand at ${stands.map(x=>esc(x.n)+' '+fmtT(x.s.t0)+'–'+fmtT(x.s.t1)).join(', ')} — the small high doesn’t reach there.</p>`:'')+
     `<h3 class="csec">📌 My spots this day</h3>`+(mine.length?mine.map((x,k)=>x.w?`<div class="cwin" style="border-left-color:${scoreColor(x.w.score)}"><div class="cws" style="color:${scoreColor(x.w.score)};font-size:1.25rem">${x.w.score}</div><div class="cwb"><span class="mut">${k+1}.</span> ${ptLabel(x.p)} ${x.p.type&&S?`<span class="cstg" style="background:${S.TYPES[x.p.type].col}">${S.TYPES[x.p.type].s}</span>`:''}<br><b>${fmtT(x.w.w.start)} – ${fmtT(x.w.w.end)}</b> ${stTag(x.w.stage)} <span class="mut">${esc(x.w.reasons[1]||'')}${x.more.length?' · also '+x.more.map(m=>fmtT(m.w.start)+' ('+m.score+')').join(', '):''}</span>${btns(x.w)}</div></div>`:`<div class="cwin"><div class="cwb">${ptLabel(x.p)} — no window</div></div>`).join(''):'<p class="mut">Add your own spots on the 🗺️ Map tab — they’re ranked here for each day.</p>')+
@@ -4373,7 +4376,7 @@ FT.calApi={buildCfg,lmPt,scanPts,lineList,refPoint,isMainLine,lineShort,ptLabel,
 FT.cal={get st(){return st},get set(){return set},openDay,start,closeSheet,cellVal,refine:(pt,ds)=>st.core.refine(pt,ds),ptsFor,bestDays,ics,winsOf};
 })();
 </script>
-<script type="text/ft-deferred">/* ===== Plan my day: suggested fish / move / rest schedule for one date on the current river system =====
+<script type="text/ft-deferred">/* ===== Plan my day: suggested fish / move / tinny time schedule for one date on the current river system =====
    Scores = the Bite tab's exact 15-min scoring per spot (spot types, Baffle single-high stands, forecast weather or
    outlook, flood cycle) computed — with the schedule optimisation — in the calendar's Web Worker (main-thread fallback).
    Settings live in localStorage (per system). Spot names stay on the phone: .ics uses '★ my spot (km x)'. */
@@ -4411,7 +4414,7 @@ function optsHTML(all){const sel=new Set(selSpots(all).map(keyOf)),lch=launchOf(
    <label>End<select id="poEnd">${en.map(m=>`<option value="${m}"${m===set.end?' selected':''}>${m===1440?'midnight':hhmm(m)}</option>`).join('')}</select></label>
    <label>Launch from<select id="poLaunch"><option value="auto"${set.launch==='auto'?' selected':''}>auto (${esc(lch?lch.name:'')})</option>${all.map(p=>`<option value="${esc(keyOf(p))}"${set.launch===keyOf(p)?' selected':''}>${isRamp(p)?'⛵ ':''}${p.custom?'★ ':''}${esc(p.name)}</option>`).join('')}</select></label>
    <label>Boat speed (km/h)<input type="number" id="poSpeed" min="3" max="60" step="1" value="${set.speed}"></label>
-   <label>Rest threshold<select id="poThr"><option value="auto"${set.thr==='auto'?' selected':''}>auto: max(55, day median)</option>${[45,50,55,60,65,70,75,80].map(v=>`<option value="${v}"${String(set.thr)===String(v)?' selected':''}>rest below ${v}</option>`).join('')}</select></label>
+   <label>Tinny time threshold<select id="poThr"><option value="auto"${set.thr==='auto'?' selected':''}>auto: max(55, day median)</option>${[45,50,55,60,65,70,75,80].map(v=>`<option value="${v}"${String(set.thr)===String(v)?' selected':''}>tinny time below ${v}</option>`).join('')}</select></label>
    <label>Min block<select id="poMin">${[15,30,45,60,90].map(v=>`<option value="${v}"${v===set.minBlock?' selected':''}>${v} min</option>`).join('')}</select></label>
    <label>Max fishing hours<select id="poMax"><option value="0">no limit</option>${[2,3,4,5,6,8,10].map(v=>`<option value="${v}"${v===set.maxH?' selected':''}>${v} h</option>`).join('')}</select></label>
    <label style="justify-content:flex-end"><span><input type="checkbox" id="poDD"${set.dd?' checked':''}> Dawn &amp; dusk focus</span></label>
@@ -4452,8 +4455,8 @@ function render(P,cfg){const fc=cfg&&cfg.wx&&cfg.wx.tt.length&&cfg.wx.tt[cfg.wx.
     if(b.ty==='move')return R5('move',`<td class="pt">${fmtT(b.t0)}</td><td class="pp">🚤 Move</td><td>→ ${nmKm(P,b.loc)}<small class="mut pmv"> · ${b.km} km, ~${b.min} min</small></td><td class="ps">—</td>`,`<span class="mut">${b.km} km · ~${b.min} min</span>`,false);
     const first=k===0,last=k===B0.length-1,sl=P.best.slice(Math.round((b.t0-P.t0)/9e5),Math.round((b.t1-P.t0)/9e5)),mx=Math.max(...sl),av=sl.length?Math.round(sl.reduce((a,v)=>a+v,0)/sl.length):NaN,here=nm(P,b.loc);
     const what=first&&b.next?`Launch from ${here}${b.leaveT?' by '+fmtT(b.leaveT):''}`:last||!b.next?`Done — back to ${nm(P,P.launch)}`:`At ${here} — be back at ${nm(P,b.next.loc)} by ${fmtT(b.next.t)}`;
-    return R5('rest',`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">${first&&b.next?'⏸ Free':last||!b.next?'⏸ Free':'💤 Rest'}</td><td>${what}</td><td class="ps">${isFinite(mx)?mx:'—'}</td>`,`<span class="mut">best available averages ${isFinite(av)?av:'—'}${isFinite(mx)?', peaks '+mx:''} (rest threshold ${P.thr})</span>`);}).join('');
-  const one=P.one,oneH=one?`<div class="pone">🎯 <b>If you only fish one session:</b> ${span(one.t0,one.t1)} — ${[...new Set(one.blocks.filter(b=>b.ty==='fish').map(b=>b.loc))].map(i=>nm(P,i)).join(' → ')} (peak ${Math.max(...one.blocks.filter(b=>b.ty==='fish').map(b=>b.peak))})${P.solo&&(!one||P.solo.loc!==one.blocks[0].loc||Math.abs(P.solo.t0-one.t0)>36e5)?`<br><span class="mut">Single spot, no moves: ${nm(P,P.solo.loc)} ${span(P.solo.t0,P.solo.t1)} (avg ${P.solo.avg})</span>`:''}</div>`:'<div class="pone">No fishing block clears the threshold on this day — try a lower rest threshold.</div>';
+    return R5('rest',`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">${first&&b.next?'⏸ Free':last||!b.next?'⏸ Free':'🍺 Tinny time'}</td><td>${what}</td><td class="ps">${isFinite(mx)?mx:'—'}</td>`,`<span class="mut">best available averages ${isFinite(av)?av:'—'}${isFinite(mx)?', peaks '+mx:''} (tinny time threshold ${P.thr})</span>`);}).join('');
+  const one=P.one,oneH=one?`<div class="pone">🎯 <b>If you only fish one session:</b> ${span(one.t0,one.t1)} — ${[...new Set(one.blocks.filter(b=>b.ty==='fish').map(b=>b.loc))].map(i=>nm(P,i)).join(' → ')} (peak ${Math.max(...one.blocks.filter(b=>b.ty==='fish').map(b=>b.peak))})${P.solo&&(!one||P.solo.loc!==one.blocks[0].loc||Math.abs(P.solo.t0-one.t0)>36e5)?`<br><span class="mut">Single spot, no moves: ${nm(P,P.solo.loc)} ${span(P.solo.t0,P.solo.t1)} (avg ${P.solo.avg})</span>`:''}</div>`:'<div class="pone">No fishing block clears the threshold on this day — try a lower tinny time threshold.</div>';
   const opt=(o,lab)=>o?`<li>${lab}: <b>${span(o.t0,o.t1)}</b> at ${nm(P,o.loc)} — avg ${o.avg}, peak ${o.peak}${o.ri?` (${o.ri.kind==='rise'?'water starts rising':'run-in starts'} ${fmtT(o.ri.t)} ±${Math.round(o.ri.u)}′)`:''}</li>`:'';
   const extra=opt(P.early,'🌙 Early option (before your start)')+opt(P.late,'🌙 Late-night option (after your end)');
   const bench=P.bench.map(x=>x.kind==='single'?`<li>🌗 ${nm(P,x.loc)}: <b>single-high day</b> — water should stand ${fmtT(x.sd.t0)}–${fmtT(x.sd.t1)} with no second rise. Seen a rise? Log it (Tides → Benchmarks, “both highs”).</li>`
@@ -4461,7 +4464,7 @@ function render(P,cfg){const fc=cfg&&cfg.wx&&cfg.wx.tt.length&&cfg.wx.tt[cfg.wx.
     :`<li>⏱ ${nm(P,x.loc)} ~${fmtT(x.t)} ±${Math.round(x.u)}′: ${x.kind==='rise'?'water starts rising':'low turn'} — note the real time (Tides → Benchmarks).</li>`).join('');
   const thrTxt=P.auto?`auto = max(55, median ${P.med})`:'set';
   $('planB').innerHTML=`<p class="csub">${A().moonOf(P.date).e} ${esc(A().fmtDay(P.date,{weekday:'long',day:'numeric',month:'long'}))} · ${esc(FT.SYSNAME)} · ${fc?'<span class="tagf">FORECAST</span> weather':'<span class="tago">OUTLOOK</span> neutral weather, seasonal water temp'} · ${hhmm(set.start)}–${set.end===1440?'midnight':hhmm(set.end)}</p>
-  <div class="psum"><span>🎣 ${P.fishH.toFixed(1)} h fishing</span><span>🚤 ${fish.length?B0.filter(b=>b.ty==='move').length:0} moves · ${P.moveKm} km</span><span>💤 rest below ${P.thr} (${thrTxt})</span><span>⛵ launch ${nm(P,P.launch)}</span></div>
+  <div class="psum"><span>🎣 ${P.fishH.toFixed(1)} h fishing</span><span>🚤 ${fish.length?B0.filter(b=>b.ty==='move').length:0} moves · ${P.moveKm} km</span><span>🍺 tinny time below ${P.thr} (${thrTxt})</span><span>⛵ launch ${nm(P,P.launch)}</span></div>
   ${oneH}
   <div style="overflow-x:auto"><table class="ptl"><tr><th>Time</th><th>Plan</th><th>Spot</th><th>Score</th><th class="pwc">Why</th></tr>${rows}</table></div>
   ${extra?`<ul class="pnote" style="padding-left:18px;margin:6px 0">${extra}</ul>`:''}
@@ -4479,8 +4482,8 @@ function shareText(P){const L=[`Mac's Jacks — plan for ${A().fmtDay(P.date,{we
   for(const b of P.blocks){const n=P.spots[b.loc]?P.spots[b.loc].name:'';
     if(b.ty==='fish')L.push(`${span(b.t0,b.t1)}  FISH ${n} (km ${P.spots[b.loc].km.toFixed(1)}) — peak ${b.peak}${b.optional?' (optional)':''}: ${b.why.map(T).join('; ')}`);
     else if(b.ty==='move')L.push(`${fmtT(b.t0)}  MOVE → ${n} (${b.km} km, ~${b.min} min)`);
-    else if(b.next)L.push(`${span(b.t0,b.t1)}  REST — be back at ${P.spots[b.next.loc].name} by ${fmtT(b.next.t)}`);}
-  if(P.one)L.push('',`One session only: ${span(P.one.t0,P.one.t1)}`);L.push(`Total fishing ${P.fishH.toFixed(1)} h; rest below ${P.thr}.`);return L.join('\n');}
+    else if(b.next)L.push(`${span(b.t0,b.t1)}  TINNY TIME — be back at ${P.spots[b.next.loc].name} by ${fmtT(b.next.t)}`);}
+  if(P.one)L.push('',`One session only: ${span(P.one.t0,P.one.t1)}`);L.push(`Total fishing ${P.fishH.toFixed(1)} h; tinny time below ${P.thr}.`);return L.join('\n');}
 function chart(P){const W=360,H=120,pl=24,pr=6,pt=8,pb=18,n=P.best.length;if(n<2)return '';const x=k=>pl+(W-pl-pr)*k/(n-1),y=v=>pt+(H-pt-pb)*(1-Math.max(0,Math.min(100,v))/100);
   let o=`<svg class="pchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Chosen spot score vs best possible">`;
   for(const v of [25,50,75,100])o+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="#1d3a3f"/><text x="2" y="${y(v)+3}" fill="#6f8b87" font-size="8">${v}</text>`;
@@ -4490,7 +4493,7 @@ function chart(P){const W=360,H=120,pl=24,pr=6,pt=8,pb=18,n=P.best.length;if(n<2
   let seg=[];const flush=()=>{if(seg.length>1)o+=`<polyline fill="none" stroke="#7ff0c8" stroke-width="2.4" points="${seg.join(' ')}"/>`;seg=[];};
   P.chosen.forEach((v,k)=>{if(v==null)flush();else seg.push(x(k)+','+y(v));});flush();
   for(let k=0;k<n;k+=12){const t=P.t0+k*9e5;o+=`<text x="${x(k)}" y="${H-5}" fill="#6f8b87" font-size="8" text-anchor="middle">${fmtT(t).replace(':00','')}</text>`;}
-  return o+`</svg><div class="pnote"><span style="color:#7ff0c8">━</span> score where the plan has you fishing · <span style="color:#9db5b1">┅</span> best possible of your chosen spots · <span style="color:#ff7b6b">┅</span> rest threshold</div>`;}
+  return o+`</svg><div class="pnote"><span style="color:#7ff0c8">━</span> score where the plan has you fishing · <span style="color:#9db5b1">┅</span> best possible of your chosen spots · <span style="color:#ff7b6b">┅</span> tinny time threshold</div>`;}
 function close(){$('planSheet').hidden=true;document.body.style.overflow='';delete document.body.dataset.planOpen;}
 FT.planDay=function(ds){if(!ds)ds=MJ.ymd(Date.now(),TZ);cur.ds=ds;$('planSheet').hidden=false;document.body.style.overflow='hidden';document.body.dataset.planOpen=ds;
   $('planT').textContent='🗓 Plan my day — '+A().fmtDay(ds,{weekday:'short',day:'numeric',month:'short'});

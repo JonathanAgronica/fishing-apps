@@ -1,4 +1,4 @@
-/* ===== Plan my day: suggested fish / move / rest schedule for one date on the current river system =====
+/* ===== Plan my day: suggested fish / move / tinny time schedule for one date on the current river system =====
    Scores = the Bite tab's exact 15-min scoring per spot (spot types, Baffle single-high stands, forecast weather or
    outlook, flood cycle) computed — with the schedule optimisation — in the calendar's Web Worker (main-thread fallback).
    Settings live in localStorage (per system). Spot names stay on the phone: .ics uses '★ my spot (km x)'. */
@@ -36,7 +36,7 @@ function optsHTML(all){const sel=new Set(selSpots(all).map(keyOf)),lch=launchOf(
    <label>End<select id="poEnd">${en.map(m=>`<option value="${m}"${m===set.end?' selected':''}>${m===1440?'midnight':hhmm(m)}</option>`).join('')}</select></label>
    <label>Launch from<select id="poLaunch"><option value="auto"${set.launch==='auto'?' selected':''}>auto (${esc(lch?lch.name:'')})</option>${all.map(p=>`<option value="${esc(keyOf(p))}"${set.launch===keyOf(p)?' selected':''}>${isRamp(p)?'⛵ ':''}${p.custom?'★ ':''}${esc(p.name)}</option>`).join('')}</select></label>
    <label>Boat speed (km/h)<input type="number" id="poSpeed" min="3" max="60" step="1" value="${set.speed}"></label>
-   <label>Rest threshold<select id="poThr"><option value="auto"${set.thr==='auto'?' selected':''}>auto: max(55, day median)</option>${[45,50,55,60,65,70,75,80].map(v=>`<option value="${v}"${String(set.thr)===String(v)?' selected':''}>rest below ${v}</option>`).join('')}</select></label>
+   <label>Tinny time threshold<select id="poThr"><option value="auto"${set.thr==='auto'?' selected':''}>auto: max(55, day median)</option>${[45,50,55,60,65,70,75,80].map(v=>`<option value="${v}"${String(set.thr)===String(v)?' selected':''}>tinny time below ${v}</option>`).join('')}</select></label>
    <label>Min block<select id="poMin">${[15,30,45,60,90].map(v=>`<option value="${v}"${v===set.minBlock?' selected':''}>${v} min</option>`).join('')}</select></label>
    <label>Max fishing hours<select id="poMax"><option value="0">no limit</option>${[2,3,4,5,6,8,10].map(v=>`<option value="${v}"${v===set.maxH?' selected':''}>${v} h</option>`).join('')}</select></label>
    <label style="justify-content:flex-end"><span><input type="checkbox" id="poDD"${set.dd?' checked':''}> Dawn &amp; dusk focus</span></label>
@@ -77,8 +77,8 @@ function render(P,cfg){const fc=cfg&&cfg.wx&&cfg.wx.tt.length&&cfg.wx.tt[cfg.wx.
     if(b.ty==='move')return R5('move',`<td class="pt">${fmtT(b.t0)}</td><td class="pp">🚤 Move</td><td>→ ${nmKm(P,b.loc)}<small class="mut pmv"> · ${b.km} km, ~${b.min} min</small></td><td class="ps">—</td>`,`<span class="mut">${b.km} km · ~${b.min} min</span>`,false);
     const first=k===0,last=k===B0.length-1,sl=P.best.slice(Math.round((b.t0-P.t0)/9e5),Math.round((b.t1-P.t0)/9e5)),mx=Math.max(...sl),av=sl.length?Math.round(sl.reduce((a,v)=>a+v,0)/sl.length):NaN,here=nm(P,b.loc);
     const what=first&&b.next?`Launch from ${here}${b.leaveT?' by '+fmtT(b.leaveT):''}`:last||!b.next?`Done — back to ${nm(P,P.launch)}`:`At ${here} — be back at ${nm(P,b.next.loc)} by ${fmtT(b.next.t)}`;
-    return R5('rest',`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">${first&&b.next?'⏸ Free':last||!b.next?'⏸ Free':'💤 Rest'}</td><td>${what}</td><td class="ps">${isFinite(mx)?mx:'—'}</td>`,`<span class="mut">best available averages ${isFinite(av)?av:'—'}${isFinite(mx)?', peaks '+mx:''} (rest threshold ${P.thr})</span>`);}).join('');
-  const one=P.one,oneH=one?`<div class="pone">🎯 <b>If you only fish one session:</b> ${span(one.t0,one.t1)} — ${[...new Set(one.blocks.filter(b=>b.ty==='fish').map(b=>b.loc))].map(i=>nm(P,i)).join(' → ')} (peak ${Math.max(...one.blocks.filter(b=>b.ty==='fish').map(b=>b.peak))})${P.solo&&(!one||P.solo.loc!==one.blocks[0].loc||Math.abs(P.solo.t0-one.t0)>36e5)?`<br><span class="mut">Single spot, no moves: ${nm(P,P.solo.loc)} ${span(P.solo.t0,P.solo.t1)} (avg ${P.solo.avg})</span>`:''}</div>`:'<div class="pone">No fishing block clears the threshold on this day — try a lower rest threshold.</div>';
+    return R5('rest',`<td class="pt">${span(b.t0,b.t1)}</td><td class="pp">${first&&b.next?'⏸ Free':last||!b.next?'⏸ Free':'🍺 Tinny time'}</td><td>${what}</td><td class="ps">${isFinite(mx)?mx:'—'}</td>`,`<span class="mut">best available averages ${isFinite(av)?av:'—'}${isFinite(mx)?', peaks '+mx:''} (tinny time threshold ${P.thr})</span>`);}).join('');
+  const one=P.one,oneH=one?`<div class="pone">🎯 <b>If you only fish one session:</b> ${span(one.t0,one.t1)} — ${[...new Set(one.blocks.filter(b=>b.ty==='fish').map(b=>b.loc))].map(i=>nm(P,i)).join(' → ')} (peak ${Math.max(...one.blocks.filter(b=>b.ty==='fish').map(b=>b.peak))})${P.solo&&(!one||P.solo.loc!==one.blocks[0].loc||Math.abs(P.solo.t0-one.t0)>36e5)?`<br><span class="mut">Single spot, no moves: ${nm(P,P.solo.loc)} ${span(P.solo.t0,P.solo.t1)} (avg ${P.solo.avg})</span>`:''}</div>`:'<div class="pone">No fishing block clears the threshold on this day — try a lower tinny time threshold.</div>';
   const opt=(o,lab)=>o?`<li>${lab}: <b>${span(o.t0,o.t1)}</b> at ${nm(P,o.loc)} — avg ${o.avg}, peak ${o.peak}${o.ri?` (${o.ri.kind==='rise'?'water starts rising':'run-in starts'} ${fmtT(o.ri.t)} ±${Math.round(o.ri.u)}′)`:''}</li>`:'';
   const extra=opt(P.early,'🌙 Early option (before your start)')+opt(P.late,'🌙 Late-night option (after your end)');
   const bench=P.bench.map(x=>x.kind==='single'?`<li>🌗 ${nm(P,x.loc)}: <b>single-high day</b> — water should stand ${fmtT(x.sd.t0)}–${fmtT(x.sd.t1)} with no second rise. Seen a rise? Log it (Tides → Benchmarks, “both highs”).</li>`
@@ -86,7 +86,7 @@ function render(P,cfg){const fc=cfg&&cfg.wx&&cfg.wx.tt.length&&cfg.wx.tt[cfg.wx.
     :`<li>⏱ ${nm(P,x.loc)} ~${fmtT(x.t)} ±${Math.round(x.u)}′: ${x.kind==='rise'?'water starts rising':'low turn'} — note the real time (Tides → Benchmarks).</li>`).join('');
   const thrTxt=P.auto?`auto = max(55, median ${P.med})`:'set';
   $('planB').innerHTML=`<p class="csub">${A().moonOf(P.date).e} ${esc(A().fmtDay(P.date,{weekday:'long',day:'numeric',month:'long'}))} · ${esc(FT.SYSNAME)} · ${fc?'<span class="tagf">FORECAST</span> weather':'<span class="tago">OUTLOOK</span> neutral weather, seasonal water temp'} · ${hhmm(set.start)}–${set.end===1440?'midnight':hhmm(set.end)}</p>
-  <div class="psum"><span>🎣 ${P.fishH.toFixed(1)} h fishing</span><span>🚤 ${fish.length?B0.filter(b=>b.ty==='move').length:0} moves · ${P.moveKm} km</span><span>💤 rest below ${P.thr} (${thrTxt})</span><span>⛵ launch ${nm(P,P.launch)}</span></div>
+  <div class="psum"><span>🎣 ${P.fishH.toFixed(1)} h fishing</span><span>🚤 ${fish.length?B0.filter(b=>b.ty==='move').length:0} moves · ${P.moveKm} km</span><span>🍺 tinny time below ${P.thr} (${thrTxt})</span><span>⛵ launch ${nm(P,P.launch)}</span></div>
   ${oneH}
   <div style="overflow-x:auto"><table class="ptl"><tr><th>Time</th><th>Plan</th><th>Spot</th><th>Score</th><th class="pwc">Why</th></tr>${rows}</table></div>
   ${extra?`<ul class="pnote" style="padding-left:18px;margin:6px 0">${extra}</ul>`:''}
@@ -104,8 +104,8 @@ function shareText(P){const L=[`Mac's Jacks — plan for ${A().fmtDay(P.date,{we
   for(const b of P.blocks){const n=P.spots[b.loc]?P.spots[b.loc].name:'';
     if(b.ty==='fish')L.push(`${span(b.t0,b.t1)}  FISH ${n} (km ${P.spots[b.loc].km.toFixed(1)}) — peak ${b.peak}${b.optional?' (optional)':''}: ${b.why.map(T).join('; ')}`);
     else if(b.ty==='move')L.push(`${fmtT(b.t0)}  MOVE → ${n} (${b.km} km, ~${b.min} min)`);
-    else if(b.next)L.push(`${span(b.t0,b.t1)}  REST — be back at ${P.spots[b.next.loc].name} by ${fmtT(b.next.t)}`);}
-  if(P.one)L.push('',`One session only: ${span(P.one.t0,P.one.t1)}`);L.push(`Total fishing ${P.fishH.toFixed(1)} h; rest below ${P.thr}.`);return L.join('\n');}
+    else if(b.next)L.push(`${span(b.t0,b.t1)}  TINNY TIME — be back at ${P.spots[b.next.loc].name} by ${fmtT(b.next.t)}`);}
+  if(P.one)L.push('',`One session only: ${span(P.one.t0,P.one.t1)}`);L.push(`Total fishing ${P.fishH.toFixed(1)} h; tinny time below ${P.thr}.`);return L.join('\n');}
 function chart(P){const W=360,H=120,pl=24,pr=6,pt=8,pb=18,n=P.best.length;if(n<2)return '';const x=k=>pl+(W-pl-pr)*k/(n-1),y=v=>pt+(H-pt-pb)*(1-Math.max(0,Math.min(100,v))/100);
   let o=`<svg class="pchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Chosen spot score vs best possible">`;
   for(const v of [25,50,75,100])o+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="#1d3a3f"/><text x="2" y="${y(v)+3}" fill="#6f8b87" font-size="8">${v}</text>`;
@@ -115,7 +115,7 @@ function chart(P){const W=360,H=120,pl=24,pr=6,pt=8,pb=18,n=P.best.length;if(n<2
   let seg=[];const flush=()=>{if(seg.length>1)o+=`<polyline fill="none" stroke="#7ff0c8" stroke-width="2.4" points="${seg.join(' ')}"/>`;seg=[];};
   P.chosen.forEach((v,k)=>{if(v==null)flush();else seg.push(x(k)+','+y(v));});flush();
   for(let k=0;k<n;k+=12){const t=P.t0+k*9e5;o+=`<text x="${x(k)}" y="${H-5}" fill="#6f8b87" font-size="8" text-anchor="middle">${fmtT(t).replace(':00','')}</text>`;}
-  return o+`</svg><div class="pnote"><span style="color:#7ff0c8">━</span> score where the plan has you fishing · <span style="color:#9db5b1">┅</span> best possible of your chosen spots · <span style="color:#ff7b6b">┅</span> rest threshold</div>`;}
+  return o+`</svg><div class="pnote"><span style="color:#7ff0c8">━</span> score where the plan has you fishing · <span style="color:#9db5b1">┅</span> best possible of your chosen spots · <span style="color:#ff7b6b">┅</span> tinny time threshold</div>`;}
 function close(){$('planSheet').hidden=true;document.body.style.overflow='';delete document.body.dataset.planOpen;}
 FT.planDay=function(ds){if(!ds)ds=MJ.ymd(Date.now(),TZ);cur.ds=ds;$('planSheet').hidden=false;document.body.style.overflow='hidden';document.body.dataset.planOpen=ds;
   $('planT').textContent='🗓 Plan my day — '+A().fmtDay(ds,{weekday:'short',day:'numeric',month:'short'});

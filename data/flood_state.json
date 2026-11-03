@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-03T19:42+10:00",
+ "generated_aest": "2026-11-03T20:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 32.2,
    "base": 0.78,
-   "level": 1.5,
+   "level": 1.49,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-23 01:44",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.7
+   "day": 11.8
   },
   "burnett-river": {
    "gauge": "539153",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-10-19 06:59",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 15.5
+   "day": 15.6
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.5
+   "day": 12.6
   },
   "elliott-river": {
    "gauge": "539060",
@@ -149,7 +149,7 @@
    "onset_aest": "2026-10-22 02:30",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.7
+   "day": 12.8
   },
   "kolan-river": {
    "gauge": "539205",

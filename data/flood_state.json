@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-03T17:40+10:00",
+ "generated_aest": "2026-11-03T18:39+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 32.1,
    "base": 0.78,
-   "level": 1.51,
+   "level": 1.5,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-10-19 06:59",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 15.4
+   "day": 15.5
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.4
+   "day": 12.5
   },
   "elliott-river": {
    "gauge": "539060",
@@ -149,7 +149,7 @@
    "onset_aest": "2026-10-22 02:40",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.6
+   "day": 12.7
   },
   "kolan-river": {
    "gauge": "539205",
@@ -175,7 +175,7 @@
    "onset_aest": "2026-10-22 07:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.4
+   "day": 12.5
   },
   "mary-river": {
    "gauge": "540686",
@@ -190,7 +190,7 @@
    "onset_aest": "2026-10-24 18:37",
    "peak_at_record_start": false,
    "phase": "prime",
-   "day": 9.0,
+   "day": 9.1,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false

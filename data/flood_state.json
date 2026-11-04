@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-05T07:43+10:00",
+ "generated_aest": "2026-11-05T08:46+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 33.7,
+   "span_days": 33.8,
    "base": 0.81,
    "level": 1.34,
    "kind": "light",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-23 01:44",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 13.2
+   "day": 13.3
   },
   "burnett-river": {
    "gauge": "539153",
@@ -59,7 +59,7 @@
    "peak_aest": "2026-10-22 08:45",
    "onset_aest": "2026-10-22 05:23",
    "peak_at_record_start": false,
-   "phase": "prime",
+   "phase": "tapering",
    "day": 14.0,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-10-19 06:59",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 17.0
+   "day": 17.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 14.0
+   "day": 14.1
   },
   "elliott-river": {
    "gauge": "539060",
@@ -149,7 +149,7 @@
    "onset_aest": "2026-10-22 02:30",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 14.2
+   "day": 14.3
   },
   "kolan-river": {
    "gauge": "539205",

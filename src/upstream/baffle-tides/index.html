@@ -210,10 +210,10 @@ const NODES=[
   hwLvl:H=>H-LAT2AHD_BUND,lwLvl:L=>L-LAT2AHD_BUND},
  {km:3.4,name:'Baffle Ck (Winfield) — MSQ secondary place',hwLag:65,lwLag:116,hwU:15,lwU:20,src:'MSQ 2025 Tidal Planes: HW +1:05, LW +1:56 on Bundaberg; MHWS 2.27 MHWN 1.81 MLWN 1.02 MLWS 1.01 m LAT (** non-linear transfer)',
   hwLvl:H=>1.81+(H-2.35)*(2.27-1.81)/(2.94-2.35)-LAT2AHD_WIN,lwLvl:L=>1.02+(L-1.20)*(1.01-1.02)/(0.61-1.20)-LAT2AHD_WIN},
- {km:25.24,name:'Euleilah Ck @ Hills Rd gauge (proxy)',hwLag:179,lwLag:277,hwU:35,lwU:45,src:'BoM 539135, 2–9 Oct 2026: 13 HW (lag 179 ± 18 min), 13 LW (277 ± 25 min); HW lvl = −0.981+0.613·H r=0.99; LW lvl = 0.225−0.220·L r=0.50. On Euleilah Ck 8.9 km above its junction (16.4 km).',
-  hwLvl:H=>-0.981+0.613*H,lwLvl:L=>0.225-0.220*L},
- {km:35.25,name:'Essendean Bridge gauge',hwLag:339,lwLag:415,hwU:60,lwU:150,src:'BoM 039267, 2–9 Oct 2026: 10 HW (lag 339 ± 44 min, ±60 min gauge resolution); HW lvl = −0.520+0.423·H r=0.93; lows truncated: base ≈ 0.738−0.384·L (≥0.30) m AHD.',
-  hwLvl:H=>-0.520+0.423*H,lwLvl:L=>Math.max(0.30,0.738-0.384*L),trunc:true}
+ {km:25.24,name:'Euleilah Ck @ Hills Rd gauge (proxy)',hwLag:178,lwLag:264,hwU:35,lwU:45,src:'BoM 539135, 34-day refit (2 Oct–5 Nov 2026): HW lag 178 min, LW 264 min; HW lvl = −0.900+0.585·H; LW lvl = 0.202−0.158·L. Fitted to dry, calm hours only (surge and fresh removed) so the live adjustments carry the rest. On Euleilah Ck 8.9 km above its junction (16.4 km).',
+  hwLvl:H=>-0.900+0.585*H,lwLvl:L=>0.202-0.158*L},
+ {km:35.25,name:'Essendean Bridge gauge',hwLag:332,lwLag:424,hwU:60,lwU:150,src:'BoM 039267, 34-day refit (2 Oct–5 Nov 2026): HW lag 332 min, LW 424 min; HW lvl = −0.544+0.437·H; lows truncated: base ≈ 0.640−0.226·L, floor 0.37 m AHD (the lowest dry-tide pool level the gauge has shown). Dry, calm hours only; the live fresh adjustment now also lifts these pool-level lows.',
+  hwLvl:H=>-0.544+0.437*H,lwLvl:L=>Math.max(0.37,0.640-0.226*L),trunc:true}
 ];
 const MAXKM=40;
 function calAt(km,opts){opts=opts||{};km=Math.max(0,Math.min(MAXKM,km));

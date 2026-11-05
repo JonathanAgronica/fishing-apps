@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#0b3b3a">
 <title>Mac's Jacks — mangrove jack bite times &amp; Baffle Creek tides</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202611032037"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202611032037"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202611032037">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202611032037">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png?v=202611051027"><link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png?v=202611051027"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=202611051027">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png?v=202611051027">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mac's Jacks">
-<meta name="app-version" content="202611032037">
+<meta name="app-version" content="202611051027">
 <style>
 
 :root{--bg:#0d1f22;--panel:#13292d;--panel2:#183338;--ink:#e8f1ef;--mut:#9db5b1;--acc:#f0a03a;--acc2:#ff6b3d;--tide:#5cc8ff;--good:#57d18a;--line:#25464b}
@@ -789,7 +789,7 @@ input:disabled{opacity:.4}
   <div id="planB"></div>
 </div></div>
 
-<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202611032037</span></footer>
+<footer>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (marine, forecast, geocoding; CC BY 4.0). Sun &amp; moon computed locally (SunCalc-style algorithms, after V. Agafonkin, BSD-2).<br>Data: Maritime Safety Queensland / Qld Government tide gauge data (data.qld.gov.au, CC BY 4.0) · MSQ 2025 Semidiurnal Tidal Planes · Bureau of Meteorology river heights (CC BY) · © OpenStreetMap contributors (ODbL). Tide prediction tables © Commonwealth of Australia (BoM) — embedded 2026 Bundaberg high/low times are reproduced for comparison only.<br><span class="mut">Mac's Jacks build 202611051027</span></footer>
 <script>
 /* Mac's Jacks shell: tabs, shared date, cross-tab hooks */
 window.FT=(function(){const FT={};
@@ -1196,10 +1196,10 @@ const NODES=[
   hwLvl:H=>H-LAT2AHD_BUND,lwLvl:L=>L-LAT2AHD_BUND},
  {km:3.4,name:'Baffle Ck (Winfield) — MSQ secondary place',hwLag:65,lwLag:116,hwU:15,lwU:20,src:'MSQ 2025 Tidal Planes: HW +1:05, LW +1:56 on Bundaberg; MHWS 2.27 MHWN 1.81 MLWN 1.02 MLWS 1.01 m LAT (** non-linear transfer)',
   hwLvl:H=>1.81+(H-2.35)*(2.27-1.81)/(2.94-2.35)-LAT2AHD_WIN,lwLvl:L=>1.02+(L-1.20)*(1.01-1.02)/(0.61-1.20)-LAT2AHD_WIN},
- {km:25.24,name:'Euleilah Ck @ Hills Rd gauge (proxy)',hwLag:179,lwLag:277,hwU:35,lwU:45,src:'BoM 539135, 2–9 Oct 2026: 13 HW (lag 179 ± 18 min), 13 LW (277 ± 25 min); HW lvl = −0.981+0.613·H r=0.99; LW lvl = 0.225−0.220·L r=0.50. On Euleilah Ck 8.9 km above its junction (16.4 km).',
-  hwLvl:H=>-0.981+0.613*H,lwLvl:L=>0.225-0.220*L},
- {km:35.25,name:'Essendean Bridge gauge',hwLag:339,lwLag:415,hwU:60,lwU:150,src:'BoM 039267, 2–9 Oct 2026: 10 HW (lag 339 ± 44 min, ±60 min gauge resolution); HW lvl = −0.520+0.423·H r=0.93; lows truncated: base ≈ 0.738−0.384·L (≥0.30) m AHD.',
-  hwLvl:H=>-0.520+0.423*H,lwLvl:L=>Math.max(0.30,0.738-0.384*L),trunc:true}
+ {km:25.24,name:'Euleilah Ck @ Hills Rd gauge (proxy)',hwLag:178,lwLag:264,hwU:35,lwU:45,src:'BoM 539135, 34-day refit (2 Oct–5 Nov 2026): HW lag 178 min, LW 264 min; HW lvl = −0.900+0.585·H; LW lvl = 0.202−0.158·L. Fitted to dry, calm hours only (surge and fresh removed) so the live adjustments carry the rest. On Euleilah Ck 8.9 km above its junction (16.4 km).',
+  hwLvl:H=>-0.900+0.585*H,lwLvl:L=>0.202-0.158*L},
+ {km:35.25,name:'Essendean Bridge gauge',hwLag:332,lwLag:424,hwU:60,lwU:150,src:'BoM 039267, 34-day refit (2 Oct–5 Nov 2026): HW lag 332 min, LW 424 min; HW lvl = −0.544+0.437·H; lows truncated: base ≈ 0.640−0.226·L, floor 0.37 m AHD (the lowest dry-tide pool level the gauge has shown). Dry, calm hours only; the live fresh adjustment now also lifts these pool-level lows.',
+  hwLvl:H=>-0.544+0.437*H,lwLvl:L=>Math.max(0.37,0.640-0.226*L),trunc:true}
 ];
 const MAXKM=40;
 function calAt(km,opts){opts=opts||{};km=Math.max(0,Math.min(MAXKM,km));
@@ -2360,7 +2360,7 @@ function render(){
   {const sd=P.ext.filter(e=>e.stand&&e.t>=t0&&e.t<t0+24);if(sd.length)warn+=`<div class="notice info">🌗 <b>Single-high day here.</b> The small high around ${sd.map(e=>B.fmtT(e.t)).join(', ')} (Bundaberg ${sd.map(e=>e.sup.H.toFixed(2)).join(', ')} m LAT, below the ${sd[0].sup.thr.toFixed(2)} m needed at this km) doesn’t make it up the creek — the water just stands for a few hours, then keeps falling to the next low. No run-in or top of tide from it.</div>`;}
   if(!GEN&&window.FTADJ&&FTADJ.cur){const nh=B.nowH(),tq=nh>=t0&&nh<t0+24?nh:t0+12,AL=(!st.bline||st.bline==='B')?'B':'X';
     warn+=FTADJ.floodHtml();const bd=FTADJ.badge(tq,km,AL);if(bd)warn+=`<div class="adjrow">${bd}</div>`;
-    const ai=document.getElementById('bt-adjInfo');if(ai){const I=FTADJ.info(tq,km,AL);ai.innerHTML=`⚖ <b>${esc(FTADJ.line(tq,km,AL))}</b> (${tq===nh?'now':B.fmtDay(tq)}). Coastal surge = Bundaberg observed − MSQ predicted, 25 h mean (gain 1, capped ±0.3 m), added to every reach incl. Euleilah and side creeks. Fresh = Mimdale ${I.mim!=null?I.mim.toFixed(2):'?'} m vs its dry baseline ${I.M0!=null?I.M0.toFixed(2):'?'} m (14-day 10th percentile, 3 h lag): highs + 0.5 × fresh × a weight rising from 0 at the Euleilah junction (16.4 km) to 1 at Essendean, single-high threshold +${I.sup.toFixed(2)} m here; lows unchanged. Both fade out ahead (surge gone after 48 h, fresh after 72 h), so later dates are pure harmonic predictions. Data ${esc(I.gen||'')}.`;}}
+    const ai=document.getElementById('bt-adjInfo');if(ai){const I=FTADJ.info(tq,km,AL);ai.innerHTML=`⚖ <b>${esc(FTADJ.line(tq,km,AL))}</b> (${tq===nh?'now':B.fmtDay(tq)}). Coastal surge = Bundaberg observed − MSQ predicted, 25 h mean (gain 1, capped ±0.3 m), added to every reach incl. Euleilah and side creeks. Fresh = Mimdale ${I.mim!=null?I.mim.toFixed(2):'?'} m vs its dry baseline ${I.M0!=null?I.M0.toFixed(2):'?'} m (14-day 10th percentile, 3 h lag): highs + 0.5 × fresh × a weight rising from 0 at the Euleilah junction (16.4 km) to 1 at Essendean, single-high threshold +${I.sup.toFixed(2)} m here; pool-level lows + 0.75 × fresh × the same weight. Both fade out ahead (surge gone after 48 h, fresh after 72 h), so later dates are pure harmonic predictions. Data ${esc(I.gen||'')}.`;}}
   else{const ai=document.getElementById('bt-adjInfo');if(ai)ai.textContent='';}
   $('bt-locWarn').innerHTML=warn;
   // stats

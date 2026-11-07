@@ -1,14 +1,14 @@
 {
- "generated_aest": "2026-11-07T17:37+10:00",
+ "generated_aest": "2026-11-07T18:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 36.1,
+   "span_days": 36.2,
    "base": 0.83,
-   "level": 1.18,
+   "level": 1.19,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -89,7 +89,7 @@
    "onset_aest": "2026-10-19 07:01",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.4
+   "day": 19.5
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -104,7 +104,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 16.4
+   "day": 16.5
   },
   "elliott-river": {
    "gauge": "539060",
@@ -145,7 +145,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.3
+   "day": 19.4
   },
   "kolan-river": {
    "gauge": "539205",
@@ -171,7 +171,7 @@
    "onset_aest": "2026-10-22 07:42",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 16.4
+   "day": 16.5
   },
   "mary-river": {
    "gauge": "540686",
@@ -186,7 +186,7 @@
    "onset_aest": "2026-10-24 18:37",
    "peak_at_record_start": false,
    "phase": "prime",
-   "day": 13.0,
+   "day": 13.1,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -204,7 +204,7 @@
    "onset_aest": "2026-10-19 15:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.1
+   "day": 19.2
   },
   "noosa-river": {
    "gauge": "540774",
@@ -237,7 +237,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -252,7 +252,7 @@
    "onset_aest": "2026-10-22 09:00",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 16.0,
+   "day": 16.1,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

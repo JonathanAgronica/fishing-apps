@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-08T20:42+10:00",
+ "generated_aest": "2026-11-08T21:46+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 37.2,
+   "span_days": 37.3,
    "base": 0.83,
    "level": 1.22,
    "kind": "light",
@@ -15,7 +15,7 @@
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 14.2
+   "day": 14.3
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-25 03:44",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 14.7
+   "day": 14.8
   },
   "burnett-river": {
    "gauge": "539153",
@@ -175,7 +175,7 @@
    "onset_aest": "2026-10-22 07:42",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 17.5
+   "day": 17.6
   },
   "mary-river": {
    "gauge": "540686",
@@ -201,7 +201,7 @@
    "onset_aest": "2026-10-19 15:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 20.2
+   "day": 20.3
   },
   "noosa-river": {
    "gauge": "540774",
@@ -216,7 +216,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 14.3,
+   "day": 14.4,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -249,7 +249,7 @@
    "onset_aest": "2026-10-22 09:10",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 17.1,
+   "day": 17.2,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

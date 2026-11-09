@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-10T07:42+10:00",
+ "generated_aest": "2026-11-10T08:45+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 38.7,
+   "span_days": 38.8,
    "base": 0.83,
    "level": 1.41,
    "kind": "light",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 02:43",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 16.2
+   "day": 16.3
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -89,7 +89,7 @@
    "onset_aest": "2026-10-19 07:01",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.0
+   "day": 22.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -104,7 +104,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.0
+   "day": 19.1
   },
   "elliott-river": {
    "gauge": "539060",
@@ -141,7 +141,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.9
+   "day": 22.0
   },
   "kolan-river": {
    "gauge": "539205",
@@ -156,7 +156,7 @@
    "onset_aest": "2026-11-05 04:19",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.1
+   "day": 5.2
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -230,7 +230,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.8
+   "day": 4.9
   },
   "pumicestone-passage": {
    "gauge": "540533",

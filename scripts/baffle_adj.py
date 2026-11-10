@@ -3,8 +3,9 @@
 
 Two terms the app adds to the Bundaberg-harmonic along-creek model (see README "Live adjustments"):
   surge  = trailing 25 h mean of (Bundaberg observed - MSQ predicted) [m]; app: gain 1, capped +-0.3 m, all Baffle reaches.
-  F      = max(0, Mimdale(t-3 h) - M0), M0 = 10th percentile of hourly Mimdale over the previous 14 d (needs >= 7 d,
-           else the available record if >= 3 d) [m]; app: highs += 0.5*F*w(km) on the main channel above the Euleilah
+  F      = max(0, Mimdale(t-3 h) - M0), M0 = min(14-day 10th, 40-day 10th) of hourly Mimdale (needs >= 3 d
+           of history) [m]. The longer window stops a flood recession from lifting the baseline and wiping F;
+           the shorter window still lets M0 fall quickly once the creek is actually dry again. app: highs += 0.5*F*w(km) on the main channel above the Euleilah
            junction, single-high threshold += F*w/0.423; lows += 0.75*F*w (pool-level lows held up by fresh).
 The hourly series (trailing values = what was known at the time) drives the Gauges hindcast and the validation replay.
 It also carries the calibration mask used by refits (cal: 1 = clean period, 0 = fresh or surge affected).
@@ -12,7 +13,7 @@ Usage: baffle_adj.py [--data DIR] [--out FILE]"""
 import csv, json, os, sys, math, datetime as dt
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EPOCH=dt.datetime(2026,1,1)
-P=dict(surge_win_h=25,surge_min_frac=0.7,f_lag_h=3,m0_days=14,m0_min_days=7,m0_floor_days=3,m0_pct=10,
+P=dict(surge_win_h=25,surge_min_frac=0.7,f_lag_h=3,m0_days=14,m0_min_days=7,m0_floor_days=3,m0_pct=10,m0_long_days=40,
        gain=1.0,cap=0.3,kH=0.5,kL=0.75,w_j=16.4,w_span=18.85,w_pow=1.5,sup_div=0.423,
        surge_tau_h=24,surge_cut_h=48,f_tau_h=48,f_cut_h=72,
        mask_fresh=0.05,mask_rise_12h=0.02,mask_surge=0.04,mask_hold_h=24)
@@ -61,8 +62,11 @@ def main():
     for h in hrs:
         s=mean(h-W,h);sc=mean(h-W/2,h+W/2)
         hist=[mh[x] for x in hrs if h-dt.timedelta(days=P['m0_days'])<=x<=h and mh[x] is not None]
-        span=len(hist)/24
-        m0=pct(hist,P['m0_pct']) if span>=P['m0_floor_days'] else None
+        histL=[mh[x] for x in hrs if h-dt.timedelta(days=P.get('m0_long_days',40))<=x<=h and mh[x] is not None]
+        span=len(hist)/24; spanL=len(histL)/24
+        m0s=pct(hist,P['m0_pct']) if span>=P['m0_floor_days'] else None
+        m0l=pct(histL,P['m0_pct']) if spanL>=P['m0_floor_days'] else None
+        m0=min(x for x in (m0s,m0l) if x is not None) if (m0s is not None or m0l is not None) else None
         ml=mim(h-dt.timedelta(hours=P['f_lag_h']));mn=mh[h]
         F=max(0.0,ml-m0) if (ml is not None and m0 is not None) else None
         m12=mim(h-dt.timedelta(hours=12))

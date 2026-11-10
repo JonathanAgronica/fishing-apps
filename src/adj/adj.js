@@ -3,7 +3,7 @@
    - surge(t): Bundaberg trailing 25 h mean residual (obs − MSQ pred); gain 1, capped ±0.3 m; all Baffle reaches
      (main channel, Euleilah, side creeks), highs and lows (pool-level lows above ~30 km: only a positive surge lifts them). Past = archived hourly series; after the last value it
      fades (e-fold 24 h) and is 0 from 48 h on — later dates are unchanged.
-   - F(t) = max(0, Mimdale(t−3 h) − M0), M0 = 10th percentile of the previous 14 d. Highs += 0.5·F·w(km) on the main
+   - F(t) = max(0, Mimdale(t−3 h) − M0), M0 = min(14-day 10th, 40-day 10th) of hourly Mimdale. Highs += 0.5·F·w(km) on the main
      channel only, w = ((km−16.4)/18.85)^1.5 clipped 0..1 (0 at/below the Euleilah junction, 1 at Essendean and above);
      single-high threshold += F·w/0.423 (same as the upper-creek base adj, but lows are not raised). Fades e-fold 48 h, 0 from 72 h.
    The Baffle core reads window.BT_ADJ in predictAt (opts.adj===null disables). No data → no adjustment (identical output). */

@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-11T01:49+10:00",
+ "generated_aest": "2026-11-11T02:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,14 +8,14 @@
    "known": true,
    "span_days": 39.5,
    "base": 0.83,
-   "level": 1.34,
+   "level": 1.33,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 16.4
+   "day": 16.5
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-25 03:44",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 16.9
+   "day": 17.0
   },
   "burnett-river": {
    "gauge": "539153",
@@ -197,7 +197,7 @@
    "onset_aest": "2026-10-19 15:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.4
+   "day": 22.5
   },
   "noosa-river": {
    "gauge": "540774",
@@ -212,7 +212,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 16.5,
+   "day": 16.6,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -245,7 +245,7 @@
    "onset_aest": "2026-10-22 09:10",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 19.3,
+   "day": 19.4,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

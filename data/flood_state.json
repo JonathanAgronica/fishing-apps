@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-10T14:40+10:00",
+ "generated_aest": "2026-11-10T15:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 39.0,
    "base": 0.83,
-   "level": 1.39,
+   "level": 1.38,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-10-22 05:33",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 19.2,
+   "day": 19.3,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -89,7 +89,7 @@
    "onset_aest": "2026-10-19 07:01",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.3
+   "day": 22.4
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -104,7 +104,7 @@
    "onset_aest": "2026-10-22 07:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.3
+   "day": 19.4
   },
   "elliott-river": {
    "gauge": "539060",
@@ -156,7 +156,7 @@
    "onset_aest": "2026-11-05 04:19",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.4
+   "day": 5.5
   },
   "maroochy-river": {
    "gauge": "540222",

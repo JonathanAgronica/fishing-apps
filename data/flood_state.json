@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-10T10:50+10:00",
+ "generated_aest": "2026-11-10T11:48+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 03:00",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 16.3
+   "day": 16.4
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -141,7 +141,7 @@
    "onset_aest": "2026-10-19 09:50",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.0
+   "day": 22.1
   },
   "kolan-river": {
    "gauge": "539205",
@@ -171,7 +171,7 @@
    "onset_aest": "2026-10-22 07:42",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.1
+   "day": 19.2
   },
   "mary-river": {
    "gauge": "540686",
@@ -197,7 +197,7 @@
    "onset_aest": "2026-10-19 15:05",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.8
+   "day": 21.9
   },
   "noosa-river": {
    "gauge": "540774",
@@ -212,7 +212,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 15.9,
+   "day": 16.0,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -230,7 +230,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.9
+   "day": 5.0
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -245,7 +245,7 @@
    "onset_aest": "2026-10-22 09:10",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 18.7,
+   "day": 18.8,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false

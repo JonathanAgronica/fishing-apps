@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-11T11:44+10:00",
+ "generated_aest": "2026-11-11T12:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -15,7 +15,7 @@
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 16.8
+   "day": 16.9
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-25 03:44",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 17.3
+   "day": 17.4
   },
   "burnett-river": {
    "gauge": "539153",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-10-22 05:33",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 20.1,
+   "day": 20.2,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -156,7 +156,7 @@
    "onset_aest": "2026-11-04 13:19",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.9
+   "day": 7.0
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -212,7 +212,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 16.9,
+   "day": 17.0,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false

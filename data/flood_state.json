@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-11T19:47+10:00",
+ "generated_aest": "2026-11-11T20:45+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 04:58",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 17.6
+   "day": 17.7
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -89,7 +89,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.0
+   "day": 0.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -104,7 +104,7 @@
    "onset_aest": "2026-11-11 16:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.1
+   "day": 0.2
   },
   "elliott-river": {
    "gauge": "539060",
@@ -141,7 +141,7 @@
    "onset_aest": "2026-11-11 18:42",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.0
+   "day": 0.1
   },
   "kolan-river": {
    "gauge": "539205",
@@ -230,7 +230,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.3
+   "day": 6.4
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -263,7 +263,7 @@
    "onset_aest": "2026-10-22 02:27",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 20.7
+   "day": 20.8
   }
  },
  "alerts": []

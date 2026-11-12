@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-11-12T16:42+10:00",
+ "generated_aest": "2026-11-12T17:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 41.0,
+   "span_days": 41.1,
    "base": 0.83,
-   "level": 1.27,
+   "level": 1.26,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 18.0
+   "day": 18.1
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-25 05:56",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 18.4
+   "day": 18.5
   },
   "burnett-river": {
    "gauge": "539153",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-10-22 05:33",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.3,
+   "day": 21.4,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -78,7 +78,7 @@
    "onset_aest": "2026-11-10 11:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.9
+   "day": 1.0
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -145,7 +145,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.9
+   "day": 1.0
   },
   "kolan-river": {
    "gauge": "539205",
@@ -160,7 +160,7 @@
    "onset_aest": "2026-11-04 13:19",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.1
+   "day": 8.2
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -190,7 +190,7 @@
    "onset_aest": "2026-11-12 03:51",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.5
+   "day": 0.6
   },
   "mooloolah-river": {
    "gauge": "540345",

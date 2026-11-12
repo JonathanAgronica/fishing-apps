@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-12T17:41+10:00",
+ "generated_aest": "2026-11-12T18:45+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 41.1,
+   "span_days": 41.2,
    "base": 0.83,
    "level": 1.26,
    "kind": "light",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-11-11 17:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.0
+   "day": 1.1
   },
   "elliott-river": {
    "gauge": "539060",
@@ -175,7 +175,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.4
+   "day": 21.5
   },
   "mary-river": {
    "gauge": "540686",
@@ -238,7 +238,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.2
+   "day": 7.3
   },
   "pumicestone-passage": {
    "gauge": "540533",

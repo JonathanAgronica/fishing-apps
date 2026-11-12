@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-12T19:41+10:00",
+ "generated_aest": "2026-11-12T20:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 41.2,
    "base": 0.83,
-   "level": 1.26,
+   "level": 1.25,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -78,7 +78,7 @@
    "onset_aest": "2026-11-10 11:28",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.3
+   "day": 2.4
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -93,7 +93,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.0
+   "day": 1.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -145,7 +145,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.0
+   "day": 1.1
   },
   "kolan-river": {
    "gauge": "539205",
@@ -238,7 +238,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.3
+   "day": 7.4
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -268,7 +268,7 @@
    "onset_aest": "2026-10-22 04:07",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.6
+   "day": 21.7
   }
  },
  "alerts": []

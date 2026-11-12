@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-13T05:40+10:00",
+ "generated_aest": "2026-11-13T06:40+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-25 07:02",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 18.9
+   "day": 19.0
   },
   "burnett-river": {
    "gauge": "539153",
@@ -108,7 +108,7 @@
    "onset_aest": "2026-11-11 17:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.5
+   "day": 1.6
   },
   "elliott-river": {
    "gauge": "539060",
@@ -238,7 +238,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.7
+   "day": 7.8
   },
   "pumicestone-passage": {
    "gauge": "540533",

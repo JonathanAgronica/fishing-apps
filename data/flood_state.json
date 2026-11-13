@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-14T04:48+10:00",
+ "generated_aest": "2026-11-14T05:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,14 +8,14 @@
    "known": true,
    "span_days": 42.6,
    "base": 0.84,
-   "level": 1.27,
+   "level": 1.26,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.5
+   "day": 19.6
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-11-11 23:19",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "burrum-river": {
    "gauge": "040907",
@@ -75,7 +75,7 @@
    "onset_aest": "2026-11-12 10:54",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.7
+   "day": 1.8
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -90,7 +90,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.4
+   "day": 2.5
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -142,7 +142,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.4
+   "day": 2.5
   },
   "kolan-river": {
    "gauge": "539205",
@@ -157,7 +157,7 @@
    "onset_aest": "2026-10-24 23:35",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 20.2
+   "day": 20.3
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -187,7 +187,7 @@
    "onset_aest": "2026-11-12 03:51",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.0
+   "day": 2.1
   },
   "mooloolah-river": {
    "gauge": "540345",

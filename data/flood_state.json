@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-13T23:38+10:00",
+ "generated_aest": "2026-11-14T00:46+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 42.3,
+   "span_days": 42.4,
    "base": 0.84,
    "level": 1.29,
    "kind": "light",
@@ -15,7 +15,7 @@
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.3
+   "day": 19.4
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-10-22 05:33",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.6,
+   "day": 22.7,
    "prime_from_aest": "2026-10-29",
    "prime_to_aest": "2026-11-05",
    "entering_prime": false
@@ -78,7 +78,7 @@
    "onset_aest": "2026-11-12 10:54",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.5
+   "day": 1.6
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -190,7 +190,7 @@
    "onset_aest": "2026-11-12 03:51",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.8
+   "day": 1.9
   },
   "mooloolah-river": {
    "gauge": "540345",
@@ -220,7 +220,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 19.4,
+   "day": 19.5,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -268,7 +268,7 @@
    "onset_aest": "2026-10-22 04:07",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.8
+   "day": 22.9
   }
  },
  "alerts": []

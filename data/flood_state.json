@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-14T19:44+10:00",
+ "generated_aest": "2026-11-14T20:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -90,7 +90,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -142,7 +142,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   },
   "kolan-river": {
    "gauge": "539205",
@@ -157,7 +157,7 @@
    "onset_aest": "2026-10-24 23:35",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 20.8
+   "day": 20.9
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -235,7 +235,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 9.3
+   "day": 9.4
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -265,7 +265,7 @@
    "onset_aest": "2026-10-22 04:52",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 23.6
+   "day": 23.7
   }
  },
  "alerts": []

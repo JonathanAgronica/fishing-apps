@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-14T23:45+10:00",
+ "generated_aest": "2026-11-15T00:40+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -15,7 +15,7 @@
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 20.3
+   "day": 20.4
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-11-11 23:19",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.0
+   "day": 3.1
   },
   "burrum-river": {
    "gauge": "040907",
@@ -75,7 +75,7 @@
    "onset_aest": "2026-11-12 10:54",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.5
+   "day": 2.6
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -187,7 +187,7 @@
    "onset_aest": "2026-11-12 03:51",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.8
+   "day": 2.9
   },
   "mooloolah-river": {
    "gauge": "540345",
@@ -217,7 +217,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": "tapering",
-   "day": 20.4,
+   "day": 20.5,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false

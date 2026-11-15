@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-16T05:45+10:00",
+ "generated_aest": "2026-11-16T06:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 19:43",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.4
+   "day": 21.5
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -105,7 +105,7 @@
    "onset_aest": "2026-11-11 17:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.5
+   "day": 4.6
   },
   "elliott-river": {
    "gauge": "539060",
@@ -225,7 +225,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.7
+   "day": 10.8
   },
   "pumicestone-passage": {
    "gauge": "540533",

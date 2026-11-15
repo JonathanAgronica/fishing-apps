@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-16T08:44+10:00",
+ "generated_aest": "2026-11-16T09:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 44.8,
    "base": 0.84,
-   "level": 1.29,
+   "level": 1.28,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-11-15 17:37",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.6
+   "day": 0.7
   },
   "burnett-river": {
    "gauge": "539153",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 19:43",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.5
+   "day": 21.6
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -105,7 +105,7 @@
    "onset_aest": "2026-11-11 17:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.6
+   "day": 4.7
   },
   "elliott-river": {
    "gauge": "539060",
@@ -120,7 +120,7 @@
    "onset_aest": "2026-10-23 13:00",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 23.8
+   "day": 23.9
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -172,7 +172,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 25.0
+   "day": 25.1
   },
   "mary-river": {
    "gauge": "540686",
@@ -196,7 +196,7 @@
    "onset_aest": "2026-10-19 15:15",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 27.7
+   "day": 27.8
   },
   "noosa-river": {
    "gauge": "540774",
@@ -211,7 +211,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.8,
+   "day": 21.9,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -244,7 +244,7 @@
    "onset_aest": "2026-11-11 20:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 4.5
+   "day": 4.6
   },
   "saltwater-creek": {
    "gauge": "540741",
@@ -259,7 +259,7 @@
    "onset_aest": "2026-10-22 05:32",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 25.1
+   "day": 25.2
   }
  },
  "alerts": []

@@ -1,14 +1,14 @@
 {
- "generated_aest": "2026-11-15T15:38+10:00",
+ "generated_aest": "2026-11-15T16:48+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 44.0,
+   "span_days": 44.1,
    "base": 0.84,
-   "level": 1.24,
+   "level": 1.26,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -21,37 +21,37 @@
    "gauge": "540199",
    "gauge_name": "Brisbane River at Mt Crosby",
    "known": true,
-   "span_days": 50.0,
+   "span_days": 50.2,
    "base": 6.88,
-   "level": 6.93,
+   "level": 6.94,
    "kind": "light",
    "peak": 7.59,
    "peak_aest": "2026-10-28 02:02",
    "onset_aest": "2026-10-25 07:42",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.3
+   "day": 21.4
   },
   "burnett-river": {
    "gauge": "539153",
    "gauge_name": "Burnett River at Branyan (Woongarra PS)",
    "known": true,
-   "span_days": 43.1,
+   "span_days": 43.2,
    "base": 2.97,
-   "level": 4.28,
+   "level": 4.31,
    "kind": "light",
    "peak": 4.32,
    "peak_aest": "2026-11-13 07:00",
    "onset_aest": "2026-10-25 19:43",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 20.8
+   "day": 20.9
   },
   "burpengary-creek": {
    "gauge": "540242",
    "gauge_name": "Burpengary Creek at Burpengary (Dale St)",
    "known": true,
-   "span_days": 43.1,
+   "span_days": 43.3,
    "base": 3.64,
    "level": 3.64,
    "kind": "light",
@@ -66,9 +66,9 @@
    "gauge": "040907",
    "gauge_name": "Burrum River at Howard",
    "known": true,
-   "span_days": 43.1,
+   "span_days": 43.2,
    "base": 4.86,
-   "level": 5.16,
+   "level": 5.26,
    "kind": "light",
    "peak": 5.56,
    "peak_aest": "2026-11-15 02:40",
@@ -96,7 +96,7 @@
    "gauge": "540357",
    "gauge_name": "Caboolture River at Upper Caboolture (Hausman Lane)",
    "known": true,
-   "span_days": 43.2,
+   "span_days": 43.3,
    "base": 0.75,
    "level": 0.78,
    "kind": "light",
@@ -105,15 +105,15 @@
    "onset_aest": "2026-11-11 17:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.9
+   "day": 4.0
   },
   "elliott-river": {
    "gauge": "539060",
    "gauge_name": "Elliott River at Dr Mays Crossing",
    "known": true,
-   "span_days": 43.1,
+   "span_days": 43.2,
    "base": 0.85,
-   "level": 1.27,
+   "level": 1.29,
    "kind": "none",
    "phase": null,
    "day": null
@@ -148,7 +148,7 @@
    "gauge": "539205",
    "gauge_name": "Kolan River at Bucca Weir",
    "known": true,
-   "span_days": 43.2,
+   "span_days": 43.3,
    "base": 14.62,
    "level": 16.32,
    "kind": "light",
@@ -157,13 +157,13 @@
    "onset_aest": "2026-10-25 00:25",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.6
+   "day": 21.7
   },
   "maroochy-river": {
    "gauge": "540222",
    "gauge_name": "Eudlo Creek at Eudlo",
    "known": true,
-   "span_days": 43.0,
+   "span_days": 43.1,
    "base": 1.17,
    "level": 1.17,
    "kind": "light",
@@ -172,28 +172,22 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 24.3
+   "day": 24.4
   },
   "mary-river": {
    "gauge": "540686",
    "gauge_name": "Mary River at Owanyilla",
-   "known": true,
+   "kind": "stale",
+   "known": false,
    "span_days": 40.2,
-   "base": 2.15,
-   "level": 2.95,
-   "kind": "light",
-   "peak": 3.05,
-   "peak_aest": "2026-11-12 09:21",
-   "onset_aest": "2026-11-12 03:51",
-   "peak_at_record_start": false,
-   "phase": "runoff",
-   "day": 3.5
+   "phase": null,
+   "day": null
   },
   "mooloolah-river": {
    "gauge": "540345",
    "gauge_name": "Mooloolah River at Mooloolah",
    "known": true,
-   "span_days": 43.1,
+   "span_days": 43.2,
    "base": 0.56,
    "level": 0.44,
    "kind": "light",
@@ -202,13 +196,13 @@
    "onset_aest": "2026-10-19 15:10",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 27.0
+   "day": 27.1
   },
   "noosa-river": {
    "gauge": "540774",
    "gauge_name": "Kin Kin Creek at Wahpunga Lane",
    "known": true,
-   "span_days": 43.0,
+   "span_days": 43.1,
    "base": 0.05,
    "level": 0.05,
    "kind": "big",
@@ -217,7 +211,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.1,
+   "day": 21.2,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false
@@ -226,7 +220,7 @@
    "gauge": "540412",
    "gauge_name": "North Pine River at Youngs Crossing",
    "known": true,
-   "span_days": 42.7,
+   "span_days": 42.8,
    "base": 0.81,
    "level": 0.81,
    "kind": "light",
@@ -235,28 +229,28 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.1
+   "day": 10.2
   },
   "pumicestone-passage": {
    "gauge": "540533",
    "gauge_name": "Coochin Creek at Mawsons Rd",
    "known": true,
-   "span_days": 43.1,
+   "span_days": 43.2,
    "base": 0.45,
-   "level": 0.43,
+   "level": 0.42,
    "kind": "light",
    "peak": 0.9,
    "peak_aest": "2026-11-12 04:00",
    "onset_aest": "2026-11-11 20:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.8
+   "day": 3.9
   },
   "saltwater-creek": {
    "gauge": "540741",
    "gauge_name": "Saltwater Creek at Deception Bay (Major St)",
    "known": true,
-   "span_days": 43.1,
+   "span_days": 43.2,
    "base": 0.25,
    "level": 0.35,
    "kind": "light",
@@ -265,7 +259,7 @@
    "onset_aest": "2026-10-22 05:32",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 24.4
+   "day": 24.5
   }
  },
  "alerts": []

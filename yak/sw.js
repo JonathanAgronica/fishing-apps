@@ -1,9 +1,9 @@
-/* Mac's Yak service worker 202611170614 — only touches caches prefixed "macsyak-" (the github.io origin is shared with Mac's Jacks, Marlin and Crabs).
+/* Mac's Yak service worker 202611170628 — only touches caches prefixed "macsyak-" (the github.io origin is shared with Mac's Jacks, Marlin and Crabs).
    Offline: app shell cache-first; Mac's Jacks flood_state network-first; forecasts are kept by the page in localStorage.
    Alerts: periodic background sync (Android Chrome, installed) re-checks the next kayak day and shows a notification once per slot. */
-const CACHE='macsyak-202611170614',DATA='macsyak-data',TILES='macsyak-tiles',SETC='macsyak-settings',TILE_MAX=600;
-const ASSETS=['./','./index.html','./manifest.webmanifest','./astro.js?v=202611170614','./data.js?v=202611170614','./core.js?v=202611170614','./favicon.ico','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-64.png','./icons/icon-32.png','./icons/maskable-192.png','./icons/maskable-512.png','./vendor/leaflet/leaflet.js','./vendor/leaflet/leaflet.css'];
-importScripts('astro.js?v=202611170614','data.js?v=202611170614','core.js?v=202611170614');
+const CACHE='macsyak-202611170628',DATA='macsyak-data',TILES='macsyak-tiles',SETC='macsyak-settings',TILE_MAX=600;
+const ASSETS=['./','./index.html','./manifest.webmanifest','./astro.js?v=202611170628','./data.js?v=202611170628','./core.js?v=202611170628','./favicon.ico','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-64.png','./icons/icon-32.png','./icons/maskable-192.png','./icons/maskable-512.png','./vendor/leaflet/leaflet.js','./vendor/leaflet/leaflet.css'];
+importScripts('astro.js?v=202611170628','data.js?v=202611170628','core.js?v=202611170628');
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>/^macsyak-\d/.test(k)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 const put=(name,req,res)=>caches.open(name).then(c=>c.put(req,res));

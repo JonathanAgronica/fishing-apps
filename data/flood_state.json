@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-11-16T20:46+10:00",
+ "generated_aest": "2026-11-16T21:46+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 45.2,
+   "span_days": 45.3,
    "base": 0.84,
-   "level": 1.24,
+   "level": 1.23,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 15:45",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.2
+   "day": 22.3
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-11-15 18:08",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.1
+   "day": 1.2
   },
   "burnett-river": {
    "gauge": "539153",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-25 20:28",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.0
+   "day": 22.1
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -120,7 +120,7 @@
    "onset_aest": "2026-10-23 13:00",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 24.3
+   "day": 24.4
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -172,7 +172,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 25.5
+   "day": 25.6
   },
   "mary-river": {
    "gauge": "540686",
@@ -198,7 +198,7 @@
    "onset_aest": "2026-10-19 15:15",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 28.2
+   "day": 28.3
   },
   "noosa-river": {
    "gauge": "540774",
@@ -213,7 +213,7 @@
    "onset_aest": "2026-10-24 14:24",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 22.3,
+   "day": 22.4,
    "prime_from_aest": "2026-11-01",
    "prime_to_aest": "2026-11-08",
    "entering_prime": false

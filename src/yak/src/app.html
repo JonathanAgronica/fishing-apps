@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-AU"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mac's Yak — kayak fishing weather, bite times &amp; traffic light</title>
+<meta name="theme-color" content="#0d2430"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Mac's Yak">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png"><link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<style>/*CSS*/</style></head>
+<body>
+<header><b>🛶 Mac's Yak</b><span id="dataAge" class="mut"></span></header>
+<div id="ciBanner" class="banner" hidden></div>
+<main>
+<section id="t-days" class="tab on">
+  <div class="card"><div class="row" style="align-items:center"><div class="grow"><b id="spotName"></b><div class="small mut" id="spotInfo"></div></div><button id="refresh">↻</button></div></div>
+  <div id="notice"></div>
+  <div class="card"><h3>Next 14 days</h3><div class="strip" id="strip"></div><p class="small mut">Bright = your kayak days. Tap any day for the hour-by-hour.</p></div>
+  <div id="wq"></div>
+  <div id="dayList"></div>
+  <details class="card"><summary>How the traffic light works</summary><div id="howBody"></div></details>
+</section>
+<section id="t-hours" class="tab">
+  <div class="card row"><label>Day <select id="hrDay"></select></label></div>
+  <div class="card" id="hrSum"></div>
+  <div class="card" style="overflow-x:auto"><table class="ht" id="hrTable"></table><p class="small mut">Dimmed rows are outside your session hours or in the dark. Wind in knots (direction it blows <i>from</i>); waves are the nearest offshore model cell. Tap a row for the reasons.</p></div>
+</section>
+<section id="t-fish" class="tab">
+  <div class="card row"><label>Day <select id="fiDay"></select></label></div>
+  <div class="card" id="fiSum"></div>
+  <div class="card"><h3>Bite score by hour</h3><div class="hrs" id="fiHrs"></div><p class="small mut">Colour = bite score; a dark outline means the traffic light is amber or red for that hour.</p></div>
+  <div class="card"><h3>🗓 Plan my session</h3><div class="row"><label>Yak time below <select id="fiThr"></select></label></div><div id="fiPlan"></div><p class="small mut">Fish blocks are your best safe hours. 🧃 <b>Yak time</b> is a break: pull up on the beach, drift and have a feed or a drink until the bite picks up again.</p></div>
+</section>
+<section id="t-trip" class="tab">
+  <div class="card"><h3>🧭 Paddle planner</h3>
+    <div class="row"><label>Day <select id="tpDay"></select></label><label>Target spot <select id="tpTarget"></select></label></div>
+    <div id="tripmap" style="margin-top:8px"></div>
+    <p class="small mut">Tap the map to add a target spot. Targets are stored <b>only on this phone</b>.</p>
+    <div class="row"><label>Paddle speed (kn) <input id="tpSpeed" type="number" step="0.1" min="1" max="7"></label><label>Fishing time (h) <input id="tpFish" type="number" step="0.5" min="0" max="10"></label><label>Peak tidal current (kn) <input id="tpCur" type="number" step="0.1" min="0" max="5"></label></div>
+    <div id="tpOut"></div></div>
+  <div class="card"><h3>🆘 Safety check-in</h3>
+    <div class="row"><label>I'll be back by <input id="ciTime" type="datetime-local"></label><label>Grace (min) <input id="ciGrace" type="number" min="5" max="240" step="5"></label></div>
+    <div class="row" style="margin-top:6px"><label>Emergency contact name <input id="ciName" placeholder="e.g. home"></label><label>Mobile <input id="ciPhone" type="tel" placeholder="04xx xxx xxx"></label></div>
+    <div class="row" style="margin-top:8px"><button class="pri" id="ciStart">▶ Start trip</button><button id="ciBack">✅ I'm back</button><button id="ciShare">📍 Share my position</button><button id="ciSms">💬 SMS my contact</button><button id="ciIcs">📅 Calendar alarm</button></div>
+    <div id="ciState" class="small" style="margin-top:6px"></div>
+    <p class="small mut">Stays on this phone. The app reminds you at your return time and, after the grace period, asks you to send your last GPS position. <b>Nothing is ever sent unless you tap.</b> Phones only fire reminders while the app is open or recently used, so add the 📅 calendar alarm as a backup and tell someone your plan.</p></div>
+</section>
+<section id="t-log" class="tab">
+  <div class="card" id="lgActive"></div>
+  <div class="card" id="lgForm" hidden><h3 id="lgTitle">Session</h3>
+    <div class="grid2">
+      <label>Start <input id="lgS0" type="datetime-local"></label><label>End <input id="lgS1" type="datetime-local"></label>
+      <label class="span2">Spot <input id="lgSpot" placeholder="spot name (stays on this phone)"></label>
+      <label class="span2">Bait / lure <input id="lgBait" list="lures" placeholder="e.g. 3&quot; prawn plastic"></label>
+      <label class="span2">Note <input id="lgNote"></label></div>
+    <datalist id="lures"><option>Soft plastic prawn</option><option>Soft plastic paddle-tail</option><option>Hard body / crank</option><option>Surface lure</option><option>Vibe / blade</option><option>Live bait</option><option>Prawn / yabby bait</option><option>Strip bait</option></datalist>
+    <h3 style="margin-top:10px">Catches</h3><div id="lgCatches"></div>
+    <div class="grid2"><label>Time <input id="lgCt" type="datetime-local"></label><label>Species <input id="lgSp" list="species" placeholder="Flathead"></label><label>Length (cm) <input id="lgLen" type="number" step="0.5"></label><label>Kept / released <select id="lgKR"><option>Released</option><option>Kept</option></select></label></div>
+    <datalist id="species"><option>Flathead</option><option>Bream</option><option>Whiting</option><option>Mangrove jack</option><option>Grunter</option><option>Trevally</option><option>Queenfish</option><option>Mackerel</option><option>Cod</option><option>Snapper</option><option>Tailor</option><option>Barra</option></datalist>
+    <p><button id="lgAddC">+ Add catch</button></p>
+    <p><button class="pri" id="lgSave">Save session</button> <button id="lgCancel">Cancel</button> <span class="small mut">Stored on this phone only. Blank sessions count too.</span></p></div>
+  <div class="card" id="lgStats"></div>
+  <ul id="lgList" class="list"></ul>
+  <details class="card"><summary>Export / import</summary><button id="lgCsv">Export CSV</button> <button id="lgJson">Export backup (JSON)</button> <label class="btn">Import backup <input id="lgImp" type="file" accept=".json" hidden></label></details>
+</section>
+<section id="t-set" class="tab">
+  <div class="card"><h3>🗓 My kayak days</h3><div class="days7" id="setDays"></div></div>
+  <div class="card"><h3>📍 Launch spot</h3>
+    <label>Preset <select id="setLaunch"></select></label>
+    <div id="spotmap" style="margin-top:8px"></div>
+    <p class="small mut">Tap the map to set your own launch (it becomes “My launch”). Your spot is stored <b>only on this phone</b>.</p>
+    <div class="row"><label>Water type <select id="setExp"></select></label><label>Faces out to sea (offshore check) <select id="setFacing"></select></label></div></div>
+  <div class="card"><h3>⏰ Session hours</h3><div class="row"><label>From (h) <input id="setS0" type="number" min="0" max="23"></label><label>To (h) <input id="setS1" type="number" min="1" max="24"></label><label>Shortest window (h) <input id="setMin" type="number" min="1" max="8"></label></div></div>
+  <div class="card"><h3>🚦 Thresholds</h3><div class="grid2" id="setThr"></div><p><button id="setReset">Reset to defaults</button></p></div>
+  <div class="card"><h3>🔔 Alerts</h3><p class="small">The app checks your next kayak day each time you open it (and in the background on Android Chrome when installed) and pops up a notification with that day's light: the afternoon before, and again on the morning.</p>
+    <div class="row"><button class="pri" id="setNotif">🔔 Enable alerts</button><button id="setTest">Send a test alert</button></div><div class="small mut" id="setNotifState"></div></div>
+  <div class="card warn" id="safety"></div>
+  <details class="card"><summary>Data &amp; sources</summary><div id="srcList"></div></details>
+  <details class="card"><summary>🎣 More apps</summary><p><a href="../">Mac's Jacks</a> · <a href="../../marlin-app/">Mac's Marlin</a> · <a href="../../crab-app/">Mac's Crabs</a></p></details>
+</section>
+</main>
+<nav>
+<button data-t="days" class="on">🚦<span>Days</span></button>
+<button data-t="hours">⏱<span>Hours</span></button>
+<button data-t="fish">🎣<span>Fishing</span></button>
+<button data-t="trip">🧭<span>Trip</span></button>
+<button data-t="log">📓<span>Log</span></button>
+<button data-t="set">⚙️<span>Setup</span></button>
+</nav>
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="astro.js?v=/*BUILD*/"></script>
+<script src="data.js?v=/*BUILD*/"></script>
+<script src="core.js?v=/*BUILD*/"></script>
+<script>window.BUILD='/*BUILD*/';</script>
+<script>/*APP*/</script>
+</body></html>

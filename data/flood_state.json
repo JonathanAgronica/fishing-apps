@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-17T05:47+10:00",
+ "generated_aest": "2026-11-17T06:39+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -228,7 +228,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.7
+   "day": 11.8
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -243,7 +243,7 @@
    "onset_aest": "2026-11-16 17:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.5
+   "day": 0.6
   },
   "saltwater-creek": {
    "gauge": "540741",

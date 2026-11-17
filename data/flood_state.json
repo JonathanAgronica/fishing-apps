@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-17T19:44+10:00",
+ "generated_aest": "2026-11-17T20:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 46.2,
    "base": 0.85,
-   "level": 1.17,
+   "level": 1.16,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -75,7 +75,7 @@
    "onset_aest": "2026-11-12 11:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.3
+   "day": 5.4
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -142,7 +142,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.0
+   "day": 6.1
   },
   "kolan-river": {
    "gauge": "539205",
@@ -224,7 +224,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.3
+   "day": 12.4
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -239,7 +239,7 @@
    "onset_aest": "2026-11-16 17:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.1
+   "day": 1.2
   },
   "saltwater-creek": {
    "gauge": "540741",

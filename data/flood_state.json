@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-17T20:41+10:00",
+ "generated_aest": "2026-11-17T21:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 46.2,
+   "span_days": 46.3,
    "base": 0.85,
    "level": 1.16,
    "kind": "light",
@@ -30,7 +30,7 @@
    "onset_aest": "2026-10-25 08:27",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 23.5
+   "day": 23.6
   },
   "burnett-river": {
    "gauge": "539153",
@@ -105,7 +105,7 @@
    "onset_aest": "2026-11-16 17:55",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.1
+   "day": 1.2
   },
   "elliott-river": {
    "gauge": "539060",
@@ -168,7 +168,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 26.5
+   "day": 26.6
   },
   "mary-river": {
    "gauge": "540686",
@@ -194,7 +194,7 @@
    "onset_aest": "2026-11-16 18:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.1
+   "day": 1.2
   },
   "noosa-river": {
    "gauge": "540774",
@@ -209,7 +209,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.0
+   "day": 1.1
   },
   "pine-river": {
    "gauge": "540412",
@@ -254,7 +254,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.9
+   "day": 2.0
   }
  },
  "alerts": []

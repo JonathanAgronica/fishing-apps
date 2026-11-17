@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-18T02:38+10:00",
+ "generated_aest": "2026-11-18T03:40+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -8,7 +8,7 @@
    "known": true,
    "span_days": 46.5,
    "base": 0.85,
-   "level": 1.15,
+   "level": 1.14,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-11-14 04:03",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.9
+   "day": 4.0
   },
   "burrum-river": {
    "gauge": "040907",
@@ -75,7 +75,7 @@
    "onset_aest": "2026-11-12 11:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.6
+   "day": 5.7
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -90,7 +90,7 @@
    "onset_aest": "2026-11-16 01:42",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.0
+   "day": 2.1
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -142,7 +142,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.3
+   "day": 6.4
   },
   "kolan-river": {
    "gauge": "539205",

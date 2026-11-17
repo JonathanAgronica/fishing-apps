@@ -1,13 +1,13 @@
 {
- "generated_aest": "2026-11-18T05:40+10:00",
+ "generated_aest": "2026-11-18T06:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 46.6,
-   "base": 0.85,
+   "span_days": 46.7,
+   "base": 0.86,
    "level": 1.14,
    "kind": "light",
    "peak": 4.68,
@@ -194,7 +194,7 @@
    "onset_aest": "2026-11-16 17:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.5
+   "day": 1.6
   },
   "noosa-river": {
    "gauge": "540774",
@@ -224,7 +224,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.7
+   "day": 12.8
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -239,7 +239,7 @@
    "onset_aest": "2026-11-16 17:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.5
+   "day": 1.6
   },
   "saltwater-creek": {
    "gauge": "540741",

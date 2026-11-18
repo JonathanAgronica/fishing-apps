@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-19T08:46+10:00",
+ "generated_aest": "2026-11-19T09:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -101,7 +101,7 @@
    "onset_aest": "2026-11-16 18:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.6
+   "day": 2.7
   },
   "elliott-river": {
    "gauge": "539060",
@@ -168,7 +168,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 28.0
+   "day": 28.1
   },
   "mary-river": {
    "gauge": "540686",
@@ -209,7 +209,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.5
+   "day": 2.6
   },
   "pine-river": {
    "gauge": "540412",
@@ -254,7 +254,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.4
+   "day": 3.5
   }
  },
  "alerts": []

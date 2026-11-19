@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-19T13:46+10:00",
+ "generated_aest": "2026-11-19T14:46+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -26,7 +26,7 @@
    "onset_aest": "2026-10-25 08:27",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 25.2
+   "day": 25.3
   },
   "burnett-river": {
    "gauge": "539153",
@@ -41,7 +41,7 @@
    "onset_aest": "2026-10-25 23:00",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 24.6
+   "day": 24.7
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -101,7 +101,7 @@
    "onset_aest": "2026-11-16 18:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.8
+   "day": 2.9
   },
   "elliott-river": {
    "gauge": "539060",
@@ -168,7 +168,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 28.2
+   "day": 28.3
   },
   "mary-river": {
    "gauge": "540686",
@@ -209,7 +209,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.7
+   "day": 2.8
   },
   "pine-river": {
    "gauge": "540412",
@@ -254,7 +254,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.6
+   "day": 3.7
   }
  },
  "alerts": []

@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-22T01:45+10:00",
+ "generated_aest": "2026-11-22T02:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -21,7 +21,7 @@
    "gauge": "540199",
    "gauge_name": "Brisbane River at Mt Crosby",
    "known": true,
-   "span_days": 56.5,
+   "span_days": 56.6,
    "base": 6.91,
    "level": 6.96,
    "kind": "light",
@@ -30,22 +30,22 @@
    "onset_aest": "2026-10-25 08:27",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 27.7
+   "day": 27.8
   },
   "burnett-river": {
    "gauge": "539153",
    "gauge_name": "Burnett River at Branyan (Woongarra PS)",
    "known": true,
-   "span_days": 49.5,
-   "base": 3.18,
-   "level": 3.46,
+   "span_days": 49.6,
+   "base": 3.19,
+   "level": 3.44,
    "kind": "light",
    "peak": 4.38,
    "peak_aest": "2026-11-16 00:00",
    "onset_aest": "2026-10-26 01:00",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 27.0
+   "day": 27.1
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-11-14 03:53",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.9
+   "day": 8.0
   },
   "burrum-river": {
    "gauge": "040907",
@@ -82,21 +82,21 @@
    "gauge_name": "Cabbage Tree Creek at Zillmere (Pineapple St)",
    "known": true,
    "span_days": 49.6,
-   "base": 9.24,
-   "level": 9.26,
+   "base": 9.22,
+   "level": 9.24,
    "kind": "light",
    "peak": 9.76,
    "peak_aest": "2026-11-16 05:05",
-   "onset_aest": "2026-11-16 01:34",
+   "onset_aest": "2026-11-16 01:29",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.0
+   "day": 6.1
   },
   "caboolture-river": {
    "gauge": "540357",
    "gauge_name": "Caboolture River at Upper Caboolture (Hausman Lane)",
    "known": true,
-   "span_days": 49.6,
+   "span_days": 49.7,
    "base": 0.77,
    "level": 0.76,
    "kind": "light",
@@ -105,13 +105,13 @@
    "onset_aest": "2026-11-16 17:55",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.3
+   "day": 5.4
   },
   "elliott-river": {
    "gauge": "539060",
    "gauge_name": "Elliott River at Dr Mays Crossing",
    "known": true,
-   "span_days": 49.5,
+   "span_days": 49.6,
    "base": 1.09,
    "level": 1.08,
    "kind": "light",
@@ -156,7 +156,7 @@
    "gauge": "539205",
    "gauge_name": "Kolan River at Bucca Weir",
    "known": true,
-   "span_days": 49.5,
+   "span_days": 49.7,
    "base": 15.27,
    "level": 16.17,
    "kind": "none",
@@ -167,7 +167,7 @@
    "gauge": "540222",
    "gauge_name": "Eudlo Creek at Eudlo",
    "known": true,
-   "span_days": 49.5,
+   "span_days": 49.6,
    "base": 1.17,
    "level": 1.12,
    "kind": "light",
@@ -176,7 +176,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 30.7
+   "day": 30.8
   },
   "mary-river": {
    "gauge": "540686",
@@ -193,9 +193,9 @@
    "gauge": "540345",
    "gauge_name": "Mooloolah River at Mooloolah",
    "known": true,
-   "span_days": 49.5,
+   "span_days": 49.6,
    "base": 0.49,
-   "level": 0.41,
+   "level": 0.44,
    "kind": "light",
    "peak": 0.95,
    "peak_aest": "2026-11-17 02:00",
@@ -208,7 +208,7 @@
    "gauge": "540774",
    "gauge_name": "Kin Kin Creek at Wahpunga Lane",
    "known": true,
-   "span_days": 49.5,
+   "span_days": 49.6,
    "base": 0.05,
    "level": 0.05,
    "kind": "light",
@@ -217,7 +217,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 5.2
+   "day": 5.3
   },
   "pine-river": {
    "gauge": "540412",
@@ -238,7 +238,7 @@
    "gauge": "540533",
    "gauge_name": "Coochin Creek at Mawsons Rd",
    "known": true,
-   "span_days": 49.5,
+   "span_days": 49.7,
    "base": 0.45,
    "level": 0.44,
    "kind": "light",
@@ -262,7 +262,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.1
+   "day": 6.2
   }
  },
  "alerts": []

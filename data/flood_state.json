@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-22T02:41+10:00",
+ "generated_aest": "2026-11-22T03:40+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -7,7 +7,7 @@
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
    "span_days": 50.5,
-   "base": 1.07,
+   "base": 1.09,
    "level": 1.05,
    "kind": "light",
    "peak": 4.68,
@@ -15,7 +15,7 @@
    "onset_aest": "2026-10-25 16:20",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 27.4
+   "day": 27.5
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -75,7 +75,7 @@
    "onset_aest": "2026-11-12 11:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 9.6
+   "day": 9.7
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -135,7 +135,7 @@
    "onset_aest": "2026-11-14 00:03",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.1
+   "day": 8.2
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -150,7 +150,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.3
+   "day": 10.4
   },
   "kolan-river": {
    "gauge": "539205",

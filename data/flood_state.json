@@ -1,21 +1,21 @@
 {
- "generated_aest": "2026-11-22T21:39+10:00",
+ "generated_aest": "2026-11-22T22:39+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 51.2,
+   "span_days": 51.3,
    "base": 1.09,
-   "level": 1.04,
+   "level": 1.03,
    "kind": "light",
    "peak": 4.68,
    "peak_aest": "2026-10-30 14:00",
    "onset_aest": "2026-10-25 16:20",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 28.2
+   "day": 28.3
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-26 02:00",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 27.8
+   "day": 27.9
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -60,7 +60,7 @@
    "onset_aest": "2026-11-14 03:53",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.7
+   "day": 8.8
   },
   "burrum-river": {
    "gauge": "040907",
@@ -75,7 +75,7 @@
    "onset_aest": "2026-11-12 11:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.4
+   "day": 10.5
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -90,7 +90,7 @@
    "onset_aest": "2026-11-16 01:29",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.8
+   "day": 6.9
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -150,7 +150,7 @@
    "onset_aest": "2026-11-11 18:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.1
+   "day": 11.2
   },
   "kolan-river": {
    "gauge": "539205",

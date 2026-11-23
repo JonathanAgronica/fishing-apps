@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-23T15:42+10:00",
+ "generated_aest": "2026-11-23T16:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -150,7 +150,7 @@
    "onset_aest": "2026-11-14 00:21",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 9.6
+   "day": 9.7
   },
   "kolan-river": {
    "gauge": "539205",
@@ -176,7 +176,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 32.3
+   "day": 32.4
   },
   "mary-river": {
    "gauge": "540686",
@@ -202,7 +202,7 @@
    "onset_aest": "2026-11-16 17:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.9
+   "day": 7.0
   },
   "noosa-river": {
    "gauge": "540774",
@@ -217,7 +217,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.8
+   "day": 6.9
   },
   "pine-river": {
    "gauge": "540412",
@@ -232,7 +232,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 18.1
+   "day": 18.2
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -247,7 +247,7 @@
    "onset_aest": "2026-11-16 17:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 6.9
+   "day": 7.0
   },
   "saltwater-creek": {
    "gauge": "540741",
@@ -262,7 +262,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.7
+   "day": 7.8
   }
  },
  "alerts": []

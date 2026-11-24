@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-24T15:42+10:00",
+ "generated_aest": "2026-11-24T16:39+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-26 02:33",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 29.5
+   "day": 29.6
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -105,7 +105,7 @@
    "onset_aest": "2026-11-16 17:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.9
+   "day": 8.0
   },
   "elliott-river": {
    "gauge": "539060",
@@ -150,7 +150,7 @@
    "onset_aest": "2026-11-14 00:21",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.6
+   "day": 10.7
   },
   "kolan-river": {
    "gauge": "539205",
@@ -165,7 +165,7 @@
    "onset_aest": "2026-10-25 10:22",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 30.2
+   "day": 30.3
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -180,7 +180,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 33.3
+   "day": 33.4
   },
   "mary-river": {
    "gauge": "540686",
@@ -206,7 +206,7 @@
    "onset_aest": "2026-11-16 17:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.9
+   "day": 8.0
   },
   "noosa-river": {
    "gauge": "540774",
@@ -221,7 +221,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.8
+   "day": 7.9
   },
   "pine-river": {
    "gauge": "540412",
@@ -236,7 +236,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.1
+   "day": 19.2
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -251,7 +251,7 @@
    "onset_aest": "2026-11-16 17:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.9
+   "day": 8.0
   },
   "saltwater-creek": {
    "gauge": "540741",
@@ -266,7 +266,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 8.7
+   "day": 8.8
   }
  },
  "alerts": []

@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-24T12:43+10:00",
+ "generated_aest": "2026-11-24T13:41+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 52.9,
+   "span_days": 53.0,
    "base": 1.11,
    "level": 1.01,
    "kind": "light",
@@ -15,7 +15,7 @@
    "onset_aest": "2026-10-25 16:25",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 29.8
+   "day": 29.9
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -45,7 +45,7 @@
    "onset_aest": "2026-10-26 02:33",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 29.4
+   "day": 29.5
   },
   "burpengary-creek": {
    "gauge": "540242",
@@ -120,7 +120,7 @@
    "onset_aest": "2026-10-23 14:30",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 31.9
+   "day": 32.0
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -135,7 +135,7 @@
    "onset_aest": "2026-11-14 00:03",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.5
+   "day": 10.6
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -150,7 +150,7 @@
    "onset_aest": "2026-11-14 00:21",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.5
+   "day": 10.6
   },
   "kolan-river": {
    "gauge": "539205",
@@ -206,7 +206,7 @@
    "onset_aest": "2026-11-16 17:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.8
+   "day": 7.9
   },
   "noosa-river": {
    "gauge": "540774",
@@ -236,7 +236,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 19.0
+   "day": 19.1
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -251,7 +251,7 @@
    "onset_aest": "2026-11-16 17:05",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 7.8
+   "day": 7.9
   },
   "saltwater-creek": {
    "gauge": "540741",

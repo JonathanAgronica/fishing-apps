@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-25T02:49+10:00",
+ "generated_aest": "2026-11-25T03:40+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -15,7 +15,7 @@
    "onset_aest": "2026-10-25 16:20",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 30.4
+   "day": 30.5
   },
   "brisbane-river": {
    "gauge": "540199",
@@ -75,7 +75,7 @@
    "onset_aest": "2026-11-12 11:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 12.6
+   "day": 12.7
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -135,7 +135,7 @@
    "onset_aest": "2026-11-14 00:03",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.1
+   "day": 11.2
   },
   "kedron-brook": {
    "gauge": "540478",

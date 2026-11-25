@@ -1,12 +1,12 @@
 {
- "generated_aest": "2026-11-25T21:37+10:00",
+ "generated_aest": "2026-11-25T22:47+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 54.2,
+   "span_days": 54.3,
    "base": 1.05,
    "level": 0.98,
    "kind": "none",
@@ -26,7 +26,7 @@
    "onset_aest": "2026-10-25 08:27",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 31.5
+   "day": 31.6
   },
   "burnett-river": {
    "gauge": "539153",
@@ -56,7 +56,7 @@
    "onset_aest": "2026-11-14 03:44",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.7
+   "day": 11.8
   },
   "burrum-river": {
    "gauge": "040907",
@@ -71,7 +71,7 @@
    "onset_aest": "2026-11-12 11:27",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 13.4
+   "day": 13.5
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -86,7 +86,7 @@
    "onset_aest": "2026-11-25 04:24",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 0.7
+   "day": 0.8
   },
   "caboolture-river": {
    "gauge": "540357",

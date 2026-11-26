@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-27T03:45+10:00",
+ "generated_aest": "2026-11-27T04:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -101,7 +101,7 @@
    "onset_aest": "2026-11-16 17:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.4
+   "day": 10.5
   },
   "elliott-river": {
    "gauge": "539060",
@@ -131,7 +131,7 @@
    "onset_aest": "2026-11-25 05:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 1.9
+   "day": 2.0
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -161,7 +161,7 @@
    "onset_aest": "2026-10-25 10:22",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 32.7
+   "day": 32.8
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -176,7 +176,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 35.8
+   "day": 35.9
   },
   "mary-river": {
    "gauge": "540686",
@@ -202,7 +202,7 @@
    "onset_aest": "2026-11-16 15:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.5
+   "day": 10.6
   },
   "noosa-river": {
    "gauge": "540774",
@@ -217,7 +217,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.3
+   "day": 10.4
   },
   "pine-river": {
    "gauge": "540412",
@@ -232,7 +232,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 21.6
+   "day": 21.7
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -247,7 +247,7 @@
    "onset_aest": "2026-11-16 17:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.4
+   "day": 10.5
   },
   "saltwater-creek": {
    "gauge": "540741",
@@ -262,7 +262,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.2
+   "day": 11.3
   }
  },
  "alerts": []

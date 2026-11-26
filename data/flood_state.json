@@ -1,13 +1,13 @@
 {
- "generated_aest": "2026-11-27T08:48+10:00",
+ "generated_aest": "2026-11-27T09:44+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
    "gauge": "539132",
    "gauge_name": "Baffle Ck @ Mimdale",
    "known": true,
-   "span_days": 55.5,
-   "base": 1.03,
+   "span_days": 55.8,
+   "base": 1.02,
    "level": 0.96,
    "kind": "none",
    "phase": null,
@@ -26,7 +26,7 @@
    "onset_aest": "2026-10-25 08:27",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 33.0
+   "day": 33.1
   },
   "burnett-river": {
    "gauge": "539153",
@@ -56,7 +56,7 @@
    "onset_aest": "2026-11-14 03:44",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 13.2
+   "day": 13.3
   },
   "burrum-river": {
    "gauge": "040907",
@@ -101,7 +101,7 @@
    "onset_aest": "2026-11-16 17:50",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.6
+   "day": 10.7
   },
   "elliott-river": {
    "gauge": "539060",
@@ -131,7 +131,7 @@
    "onset_aest": "2026-11-25 05:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.1
+   "day": 2.2
   },
   "kedron-brook": {
    "gauge": "540478",
@@ -161,7 +161,7 @@
    "onset_aest": "2026-10-25 10:22",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 32.9
+   "day": 33.0
   },
   "maroochy-river": {
    "gauge": "540222",
@@ -176,7 +176,7 @@
    "onset_aest": "2026-10-22 07:57",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 36.0
+   "day": 36.1
   },
   "mary-river": {
    "gauge": "540686",
@@ -202,7 +202,7 @@
    "onset_aest": "2026-11-16 15:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.7
+   "day": 10.8
   },
   "noosa-river": {
    "gauge": "540774",
@@ -217,7 +217,7 @@
    "onset_aest": "2026-11-16 19:59",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 10.5
+   "day": 10.6
   },
   "pine-river": {
    "gauge": "540412",
@@ -262,7 +262,7 @@
    "onset_aest": "2026-11-15 22:22",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.4
+   "day": 11.5
   }
  },
  "alerts": []

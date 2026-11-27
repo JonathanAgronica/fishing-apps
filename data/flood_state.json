@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-27T09:44+10:00",
+ "generated_aest": "2026-11-27T10:43+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -71,7 +71,7 @@
    "onset_aest": "2026-11-12 11:27",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 14.9
+   "day": 15.0
   },
   "cabbage-tree-creek": {
    "gauge": "540122",
@@ -86,7 +86,7 @@
    "onset_aest": "2026-11-25 04:24",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -146,7 +146,7 @@
    "onset_aest": "2026-11-25 04:21",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 2.2
+   "day": 2.3
   },
   "kolan-river": {
    "gauge": "539205",

@@ -1,5 +1,5 @@
 {
- "generated_aest": "2026-11-28T12:45+10:00",
+ "generated_aest": "2026-11-28T13:38+10:00",
  "rules": "big flood: dirty <4 d, clearing 4-7 d, PRIME 7-14 d, tapering 14-21 d after peak; light flood/runoff: good 0-14 d from onset",
  "systems": {
   "baffle": {
@@ -86,7 +86,7 @@
    "onset_aest": "2026-11-25 04:24",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 3.3
+   "day": 3.4
   },
   "caboolture-river": {
    "gauge": "540357",
@@ -116,7 +116,7 @@
    "onset_aest": "2026-10-23 14:20",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 35.9
+   "day": 36.0
   },
   "freshwater-creek": {
    "gauge": "540658",
@@ -232,7 +232,7 @@
    "onset_aest": "2026-11-05 12:15",
    "peak_at_record_start": false,
    "phase": null,
-   "day": 23.0
+   "day": 23.1
   },
   "pumicestone-passage": {
    "gauge": "540533",
@@ -247,7 +247,7 @@
    "onset_aest": "2026-11-16 17:00",
    "peak_at_record_start": false,
    "phase": "runoff",
-   "day": 11.8
+   "day": 11.9
   },
   "saltwater-creek": {
    "gauge": "540741",
